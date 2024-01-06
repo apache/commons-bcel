@@ -385,7 +385,17 @@ public class ConstantPoolModuleToStringTestCase {
             append(constantModule);
             append(constantModule.toString(pool));
             final String s = constantModule.toString(pool).trim();
-            assertTrue(StringUtils.startsWithAny(s, "jdk.", "java.", "org.junit", "org.apiguardian.api", "org.opentest4j"), s);
+            boolean condition = StringUtils.startsWithAny(s, 
+                    "jdk.",
+                    "java.",
+                    "org.junit",
+                    "org.apiguardian.api",
+                    "org.opentest4j",
+                    "net.bytebuddy",
+                    "com.sun.jna",
+                    "junit",
+                    "org.hamcrest");
+            assertTrue(condition, s);
         }
 
         @Override

@@ -28,6 +28,7 @@ import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantCP;
 import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantDouble;
+import org.apache.bcel.classfile.ConstantDynamic;
 import org.apache.bcel.classfile.ConstantFieldref;
 import org.apache.bcel.classfile.ConstantFloat;
 import org.apache.bcel.classfile.ConstantInteger;
@@ -651,9 +652,10 @@ public final class Pass3aVerifier extends PassVerifier {
             final Constant c = constantPoolGen.getConstant(ldc.getIndex());
             if (c instanceof ConstantClass) {
                 addMessage("Operand of LDC or LDC_W is CONSTANT_Class '" + tostring(c) + "' - this is only supported in JDK 1.5 and higher.");
-            } else if (!(c instanceof ConstantInteger || c instanceof ConstantFloat || c instanceof ConstantString)) {
+            } else if (!(c instanceof ConstantInteger || c instanceof ConstantFloat || c instanceof ConstantString || c instanceof ConstantDynamic)) {
                 constraintViolated(ldc,
-                    "Operand of LDC or LDC_W must be one of CONSTANT_Integer, CONSTANT_Float or CONSTANT_String, but is '" + tostring(c) + "'.");
+                    "Operand of LDC or LDC_W must be one of CONSTANT_Integer, CONSTANT_Float, CONSTANT_String or CONSTANT_Dynamic but is '"
+                            + tostring(c) + "'.");
             }
         }
 

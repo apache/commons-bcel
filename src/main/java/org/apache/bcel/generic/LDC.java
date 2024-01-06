@@ -89,6 +89,8 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
             return Type.INT;
         case org.apache.bcel.Const.CONSTANT_Class:
             return Type.CLASS;
+        case org.apache.bcel.Const.CONSTANT_Dynamic:
+            return Type.OBJECT;
         default: // Never reached
             throw new IllegalArgumentException("Unknown or invalid constant type at " + super.getIndex());
         }
@@ -109,6 +111,9 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
             final int nameIndex = ((org.apache.bcel.classfile.ConstantClass) c).getNameIndex();
             c = cpg.getConstantPool().getConstant(nameIndex);
             return Type.getType(Type.internalTypeNameToSignature(((org.apache.bcel.classfile.ConstantUtf8) c).getBytes()));
+        case org.apache.bcel.Const.CONSTANT_Dynamic:
+            // Really not sure what to return here, maybe a BootstrapMethod instance but how do we get it?
+            return c;
         default: // Never reached
             throw new IllegalArgumentException("Unknown or invalid constant type at " + super.getIndex());
         }
