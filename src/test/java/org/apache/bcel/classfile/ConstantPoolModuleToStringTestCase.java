@@ -385,7 +385,7 @@ public class ConstantPoolModuleToStringTestCase {
             append(constantModule);
             append(constantModule.toString(pool));
             final String s = constantModule.toString(pool).trim();
-            final boolean condition = StringUtils.startsWithAny(s,
+            boolean condition = StringUtils.startsWithAny(s, 
                     "jdk.",
                     "java.",
                     "org.junit",

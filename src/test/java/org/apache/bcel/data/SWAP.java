@@ -32,6 +32,6 @@ public class SWAP {
             return theClass.getConstructor(args);
         } catch (final NoSuchMethodException e) {
         }
-        return theClass.getConstructor();
+        return theClass.getConstructor(new Class[0]);
     }
 }

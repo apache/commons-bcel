@@ -91,7 +91,7 @@ public class TypeTestCase {
                 for (final InstructionHandle instructionHandle : instructionList) {
                     instructionHandle.accept(new EmptyVisitor() {
                         @Override
-                        public void visitLDC(final LDC obj) {
+                        public void visitLDC(LDC obj) {
                             assertNotNull(obj.getValue(cpg));
                         }
                     });

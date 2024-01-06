@@ -46,19 +46,19 @@ public class JiraBcel370TestCase extends AbstractTestCase {
     public void testLdcGetType(final String classFileName) throws Exception {
         try (FileInputStream file = new FileInputStream(classFileName)) {
             final ClassParser parser = new ClassParser(file, new File(classFileName).getName());
-            final JavaClass clazz = parser.parse();
-
-            final Method[] methods = clazz.getMethods();
-
-            final ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
-            final MethodGen methodGen = new MethodGen(methods[0], classFileName, cp);
-
+            JavaClass clazz = parser.parse();
+            
+            Method[] methods = clazz.getMethods();
+            
+            ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
+            MethodGen methodGen = new MethodGen(methods[0], classFileName, cp);
+            
             // The first instruction is an LDC CONSTANT_Dynamic added by Jacoco
-            final Instruction instruction = methodGen.getInstructionList().getInstructions()[0];
+            Instruction instruction = methodGen.getInstructionList().getInstructions()[0];
 
             instruction.accept(new EmptyVisitor() {
                 @Override
-                public void visitLDC(final LDC ldc) {
+                public void visitLDC(LDC ldc) {
                     // Without the change to LDC.getType() this fails because the tag is CONSTANT_Dynamic
                     ldc.getType(cp);
                 }
@@ -72,7 +72,7 @@ public class JiraBcel370TestCase extends AbstractTestCase {
         "com.foo.Foo"
     })
     // @formatter:on
-    public void testVerify(final String className) throws ClassNotFoundException {
+    public void testVerify(String className) throws ClassNotFoundException {
         // Without the changes to the verifier this fails because it doesn't allow LDC CONSTANT_Dynamic
         Verifier.verifyType(className);
     }

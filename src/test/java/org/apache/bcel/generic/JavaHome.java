@@ -68,7 +68,7 @@ public class JavaHome {
 
     private static Stream<Path> find(final Path start, final int maxDepth, final BiPredicate<Path, BasicFileAttributes> matcher,
             final FileVisitOption... options) {
-        // TODO Apache Commons 2.14.0: Use FilesUncheck
+        // TODO Apache Commons 2.14.0: Use FilesUncheck 
         return Files.exists(start) ? Uncheck.apply(Files::find, start, maxDepth, matcher, options) : Stream.empty();
     }
 

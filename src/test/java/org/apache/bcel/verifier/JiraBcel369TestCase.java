@@ -109,7 +109,7 @@ Slots used: 0 MaxStack: 1.
     at org.apache.bcel.verifier.structurals.Pass3bVerifier.do_verify(Pass3bVerifier.java:386)
     ... 74 more
      * }</pre>
-     *
+     * 
      * @throws ClassNotFoundException
      */
     @Test
