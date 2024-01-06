@@ -66,7 +66,7 @@ public class ConstantPoolTestCase extends AbstractTestCase {
                         // Next constant pool entry will be invalid so skip it
                         i++;
                     }
-                } catch (Throwable t) {
+                } catch (final Throwable t) {
                     t.printStackTrace();
                     fail();
                 }
@@ -92,7 +92,7 @@ public class ConstantPoolTestCase extends AbstractTestCase {
                         // Next constant pool entry will be invalid so skip it
                         i++;
                     }
-                } catch (Throwable t) {
+                } catch (final Throwable t) {
                     t.printStackTrace();
                     fail();
                 }

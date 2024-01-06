@@ -35,7 +35,7 @@ public class TestJira368 {
 
     @Test
     public void testInstructionListStringBrief() throws Exception {
-        for (Method method : parseJavaClass().getMethods()) {
+        for (final Method method : parseJavaClass().getMethods()) {
             if (!method.isAbstract() && !method.isNative()) {
                 final InstructionList instructionList = new InstructionList(method.getCode().getCode());
                 final String string = instructionList.toString(false);
@@ -46,7 +46,7 @@ public class TestJira368 {
 
     @Test
     public void testInstructionListStringVerbose() throws Exception {
-        for (Method method : parseJavaClass().getMethods()) {
+        for (final Method method : parseJavaClass().getMethods()) {
             if (!method.isAbstract() && !method.isNative()) {
                 final InstructionList instructionList = new InstructionList(method.getCode().getCode());
                 final String string = instructionList.toString(true);

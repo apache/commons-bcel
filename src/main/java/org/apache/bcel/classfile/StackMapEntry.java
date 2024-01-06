@@ -71,9 +71,7 @@ public final class StackMapEntry implements Node, Cloneable {
         } else if (frameType == Const.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) {
             byteCodeOffset = dataInput.readUnsignedShort();
             typesOfStackItems = new StackMapType[] { new StackMapType(dataInput, constantPool) };
-        } else if (frameType >= Const.CHOP_FRAME && frameType <= Const.CHOP_FRAME_MAX) {
-            byteCodeOffset = dataInput.readUnsignedShort();
-        } else if (frameType == Const.SAME_FRAME_EXTENDED) {
+        } else if (frameType >= Const.CHOP_FRAME && frameType <= Const.CHOP_FRAME_MAX || frameType == Const.SAME_FRAME_EXTENDED) {
             byteCodeOffset = dataInput.readUnsignedShort();
         } else if (frameType >= Const.APPEND_FRAME && frameType <= Const.APPEND_FRAME_MAX) {
             byteCodeOffset = dataInput.readUnsignedShort();
@@ -186,9 +184,7 @@ public final class StackMapEntry implements Node, Cloneable {
         } else if (frameType == Const.SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED) {
             file.writeShort(byteCodeOffset);
             typesOfStackItems[0].dump(file);
-        } else if (frameType >= Const.CHOP_FRAME && frameType <= Const.CHOP_FRAME_MAX) {
-            file.writeShort(byteCodeOffset);
-        } else if (frameType == Const.SAME_FRAME_EXTENDED) {
+        } else if (frameType >= Const.CHOP_FRAME && frameType <= Const.CHOP_FRAME_MAX || frameType == Const.SAME_FRAME_EXTENDED) {
             file.writeShort(byteCodeOffset);
         } else if (frameType >= Const.APPEND_FRAME && frameType <= Const.APPEND_FRAME_MAX) {
             file.writeShort(byteCodeOffset);
