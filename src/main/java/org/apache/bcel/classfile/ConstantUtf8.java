@@ -112,6 +112,11 @@ public final class ConstantUtf8 extends Constant {
         hits = considered = skipped = created = 0;
     }
 
+    // Avoid Spotbugs complaint about Write to static field
+    private static void countCreated() {
+        created++;
+    }
+
     /**
      * Gets a new or cached instance of the given value.
      * <p>
@@ -176,11 +181,6 @@ public final class ConstantUtf8 extends Constant {
         System.err.printf("%s Total of %,d ConstantUtf8 objects created.%n", prefix, created);
         System.err.printf("%s Configuration: %s=%,d, %s=%,d.%n", prefix, SYS_PROP_CACHE_MAX_ENTRIES, Cache.MAX_ENTRIES, SYS_PROP_CACHE_MAX_ENTRY_SIZE,
             Cache.MAX_ENTRY_SIZE);
-    }
-
-    // Avoid Spotbugs complaint about Write to static field
-    private static void countCreated() {
-        created++;
     }
 
     private final String value;

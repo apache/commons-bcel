@@ -30,11 +30,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class InstConstraintVisitorTestCase {
     private ConstantPoolGen cp;
     
-    @BeforeEach
-    public void setup() {
-        cp = mock(ConstantPoolGen.class);
-    }
-    
     @ParameterizedTest
     @MethodSource("org.apache.bcel.verifier.statics.Pass3aVerifierTestCase#constantsNotSupportedByLdc")
     public void rejectLdcConstantModule(Constant constant) {
@@ -48,5 +43,10 @@ public class InstConstraintVisitorTestCase {
         LDC ldc = new LDC(0);
         
         assertThatCode(() -> visitor.visitLDC(ldc)).hasMessageStartingWith("Instruction LDC constraint violated: Referenced constant should be a");
+    }
+    
+    @BeforeEach
+    public void setup() {
+        cp = mock(ConstantPoolGen.class);
     }
 }

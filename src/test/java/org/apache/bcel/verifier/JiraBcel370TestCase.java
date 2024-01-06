@@ -39,17 +39,6 @@ public class JiraBcel370TestCase extends AbstractTestCase {
     @ParameterizedTest
     @ValueSource(strings = {
     // @formatter:off
-        "com.foo.Foo"
-    })
-    // @formatter:on
-    public void testVerify(String className) throws ClassNotFoundException {
-        // Without the changes to the verifier this fails because it doesn't allow LDC CONSTANT_Dynamic
-        Verifier.verifyType(className);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {
-    // @formatter:off
         "target/test-classes/com/puppycrawl/tools/checkstyle/grammar/java/JavaLanguageParser$ClassBlockContext.class",
         "target/test-classes/com/foo/Foo.class"
     })
@@ -75,5 +64,16 @@ public class JiraBcel370TestCase extends AbstractTestCase {
                 }
             });
         }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+    // @formatter:off
+        "com.foo.Foo"
+    })
+    // @formatter:on
+    public void testVerify(String className) throws ClassNotFoundException {
+        // Without the changes to the verifier this fails because it doesn't allow LDC CONSTANT_Dynamic
+        Verifier.verifyType(className);
     }
 }
