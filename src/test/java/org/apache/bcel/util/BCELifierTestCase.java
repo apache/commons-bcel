@@ -174,7 +174,7 @@ public class BCELifierTestCase extends AbstractTestCase {
 
     /*
      * Dumps a class using "javap" and compare with the same class recreated using BCELifier, "javac", "java" and dumped with "javap".
-     * 
+     *
      * TODO: detect if JDK present and skip test if not
      */
     @ParameterizedTest

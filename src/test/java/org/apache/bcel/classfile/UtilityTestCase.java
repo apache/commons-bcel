@@ -44,7 +44,7 @@ public class UtilityTestCase {
     @Test
     public void testCodeToString() throws Exception {
         final class CodeToString {
-            int[][] a = new int[0][0];
+            int[][] a = {};
 
             CodeToString() {
                 if (a instanceof int[][]) {

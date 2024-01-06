@@ -72,62 +72,62 @@ class Pass3aVerifierTestCase {
     }
     @AfterAll
     public static void restoreRepository() {
-        // We have set our mock repository, revert the change 
+        // We have set our mock repository, revert the change
         Repository.setRepository(SyntheticRepository.getInstance());
     }
     private Verifier verifier;
     private org.apache.bcel.util.Repository repository;
 
     private ConstantPool cp;
-    
+
     private JavaClass javaClass;
-    
+
     @ParameterizedTest
     @MethodSource("constantsNotSupportedByLdc")
-    public void rejectLdcConstant(Constant constant) {
+    public void rejectLdcConstant(final Constant constant) {
         // LDC the constant 0 and then return
-        byte[] methodCode = new byte[] {
+        final byte[] methodCode = {
                 Const.LDC,
                 0,
                 0,
                 (byte) Const.RETURN,
         };
-        
-        Code code = new Code(0, 0, 0, 0, methodCode, new CodeException[0], new Attribute[0], cp);
+
+        final Code code = new Code(0, 0, 0, 0, methodCode, new CodeException[0], new Attribute[0], cp);
 
         when(cp.getConstantPool()).thenReturn(new Constant[] {constant});
-        
-        Attribute[] attributes = new Attribute[] {code};
-        Method method = new Method(0, 0, 0, attributes, cp);
-        
+
+        final Attribute[] attributes = {code};
+        final Method method = new Method(0, 0, 0, attributes, cp);
+
         when(javaClass.getMethods()).thenReturn(new Method[] {method});
-        
-        Pass3aVerifier pass3aVerifier = new Pass3aVerifier(verifier, 0);
-        VerificationResult verificationResult = pass3aVerifier.do_verify();
-        
+
+        final Pass3aVerifier pass3aVerifier = new Pass3aVerifier(verifier, 0);
+        final VerificationResult verificationResult = pass3aVerifier.do_verify();
+
         assertThat(verificationResult.getStatus()).isEqualTo(VerificationResult.VERIFIED_REJECTED);
         assertThat(verificationResult.getMessage()).startsWith("Instruction ldc[18](2) 0 constraint violated: Operand of LDC");
     }
-    
+
     @BeforeEach
     void setup() throws ClassNotFoundException {
-        String className = "org.apache.bcel.verifier.statics.Pass3aVerifierTestCase.foo";
-        
+        final String className = "org.apache.bcel.verifier.statics.Pass3aVerifierTestCase.foo";
+
         verifier = spy(VerifierFactory.getVerifier(className));
         repository = mock(org.apache.bcel.util.Repository.class);
         cp = mock(ConstantPool.class);
         javaClass = mock(JavaClass.class);
-        
+
         // Mock the verifier
         doReturn(VerificationResult.VR_OK).when(verifier).doPass2();
-        
+
         // Mock the repository
         Repository.setRepository(repository);
         when(repository.loadClass(className)).thenReturn(javaClass);
-        
+
         // Mock the constant pool
         when(cp.getConstantPool()).thenReturn(new Constant[] {new ConstantModule(0)});
-        
+
         // Mock the java class
         when(javaClass.getConstantPool()).thenReturn(cp);
     }
