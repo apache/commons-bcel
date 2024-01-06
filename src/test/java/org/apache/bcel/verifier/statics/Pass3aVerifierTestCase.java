@@ -1,4 +1,3 @@
-package org.apache.bcel.verifier.statics;
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -15,8 +14,12 @@ package org.apache.bcel.verifier.statics;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+package org.apache.bcel.verifier.statics;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import java.util.stream.Stream;
@@ -44,6 +47,7 @@ import org.apache.bcel.classfile.Method;
 import org.apache.bcel.util.SyntheticRepository;
 import org.apache.bcel.verifier.VerificationResult;
 import org.apache.bcel.verifier.Verifier;
+import org.apache.bcel.verifier.VerifierFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -54,23 +58,18 @@ class Pass3aVerifierTestCase {
     private org.apache.bcel.util.Repository repository;
     private ConstantPool cp;
     private JavaClass javaClass;
-    private Method method;
-    private Code code;
 
     @BeforeEach
     void setup() throws ClassNotFoundException {
-        String className = "pass3a";
+        String className = "org.apache.bcel.verifier.statics.Pass3aVerifierTestCase.foo";
         
-        verifier = mock(Verifier.class);
+        verifier = spy(VerifierFactory.getVerifier(className));
         repository = mock(org.apache.bcel.util.Repository.class);
         cp = mock(ConstantPool.class);
         javaClass = mock(JavaClass.class);
-        method = mock(Method.class);
-        code = mock(Code.class);
         
         // Mock the verifier
-        when(verifier.doPass2()).thenReturn(VerificationResult.VR_OK);
-        when(verifier.getClassName()).thenReturn(className);
+        doReturn(VerificationResult.VR_OK).when(verifier).doPass2();
         
         // Mock the repository
         Repository.setRepository(repository);
@@ -80,15 +79,7 @@ class Pass3aVerifierTestCase {
         when(cp.getConstantPool()).thenReturn(new Constant[] {new ConstantModule(0)});
         
         // Mock the java class
-        when(javaClass.getMethods()).thenReturn(new Method[] {method});
         when(javaClass.getConstantPool()).thenReturn(cp);
-        
-        // Mock the method
-        when(method.getCode()).thenReturn(code);
-        
-        // Mock the code
-        when(code.getAttributes()).thenReturn(new Attribute[0]);
-        when(code.getExceptionTable()).thenReturn(new CodeException[0]);
     }
     
     @AfterAll
@@ -116,7 +107,7 @@ class Pass3aVerifierTestCase {
     
     @ParameterizedTest
     @MethodSource("constantsNotSupportedByLdc")
-    public void rejectLdcConstantModule(Constant constant) {
+    public void rejectLdcConstant(Constant constant) {
         // LDC the constant 0 and then return
         byte[] methodCode = new byte[] {
                 Const.LDC,
@@ -124,9 +115,15 @@ class Pass3aVerifierTestCase {
                 0,
                 (byte) Const.RETURN,
         };
+        
+        Code code = new Code(0, 0, 0, 0, methodCode, new CodeException[0], new Attribute[0], cp);
 
-        when(code.getCode()).thenReturn(methodCode);
         when(cp.getConstantPool()).thenReturn(new Constant[] {constant});
+        
+        Attribute[] attributes = new Attribute[] {code};
+        Method method = new Method(0, 0, 0, attributes, cp);
+        
+        when(javaClass.getMethods()).thenReturn(new Method[] {method});
         
         Pass3aVerifier pass3aVerifier = new Pass3aVerifier(verifier, 0);
         VerificationResult verificationResult = pass3aVerifier.do_verify();
