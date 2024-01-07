@@ -31,6 +31,9 @@ public abstract class AccessFlags {
     @java.lang.Deprecated
     protected int access_flags; // TODO not used externally at present
 
+    /**
+     * Constructs a new instance.
+     */
     public AccessFlags() {
     }
 
@@ -67,7 +70,7 @@ public abstract class AccessFlags {
      * @return whether the abstract bit is on.
      */
     public final boolean isAbstract() {
-        return (access_flags & Const.ACC_ABSTRACT) != 0;
+        return test(Const.ACC_ABSTRACT);
     }
 
     /**
@@ -85,7 +88,7 @@ public abstract class AccessFlags {
      * @return whether the annotation bit is on.
      */
     public final boolean isAnnotation() {
-        return (access_flags & Const.ACC_ANNOTATION) != 0;
+        return test(Const.ACC_ANNOTATION);
     }
 
     /**
@@ -96,14 +99,13 @@ public abstract class AccessFlags {
     public final void isAnnotation(final boolean flag) {
         setFlag(Const.ACC_ANNOTATION, flag);
     }
-
     /**
      * Tests whether the enum bit is on.
      *
      * @return whether the enum bit is on.
      */
     public final boolean isEnum() {
-        return (access_flags & Const.ACC_ENUM) != 0;
+        return test(Const.ACC_ENUM);
     }
 
     /**
@@ -121,7 +123,7 @@ public abstract class AccessFlags {
      * @return whether the final bit is on.
      */
     public final boolean isFinal() {
-        return (access_flags & Const.ACC_FINAL) != 0;
+        return test(Const.ACC_FINAL);
     }
 
     /**
@@ -139,7 +141,7 @@ public abstract class AccessFlags {
      * @return whether the interface bit is on.
      */
     public final boolean isInterface() {
-        return (access_flags & Const.ACC_INTERFACE) != 0;
+        return test(Const.ACC_INTERFACE);
     }
 
     /**
@@ -157,7 +159,7 @@ public abstract class AccessFlags {
      * @return whether the native bit is on.
      */
     public final boolean isNative() {
-        return (access_flags & Const.ACC_NATIVE) != 0;
+        return test(Const.ACC_NATIVE);
     }
 
     /**
@@ -175,7 +177,7 @@ public abstract class AccessFlags {
      * @return whether the private bit is on.
      */
     public final boolean isPrivate() {
-        return (access_flags & Const.ACC_PRIVATE) != 0;
+        return test(Const.ACC_PRIVATE);
     }
 
     /**
@@ -193,7 +195,7 @@ public abstract class AccessFlags {
      * @return whether the protected bit is on.
      */
     public final boolean isProtected() {
-        return (access_flags & Const.ACC_PROTECTED) != 0;
+        return test(Const.ACC_PROTECTED);
     }
 
     /**
@@ -211,7 +213,7 @@ public abstract class AccessFlags {
      * @return whether the public bit is on.
      */
     public final boolean isPublic() {
-        return (access_flags & Const.ACC_PUBLIC) != 0;
+        return test(Const.ACC_PUBLIC);
     }
 
     /**
@@ -229,7 +231,7 @@ public abstract class AccessFlags {
      * @return whether the static bit is on.
      */
     public final boolean isStatic() {
-        return (access_flags & Const.ACC_STATIC) != 0;
+        return test(Const.ACC_STATIC);
     }
 
     /**
@@ -247,7 +249,7 @@ public abstract class AccessFlags {
      * @return whether the strict bit is on.
      */
     public final boolean isStrictfp() {
-        return (access_flags & Const.ACC_STRICT) != 0;
+        return test(Const.ACC_STRICT);
     }
 
     /**
@@ -265,7 +267,7 @@ public abstract class AccessFlags {
      * @return whether the synchronized bit is on.
      */
     public final boolean isSynchronized() {
-        return (access_flags & Const.ACC_SYNCHRONIZED) != 0;
+        return test(Const.ACC_SYNCHRONIZED);
     }
 
     /**
@@ -283,7 +285,7 @@ public abstract class AccessFlags {
      * @return whether the synthetic bit is on.
      */
     public final boolean isSynthetic() {
-        return (access_flags & Const.ACC_SYNTHETIC) != 0;
+        return test(Const.ACC_SYNTHETIC);
     }
 
     /**
@@ -301,7 +303,7 @@ public abstract class AccessFlags {
      * @return whether the varargs bit is on.
      */
     public final boolean isTransient() {
-        return (access_flags & Const.ACC_TRANSIENT) != 0;
+        return test(Const.ACC_TRANSIENT);
     }
 
     /**
@@ -319,7 +321,7 @@ public abstract class AccessFlags {
      * @return whether the varargs bit is on.
      */
     public final boolean isVarArgs() {
-        return (access_flags & Const.ACC_VARARGS) != 0;
+        return test(Const.ACC_VARARGS);
     }
 
     /**
@@ -337,7 +339,7 @@ public abstract class AccessFlags {
      * @return whether the volatile bit is on.
      */
     public final boolean isVolatile() {
-        return (access_flags & Const.ACC_VOLATILE) != 0;
+        return test(Const.ACC_VOLATILE);
     }
 
     /**
@@ -375,5 +377,15 @@ public abstract class AccessFlags {
      */
     public final void setModifiers(final int accessFlags) {
         setAccessFlags(accessFlags);
+    }
+
+    /**
+     * Tests whether the bit is on.
+     *
+     * @param test the bit to test.
+     * @return whether the bit is on.
+     */
+    private boolean test(final short test) {
+        return (access_flags & test) != 0;
     }
 }
