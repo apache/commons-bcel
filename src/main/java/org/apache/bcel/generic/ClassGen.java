@@ -44,33 +44,30 @@ import org.apache.commons.lang3.ArrayUtils;
  */
 public class ClassGen extends AccessFlags implements Cloneable {
 
-    private static BCELComparator bcelComparator = new BCELComparator() {
+    private static BCELComparator<ClassGen> bcelComparator = new BCELComparator<ClassGen>() {
 
         @Override
-        public boolean equals(final Object o1, final Object o2) {
-            final ClassGen THIS = (ClassGen) o1;
-            final ClassGen THAT = (ClassGen) o2;
-            return Objects.equals(THIS.getClassName(), THAT.getClassName());
+        public boolean equals(final ClassGen a, final ClassGen b) {
+            return a == b || a != null && b != null && Objects.equals(a.getClassName(), b.getClassName());
         }
 
         @Override
-        public int hashCode(final Object o) {
-            final ClassGen THIS = (ClassGen) o;
-            return THIS.getClassName().hashCode();
+        public int hashCode(final ClassGen o) {
+            return o != null ? Objects.hashCode(o.getClassName()) : 0;
         }
     };
 
     /**
      * @return Comparison strategy object
      */
-    public static BCELComparator getComparator() {
+    public static BCELComparator<ClassGen> getComparator() {
         return bcelComparator;
     }
 
     /**
      * @param comparator Comparison strategy object
      */
-    public static void setComparator(final BCELComparator comparator) {
+    public static void setComparator(final BCELComparator<ClassGen> comparator) {
         bcelComparator = comparator;
     }
 
@@ -279,7 +276,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
      */
     @Override
     public boolean equals(final Object obj) {
-        return bcelComparator.equals(this, obj);
+        return obj instanceof ClassGen && bcelComparator.equals(this, (ClassGen) obj);
     }
 
     // J5TODO: Should we make calling unpackAnnotations() lazy and put it in here?

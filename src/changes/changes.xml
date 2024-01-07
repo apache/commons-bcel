@@ -68,6 +68,14 @@ The <action> type attribute can be add,update,fix,remove.
       <!-- FIX  -->
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Replace internal use of StringBuffer with StringBuilder.</action>
       <action issue="BCEL-370" type="fix" dev="ggregory" due-to="Gary Gregory">CONSTANT_Dynamic is not handled in LDC #254.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">BCELComparator now uses generics.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException in ClassGen.BCELComparator#equals() and ClassGen.BCELComparator#hashCode().</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException in Constant.BCELComparator#equals() and Constant.BCELComparator#hashCode().</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException in Field.BCELComparator#equals() and Field.BCELComparator#hashCode().</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException in FieldGen.BCELComparator#equals() and FieldGen.BCELComparator#hashCode().</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException in JavaClass.BCELComparator#equals() and JavaClass.BCELComparator#hashCode().</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException in Method.BCELComparator#equals() and Method.BCELComparator#hashCode().</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException in MethodGen.BCELComparator#equals() and MethodGen.BCELComparator#hashCode().</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump GitHub various actions for CI builds.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump jna.version from 5.13.0 to 5.14.0 #250.</action>

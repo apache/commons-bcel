@@ -14,30 +14,25 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.apache.bcel.util;
+
+package org.apache.bcel.classfile;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 
 /**
- * Used for BCEL comparison strategy.
- *
- * @param <T> What type we are comparing.
- * @since 5.2
+ * Tests {@link Field}.
  */
-public interface BCELComparator<T> {
+public class FieldTest {
 
-    /**
-     * Compares two objects and return what a.equals(b) should return.
-     *
-     * @param a an object.
-     * @param b an object to be compared with {@code a} for equality.
-     * @return {@code true} if the arguments are equal to each other and {@code false} otherwise.
-     */
-    boolean equals(T a, T b);
-
-    /**
-     * Gets the hash code for o.hashCode()
-     *
-     * @param o
-     * @return hash code for o.hashCode()
-     */
-    int hashCode(T o);
+    @Test
+    public void testBCELComparator() throws Exception {
+        final Field obj = new Field(1, 1, 1, null, null);
+        assertTrue(Field.getComparator().equals(null, null));
+        assertTrue(Field.getComparator().equals(obj, obj));
+        assertFalse(Field.getComparator().equals(obj, null));
+        assertFalse(Field.getComparator().equals(null, obj));
+    }
 }
