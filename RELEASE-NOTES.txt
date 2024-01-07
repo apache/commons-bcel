@@ -1,4 +1,73 @@
               Apache Commons BCEL
+              Version 6.8.1
+              RELEASE NOTES
+
+
+INTRODUCTION:
+
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.8.1.
+
+The Byte Code Engineering Library (BCEL) is intended to give users a convenient
+way to analyze, create, and manipulate compiled .class files. Classes are
+represented by objects containing all the symbolic information of the given
+class: methods, fields, and byte code instructions.
+
+Maintenance and bug fix release.
+
+FIXED BUGS:
+===========
+
+o           Replace internal use of StringBuffer with StringBuilder. Thanks to Gary Gregory.
+o BCEL-370: CONSTANT_Dynamic is not handled in LDC #254. Thanks to Gary Gregory.
+o           BCELComparator now uses generics. Thanks to Gary Gregory.
+o           Avoid NullPointerException in ClassGen.BCELComparator#equals() and ClassGen.BCELComparator#hashCode(). Thanks to Gary Gregory.
+o           Avoid NullPointerException in Constant.BCELComparator#equals() and Constant.BCELComparator#hashCode(). Thanks to Gary Gregory.
+o           Avoid NullPointerException in Field.BCELComparator#equals() and Field.BCELComparator#hashCode(). Thanks to Gary Gregory.
+o           Avoid NullPointerException in FieldGen.BCELComparator#equals() and FieldGen.BCELComparator#hashCode(). Thanks to Gary Gregory.
+o           Avoid NullPointerException in JavaClass.BCELComparator#equals() and JavaClass.BCELComparator#hashCode(). Thanks to Gary Gregory.
+o           Avoid NullPointerException in Method.BCELComparator#equals() and Method.BCELComparator#hashCode(). Thanks to Gary Gregory.
+o           Avoid NullPointerException in MethodGen.BCELComparator#equals() and MethodGen.BCELComparator#hashCode(). Thanks to Gary Gregory.
+
+CHANGES:
+========
+
+o           Bump GitHub various actions for CI builds. Thanks to Dependabot.
+o           Bump jna.version from 5.13.0 to 5.14.0 #250. Thanks to Dependabot.
+o           Bump org.jetbrains.kotlin:kotlin-stdlib from 1.9.21 to 1.9.22 #252. Thanks to Dependabot.
+o           Bump org.apache.commons:commons-exec from 1.3 to 1.4.0 #255. Thanks to Dependabot.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-bcelchanges-report.html
+
+For complete information on Apache Commons BCEL, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons BCEL website:
+
+https://commons.apache.org/proper/commons-bcel
+
+Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+
+Open source works best when you give feedback:
+
+    https://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
+              Apache Commons BCEL
               Version 6.8.0
               RELEASE NOTES
 

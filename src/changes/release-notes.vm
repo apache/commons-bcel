@@ -23,7 +23,7 @@
 INTRODUCTION:
 
 The ${developmentTeam} is pleased to announce the release of
-${project.name} ${version}!
+${project.name} ${version}.
 
 The Byte Code Engineering Library (BCEL) is intended to give users a convenient
 way to analyze, create, and manipulate compiled .class files. Classes are
