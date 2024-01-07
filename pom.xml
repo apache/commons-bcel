@@ -82,21 +82,6 @@
     <url>https://github.com/apache/commons-bcel/actions</url>
   </ciManagement>
 
-  <mailingLists>
-    <mailingList>
-      <name>BCEL User List</name>
-      <subscribe>user-subscribe@commons.apache.org</subscribe>
-      <unsubscribe>user-unsubscribe@commons.apache.org</unsubscribe>
-      <archive>https://mail-archives.apache.org/mod_mbox/commons-user/</archive>
-    </mailingList>
-    <mailingList>
-      <name>BCEL Developer List</name>
-      <subscribe>dev-subscribe@commons.apache.org</subscribe>
-      <unsubscribe>dev-unsubscribe@commons.apache.org</unsubscribe>
-      <archive>https://mail-archives.apache.org/mod_mbox/commons-dev/</archive>
-    </mailingList>
-  </mailingLists>
-
   <issueManagement>
     <system>jira</system>
     <url>https://issues.apache.org/jira/browse/BCEL</url>
