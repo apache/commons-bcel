@@ -61,7 +61,7 @@ public class JvmOpCodes {
      * Tests {@link DUP2}.
      */
     long dup2(long a) {
-        return a = a + 1;
+        return a++;
     }
 
     /**

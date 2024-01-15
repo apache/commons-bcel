@@ -1169,7 +1169,7 @@ public abstract class Utility {
             type = typeParams + typeSignaturesToString(signature.substring(index), chopit, ')');
             index += unwrap(CONSUMER_CHARS); // update position
             // add return type
-            type = type + typeSignatureToString(signature.substring(index), chopit);
+            type += typeSignatureToString(signature.substring(index), chopit);
             index += unwrap(CONSUMER_CHARS); // update position
             // ignore any throws information in the signature
             return type;
