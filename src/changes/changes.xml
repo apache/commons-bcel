@@ -67,6 +67,7 @@ The <action> type attribute can be add,update,fix,remove.
     <release version="6.8.2" date="20YY-MM-DD" description="Maintenance and bug fix release.">
       <!-- FIX  -->
       <!-- UPDATE -->
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.assertj:assertj-core from 3.25.1 to 3.25.2 #268.</action>
     </release>
     <release version="6.8.1" date="2024-01-07" description="Maintenance and bug fix release.">
       <!-- FIX  -->
