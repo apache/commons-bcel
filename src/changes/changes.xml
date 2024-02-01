@@ -68,7 +68,8 @@ The <action> type attribute can be add,update,fix,remove.
       <!-- FIX  -->
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump GitHub various actions for CI builds.</action>
-      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.assertj:assertj-core from 3.25.1 to 3.25.2 #268.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.assertj:assertj-core from 3.25.1 to 3.25.2.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.apache.commons:commons-parent from 65 to 66.</action>
     </release>
     <release version="6.8.1" date="2024-01-07" description="Maintenance and bug fix release.">
       <!-- FIX  -->
