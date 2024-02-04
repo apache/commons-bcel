@@ -1043,8 +1043,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 try {
                     delayedPass2Checks();
                 } catch (final ClassConstraintException | ClassFormatException cce) {
-                    vr = new VerificationResult(VerificationResult.VERIFIED_REJECTED, cce.getMessage());
-                    return vr;
+                    return new VerificationResult(VerificationResult.VERIFIED_REJECTED, cce.getMessage());
                 }
                 try {
                     pass3StaticInstructionChecks();

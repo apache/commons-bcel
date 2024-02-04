@@ -48,8 +48,7 @@ public class BCELifierTestCase extends AbstractTestCase {
     private String canonHashRef(String input) {
         input = input.replaceAll("#\\d+", "#n"); // numbers may vary in length
         input = input.replaceAll(" +", " "); // collapse spaces
-        input = input.replaceAll("//.+", ""); // comments may vary
-        return input;
+        return input.replaceAll("//.+", "");
     }
 
     private String exec(final File workDir, final String... args) throws Exception {

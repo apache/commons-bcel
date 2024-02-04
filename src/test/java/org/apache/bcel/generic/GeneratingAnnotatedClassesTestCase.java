@@ -291,8 +291,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         final ObjectType t = new ObjectType("SimpleAnnotation");
         final List<ElementValuePairGen> elements = new ArrayList<>();
         elements.add(nvGen);
-        final AnnotationEntryGen a = new AnnotationEntryGen(t, elements, false, cp);
-        return a;
+        return new AnnotationEntryGen(t, elements, false, cp);
     }
 
     public AnnotationEntryGen createSimpleVisibleAnnotation(final ConstantPoolGen cp) {
@@ -301,8 +300,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         final ObjectType t = new ObjectType("SimpleAnnotation");
         final List<ElementValuePairGen> elements = new ArrayList<>();
         elements.add(nvGen);
-        final AnnotationEntryGen a = new AnnotationEntryGen(t, elements, true, cp);
-        return a;
+        return new AnnotationEntryGen(t, elements, true, cp);
     }
 
     private void dumpClass(final ClassGen cg, final String fname) {
