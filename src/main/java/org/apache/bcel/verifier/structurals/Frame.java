@@ -118,10 +118,10 @@ public class Frame {
      */
     @Override
     public String toString() {
-        String s = "Local Variables:\n";
-        s += locals;
-        s += "OperandStack:\n";
-        s += stack;
-        return s;
+        StringBuilder s = new StringBuilder("Local Variables:\n");
+        s.append(locals);
+        s.append("OperandStack:\n");
+        s.append(stack);
+        return s.toString();
     }
 }
