@@ -65,7 +65,7 @@
     <commons.jira.id>BCEL</commons.jira.id>
     <commons.jira.pid>12314220</commons.jira.pid>
     <mockito.version>4.11.0</mockito.version>
-    <assertj.version>3.25.2</assertj.version>
+    <assertj.version>3.25.3</assertj.version>
     <jna.version>5.14.0</jna.version>
     <japicmp.skip>false</japicmp.skip>
   </properties>
