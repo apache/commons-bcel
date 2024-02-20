@@ -16,8 +16,8 @@
  */
 package org.apache.bcel.util;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This repository is used in situations where a Class is created outside the realm of a ClassLoader. Classes are loaded
@@ -32,7 +32,7 @@ import java.util.Map;
  */
 public class SyntheticRepository extends MemorySensitiveClassPathRepository {
 
-    private static final Map<ClassPath, SyntheticRepository> MAP = new HashMap<>(); // CLASSPATH X REPOSITORY
+    private static final Map<ClassPath, SyntheticRepository> MAP = new ConcurrentHashMap<>(); // CLASSPATH X REPOSITORY
 
     public static SyntheticRepository getInstance() {
         return getInstance(ClassPath.SYSTEM_CLASS_PATH);
