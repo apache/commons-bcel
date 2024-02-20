@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-
    Licensed to the Apache Software Foundation (ASF) under one or more
    contributor license agreements.  See the NOTICE file distributed with
    this work for additional information regarding copyright ownership.
@@ -15,7 +14,6 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-
 -->
 <!--
 This file is also used by the maven-changes-plugin to generate the release notes.
@@ -38,7 +36,6 @@ and commit
 
 The <action> type attribute can be add,update,fix,remove.
 -->
-
 <document xmlns="http://maven.apache.org/changes/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
@@ -46,7 +43,6 @@ The <action> type attribute can be add,update,fix,remove.
     <title>Apache Commons BCEL Release Notes</title>
     <author email="dev@commons.apache.org">Apache Commons developers</author>
   </properties>
-
   <!-- NOTE:
   The description below is specially formatted so as to improve the layout of the generated release notes:
   The parsing process removes all line feeds, replacing them with a single space.
@@ -62,12 +58,10 @@ The <action> type attribute can be add,update,fix,remove.
 
   Defining changes.version allows one to create the RN without first removing the SNAPSHOT suffix.
    -->
-
   <body>
     <release version="6.8.2" date="20YY-MM-DD" description="Maintenance and bug fix release.">
       <!-- FIX -->
       <action type="add" dev="ggregory" due-to="Guillaume Nodet">Fix ConcurrentModificationException in org.apache.bcel.util.SyntheticRepository.getInstance() #275.</action>
-         
       <!-- ADD -->
       <action type="add" dev="ggregory" due-to="Gary Gregory">Add Maven property project.build.outputTimestamp for build reproducibility.</action>
       <!-- UPDATE -->
