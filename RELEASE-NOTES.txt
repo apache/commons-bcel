@@ -1,10 +1,67 @@
-              Apache Commons BCEL
-              Version 6.8.1
-              RELEASE NOTES
+Apache Commons BCEL
+Version 6.8.2
+RELEASE NOTES
 
 
-INTRODUCTION:
+Introduction
+------------
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.8.2.
 
+The Byte Code Engineering Library (BCEL) is intended to give users a convenient
+way to analyze, create, and manipulate compiled .class files. Classes are
+represented by objects containing all the symbolic information of the given
+class: methods, fields, and byte code instructions.
+
+Maintenance and bug fix release.
+
+New Features
+------------
+*           Fix ConcurrentModificationException in org.apache.bcel.util.SyntheticRepository.getInstance() #275. Thanks to Guillaume Nodet.
+*           Add Maven property project.build.outputTimestamp for build reproducibility. Thanks to Gary Gregory.
+
+Changes
+-------
+*           Bump GitHub various actions for CI builds. Thanks to Dependabot.
+*           Bump org.assertj:assertj-core from 3.25.1 to 3.25.2. Thanks to Dependabot.
+*           Bump org.apache.commons:commons-parent from 65 to 66. Thanks to Dependabot.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-bcelchanges-report.html
+
+For complete information on Apache Commons BCEL, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons BCEL website:
+
+https://commons.apache.org/proper/commons-bcel
+
+Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+Open source works best when you give feedback:
+
+    https://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
+Apache Commons BCEL
+Version 6.8.1
+RELEASE NOTES
+
+
+Introduction
+------------
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.8.1.
 
@@ -15,27 +72,27 @@ class: methods, fields, and byte code instructions.
 
 Maintenance and bug fix release.
 
-FIXED BUGS:
-===========
+Fixed Bugs
+-----------
 
-o           Replace internal use of StringBuffer with StringBuilder. Thanks to Gary Gregory.
-o BCEL-370: CONSTANT_Dynamic is not handled in LDC #254. Thanks to Gary Gregory.
-o           BCELComparator now uses generics. Thanks to Gary Gregory.
-o           Avoid NullPointerException in ClassGen.BCELComparator#equals() and ClassGen.BCELComparator#hashCode(). Thanks to Gary Gregory.
-o           Avoid NullPointerException in Constant.BCELComparator#equals() and Constant.BCELComparator#hashCode(). Thanks to Gary Gregory.
-o           Avoid NullPointerException in Field.BCELComparator#equals() and Field.BCELComparator#hashCode(). Thanks to Gary Gregory.
-o           Avoid NullPointerException in FieldGen.BCELComparator#equals() and FieldGen.BCELComparator#hashCode(). Thanks to Gary Gregory.
-o           Avoid NullPointerException in JavaClass.BCELComparator#equals() and JavaClass.BCELComparator#hashCode(). Thanks to Gary Gregory.
-o           Avoid NullPointerException in Method.BCELComparator#equals() and Method.BCELComparator#hashCode(). Thanks to Gary Gregory.
-o           Avoid NullPointerException in MethodGen.BCELComparator#equals() and MethodGen.BCELComparator#hashCode(). Thanks to Gary Gregory.
+*           Replace internal use of StringBuffer with StringBuilder. Thanks to Gary Gregory.
+* BCEL-370: CONSTANT_Dynamic is not handled in LDC #254. Thanks to Gary Gregory.
+*           BCELComparator now uses generics. Thanks to Gary Gregory.
+*           Avoid NullPointerException in ClassGen.BCELComparator#equals() and ClassGen.BCELComparator#hashCode(). Thanks to Gary Gregory.
+*           Avoid NullPointerException in Constant.BCELComparator#equals() and Constant.BCELComparator#hashCode(). Thanks to Gary Gregory.
+*           Avoid NullPointerException in Field.BCELComparator#equals() and Field.BCELComparator#hashCode(). Thanks to Gary Gregory.
+*           Avoid NullPointerException in FieldGen.BCELComparator#equals() and FieldGen.BCELComparator#hashCode(). Thanks to Gary Gregory.
+*           Avoid NullPointerException in JavaClass.BCELComparator#equals() and JavaClass.BCELComparator#hashCode(). Thanks to Gary Gregory.
+*           Avoid NullPointerException in Method.BCELComparator#equals() and Method.BCELComparator#hashCode(). Thanks to Gary Gregory.
+*           Avoid NullPointerException in MethodGen.BCELComparator#equals() and MethodGen.BCELComparator#hashCode(). Thanks to Gary Gregory.
 
-CHANGES:
-========
+Changes
+--------
 
-o           Bump GitHub various actions for CI builds. Thanks to Dependabot.
-o           Bump jna.version from 5.13.0 to 5.14.0 #250. Thanks to Dependabot.
-o           Bump org.jetbrains.kotlin:kotlin-stdlib from 1.9.21 to 1.9.22 #252. Thanks to Dependabot.
-o           Bump org.apache.commons:commons-exec from 1.3 to 1.4.0 #255. Thanks to Dependabot.
+*           Bump GitHub various actions for CI builds. Thanks to Dependabot.
+*           Bump jna.version from 5.13.0 to 5.14.0 #250. Thanks to Dependabot.
+*           Bump org.jetbrains.kotlin:kotlin-stdlib from 1.9.21 to 1.9.22 #252. Thanks to Dependabot.
+*           Bump org.apache.commons:commons-exec from 1.3 to 1.4.0 #255. Thanks to Dependabot.
 
 
 Historical list of changes: https://commons.apache.org/proper/commons-bcelchanges-report.html
@@ -67,13 +124,13 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-              Apache Commons BCEL
-              Version 6.8.0
-              RELEASE NOTES
+Apache Commons BCEL
+Version 6.8.0
+RELEASE NOTES
 
 
-INTRODUCTION:
-
+Introduction
+------------
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.8.0!
 
@@ -84,47 +141,47 @@ class: methods, fields and byte code instructions.
 
 Maintenance and bug fix release.
 
-NEW FEATURES:
-=============
+New Features
+-------------
 
-o           Add and use InvalidMethodSignatureException extending ClassFormatException. Thanks to Gary Gregory.
-o           Increase code coverage in Class2HTMLTestCase with new test input Java4Example #186. Thanks to nbauma109.
-o           Add verifier tests on some opcodes #180. Thanks to nbauma109.
-o           Added signature test cases for class/method, and bad signatures #182. Thanks to nbauma109.
-o           Add Const.MAJOR_20. Thanks to Gary Gregory.
-o           Add Const.MINOR_20. Thanks to Gary Gregory.
-o           Add Const.MAJOR_21. Thanks to Gary Gregory.
-o           Add Const.MINOR_21. Thanks to Gary Gregory.
-o           [Bcelifier] stackmap support to pass JDK verifier #177. Thanks to nbauma109, Gary Gregory, Mark Roberts.
-o           Fix SpotBugs [ERROR] Class org.apache.bcel.util.ClassVector defines non-transient non-serializable instance field vec [org.apache.bcel.util.ClassVector] In ClassVector.java SE_BAD_FIELD. Thanks to Gary Gregory.
-o           Fix SpotBugs [ERROR] Switch statement found in org.apache.bcel.util.BCELFactory.visitAllocationInstruction(AllocationInstruction) where one case falls through to the next case [org.apache.bcel.util.BCELFactory, org.apache.bcel.util.BCELFactory] At BCELFactory.java:[lines 188-191]Another occurrence at BCELFactory.java:[lines 192-196] SF_SWITCH_FALLTHROUGH. Thanks to Gary Gregory.
+*           Add and use InvalidMethodSignatureException extending ClassFormatException. Thanks to Gary Gregory.
+*           Increase code coverage in Class2HTMLTestCase with new test input Java4Example #186. Thanks to nbauma109.
+*           Add verifier tests on some opcodes #180. Thanks to nbauma109.
+*           Added signature test cases for class/method, and bad signatures #182. Thanks to nbauma109.
+*           Add Const.MAJOR_20. Thanks to Gary Gregory.
+*           Add Const.MINOR_20. Thanks to Gary Gregory.
+*           Add Const.MAJOR_21. Thanks to Gary Gregory.
+*           Add Const.MINOR_21. Thanks to Gary Gregory.
+*           [Bcelifier] stackmap support to pass JDK verifier #177. Thanks to nbauma109, Gary Gregory, Mark Roberts.
+*           Fix SpotBugs [ERROR] Class org.apache.bcel.util.ClassVector defines non-transient non-serializable instance field vec [org.apache.bcel.util.ClassVector] In ClassVector.java SE_BAD_FIELD. Thanks to Gary Gregory.
+*           Fix SpotBugs [ERROR] Switch statement found in org.apache.bcel.util.BCELFactory.visitAllocationInstruction(AllocationInstruction) where one case falls through to the next case [org.apache.bcel.util.BCELFactory, org.apache.bcel.util.BCELFactory] At BCELFactory.java:[lines 188-191]Another occurrence at BCELFactory.java:[lines 192-196] SF_SWITCH_FALLTHROUGH. Thanks to Gary Gregory.
 
-FIXED BUGS:
-===========
+Fixed Bugs
+-----------
 
-o           When parsing an class with an invalid constant reference, ensure ClassParser.parse() throws ClassFormatException, not NullPointerException. Thanks to OSS-Fuzz.
-o           Ensure that references to a constant pool entry with index zero trigger a ClassFormatException, not a NullPointerException. Thanks to OSS-Fuzz.
-o           Ensure that references to the unused constant pool entry after a long/double entry triggers a ClassFormatException, not a NullPointerException. Thanks to OSS-Fuzz.
-o           Test and coverage of InstructionFactory #190. Thanks to nbauma109.
-o           Verifier: test and coverage for SWAP instruction #188. Thanks to nbauma109.
-o           Exception parsing Kotlin class with 'fun `method name with () in it`()' #205. Thanks to Jason Copenhaver, Gary Gregory.
-o           Fix null pointers in AnnotationEntry #213. Thanks to nbauma109, Gary Gregory.
-o           Field not found, search field in both super class and implemented interfaces (5x duplicated code to find field by name and type is refactored to a new method and now supports package-private) #181. Thanks to nbauma109.
-o BCEL-366: Use alternative name for broken classes under test #220. Thanks to Slawomir Jaranowski.
-o BCEL-367: Fixes java.lang.IndexOutOfBoundsException for ATHROW on empty stack #223. Thanks to Katherine Hough, Gary Gregory.
-o BCEL-368: Fixes java.lang.StackOverflowError in Select#toString(boolean) #229. Thanks to Katherine Hough, Gary Gregory.
-o           Fix for type.getType(...) use on non-signature type names #221. Thanks to nbauma109, Judit Knoll, Gary Gregory.
-o           Fix EmptyVisitorTestCase on Java 21. Thanks to Gary Gregory.
+*           When parsing an class with an invalid constant reference, ensure ClassParser.parse() throws ClassFormatException, not NullPointerException. Thanks to OSS-Fuzz.
+*           Ensure that references to a constant pool entry with index zero trigger a ClassFormatException, not a NullPointerException. Thanks to OSS-Fuzz.
+*           Ensure that references to the unused constant pool entry after a long/double entry triggers a ClassFormatException, not a NullPointerException. Thanks to OSS-Fuzz.
+*           Test and coverage of InstructionFactory #190. Thanks to nbauma109.
+*           Verifier: test and coverage for SWAP instruction #188. Thanks to nbauma109.
+*           Exception parsing Kotlin class with 'fun `method name with () in it`()' #205. Thanks to Jason Copenhaver, Gary Gregory.
+*           Fix null pointers in AnnotationEntry #213. Thanks to nbauma109, Gary Gregory.
+*           Field not found, search field in both super class and implemented interfaces (5x duplicated code to find field by name and type is refactored to a new method and now supports package-private) #181. Thanks to nbauma109.
+* BCEL-366: Use alternative name for broken classes under test #220. Thanks to Slawomir Jaranowski.
+* BCEL-367: Fixes java.lang.IndexOutOfBoundsException for ATHROW on empty stack #223. Thanks to Katherine Hough, Gary Gregory.
+* BCEL-368: Fixes java.lang.StackOverflowError in Select#toString(boolean) #229. Thanks to Katherine Hough, Gary Gregory.
+*           Fix for type.getType(...) use on non-signature type names #221. Thanks to nbauma109, Judit Knoll, Gary Gregory.
+*           Fix EmptyVisitorTestCase on Java 21. Thanks to Gary Gregory.
 
-CHANGES:
-========
+Changes
+--------
 
-o           Bump commons-parent from 54 to 65 #189, #198, #222. Thanks to Gary Gregory, Dependabot.
-o           Bump jna.version from 5.12.1 to 5.13.0 #203. Thanks to Dependabot.
-o           Bump kotlin-stdlib from 1.8.10 to 1.9.21 #217, #219, #227, #231, #235, #245, #247. Thanks to Dependabot.
-o           Bump commons-io from 2.11.0 to 2.15.1. Thanks to Dependabot.
-o           Bump commons-lang3 from 3.12.0 to 3.14.0. Thanks to Gary Gregory.
-o           Bump org.codehaus.mojo:exec-maven-plugin from 3.1.0 to 3.1.1 #246. Thanks to Gary Gregory.
+*           Bump commons-parent from 54 to 65 #189, #198, #222. Thanks to Gary Gregory, Dependabot.
+*           Bump jna.version from 5.12.1 to 5.13.0 #203. Thanks to Dependabot.
+*           Bump kotlin-stdlib from 1.8.10 to 1.9.21 #217, #219, #227, #231, #235, #245, #247. Thanks to Dependabot.
+*           Bump commons-io from 2.11.0 to 2.15.1. Thanks to Dependabot.
+*           Bump commons-lang3 from 3.12.0 to 3.14.0. Thanks to Gary Gregory.
+*           Bump org.codehaus.mojo:exec-maven-plugin from 3.1.0 to 3.1.1 #246. Thanks to Gary Gregory.
 
 
 Historical list of changes: https://commons.apache.org/proper/commons-bcelchanges-report.html
@@ -156,13 +213,13 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-              Apache Commons BCEL
-              Version 6.7.0
-              RELEASE NOTES
+Apache Commons BCEL
+Version 6.7.0
+RELEASE NOTES
 
 
-INTRODUCTION:
-
+Introduction
+------------
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.7.0!
 
@@ -173,71 +230,71 @@ class: methods, fields and byte code instructions.
 
 Maintenance and bug fix release.
 
-NEW FEATURES:
-=============
+New Features
+-------------
 
-o           Add org.apache.bcel.classfile.ClassFormatException.ClassFormatException(Throwable). Thanks to Gary Gregory.
-o           Add org.apache.bcel.classfile.JavaClass.EXTENSION. Thanks to Gary Gregory.
-o           Add org.apache.bcel.classfile.Module.EXTENSION. Thanks to Gary Gregory.
-o           Add org.apache.bcel.util.Args. Thanks to Gary Gregory.
-o           Add org.apache.bcel.generic.ArrayType.getClassName(). Thanks to Gary Gregory.
-o           Add org.apache.bcel.generic.Type.getClassName(). Thanks to Gary Gregory.
-o           Add org.apache.bcel.classfile.Utility.packageToPath(String). Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.MethodParameter now implements org.apache.bcel.classfile.Node. Thanks to Gary Gregory, Mark Roberts.
-o           Add org.apache.bcel.classfile.JavaClass.getSourceFilePath(). Thanks to nbauma109, Gary Gregory.
-o           Add org.apache.bcel.generic.PUSH.PUSH(ConstantPoolGen, ArrayType). Thanks to nbauma109, Gary Gregory.
+*           Add org.apache.bcel.classfile.ClassFormatException.ClassFormatException(Throwable). Thanks to Gary Gregory.
+*           Add org.apache.bcel.classfile.JavaClass.EXTENSION. Thanks to Gary Gregory.
+*           Add org.apache.bcel.classfile.Module.EXTENSION. Thanks to Gary Gregory.
+*           Add org.apache.bcel.util.Args. Thanks to Gary Gregory.
+*           Add org.apache.bcel.generic.ArrayType.getClassName(). Thanks to Gary Gregory.
+*           Add org.apache.bcel.generic.Type.getClassName(). Thanks to Gary Gregory.
+*           Add org.apache.bcel.classfile.Utility.packageToPath(String). Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.MethodParameter now implements org.apache.bcel.classfile.Node. Thanks to Gary Gregory, Mark Roberts.
+*           Add org.apache.bcel.classfile.JavaClass.getSourceFilePath(). Thanks to nbauma109, Gary Gregory.
+*           Add org.apache.bcel.generic.PUSH.PUSH(ConstantPoolGen, ArrayType). Thanks to nbauma109, Gary Gregory.
 
-FIXED BUGS:
-===========
+Fixed Bugs
+-----------
 
-o           Avoid internal NPE in org.apache.bcel.util.ClassPath.getInputStream(String, String). Thanks to Gary Gregory.
-o           InstructionConstants.ALOAD_0 value is wrong (regression from 6.6.0). Thanks to Gary Gregory.
-o           InstructionConstants.DCONST_0 value is wrong (regression from 6.6.0). Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.Attribute constructors now throw ClassFormatException on invalid name index input. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.CodeException constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.ConstantInvokeDynamic.ConstantInvokeDynamic(DataInput). Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.ConstantValue constructors now throw ClassFormatException on invalid length input. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.Deprecated constructors now throw ClassFormatException on invalid length input. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.EnclosingMethod constructors now throw ClassFormatException on invalid length, class index, or method index input. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.ExceptionTable constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.InnerClasses constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.LineNumber constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.LocalVariable constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.LocalVariableTable constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.LocalVariableTypeTable constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.ModuleMainClass constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.ModulePackages constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.NestHost constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.NestMembers constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.Signature constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.SourceFile constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.StackMap constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.StackMapEntry.StackMapEntry(DataInput, ConstantPool) reads signed instead of unsigned shorts from its DataInput. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.StackMapType.StackMapType(DataInput, ConstantPool) reads signed instead of unsigned shorts from its DataInput. Thanks to Gary Gregory.
-o           org.apache.bcel.classfile.Synthetic constructors now throw ClassFormatException on invalid length input. Thanks to Gary Gregory.
-o           org.apache.bcel.util.ClassPath hashCode() and equals() don't match. Thanks to Gary Gregory.
-o           Fix code duplication in org.apache.bcel.verifier.structurals.ExceptionHandlers.ExceptionHandlers(MethodGen). Thanks to Mark Roberts, Gary Gregory.
-o           Improve test coverage to bcel/generic and UtilityTest #162. Thanks to Sam Ng, Gary Gregory.
-o           Code coverage and bug fixes for bcelifier #171. Thanks to nbauma109, Gary Gregory.
-o           Code coverage and unit tests on the verifier #166. Thanks to nbauma109, Gary Gregory.
-o           Typo in SimpleElementValue error message #161. Thanks to nbauma109, Gary Gregory.
-o           org.apache.bcel.classfile.Attribute constructors now throw ClassFormatException on invalid length input. Thanks to Mark Thomas, Gary Gregory.
-o           References to constant pool entries that are not of the expected type should throw ClassFormatException, not ClassCastException. Thanks to OSS-Fuzz.
-o           When parsing an invalid class, ensure ClassParser.parse() throws ClassFormatException, not IllegalArgumentException. Thanks to OSS-Fuzz.
-o           org.apache.bcel.classfile.Code constructors now throw ClassFormatException on invalid input. Thanks to OSS-Fuzz.
-o           org.apache.bcel.classfile.StackMapType constructors now throw ClassFormatException on invalid input. Thanks to OSS-Fuzz.
-o           When parsing class files, limit arrays to no more than 255 dimensions as per section 4.4.1 of the JVM specification. Thanks to OSS-Fuzz.
-o           Tests and coverage for Utility class #175. Thanks to nbauma109.
-o           Unit tests and coverage for binary operations #174. Thanks to nbauma109.
-o           Fix possible NullPointerException in org.apache.bcel.classfile.StackMap.setStackMap(StackMapEntry[]). Thanks to Gary Gregory.
+*           Avoid internal NPE in org.apache.bcel.util.ClassPath.getInputStream(String, String). Thanks to Gary Gregory.
+*           InstructionConstants.ALOAD_0 value is wrong (regression from 6.6.0). Thanks to Gary Gregory.
+*           InstructionConstants.DCONST_0 value is wrong (regression from 6.6.0). Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.Attribute constructors now throw ClassFormatException on invalid name index input. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.CodeException constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.ConstantInvokeDynamic.ConstantInvokeDynamic(DataInput). Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.ConstantValue constructors now throw ClassFormatException on invalid length input. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.Deprecated constructors now throw ClassFormatException on invalid length input. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.EnclosingMethod constructors now throw ClassFormatException on invalid length, class index, or method index input. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.ExceptionTable constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.InnerClasses constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.LineNumber constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.LocalVariable constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.LocalVariableTable constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.LocalVariableTypeTable constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.ModuleMainClass constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.ModulePackages constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.NestHost constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.NestMembers constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.Signature constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.SourceFile constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.StackMap constructors now throw ClassFormatException on invalid input. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.StackMapEntry.StackMapEntry(DataInput, ConstantPool) reads signed instead of unsigned shorts from its DataInput. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.StackMapType.StackMapType(DataInput, ConstantPool) reads signed instead of unsigned shorts from its DataInput. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.Synthetic constructors now throw ClassFormatException on invalid length input. Thanks to Gary Gregory.
+*           org.apache.bcel.util.ClassPath hashCode() and equals() don't match. Thanks to Gary Gregory.
+*           Fix code duplication in org.apache.bcel.verifier.structurals.ExceptionHandlers.ExceptionHandlers(MethodGen). Thanks to Mark Roberts, Gary Gregory.
+*           Improve test coverage to bcel/generic and UtilityTest #162. Thanks to Sam Ng, Gary Gregory.
+*           Code coverage and bug fixes for bcelifier #171. Thanks to nbauma109, Gary Gregory.
+*           Code coverage and unit tests on the verifier #166. Thanks to nbauma109, Gary Gregory.
+*           Typo in SimpleElementValue error message #161. Thanks to nbauma109, Gary Gregory.
+*           org.apache.bcel.classfile.Attribute constructors now throw ClassFormatException on invalid length input. Thanks to Mark Thomas, Gary Gregory.
+*           References to constant pool entries that are not of the expected type should throw ClassFormatException, not ClassCastException. Thanks to OSS-Fuzz.
+*           When parsing an invalid class, ensure ClassParser.parse() throws ClassFormatException, not IllegalArgumentException. Thanks to OSS-Fuzz.
+*           org.apache.bcel.classfile.Code constructors now throw ClassFormatException on invalid input. Thanks to OSS-Fuzz.
+*           org.apache.bcel.classfile.StackMapType constructors now throw ClassFormatException on invalid input. Thanks to OSS-Fuzz.
+*           When parsing class files, limit arrays to no more than 255 dimensions as per section 4.4.1 of the JVM specification. Thanks to OSS-Fuzz.
+*           Tests and coverage for Utility class #175. Thanks to nbauma109.
+*           Unit tests and coverage for binary operations #174. Thanks to nbauma109.
+*           Fix possible NullPointerException in org.apache.bcel.classfile.StackMap.setStackMap(StackMapEntry[]). Thanks to Gary Gregory.
 
-CHANGES:
-========
+Changes
+--------
 
-o           Bump spotbugs-maven-plugin from 4.7.2.2 to 4.7.3.0 #167. Thanks to Gary Gregory.
-o           Bump jmh.version from 1.35 to 1.36 #170. Thanks to Dependabot.
-o           Bump pmd from 6.51.0 to 6.52.0. Thanks to Gary Gregory.
-o           Bump japicmp from 0.16.0 to 0.17.1. Thanks to Gary Gregory.
+*           Bump spotbugs-maven-plugin from 4.7.2.2 to 4.7.3.0 #167. Thanks to Gary Gregory.
+*           Bump jmh.version from 1.35 to 1.36 #170. Thanks to Dependabot.
+*           Bump pmd from 6.51.0 to 6.52.0. Thanks to Gary Gregory.
+*           Bump japicmp from 0.16.0 to 0.17.1. Thanks to Gary Gregory.
 
 
 Historical list of changes: https://commons.apache.org/proper/commons-bcelchanges-report.html
@@ -269,13 +326,13 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-              Apache Commons BCEL
-              Version 6.6.1
-              RELEASE NOTES
+Apache Commons BCEL
+Version 6.6.1
+RELEASE NOTES
 
 
-INTRODUCTION:
-
+Introduction
+------------
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.6.1!
 
@@ -286,17 +343,17 @@ class: methods, fields and byte code instructions.
 
 Maintenance and bug fix release.
 
-FIXED BUGS:
-===========
+Fixed Bugs
+-----------
 
-o           Keep ConstantPool.getConstant(int) backward compatible with 6.5.0 #157. Thanks to Kengo TODA, Gary Gregory.
+*           Keep ConstantPool.getConstant(int) backward compatible with 6.5.0 #157. Thanks to Kengo TODA, Gary Gregory.
 
-CHANGES:
-========
+Changes
+--------
 
-o           Bump actions/setup-java from 3.5.1 to 3.6.0 #159. Thanks to Dependabot.
-o           Bump spotbugs from 4.7.2 to 4.7.3. Thanks to Gary Gregory.
-o           Bump pmd from 6.50.0 to 6.51.0. Thanks to Gary Gregory.
+*           Bump actions/setup-java from 3.5.1 to 3.6.0 #159. Thanks to Dependabot.
+*           Bump spotbugs from 4.7.2 to 4.7.3. Thanks to Gary Gregory.
+*           Bump pmd from 6.50.0 to 6.51.0. Thanks to Gary Gregory.
 
 
 Historical list of changes: https://commons.apache.org/proper/commons-bcelchanges-report.html
@@ -329,13 +386,13 @@ The Apache Commons Team
 -----------------------------------------------------------------------------
 
 
-              Apache Commons BCEL
-              Version 6.6.0
-              RELEASE NOTES
+Apache Commons BCEL
+Version 6.6.0
+RELEASE NOTES
 
 
-INTRODUCTION:
-
+Introduction
+------------
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.6.0!
 
@@ -345,90 +402,90 @@ represented by objects containing all the symbolic information of the given
 class: methods, fields and byte code instructions.
 
 
-NEW FEATURES:
-=============
+New Features
+-------------
 
-o           Add github/codeql-action.
-o           Make Annotations implement Iterable<AnnotationEntry>. Thanks to Gary Gregory.
-o           Make BootstrapMethods implement Iterable<BootstrapMethod>. Thanks to Gary Gregory.
-o           Make ConstantPool implement Iterable<Constant>. Thanks to Gary Gregory.
-o           Make InnerClasses implement Iterable<InnerClass>. Thanks to Gary Gregory.
-o           Make LineNumberTable implement Iterable<LineNumber>. Thanks to Gary Gregory.
-o           Make LocalVariableTable implement Iterable<LocalVariable>. Thanks to Gary Gregory.
-o           Make LocalVariableTypeTable implement Iterable<LocalVariable>. Thanks to Gary Gregory.
-o           Make MethodParameters implement Iterable<MethodParameter>. Thanks to Gary Gregory.
-o           Make ParameterAnnotations implement Iterable<ParameterAnnotationEntry>. Thanks to Gary Gregory.
-o           Add Const.MAJOR_15 Thanks to Gary Gregory.
-o           Add Const.MAJOR_16 Thanks to Gary Gregory.
-o           Add Const.MAJOR_17 Thanks to Gary Gregory.
-o           Add Const.MAJOR_18 Thanks to Gary Gregory.
-o           Add Const.MAJOR_19 Thanks to Gary Gregory.
-o           Add Const.MINOR_15 Thanks to Gary Gregory.
-o           Add Const.MINOR_16 Thanks to Gary Gregory.
-o           Add Const.MINOR_17 Thanks to Gary Gregory.
-o           Add Const.MINOR_18 Thanks to Gary Gregory.
-o           Add Const.MINOR_19 Thanks to Gary Gregory.
+*           Add github/codeql-action.
+*           Make Annotations implement Iterable<AnnotationEntry>. Thanks to Gary Gregory.
+*           Make BootstrapMethods implement Iterable<BootstrapMethod>. Thanks to Gary Gregory.
+*           Make ConstantPool implement Iterable<Constant>. Thanks to Gary Gregory.
+*           Make InnerClasses implement Iterable<InnerClass>. Thanks to Gary Gregory.
+*           Make LineNumberTable implement Iterable<LineNumber>. Thanks to Gary Gregory.
+*           Make LocalVariableTable implement Iterable<LocalVariable>. Thanks to Gary Gregory.
+*           Make LocalVariableTypeTable implement Iterable<LocalVariable>. Thanks to Gary Gregory.
+*           Make MethodParameters implement Iterable<MethodParameter>. Thanks to Gary Gregory.
+*           Make ParameterAnnotations implement Iterable<ParameterAnnotationEntry>. Thanks to Gary Gregory.
+*           Add Const.MAJOR_15 Thanks to Gary Gregory.
+*           Add Const.MAJOR_16 Thanks to Gary Gregory.
+*           Add Const.MAJOR_17 Thanks to Gary Gregory.
+*           Add Const.MAJOR_18 Thanks to Gary Gregory.
+*           Add Const.MAJOR_19 Thanks to Gary Gregory.
+*           Add Const.MINOR_15 Thanks to Gary Gregory.
+*           Add Const.MINOR_16 Thanks to Gary Gregory.
+*           Add Const.MINOR_17 Thanks to Gary Gregory.
+*           Add Const.MINOR_18 Thanks to Gary Gregory.
+*           Add Const.MINOR_19 Thanks to Gary Gregory.
 
-FIXED BUGS:
-===========
+Fixed Bugs
+-----------
 
-o           Improve test case coverage; fix Utility.encode bug #46. Thanks to Mark Roberts, Gary Gregory.
-o BCEL-342: Migrate test suite to JUnit Jupiter #68. Thanks to Allon Murienik, Gary Gregory.
-o BCEL-343: JUnit Assertion improvement #69. Thanks to Allon Murienik, Gary Gregory.
-o           Minor improvements to comments and toString() methods #71. Thanks to Mark Roberts.
-o           Minor Improvements #83. Thanks to Arturo Bernal.
-o           Inline variable and avoid unnecessary variable. #94. Thanks to Arturo Bernal.
-o           Formalize PerformanceTest #168. Thanks to Mark Roberts, Gary Gregory.
-o           Java 8 improvements #95. Thanks to Arturo Bernal.
-o BCEL-345: Make documentation wording more inclusive #98. Thanks to Christine Poerschke.
-o           Force unsigned short for LineNumber.toString() #118. Thanks to Mark Roberts, Gary Gregory.
-o           Fix IllegalStateException when calling toString(ConstantPool) on a Module or ModuleRequires #125. Thanks to Tim Boudreau, Gary Gregory.
-o           Generate HTML in UTF-8 instead of whatever happens to be the default platform encoding. Thanks to Gary Gregory.
-o BCEL-303: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
-o BCEL-307: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
-o BCEL-308: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
-o BCEL-309: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
-o BCEL-311: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
-o BCEL-312: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
-o BCEL-313: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
-o BCEL-337: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
-o           Close resources #138. Thanks to Michael Ernst, Gary Gregory.
-o           Improve condy (constant dynamic) support #139. Thanks to Alexander Kriegisch, Gary Gregory.
-o           Fix typos #140. Thanks to Michael Ernst.
-o BCEL-363: Enforce MAX_CP_ENTRIES in ConstantPoolGen and ConstantPool.dump #147. Thanks to Richard Atkins, Gary Gregory.
-o           Minor Changes #99. Thanks to Arturo Bernal, Gary Gregory.
-o           Simplify boolean expressions #152. Thanks to Arturo Bernal.
-o           Use Math.max #151. Thanks to Arturo Bernal.
-o           org.apache.bcel.classfile.Signature.translate(String) does not detect EOF correctly. Thanks to Gary Gregory.
-o           Fix SpotBugs [ERROR] High: Found reliance on default encoding in new org.apache.bcel.util.BCELifier(JavaClass, OutputStream): new java.io.PrintWriter(OutputStream) [org.apache.bcel.util.BCELifier] At BCELifier.java:[line 169] DM_DEFAULT_ENCODING. Thanks to Gary Gregory.
-o           Fix SpotBugs [ERROR] Medium: Unread field: org.apache.bcel.verifier.GraphicalVerifier.packFrame; should this field be static? [org.apache.bcel.verifier.GraphicalVerifier] At GraphicalVerifier.java:[line 43] SS_SHOULD_BE_STATIC. Thanks to Gary Gregory.
-o           Fix SpotBugs [ERROR] Medium: new org.apache.bcel.util.ModularRuntimeImage(String) creates a java.net.URLClassLoader classloader, which should be performed within a doPrivileged block [org.apache.bcel.util.ModularRuntimeImage] At ModularRuntimeImage.java:[line 68] DP_CREATE_CLASSLOADER_INSIDE_DO_PRIVILEGED. Thanks to Gary Gregory.
+*           Improve test case coverage; fix Utility.encode bug #46. Thanks to Mark Roberts, Gary Gregory.
+* BCEL-342: Migrate test suite to JUnit Jupiter #68. Thanks to Allon Murienik, Gary Gregory.
+* BCEL-343: JUnit Assertion improvement #69. Thanks to Allon Murienik, Gary Gregory.
+*           Minor improvements to comments and toString() methods #71. Thanks to Mark Roberts.
+*           Minor Improvements #83. Thanks to Arturo Bernal.
+*           Inline variable and avoid unnecessary variable. #94. Thanks to Arturo Bernal.
+*           Formalize PerformanceTest #168. Thanks to Mark Roberts, Gary Gregory.
+*           Java 8 improvements #95. Thanks to Arturo Bernal.
+* BCEL-345: Make documentation wording more inclusive #98. Thanks to Christine Poerschke.
+*           Force unsigned short for LineNumber.toString() #118. Thanks to Mark Roberts, Gary Gregory.
+*           Fix IllegalStateException when calling toString(ConstantPool) on a Module or ModuleRequires #125. Thanks to Tim Boudreau, Gary Gregory.
+*           Generate HTML in UTF-8 instead of whatever happens to be the default platform encoding. Thanks to Gary Gregory.
+* BCEL-303: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
+* BCEL-307: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
+* BCEL-308: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
+* BCEL-309: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
+* BCEL-311: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
+* BCEL-312: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
+* BCEL-313: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
+* BCEL-337: Several fixes to the verifier #117. Thanks to Mark Roberts, Gary Gregory.
+*           Close resources #138. Thanks to Michael Ernst, Gary Gregory.
+*           Improve condy (constant dynamic) support #139. Thanks to Alexander Kriegisch, Gary Gregory.
+*           Fix typos #140. Thanks to Michael Ernst.
+* BCEL-363: Enforce MAX_CP_ENTRIES in ConstantPoolGen and ConstantPool.dump #147. Thanks to Richard Atkins, Gary Gregory.
+*           Minor Changes #99. Thanks to Arturo Bernal, Gary Gregory.
+*           Simplify boolean expressions #152. Thanks to Arturo Bernal.
+*           Use Math.max #151. Thanks to Arturo Bernal.
+*           org.apache.bcel.classfile.Signature.translate(String) does not detect EOF correctly. Thanks to Gary Gregory.
+*           Fix SpotBugs [ERROR] High: Found reliance on default encoding in new org.apache.bcel.util.BCELifier(JavaClass, OutputStream): new java.io.PrintWriter(OutputStream) [org.apache.bcel.util.BCELifier] At BCELifier.java:[line 169] DM_DEFAULT_ENCODING. Thanks to Gary Gregory.
+*           Fix SpotBugs [ERROR] Medium: Unread field: org.apache.bcel.verifier.GraphicalVerifier.packFrame; should this field be static? [org.apache.bcel.verifier.GraphicalVerifier] At GraphicalVerifier.java:[line 43] SS_SHOULD_BE_STATIC. Thanks to Gary Gregory.
+*           Fix SpotBugs [ERROR] Medium: new org.apache.bcel.util.ModularRuntimeImage(String) creates a java.net.URLClassLoader classloader, which should be performed within a doPrivileged block [org.apache.bcel.util.ModularRuntimeImage] At ModularRuntimeImage.java:[line 68] DP_CREATE_CLASSLOADER_INSIDE_DO_PRIVILEGED. Thanks to Gary Gregory.
 
-CHANGES:
-========
+Changes
+--------
 
-o           Bump actions/cache from 2 to 3.0.10 #88, #93, #110, #119, #149, #154. Thanks to Dependabot, Gary Gregory.
-o           Bump actions/checkout from 2.3.1 to 3.1.0 #59, #66, #73, #108, #115, #153. Thanks to Dependabot, Gary Gregory.
-o           Bump actions/setup-java from 1.4.0 to 3.5.1 #62, #67. Thanks to Dependabot, Gary Gregory.
-o           Bump tests from Apache Commons Lang 3.10 to 3.12.0 Thanks to Gary Gregory.
-o           Bump commons-parent from 50 to 54. Thanks to Gary Gregory.
-o           Bump biz.aQute.bndlib from 5.1.0 to 6.3.1, #54, #72, #81, #111. Thanks to Dependabot, Gary Gregory.
-o           Bump maven-surefire-plugin from 3.0.0-M4 to 3.0.0-M7 #53, #124, #129. Thanks to Dependabot.
-o           Bump maven-checkstyle-plugin from 3.1.0 to 3.2.0, #77, #141. Thanks to Gary Gregory, Dependabot.
-o           Bump Jacoco from 0.8.5 to 0.8.8. Thanks to Dependabot, Gary Gregory.
-o           Bump commons-io from 2.7 to 2.11.0 #65, #96. Thanks to Dependabot, Gary Gregory.
-o           Bump exec-maven-plugin from 1.6.0 to 3.1.0 #51, #134. Thanks to Dependabot.
-o           Bump commons.japicmp.version from 0.14.3 to 0.16.0. Thanks to Gary Gregory.
-o           Bump maven-pmd-plugin from 3.13.0 to 3.19. #74, #103, #116, #130, #142, #144. Thanks to Dependabot.
-o           Bump pmd from 6.44.0 to 6.50.0. Thanks to Dependabot, Gary Gregory.
-o           Bump junit-jupiter from 5.7.0 to 5.9.1 #78, #90, #101, #112, #135. Thanks to Dependabot, Gary Gregory.
-o           Bump jna.version from 5.6.0 to 5.12.1 #84, #102, #109, #120, #131. Thanks to Dependabot.
-o           Bump jmh.version from 1.19 to 1.35 #92, #100, #122. Thanks to Dependabot.
-o           Bump maven-javadoc-plugin from 3.2.0 to 3.4.1. Thanks to Gary Gregory.
-o           Bump maven-bundle-plugin from 5.1.1 to 5.1.8. Thanks to Gary Gregory.
-o           Bump taglist-maven-plugin from 2.4 to 3.0.0 #114. Thanks to Dependabot.
-o           Bump spotbugs-maven-plugin from 4.5.3.0 to 4.7.2.1 #128, #132, #136, #144, #155. Thanks to Gary Gregory, Dependabot.
-o           Bump spotbugs from 4.5.3 to 4.7.1. Thanks to Gary Gregory.
+*           Bump actions/cache from 2 to 3.0.10 #88, #93, #110, #119, #149, #154. Thanks to Dependabot, Gary Gregory.
+*           Bump actions/checkout from 2.3.1 to 3.1.0 #59, #66, #73, #108, #115, #153. Thanks to Dependabot, Gary Gregory.
+*           Bump actions/setup-java from 1.4.0 to 3.5.1 #62, #67. Thanks to Dependabot, Gary Gregory.
+*           Bump tests from Apache Commons Lang 3.10 to 3.12.0 Thanks to Gary Gregory.
+*           Bump commons-parent from 50 to 54. Thanks to Gary Gregory.
+*           Bump biz.aQute.bndlib from 5.1.0 to 6.3.1, #54, #72, #81, #111. Thanks to Dependabot, Gary Gregory.
+*           Bump maven-surefire-plugin from 3.0.0-M4 to 3.0.0-M7 #53, #124, #129. Thanks to Dependabot.
+*           Bump maven-checkstyle-plugin from 3.1.0 to 3.2.0, #77, #141. Thanks to Gary Gregory, Dependabot.
+*           Bump Jacoco from 0.8.5 to 0.8.8. Thanks to Dependabot, Gary Gregory.
+*           Bump commons-io from 2.7 to 2.11.0 #65, #96. Thanks to Dependabot, Gary Gregory.
+*           Bump exec-maven-plugin from 1.6.0 to 3.1.0 #51, #134. Thanks to Dependabot.
+*           Bump commons.japicmp.version from 0.14.3 to 0.16.0. Thanks to Gary Gregory.
+*           Bump maven-pmd-plugin from 3.13.0 to 3.19. #74, #103, #116, #130, #142, #144. Thanks to Dependabot.
+*           Bump pmd from 6.44.0 to 6.50.0. Thanks to Dependabot, Gary Gregory.
+*           Bump junit-jupiter from 5.7.0 to 5.9.1 #78, #90, #101, #112, #135. Thanks to Dependabot, Gary Gregory.
+*           Bump jna.version from 5.6.0 to 5.12.1 #84, #102, #109, #120, #131. Thanks to Dependabot.
+*           Bump jmh.version from 1.19 to 1.35 #92, #100, #122. Thanks to Dependabot.
+*           Bump maven-javadoc-plugin from 3.2.0 to 3.4.1. Thanks to Gary Gregory.
+*           Bump maven-bundle-plugin from 5.1.1 to 5.1.8. Thanks to Gary Gregory.
+*           Bump taglist-maven-plugin from 2.4 to 3.0.0 #114. Thanks to Dependabot.
+*           Bump spotbugs-maven-plugin from 4.5.3.0 to 4.7.2.1 #128, #132, #136, #144, #155. Thanks to Gary Gregory, Dependabot.
+*           Bump spotbugs from 4.5.3 to 4.7.1. Thanks to Gary Gregory.
 
 
 Historical list of changes: https://commons.apache.org/proper/commons-bcelchanges-report.html
@@ -460,13 +517,13 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-              Apache Commons BCEL
-              Version 6.5.0
-              RELEASE NOTES
+Apache Commons BCEL
+Version 6.5.0
+RELEASE NOTES
 
 
-INTRODUCTION:
-
+Introduction
+------------
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.5.0!
 
@@ -477,32 +534,32 @@ class: methods, fields and byte code instructions.
 
 Minor feature and bug fix release.
 
-FIXED BUGS:
-===========
+Fixed Bugs
+-----------
 
-o BCEL-329: MethodGen duplicates some attributes. Thanks to Gary Gregory, Mark Roberts.
+* BCEL-329: MethodGen duplicates some attributes. Thanks to Gary Gregory, Mark Roberts.
 
-CHANGES:
-========
+Changes
+--------
 
-o BCEL-330: Remove unnecessary references to Constants. Thanks to Mark Roberts.
-o BCEL-336: MethodGen throws NullPointerException upon Invalid Class File Missing Constructor Body. Thanks to Tomo Suzuki, Gary Gregory.
-o           Improve documentation of Pass3bVerifier (#37). Thanks to Michael Ernst.
-o           Replaced deprecated constants in examples (#38). Thanks to Arthur Kupriyanov.
-o           Update tests from JNA 5.4.0 to 5.5.0. Thanks to Gary Gregory.
-o           Update tests JUnit from 4.12 to 4.13. Thanks to Gary Gregory.
-o           Update tests from Apache Commons Lang 3.9 to 3.10. Thanks to Gary Gregory.
-o           Update build maven-pmd-plugin 3.12.0 -> 3.13.0. Thanks to Gary Gregory.
-o           Update tests maven-surefire-plugin 3.0.0-M3 -> 3.0.0-M4. Thanks to Gary Gregory.
-o           Update build japicmp-maven-plugin 0.14.1 -> 0.14.3. Thanks to Gary Gregory.
-o           Update build jacoco-maven-plugin 0.8.4 -> 0.8.5. Thanks to Gary Gregory.
-o           Update tests from commons-io:commons-io 2.6 to 2.7. Thanks to Gary Gregory.
-o           Add support for invokestatic of an InterfaceMethodref #39. Thanks to Mark Roberts.
-o           Add attribute name(s) to Code.toString() #40. Thanks to Mark Roberts.
-o BCEL-338: org.apache.bcel.generic.InstructionFactory.createInvoke() populates its internal ConstantPoolGen on bad input, then throws exception. Thanks to Gary Gregory.
-o BCEL-339: Throw IllegalArgumentException, IllegalStateException, UnsupportedOperationException instead of RuntimeException. Thanks to Gary Gregory.
-o           Make some annotation methods public (#45). Thanks to Mark Roberts.
-o           Fix ConcurrentModificationException in the maven-bundle-plugin:4.2.1:manifest on Java 15-ea. Thanks to Gary Gregory.
+* BCEL-330: Remove unnecessary references to Constants. Thanks to Mark Roberts.
+* BCEL-336: MethodGen throws NullPointerException upon Invalid Class File Missing Constructor Body. Thanks to Tomo Suzuki, Gary Gregory.
+*           Improve documentation of Pass3bVerifier (#37). Thanks to Michael Ernst.
+*           Replaced deprecated constants in examples (#38). Thanks to Arthur Kupriyanov.
+*           Update tests from JNA 5.4.0 to 5.5.0. Thanks to Gary Gregory.
+*           Update tests JUnit from 4.12 to 4.13. Thanks to Gary Gregory.
+*           Update tests from Apache Commons Lang 3.9 to 3.10. Thanks to Gary Gregory.
+*           Update build maven-pmd-plugin 3.12.0 -> 3.13.0. Thanks to Gary Gregory.
+*           Update tests maven-surefire-plugin 3.0.0-M3 -> 3.0.0-M4. Thanks to Gary Gregory.
+*           Update build japicmp-maven-plugin 0.14.1 -> 0.14.3. Thanks to Gary Gregory.
+*           Update build jacoco-maven-plugin 0.8.4 -> 0.8.5. Thanks to Gary Gregory.
+*           Update tests from commons-io:commons-io 2.6 to 2.7. Thanks to Gary Gregory.
+*           Add support for invokestatic of an InterfaceMethodref #39. Thanks to Mark Roberts.
+*           Add attribute name(s) to Code.toString() #40. Thanks to Mark Roberts.
+* BCEL-338: org.apache.bcel.generic.InstructionFactory.createInvoke() populates its internal ConstantPoolGen on bad input, then throws exception. Thanks to Gary Gregory.
+* BCEL-339: Throw IllegalArgumentException, IllegalStateException, UnsupportedOperationException instead of RuntimeException. Thanks to Gary Gregory.
+*           Make some annotation methods public (#45). Thanks to Mark Roberts.
+*           Fix ConcurrentModificationException in the maven-bundle-plugin:4.2.1:manifest on Java 15-ea. Thanks to Gary Gregory.
 
 
 Historical list of changes: https://commons.apache.org/proper/commons-bcel/changes-report.html
@@ -534,13 +591,13 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-              Apache Commons BCEL
-              Version 6.4.1
-              RELEASE NOTES
+Apache Commons BCEL
+Version 6.4.1
+RELEASE NOTES
 
 
-INTRODUCTION:
-
+Introduction
+------------
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.4.1!
 
@@ -551,15 +608,15 @@ class: methods, fields and byte code instructions.
 
 Bug fix release.
 
-FIXED BUGS:
-===========
+Fixed Bugs
+-----------
 
-o BCEL-328: java.util.EmptyStackException at org.apache.bcel.classfile.DescendingVisitor.visitModule (DescendingVisitor.java:592). Thanks to Gary Gregory, Mark Roberts.
+* BCEL-328: java.util.EmptyStackException at org.apache.bcel.classfile.DescendingVisitor.visitModule (DescendingVisitor.java:592). Thanks to Gary Gregory, Mark Roberts.
 
-CHANGES:
-========
+Changes
+--------
 
-o           Update build from Checkstyle Maven Plugin 3.0.0 to 3.1.0. Thanks to Gary Gregory.
+*           Update build from Checkstyle Maven Plugin 3.0.0 to 3.1.0. Thanks to Gary Gregory.
 
 
 Historical list of changes: https://commons.apache.org/proper/commons-bcelchanges-report.html
@@ -591,13 +648,13 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-              Apache Commons BCEL
-              Version 6.4.0
-              RELEASE NOTES
+Apache Commons BCEL
+Version 6.4.0
+RELEASE NOTES
 
 
-INTRODUCTION:
-
+Introduction
+------------
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.4.0!
 
@@ -608,32 +665,32 @@ class: methods, fields and byte code instructions.
 
 Feature and bug fix release.
 
-NEW FEATURES:
-=============
+New Features
+-------------
 
-o BCEL-318: Add method org.apache.bcel.classfile.ConstantUtf8.clearCache(). Thanks to Gary Gregory.
-o BCEL-320: Add LruCacheClassPathRepository that can scan many JAR files without OutOfMemoryError. Thanks to Tomo Suzuki, Gary Gregory.
-o BCEL-322: Add constants to org.apache.bcel.Const for Java 14. Thanks to Gary Gregory.
-o BCEL-321: Refactor subclasses of ClassPathRepository for differences in underlying cache. Thanks to Tomo Suzuki.
+* BCEL-318: Add method org.apache.bcel.classfile.ConstantUtf8.clearCache(). Thanks to Gary Gregory.
+* BCEL-320: Add LruCacheClassPathRepository that can scan many JAR files without OutOfMemoryError. Thanks to Tomo Suzuki, Gary Gregory.
+* BCEL-322: Add constants to org.apache.bcel.Const for Java 14. Thanks to Gary Gregory.
+* BCEL-321: Refactor subclasses of ClassPathRepository for differences in underlying cache. Thanks to Tomo Suzuki.
 
-FIXED BUGS:
-===========
+Fixed Bugs
+-----------
 
-o BCEL-316: org.apache.bcel.classfile.Attribute class and subclasses should NOT log to the console by default. Thanks to Gary Gregory.
-o BCEL-278: InvokeInstruction.toString(final ConstantPool cp) throws NoSuchElementException #11. Thanks to Valery Barysoky.
-o BCEL-270: Calling toString(ConstantPool) on InvokeInstruction throws NullPointerException. Thanks to Alexandru-Constantin Bledea.
-o BCEL-323: org.apache.bcel.util.BCELifier to set major and minor versions. Thanks to Tomo Suzuki.
-o BCEL-326: Add missing Java 9 and Java 11 class file attributes. #33 Thanks to Mark Roberts.
-o BCEL-325: ClassDumper crashes on a module-info.class. #33 Thanks to Mark Roberts.
-o BCEL-327: Update signature scanning in Utility to support TypeParameters. #32 Thanks to Mark Roberts.
+* BCEL-316: org.apache.bcel.classfile.Attribute class and subclasses should NOT log to the console by default. Thanks to Gary Gregory.
+* BCEL-278: InvokeInstruction.toString(final ConstantPool cp) throws NoSuchElementException #11. Thanks to Valery Barysoky.
+* BCEL-270: Calling toString(ConstantPool) on InvokeInstruction throws NullPointerException. Thanks to Alexandru-Constantin Bledea.
+* BCEL-323: org.apache.bcel.util.BCELifier to set major and minor versions. Thanks to Tomo Suzuki.
+* BCEL-326: Add missing Java 9 and Java 11 class file attributes. #33 Thanks to Mark Roberts.
+* BCEL-325: ClassDumper crashes on a module-info.class. #33 Thanks to Mark Roberts.
+* BCEL-327: Update signature scanning in Utility to support TypeParameters. #32 Thanks to Mark Roberts.
 
-CHANGES:
-========
+Changes
+--------
 
-o BCEL-317: Pluggable cache for ConstantUtf8. Thanks to Tomo Suzuki, Gary Gregory.
-o BCEL-299: Fix example src/examples/ClassDumper.java ClassDumper.processID(). Thanks to Gary Gregory, zhangminglei.
-o           Update tests from JNA 4.5.0 to 5.3.1. Thanks to Gary Gregory.
-o           Update tests from JNA 5.3.1. to 5.4.0. Thanks to Gary Gregory.
+* BCEL-317: Pluggable cache for ConstantUtf8. Thanks to Tomo Suzuki, Gary Gregory.
+* BCEL-299: Fix example src/examples/ClassDumper.java ClassDumper.processID(). Thanks to Gary Gregory, zhangminglei.
+*           Update tests from JNA 4.5.0 to 5.3.1. Thanks to Gary Gregory.
+*           Update tests from JNA 5.3.1. to 5.4.0. Thanks to Gary Gregory.
 
 
 Historical list of changes: https://commons.apache.org/proper/commons-bcelchanges-report.html
@@ -666,13 +723,13 @@ The Apache Commons Team
 -----------------------------------------------------------------------------
 
 
-              Apache Commons BCEL
-              Version 6.3.1
-              RELEASE NOTES
+Apache Commons BCEL
+Version 6.3.1
+RELEASE NOTES
 
 
-INTRODUCTION:
-
+Introduction
+------------
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.3.1!
 
@@ -683,17 +740,17 @@ class: methods, fields and byte code instructions.
 
 Bug fix release
 
-FIXED BUGS:
-===========
+Fixed Bugs
+-----------
 
-o BCEL-267: Race conditions on static fields in BranchHandle and InstructionHandle. Thanks to Stephan Herrmann, Sebb, Gary Gregory, Torsten Curdt.
-o BCEL-297: Possible NPE in override implementation of Object.equals (#20) Thanks to Mark Roberts, mingleizhang.
-o BCEL-315: NullPointerException at org.apache.bcel.classfile.FieldOrMethod.dump(). Thanks to Gary Gregory.
+* BCEL-267: Race conditions on static fields in BranchHandle and InstructionHandle. Thanks to Stephan Herrmann, Sebb, Gary Gregory, Torsten Curdt.
+* BCEL-297: Possible NPE in override implementation of Object.equals (#20) Thanks to Mark Roberts, mingleizhang.
+* BCEL-315: NullPointerException at org.apache.bcel.classfile.FieldOrMethod.dump(). Thanks to Gary Gregory.
 
-CHANGES:
-========
+Changes
+--------
 
-o BCEL-298: Add some files to .gitignore (#19) Thanks to mingleizhang.
+* BCEL-298: Add some files to .gitignore (#19) Thanks to mingleizhang.
 
 
 
@@ -717,13 +774,13 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-              Apache Commons BCEL
-                  Version 6.3
-                RELEASE NOTES
+Apache Commons BCEL
+Version 6.3
+RELEASE NOTES
 
 
-INTRODUCTION:
-
+Introduction
+------------
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.3!
 
@@ -733,25 +790,25 @@ represented by objects containing all the symbolic information of the given
 class: methods, fields and byte code instructions.
 
 
-NEW FEATURES:
-=============
+New Features
+-------------
 
-o           Added org.apache.bcel.classfile.Visitor.visitConstantDynamic(ConstantDynamic) Thanks to Mark Thomas.
-o           Added org.apache.bcel.classfile.ConstantDynamic Thanks to Mark Thomas.
-o           Added fields in org.apache.bcel.Const for Java 9, 10, and 11. Thanks to Mark Thomas.
-o           Added fields in org.apache.bcel.Const for Java 12 and 13 based on Java Early Access releases. Thanks to Mark Thomas.
+*           Added org.apache.bcel.classfile.Visitor.visitConstantDynamic(ConstantDynamic) Thanks to Mark Thomas.
+*           Added org.apache.bcel.classfile.ConstantDynamic Thanks to Mark Thomas.
+*           Added fields in org.apache.bcel.Const for Java 9, 10, and 11. Thanks to Mark Thomas.
+*           Added fields in org.apache.bcel.Const for Java 12 and 13 based on Java Early Access releases. Thanks to Mark Thomas.
 
-FIXED BUGS:
-===========
+Fixed Bugs
+-----------
 
-o BCEL-304: ClassPath.getClassFile() and friends do not work with JDK 9 and higher (PR #22.) Thanks to Gary Gregory, Ed Pavlak.
-o BCEL-305: ClassPath.getClassFile() and friends do not work with JRE 9 and higher Thanks to Gary Gregory.
+* BCEL-304: ClassPath.getClassFile() and friends do not work with JDK 9 and higher (PR #22.) Thanks to Gary Gregory, Ed Pavlak.
+* BCEL-305: ClassPath.getClassFile() and friends do not work with JRE 9 and higher Thanks to Gary Gregory.
 
-CHANGES:
-========
+Changes
+--------
 
-o           Initial support for Java 11 Thanks to Mark Thomas, Gary Gregory.
-o           Update Java requirement from Java 7 to Java 8. Thanks to Gary Gregory.
+*           Initial support for Java 11 Thanks to Mark Thomas, Gary Gregory.
+*           Update Java requirement from Java 7 to Java 8. Thanks to Gary Gregory.
 
 
 
@@ -775,13 +832,13 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-              Apache Commons BCEL
-                  Version 6.2
-                RELEASE NOTES
+Apache Commons BCEL
+Version 6.2
+RELEASE NOTES
 
 
-INTRODUCTION:
-
+Introduction
+------------
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.2!
 
@@ -792,14 +849,14 @@ class: methods, fields and byte code instructions.
 
 Experimental Java 9 Support
 
-FIXED BUGS:
-===========
+Fixed Bugs
+-----------
 
-o BCEL-294: Incorrect comment in StackMap.java Thanks to Mark Roberts.
-o BCEL-296: Incorrect comment in several classes. Thanks to Mark Roberts.
-o BCEL-295: Fix local variable live range length; add test case. Thanks to Mark Roberts.
-o BCEL-300: org.apache.bcel.classfile.ClassFormatException: Invalid byte tag in constant pool: 19.
-o BCEL-301: org.apache.bcel.classfile.ClassFormatException: Invalid byte tag in constant pool: 20.
+* BCEL-294: Incorrect comment in StackMap.java Thanks to Mark Roberts.
+* BCEL-296: Incorrect comment in several classes. Thanks to Mark Roberts.
+* BCEL-295: Fix local variable live range length; add test case. Thanks to Mark Roberts.
+* BCEL-300: org.apache.bcel.classfile.ClassFormatException: Invalid byte tag in constant pool: 19.
+* BCEL-301: org.apache.bcel.classfile.ClassFormatException: Invalid byte tag in constant pool: 20.
 
 
 Have fun!
@@ -822,12 +879,12 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-              Apache Commons BCEL
-                  Version 6.1
-                RELEASE NOTES
+Apache Commons BCEL
+    Version 6.1
+  RELEASE NOTES
 
 
-INTRODUCTION:
+Introduction
 
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.1!
@@ -844,7 +901,7 @@ It requires Java 7 or higher to run.
 
 
 COMPATIBILITY with 6.1
-======================
+----------------------
 
 Binary compatible - Yes
 
@@ -865,7 +922,7 @@ https://commons.apache.org/bcel/clirr-report.html
 
 
 COMPATIBILITY with Java 9
-=========================
+-------------------------
 
 The MANIFEST.MF now contains an additional entry:
 
@@ -883,25 +940,25 @@ are still working on this. For more information see:
 https://issues.apache.org/jira/browse/BCEL-275
 
 
-NEW FEATURES:
-=============
+New Features
+-------------
 
-o BCEL-293: Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility.
-o BCEL-292: Add minimal Java 9 support.
+* BCEL-293: Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility.
+* BCEL-292: Add minimal Java 9 support.
 
-FIXED BUGS:
-===========
+Fixed Bugs
+-----------
 
-o BCEL-286: Utility.signatureToString fails if a method has multiple type
+* BCEL-286: Utility.signatureToString fails if a method has multiple type
             arguments. Thanks to Mark Roberts.
-o BCEL-287: IINC does not handle -128 properly. Thanks to Mark Roberts.
-o BCEL-283: Support for StackMap should be different from StackMapTable.
+* BCEL-287: IINC does not handle -128 properly. Thanks to Mark Roberts.
+* BCEL-283: Support for StackMap should be different from StackMapTable.
             Thanks to Mark Roberts.
-o BCEL-289: Crash when parsing constructor of inner classes with parameters
+* BCEL-289: Crash when parsing constructor of inner classes with parameters
             annotated.
-o BCEL-276: LocalVariableTypeTable is not updated.
+* BCEL-276: LocalVariableTypeTable is not updated.
             Thanks to Sam Yoon, Mark Roberts.
-o BCEL-277: Resolving the String representation of a constant throws
+* BCEL-277: Resolving the String representation of a constant throws
             NoSuchElementException in case of CONSTANT_NameAndType constant.
             Thanks to Sam Yoon.
 
@@ -911,11 +968,11 @@ Have fun!
 
 -----------------------------------------------------------------------------
 
-              Release Notes for 6.0
+Release Notes for 6.0
 
 
-INTRODUCTION:
-
+Introduction
+------------
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.0!
 
@@ -931,7 +988,7 @@ It requires Java 7 or higher to run.
 
 
 COMPATIBILITY with 5.2
-======================
+----------------------
 
 Binary compatible - not strictly compatible
 - The constant interface org.apache.bcel.Constants has been deprecated. Classes
@@ -964,169 +1021,169 @@ For full information about API changes please see the extended Clirr report:
 
 https://commons.apache.org/bcel/clirr-report.html
 
-NEW FEATURES:
-=============
+New Features
+-------------
 
-o BCEL-272: Add constants for Java 9 class file version 53.
+* BCEL-272: Add constants for Java 9 class file version 53.
 
-FIXED BUGS:
-===========
+Fixed Bugs
+-----------
 
-o BCEL-237: non-empty final arrays should be private as they are mutable.
-o BCEL-243: Type.getType() needs to understand TypeVariableSignature(s).
-o BCEL-271: FCONST pattern does not include FCONST_2.
-o BCEL-264: Add missing Node.accept() implementations (ConstantMethodHandle,
+* BCEL-237: non-empty final arrays should be private as they are mutable.
+* BCEL-243: Type.getType() needs to understand TypeVariableSignature(s).
+* BCEL-271: FCONST pattern does not include FCONST_2.
+* BCEL-264: Add missing Node.accept() implementations (ConstantMethodHandle,
             ConstantMethodType, ParameterAnnotationEntry).
-o BCEL-221: BCELifier is not working for Java8Example (incomplete).
-o BCEL-195: Addition of hashCode() to generic/Instruction.java breaks Targeters.
+* BCEL-221: BCELifier is not working for Java8Example (incomplete).
+* BCEL-195: Addition of hashCode() to generic/Instruction.java breaks Targeters.
             Never make distinct BranchInstructions compare equal.
-o BCEL-261: Select constructor allows partially constructed instance to escape.
+* BCEL-261: Select constructor allows partially constructed instance to escape.
             Re-ordered code to delay the escape.
-o BCEL-259: Minor doc error in BranchInstruction.java.
-o BCEL-260: ClassDumper example duplicates field attribute types.
-o BCEL-258: No tests to check the output of dump methods.
-o BCEL-257: INVOKESPECIAL, INVOKESTATIC, INVOKEVIRTUAL need to define dump()
+* BCEL-259: Minor doc error in BranchInstruction.java.
+* BCEL-260: ClassDumper example duplicates field attribute types.
+* BCEL-258: No tests to check the output of dump methods.
+* BCEL-257: INVOKESPECIAL, INVOKESTATIC, INVOKEVIRTUAL need to define dump()
             methods.
-o BCEL-254: Two more methods that would be nice to be public.
-o BCEL-245: Type class includes constants that reference subclasses.
-o BCEL-253: Pass 3b verifier is too strict.
-o BCEL-248: StackMapTable[Entry] should be removed and improvements merged into
+* BCEL-254: Two more methods that would be nice to be public.
+* BCEL-245: Type class includes constants that reference subclasses.
+* BCEL-253: Pass 3b verifier is too strict.
+* BCEL-248: StackMapTable[Entry] should be removed and improvements merged into
             StackMap[Entry].
-o BCEL-202: StackMap[Table]Entry.copy() needs to be deep; Improved support for
+* BCEL-202: StackMap[Table]Entry.copy() needs to be deep; Improved support for
             StackMaps.
-o BCEL-251: Pass3aVerifier visitANEWARRAY() does not allow 255 array dimensions.
-o BCEL-249: Check for max Short seems wrong.
-o BCEL-208: Need to check for an empty InstructionList.
-o BCEL-217: long type instructions are not searched by InstructionFinder using
+* BCEL-251: Pass3aVerifier visitANEWARRAY() does not allow 255 array dimensions.
+* BCEL-249: Check for max Short seems wrong.
+* BCEL-208: Need to check for an empty InstructionList.
+* BCEL-217: long type instructions are not searched by InstructionFinder using
             regular expression.
-o BCEL-239: Interfaces should not be used to define constants.
-o BCEL-234: Code must not swallow Throwable.
-o BCEL-209: Bug fixes and improvements to InvokeDynamic and BootStrapMethods
+* BCEL-239: Interfaces should not be used to define constants.
+* BCEL-234: Code must not swallow Throwable.
+* BCEL-209: Bug fixes and improvements to InvokeDynamic and BootStrapMethods
             implementation. Thanks to Mark Roberts.
-o BCEL-187: Verification error when an invoke references a method defined in
+* BCEL-187: Verification error when an invoke references a method defined in
             superclass. Thanks to Jérôme Leroux.
-o BCEL-218: Remove ObjectType cache. Thanks to chas.
-o BCEL-184: The verifier now checks if methods with a void return type attempt
+* BCEL-218: Remove ObjectType cache. Thanks to chas.
+* BCEL-184: The verifier now checks if methods with a void return type attempt
             to return an object. Thanks to Jérôme Leroux.
-o BCEL-207: MethodGen.removeLocalVariable now properly unreference the removed
+* BCEL-207: MethodGen.removeLocalVariable now properly unreference the removed
             variable from the targetters of the instruction handlers delimiting
             the scope of the variable. Thanks to Mark Roberts.
-o BCEL-197: Utility.signatureToString() no longer throws a ClassFormatException
+* BCEL-197: Utility.signatureToString() no longer throws a ClassFormatException
             on TypeVariables found in generic signatures. Thanks to Mark Roberts.
-o BCEL-194: Removed the 'index' variable from the LocalVariableGen's hash code. Thanks to Mark Roberts.
-o BCEL-193: The verifier should not check for run time compatibility of objects
+* BCEL-194: Removed the 'index' variable from the LocalVariableGen's hash code. Thanks to Mark Roberts.
+* BCEL-193: The verifier should not check for run time compatibility of objects
             assigned to arrays. Thanks to Jérôme Leroux.
-o BCEL-188: Correct verification of the return value of a method. Thanks to Jérôme Leroux.
-o BCEL-186: Performance degradation with the UTF8 cache. getInstance no longer
+* BCEL-188: Correct verification of the return value of a method. Thanks to Jérôme Leroux.
+* BCEL-186: Performance degradation with the UTF8 cache. getInstance no longer
             uses cache.
-o BCEL-181: org.apache.bcel.util.ClassLoaderRepository.loadClass(String) leaks
+* BCEL-181: org.apache.bcel.util.ClassLoaderRepository.loadClass(String) leaks
             input streams.
-o BCEL-28:  Mistake in "Peephole optimizer" example
+* BCEL-28:  Mistake in "Peephole optimizer" example
             at https://commons.apache.org/bcel/manual.html
-o BCEL-74:  BCEL cannot be used as java.system.class.loader.
-o BCEL-77:  XSLT transforms broken in Turkish Locale.
-o BCEL-79:  java.lang.ClassFormatError: LVTT entry for 'local' in class file
+* BCEL-74:  BCEL cannot be used as java.system.class.loader.
+* BCEL-77:  XSLT transforms broken in Turkish Locale.
+* BCEL-79:  java.lang.ClassFormatError: LVTT entry for 'local' in class file
             org/shiftone/jrat/test/dummy/CrashTestDummy does not match any LVT
             entry
-o BCEL-81:  ClassParser.parse() throws NullPointerException if class does not
+* BCEL-81:  ClassParser.parse() throws NullPointerException if class does not
             exist and ClassParser(String) constructor is used.
-o BCEL-85:  ArrayOutOfBoundsException in InstructionFinder.
-o BCEL-87:  Website: Incorrect URL for source; version 5.2 is not in the bug
+* BCEL-85:  ArrayOutOfBoundsException in InstructionFinder.
+* BCEL-87:  Website: Incorrect URL for source; version 5.2 is not in the bug
             page
-o BCEL-88:  bcelified method doesn't pass verification.
-o BCEL-89:  return type not verified by JustIce.
-o BCEL-94:  @since tag incorrect for Annotation classes in BCEL trunk.
-o BCEL-95:  InstructionFactory missing % operator for Float, Double.
-o BCEL-96:  Fields in Annotations and AnnotationEntry are inaccessible to
+* BCEL-88:  bcelified method doesn't pass verification.
+* BCEL-89:  return type not verified by JustIce.
+* BCEL-94:  @since tag incorrect for Annotation classes in BCEL trunk.
+* BCEL-95:  InstructionFactory missing % operator for Float, Double.
+* BCEL-96:  Fields in Annotations and AnnotationEntry are inaccessible to
             subclasses
-o BCEL-97:  Add support for getResources to ClassPath.
-o BCEL-98:  Two source files in repository are empty.
-o BCEL-99:  Maven POM file calls in apache regex but code does not use it.
-o BCEL-100: ClassParser throws unintelligible Exception.
-o BCEL-101: verifier raises an AssertionViolatedException when done against
+* BCEL-97:  Add support for getResources to ClassPath.
+* BCEL-98:  Two source files in repository are empty.
+* BCEL-99:  Maven POM file calls in apache regex but code does not use it.
+* BCEL-100: ClassParser throws unintelligible Exception.
+* BCEL-101: verifier raises an AssertionViolatedException when done against
             Java 5 files with generics/annotations.
-o BCEL-102: Verifier fails in pass 2 with "Number of LocalVariableTable
+* BCEL-102: Verifier fails in pass 2 with "Number of LocalVariableTable
             attributes of Code attribute" on static methods.
-o BCEL-107: ParameterAnnotationEntries are read not dumped.
-o BCEL-108: RuntimeVisible Annotations duplicated.
-o BCEL-112: ARRAYLENGTH incorrectly not StackConsumer.
-o BCEL-114: Error in method search() defined in
+* BCEL-107: ParameterAnnotationEntries are read not dumped.
+* BCEL-108: RuntimeVisible Annotations duplicated.
+* BCEL-112: ARRAYLENGTH incorrectly not StackConsumer.
+* BCEL-114: Error in method search() defined in
             org.apache.bcel.util.InstructionFinder
-o BCEL-115: Deleting all instructions of a list shows wrong behavior.
-o BCEL-120: Make BCEL JAR OSGi compatible.
-o BCEL-122: ArrayIndexOutOfBoundsException thrown from TABLESWITCH.initFromFile.
-o BCEL-124: tableswitch/lookupswitch invalid alignment of 4-byte operands.
-o BCEL-125: Incorrect size calculation in InstructionFinder.
-o BCEL-130: Class files containing "ParameterAnnotations" are dumped
+* BCEL-115: Deleting all instructions of a list shows wrong behavior.
+* BCEL-120: Make BCEL JAR OSGi compatible.
+* BCEL-122: ArrayIndexOutOfBoundsException thrown from TABLESWITCH.initFromFile.
+* BCEL-124: tableswitch/lookupswitch invalid alignment of 4-byte operands.
+* BCEL-125: Incorrect size calculation in InstructionFinder.
+* BCEL-130: Class files containing "ParameterAnnotations" are dumped
             incorrectly.
-o BCEL-131: Class files containing "StackMapTable" attributes (on method code)
+* BCEL-131: Class files containing "StackMapTable" attributes (on method code)
             are dumped incorrectly.
-o BCEL-132: org.apache.bcel.classfile.ClassParser: NullPointerException caused
+* BCEL-132: org.apache.bcel.classfile.ClassParser: NullPointerException caused
             by fileopen failed.
-o BCEL-133: org.apache.bcel.classfile.ClassParser: NullPointerException caused
+* BCEL-133: org.apache.bcel.classfile.ClassParser: NullPointerException caused
             by invalid filename.
-o BCEL-134: ExecutionVisitor doesn't support Class constant type for LDC and
+* BCEL-134: ExecutionVisitor doesn't support Class constant type for LDC and
             LDC_W.
-o BCEL-135: BCELifier issue: BCELFactory fails to handle float and long
+* BCEL-135: BCELifier issue: BCELFactory fails to handle float and long
             constants.
-o BCEL-137: "Invalid method signature: TT;" when using MethodGen for a method
+* BCEL-137: "Invalid method signature: TT;" when using MethodGen for a method
             having a generic parameter.
-o BCEL-138: FieldInstruction.getFieldSize() doesn't decode Type.getTypeSize()
+* BCEL-138: FieldInstruction.getFieldSize() doesn't decode Type.getTypeSize()
             output.
-o BCEL-140: org.apache.bcel.generic.Instruction.equals(Object) does not follow
+* BCEL-140: org.apache.bcel.generic.Instruction.equals(Object) does not follow
             Object.equals(Object) rules.
-o BCEL-141: Select instructions should implement StackConsumer instead of
+* BCEL-141: Select instructions should implement StackConsumer instead of
             StackProducer.
-o BCEL-143: Fix CPL License issues with EnclosingMethod.java and
+* BCEL-143: Fix CPL License issues with EnclosingMethod.java and
             LocalVariableTypeTable.java.
-o BCEL-145: Type.getReturnTypeSize() doesn't decode Type.getTypeSize() output.
-o BCEL-146: SyntheticRepository.loadClass() fails to close the inputStream.
-o BCEL-148: BCELifier produces incorrect code for methods containing loads of
+* BCEL-145: Type.getReturnTypeSize() doesn't decode Type.getTypeSize() output.
+* BCEL-146: SyntheticRepository.loadClass() fails to close the inputStream.
+* BCEL-148: BCELifier produces incorrect code for methods containing loads of
             class literals from constant pool.
-o BCEL-151: Code attribute size not updated.
-o BCEL-152: Incorrect link for Jasmin assembler language.
-o BCEL-153: Examples not present in source or binary downloads.
-o BCEL-154: ClassParser.parse() generates NPE if it cannot open the file.
-o BCEL-155: InstConstraintVisitor does not handle class constants.
-o BCEL-156: Pass3bVerifier crashes on empty methods.
-o BCEL-159: LocalVariableGen.getLocalVariable() computes incorrect length.
-o BCEL-164: Method does not have a method to access parameter annotations.
-o BCEL-167: ClassPath.getResource does not correctly perform URL escaping.
-o BCEL-173: ClassParser fails to parse JDK classes in Java 8:
+* BCEL-151: Code attribute size not updated.
+* BCEL-152: Incorrect link for Jasmin assembler language.
+* BCEL-153: Examples not present in source or binary downloads.
+* BCEL-154: ClassParser.parse() generates NPE if it cannot open the file.
+* BCEL-155: InstConstraintVisitor does not handle class constants.
+* BCEL-156: Pass3bVerifier crashes on empty methods.
+* BCEL-159: LocalVariableGen.getLocalVariable() computes incorrect length.
+* BCEL-164: Method does not have a method to access parameter annotations.
+* BCEL-167: ClassPath.getResource does not correctly perform URL escaping.
+* BCEL-173: ClassParser fails to parse JDK classes in Java 8:
             ClassFormatException: Invalid byte tag in constant pool.
-o BCEL-174: Verification of interfaces with default methods fails with Java 8.
-o BCEL-177: When reading the number of parameters in a MethodParameters
+* BCEL-174: Verification of interfaces with default methods fails with Java 8.
+* BCEL-177: When reading the number of parameters in a MethodParameters
             structure only read a single byte as per the JVM specification.
 
-CHANGES:
-========
+Changes
+--------
 
-o BCEL-262: InvokeInstruction.getClassName(ConstantPoolGen) should not throw 
+* BCEL-262: InvokeInstruction.getClassName(ConstantPoolGen) should not throw 
             an exception when it detects an array. Thanks to Mark Roberts.
-o BCEL-230: Document the Java platform requirement clearly and early.
-o BCEL-211: Some additional clone methods should be public.
-o BCEL-127: Document that Instruction Factory returns singleton instances.
-o BCEL-198: better support for clone/copy methods.
-o BCEL-201: modify several toString methods to make output similar to "javap".
-o BCEL-205: add javadoc comments to LineNumber.java and LineNumberTable.java.
-o BCEL-212: Inconsistent toString() results.
-o BCEL-244: Update Java requirement from 5 to 7.
-o BCEL-219: Make org.apache.bcel.classfile.ConstantPool.ConstantPool(DataInput)
+* BCEL-230: Document the Java platform requirement clearly and early.
+* BCEL-211: Some additional clone methods should be public.
+* BCEL-127: Document that Instruction Factory returns singleton instances.
+* BCEL-198: better support for clone/copy methods.
+* BCEL-201: modify several toString methods to make output similar to "javap".
+* BCEL-205: add javadoc comments to LineNumber.java and LineNumberTable.java.
+* BCEL-212: Inconsistent toString() results.
+* BCEL-244: Update Java requirement from 5 to 7.
+* BCEL-219: Make org.apache.bcel.classfile.ConstantPool.ConstantPool(DataInput)
             public. Thanks to Maxim Degtyarev.
-o BCEL-76:  Add parent type processing for ClassPath class.
-o BCEL-83:  Add support for getResource and getResourceAsStream to ClassPath.
-o BCEL-92:  Properly parse StackMapTable attributes in Java 6 classfiles.
-o BCEL-104: Javadoc overhaul.
-o BCEL-119: BCEL is unnecessarily slow.
-o BCEL-157: Add support for INVOKEDYNAMIC and MethodHandles.
-o BCEL-160: Why using unstable sort at MethodGen.getLocalVariables() ?
-o BCEL-163: Incorporate patch file from Findbugs.
-o BCEL-175: Implement the MethodParameters attribute.
+* BCEL-76:  Add parent type processing for ClassPath class.
+* BCEL-83:  Add support for getResource and getResourceAsStream to ClassPath.
+* BCEL-92:  Properly parse StackMapTable attributes in Java 6 classfiles.
+* BCEL-104: Javadoc overhaul.
+* BCEL-119: BCEL is unnecessarily slow.
+* BCEL-157: Add support for INVOKEDYNAMIC and MethodHandles.
+* BCEL-160: Why using unstable sort at MethodGen.getLocalVariables() ?
+* BCEL-163: Incorporate patch file from Findbugs.
+* BCEL-175: Implement the MethodParameters attribute.
 
-REMOVED:
-========
-o BCEL-242: Remove Serializable.
-o BCEL-110: Problem with JAXB if the bcel classloader is used; remove the broken
+Removed
+--------
+* BCEL-242: Remove Serializable.
+* BCEL-110: Problem with JAXB if the bcel classloader is used; remove the broken
             ClassLoader class.
 
 

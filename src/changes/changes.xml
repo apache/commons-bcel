@@ -59,7 +59,7 @@ The <action> type attribute can be add,update,fix,remove.
   Defining changes.version allows one to create the RN without first removing the SNAPSHOT suffix.
    -->
   <body>
-    <release version="6.8.2" date="20YY-MM-DD" description="Maintenance and bug fix release.">
+    <release version="6.8.2" date="2024-02-21" description="Maintenance and bug fix release.">
       <!-- FIX -->
       <action type="add" dev="ggregory" due-to="Guillaume Nodet">Fix ConcurrentModificationException in org.apache.bcel.util.SyntheticRepository.getInstance() #275.</action>
       <!-- ADD -->

@@ -15,13 +15,13 @@
 ## specific language governing permissions and limitations
 ## under the License.
 ##
-              ${project.name}
-              Version ${version}
-              RELEASE NOTES
+${project.name}
+Version ${version}
+RELEASE NOTES
 
 
-INTRODUCTION:
-
+Introduction
+------------
 The ${developmentTeam} is pleased to announce the release of
 ${project.name} ${version}.
 
@@ -79,7 +79,7 @@ $action
 #else
 #set($dueto="")
 #end
-o $issue ${action}$dueto
+* $issue ${action}$dueto
 #end
 #set($action="")
 #set($issue="")
@@ -90,9 +90,8 @@ o $issue ${action}$dueto
 No changes defined in this version.
 #else
 #if ($release.getActions('add').size() !=0)
-NEW FEATURES:
-=============
-
+New Features
+------------
 #foreach($actionItem in $release.getActions('add'))
 #processaction()
 #end 
@@ -100,9 +99,8 @@ NEW FEATURES:
 #end
 ##
 #if ($release.getActions('fix').size() !=0)
-FIXED BUGS:
-===========
-
+Fixed Bugs
+----------
 #foreach($actionItem in $release.getActions('fix'))
 #processaction()
 #end
@@ -110,9 +108,8 @@ FIXED BUGS:
 #end
 ##
 #if ($release.getActions('update').size() !=0)
-CHANGES:
-========
-
+Changes
+-------
 #foreach($actionItem in $release.getActions('update'))
 #processaction()
 #end
@@ -120,8 +117,8 @@ CHANGES:
 #end
 ##
 #if ($release.getActions('remove').size() !=0)
-REMOVED:
-========
+Removed
+-------
 #foreach($actionItem in $release.getActions('remove'))
 #processaction()
 #end
@@ -143,7 +140,6 @@ Have fun!
 
 Feedback
 --------
-
 Open source works best when you give feedback:
 
     https://commons.apache.org/bcel
