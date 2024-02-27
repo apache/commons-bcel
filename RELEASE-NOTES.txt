@@ -27,7 +27,7 @@ Changes
 *           Bump org.apache.commons:commons-parent from 65 to 66. Thanks to Dependabot.
 
 
-Historical list of changes: https://commons.apache.org/proper/commons-bcelchanges-report.html
+Historical list of changes: https://commons.apache.org/proper/commons-bcel/changes-report.html
 
 For complete information on Apache Commons BCEL, including instructions on how to submit bug reports,
 patches, or suggestions for improvement, see the Apache Commons BCEL website:
