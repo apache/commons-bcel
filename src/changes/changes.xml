@@ -59,7 +59,8 @@ The <action> type attribute can be add,update,fix,remove.
   Defining changes.version allows one to create the RN without first removing the SNAPSHOT suffix.
    -->
   <body>
-    <release version="6.8.3" date="2024-MM-DD" description="Maintenance and bug fix release.">
+    <release version="6.8.3" date="YYYY-MM-DD" description="Maintenance and bug fix release.">
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.apache.commons:commons-parent from 66 to 67 #283.</action>
     </release>
     <release version="6.8.2" date="2024-02-21" description="Maintenance and bug fix release.">
       <!-- FIX -->
