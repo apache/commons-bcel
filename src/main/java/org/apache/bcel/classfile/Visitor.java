@@ -208,6 +208,14 @@ public interface Visitor {
     }
 
     /**
+     * @since 6.5.0
+     */
+    default void visitRecord(final Record obj) {
+        // empty
+    }
+
+    
+    /**
      * @since 6.0
      */
     void visitParameterAnnotation(ParameterAnnotations obj);
@@ -237,4 +245,7 @@ public interface Visitor {
     void visitSynthetic(Synthetic obj);
 
     void visitUnknown(Unknown obj);
+
+    void visitRecordComponent(RecordComponentInfo v);
+
 }
