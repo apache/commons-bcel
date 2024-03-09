@@ -191,6 +191,8 @@ public abstract class Attribute implements Cloneable, Node {
             return new NestHost(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_NEST_MEMBERS:
             return new NestMembers(nameIndex, length, dataInput, constantPool);
+        case Const.ATTR_RECORD:
+            return new Record(nameIndex, length, dataInput, constantPool);
         default:
             // Never reached
             throw new IllegalStateException("Unrecognized attribute type tag parsed: " + tag);
