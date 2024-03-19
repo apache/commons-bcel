@@ -909,6 +909,11 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         return buf.toString();
     }
 
+    /**
+     * Query method to check if this class was declared as a record
+     * 
+     * @return true if a record attribute is present, false otherwise
+     */
     public boolean isRecord() {
         computeIsRecord();
         return this.isRecord;
