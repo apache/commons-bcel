@@ -20,15 +20,13 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
-
 import org.apache.bcel.Const;
 import org.apache.bcel.util.Args;
-import org.apache.commons.lang3.ArrayUtils;
 
 /**
- * This class is derived from <em>Attribute</em> and records the classes and interfaces that are authorized to claim
- * membership in the nest hosted by the current class or interface. There may be at most one Record attribute in a
+ * This class is derived from <em>Attribute</em> and records the classes and
+ * interfaces that are authorized to claim membership in the nest hosted by the
+ * current class or interface. There may be at most one Record attribute in a
  * ClassFile structure.
  *
  * @see Attribute
@@ -43,48 +41,47 @@ public final class Record extends Attribute {
     /**
      * Constructs object from input stream.
      *
-     * @param nameIndex Index in constant pool
-     * @param length Content length in bytes
-     * @param input Input stream
+     * @param nameIndex    Index in constant pool
+     * @param length       Content length in bytes
+     * @param input        Input stream
      * @param constantPool Array of constants
      * @throws IOException if an I/O error occurs.
      */
-    Record(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+    Record(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool)
+            throws IOException {
         this(nameIndex, length, (RecordComponentInfo[]) null, constantPool);
         final int classCount = input.readUnsignedShort();
         components = new RecordComponentInfo[classCount];
         for (int i = 0; i < classCount; i++) {
             final int index = input.readUnsignedShort();
-            final int descriptorIndex =input.readUnsignedShort();
+            final int descriptorIndex = input.readUnsignedShort();
             final int attributesCount = input.readUnsignedShort();
             final Attribute[] attributes = new Attribute[attributesCount];
-            for (int j = 0 ; j< attributesCount; j++) {
+            for (int j = 0; j < attributesCount; j++) {
                 attributes[j] = Attribute.readAttribute(input, constantPool);
             }
-            components[i] = new RecordComponentInfo(
-                    index,
-                    descriptorIndex,
-                    attributes,input,constantPool);
+            components[i] = new RecordComponentInfo(index, descriptorIndex, attributes, input, constantPool);
         }
     }
 
     /**
      * Construct elements using its components
-     * 
-     * @param nameIndex Index in constant pool
-     * @param length Content length in bytes
-     * @param classes Array of Record Component Info elements
+     *
+     * @param nameIndex    Index in constant pool
+     * @param length       Content length in bytes
+     * @param classes      Array of Record Component Info elements
      * @param constantPool Array of constants
      */
-    public Record(final int nameIndex, final int length, final RecordComponentInfo[] classes, final ConstantPool constantPool) {
+    public Record(final int nameIndex, final int length, final RecordComponentInfo[] classes,
+            final ConstantPool constantPool) {
         super(Const.ATTR_RECORD, nameIndex, length, constantPool);
         this.components = classes != null ? classes : EMPTY_RCI_ARRAY;
         Args.requireU2(this.components.length, "attributes.length");
     }
 
     /**
-     * Initialize from another object. Note that both objects use the same references (shallow copy). Use copy() for a
-     * physical copy.
+     * Initialize from another object. Note that both objects use the same
+     * references (shallow copy). Use copy() for a physical copy.
      *
      * @param c Source to copy.
      */
@@ -93,8 +90,9 @@ public final class Record extends Attribute {
     }
 
     /**
-     * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
-     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
+     * Called by objects that are traversing the nodes of the tree implicitly
+     * defined by the contents of a Java class. I.e., the hierarchy of methods,
+     * fields, attributes, etc. spawns a tree of objects.
      *
      * @param v Visitor object
      */

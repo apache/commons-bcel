@@ -280,8 +280,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
                     }
                 });
             }
-            if (attribute instanceof Record)
+            if (attribute instanceof Record) {
                 isRecord = true;
+            }
         }
         this.computedNestedTypeStatus = true;
     }
@@ -911,7 +912,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
     /**
      * Query method to check if this class was declared as a record
-     * 
+     *
      * @return true if a record attribute is present, false otherwise
      */
     public boolean isRecord() {
