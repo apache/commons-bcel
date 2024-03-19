@@ -567,12 +567,12 @@ public class DescendingVisitor implements Visitor {
         record.accept(visitor);
         stack.pop();
     }
-    
+
     @Override
     public void visitRecordComponent(RecordComponentInfo recordComponentInfo) {
         stack.push(recordComponentInfo);
         recordComponentInfo.accept(visitor);
         stack.pop();
     }
- 
+
 }
