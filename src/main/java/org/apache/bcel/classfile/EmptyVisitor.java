@@ -326,8 +326,4 @@ public class EmptyVisitor implements Visitor {
     @Override
     public void visitUnknown(final Unknown obj) {
     }
-
-    @Override
-    public void visitRecordComponent(RecordComponentInfo v) {
-    }
 }
