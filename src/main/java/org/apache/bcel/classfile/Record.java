@@ -58,8 +58,9 @@ public final class Record extends Attribute {
             final int descriptorIndex =input.readUnsignedShort();
             final int attributesCount = input.readUnsignedShort();
             final Attribute[] attributes = new Attribute[attributesCount];
-            for (int j = 0 ; j< attributesCount; j++)
+            for (int j = 0 ; j< attributesCount; j++) {
                 attributes[j] = Attribute.readAttribute(input, constantPool);
+            }
             components[i] = new RecordComponentInfo(
                     index,
                     descriptorIndex,
@@ -68,9 +69,11 @@ public final class Record extends Attribute {
     }
 
     /**
+     * Construct elements using its components
+     * 
      * @param nameIndex Index in constant pool
      * @param length Content length in bytes
-     * @param classes Table of Record component info
+     * @param classes Array of Record Component Info elements
      * @param constantPool Array of constants
      */
     public Record(final int nameIndex, final int length, final RecordComponentInfo[] classes, final ConstantPool constantPool) {
@@ -101,7 +104,7 @@ public final class Record extends Attribute {
     }
 
     /**
-     * @return deep copy of this attribute
+     * @return deep copy of this record attribute
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {
