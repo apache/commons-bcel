@@ -919,7 +919,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
             return;
         }
         for (final Attribute attribute : this.attributes) { 
-            if(attribute instanceof Record) {
+            if (attribute instanceof Record) {
                 isRecord = true;
                 break;
             }
