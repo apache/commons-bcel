@@ -911,8 +911,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         return buf.toString();
     }
     
-    public boolean isRecord()
-    {
+    public boolean isRecord() {
         computeIsRecord();
         return this.isRecord;
     }
