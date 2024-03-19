@@ -37,7 +37,7 @@ import org.apache.commons.lang3.ArrayUtils;
 public final class Record extends Attribute {
 
     private static final RecordComponentInfo[] EMPTY_RCI_ARRAY = new RecordComponentInfo[] {};
-    
+
     private RecordComponentInfo[] components;
 
     /**
@@ -70,7 +70,7 @@ public final class Record extends Attribute {
     /**
      * @param nameIndex Index in constant pool
      * @param length Content length in bytes
-     * @param classes Table of Record component info 
+     * @param classes Table of Record component info
      * @param constantPool Array of constants
      */
     public Record(final int nameIndex, final int length, final RecordComponentInfo[] classes, final ConstantPool constantPool) {
@@ -134,7 +134,7 @@ public final class Record extends Attribute {
     public RecordComponentInfo[] getComponents() {
         return components;
     }
- 
+
     /**
      * @return String representation, i.e., a list of classes.
      */
