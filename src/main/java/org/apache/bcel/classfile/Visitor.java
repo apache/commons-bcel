@@ -208,7 +208,7 @@ public interface Visitor {
     }
 
     /**
-     * @since 6.5.0
+     * @since 6.9.0
      */
     default void visitRecord(final Record obj) {
         // empty
