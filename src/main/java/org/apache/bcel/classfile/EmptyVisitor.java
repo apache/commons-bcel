@@ -328,7 +328,6 @@ public class EmptyVisitor implements Visitor {
     }
 
     @Override
-    public void visitRecordComponent(RecordComponentInfo v) {
-        
+    public void visitRecordComponent(RecordComponentInfo v) {        
     }
 }
