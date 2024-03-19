@@ -197,6 +197,10 @@ limitations under the License.
     <!-- config_loc is used by Eclipse plugin -->
     <property name="file" value="${config_loc}/src/conf/checkstyle-suppressions.xml"/>
   </module>
-
+  <module name="RegexpSingleline">
+    <!-- \s matches whitespace character, $ matches end of line. -->
+    <property name="format" value="\s+$" />
+    <property name="message" value="Line has trailing spaces." />
+  </module>
 </module>
 
