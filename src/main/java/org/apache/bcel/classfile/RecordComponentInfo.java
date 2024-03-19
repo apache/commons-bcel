@@ -26,15 +26,15 @@ public class RecordComponentInfo implements Cloneable, Node {
 
     private final int index;
     private final int descriptorIndex;
-    private final Attribute[] attributes; 
+    private final Attribute[] attributes;
     private final ConstantPool constantPool;
-    
+
     public RecordComponentInfo(int index, int descriptorIndex, Attribute[] attributes, DataInput input,
             ConstantPool constantPool) {
-        this.index=index;
-        this.descriptorIndex=descriptorIndex;
-        this.attributes=attributes;
-        this.constantPool=constantPool;
+        this.index = index;
+        this.descriptorIndex = descriptorIndex;
+        this.attributes = attributes;
+        this.constantPool = constantPool;
     }
 
     public void write(DataOutputStream file) throws IOException {
@@ -61,7 +61,7 @@ public class RecordComponentInfo implements Cloneable, Node {
     public Attribute[] getAttributes() {
         return attributes;
     }
-    
+
     /**
      * @return String representation, i.e., a list of classes.
      */
