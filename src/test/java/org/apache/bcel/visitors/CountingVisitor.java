@@ -205,7 +205,8 @@ public class CountingVisitor implements Visitor {
 
     /** @since 6.4.0 */
     public int nestMembersCount;
-    /** @since 6.5.0 */
+
+    /** @since 6.9.0 */
     public int recordCount;
     
     // CHECKSTYLE:ON
