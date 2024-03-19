@@ -246,6 +246,13 @@ public interface Visitor {
 
     void visitUnknown(Unknown obj);
 
-    void visitRecordComponent(RecordComponentInfo v);
+    /**
+     * Visits a {@link RecordComponentInfo} object.
+     * @param obj record component to visit
+     * @since 6.9.0
+     */
+    default void visitRecordComponent(RecordComponentInfo v) {
+        
+    };
 
 }
