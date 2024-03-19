@@ -32,6 +32,7 @@ import org.apache.commons.lang3.ArrayUtils;
  * ClassFile structure.
  *
  * @see Attribute
+ * @since 6.9.0
  */
 public final class Record extends Attribute {
 
