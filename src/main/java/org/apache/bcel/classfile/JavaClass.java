@@ -280,7 +280,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
                     }
                 });
             }
-            if(attribute instanceof Record)
+            if (attribute instanceof Record)
                 isRecord = true;
         }
         this.computedNestedTypeStatus = true;
