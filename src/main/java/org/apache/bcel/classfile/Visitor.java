@@ -251,7 +251,7 @@ public interface Visitor {
      * @param obj record component to visit
      * @since 6.9.0
      */
-    default void visitRecordComponent(RecordComponentInfo v) {
+    default void visitRecordComponent(RecordComponentInfo obj) {
 
     }
 
