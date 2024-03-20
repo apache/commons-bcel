@@ -253,6 +253,6 @@ public interface Visitor {
      */
     default void visitRecordComponent(RecordComponentInfo v) {
 
-    };
+    }
 
 }

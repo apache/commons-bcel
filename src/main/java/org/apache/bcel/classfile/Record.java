@@ -60,7 +60,7 @@ public final class Record extends Attribute {
             for (int j = 0; j < attributesCount; j++) {
                 attributes[j] = Attribute.readAttribute(input, constantPool);
             }
-            components[i] = new RecordComponentInfo(index, descriptorIndex, attributes, input, constantPool);
+            components[i] = new RecordComponentInfo(index, descriptorIndex, attributes,  constantPool);
         }
     }
 
