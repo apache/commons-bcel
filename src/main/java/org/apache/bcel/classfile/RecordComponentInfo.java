@@ -22,12 +22,13 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * Record component info from a record. Instances from this class maps 
+ * Record component info from a record. Instances from this class maps
  * every component from a given record.
- * 
- * @see <a href="https://docs.oracle.com/javase/specs/jvms/se14/preview/specs/records-jvms.html#jvms-4.7.30">The Java Virtual Machine Specification, Java SE 14 Edition, Records (preview)</a> 
+ *
+ * @see <a href="https://docs.oracle.com/javase/specs/jvms/se14/preview/specs/records-jvms.html#jvms-4.7.30">
+ *      The Java Virtual Machine Specification, Java SE 14 Edition, Records (preview)</a>
  */
-public class RecordComponentInfo implements Cloneable, Node {
+public class RecordComponentInfo implements Node {
 
     private final int index;
     private final int descriptorIndex;
@@ -42,7 +43,7 @@ public class RecordComponentInfo implements Cloneable, Node {
      * @param attributes Array of attributes
      * @param constantPool Constant pool
      */
-    public RecordComponentInfo(int index, int descriptorIndex, Attribute[] attributes, 
+    public RecordComponentInfo(int index, int descriptorIndex, Attribute[] attributes,
             ConstantPool constantPool) {
         this.index = index;
         this.descriptorIndex = descriptorIndex;
