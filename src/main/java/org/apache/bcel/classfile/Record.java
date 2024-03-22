@@ -53,7 +53,7 @@ public final class Record extends Attribute {
         this(nameIndex, length, readComponents(input, constantPool), constantPool);
     }
 
-    private static final RecordComponentInfo[] readComponents(final DataInput input, final ConstantPool constantPool)
+    private static RecordComponentInfo[] readComponents(final DataInput input, final ConstantPool constantPool)
             throws IOException {
         final int classCount = input.readUnsignedShort();
         final RecordComponentInfo[] components = new RecordComponentInfo[classCount];
