@@ -20,6 +20,7 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+
 import org.apache.bcel.Const;
 import org.apache.bcel.util.Args;
 
@@ -49,19 +50,17 @@ public final class Record extends Attribute {
      */
     Record(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool)
             throws IOException {
-        this(nameIndex, length, (RecordComponentInfo[]) null, constantPool);
+        this(nameIndex, length, readComponents(input, constantPool), constantPool);
+    }
+
+    private static final RecordComponentInfo[] readComponents(final DataInput input, final ConstantPool constantPool)
+            throws IOException {
         final int classCount = input.readUnsignedShort();
-        components = new RecordComponentInfo[classCount];
+        final RecordComponentInfo[] components = new RecordComponentInfo[classCount];
         for (int i = 0; i < classCount; i++) {
-            final int index = input.readUnsignedShort();
-            final int descriptorIndex = input.readUnsignedShort();
-            final int attributesCount = input.readUnsignedShort();
-            final Attribute[] attributes = new Attribute[attributesCount];
-            for (int j = 0; j < attributesCount; j++) {
-                attributes[j] = Attribute.readAttribute(input, constantPool);
-            }
-            components[i] = new RecordComponentInfo(index, descriptorIndex, attributes,  constantPool);
+            components[i] = new RecordComponentInfo(input, constantPool);
         }
+        return components;
     }
 
     /**
@@ -77,16 +76,6 @@ public final class Record extends Attribute {
         super(Const.ATTR_RECORD, nameIndex, length, constantPool);
         this.components = classes != null ? classes : EMPTY_RCI_ARRAY;
         Args.requireU2(this.components.length, "attributes.length");
-    }
-
-    /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use copy() for a physical copy.
-     *
-     * @param c Source to copy.
-     */
-    public Record(final Record c) {
-        this(c.getNameIndex(), c.getLength(), c.getComponents(), c.getConstantPool());
     }
 
     /**
@@ -125,7 +114,7 @@ public final class Record extends Attribute {
         super.dump(file);
         file.writeShort(components.length);
         for (final RecordComponentInfo component : components) {
-            component.write(file);
+            component.dump(file);
         }
     }
 
@@ -150,4 +139,5 @@ public final class Record extends Attribute {
         }
         return buf.substring(0, buf.length() - 1); // remove the last newline
     }
+
 }
