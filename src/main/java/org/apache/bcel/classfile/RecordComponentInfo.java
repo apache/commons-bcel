@@ -16,6 +16,7 @@
  */
 package org.apache.bcel.classfile;
 
+import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -36,24 +37,27 @@ public class RecordComponentInfo implements Node {
     private final ConstantPool constantPool;
 
     /**
-     * Constructs object from its components.
+     * Constructs object from input stream.
      *
-     * @param index Index in constant pool
-     * @param descriptorIndex descriptor index
-     * @param attributes Array of attributes
-     * @param constantPool Constant pool
+     * @param input        Input stream
+     * @param constantPool Array of constants
+     * @throws IOException if an I/O error occurs.
      */
-    public RecordComponentInfo(int index, int descriptorIndex, Attribute[] attributes,
-            ConstantPool constantPool) {
-        this.index = index;
-        this.descriptorIndex = descriptorIndex;
-        this.attributes = attributes;
+    public RecordComponentInfo(final DataInput input, ConstantPool constantPool) throws IOException {
+        this.index = input.readUnsignedShort();
+        this.descriptorIndex = input.readUnsignedShort();
+        final int attributesCount = input.readUnsignedShort();
+        this.attributes = new Attribute[attributesCount];
+        for (int j = 0; j < attributesCount; j++) {
+            attributes[j] = Attribute.readAttribute(input, constantPool);
+        }
         this.constantPool = constantPool;
     }
 
-    public void write(DataOutputStream file) throws IOException {
+    public void dump(DataOutputStream file) throws IOException {
         file.writeShort(index);
         file.writeShort(descriptorIndex);
+        file.writeShort(attributes.length);
         for (final Attribute attribute : attributes) {
             attribute.dump(file);
         }
@@ -94,5 +98,6 @@ public class RecordComponentInfo implements Node {
         }
         return buf.substring(0, buf.length() - 1); // remove the last newline
     }
+ 
 
 }
