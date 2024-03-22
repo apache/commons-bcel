@@ -98,6 +98,5 @@ public class RecordComponentInfo implements Node {
         }
         return buf.substring(0, buf.length() - 1); // remove the last newline
     }
- 
 
 }
