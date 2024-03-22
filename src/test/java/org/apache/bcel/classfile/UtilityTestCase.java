@@ -20,6 +20,7 @@ package org.apache.bcel.classfile;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -105,7 +106,7 @@ public class UtilityTestCase {
 
     @Test
     public void testPrintArray() {
-        assertEquals(null, Utility.printArray(null, false, false));
+        assertNull(Utility.printArray(null, false, false));
         assertEquals("", Utility.printArray(new Object[0], false, false));
         assertEquals("{}", Utility.printArray(new Object[0], true, false));
         assertEquals("null", Utility.printArray(new Object[]{null}, false, false));

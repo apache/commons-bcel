@@ -18,6 +18,7 @@ package org.apache.bcel.generic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.Code;
@@ -41,7 +42,7 @@ public class TypeTestCase {
 
     @Test
     public void testInternalTypeNametoSignature() {
-        assertEquals(null, Type.internalTypeNameToSignature(null));
+        assertNull(Type.internalTypeNameToSignature(null));
         assertEquals("", Type.internalTypeNameToSignature(""));
         assertEquals("TT;", Type.internalTypeNameToSignature("TT;"));
         assertEquals("Ljava/lang/String;", Type.internalTypeNameToSignature("Ljava/lang/String;"));
