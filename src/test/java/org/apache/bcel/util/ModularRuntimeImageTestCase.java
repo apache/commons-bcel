@@ -46,7 +46,7 @@ public class ModularRuntimeImageTestCase {
     public void testListJreModule(final ModularRuntimeImage modularRuntimeImage) throws IOException {
         final List<Path> listEntries = modularRuntimeImage.list(ModularRuntimeImage.MODULES_PATH + "/java.base");
         assertFalse(listEntries.isEmpty());
-        assertTrue(listEntries.toString().indexOf("/java.base") > -1);
+        assertTrue(listEntries.toString().contains("/java.base"));
     }
 
     @ParameterizedTest
@@ -54,7 +54,7 @@ public class ModularRuntimeImageTestCase {
     public void testListJreModulePackageDir(final ModularRuntimeImage modularRuntimeImage) throws IOException {
         final List<Path> listEntries = modularRuntimeImage.list(ModularRuntimeImage.MODULES_PATH + "/java.base/java/lang");
         assertFalse(listEntries.isEmpty());
-        assertTrue(listEntries.toString().indexOf("/java.base/java/lang/String.class") > -1);
+        assertTrue(listEntries.toString().contains("/java.base/java/lang/String.class"));
     }
 
     @ParameterizedTest
@@ -62,7 +62,7 @@ public class ModularRuntimeImageTestCase {
     public void testListJreModules(final ModularRuntimeImage modularRuntimeImage) throws IOException {
         final List<Path> listEntries = modularRuntimeImage.list(ModularRuntimeImage.MODULES_PATH);
         assertFalse(listEntries.isEmpty());
-        assertTrue(listEntries.toString().indexOf("/java.base") > -1);
+        assertTrue(listEntries.toString().contains("/java.base"));
     }
 
     @ParameterizedTest
@@ -70,6 +70,6 @@ public class ModularRuntimeImageTestCase {
     public void testListJrePackages(final ModularRuntimeImage modularRuntimeImage) throws IOException {
         final List<Path> listEntries = modularRuntimeImage.list(ModularRuntimeImage.PACKAGES_PATH);
         assertFalse(listEntries.isEmpty());
-        assertTrue(listEntries.toString().indexOf("java.lang") > -1);
+        assertTrue(listEntries.toString().contains("java.lang"));
     }
 }
