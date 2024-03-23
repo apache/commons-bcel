@@ -205,6 +205,7 @@
           <!-- Needed to define config_loc -->
           <propertyExpansion>config_loc=${basedir}</propertyExpansion>
           <enableRulesSummary>false</enableRulesSummary>
+          <includeTestSourceDirectory>true</includeTestSourceDirectory>
         </configuration>
       </plugin>
       <plugin>

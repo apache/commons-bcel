@@ -34,7 +34,9 @@ public class JiraBcel369TestCase extends AbstractTestCase {
     /**
      * 3.7.0 fails with
      * <pre>{@code
-     * org.apache.bcel.verifier.exc.AssertionViolatedException: INTERNAL ERROR: Some RuntimeException occurred while verify()ing class 'issue369.Test', method 'public void <init>(int arg1)'. Original RuntimeException's stack trace:
+     * org.apache.bcel.verifier.exc.AssertionViolatedException:
+     * INTERNAL ERROR: Some RuntimeException occurred while verify()ing class 'issue369.Test', method 'public void <init>(int arg1)'.
+     * Original RuntimeException's stack trace:
 ---
 org.apache.bcel.verifier.exc.AssertionViolatedException: INTERNAL ERROR: outFrame not set! This:
   24: return    [InstructionContext]

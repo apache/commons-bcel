@@ -41,7 +41,8 @@ import org.apache.bcel.generic.POP2;
  */
 public class JvmOpCodes {
 
-    long l1, l2;
+    long l1;
+    long l2;
 
     /**
      * Tests {@link DNEG}.

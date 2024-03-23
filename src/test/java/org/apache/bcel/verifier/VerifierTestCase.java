@@ -133,7 +133,7 @@ public class VerifierTestCase {
 
     @Test
     public void testJvmOpCodes() throws ClassNotFoundException {
-    	testDefaultMethodValidation("org.apache.bcel.verifier.tests.JvmOpCodes");
+        testDefaultMethodValidation("org.apache.bcel.verifier.tests.JvmOpCodes");
     }
 
     @Test
@@ -160,6 +160,6 @@ public class VerifierTestCase {
 
     @Test
     public void testWSDL() throws IOException, URISyntaxException, ClassNotFoundException {
-        testJarFile(getJarFile(javax.wsdl.Port.class), "WSDLReaderImpl",  "DefinitionImpl");
+        testJarFile(getJarFile(javax.wsdl.Port.class), "WSDLReaderImpl", "DefinitionImpl");
     }
 }
