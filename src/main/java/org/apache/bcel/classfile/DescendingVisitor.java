@@ -565,6 +565,7 @@ public class DescendingVisitor implements Visitor {
     public void visitRecord(Record record) {
         stack.push(record);
         record.accept(visitor);
+        accept(record.getComponents());
         stack.pop();
     }
 
