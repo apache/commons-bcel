@@ -68,6 +68,7 @@ import org.apache.bcel.classfile.NestHost;
 import org.apache.bcel.classfile.NestMembers;
 import org.apache.bcel.classfile.ParameterAnnotationEntry;
 import org.apache.bcel.classfile.ParameterAnnotations;
+import org.apache.bcel.classfile.Record;
 import org.apache.bcel.classfile.RecordComponentInfo;
 import org.apache.bcel.classfile.Signature;
 import org.apache.bcel.classfile.SourceFile;
@@ -208,7 +209,10 @@ public class CountingVisitor implements Visitor {
 
     /** @since 6.9.0 */
     public int recordCount;
-    
+
+    /** @since 6.9.0 */
+    public int recordComponentCount;
+
     // CHECKSTYLE:ON
 
     @Override
@@ -524,7 +528,12 @@ public class CountingVisitor implements Visitor {
     }
 
     @Override
-    public void visitRecordComponent(RecordComponentInfo v) {
+    public void visitRecord(Record v) {
         recordCount++;
+    }
+
+    @Override
+    public void visitRecordComponent(RecordComponentInfo v) {
+        recordComponentCount++;
     }
 }
