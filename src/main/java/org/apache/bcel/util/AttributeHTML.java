@@ -42,6 +42,11 @@ import org.apache.bcel.classfile.Utility;
  */
 final class AttributeHTML implements Closeable {
 
+    public static final String A_HREF = "<A HREF=\"";
+    public static final String CODE_HTML_CODE = "_code.html#code";
+    public static final String TARGET_CODE = "\" TARGET=Code>";
+    public static final String CP_HTML_CP = "_cp.html#cp";
+    public static final String UL = "</UL>\n";
     private final String className; // name of current class
     private final PrintWriter printWriter; // file to write to
     private int attrCount;
@@ -67,7 +72,7 @@ final class AttributeHTML implements Closeable {
     }
 
     private String codeLink(final int link, final int methodNumber) {
-        return "<A HREF=\"" + className + "_code.html#code" + methodNumber + "@" + link + "\" TARGET=Code>" + link + "</A>";
+        return A_HREF + className + CODE_HTML_CODE + methodNumber + "@" + link + TARGET_CODE + link + "</A>";
     }
 
     void writeAttribute(final Attribute attribute, final String anchor) {
@@ -92,76 +97,29 @@ final class AttributeHTML implements Closeable {
          */
         switch (tag) {
         case Const.ATTR_CODE:
-            final Code c = (Code) attribute;
-            // Some directly printable values
-            printWriter.print("<UL><LI>Maximum stack size = " + c.getMaxStack() + "</LI>\n<LI>Number of local variables = " + c.getMaxLocals()
-                + "</LI>\n<LI><A HREF=\"" + className + "_code.html#method" + methodNumber + "\" TARGET=Code>Byte code</A></LI></UL>\n");
-            // Get handled exceptions and list them
-            final CodeException[] ce = c.getExceptionTable();
-            final int len = ce.length;
-            if (len > 0) {
-                printWriter.print("<P><B>Exceptions handled</B><UL>");
-                for (final CodeException cex : ce) {
-                    final int catchType = cex.getCatchType(); // Index in constant pool
-                    printWriter.print("<LI>");
-                    if (catchType != 0) {
-                        printWriter.print(constantHtml.referenceConstant(catchType)); // Create Link to _cp.html
-                    } else {
-                        printWriter.print("Any Exception");
-                    }
-                    printWriter.print("<BR>(Ranging from lines " + codeLink(cex.getStartPC(), methodNumber) + " to " + codeLink(cex.getEndPC(), methodNumber)
-                        + ", handled at line " + codeLink(cex.getHandlerPC(), methodNumber) + ")</LI>");
-                }
-                printWriter.print("</UL>");
-            }
+            handleAttrCode((Code) attribute, methodNumber);
             break;
         case Const.ATTR_CONSTANT_VALUE:
             index = ((ConstantValue) attribute).getConstantValueIndex();
             // Reference _cp.html
             printWriter
-                .print("<UL><LI><A HREF=\"" + className + "_cp.html#cp" + index + "\" TARGET=\"ConstantPool\">Constant value index(" + index + ")</A></UL>\n");
+                .print("<UL><LI><A HREF=\"" + className + CP_HTML_CP + index + "\" TARGET=\"ConstantPool\">Constant value index(" + index + ")</A></UL>\n");
             break;
         case Const.ATTR_SOURCE_FILE:
             index = ((SourceFile) attribute).getSourceFileIndex();
             // Reference _cp.html
             printWriter
-                .print("<UL><LI><A HREF=\"" + className + "_cp.html#cp" + index + "\" TARGET=\"ConstantPool\">Source file index(" + index + ")</A></UL>\n");
+                .print("<UL><LI><A HREF=\"" + className + CP_HTML_CP + index + "\" TARGET=\"ConstantPool\">Source file index(" + index + ")</A></UL>\n");
             break;
         case Const.ATTR_EXCEPTIONS:
-            // List thrown exceptions
-            final int[] indices = ((ExceptionTable) attribute).getExceptionIndexTable();
-            printWriter.print("<UL>");
-            for (final int indice : indices) {
-                printWriter
-                    .print("<LI><A HREF=\"" + className + "_cp.html#cp" + indice + "\" TARGET=\"ConstantPool\">Exception class index(" + indice + ")</A>\n");
-            }
-            printWriter.print("</UL>\n");
+            handleAttrExceptions((ExceptionTable) attribute);
             break;
         case Const.ATTR_LINE_NUMBER_TABLE:
-            final LineNumber[] lineNumbers = ((LineNumberTable) attribute).getLineNumberTable();
-            // List line number pairs
-            printWriter.print("<P>");
-            for (int i = 0; i < lineNumbers.length; i++) {
-                printWriter.print("(" + lineNumbers[i].getStartPC() + ",&nbsp;" + lineNumbers[i].getLineNumber() + ")");
-                if (i < lineNumbers.length - 1) {
-                    printWriter.print(", "); // breakable
-                }
-            }
+            handleAttrLineNumberTable((LineNumberTable) attribute);
             break;
         case Const.ATTR_LOCAL_VARIABLE_TABLE:
             // List name, range and type
-            printWriter.print("<UL>");
-            ((LocalVariableTable) attribute).forEach(var -> {
-                final int sigIdx = var.getSignatureIndex();
-                String signature = constantPool.getConstantUtf8(sigIdx).getBytes();
-                signature = Utility.signatureToString(signature, false);
-                final int start = var.getStartPC();
-                final int end = start + var.getLength();
-                printWriter.println("<LI>" + Class2HTML.referenceType(signature) + "&nbsp;<B>" + var.getName() + "</B> in slot %" + var.getIndex()
-                    + "<BR>Valid from lines " + "<A HREF=\"" + className + "_code.html#code" + methodNumber + "@" + start + "\" TARGET=Code>" + start
-                    + "</A> to " + "<A HREF=\"" + className + "_code.html#code" + methodNumber + "@" + end + "\" TARGET=Code>" + end + "</A></LI>");
-            });
-            printWriter.print("</UL>\n");
+            handleAttrLocalVariableTable((LocalVariableTable) attribute, methodNumber);
             break;
         case Const.ATTR_INNER_CLASSES:
             // List inner classes
@@ -179,12 +137,75 @@ final class AttributeHTML implements Closeable {
                 printWriter.print("<LI><FONT COLOR=\"#FF0000\">" + access + "</FONT> " + constantHtml.referenceConstant(clazz.getInnerClassIndex())
                     + " in&nbsp;class " + constantHtml.referenceConstant(clazz.getOuterClassIndex()) + " named " + name + "</LI>\n");
             }
-            printWriter.print("</UL>\n");
+            printWriter.print(UL);
             break;
         default: // Such as Unknown attribute or Deprecated
             printWriter.print("<P>" + attribute);
         }
         printWriter.println("</TD></TR>");
         printWriter.flush();
+    }
+
+    private void handleAttrLocalVariableTable(LocalVariableTable attribute, int methodNumber) {
+        printWriter.print("<UL>");
+        attribute.forEach(var -> {
+            final int sigIdx = var.getSignatureIndex();
+            String signature = constantPool.getConstantUtf8(sigIdx).getBytes();
+            signature = Utility.signatureToString(signature, false);
+            final int start = var.getStartPC();
+            final int end = start + var.getLength();
+            printWriter.println("<LI>" + Class2HTML.referenceType(signature) + "&nbsp;<B>" + var.getName() + "</B> in slot %" + var.getIndex()
+                + "<BR>Valid from lines " + A_HREF + className + CODE_HTML_CODE + methodNumber + "@" + start + TARGET_CODE + start
+                + "</A> to " + A_HREF + className + CODE_HTML_CODE + methodNumber + "@" + end + TARGET_CODE + end + "</A></LI>");
+        });
+        printWriter.print(UL);
+    }
+
+    private void handleAttrLineNumberTable(LineNumberTable attribute) {
+        final LineNumber[] lineNumbers = attribute.getLineNumberTable();
+        // List line number pairs
+        printWriter.print("<P>");
+        for (int i = 0; i < lineNumbers.length; i++) {
+            printWriter.print("(" + lineNumbers[i].getStartPC() + ",&nbsp;" + lineNumbers[i].getLineNumber() + ")");
+            if (i < lineNumbers.length - 1) {
+                printWriter.print(", "); // breakable
+            }
+        }
+    }
+
+    private void handleAttrExceptions(ExceptionTable attribute) {
+        // List thrown exceptions
+        final int[] indices = attribute.getExceptionIndexTable();
+        printWriter.print("<UL>");
+        for (final int indice : indices) {
+            printWriter
+                .print("<LI><A HREF=\"" + className + CP_HTML_CP + indice + "\" TARGET=\"ConstantPool\">Exception class index(" + indice + ")</A>\n");
+        }
+        printWriter.print(UL);
+    }
+
+    private void handleAttrCode(Code attribute, int methodNumber) {
+        final Code c = attribute;
+        // Some directly printable values
+        printWriter.print("<UL><LI>Maximum stack size = " + c.getMaxStack() + "</LI>\n<LI>Number of local variables = " + c.getMaxLocals()
+            + "</LI>\n<LI><A HREF=\"" + className + "_code.html#method" + methodNumber + "\" TARGET=Code>Byte code</A></LI></UL>\n");
+        // Get handled exceptions and list them
+        final CodeException[] ce = c.getExceptionTable();
+        final int len = ce.length;
+        if (len > 0) {
+            printWriter.print("<P><B>Exceptions handled</B><UL>");
+            for (final CodeException cex : ce) {
+                final int catchType = cex.getCatchType(); // Index in constant pool
+                printWriter.print("<LI>");
+                if (catchType != 0) {
+                    printWriter.print(constantHtml.referenceConstant(catchType)); // Create Link to _cp.html
+                } else {
+                    printWriter.print("Any Exception");
+                }
+                printWriter.print("<BR>(Ranging from lines " + codeLink(cex.getStartPC(), methodNumber) + " to " + codeLink(cex.getEndPC(), methodNumber)
+                    + ", handled at line " + codeLink(cex.getHandlerPC(), methodNumber) + ")</LI>");
+            }
+            printWriter.print("</UL>");
+        }
     }
 }
