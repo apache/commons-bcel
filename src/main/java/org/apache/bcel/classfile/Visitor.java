@@ -237,6 +237,7 @@ public interface Visitor {
 
     /**
      * Visits a {@link StackMapType} object.
+     *
      * @param obj object to visit
      * @since 6.8.0
      */
@@ -250,6 +251,7 @@ public interface Visitor {
 
     /**
      * Visits a {@link RecordComponentInfo} object.
+     *
      * @param obj record component to visit
      * @since 6.9.0
      */
