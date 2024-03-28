@@ -209,6 +209,7 @@ public interface Visitor {
 
     /**
      * Visits a {@link Record} object.
+     *
      * @param obj Record to visit
      * @since 6.9.0
      */
