@@ -28,6 +28,7 @@ import org.apache.bcel.Const;
  *
  * @see <a href="https://docs.oracle.com/javase/specs/jvms/se14/preview/specs/records-jvms.html#jvms-4.7.30">
  *      The Java Virtual Machine Specification, Java SE 14 Edition, Records (preview)</a>
+ * @since 6.9.0
  */
 public class RecordComponentInfo implements Node {
 
@@ -37,7 +38,7 @@ public class RecordComponentInfo implements Node {
     private final ConstantPool constantPool;
 
     /**
-     * Constructs object from input stream.
+     * Constructs a new instance from an input stream.
      *
      * @param input        Input stream
      * @param constantPool Array of constants
@@ -55,7 +56,7 @@ public class RecordComponentInfo implements Node {
     }
 
     /**
-     * Dump RecordComponentInfo into a file stream in binary format.
+     * Dumps contents into a file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.
@@ -75,7 +76,7 @@ public class RecordComponentInfo implements Node {
     }
 
     /**
-     * Getter for this component name index.
+     * Gets the name index.
      *
      * @return index in constant pool of this record component name.
      */
@@ -84,7 +85,7 @@ public class RecordComponentInfo implements Node {
     }
 
     /**
-     * Getter for this component name index.
+     * Gets the description index.
      *
      * @return index in constant pool of this record component descriptor.
      */
@@ -93,25 +94,27 @@ public class RecordComponentInfo implements Node {
     }
 
     /**
-     * Getter for all the attributes of this record component.
+     * Gets all attributes.
      *
-     * @return Attributes attached to this record component
+     * @return all attributes.
      */
     public Attribute[] getAttributes() {
         return attributes;
     }
 
     /**
-     * Getter for the constant pool used with this record compontent
+     * Gets the constant pool.
      *
-     * @return Constant pool used by this object.
+     * @return Constant pool.
      */
     public ConstantPool getConstantPool() {
         return constantPool;
     }
 
     /**
-     * @return String representation, i.e., a list of classes.
+     * Converts this instance to a String suitable for debugging.
+     *
+     * @return a String suitable for debugging.
      */
     @Override
     public String toString() {
