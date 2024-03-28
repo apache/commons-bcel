@@ -34,7 +34,8 @@ public class RecordTestCase extends AbstractTestCase {
     /**
      * A record type, once compiled, should result in a class file that is
      * marked such that we can determine from the access flags
-     * (through BCEL) that it is in fact a record
+     * (through BCEL) that it is in fact a record.
+     *
      * @throws IOException
      * @throws ClassFormatException
      */
@@ -58,9 +59,9 @@ public class RecordTestCase extends AbstractTestCase {
     public void testRecordToString() throws ClassNotFoundException, ClassFormatException, IOException {
         final JavaClass clazz = new ClassParser("src/test/resources/record/SimpleRecord.class").parse();
         final Attribute[] attributes = clazz.getAttributes();
-        final Record recordAttribute = (Record)findAttribute("Record",clazz)[0];
-        assertEquals(4,attributes.length);
-        assertEquals("SourceFile: SimpleRecord.java",attributes[0].toString());
+        final Record recordAttribute = (Record) findAttribute("Record",clazz)[0];
+        assertEquals(4, attributes.length);
+        assertEquals("SourceFile: SimpleRecord.java", attributes[0].toString());
         assertEquals("Record(2):\n"
                 + "  RecordComponentInfo(aNumber,I,0):\n"
                 + "  RecordComponentInfo(aString,Ljava/lang/String;,1):\n"
@@ -68,10 +69,10 @@ public class RecordTestCase extends AbstractTestCase {
                 + "  @Ljavax/annotation/Nonnull;"
                 ,recordAttribute.toString());
         final RecordComponentInfo firstComponent = recordAttribute.getComponents()[0];
-        assertEquals(5,firstComponent.getIndex());
-        assertEquals(6,firstComponent.getDescriptorIndex());
-        assertEquals(0,firstComponent.getAttributes().length);
-        assertEquals("RecordComponentInfo(aNumber,I,0):",firstComponent.toString());
+        assertEquals(5, firstComponent.getIndex());
+        assertEquals(6, firstComponent.getDescriptorIndex());
+        assertEquals(0, firstComponent.getAttributes().length);
+        assertEquals("RecordComponentInfo(aNumber,I,0):", firstComponent.toString());
     }
 
 
@@ -100,7 +101,7 @@ public class RecordTestCase extends AbstractTestCase {
     public void recordsCanBeCopied() throws ClassNotFoundException, IOException {
         final JavaClass clazz = new ClassParser("src/test/resources/record/SimpleRecord.class").parse();
         final JavaClass copyClazz = clazz.copy();
-        assertEquals(clazz.toString(),copyClazz.toString(),"both records should have the same value");
+        assertEquals(clazz.toString(), copyClazz.toString(), "both records should have the same value");
     }
 
     /**
@@ -112,8 +113,8 @@ public class RecordTestCase extends AbstractTestCase {
         final CountingVisitor countVisitor = new CountingVisitor();
         final DescendingVisitor desendingVisitor = new DescendingVisitor(clazz, countVisitor);
         desendingVisitor.visit();
-        assertEquals(1,countVisitor.recordCount,"should count one record");
-        assertEquals(2,countVisitor.recordComponentCount,"should count two record components");
+        assertEquals(1,countVisitor.recordCount, "should count one record");
+        assertEquals(2,countVisitor.recordComponentCount, "should count two record components");
     }
 
 }
