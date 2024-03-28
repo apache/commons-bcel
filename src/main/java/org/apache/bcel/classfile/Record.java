@@ -25,7 +25,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.util.Args;
 
 /**
- * This class is derived from <em>Attribute</em> and records the classes and
+ * Extends {@link Attribute} and records the classes and
  * interfaces that are authorized to claim membership in the nest hosted by the
  * current class or interface. There may be at most one Record attribute in a
  * ClassFile structure.
@@ -64,7 +64,7 @@ public final class Record extends Attribute {
     }
 
     /**
-     * Construct elements using its components
+     * Constructs a new instance using components.
      *
      * @param nameIndex    Index in constant pool
      * @param length       Content length in bytes
@@ -80,7 +80,7 @@ public final class Record extends Attribute {
 
     /**
      * Called by objects that are traversing the nodes of the tree implicitly
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
+     * defined by the contents of a Java class. For example, the hierarchy of methods,
      * fields, attributes, etc. spawns a tree of objects.
      *
      * @param v Visitor object
@@ -91,9 +91,9 @@ public final class Record extends Attribute {
     }
 
     /**
-     * Method used to copy a Record
+     * Copies this instance and its components.
      *
-     * @return deep copy of this record attribute
+     * @return a deep copy of this instance and its components.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {
@@ -106,9 +106,9 @@ public final class Record extends Attribute {
     }
 
     /**
-     * Dump a Record attribute into a file stream in binary format.
+     * Dumps this instance into a file stream in binary format.
      *
-     * @param file Output file stream
+     * @param file output stream.
      * @throws IOException if an I/O error occurs.
      */
     @Override
@@ -121,7 +121,7 @@ public final class Record extends Attribute {
     }
 
     /**
-     * Getter for all the record components
+     * Gets all the record components.
      *
      * @return array of Record Component Info elements.
      */
@@ -130,7 +130,9 @@ public final class Record extends Attribute {
     }
 
     /**
-     * @return String representation, i.e., a list of classes.
+     * Converts this instance to a String suitable for debugging.
+     *
+     * @return String a String suitable for debugging.
      */
     @Override
     public String toString() {
