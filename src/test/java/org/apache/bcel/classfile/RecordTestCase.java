@@ -32,8 +32,9 @@ import org.junit.jupiter.api.Test;
 public class RecordTestCase extends AbstractTestCase {
 
     /**
-     * An record type, once compiled, should result in a class file that is marked such that we can determine from the
-     * access flags (through BCEL) that it is in fact a record
+     * A record type, once compiled, should result in a class file that is
+     * marked such that we can determine from the access flags
+     * (through BCEL) that it is in fact a record
      * @throws IOException
      * @throws ClassFormatException
      */
@@ -46,7 +47,7 @@ public class RecordTestCase extends AbstractTestCase {
     }
 
     /**
-     * An simple record with two simple fields, an integer and a String field, should
+     * A simple record with two simple fields, an integer and a String field, should
      * show its content in its string representation.
      *
      * @throws ClassNotFoundException
@@ -66,7 +67,11 @@ public class RecordTestCase extends AbstractTestCase {
                 + "  RuntimeVisibleAnnotations:\n"
                 + "  @Ljavax/annotation/Nonnull;"
                 ,recordAttribute.toString());
-        assertEquals("RecordComponentInfo(aNumber,I,0):",recordAttribute.getComponents()[0].toString());
+        final RecordComponentInfo firstComponent = recordAttribute.getComponents()[0];
+        assertEquals(5,firstComponent.getIndex());
+        assertEquals(6,firstComponent.getDescriptorIndex());
+        assertEquals(0,firstComponent.getAttributes().length);
+        assertEquals("RecordComponentInfo(aNumber,I,0):",firstComponent.toString());
     }
 
 
@@ -88,12 +93,19 @@ public class RecordTestCase extends AbstractTestCase {
         tfile.deleteOnExit();
     }
 
+    /**
+     * Check that we can copy a attribute correctly.
+     */
     @Test
     public void recordsCanBeCopied() throws ClassNotFoundException, IOException {
         final JavaClass clazz = new ClassParser("src/test/resources/record/SimpleRecord.class").parse();
         final JavaClass copyClazz = clazz.copy();
         assertEquals(clazz.toString(),copyClazz.toString(),"both records should have the same value");
     }
+
+    /**
+     * Check that a record can be visited by our visitors
+     */
     @Test
     public void recordsCanBeVisited() throws ClassNotFoundException, IOException {
         final JavaClass clazz = new ClassParser("src/test/resources/record/SimpleRecord.class").parse();

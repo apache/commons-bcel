@@ -208,6 +208,8 @@ public interface Visitor {
     }
 
     /**
+     * Visits a {@link Record} object.
+     * @param obj Record to visit
      * @since 6.9.0
      */
     default void visitRecord(final Record obj) {
@@ -251,8 +253,8 @@ public interface Visitor {
      * @param obj record component to visit
      * @since 6.9.0
      */
-    default void visitRecordComponent(RecordComponentInfo obj) {
-
+    default void visitRecordComponent(RecordComponentInfo record) {
+     // noop
     }
 
 }

@@ -91,6 +91,8 @@ public final class Record extends Attribute {
     }
 
     /**
+     * Method used to copy a Record
+     *
      * @return deep copy of this record attribute
      */
     @Override
@@ -104,7 +106,7 @@ public final class Record extends Attribute {
     }
 
     /**
-     * Dump RecordComponentInfo attribute to file stream in binary format.
+     * Dump a Record attribute into a file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.
@@ -119,6 +121,8 @@ public final class Record extends Attribute {
     }
 
     /**
+     * Getter for all the record components
+     *
      * @return array of Record Component Info elements.
      */
     public RecordComponentInfo[] getComponents() {
