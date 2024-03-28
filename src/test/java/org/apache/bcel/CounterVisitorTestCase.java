@@ -217,4 +217,9 @@ public class CounterVisitorTestCase extends AbstractCounterVisitorTestCase {
     public void testUnknownCount() {
         assertEquals(0, getVisitor().unknownCount, "unknownCount");
     }
+
+    @Test
+    public void testRecordCount() {
+        assertEquals(0, getVisitor().recordCount, "recordCount");
+    }
 }
