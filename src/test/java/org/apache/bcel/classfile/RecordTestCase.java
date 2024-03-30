@@ -42,7 +42,7 @@ public class RecordTestCase extends AbstractTestCase {
     @Test
     public void testRecordClassSaysItIs() throws ClassNotFoundException, ClassFormatException, IOException {
         final JavaClass clazz = new ClassParser("src/test/resources/record/SimpleRecord.class").parse();
-        assertTrue(clazz.isRecord(), "Expected SimpleEnum class to say it was a record - but it didn't !");
+        assertTrue(clazz.isRecord(), "Expected SimpleRecord class to say it was a record - but it didn't !");
         final JavaClass simpleClazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleClass");
         assertFalse(simpleClazz.isRecord(), "Expected SimpleClass class to say it was not a record - but it didn't !");
     }
