@@ -38,9 +38,9 @@ public class MethodParameters extends Attribute implements Iterable<MethodParame
     /**
      * Empty array.
      */
-    private static final MethodParameter[] EMPTY_METHOD_PARAMETER_ARRAY = {};
+    private static final MethodParameter[] EMPTY_ARRAY = {};
 
-    private MethodParameter[] parameters = EMPTY_METHOD_PARAMETER_ARRAY;
+    private MethodParameter[] parameters = EMPTY_ARRAY;
 
     MethodParameters(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
         super(Const.ATTR_METHOD_PARAMETERS, nameIndex, length, constantPool);
