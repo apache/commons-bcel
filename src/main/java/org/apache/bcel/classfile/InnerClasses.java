@@ -37,7 +37,7 @@ public final class InnerClasses extends Attribute implements Iterable<InnerClass
     /**
      * Empty array.
      */
-    private static final InnerClass[] EMPTY_INNER_CLASSE_ARRAY = {};
+    private static final InnerClass[] EMPTY_ARRAY = {};
 
     private InnerClass[] innerClasses;
 
@@ -77,7 +77,7 @@ public final class InnerClasses extends Attribute implements Iterable<InnerClass
      */
     public InnerClasses(final int nameIndex, final int length, final InnerClass[] innerClasses, final ConstantPool constantPool) {
         super(Const.ATTR_INNER_CLASSES, nameIndex, length, constantPool);
-        this.innerClasses = innerClasses != null ? innerClasses : EMPTY_INNER_CLASSE_ARRAY;
+        this.innerClasses = innerClasses != null ? innerClasses : EMPTY_ARRAY;
         Args.requireU2(this.innerClasses.length, "innerClasses.length");
     }
 
@@ -136,7 +136,7 @@ public final class InnerClasses extends Attribute implements Iterable<InnerClass
      * @param innerClasses the array of inner classes
      */
     public void setInnerClasses(final InnerClass[] innerClasses) {
-        this.innerClasses = innerClasses != null ? innerClasses : EMPTY_INNER_CLASSE_ARRAY;
+        this.innerClasses = innerClasses != null ? innerClasses : EMPTY_ARRAY;
     }
 
     /**
