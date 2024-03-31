@@ -127,8 +127,8 @@ public final class Code extends Attribute {
         super(Const.ATTR_CODE, nameIndex, length, constantPool);
         this.maxStack = Args.requireU2(maxStack, "maxStack");
         this.maxLocals = Args.requireU2(maxLocals, "maxLocals");
-        this.code = code != null ? code : ArrayUtils.EMPTY_BYTE_ARRAY;
-        this.exceptionTable = exceptionTable != null ? exceptionTable : CodeException.EMPTY_CODE_EXCEPTION_ARRAY;
+        this.code = ArrayUtils.nullToEmpty(code);
+        this.exceptionTable = ArrayUtils.nullToEmpty(exceptionTable, CodeException[].class);
         Args.requireU2(this.exceptionTable.length, "exceptionTable.length");
         this.attributes = attributes != null ? attributes : EMPTY_ARRAY;
         super.setLength(calculateLength()); // Adjust length
@@ -299,7 +299,7 @@ public final class Code extends Attribute {
      * @param code byte code
      */
     public void setCode(final byte[] code) {
-        this.code = code != null ? code : ArrayUtils.EMPTY_BYTE_ARRAY;
+        this.code = ArrayUtils.nullToEmpty(code);
         super.setLength(calculateLength()); // Adjust length
     }
 

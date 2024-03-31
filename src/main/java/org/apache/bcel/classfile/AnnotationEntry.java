@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.stream.Streams;
+
 /**
  * Represents one annotation in the annotation table
  *
@@ -34,7 +36,7 @@ public class AnnotationEntry implements Node {
 
     public static AnnotationEntry[] createAnnotationEntries(final Attribute[] attrs) {
         // Find attributes that contain annotation data
-        return Stream.of(attrs).filter(Annotations.class::isInstance).flatMap(e -> Stream.of(((Annotations) e).getAnnotationEntries()))
+        return Streams.of(attrs).filter(Annotations.class::isInstance).flatMap(e -> Stream.of(((Annotations) e).getAnnotationEntries()))
             .toArray(AnnotationEntry[]::new);
     }
 

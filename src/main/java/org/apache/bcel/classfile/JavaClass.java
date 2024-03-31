@@ -182,9 +182,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     public JavaClass(final int classNameIndex, final int superclassNameIndex, final String fileName, final int major, final int minor, final int accessFlags,
         final ConstantPool constantPool, int[] interfaces, Field[] fields, Method[] methods, Attribute[] attributes, final byte source) {
         super(accessFlags);
-        if (interfaces == null) {
-            interfaces = ArrayUtils.EMPTY_INT_ARRAY;
-        }
+        interfaces = ArrayUtils.nullToEmpty(interfaces);
         if (attributes == null) {
             attributes = Attribute.EMPTY_ARRAY;
         }

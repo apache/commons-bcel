@@ -82,7 +82,7 @@ public final class ExceptionTable extends Attribute {
      */
     public ExceptionTable(final int nameIndex, final int length, final int[] exceptionIndexTable, final ConstantPool constantPool) {
         super(Const.ATTR_EXCEPTIONS, nameIndex, length, constantPool);
-        this.exceptionIndexTable = exceptionIndexTable != null ? exceptionIndexTable : ArrayUtils.EMPTY_INT_ARRAY;
+        this.exceptionIndexTable = ArrayUtils.nullToEmpty(exceptionIndexTable);
         Args.requireU2(this.exceptionIndexTable.length, "exceptionIndexTable.length");
     }
 
@@ -153,7 +153,7 @@ public final class ExceptionTable extends Attribute {
      *        length.
      */
     public void setExceptionIndexTable(final int[] exceptionIndexTable) {
-        this.exceptionIndexTable = exceptionIndexTable != null ? exceptionIndexTable : ArrayUtils.EMPTY_INT_ARRAY;
+        this.exceptionIndexTable = ArrayUtils.nullToEmpty(exceptionIndexTable);
     }
 
     /**

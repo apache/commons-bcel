@@ -63,7 +63,7 @@ public final class NestMembers extends Attribute {
      */
     public NestMembers(final int nameIndex, final int length, final int[] classes, final ConstantPool constantPool) {
         super(Const.ATTR_NEST_MEMBERS, nameIndex, length, constantPool);
-        this.classes = classes != null ? classes : ArrayUtils.EMPTY_INT_ARRAY;
+        this.classes = ArrayUtils.nullToEmpty(classes);
         Args.requireU2(this.classes.length, "classes.length");
     }
 
@@ -143,7 +143,7 @@ public final class NestMembers extends Attribute {
      * @param classes the list of class indexes Also redefines number_of_classes according to table length.
      */
     public void setClasses(final int[] classes) {
-        this.classes = classes != null ? classes : ArrayUtils.EMPTY_INT_ARRAY;
+        this.classes = ArrayUtils.nullToEmpty(classes);
     }
 
     /**

@@ -31,6 +31,7 @@ import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
+import org.apache.commons.lang3.stream.Streams;
 
 /**
  * Read class file(s) and display its contents. The command line usage is:
@@ -193,13 +194,13 @@ public class ListClass {
      * Dump the disassembled code of all methods in the class.
      */
     public static void printCode(final Method[] methods, final boolean verbose) {
-        for (final Method method : methods) {
+        Streams.of(methods).forEach(method -> {
             System.out.println(method);
             final Code code = method.getCode();
             if (code != null) {
                 System.out.println(code.toString(verbose));
             }
-        }
+        });
     }
 
     boolean code;
