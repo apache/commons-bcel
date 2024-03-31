@@ -307,7 +307,7 @@ public final class Code extends Attribute {
      * @param exceptionTable exception table
      */
     public void setExceptionTable(final CodeException[] exceptionTable) {
-        this.exceptionTable = exceptionTable != null ? exceptionTable : CodeException.EMPTY_CODE_EXCEPTION_ARRAY;
+        this.exceptionTable = exceptionTable != null ? exceptionTable : CodeException.EMPTY_ARRAY;
         super.setLength(calculateLength()); // Adjust length
     }
 
