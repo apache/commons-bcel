@@ -51,11 +51,6 @@ public final class Field extends FieldOrMethod {
     };
 
     /**
-     * Empty array.
-     */
-    static final Field[] EMPTY_FIELD_ARRAY = {};
-
-    /**
      * @return Comparison strategy object.
      */
     public static BCELComparator<Field> getComparator() {

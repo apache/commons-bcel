@@ -187,7 +187,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
             attributes = Attribute.EMPTY_ARRAY;
         }
         if (fields == null) {
-            fields = Field.EMPTY_FIELD_ARRAY;
+            fields = Field.EMPTY_ARRAY;
         }
         if (methods == null) {
             methods = Method.EMPTY_METHOD_ARRAY;
