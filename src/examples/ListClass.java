@@ -195,7 +195,6 @@ public class ListClass {
     public static void printCode(final Method[] methods, final boolean verbose) {
         for (final Method method : methods) {
             System.out.println(method);
-
             final Code code = method.getCode();
             if (code != null) {
                 System.out.println(code.toString(verbose));
@@ -207,13 +206,9 @@ public class ListClass {
     boolean constants;
     boolean verbose;
     boolean classDep;
-
     boolean noContents;
-
     boolean recurse;
-
     Map<String, String> listedClasses;
-
     List<String> excludeName;
 
     public ListClass(final boolean code, final boolean constants, final boolean verbose, final boolean classDep, final boolean noContents,
