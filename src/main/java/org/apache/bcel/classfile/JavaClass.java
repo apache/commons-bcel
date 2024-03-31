@@ -280,9 +280,6 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
                     }
                 });
             }
-            if (attribute instanceof Record) {
-                isRecord = true;
-            }
         }
         this.computedNestedTypeStatus = true;
     }
@@ -931,6 +928,6 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
                 break;
             }
         }
-        this.computedRecord = false;
+        this.computedRecord = true;
     }
 }
