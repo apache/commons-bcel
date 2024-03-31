@@ -50,11 +50,6 @@ public final class Method extends FieldOrMethod {
     };
 
     /**
-     * Empty array.
-     */
-    static final Method[] EMPTY_METHOD_ARRAY = {};
-
-    /**
      * @return Comparison strategy object.
      */
     public static BCELComparator<Method> getComparator() {
