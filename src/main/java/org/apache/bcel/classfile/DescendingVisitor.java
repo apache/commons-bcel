@@ -20,6 +20,8 @@ import java.util.Objects;
 import java.util.Stack;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.stream.Streams;
+
 /**
  * Traverses a JavaClass with another Visitor object 'piggy-backed' that is applied to all components of a JavaClass
  * object. I.e. this class supplies the traversal strategy, other classes can make use of it.
@@ -41,7 +43,7 @@ public class DescendingVisitor implements Visitor {
     }
 
     private <E extends Node> void accept(final E[] node) {
-        Stream.of(node).forEach(e -> e.accept(this));
+        Streams.of(node).forEach(e -> e.accept(this));
     }
 
     /**
