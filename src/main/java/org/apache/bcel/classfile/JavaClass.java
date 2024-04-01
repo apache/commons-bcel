@@ -798,7 +798,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param interfaces .
      */
     public void setInterfaces(final int[] interfaces) {
-        this.interfaces = interfaces;
+        this.interfaces = ArrayUtils.nullToEmpty(interfaces);
     }
 
     /**
