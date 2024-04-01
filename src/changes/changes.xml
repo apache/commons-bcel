@@ -97,7 +97,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException calling org.apache.bcel.generic.MethodGen.removeRuntimeAttributes(Attribute[]) with null.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException calling org.apache.bcel.generic.MethodGen.makeMutableVersion(AnnotationEntry[]) with null.</action>
       <!-- UPDATE -->
-      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.apache.commons:commons-parent from 66 to 67 #283.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.apache.commons:commons-parent from 66 to 69 #283, #297.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.jetbrains.kotlin:kotlin-stdlib from 1.9.22 to 1.9.23 #284.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump commons-io:commons-io from 2.15.1 to 2.16.0 #295.</action>
     </release>
