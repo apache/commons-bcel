@@ -24,6 +24,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Objects;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.AnnotationEntry;
@@ -894,11 +895,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     private List<AnnotationEntryGen> makeMutableVersion(final AnnotationEntry[] mutableArray) {
-        final List<AnnotationEntryGen> result = new ArrayList<>();
-        for (final AnnotationEntry element : mutableArray) {
-            result.add(new AnnotationEntryGen(element, getConstantPool(), false));
-        }
-        return result;
+        return Streams.of(mutableArray).map(ae -> new AnnotationEntryGen(ae, getConstantPool(), false)).collect(Collectors.toList());
     }
 
     /**
