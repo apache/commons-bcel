@@ -957,7 +957,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * @see MethodGen
      */
     public void redirectExceptionHandlers(final CodeExceptionGen[] exceptions, final InstructionHandle oldTarget, final InstructionHandle newTarget) {
-        for (final CodeExceptionGen exception : exceptions) {
+        Streams.of(exceptions).forEach(exception -> {
             if (exception.getStartPC() == oldTarget) {
                 exception.setStartPC(newTarget);
             }
@@ -967,7 +967,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
             if (exception.getHandlerPC() == oldTarget) {
                 exception.setHandlerPC(newTarget);
             }
-        }
+        });
     }
 
     /**
