@@ -60,6 +60,8 @@ import org.apache.bcel.util.Args;
  */
 public class LocalVariableTypeTable extends Attribute implements Iterable<LocalVariable> {
 
+    private static final LocalVariable[] EMPTY_ARRAY = {};
+
     private LocalVariable[] localVariableTypeTable; // variables
 
     LocalVariableTypeTable(final int nameIdx, final int len, final DataInput input, final ConstantPool cpool) throws IOException {
@@ -130,7 +132,7 @@ public class LocalVariableTypeTable extends Attribute implements Iterable<LocalV
     }
 
     public final void setLocalVariableTable(final LocalVariable[] localVariableTable) {
-        this.localVariableTypeTable = localVariableTable;
+        this.localVariableTypeTable = localVariableTable != null ? localVariableTable : EMPTY_ARRAY;
     }
 
     /**
