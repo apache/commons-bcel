@@ -29,6 +29,8 @@ import java.util.stream.Stream;
  */
 public abstract class ParameterAnnotations extends Attribute implements Iterable<ParameterAnnotationEntry> {
 
+    private static final ParameterAnnotationEntry[] EMPTY_ARRAY = {};
+    
     /** Table of parameter annotations */
     private ParameterAnnotationEntry[] parameterAnnotationTable;
 
@@ -119,6 +121,6 @@ public abstract class ParameterAnnotations extends Attribute implements Iterable
      * @param parameterAnnotationTable the entries to set in this parameter annotation
      */
     public final void setParameterAnnotationTable(final ParameterAnnotationEntry[] parameterAnnotationTable) {
-        this.parameterAnnotationTable = parameterAnnotationTable;
+        this.parameterAnnotationTable = parameterAnnotationTable != null ? parameterAnnotationTable : EMPTY_ARRAY;
     }
 }
