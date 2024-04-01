@@ -95,7 +95,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     private List<ClassObserver> observers;
 
     /**
-     * Initialize with existing class.
+     * Constructs a new instance from an existing class.
      *
      * @param clazz JavaClass object (e.g. read from file)
      */
@@ -112,16 +112,26 @@ public class ClassGen extends AccessFlags implements Cloneable {
         final Attribute[] attributes = clazz.getAttributes();
         // J5TODO: Could make unpacking lazy, done on first reference
         final AnnotationEntryGen[] annotations = unpackAnnotations(attributes);
-        Collections.addAll(interfaceList, clazz.getInterfaceNames());
-        for (final Attribute attribute : attributes) {
-            if (!(attribute instanceof Annotations)) {
-                addAttribute(attribute);
+        final String[] interfaceNames = clazz.getInterfaceNames();
+        if (interfaceNames != null) {
+            Collections.addAll(interfaceList, interfaceNames);
+        }
+        if (attributes != null) {
+            for (final Attribute attribute : attributes) {
+                if (!(attribute instanceof Annotations)) {
+                    addAttribute(attribute);
+                }
             }
         }
         Collections.addAll(annotationList, annotations);
-        Collections.addAll(methodList, clazz.getMethods());
-        Collections.addAll(fieldList, clazz.getFields());
-    }
+        final Method[] methods = clazz.getMethods();
+        if (methods != null) {
+            Collections.addAll(methodList, methods);
+        }
+        final Field[] fields = clazz.getFields();
+        if (fields != null) {
+            Collections.addAll(fieldList, fields);
+        }}
 
     /**
      * Convenience constructor to set up some important values initially.
