@@ -749,7 +749,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param attributes .
      */
     public void setAttributes(final Attribute[] attributes) {
-        this.attributes = attributes;
+        this.attributes = attributes != null ? attributes : Attribute.EMPTY_ARRAY;
     }
 
     /**
@@ -777,7 +777,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param fields .
      */
     public void setFields(final Field[] fields) {
-        this.fields = fields;
+        this.fields = fields != null ? fields : Field.EMPTY_ARRAY;
     }
 
     /**
@@ -791,7 +791,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param interfaceNames .
      */
     public void setInterfaceNames(final String[] interfaceNames) {
-        this.interfaceNames = interfaceNames;
+        this.interfaceNames = ArrayUtils.nullToEmpty(interfaceNames);
     }
 
     /**
