@@ -21,7 +21,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.AccessFlags;
@@ -31,12 +30,12 @@ import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
 import org.apache.bcel.classfile.SourceFile;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.BCELComparator;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.stream.Streams;
 
 /**
  * Template class for building up a java class. May be initialized with an existing Java class (file).

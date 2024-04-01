@@ -33,6 +33,8 @@ public abstract class ParameterAnnotations extends Attribute implements Iterable
     private ParameterAnnotationEntry[] parameterAnnotationTable;
 
     /**
+     * Constructs a new instance.
+     *
      * @param parameterAnnotationType the subclass type of the parameter annotation
      * @param nameIndex Index pointing to the name <em>Code</em>
      * @param length Content length in bytes
@@ -50,6 +52,8 @@ public abstract class ParameterAnnotations extends Attribute implements Iterable
     }
 
     /**
+     * Constructs a new instance.
+     *
      * @param parameterAnnotationType the subclass type of the parameter annotation
      * @param nameIndex Index pointing to the name <em>Code</em>
      * @param length Content length in bytes
