@@ -30,6 +30,8 @@ import org.apache.bcel.util.BCELComparator;
  */
 public abstract class Constant implements Cloneable, Node {
 
+    static final Constant[] EMPTY_ARRAY = {};
+
     private static BCELComparator<Constant> bcelComparator = new BCELComparator<Constant>() {
 
         @Override
