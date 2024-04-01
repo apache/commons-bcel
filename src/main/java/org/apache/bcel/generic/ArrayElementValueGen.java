@@ -50,14 +50,14 @@ public class ArrayElementValueGen extends ElementValueGen {
         evalues = new ArrayList<>();
     }
 
-    public ArrayElementValueGen(final int type, final ElementValue[] datums, final ConstantPoolGen cpool) {
+    public ArrayElementValueGen(final int type, final ElementValue[] elementValues, final ConstantPoolGen cpool) {
         super(type, cpool);
         if (type != ARRAY) {
             throw new IllegalArgumentException("Only element values of type array can be built with this ctor - type specified: " + type);
         }
         this.evalues = new ArrayList<>();
-        for (final ElementValue datum : datums) {
-            evalues.add(ElementValueGen.copy(datum, cpool, true));
+        for (final ElementValue elementValue : elementValues) {
+            evalues.add(ElementValueGen.copy(elementValue, cpool, true));
         }
     }
 
