@@ -83,7 +83,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.ConstantPool.setConstantPool(Constant[]) with null.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.FieldOrMethod.setAttributes(Attribute[]) with null.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.Annotations.setAnnotationTable(AnnotationEntry[]) with null.</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after callingorg.apache.bcel.classfile.ArrayElementValue.ArrayElementValue(int, ElementValue[], ConstantPool) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.ArrayElementValue.ArrayElementValue(int, ElementValue[], ConstantPool) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.BootstrapMethod.BootstrapMethod(int, int[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.BootstrapMethod.setBootstrapArguments(int[]) with null.</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.apache.commons:commons-parent from 66 to 67 #283.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.jetbrains.kotlin:kotlin-stdlib from 1.9.22 to 1.9.23 #284.</action>

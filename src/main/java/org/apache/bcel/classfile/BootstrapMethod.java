@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.apache.bcel.Const;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * This class represents a bootstrap method attribute, i.e., the bootstrap method ref, the number of bootstrap arguments
@@ -74,7 +75,7 @@ public class BootstrapMethod implements Cloneable {
      */
     public BootstrapMethod(final int bootstrapMethodRef, final int[] bootstrapArguments) {
         this.bootstrapMethodRef = bootstrapMethodRef;
-        this.bootstrapArguments = bootstrapArguments;
+        setBootstrapArguments(bootstrapArguments);
     }
 
     /**
@@ -128,7 +129,7 @@ public class BootstrapMethod implements Cloneable {
      * @param bootstrapArguments int[] indices into constant_pool of CONSTANT_[type]_info
      */
     public void setBootstrapArguments(final int[] bootstrapArguments) {
-        this.bootstrapArguments = bootstrapArguments;
+        this.bootstrapArguments = ArrayUtils.nullToEmpty(bootstrapArguments);
     }
 
     /**
