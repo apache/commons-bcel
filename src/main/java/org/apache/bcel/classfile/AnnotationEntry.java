@@ -34,10 +34,10 @@ public class AnnotationEntry implements Node {
 
     public static final AnnotationEntry[] EMPTY_ARRAY = {};
 
-    public static AnnotationEntry[] createAnnotationEntries(final Attribute[] attrs) {
+    public static AnnotationEntry[] createAnnotationEntries(final Attribute[] attributes) {
         // Find attributes that contain annotation data
-        return Streams.of(attrs).filter(Annotations.class::isInstance).flatMap(e -> Stream.of(((Annotations) e).getAnnotationEntries()))
-            .toArray(AnnotationEntry[]::new);
+        return Streams.of(attributes).filter(Annotations.class::isInstance).flatMap(e -> Stream.of(((Annotations) e).getAnnotationEntries()))
+                .toArray(AnnotationEntry[]::new);
     }
 
     /**
