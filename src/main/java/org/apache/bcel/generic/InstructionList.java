@@ -31,6 +31,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.util.ByteSequence;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.stream.Streams;
 
 /**
  * This class is a container for a list of <a href="Instruction.html">Instruction</a> objects. Instructions can be
@@ -978,16 +979,14 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * @see MethodGen
      */
     public void redirectLocalVariables(final LocalVariableGen[] lg, final InstructionHandle oldTarget, final InstructionHandle newTarget) {
-        for (final LocalVariableGen element : lg) {
-            final InstructionHandle start = element.getStart();
-            final InstructionHandle end = element.getEnd();
-            if (start == oldTarget) {
+        Streams.of(lg).forEach(element -> {
+            if (element.getStart() == oldTarget) {
                 element.setStart(newTarget);
             }
-            if (end == oldTarget) {
+            if (element.getEnd() == oldTarget) {
                 element.setEnd(newTarget);
             }
-        }
+        });
     }
 
     /**
