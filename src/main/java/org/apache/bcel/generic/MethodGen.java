@@ -1034,7 +1034,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     public void setArgumentNames(final String[] argNames) {
-        this.argNames = argNames;
+        this.argNames = ArrayUtils.nullToEmpty(argNames);
     }
 
     public void setArgumentType(final int i, final Type type) {
