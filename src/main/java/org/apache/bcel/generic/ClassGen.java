@@ -131,7 +131,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
         final Field[] fields = clazz.getFields();
         if (fields != null) {
             Collections.addAll(fieldList, fields);
-        }}
+        }
+    }
 
     /**
      * Convenience constructor to set up some important values initially.

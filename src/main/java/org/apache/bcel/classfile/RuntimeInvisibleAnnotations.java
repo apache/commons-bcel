@@ -44,7 +44,7 @@ public class RuntimeInvisibleAnnotations extends Annotations {
 
     /**
      * Creates a deep copy of this attribute.
-     * 
+     *
      * @return deep copy of this attribute.
      */
     @Override
