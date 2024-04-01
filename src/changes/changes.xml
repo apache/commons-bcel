@@ -74,15 +74,16 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.ParameterAnnotations.setParameterAnnotationTable(ParameterAnnotationEntry[]) with null.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.LocalVariableTypeTable.setLocalVariableTable(LocalVariable[]) with null.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.LocalVariableTable.setLocalVariableTable(LocalVariable[]) with null.</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.LineNumberTable.setLineNumberTable(LineNumber[]).</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setMethods(Method[]).</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setInterfaces(int[]).</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setInterfaceNames(String[]).</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setFields(Field[]).</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setAttributes(Attribute[]).</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.ConstantPool.setConstantPool(Constant[]).</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.FieldOrMethod.setAttributes(Attribute[]).</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.Annotations.setAnnotationTable(AnnotationEntry[]).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.LineNumberTable.setLineNumberTable(LineNumber[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setMethods(Method[] with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setInterfaces(int[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setInterfaceNames(String[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setFields(Field[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setAttributes(Attribute[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.ConstantPool.setConstantPool(Constant[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.FieldOrMethod.setAttributes(Attribute[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.Annotations.setAnnotationTable(AnnotationEntry[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after callingorg.apache.bcel.classfile.ArrayElementValue.ArrayElementValue(int, ElementValue[], ConstantPool) with null.</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.apache.commons:commons-parent from 66 to 67 #283.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.jetbrains.kotlin:kotlin-stdlib from 1.9.22 to 1.9.23 #284.</action>
