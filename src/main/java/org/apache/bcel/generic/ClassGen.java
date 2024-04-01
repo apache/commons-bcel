@@ -486,7 +486,9 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     public void setMethods(final Method[] methods) {
         methodList.clear();
-        Collections.addAll(methodList, methods);
+        if (methods != null) {
+            Collections.addAll(methodList, methods);
+        }
     }
 
     /**
