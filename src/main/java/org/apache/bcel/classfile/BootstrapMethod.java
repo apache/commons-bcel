@@ -35,6 +35,8 @@ import org.apache.commons.lang3.ArrayUtils;
  */
 public class BootstrapMethod implements Cloneable {
 
+    static final BootstrapMethod[] EMPTY_ARRAY = {};
+
     /** Index of the CONSTANT_MethodHandle_info structure in the constant_pool table */
     private int bootstrapMethodRef;
 
