@@ -83,7 +83,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @param defaultTarget default instruction target
      */
     Select(final short opcode, final int[] match, final InstructionHandle[] targets, final InstructionHandle defaultTarget) {
-        // don't set default target before instuction is built
+        // don't set default target before instruction is built
         super(opcode, null);
         this.match = match;
         this.targets = targets;
