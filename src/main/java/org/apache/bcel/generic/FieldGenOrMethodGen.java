@@ -62,8 +62,10 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
         super(accessFlags);
     }
 
-    protected void addAll(final Attribute[] attrs) {
-        Collections.addAll(attributeList, attrs);
+    protected void addAll(final Attribute[] attributes) {
+        if (attributes != null) {
+            Collections.addAll(attributeList, attributes);
+        }
     }
 
     /**
