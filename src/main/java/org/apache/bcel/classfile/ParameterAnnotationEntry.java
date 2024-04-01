@@ -32,10 +32,13 @@ public class ParameterAnnotationEntry implements Node {
 
     static final ParameterAnnotationEntry[] EMPTY_ARRAY = {};
 
-    public static ParameterAnnotationEntry[] createParameterAnnotationEntries(final Attribute[] attrs) {
+    public static ParameterAnnotationEntry[] createParameterAnnotationEntries(final Attribute[] attributes) {
+        if (attributes == null) {
+            return EMPTY_ARRAY;
+        }
         // Find attributes that contain parameter annotation data
-        final List<ParameterAnnotationEntry> accumulatedAnnotations = new ArrayList<>(attrs.length);
-        for (final Attribute attribute : attrs) {
+        final List<ParameterAnnotationEntry> accumulatedAnnotations = new ArrayList<>(attributes.length);
+        for (final Attribute attribute : attributes) {
             if (attribute instanceof ParameterAnnotations) {
                 final ParameterAnnotations runtimeAnnotations = (ParameterAnnotations) attribute;
                 final ParameterAnnotationEntry[] parameterAnnotationEntries = runtimeAnnotations.getParameterAnnotationEntries();
@@ -44,7 +47,7 @@ public class ParameterAnnotationEntry implements Node {
                 }
             }
         }
-        return accumulatedAnnotations.toArray(ParameterAnnotationEntry.EMPTY_ARRAY);
+        return accumulatedAnnotations.toArray(EMPTY_ARRAY);
     }
 
     private final AnnotationEntry[] annotationTable;
