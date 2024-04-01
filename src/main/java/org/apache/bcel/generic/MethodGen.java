@@ -1042,7 +1042,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     public void setArgumentTypes(final Type[] argTypes) {
-        this.argTypes = argTypes;
+        this.argTypes = argTypes != null ? argTypes : Type.NO_ARGS;
     }
 
     public void setClassName(final String className) { // TODO could be package-protected?
@@ -1059,10 +1059,8 @@ public class MethodGen extends FieldGenOrMethodGen {
     public void setMaxLocals() { // TODO could be package-protected? (some tests would need repackaging)
         if (il != null) {
             int max = isStatic() ? 0 : 1;
-            if (argTypes != null) {
-                for (final Type argType : argTypes) {
-                    max += argType.getSize();
-                }
+            for (final Type argType : argTypes) {
+                max += argType.getSize();
             }
             for (InstructionHandle ih = il.getStart(); ih != null; ih = ih.getNext()) {
                 final Instruction ins = ih.getInstruction();
