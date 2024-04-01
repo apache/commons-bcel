@@ -515,13 +515,15 @@ public class ClassGen extends AccessFlags implements Cloneable {
      */
     private AnnotationEntryGen[] unpackAnnotations(final Attribute[] attributes) {
         final List<AnnotationEntryGen> annotationGenObjs = new ArrayList<>();
-        for (final Attribute attr : attributes) {
-            if (attr instanceof RuntimeVisibleAnnotations) {
-                final RuntimeVisibleAnnotations rva = (RuntimeVisibleAnnotations) attr;
-                rva.forEach(a -> annotationGenObjs.add(new AnnotationEntryGen(a, getConstantPool(), false)));
-            } else if (attr instanceof RuntimeInvisibleAnnotations) {
-                final RuntimeInvisibleAnnotations ria = (RuntimeInvisibleAnnotations) attr;
-                ria.forEach(a -> annotationGenObjs.add(new AnnotationEntryGen(a, getConstantPool(), false)));
+        if (attributes != null) {
+            for (final Attribute attr : attributes) {
+                if (attr instanceof RuntimeVisibleAnnotations) {
+                    final RuntimeVisibleAnnotations rva = (RuntimeVisibleAnnotations) attr;
+                    rva.forEach(a -> annotationGenObjs.add(new AnnotationEntryGen(a, getConstantPool(), false)));
+                } else if (attr instanceof RuntimeInvisibleAnnotations) {
+                    final RuntimeInvisibleAnnotations ria = (RuntimeInvisibleAnnotations) attr;
+                    ria.forEach(a -> annotationGenObjs.add(new AnnotationEntryGen(a, getConstantPool(), false)));
+                }
             }
         }
         return annotationGenObjs.toArray(AnnotationEntryGen.EMPTY_ARRAY);
