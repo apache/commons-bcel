@@ -58,23 +58,25 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * @return target position's instruction handle if available
      */
     public static InstructionHandle findHandle(final InstructionHandle[] ihs, final int[] pos, final int count, final int target) {
-        int l = 0;
-        int r = count - 1;
-        /*
-         * Do a binary search since the pos array is orderd.
-         */
-        do {
-            final int i = l + r >>> 1;
-            final int j = pos[i];
-            if (j == target) {
-                return ihs[i];
-            }
-            if (target < j) {
-                r = i - 1;
-            } else {
-                l = i + 1;
-            }
-        } while (l <= r);
+        if (ihs != null && pos != null) {
+            int l = 0;
+            int r = count - 1;
+            /*
+             * Do a binary search since the pos array is orderd.
+             */
+            do {
+                final int i = l + r >>> 1;
+                final int j = pos[i];
+                if (j == target) {
+                    return ihs[i];
+                }
+                if (target < j) {
+                    r = i - 1;
+                } else {
+                    l = i + 1;
+                }
+            } while (l <= r);
+        }
         return null;
     }
 
