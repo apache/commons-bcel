@@ -812,7 +812,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param methods .
      */
     public void setMethods(final Method[] methods) {
-        this.methods = methods;
+        this.methods = methods != null ? methods : Method.EMPTY_ARRAY;
     }
 
     /**
