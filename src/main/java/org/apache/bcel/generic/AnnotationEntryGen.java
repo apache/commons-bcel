@@ -33,6 +33,7 @@ import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeInvisibleParameterAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleParameterAnnotations;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * @since 6.0
@@ -48,7 +49,7 @@ public class AnnotationEntryGen {
      * @param annotationEntryGens An array of AnnotationGen objects
      */
     static Attribute[] getAnnotationAttributes(final ConstantPoolGen cp, final AnnotationEntryGen[] annotationEntryGens) {
-        if (annotationEntryGens.length == 0) {
+        if (ArrayUtils.isEmpty(annotationEntryGens)) {
             return Attribute.EMPTY_ARRAY;
         }
 
