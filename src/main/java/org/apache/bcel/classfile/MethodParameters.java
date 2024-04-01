@@ -44,7 +44,6 @@ public class MethodParameters extends Attribute implements Iterable<MethodParame
 
     MethodParameters(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
         super(Const.ATTR_METHOD_PARAMETERS, nameIndex, length, constantPool);
-
         final int parameterCount = input.readUnsignedByte();
         parameters = new MethodParameter[parameterCount];
         for (int i = 0; i < parameterCount; i++) {
