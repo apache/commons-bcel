@@ -90,6 +90,6 @@ public class MethodParameters extends Attribute implements Iterable<MethodParame
     }
 
     public void setParameters(final MethodParameter[] parameters) {
-        this.parameters = parameters;
+        this.parameters = parameters != null ? parameters : EMPTY_ARRAY;
     }
 }
