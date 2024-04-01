@@ -147,10 +147,8 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         file.writeShort(name_index);
         file.writeShort(signature_index);
         file.writeShort(attributes_count);
-        if (attributes != null) {
-            for (final Attribute attribute : attributes) {
-                attribute.dump(file);
-            }
+        for (final Attribute attribute : attributes) {
+            attribute.dump(file);
         }
     }
 
@@ -233,8 +231,8 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @param attributes Collection of object attributes.
      */
     public final void setAttributes(final Attribute[] attributes) {
-        this.attributes = attributes;
-        this.attributes_count = attributes != null ? attributes.length : 0; // init deprecated field
+        this.attributes = attributes != null ? attributes : Attribute.EMPTY_ARRAY;
+        this.attributes_count = this.attributes.length; // init deprecated field
     }
 
     /**
