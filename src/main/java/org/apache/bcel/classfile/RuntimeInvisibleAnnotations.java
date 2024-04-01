@@ -23,13 +23,15 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * represents an annotation that is represented in the class file but is not provided to the JVM.
+ * An annotation that is represented in the class file but is not provided to the JVM.
  *
  * @since 6.0
  */
 public class RuntimeInvisibleAnnotations extends Annotations {
 
     /**
+     * Constructs a new instance.
+     *
      * @param nameIndex Index pointing to the name <em>Code</em>
      * @param length Content length in bytes
      * @param input Input stream
@@ -41,7 +43,9 @@ public class RuntimeInvisibleAnnotations extends Annotations {
     }
 
     /**
-     * @return deep copy of this attribute
+     * Creates a deep copy of this attribute.
+     * 
+     * @return deep copy of this attribute.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {
