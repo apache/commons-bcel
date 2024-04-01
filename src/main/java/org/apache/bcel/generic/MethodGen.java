@@ -44,6 +44,7 @@ import org.apache.bcel.classfile.RuntimeVisibleParameterAnnotations;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.BCELComparator;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.stream.Streams;
 
 /**
  * Template class for building up a method. This is done by defining exception handlers, adding thrown exceptions, local
@@ -1023,10 +1024,8 @@ public class MethodGen extends FieldGenOrMethodGen {
      *
      * @since 6.5.0
      */
-    public void removeRuntimeAttributes(final Attribute[] attrs) {
-        for (final Attribute attr : attrs) {
-            removeAttribute(attr);
-        }
+    public void removeRuntimeAttributes(final Attribute[] attributes) {
+        Streams.of(attributes).forEach(this::removeAttribute);
     }
 
     public void setArgumentName(final int i, final String name) {
