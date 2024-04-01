@@ -20,9 +20,11 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.bcel.classfile.ArrayElementValue;
 import org.apache.bcel.classfile.ElementValue;
+import org.apache.commons.lang3.stream.Streams;
 
 /**
  * @since 6.0
@@ -55,10 +57,7 @@ public class ArrayElementValueGen extends ElementValueGen {
         if (type != ARRAY) {
             throw new IllegalArgumentException("Only element values of type array can be built with this ctor - type specified: " + type);
         }
-        this.evalues = new ArrayList<>();
-        for (final ElementValue elementValue : elementValues) {
-            evalues.add(ElementValueGen.copy(elementValue, cpool, true));
-        }
+        this.evalues = Streams.of(elementValues).map(e -> ElementValueGen.copy(e, cpool, true)).collect(Collectors.toList());
     }
 
     public void addElement(final ElementValueGen gen) {
