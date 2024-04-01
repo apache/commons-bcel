@@ -186,7 +186,7 @@ public final class LineNumberTable extends Attribute implements Iterable<LineNum
      * @param lineNumberTable the line number entries for this table
      */
     public void setLineNumberTable(final LineNumber[] lineNumberTable) {
-        this.lineNumberTable = lineNumberTable != null ? lineNumberTable : EMPTY_ARRAY;
+        this.lineNumberTable = lineNumberTable != null ? lineNumberTable : LineNumber.EMPTY_ARRAY;
     }
 
     /**
