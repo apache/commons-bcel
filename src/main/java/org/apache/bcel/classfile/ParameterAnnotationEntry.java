@@ -38,7 +38,10 @@ public class ParameterAnnotationEntry implements Node {
         for (final Attribute attribute : attrs) {
             if (attribute instanceof ParameterAnnotations) {
                 final ParameterAnnotations runtimeAnnotations = (ParameterAnnotations) attribute;
-                Collections.addAll(accumulatedAnnotations, runtimeAnnotations.getParameterAnnotationEntries());
+                final ParameterAnnotationEntry[] parameterAnnotationEntries = runtimeAnnotations.getParameterAnnotationEntries();
+                if (parameterAnnotationEntries != null) {
+                    Collections.addAll(accumulatedAnnotations, parameterAnnotationEntries);
+                }
             }
         }
         return accumulatedAnnotations.toArray(ParameterAnnotationEntry.EMPTY_ARRAY);
