@@ -60,7 +60,6 @@ public class MethodParameters extends Attribute implements Iterable<MethodParame
     public Attribute copy(final ConstantPool constantPool) {
         final MethodParameters c = (MethodParameters) clone();
         c.parameters = new MethodParameter[parameters.length];
-
         Arrays.setAll(c.parameters, i -> parameters[i].copy());
         c.setConstantPool(constantPool);
         return c;
