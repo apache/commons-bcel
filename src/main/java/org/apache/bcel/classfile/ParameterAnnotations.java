@@ -30,7 +30,7 @@ import java.util.stream.Stream;
 public abstract class ParameterAnnotations extends Attribute implements Iterable<ParameterAnnotationEntry> {
 
     private static final ParameterAnnotationEntry[] EMPTY_ARRAY = {};
-    
+
     /** Table of parameter annotations */
     private ParameterAnnotationEntry[] parameterAnnotationTable;
 
