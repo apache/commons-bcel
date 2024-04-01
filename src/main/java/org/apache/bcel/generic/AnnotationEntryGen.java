@@ -24,6 +24,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.Attribute;
@@ -34,6 +35,7 @@ import org.apache.bcel.classfile.RuntimeInvisibleParameterAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleParameterAnnotations;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.stream.Streams;
 
 /**
  * @since 6.0
@@ -251,11 +253,7 @@ public class AnnotationEntryGen {
     }
 
     private List<ElementValuePairGen> copyValues(final ElementValuePair[] in, final ConstantPoolGen cpool, final boolean copyPoolEntries) {
-        final List<ElementValuePairGen> out = new ArrayList<>();
-        for (final ElementValuePair nvp : in) {
-            out.add(new ElementValuePairGen(nvp, cpool, copyPoolEntries));
-        }
-        return out;
+        return Streams.of(in).map(nvp -> new ElementValuePairGen(nvp, cpool, copyPoolEntries)).collect(Collectors.toList());
     }
 
     public void dump(final DataOutputStream dos) throws IOException {
