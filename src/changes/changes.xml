@@ -74,6 +74,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.ParameterAnnotations.setParameterAnnotationTable(ParameterAnnotationEntry[]) with null.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.LocalVariableTypeTable.setLocalVariableTable(LocalVariable[]) with null.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.LocalVariableTable.setLocalVariableTable(LocalVariable[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.LineNumberTable.setLineNumberTable(LineNumber[]).</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.apache.commons:commons-parent from 66 to 67 #283.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.jetbrains.kotlin:kotlin-stdlib from 1.9.22 to 1.9.23 #284.</action>
