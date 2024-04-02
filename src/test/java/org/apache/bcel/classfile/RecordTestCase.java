@@ -72,6 +72,7 @@ public class RecordTestCase extends AbstractTestCase {
         assertEquals(5, firstComponent.getIndex());
         assertEquals(6, firstComponent.getDescriptorIndex());
         assertEquals(0, firstComponent.getAttributes().length);
+        assertEquals(recordAttribute.getConstantPool(),firstComponent.getConstantPool());
         assertEquals("RecordComponentInfo(aNumber,I,0):", firstComponent.toString());
     }
 
