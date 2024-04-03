@@ -22,6 +22,7 @@ import org.apache.bcel.generic.ReferenceType;
 import org.apache.bcel.generic.Type;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
 import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
+import org.apache.commons.lang3.ArrayFill;
 
 /**
  * This class implements an array of local variables used for symbolic JVM simulation.
@@ -37,8 +38,7 @@ public class LocalVariables implements Cloneable {
      * @param localVariableCount local variable count.
      */
     public LocalVariables(final int localVariableCount) {
-        locals = new Type[localVariableCount];
-        Arrays.fill(locals, Type.UNKNOWN);
+        locals = ArrayFill.fill(new Type[localVariableCount], Type.UNKNOWN);
     }
 
     /**
