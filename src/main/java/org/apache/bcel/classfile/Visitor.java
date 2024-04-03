@@ -253,7 +253,7 @@ public interface Visitor {
     /**
      * Visits a {@link RecordComponentInfo} object.
      *
-     * @param obj record component to visit
+     * @param record component to visit
      * @since 6.9.0
      */
     default void visitRecordComponent(RecordComponentInfo record) {
