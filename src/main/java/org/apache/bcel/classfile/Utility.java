@@ -37,6 +37,7 @@ import java.util.zip.GZIPOutputStream;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.util.ByteSequence;
+import org.apache.commons.lang3.ArrayFill;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
@@ -715,8 +716,7 @@ public abstract class Utility {
      */
     public static String fillup(final String str, final int length, final boolean leftJustify, final char fill) {
         final int len = length - str.length();
-        final char[] buf = new char[Math.max(len, 0)];
-        Arrays.fill(buf, fill);
+        final char[] buf = ArrayFill.fill(new char[Math.max(len, 0)], fill);
         if (leftJustify) {
             return str + new String(buf);
         }
