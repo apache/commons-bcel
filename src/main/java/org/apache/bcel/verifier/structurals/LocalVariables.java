@@ -16,8 +16,6 @@
  */
 package org.apache.bcel.verifier.structurals;
 
-import java.util.Arrays;
-
 import org.apache.bcel.generic.ReferenceType;
 import org.apache.bcel.generic.Type;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
