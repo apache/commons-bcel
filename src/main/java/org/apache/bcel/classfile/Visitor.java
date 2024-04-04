@@ -208,6 +208,17 @@ public interface Visitor {
     }
 
     /**
+     * Visits a {@link Record} object.
+     *
+     * @param obj Record to visit
+     * @since 6.9.0
+     */
+    default void visitRecord(final Record obj) {
+        // empty
+    }
+
+
+    /**
      * @since 6.0
      */
     void visitParameterAnnotation(ParameterAnnotations obj);
@@ -227,6 +238,7 @@ public interface Visitor {
 
     /**
      * Visits a {@link StackMapType} object.
+     *
      * @param obj object to visit
      * @since 6.8.0
      */
@@ -237,4 +249,15 @@ public interface Visitor {
     void visitSynthetic(Synthetic obj);
 
     void visitUnknown(Unknown obj);
+
+    /**
+     * Visits a {@link RecordComponentInfo} object.
+     *
+     * @param record component to visit
+     * @since 6.9.0
+     */
+    default void visitRecordComponent(RecordComponentInfo record) {
+     // noop
+    }
+
 }
