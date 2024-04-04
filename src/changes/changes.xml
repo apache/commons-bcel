@@ -60,6 +60,9 @@ The <action> type attribute can be add,update,fix,remove.
    -->
   <body>
     <release version="6.8.3" date="YYYY-MM-DD" description="Maintenance and bug fix release.">
+      <!-- ADD -->
+      <action                  type="update" dev="ggregory" due-to="Pablo Nicolas Diaz, Gary Gregory, Paul King, Mark Roberts">Add Support for Java 16 records #290.</action>
+      <!-- FIX -->
       <action                  type="update" dev="ggregory" due-to="Heewon Lee">Add null guard for InstructionFactory.createInvoke() #289.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid possible NullPointerException in org.apache.bcel.classfile.DescendingVisitor.accept(E[]).</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid possible NullPointerException in AnnotationEntryGen.getAnnotationAttributes(ConstantPoolGen, AnnotationEntryGen[]).</action>
