@@ -1,4 +1,93 @@
 Apache Commons BCEL
+Version 6.9.0
+RELEASE NOTES
+
+
+Introduction
+------------
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.9.0.
+
+The Byte Code Engineering Library (BCEL) is intended to give users a convenient
+way to analyze, create, and manipulate compiled .class files. Classes are
+represented by objects containing all the symbolic information of the given
+class: methods, fields, and byte code instructions.
+
+Maintenance and bug fix release.
+
+Changes
+-------
+*           Add Support for Java 16 records #290. Thanks to Pablo Nicolas Diaz, Gary Gregory, Paul King, Mark Roberts.
+*           Add null guard for InstructionFactory.createInvoke() #289. Thanks to Heewon Lee.
+*           Avoid possible NullPointerException in org.apache.bcel.classfile.DescendingVisitor.accept(E[]). Thanks to Gary Gregory.
+*           Avoid possible NullPointerException in AnnotationEntryGen.getAnnotationAttributes(ConstantPoolGen, AnnotationEntryGen[]). Thanks to Gary Gregory.
+*           Avoid possible NullPointerException in AnnotationEntryGen.copyValues(ElementValuePair[], ConstantPoolGen, boolean). Thanks to Gary Gregory.
+*           Avoid possible NullPointerException in ArrayElementValueGen.ArrayElementValueGen(int, ElementValue[], ConstantPoolGen). Thanks to Gary Gregory.
+*           Avoid possible NullPointerException in org.apache.bcel.generic.ClassGen.setMethods(Method[]). Thanks to Gary Gregory.
+*           Avoid possible NullPointerException in org.apache.bcel.generic.ClassGen.unpackAnnotations(Attribute[]). Thanks to Gary Gregory.
+*           Avoid possible NullPointerException in org.apache.bcel.classfile.ParameterAnnotationEntry.createParameterAnnotationEntries(Attribute[]). Thanks to Gary Gregory.
+*           Avoid possible NullPointerException in org.apache.bcel.generic.ClassGen.ClassGen(JavaClass). Thanks to Gary Gregory.
+*           Avoid possible NullPointerException in org.apache.bcel.generic.FieldGenOrMethodGen.addAll(Attribute[]). Thanks to Gary Gregory.
+*           Avoid possible NullPointerException in org.apache.bcel.classfile.ParameterAnnotationEntry.createParameterAnnotationEntries(Attribute[]). Thanks to Gary Gregory.
+*           Avoid NullPointerException after calling org.apache.bcel.classfile.MethodParameters.setParameters(MethodParameter[]) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException after calling org.apache.bcel.classfile.ParameterAnnotations.setParameterAnnotationTable(ParameterAnnotationEntry[]) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException after calling org.apache.bcel.classfile.LocalVariableTypeTable.setLocalVariableTable(LocalVariable[]) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException after calling org.apache.bcel.classfile.LocalVariableTable.setLocalVariableTable(LocalVariable[]) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException after calling org.apache.bcel.classfile.LineNumberTable.setLineNumberTable(LineNumber[]) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setMethods(Method[] with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setInterfaces(int[]) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setInterfaceNames(String[]) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setFields(Field[]) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setAttributes(Attribute[]) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException after calling org.apache.bcel.classfile.ConstantPool.setConstantPool(Constant[]) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException after calling org.apache.bcel.classfile.FieldOrMethod.setAttributes(Attribute[]) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException after calling org.apache.bcel.classfile.Annotations.setAnnotationTable(AnnotationEntry[]) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException after calling org.apache.bcel.classfile.ArrayElementValue.ArrayElementValue(int, ElementValue[], ConstantPool) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException after calling org.apache.bcel.classfile.BootstrapMethod.BootstrapMethod(int, int[]) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException after calling org.apache.bcel.classfile.BootstrapMethod.setBootstrapArguments(int[]) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException after calling org.apache.bcel.classfile.BootstrapMethods.BootstrapMethods(int, int, BootstrapMethod[], ConstantPool) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException after calling org.apache.bcel.classfile.BootstrapMethods.setBootstrapMethods(BootstrapMethod[]) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException calling org.apache.bcel.generic.InstructionList.redirectLocalVariables(LocalVariableGen[], InstructionHandle, InstructionHandle) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException calling org.apache.bcel.generic.InstructionList.redirectExceptionHandlers(CodeExceptionGen[], InstructionHandle, InstructionHandle) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException calling org.apache.bcel.generic.InstructionList.findHandle(InstructionHandle[], int[], int, int) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException calling org.apache.bcel.generic.MethodGen.setArgumentTypes(Type[]) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException calling org.apache.bcel.generic.MethodGen.setArgumentNames(String[]) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException calling org.apache.bcel.generic.MethodGen.removeRuntimeAttributes(Attribute[]) with null. Thanks to Gary Gregory.
+*           Avoid NullPointerException calling org.apache.bcel.generic.MethodGen.makeMutableVersion(AnnotationEntry[]) with null. Thanks to Gary Gregory.
+*           Bump org.apache.commons:commons-parent from 66 to 69 #283, #297. Thanks to Dependabot.
+*           Bump org.jetbrains.kotlin:kotlin-stdlib from 1.9.22 to 1.9.23 #284. Thanks to Dependabot.
+*           Bump commons-io:commons-io from 2.15.1 to 2.16.1 #295, #300. Thanks to Dependabot.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-bcel/changes-report.html
+
+For complete information on Apache Commons BCEL, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons BCEL website:
+
+https://commons.apache.org/proper/commons-bcel
+
+Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+Open source works best when you give feedback:
+
+    https://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
+Apache Commons BCEL
 Version 6.8.2
 RELEASE NOTES
 
