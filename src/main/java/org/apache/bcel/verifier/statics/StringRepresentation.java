@@ -400,12 +400,12 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     }
 
     @Override
-    public void visitRecord(Record obj) {
+    public void visitRecord(final Record obj) {
         tostring = toString(obj);
     }
 
     @Override
-    public void visitRecordComponent(RecordComponentInfo obj) {
+    public void visitRecordComponent(final RecordComponentInfo obj) {
         tostring = toString(obj);
     }
 

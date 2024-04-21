@@ -64,7 +64,7 @@ public class InstructionFactoryTestCase extends AbstractTestCase {
 
     @Test
     public void testCreateInvokeNullArgTypes() throws Exception {
-        InstructionFactory factory = new InstructionFactory(new ClassGen(Repository.lookupClass(Object.class)));
+        final InstructionFactory factory = new InstructionFactory(new ClassGen(Repository.lookupClass(Object.class)));
         factory.createInvoke("", "", Type.VOID, null, Const.INVOKESPECIAL, false); // Mustn't throw an NPE
     }
 

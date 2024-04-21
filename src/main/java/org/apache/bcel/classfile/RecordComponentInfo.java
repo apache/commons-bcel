@@ -44,7 +44,7 @@ public class RecordComponentInfo implements Node {
      * @param constantPool Array of constants
      * @throws IOException if an I/O error occurs.
      */
-    public RecordComponentInfo(final DataInput input, ConstantPool constantPool) throws IOException {
+    public RecordComponentInfo(final DataInput input, final ConstantPool constantPool) throws IOException {
         this.index = input.readUnsignedShort();
         this.descriptorIndex = input.readUnsignedShort();
         final int attributesCount = input.readUnsignedShort();
@@ -56,7 +56,7 @@ public class RecordComponentInfo implements Node {
     }
 
     @Override
-    public void accept(Visitor v) {
+    public void accept(final Visitor v) {
         v.visitRecordComponent(this);
     }
 
@@ -66,7 +66,7 @@ public class RecordComponentInfo implements Node {
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.
      */
-    public void dump(DataOutputStream file) throws IOException {
+    public void dump(final DataOutputStream file) throws IOException {
         file.writeShort(index);
         file.writeShort(descriptorIndex);
         file.writeShort(attributes.length);

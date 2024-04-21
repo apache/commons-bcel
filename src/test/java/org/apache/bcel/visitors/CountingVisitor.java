@@ -490,12 +490,12 @@ public class CountingVisitor implements Visitor {
     }
 
     @Override
-    public void visitRecord(Record v) {
+    public void visitRecord(final Record v) {
         recordCount++;
     }
 
     @Override
-    public void visitRecordComponent(RecordComponentInfo v) {
+    public void visitRecordComponent(final RecordComponentInfo v) {
         recordComponentCount++;
     }
 

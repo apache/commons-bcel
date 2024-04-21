@@ -35,7 +35,7 @@ import org.apache.bcel.util.Args;
  */
 public final class Record extends Attribute {
 
-    private static final RecordComponentInfo[] EMPTY_RCI_ARRAY = new RecordComponentInfo[] {};
+    private static final RecordComponentInfo[] EMPTY_RCI_ARRAY = {};
 
     private static RecordComponentInfo[] readComponents(final DataInput input, final ConstantPool constantPool)
             throws IOException {
