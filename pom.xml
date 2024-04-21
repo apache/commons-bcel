@@ -495,7 +495,6 @@
               </testIncludes>
             </configuration>
           </plugin>
-
           <!-- Hook the benchmarks to the test phase -->
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
@@ -527,7 +526,17 @@
         </plugins>
       </build>
     </profile>
-    
+    <profile>
+      <!-- Java 8 only -->
+      <id>java-8</id>
+      <activation>
+        <jdk>8</jdk>
+      </activation>
+      <properties>
+        <!-- JaCoCo on Java 8 is different from other versions. -->
+        <commons.jacoco.classRatio>0.89</commons.jacoco.classRatio>
+      </properties>
+    </profile>
   </profiles>
 
   <developers>
