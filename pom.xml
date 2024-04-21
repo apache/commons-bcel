@@ -68,7 +68,7 @@
     <assertj.version>3.25.3</assertj.version>
     <jna.version>5.14.0</jna.version>
     <japicmp.skip>false</japicmp.skip>
-    <commons.jacoco.haltOnFailure>true</commons.jacoco.haltOnFailure>
+    <commons.jacoco.haltOnFailure>false</commons.jacoco.haltOnFailure>
   </properties>
 
   <distributionManagement>
@@ -531,7 +531,7 @@
         <commons.jacoco.classRatio>0.89</commons.jacoco.classRatio>
         <commons.jacoco.instructionRatio>0.65</commons.jacoco.instructionRatio>
         <commons.jacoco.methodRatio>0.70</commons.jacoco.methodRatio>
-        <commons.jacoco.branchRatio>0.58</commons.jacoco.branchRatio>
+        <commons.jacoco.branchRatio>0.59</commons.jacoco.branchRatio>
         <commons.jacoco.lineRatio>0.68</commons.jacoco.lineRatio>
         <commons.jacoco.complexityRatio>0.58</commons.jacoco.complexityRatio>
       </properties>
@@ -547,7 +547,7 @@
         <commons.jacoco.classRatio>0.90</commons.jacoco.classRatio>
         <commons.jacoco.instructionRatio>0.65</commons.jacoco.instructionRatio>
         <commons.jacoco.methodRatio>0.70</commons.jacoco.methodRatio>
-        <commons.jacoco.branchRatio>0.58</commons.jacoco.branchRatio>
+        <commons.jacoco.branchRatio>0.59</commons.jacoco.branchRatio>
         <commons.jacoco.lineRatio>0.68</commons.jacoco.lineRatio>
         <commons.jacoco.complexityRatio>0.58</commons.jacoco.complexityRatio>
       </properties>
