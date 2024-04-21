@@ -490,6 +490,16 @@ public class CountingVisitor implements Visitor {
     }
 
     @Override
+    public void visitRecord(Record v) {
+        recordCount++;
+    }
+
+    @Override
+    public void visitRecordComponent(RecordComponentInfo v) {
+        recordComponentCount++;
+    }
+
+    @Override
     public void visitSignature(final Signature obj) {
         signatureAnnotationCount++;
     }
@@ -525,15 +535,5 @@ public class CountingVisitor implements Visitor {
     @Override
     public void visitUnknown(final Unknown obj) {
         unknownCount++;
-    }
-
-    @Override
-    public void visitRecord(Record v) {
-        recordCount++;
-    }
-
-    @Override
-    public void visitRecordComponent(RecordComponentInfo v) {
-        recordComponentCount++;
     }
 }

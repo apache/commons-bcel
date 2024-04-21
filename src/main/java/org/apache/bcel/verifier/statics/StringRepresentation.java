@@ -400,6 +400,16 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     }
 
     @Override
+    public void visitRecord(Record obj) {
+        tostring = toString(obj);
+    }
+
+    @Override
+    public void visitRecordComponent(RecordComponentInfo obj) {
+        tostring = toString(obj);
+    }
+
+    @Override
     public void visitSignature(final Signature obj) {
         tostring = toString(obj);
     }
@@ -429,16 +439,6 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
 
     @Override
     public void visitUnknown(final Unknown obj) {
-        tostring = toString(obj);
-    }
-
-    @Override
-    public void visitRecord(Record obj) {
-        tostring = toString(obj);
-    }
-
-    @Override
-    public void visitRecordComponent(RecordComponentInfo obj) {
         tostring = toString(obj);
     }
 

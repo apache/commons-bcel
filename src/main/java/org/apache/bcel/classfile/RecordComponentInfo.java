@@ -55,6 +55,11 @@ public class RecordComponentInfo implements Node {
         this.constantPool = constantPool;
     }
 
+    @Override
+    public void accept(Visitor v) {
+        v.visitRecordComponent(this);
+    }
+
     /**
      * Dumps contents into a file stream in binary format.
      *
@@ -68,29 +73,6 @@ public class RecordComponentInfo implements Node {
         for (final Attribute attribute : attributes) {
             attribute.dump(file);
         }
-    }
-
-    @Override
-    public void accept(Visitor v) {
-        v.visitRecordComponent(this);
-    }
-
-    /**
-     * Gets the name index.
-     *
-     * @return index in constant pool of this record component name.
-     */
-    public int getIndex() {
-        return index;
-    }
-
-    /**
-     * Gets the description index.
-     *
-     * @return index in constant pool of this record component descriptor.
-     */
-    public int getDescriptorIndex() {
-        return descriptorIndex;
     }
 
     /**
@@ -109,6 +91,24 @@ public class RecordComponentInfo implements Node {
      */
     public ConstantPool getConstantPool() {
         return constantPool;
+    }
+
+    /**
+     * Gets the description index.
+     *
+     * @return index in constant pool of this record component descriptor.
+     */
+    public int getDescriptorIndex() {
+        return descriptorIndex;
+    }
+
+    /**
+     * Gets the name index.
+     *
+     * @return index in constant pool of this record component name.
+     */
+    public int getIndex() {
+        return index;
     }
 
     /**

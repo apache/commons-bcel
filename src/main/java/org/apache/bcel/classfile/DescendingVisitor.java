@@ -505,6 +505,21 @@ public class DescendingVisitor implements Visitor {
     }
 
     @Override
+    public void visitRecord(Record record) {
+        stack.push(record);
+        record.accept(visitor);
+        accept(record.getComponents());
+        stack.pop();
+    }
+
+    @Override
+    public void visitRecordComponent(RecordComponentInfo recordComponentInfo) {
+        stack.push(recordComponentInfo);
+        recordComponentInfo.accept(visitor);
+        stack.pop();
+    }
+
+    @Override
     public void visitSignature(final Signature attribute) {
         stack.push(attribute);
         attribute.accept(visitor);
@@ -558,21 +573,6 @@ public class DescendingVisitor implements Visitor {
     public void visitUnknown(final Unknown attribute) {
         stack.push(attribute);
         attribute.accept(visitor);
-        stack.pop();
-    }
-
-    @Override
-    public void visitRecord(Record record) {
-        stack.push(record);
-        record.accept(visitor);
-        accept(record.getComponents());
-        stack.pop();
-    }
-
-    @Override
-    public void visitRecordComponent(RecordComponentInfo recordComponentInfo) {
-        stack.push(recordComponentInfo);
-        recordComponentInfo.accept(visitor);
         stack.pop();
     }
 

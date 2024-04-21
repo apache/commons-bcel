@@ -63,6 +63,12 @@ public class InstructionFactoryTestCase extends AbstractTestCase {
     }
 
     @Test
+    public void testCreateInvokeNullArgTypes() throws Exception {
+        InstructionFactory factory = new InstructionFactory(new ClassGen(Repository.lookupClass(Object.class)));
+        factory.createInvoke("", "", Type.VOID, null, Const.INVOKESPECIAL, false); // Mustn't throw an NPE
+    }
+
+    @Test
     public void testExceptions() throws Exception {
         final InstructionFactory factory = new InstructionFactory(new ClassGen(Repository.lookupClass(Object.class)));
         assertThrowsExactly(IllegalArgumentException.class, () -> createArrayLoad(Type.UNKNOWN));
@@ -96,11 +102,5 @@ public class InstructionFactoryTestCase extends AbstractTestCase {
         assertEquals(InstructionConst.NOP, createNull(Type.VOID));
         assertEquals(InstructionConst.ACONST_NULL, createNull(Type.OBJECT));
         assertEquals(InstructionConst.ACONST_NULL, createNull(Type.getType("[I")));
-    }
-
-    @Test
-    public void testCreateInvokeNullArgTypes() throws Exception {
-        InstructionFactory factory = new InstructionFactory(new ClassGen(Repository.lookupClass(Object.class)));
-        factory.createInvoke("", "", Type.VOID, null, Const.INVOKESPECIAL, false); // Mustn't throw an NPE
     }
 }

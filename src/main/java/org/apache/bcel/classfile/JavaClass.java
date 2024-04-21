@@ -259,6 +259,19 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         return getClassName().compareTo(obj.getClassName());
     }
 
+    private void computeIsRecord() {
+        if (computedRecord) {
+            return;
+        }
+        for (final Attribute attribute : this.attributes) {
+            if (attribute instanceof Record) {
+                isRecord = true;
+                break;
+            }
+        }
+        this.computedRecord = true;
+    }
+
     private void computeNestedTypeStatus() {
         if (computedNestedTypeStatus) {
             return;
@@ -743,6 +756,17 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         return this.isNested;
     }
 
+    /**
+     * Tests whether this class was declared as a record
+     *
+     * @return true if a record attribute is present, false otherwise.
+     * @since 6.9.0
+     */
+    public boolean isRecord() {
+        computeIsRecord();
+        return this.isRecord;
+    }
+
     public final boolean isSuper() {
         return (super.getAccessFlags() & Const.ACC_SUPER) != 0;
     }
@@ -905,29 +929,5 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
             }
         }
         return buf.toString();
-    }
-
-    /**
-     * Tests whether this class was declared as a record
-     *
-     * @return true if a record attribute is present, false otherwise.
-     * @since 6.9.0
-     */
-    public boolean isRecord() {
-        computeIsRecord();
-        return this.isRecord;
-    }
-
-    private void computeIsRecord() {
-        if (computedRecord) {
-            return;
-        }
-        for (final Attribute attribute : this.attributes) {
-            if (attribute instanceof Record) {
-                isRecord = true;
-                break;
-            }
-        }
-        this.computedRecord = true;
     }
 }
