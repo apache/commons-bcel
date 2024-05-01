@@ -42,6 +42,7 @@ import java.util.zip.ZipFile;
 
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Utility;
+import org.apache.commons.lang3.SystemProperties;
 
 /**
  * Loads class files from the CLASSPATH. Inspired by sun.tools.ClassPath.
@@ -466,14 +467,14 @@ public class ClassPath implements Closeable {
      */
     // @since 6.0 no longer final
     public static String getClassPath() {
-        final String classPathProp = System.getProperty("java.class.path");
+        final String classPathProp = SystemProperties.getJavaClassPath();
         final String bootClassPathProp = System.getProperty("sun.boot.class.path");
-        final String extDirs = System.getProperty("java.ext.dirs");
+        final String extDirs = SystemProperties.getJavaExtDirs();
         // System.out.println("java.version = " + System.getProperty("java.version"));
         // System.out.println("java.class.path = " + classPathProp);
         // System.out.println("sun.boot.class.path=" + bootClassPathProp);
         // System.out.println("java.ext.dirs=" + extDirs);
-        final String javaHome = System.getProperty("java.home");
+        final String javaHome = SystemProperties.getJavaHome();
         final List<String> list = new ArrayList<>();
 
         // Starting in JRE 9, .class files are in the modules directory. Add them to the path.
