@@ -1,5 +1,4 @@
-Apache Commons BCEL
-Version 6.9.0
+Apache Commons BCEL Version 6.9.0
 RELEASE NOTES
 
 
@@ -87,8 +86,7 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-Apache Commons BCEL
-Version 6.8.2
+Apache Commons BCEL Version 6.8.2
 RELEASE NOTES
 
 
@@ -144,8 +142,7 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-Apache Commons BCEL
-Version 6.8.1
+Apache Commons BCEL Version 6.8.1
 RELEASE NOTES
 
 
@@ -213,8 +210,7 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-Apache Commons BCEL
-Version 6.8.0
+Apache Commons BCEL Version 6.8.0
 RELEASE NOTES
 
 
@@ -302,8 +298,7 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-Apache Commons BCEL
-Version 6.7.0
+Apache Commons BCEL Version 6.7.0
 RELEASE NOTES
 
 
@@ -415,8 +410,7 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-Apache Commons BCEL
-Version 6.6.1
+Apache Commons BCEL Version 6.6.1
 RELEASE NOTES
 
 
@@ -475,8 +469,7 @@ The Apache Commons Team
 -----------------------------------------------------------------------------
 
 
-Apache Commons BCEL
-Version 6.6.0
+Apache Commons BCEL Version 6.6.0
 RELEASE NOTES
 
 
@@ -606,8 +599,7 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-Apache Commons BCEL
-Version 6.5.0
+Apache Commons BCEL Version 6.5.0
 RELEASE NOTES
 
 
@@ -680,8 +672,7 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-Apache Commons BCEL
-Version 6.4.1
+Apache Commons BCEL Version 6.4.1
 RELEASE NOTES
 
 
@@ -737,8 +728,7 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-Apache Commons BCEL
-Version 6.4.0
+Apache Commons BCEL Version 6.4.0
 RELEASE NOTES
 
 
@@ -812,8 +802,7 @@ The Apache Commons Team
 -----------------------------------------------------------------------------
 
 
-Apache Commons BCEL
-Version 6.3.1
+Apache Commons BCEL Version 6.3.1
 RELEASE NOTES
 
 
@@ -863,8 +852,7 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-Apache Commons BCEL
-Version 6.3
+Apache Commons BCEL Version 6.3
 RELEASE NOTES
 
 
@@ -921,8 +909,7 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-Apache Commons BCEL
-Version 6.2
+Apache Commons BCEL Version 6.2
 RELEASE NOTES
 
 
@@ -968,9 +955,8 @@ The Apache Commons Team
 
 -----------------------------------------------------------------------------
 
-Apache Commons BCEL
-    Version 6.1
-  RELEASE NOTES
+Apache Commons BCEL Version 6.1
+RELEASE NOTES
 
 
 Introduction
