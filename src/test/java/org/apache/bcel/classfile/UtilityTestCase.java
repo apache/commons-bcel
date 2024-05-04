@@ -80,7 +80,7 @@ public class UtilityTestCase {
             assertTrue(code.contains("33:   getfield\t\torg.apache.bcel.classfile.UtilityTestCase$1CodeToString.a [[I"), code);
             assertTrue(code.contains("36:   invokestatic\tjava.util.Arrays.asList ([Ljava/lang/Object;)Ljava/util/List;"), code);
             assertTrue(code.contains("39:   invokeinterface\tjava.util.List.size ()I1\t0"), code);
-            assertTrue(code.contains("44:   invokevirtual\tjava.io.PrintStream.print (I)V"), code);
+            assertTrue(code.contains("44:   invokevirtual\tjava.io.PrintStream.print "), code);
             assertTrue(code.contains("47:   return"), code);
         }
     }

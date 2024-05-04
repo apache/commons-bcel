@@ -50,8 +50,8 @@ public class RecordTestCase extends AbstractTestCase {
         final CountingVisitor countVisitor = new CountingVisitor();
         final DescendingVisitor desendingVisitor = new DescendingVisitor(clazz, countVisitor);
         desendingVisitor.visit();
-        assertEquals(1,countVisitor.recordCount, "should count one record");
-        assertEquals(2,countVisitor.recordComponentCount, "should count two record components");
+        assertEquals(1, countVisitor.recordCount, "should count one record");
+        assertEquals(2, countVisitor.recordComponentCount, "should count two record components");
     }
 
 
@@ -62,13 +62,13 @@ public class RecordTestCase extends AbstractTestCase {
     public void testAttributeSerializtion() throws ClassNotFoundException, IOException {
         final JavaClass clazz = new ClassParser("src/test/resources/record/SimpleRecord.class").parse();
         final File tfile = createTestdataFile("SimpleRecord.class");
-        final Record recordAttribute = (Record)findAttribute("Record",clazz)[0];
+        final Record recordAttribute = (Record) findAttribute("Record", clazz)[0];
         clazz.dump(tfile);
         // Read in the new version and check it is OK
         final SyntheticRepository repos2 = createRepos(".");
         final JavaClass clazzFromRepo = repos2.loadClass("SimpleRecord");
         assertNotNull(clazzFromRepo); // Use the variable to avoid a warning
-        final Record recordAttributeFromRepo = (Record)findAttribute("Record",clazzFromRepo)[0];
+        final Record recordAttributeFromRepo = (Record) findAttribute("Record", clazzFromRepo)[0];
         assertEquals(recordAttribute.toString(), recordAttributeFromRepo.toString(), "Both attributes needs to be equal");
         tfile.deleteOnExit();
     }
@@ -101,20 +101,19 @@ public class RecordTestCase extends AbstractTestCase {
     public void testRecordToString() throws ClassNotFoundException, ClassFormatException, IOException {
         final JavaClass clazz = new ClassParser("src/test/resources/record/SimpleRecord.class").parse();
         final Attribute[] attributes = clazz.getAttributes();
-        final Record recordAttribute = (Record) findAttribute("Record",clazz)[0];
+        final Record recordAttribute = (Record) findAttribute("Record", clazz)[0];
         assertEquals(4, attributes.length);
         assertEquals("SourceFile: SimpleRecord.java", attributes[0].toString());
         assertEquals("Record(2):\n"
                 + "  RecordComponentInfo(aNumber,I,0):\n"
                 + "  RecordComponentInfo(aString,Ljava/lang/String;,1):\n"
                 + "  RuntimeVisibleAnnotations:\n"
-                + "  @Ljavax/annotation/Nonnull;"
-                ,recordAttribute.toString());
+                + "  @Ljavax/annotation/Nonnull;", recordAttribute.toString());
         final RecordComponentInfo firstComponent = recordAttribute.getComponents()[0];
         assertEquals(5, firstComponent.getIndex());
         assertEquals(6, firstComponent.getDescriptorIndex());
         assertEquals(0, firstComponent.getAttributes().length);
-        assertEquals(recordAttribute.getConstantPool(),firstComponent.getConstantPool());
+        assertEquals(recordAttribute.getConstantPool(), firstComponent.getConstantPool());
         assertEquals("RecordComponentInfo(aNumber,I,0):", firstComponent.toString());
     }
 

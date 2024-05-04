@@ -83,7 +83,7 @@ final class BCELFactory extends EmptyVisitor {
         if (value instanceof String) {
             embed = '"' + Utility.convertString(embed) + '"';
         } else if (value instanceof Character) {
-            embed = "(char)0x" + Integer.toHexString(((Character) value).charValue());
+            embed = "(char) 0x" + Integer.toHexString(((Character) value).charValue());
         } else if (value instanceof Float) {
             final Float f = (Float) value;
             if (Float.isNaN(f)) {

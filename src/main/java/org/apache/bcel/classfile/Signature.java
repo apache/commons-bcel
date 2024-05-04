@@ -105,7 +105,7 @@ public final class Signature extends Attribute {
         if ((ch = in.read()) == -1) {
             throw new IllegalArgumentException("Illegal signature: " + in.getData() + " no ident, reaching EOF");
         }
-        // System.out.println("return from ident:" + (char)ch);
+        // System.out.println("return from ident:" + (char) ch);
         if (!identStart(ch)) {
             final StringBuilder buf2 = new StringBuilder();
             int count = 1;
@@ -123,7 +123,7 @@ public final class Signature extends Attribute {
                 buf.append(buf2);
                 ch = in.read();
                 in.unread();
-                // System.out.println("so far:" + buf2 + ":next:" +(char)ch);
+                // System.out.println("so far:" + buf2 + ":next:" +(char) ch);
             } else {
                 for (int i = 0; i < count; i++) {
                     in.unread();
@@ -136,10 +136,10 @@ public final class Signature extends Attribute {
         do {
             buf2.append((char) ch);
             ch = in.read();
-            // System.out.println("within ident:"+ (char)ch);
+            // System.out.println("within ident:"+ (char) ch);
         } while (ch != -1 && (Character.isJavaIdentifierPart((char) ch) || ch == '/'));
         buf.append(Utility.pathToPackage(buf2.toString()));
-        // System.out.println("regular return ident:"+ (char)ch + ":" + buf2);
+        // System.out.println("regular return ident:"+ (char) ch + ":" + buf2);
         if (ch != -1) {
             in.unread();
         }

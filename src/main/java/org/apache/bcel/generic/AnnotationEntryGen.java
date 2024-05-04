@@ -280,12 +280,12 @@ public class AnnotationEntryGen {
     }
 
     public final String getTypeName() {
-        return getTypeSignature();// BCELBUG: Should I use this instead?
+        return getTypeSignature(); // BCELBUG: Should I use this instead?
         // Utility.signatureToString(getTypeSignature());
     }
 
     public final String getTypeSignature() {
-        // ConstantClass c = (ConstantClass)cpool.getConstant(typeIndex);
+        // ConstantClass c = (ConstantClass) cpool.getConstant(typeIndex);
         final ConstantUtf8 utf8 = (ConstantUtf8) cpool.getConstant(typeIndex/* c.getNameIndex() */);
         return utf8.getBytes();
     }

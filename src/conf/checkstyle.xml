@@ -103,17 +103,7 @@ limitations under the License.
     <!-- Checks for whitespace                               -->
     <!-- See http://checkstyle.sf.net/config_whitespace.html -->
     <module name="EmptyForIteratorPad"/>
-    <!-- Too many to fix at present
-    <module name="NoWhitespaceAfter"/>
-    <module name="NoWhitespaceBefore"/>
-    <module name="OperatorWrap">
-      <property name="option" value="nl" />
-    </module>
-    -->
-    <!-- Too many to fix at present
-    <module name="ParenPad"/>
     <module name="WhitespaceAfter"/>
-    -->
     <module name="WhitespaceAround"/>
     <!-- Modifier Checks                                    -->
     <!-- See http://checkstyle.sf.net/config_modifiers.html -->

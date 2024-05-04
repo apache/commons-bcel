@@ -1137,7 +1137,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
             index += i.getLength();
         }
         /*
-         * Pass 2: Expand the variable-length (Branch)Instructions depending on the target offset (short or int) and ensure that
+         * Pass 2: Expand the variable-length (Branch) Instructions depending on the target offset (short or int) and ensure that
          * branch targets are within this list.
          */
         for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {

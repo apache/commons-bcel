@@ -40,7 +40,7 @@ public class InstructionHandleTestCase {
 
     @Test
     public void testsetInstructionI() {
-        final InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP());// have to start with a valid non BI
+        final InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP()); // have to start with a valid non BI
         assertNotNull(ih);
         ih.setInstruction(new NOP());
         assertNotNull(ih);
@@ -48,14 +48,14 @@ public class InstructionHandleTestCase {
 
     @Test
     public void testsetInstructionnotI() {
-        final InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP());// have to start with a valid non BI
+        final InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP()); // have to start with a valid non BI
         assertNotNull(ih);
         assertThrows(ClassGenException.class, () -> ih.setInstruction(new GOTO(null)));
     }
 
     @Test
     public void testsetInstructionNull() {
-        final InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP());// have to start with a valid non BI
+        final InstructionHandle ih = InstructionHandle.getInstructionHandle(new NOP()); // have to start with a valid non BI
         assertNotNull(ih);
         assertThrows(ClassGenException.class, () -> ih.setInstruction(null));
     }
