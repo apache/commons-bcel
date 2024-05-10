@@ -421,7 +421,7 @@
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-stdlib</artifactId>
-      <version>1.9.23</version>
+      <version>1.9.24</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
