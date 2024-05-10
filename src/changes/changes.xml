@@ -63,6 +63,7 @@ The <action> type attribute can be add,update,fix,remove.
       <!-- FIX -->
       <!-- ADD -->
       <!-- UPDATE -->
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.jetbrains.kotlin:kotlin-stdlib from 1.9.23 to 1.9.24 #309.</action>
     </release>
     <release version="6.9.0" date="2024-04-21" description="Maintenance and bug fix release.">
       <!-- ADD -->
