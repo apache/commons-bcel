@@ -89,7 +89,7 @@ public final class Code extends Attribute {
         code = new byte[codeLength]; // Read byte code
         file.readFully(code);
         /*
-         * Read exception table that contains all regions where an exception handler is active, i.e., a try { ... } catch()
+         * Read exception table that contains all regions where an exception handler is active, i.e., a try { ... } catch ()
          * block.
          */
         final int exceptionTableLength = file.readUnsignedShort();
@@ -285,6 +285,20 @@ public final class Code extends Attribute {
      */
     public int getMaxStack() {
         return maxStack;
+    }
+
+    /**
+     * Finds the attribute of {@link StackMap} instance.
+     * @return StackMap of Code, if it has one, else null.
+     * @since 6.8.0
+     */
+    public StackMap getStackMap() {
+        for (final Attribute attribute : attributes) {
+            if (attribute instanceof StackMap) {
+                return (StackMap) attribute;
+            }
+        }
+        return null;
     }
 
     /**

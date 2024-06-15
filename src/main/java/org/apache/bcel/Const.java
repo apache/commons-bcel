@@ -277,6 +277,14 @@ public final class Const {
     public static final short MINOR_19 = 0;
 
     /**
+     * Minor version number of class files for Java 20.
+     *
+     * @see #MAJOR_20
+     * @since 6.8.0
+     */
+    public static final short MINOR_20 = 0;
+
+    /**
      * Major version number of class files for Java 14.
      *
      * @see #MINOR_14
@@ -323,6 +331,14 @@ public final class Const {
      * @since 6.6.0
      */
     public static final short MAJOR_19 = 63;
+
+    /**
+     * Major version number of class files for Java 20.
+     *
+     * @see #MINOR_20
+     * @since 6.8.0
+     */
+    public static final short MAJOR_20 = 64;
 
     /**
      * Default major version number. Class file is for Java 1.1.
@@ -660,8 +676,8 @@ public final class Const {
     /**
      * Marks a constant pool entry as dynamically computed.
      *
-     * @see <a href="https://bugs.openjdk.java.net/secure/attachment/74618/constant-dynamic.html"> Change request for JEP
-     *      309</a>
+     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.10"> The Constant Pool in The
+     *      Java Virtual Machine Specification</a>
      * @since 6.3
      */
     public static final byte CONSTANT_Dynamic = 17;

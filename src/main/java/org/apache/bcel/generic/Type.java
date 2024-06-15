@@ -23,6 +23,7 @@ import java.util.Objects;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.ClassFormatException;
+import org.apache.bcel.classfile.InvalidMethodSignatureException;
 import org.apache.bcel.classfile.Utility;
 
 /**
@@ -84,15 +85,15 @@ public abstract class Type {
             // Skip any type arguments to read argument declarations between '(' and ')'
             index = signature.indexOf('(') + 1;
             if (index <= 0) {
-                throw new ClassFormatException("Invalid method signature: " + signature);
+                throw new InvalidMethodSignatureException(signature);
             }
             while (signature.charAt(index) != ')') {
                 vec.add(getType(signature.substring(index)));
-                // corrected concurrent private static field acess
+                // corrected concurrent private static field access
                 index += unwrap(CONSUMED_CHARS); // update position
             }
         } catch (final StringIndexOutOfBoundsException e) { // Should never occur
-            throw new ClassFormatException("Invalid method signature: " + signature, e);
+            throw new InvalidMethodSignatureException(signature, e);
         }
         final Type[] types = new Type[vec.size()];
         vec.toArray(types);
@@ -106,7 +107,7 @@ public abstract class Type {
             // Skip any type arguments to read argument declarations between '(' and ')'
             index = signature.indexOf('(') + 1;
             if (index <= 0) {
-                throw new ClassFormatException("Invalid method signature: " + signature);
+                throw new InvalidMethodSignatureException(signature);
             }
             while (signature.charAt(index) != ')') {
                 final int coded = getTypeSize(signature.substring(index));
@@ -114,7 +115,7 @@ public abstract class Type {
                 index += consumed(coded);
             }
         } catch (final StringIndexOutOfBoundsException e) { // Should never occur
-            throw new ClassFormatException("Invalid method signature: " + signature, e);
+            throw new InvalidMethodSignatureException(signature, e);
         }
         return res;
     }
@@ -150,7 +151,7 @@ public abstract class Type {
             final int index = signature.lastIndexOf(')') + 1;
             return getType(signature.substring(index));
         } catch (final StringIndexOutOfBoundsException e) { // Should never occur
-            throw new ClassFormatException("Invalid method signature: " + signature, e);
+            throw new InvalidMethodSignatureException(signature, e);
         }
     }
 
@@ -226,7 +227,7 @@ public abstract class Type {
     public static Type getType(final String signature) throws StringIndexOutOfBoundsException {
         final byte type = Utility.typeOfSignature(signature);
         if (type <= Const.T_VOID) {
-            // corrected concurrent private static field acess
+            // corrected concurrent private static field access
             wrap(CONSUMED_CHARS, 1);
             return BasicType.getType(type);
         }
@@ -242,7 +243,7 @@ public abstract class Type {
         } while (signature.charAt(dim) == '[');
         // Recurse, but just once, if the signature is ok
         final Type t = getType(signature.substring(dim));
-        // corrected concurrent private static field acess
+        // corrected concurrent private static field access
         // consumed_chars += dim; // update counter - is replaced by
         final int temp = unwrap(CONSUMED_CHARS) + dim;
         wrap(CONSUMED_CHARS, temp);

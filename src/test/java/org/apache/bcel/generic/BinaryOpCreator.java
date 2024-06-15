@@ -16,17 +16,17 @@
  */
 package org.apache.bcel.generic;
 
-import org.apache.bcel.Const;
-import org.apache.bcel.classfile.StackMap;
-import org.apache.bcel.classfile.StackMapEntry;
-import org.apache.bcel.classfile.StackMapType;
-import org.apache.commons.lang.ArrayUtils;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import org.apache.bcel.Const;
+import org.apache.bcel.classfile.StackMap;
+import org.apache.bcel.classfile.StackMapEntry;
+import org.apache.bcel.classfile.StackMapType;
+import org.apache.commons.lang.ArrayUtils;
 
 public class BinaryOpCreator {
 
@@ -115,11 +115,13 @@ public class BinaryOpCreator {
                 "calculate", ORG_APACHE_BCEL_GENERIC_BINARY_OP, il, cp);
         method.addException("java.lang.Exception");
         final StackMapType[] typesOfLocals = { new StackMapType((byte) 7, cp.addClass("java.lang.String"), cp.getConstantPool()) };
-        final StackMapEntry[] table = { new StackMapEntry(252, 70, typesOfLocals, StackMapType.EMPTY_ARRAY, cp.getConstantPool()),
-                new StackMapEntry(251, 65, StackMapType.EMPTY_ARRAY, StackMapType.EMPTY_ARRAY, cp.getConstantPool()),
-                new StackMapEntry(251, 65, StackMapType.EMPTY_ARRAY, StackMapType.EMPTY_ARRAY, cp.getConstantPool()),
-                new StackMapEntry(251, 65, StackMapType.EMPTY_ARRAY, StackMapType.EMPTY_ARRAY, cp.getConstantPool()) };
-        method.addCodeAttribute(new StackMap(cp.addUtf8("StackMapTable"), 17, table, cp.getConstantPool()));
+        final StackMapEntry[] table = { new StackMapEntry(252, 70, typesOfLocals, null, cp.getConstantPool()),
+                new StackMapEntry(251, 65, null, null, cp.getConstantPool()),
+                new StackMapEntry(251, 65, null, null, cp.getConstantPool()),
+                new StackMapEntry(251, 65, null, null, cp.getConstantPool()) };
+        final StackMap stackMap = new StackMap(cp.addUtf8("StackMapTable"), 17, table, cp.getConstantPool());
+        stackMap.setStackMap(table);
+        method.addCodeAttribute(stackMap);
 
         il.append(InstructionFactory.createLoad(Type.OBJECT, 1));
         il.append(new PUSH(cp, 0));

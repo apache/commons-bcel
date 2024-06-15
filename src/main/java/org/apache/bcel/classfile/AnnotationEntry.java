@@ -50,7 +50,6 @@ public class AnnotationEntry implements Node {
     public static AnnotationEntry read(final DataInput input, final ConstantPool constantPool, final boolean isRuntimeVisible) throws IOException {
         final AnnotationEntry annotationEntry = new AnnotationEntry(input.readUnsignedShort(), constantPool, isRuntimeVisible);
         final int numElementValuePairs = input.readUnsignedShort();
-        annotationEntry.elementValuePairs = new ArrayList<>();
         for (int i = 0; i < numElementValuePairs; i++) {
             annotationEntry.elementValuePairs
                 .add(new ElementValuePair(input.readUnsignedShort(), ElementValue.readElementValue(input, constantPool), constantPool));
@@ -64,12 +63,13 @@ public class AnnotationEntry implements Node {
 
     private final boolean isRuntimeVisible;
 
-    private List<ElementValuePair> elementValuePairs;
+    private final List<ElementValuePair> elementValuePairs;
 
     public AnnotationEntry(final int typeIndex, final ConstantPool constantPool, final boolean isRuntimeVisible) {
         this.typeIndex = typeIndex;
         this.constantPool = constantPool;
         this.isRuntimeVisible = isRuntimeVisible;
+        this.elementValuePairs = new ArrayList<>();
     }
 
     /**

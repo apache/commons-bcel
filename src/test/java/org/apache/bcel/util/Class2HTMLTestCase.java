@@ -25,21 +25,29 @@ import java.io.FileInputStream;
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.ClassParser;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class Class2HTMLTestCase {
 
-    @Test
-    public void testConvertJavaUtil() throws Exception {
+    @ParameterizedTest
+    @ValueSource(strings = {
+    // @formatter:off
+        "target/test-classes/Java8Example.class",
+        "target/test-classes/Java4Example.class"})
+    // @formatter:on
+    public void testConvertJavaUtil(final String classFileName) throws Exception {
         final File outputDir = new File("target/test-output/html");
         if (!outputDir.mkdirs()) { // either was not created or already existed
             assertTrue(outputDir.isDirectory()); // fail if missing
         }
 
-        try (FileInputStream file = new FileInputStream("target/test-classes/Java8Example.class")) {
+        try (FileInputStream file = new FileInputStream(classFileName)) {
 
-            final ClassParser parser = new ClassParser(file, "Java8Example.class");
+            final ClassParser parser = new ClassParser(file, new File(classFileName).getName());
 
             new Class2HTML(parser.parse(), outputDir.getAbsolutePath() + "/");
+            // TODO assertions on generated HTML code
         }
     }
 

@@ -84,6 +84,9 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
         if (rt instanceof ObjectType) {
             return (ObjectType) rt;
         }
+        if (rt instanceof ArrayType) {
+            return Type.OBJECT;
+        }
         throw new ClassGenException(rt.getClass().getCanonicalName() + " " + rt.getSignature() + " does not represent an ObjectType");
     }
 

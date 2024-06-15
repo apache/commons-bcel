@@ -146,7 +146,7 @@ public class ClassPath implements Closeable {
 
         /**
          * @return base path of found class, i.e. class is contained relative to that path, which may either denote a directory,
-         *         or zip file
+         *         or ZIP file
          */
         String getBase();
 
