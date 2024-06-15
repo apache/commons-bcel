@@ -34,6 +34,7 @@ import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
+import org.apache.commons.lang3.SystemProperties;
 import org.junit.jupiter.api.Test;
 
 public final class PerformanceTest {
@@ -130,7 +131,7 @@ public final class PerformanceTest {
 
     @Test
     public void testPerformance() {
-        final File javaLib = new File(System.getProperty("java.home"), "lib");
+        final File javaLib = new File(SystemProperties.getJavaHome(), "lib");
         javaLib.listFiles(file -> {
             if (file.getName().endsWith(".jar")) {
                 try {

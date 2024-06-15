@@ -30,26 +30,25 @@ import org.apache.bcel.util.BCELComparator;
  */
 public abstract class Constant implements Cloneable, Node {
 
-    private static BCELComparator bcelComparator = new BCELComparator() {
+    static final Constant[] EMPTY_ARRAY = {};
+
+    private static BCELComparator<Constant> bcelComparator = new BCELComparator<Constant>() {
 
         @Override
-        public boolean equals(final Object o1, final Object o2) {
-            final Constant THIS = (Constant) o1;
-            final Constant THAT = (Constant) o2;
-            return Objects.equals(THIS.toString(), THAT.toString());
+        public boolean equals(final Constant a, final Constant b) {
+            return a == b || a != null && b != null && Objects.equals(a.toString(), b.toString());
         }
 
         @Override
-        public int hashCode(final Object o) {
-            final Constant THIS = (Constant) o;
-            return THIS.toString().hashCode();
+        public int hashCode(final Constant o) {
+            return o != null ? Objects.hashCode(o.toString()) : 0;
         }
     };
 
     /**
-     * @return Comparison strategy object
+     * @return Comparison strategy object.
      */
-    public static BCELComparator getComparator() {
+    public static BCELComparator<Constant> getComparator() {
         return bcelComparator;
     }
 
@@ -107,7 +106,7 @@ public abstract class Constant implements Cloneable, Node {
     /**
      * @param comparator Comparison strategy object
      */
-    public static void setComparator(final BCELComparator comparator) {
+    public static void setComparator(final BCELComparator<Constant> comparator) {
         bcelComparator = comparator;
     }
 
@@ -142,7 +141,7 @@ public abstract class Constant implements Cloneable, Node {
         try {
             return super.clone();
         } catch (final CloneNotSupportedException e) {
-            throw new Error("Clone Not Supported"); // never happens
+            throw new UnsupportedOperationException("Clone Not Supported", e); // never happens
         }
     }
 
@@ -168,7 +167,7 @@ public abstract class Constant implements Cloneable, Node {
      */
     @Override
     public boolean equals(final Object obj) {
-        return bcelComparator.equals(this, obj);
+        return obj instanceof Constant && bcelComparator.equals(this, (Constant) obj);
     }
 
     /**
@@ -179,7 +178,7 @@ public abstract class Constant implements Cloneable, Node {
     }
 
     /**
-     * Returns value as defined by given BCELComparator strategy. By default return the hashcode of the result of
+     * Returns value as defined by given BCELComparator strategy. By default return the hash code of the result of
      * toString().
      *
      * @see Object#hashCode()

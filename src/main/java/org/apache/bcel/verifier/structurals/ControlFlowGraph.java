@@ -43,10 +43,10 @@ public class ControlFlowGraph {
     /**
      * Objects of this class represent a node in a ControlFlowGraph. These nodes are instructions, not basic blocks.
      */
-    private class InstructionContextImpl implements InstructionContext {
+    private final class InstructionContextImpl implements InstructionContext {
 
         /**
-         * The TAG field is here for external temporary flagging, such as graph colouring.
+         * The TAG field is here for external temporary flagging, such as graph coloring.
          *
          * @see #getTag()
          * @see #setTag(int)
@@ -178,7 +178,7 @@ public class ControlFlowGraph {
             }
 
             Frame inF = inFrames.get(lastExecutionJSR());
-            if (inF == null) {// no incoming frame was set, so set it.
+            if (inF == null) { // no incoming frame was set, so set it.
                 inFrames.put(lastExecutionJSR(), inFrame);
                 inF = inFrame;
             } else if (inF.equals(inFrame) || !mergeInFrames(inFrame)) { // if there was an "old" inFrame
@@ -259,9 +259,6 @@ public class ControlFlowGraph {
             return org.getClone();
         }
 
-        /*
-         * Fulfils the contract of InstructionContext.getInstruction().
-         */
         @Override
         public InstructionHandle getInstruction() {
             return instruction;
@@ -287,13 +284,11 @@ public class ControlFlowGraph {
             return org.getClone();
         }
 
-        /* Satisfies InstructionContext.getSuccessors(). */
         @Override
         public InstructionContext[] getSuccessors() {
             return contextsOf(_getSuccessors());
         }
 
-        /* Satisfies InstructionContext.getTag(). */
         @Override
         public int getTag() {
             return TAG;

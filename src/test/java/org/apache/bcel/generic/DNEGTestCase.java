@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class DNEGTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final DNEG dneg = new DNEG();
         dneg.accept(countVisitor);

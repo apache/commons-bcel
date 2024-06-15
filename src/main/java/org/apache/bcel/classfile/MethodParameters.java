@@ -38,13 +38,12 @@ public class MethodParameters extends Attribute implements Iterable<MethodParame
     /**
      * Empty array.
      */
-    private static final MethodParameter[] EMPTY_METHOD_PARAMETER_ARRAY = {};
+    private static final MethodParameter[] EMPTY_ARRAY = {};
 
-    private MethodParameter[] parameters = EMPTY_METHOD_PARAMETER_ARRAY;
+    private MethodParameter[] parameters = EMPTY_ARRAY;
 
     MethodParameters(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
         super(Const.ATTR_METHOD_PARAMETERS, nameIndex, length, constantPool);
-
         final int parameterCount = input.readUnsignedByte();
         parameters = new MethodParameter[parameterCount];
         for (int i = 0; i < parameterCount; i++) {
@@ -61,7 +60,6 @@ public class MethodParameters extends Attribute implements Iterable<MethodParame
     public Attribute copy(final ConstantPool constantPool) {
         final MethodParameters c = (MethodParameters) clone();
         c.parameters = new MethodParameter[parameters.length];
-
         Arrays.setAll(c.parameters, i -> parameters[i].copy());
         c.setConstantPool(constantPool);
         return c;
@@ -92,6 +90,6 @@ public class MethodParameters extends Attribute implements Iterable<MethodParame
     }
 
     public void setParameters(final MethodParameter[] parameters) {
-        this.parameters = parameters;
+        this.parameters = parameters != null ? parameters : EMPTY_ARRAY;
     }
 }

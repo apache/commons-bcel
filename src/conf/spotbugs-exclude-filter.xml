@@ -26,6 +26,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://github.com/spotbugs/filter/3.0.0 https://raw.githubusercontent.com/spotbugs/spotbugs/3.1.0/spotbugs/etc/findbugsfilter.xsd"><!-- N.B. Using wild-card class names so exclusions work regardless of the top-level package -->
 
+  <!-- https://github.com/spotbugs/spotbugs/issues/2710 -->
+  <Match>
+    <Class name="~.*" />
+    <Bug pattern="CT_CONSTRUCTOR_THROW" />
+  </Match>
+
   <!-- Waiting on BCEL-252 -->
   <Match>
     <Class name="~.*\.util\.Class2HTML" />
@@ -54,6 +60,33 @@
     </Or>
   </Match>
 
+  <!-- Binary compatibility -->
+  <Match>
+    <Class name="org.apache.bcel.Repository"/>
+    <Method name="setRepository"/>
+    <Bug pattern="EI_EXPOSE_STATIC_REP2"/>
+  </Match>
+  
+  <Match>
+    <Class name="org.apache.bcel.Repository"/>
+    <Method name="getRepository"/>
+    <Bug pattern="MS_EXPOSE_REP"/>
+  </Match>
+
+
+  <!--
+    TODO: this should probably be sinplified
+     Medium: Complicated, subtle or wrong increment in for-loop
+      org.apache.bcel.util.BCELifier.printFlags(int, BCELifier$FLAGS)
+      [org.apache.bcel.util.BCELifier] At BCELifier.java:[line 118]
+      QF_QUESTIONABLE_FOR_LOOP
+   -->
+  <Match>
+    <Class name="org.apache.bcel.util.BCELifier"/>
+    <Method name="printFlags" params="int, org.apache.bcel.util.BCELifier$FLAGS" returns="java.lang.String"/>
+    <Bug pattern="QF_QUESTIONABLE_FOR_LOOP"/>
+  </Match>
+
   <!-- Reason: TODO, perhaps? -->
   <Match>
     <Class name="~.*" />
@@ -75,6 +108,50 @@
       <Class name="~.*\.data\..*" />
       <Class name="~.*\.tests\.Test.*" />
     </Or>
+  </Match>
+
+  <!--
+    This is intentional
+    Error:  Switch statement found in org.apache.bcel.util.BCELFactory.visitAllocationInstruction(AllocationInstruction)
+     where one case falls through to the next case
+     [org.apache.bcel.util.BCELFactory, org.apache.bcel.util.BCELFactory]
+     At BCELFactory.java:[lines 188-191]
+     Another occurrence at BCELFactory.java:[lines 192-196] SF_SWITCH_FALLTHROUGH
+  -->
+  <Match>
+    <Class name="org.apache.bcel.util.BCELFactory"/>
+    <Method name="visitAllocationInstruction"/>
+    <Bug pattern="SF_SWITCH_FALLTHROUGH"/>
+  </Match>
+
+  <!--
+    Class is deprecated
+    Error:  The class name org.apache.bcel.util.ClassLoader
+      shadows the simple name of the superclass java.lang.ClassLoader
+      [org.apache.bcel.util.ClassLoader] At ClassLoader.java:[lines 59-178]
+      NM_SAME_SIMPLE_NAME_AS_SUPERCLASS
+    Error:  org.apache.bcel.util.ClassLoader.DEFAULT_IGNORED_PACKAGES should be package protected
+    [org.apache.bcel.util.ClassLoader] At ClassLoader.java:[line 59]
+    MS_PKGPROTECT
+  -->
+  <Match>
+    <Class name="org.apache.bcel.util.ClassLoader"/>
+    <Or>
+      <Bug pattern="NM_SAME_SIMPLE_NAME_AS_SUPERCLASS"/>
+      <Bug pattern="MS_PKGPROTECT"/>
+    </Or>
+  </Match>
+
+  <!--
+    TODO: field is deprecated in preparation for making it private later
+    Error:  org.apache.bcel.verifier.structurals.Frame._this should be package protected
+    [org.apache.bcel.verifier.structurals.Frame] In Frame.java
+      MS_PKGPROTECT
+  -->
+  <Match>
+    <Class name="org.apache.bcel.verifier.structurals.Frame"/>
+    <Field name="_this"/>
+    <Bug pattern="MS_PKGPROTECT"/>
   </Match>
 
 </FindBugsFilter>

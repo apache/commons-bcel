@@ -55,12 +55,12 @@ public final class CodeException implements Cloneable, Node, Constants {
     /**
      * Empty array.
      */
-    static final CodeException[] EMPTY_CODE_EXCEPTION_ARRAY = {};
+    static final CodeException[] EMPTY_ARRAY = {};
 
     /** Range in the code the exception handler. */
     private int startPc;
 
-    /** active. startPc is inclusive, endPc exclusive. */
+    /** Active. startPc is inclusive, endPc exclusive. */
     private int endPc;
 
     /**

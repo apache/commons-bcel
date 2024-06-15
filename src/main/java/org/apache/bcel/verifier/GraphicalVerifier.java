@@ -40,7 +40,7 @@ public class GraphicalVerifier {
         new GraphicalVerifier();
     }
 
-    /** Constructor. */
+    /** Constructs a new instance. */
     public GraphicalVerifier() {
         final VerifierAppFrame frame = new VerifierAppFrame();
         // Frames �berpr�fen, die voreingestellte Gr��e haben

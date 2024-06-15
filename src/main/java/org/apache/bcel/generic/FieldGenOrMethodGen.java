@@ -62,8 +62,10 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
         super(accessFlags);
     }
 
-    protected void addAll(final Attribute[] attrs) {
-        Collections.addAll(attributeList, attrs);
+    protected void addAll(final Attribute[] attributes) {
+        if (attributes != null) {
+            Collections.addAll(attributeList, attributes);
+        }
     }
 
     /**
@@ -88,7 +90,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
         try {
             return super.clone();
         } catch (final CloneNotSupportedException e) {
-            throw new Error("Clone Not Supported"); // never happens
+            throw new UnsupportedOperationException("Clone Not Supported", e); // never happens
         }
     }
 

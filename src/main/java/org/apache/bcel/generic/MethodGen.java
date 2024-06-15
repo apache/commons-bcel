@@ -24,6 +24,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Objects;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.classfile.AnnotationEntry;
@@ -44,6 +45,7 @@ import org.apache.bcel.classfile.RuntimeVisibleParameterAnnotations;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.BCELComparator;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.stream.Streams;
 
 /**
  * Template class for building up a method. This is done by defining exception handlers, adding thrown exceptions, local
@@ -99,19 +101,16 @@ public class MethodGen extends FieldGenOrMethodGen {
         }
     }
 
-    private static BCELComparator bcelComparator = new BCELComparator() {
+    private static BCELComparator<FieldGenOrMethodGen> bcelComparator = new BCELComparator<FieldGenOrMethodGen>() {
 
         @Override
-        public boolean equals(final Object o1, final Object o2) {
-            final FieldGenOrMethodGen THIS = (FieldGenOrMethodGen) o1;
-            final FieldGenOrMethodGen THAT = (FieldGenOrMethodGen) o2;
-            return Objects.equals(THIS.getName(), THAT.getName()) && Objects.equals(THIS.getSignature(), THAT.getSignature());
+        public boolean equals(final FieldGenOrMethodGen a, final FieldGenOrMethodGen b) {
+            return a == b || a != null && b != null && Objects.equals(a.getName(), b.getName()) && Objects.equals(a.getSignature(), b.getSignature());
         }
 
         @Override
-        public int hashCode(final Object o) {
-            final FieldGenOrMethodGen THIS = (FieldGenOrMethodGen) o;
-            return THIS.getSignature().hashCode() ^ THIS.getName().hashCode();
+        public int hashCode(final FieldGenOrMethodGen o) {
+            return o != null ? Objects.hash(o.getSignature(), o.getName()) : 0;
         }
     };
 
@@ -124,9 +123,9 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * @return Comparison strategy object
+     * @return Comparison strategy object.
      */
-    public static BCELComparator getComparator() {
+    public static BCELComparator<FieldGenOrMethodGen> getComparator() {
         return bcelComparator;
     }
 
@@ -203,9 +202,9 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * @param comparator Comparison strategy object
+     * @param comparator Comparison strategy object.
      */
-    public static void setComparator(final BCELComparator comparator) {
+    public static void setComparator(final BCELComparator<FieldGenOrMethodGen> comparator) {
         bcelComparator = comparator;
     }
 
@@ -633,7 +632,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      */
     @Override
     public boolean equals(final Object obj) {
-        return bcelComparator.equals(this, obj);
+        return obj instanceof FieldGenOrMethodGen && bcelComparator.equals(this, (FieldGenOrMethodGen) obj);
     }
 
     // J5TODO: Should paramAnnotations be an array of arrays? Rather than an array of lists, this
@@ -787,7 +786,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Get method object. Never forget to call setMaxStack() or setMaxStack(max), respectively, before calling this method
+     * Gets method object. Never forget to call setMaxStack() or setMaxStack(max), respectively, before calling this method
      * (the same applies for max locals).
      *
      * @return method object
@@ -885,7 +884,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Return value as defined by given BCELComparator strategy. By default return the hashcode of the method's name XOR
+     * Return value as defined by given BCELComparator strategy. By default return the hash code of the method's name XOR
      * signature.
      *
      * @see Object#hashCode()
@@ -896,11 +895,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     private List<AnnotationEntryGen> makeMutableVersion(final AnnotationEntry[] mutableArray) {
-        final List<AnnotationEntryGen> result = new ArrayList<>();
-        for (final AnnotationEntry element : mutableArray) {
-            result.add(new AnnotationEntryGen(element, getConstantPool(), false));
-        }
-        return result;
+        return Streams.of(mutableArray).map(ae -> new AnnotationEntryGen(ae, getConstantPool(), false)).collect(Collectors.toList());
     }
 
     /**
@@ -1026,10 +1021,8 @@ public class MethodGen extends FieldGenOrMethodGen {
      *
      * @since 6.5.0
      */
-    public void removeRuntimeAttributes(final Attribute[] attrs) {
-        for (final Attribute attr : attrs) {
-            removeAttribute(attr);
-        }
+    public void removeRuntimeAttributes(final Attribute[] attributes) {
+        Streams.of(attributes).forEach(this::removeAttribute);
     }
 
     public void setArgumentName(final int i, final String name) {
@@ -1037,7 +1030,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     public void setArgumentNames(final String[] argNames) {
-        this.argNames = argNames;
+        this.argNames = ArrayUtils.nullToEmpty(argNames);
     }
 
     public void setArgumentType(final int i, final Type type) {
@@ -1045,7 +1038,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     public void setArgumentTypes(final Type[] argTypes) {
-        this.argTypes = argTypes;
+        this.argTypes = argTypes != null ? argTypes : Type.NO_ARGS;
     }
 
     public void setClassName(final String className) { // TODO could be package-protected?
@@ -1062,10 +1055,8 @@ public class MethodGen extends FieldGenOrMethodGen {
     public void setMaxLocals() { // TODO could be package-protected? (some tests would need repackaging)
         if (il != null) {
             int max = isStatic() ? 0 : 1;
-            if (argTypes != null) {
-                for (final Type argType : argTypes) {
-                    max += argType.getSize();
-                }
+            for (final Type argType : argTypes) {
+                max += argType.getSize();
             }
             for (InstructionHandle ih = il.getStart(); ih != null; ih = ih.getNext()) {
                 final Instruction ins = ih.getInstruction();
@@ -1083,7 +1074,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Set maximum number of local variables.
+     * Sets maximum number of local variables.
      */
     public void setMaxLocals(final int m) {
         maxLocals = m;
@@ -1101,7 +1092,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Set maximum stack size for this method.
+     * Sets maximum stack size for this method.
      */
     public void setMaxStack(final int m) { // TODO could be package-protected?
         maxStack = m;

@@ -385,7 +385,17 @@ public class ConstantPoolModuleToStringTestCase {
             append(constantModule);
             append(constantModule.toString(pool));
             final String s = constantModule.toString(pool).trim();
-            assertTrue(StringUtils.startsWithAny(s, "jdk.", "java.", "org.junit", "org.apiguardian.api", "org.opentest4j"), s);
+            final boolean condition = StringUtils.startsWithAny(s,
+                    "jdk.",
+                    "java.",
+                    "org.junit",
+                    "org.apiguardian.api",
+                    "org.opentest4j",
+                    "net.bytebuddy",
+                    "com.sun.jna",
+                    "junit",
+                    "org.hamcrest");
+            assertTrue(condition, s);
         }
 
         @Override
@@ -496,7 +506,8 @@ public class ConstantPoolModuleToStringTestCase {
     @ValueSource(strings = {
     // @formatter:off
         "java.lang.CharSequence$1CharIterator",                 // contains attribute EnclosingMethod
-        "org.apache.commons.lang3.function.TriFunction",        // contains attributes BootstrapMethods, InnerClasses, LineNumberTable, LocalVariableTable, LocalVariableTypeTable, RuntimeVisibleAnnotations, Signature, SourceFile
+        "org.apache.commons.lang3.function.TriFunction",        // contains attributes BootstrapMethods, InnerClasses, LineNumberTable, LocalVariableTable,
+                                                                // LocalVariableTypeTable, RuntimeVisibleAnnotations, Signature, SourceFile
         "org.apache.commons.lang3.math.NumberUtils",            // contains attribute ConstantFloat, ConstantDouble
         "org.apache.bcel.Const",                                // contains attributes MethodParameters
         "java.io.StringBufferInputStream",                      // contains attributes Deprecated, StackMap

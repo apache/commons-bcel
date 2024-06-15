@@ -83,7 +83,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @param defaultTarget default instruction target
      */
     Select(final short opcode, final int[] match, final InstructionHandle[] targets, final InstructionHandle defaultTarget) {
-        // don't set default target before instuction is built
+        // don't set default target before instruction is built
         super(opcode, null);
         this.match = match;
         this.targets = targets;
@@ -284,7 +284,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
-     * Set branch target for 'i'th case
+     * Sets branch target for 'i'th case
      */
     public void setTarget(final int i, final InstructionHandle target) { // TODO could be package-protected?
         notifyTarget(targets[i], target, this);
@@ -310,7 +310,11 @@ public abstract class Select extends BranchInstruction implements VariableLength
             for (int i = 0; i < match_length; i++) {
                 String s = "null";
                 if (targets[i] != null) {
-                    s = targets[i].getInstruction().toString();
+                    if (targets[i].getInstruction() == this) {
+                        s = "<points to itself>";
+                    } else {
+                        s = targets[i].getInstruction().toString();
+                    }
                 }
                 buf.append("(").append(match[i]).append(", ").append(s).append(" = {").append(indices[i]).append("})");
             }

@@ -20,7 +20,7 @@ package org.apache.bcel.data;
 public class AttributeTestClassEM01 {
     public static void main(final String[] argv) {
         @SuppressWarnings("unused")
-        class S {
+        final class S {
             public void sayhello() {
                 System.err.println("hello");
             }

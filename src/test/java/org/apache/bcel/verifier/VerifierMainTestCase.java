@@ -36,6 +36,7 @@ import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.SWAP;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemProperties;
 import org.eclipse.jdt.internal.compiler.batch.Main;
 import org.junit.jupiter.api.Test;
 
@@ -52,7 +53,7 @@ public class VerifierMainTestCase extends AbstractTestCase {
             args.add(javaAgent.replace("jacoco.exec", "jacoco_org.apache.bcel.data.SWAP.exec"));
         }
         args.add("-cp");
-        args.add(System.getProperty("java.class.path"));
+        args.add(SystemProperties.getJavaClassPath());
         args.add("org.apache.bcel.verifier.Verifier");
         args.add("org/apache/bcel/data/SWAP.class");
         final ProcessBuilder pb = new ProcessBuilder(args);

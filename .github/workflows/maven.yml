@@ -27,17 +27,17 @@ jobs:
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        java: [ 8, 11, 17 ]
+        os: [ubuntu-latest, windows-latest, macos-13]
+        java: [ 8, 11, 17, 21 ]
         experimental: [false]
 #        include:
-#          - java: 18-ea
+#          - java: 22-ea
 #            os: ubuntu-latest
 #            experimental: true
-#          - java: 18-ea
+#          - java: 22-ea
 #            os: windows-latest
 #            experimental: true
-#          - java: 18-ea
+#          - java: 22-ea
 #            os: macos-latest
 #            experimental: true
       fail-fast: false
@@ -45,19 +45,19 @@ jobs:
     steps:
     - name: Prepare git
       run: git config --global core.autocrlf false
-    - uses: actions/checkout@v3.5.2
+    - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       with:
         persist-credentials: false
-    - uses: actions/cache@v3.3.1
+    - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
       with:
         path: ~/.m2/repository
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
     - name: Set up JDK ${{ matrix.java }}
-      uses: actions/setup-java@v3.11.0
+      uses: actions/setup-java@99b8673ff64fbf99d8d325f52d9a5bdedb8483e9 # v4.2.1
       with:
         distribution: 'temurin'
         java-version: ${{ matrix.java }}
     - name: Build with Maven
-      run: mvn -V --file pom.xml --no-transfer-progress -DtrimStackTrace=false
+      run: mvn --errors --show-version --batch-mode --no-transfer-progress -DtrimStackTrace=false

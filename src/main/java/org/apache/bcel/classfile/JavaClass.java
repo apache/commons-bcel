@@ -65,19 +65,17 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     public static final byte FILE = 2;
     public static final byte ZIP = 3;
     private static final boolean debug = Boolean.getBoolean("JavaClass.debug"); // Debugging on/off
-    private static BCELComparator bcelComparator = new BCELComparator() {
+
+    private static BCELComparator<JavaClass> bcelComparator = new BCELComparator<JavaClass>() {
 
         @Override
-        public boolean equals(final Object o1, final Object o2) {
-            final JavaClass THIS = (JavaClass) o1;
-            final JavaClass THAT = (JavaClass) o2;
-            return Objects.equals(THIS.getClassName(), THAT.getClassName());
+        public boolean equals(final JavaClass a, final JavaClass b) {
+            return a == b || a != null && b != null && Objects.equals(a.getClassName(), b.getClassName());
         }
 
         @Override
-        public int hashCode(final Object o) {
-            final JavaClass THIS = (JavaClass) o;
-            return THIS.getClassName().hashCode();
+        public int hashCode(final JavaClass o) {
+            return o != null ? Objects.hashCode(o.getClassName()) : 0;
         }
     };
 
@@ -91,9 +89,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * @return Comparison strategy object
+     * @return Comparison strategy object.
      */
-    public static BCELComparator getComparator() {
+    public static BCELComparator<JavaClass> getComparator() {
         return bcelComparator;
     }
 
@@ -107,9 +105,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * @param comparator Comparison strategy object
+     * @param comparator Comparison strategy object.
      */
-    public static void setComparator(final BCELComparator comparator) {
+    public static void setComparator(final BCELComparator<JavaClass> comparator) {
         bcelComparator = comparator;
     }
 
@@ -135,8 +133,10 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     private boolean isAnonymous;
 
     private boolean isNested;
+    private boolean isRecord;
 
     private boolean computedNestedTypeStatus;
+    private boolean computedRecord;
 
     /**
      * In cases where we go ahead and create something, use the default SyntheticRepository, because we don't know any
@@ -184,17 +184,15 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     public JavaClass(final int classNameIndex, final int superclassNameIndex, final String fileName, final int major, final int minor, final int accessFlags,
         final ConstantPool constantPool, int[] interfaces, Field[] fields, Method[] methods, Attribute[] attributes, final byte source) {
         super(accessFlags);
-        if (interfaces == null) {
-            interfaces = ArrayUtils.EMPTY_INT_ARRAY;
-        }
+        interfaces = ArrayUtils.nullToEmpty(interfaces);
         if (attributes == null) {
             attributes = Attribute.EMPTY_ARRAY;
         }
         if (fields == null) {
-            fields = Field.EMPTY_FIELD_ARRAY;
+            fields = Field.EMPTY_ARRAY;
         }
         if (methods == null) {
-            methods = Method.EMPTY_METHOD_ARRAY;
+            methods = Method.EMPTY_ARRAY;
         }
         this.classNameIndex = classNameIndex;
         this.superclassNameIndex = superclassNameIndex;
@@ -259,6 +257,19 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     @Override
     public int compareTo(final JavaClass obj) {
         return getClassName().compareTo(obj.getClassName());
+    }
+
+    private void computeIsRecord() {
+        if (computedRecord) {
+            return;
+        }
+        for (final Attribute attribute : this.attributes) {
+            if (attribute instanceof Record) {
+                isRecord = true;
+                break;
+            }
+        }
+        this.computedRecord = true;
     }
 
     private void computeNestedTypeStatus() {
@@ -391,7 +402,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      */
     @Override
     public boolean equals(final Object obj) {
-        return bcelComparator.equals(this, obj);
+        return obj instanceof JavaClass && bcelComparator.equals(this, (JavaClass) obj);
     }
 
     /**
@@ -435,7 +446,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * Get all interfaces implemented by this JavaClass (transitively).
+     * Gets all interfaces implemented by this JavaClass (transitively).
      *
      * @throws ClassNotFoundException if any of the class's superclasses or interfaces can't be found.
      */
@@ -558,7 +569,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * Get interfaces directly implemented by this JavaClass.
+     * Gets interfaces directly implemented by this JavaClass.
      *
      * @throws ClassNotFoundException if any of the class's interfaces can't be found.
      */
@@ -650,7 +661,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * @return the superclass for this JavaClass object, or null if this is java.lang.Object
+     * @return the superclass for this JavaClass object, or null if this is {@link Object}
      * @throws ClassNotFoundException if the superclass can't be found
      */
     public JavaClass getSuperClass() throws ClassNotFoundException {
@@ -674,8 +685,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * returns the super class name of this class. In the case that this class is java.lang.Object, it will return itself
-     * (java.lang.Object). This is probably incorrect but isn't fixed at this time to not break existing clients.
+     * returns the super class name of this class. In the case that this class is {@link Object}, it will return itself
+     * ({@link Object}). This is probably incorrect but isn't fixed at this time to not break existing clients.
      *
      * @return Superclass name.
      */
@@ -691,7 +702,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * Return value as defined by given BCELComparator strategy. By default return the hashcode of the class name.
+     * Return value as defined by given BCELComparator strategy. By default return the hash code of the class name.
      *
      * @see Object#hashCode()
      */
@@ -761,6 +772,17 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         return this.isNested;
     }
 
+    /**
+     * Tests whether this class was declared as a record
+     *
+     * @return true if a record attribute is present, false otherwise.
+     * @since 6.9.0
+     */
+    public boolean isRecord() {
+        computeIsRecord();
+        return this.isRecord;
+    }
+
     public final boolean isSuper() {
         return (super.getAccessFlags() & Const.ACC_SUPER) != 0;
     }
@@ -769,7 +791,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param attributes .
      */
     public void setAttributes(final Attribute[] attributes) {
-        this.attributes = attributes;
+        this.attributes = attributes != null ? attributes : Attribute.EMPTY_ARRAY;
     }
 
     /**
@@ -797,11 +819,11 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param fields .
      */
     public void setFields(final Field[] fields) {
-        this.fields = fields;
+        this.fields = fields != null ? fields : Field.EMPTY_ARRAY;
     }
 
     /**
-     * Set File name of class, aka SourceFile attribute value
+     * Sets File name of class, aka SourceFile attribute value
      */
     public void setFileName(final String fileName) {
         this.fileName = fileName;
@@ -811,14 +833,14 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param interfaceNames .
      */
     public void setInterfaceNames(final String[] interfaceNames) {
-        this.interfaceNames = interfaceNames;
+        this.interfaceNames = ArrayUtils.nullToEmpty(interfaceNames);
     }
 
     /**
      * @param interfaces .
      */
     public void setInterfaces(final int[] interfaces) {
-        this.interfaces = interfaces;
+        this.interfaces = ArrayUtils.nullToEmpty(interfaces);
     }
 
     /**
@@ -832,7 +854,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param methods .
      */
     public void setMethods(final Method[] methods) {
-        this.methods = methods;
+        this.methods = methods != null ? methods : Method.EMPTY_ARRAY;
     }
 
     /**
@@ -850,7 +872,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * Set absolute path to file this class was read from.
+     * Sets absolute path to file this class was read from.
      */
     public void setSourceFileName(final String sourceFileName) {
         this.sourceFileName = sourceFileName;

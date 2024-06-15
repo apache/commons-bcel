@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class I2STestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final I2S i2s = new I2S();
         i2s.accept(countVisitor);

@@ -38,7 +38,7 @@ public final class ModuleOpens implements Cloneable, Node {
     private final int[] opensToIndex; // points to CONSTANT_Module_info
 
     /**
-     * Construct object from file stream.
+     * Constructs object from file stream.
      *
      * @param file Input stream
      * @throws IOException if an I/O Exception occurs in readUnsignedShort

@@ -29,7 +29,6 @@ import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
-import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.iterators.EnumerationIterator;
 import org.apache.commons.collections4.iterators.FilterIterator;
 import org.apache.commons.collections4.iterators.IteratorIterable;
@@ -38,7 +37,6 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Threads;
 import org.openjdk.jmh.annotations.Warmup;
@@ -52,20 +50,6 @@ import org.openjdk.jmh.infra.Blackhole;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class BCELBenchmark {
 
-    private JarFile getJarFile() throws IOException {
-        final String javaHome = System.getProperty("java.home");
-        return new JarFile(javaHome + "/lib/rt.jar");
-    }
-
-    private Iterable<JarEntry> getClasses(JarFile jar) {
-        return new IteratorIterable<>(new FilterIterator<>(new EnumerationIterator<>(jar.entries()), new Predicate<JarEntry>() {
-            @Override
-            public boolean evaluate(JarEntry entry) {
-                return entry.getName().endsWith(JavaClass.EXTENSION);
-            }
-        }));
-    }
-
     /**
      * Baseline benchmark. Read the classes but don't parse them.
      */
@@ -76,20 +60,6 @@ public class BCELBenchmark {
         for (JarEntry entry : getClasses(jar)) {
             byte[] bytes = IOUtils.toByteArray(jar.getInputStream(entry));
             bh.consume(bytes);
-        }
-
-        jar.close();
-    }
-
-    @Benchmark
-    public void parser(Blackhole bh) throws IOException {
-        JarFile jar = getJarFile();
-
-        for (JarEntry entry : getClasses(jar)) {
-            byte[] bytes = IOUtils.toByteArray(jar.getInputStream(entry));
-
-            JavaClass clazz = new ClassParser(new ByteArrayInputStream(bytes), entry.getName()).parse();
-            bh.consume(clazz);
         }
 
         jar.close();
@@ -119,6 +89,34 @@ public class BCELBenchmark {
             }
 
             bh.consume(cg.getJavaClass().getBytes());
+        }
+
+        jar.close();
+    }
+
+    private Iterable<JarEntry> getClasses(JarFile jar) {
+        return new IteratorIterable<>(new FilterIterator<>(new EnumerationIterator<>(jar.entries()), new Predicate<JarEntry>() {
+            @Override
+            public boolean evaluate(JarEntry entry) {
+                return entry.getName().endsWith(JavaClass.EXTENSION);
+            }
+        }));
+    }
+
+    private JarFile getJarFile() throws IOException {
+        final String javaHome = System.getProperty("java.home");
+        return new JarFile(javaHome + "/lib/rt.jar");
+    }
+
+    @Benchmark
+    public void parser(Blackhole bh) throws IOException {
+        JarFile jar = getJarFile();
+
+        for (JarEntry entry : getClasses(jar)) {
+            byte[] bytes = IOUtils.toByteArray(jar.getInputStream(entry));
+
+            JavaClass clazz = new ClassParser(new ByteArrayInputStream(bytes), entry.getName()).parse();
+            bh.consume(clazz);
         }
 
         jar.close();

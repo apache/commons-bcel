@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class LANDTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final LAND land = new LAND();
         land.accept(countVisitor);

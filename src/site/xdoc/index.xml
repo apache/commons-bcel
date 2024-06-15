@@ -24,7 +24,6 @@
     <author email="dev@commons.apache.org">Commons Documentation Team</author>
   </properties>
   <body>
-
     <section name="Commons BCEL">
       <p>
         The Byte Code Engineering Library (Apache Commons BCEL&#x2122;) is intended to give users a
@@ -34,7 +33,6 @@
         of the given class: methods, fields and byte code instructions, in
         particular.
       </p>
-
       <p>
         Such objects can be read from an existing file, be transformed
         by a program (e.g. a class loader at run-time) and written to a file again.
@@ -43,13 +41,11 @@
         if you want to learn about the Java Virtual Machine (JVM) and the format of
         Java .class files.
       </p>
-
       <p>
         BCEL contains a byte code verifier named JustIce, which usually
         gives you much better information about what's wrong with your
         code than the standard JVM message.
       </p>
-
       <p>
         BCEL is already being used successfully in several projects such
         as compilers, optimizers, obsfuscators, code generators
@@ -58,7 +54,6 @@
         might want to have a look into the ASM project at objectweb.
       </p>
     </section>
-
     <section name="Documentation">
       <p>
         The package descriptions in the <a href="apidocs/index.html">Javadoc</a> give an overview of the available features
@@ -69,7 +64,6 @@
         <a href="https://gitbox.apache.org/repos/asf?p=commons-bcel.git">browsed</a>, or you can browse/contribute via <a href="https://github.com/apache/commons-bcel">GitHub</a>.
       </p>
     </section>
-    <!-- ================================================== -->
     <section name="Release Information">
       <p>The latest stable release of BCEL is here, you may: </p>
       <ul>
@@ -78,15 +72,14 @@
         <li>Inspect the <a href="bcel5-bcel6-clirr-report.html">extended Clirr report</a> comparing 5.2 with 6.x</li>
       </ul>
       <p>
-        Alternatively you can pull it from the central Maven repositories through a <a href="dependency-info.html">dependency</a>.
+        Alternatively, you can pull it from the central Maven repositories through a <a href="dependency-info.html">dependency</a>.
       </p>
 
     </section>
-    <!-- ================================================== -->
     <section name="Getting Involved">
       <p>
         The <a href="mail-lists.html">commons developer mailing list</a> is the main channel of communication for contributors. Please remember that the lists are shared between all commons components, so prefix your email by [bcel]. </p>
-      <p>You can also visit the #apache-commons IRC channel on irc.freenode.net or peruse <a href="issue-tracking.html">JIRA</a>.</p>
+      <p>You can also peruse <a href="issue-tracking.html">JIRA</a>.</p>
       <p>Alternatively you can go through the <em>Needs Work</em> tags in the <a href="taglist.html">TagList report</a>.</p>
       <p>If you'd like to offer up pull requests via GitHub rather than applying patches to JIRA, we have a <a href="https://github.com/apache/commons-bcel/">GitHub mirror</a>. </p>
     </section>

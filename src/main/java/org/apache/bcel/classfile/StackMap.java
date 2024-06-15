@@ -26,8 +26,8 @@ import org.apache.bcel.util.Args;
 
 /**
  * This class represents a stack map attribute used for preverification of Java classes for the
- * <a href="http://java.sun.com/j2me/"> Java 2 Micro Edition</a> (J2ME). This attribute is used by the
- * <a href="http://java.sun.com/products/cldc/">KVM</a> and contained within the Code attribute of a method. See CLDC
+ * <a href="https://java.sun.com/j2me/"> Java 2 Micro Edition</a> (J2ME). This attribute is used by the
+ * <a href="https://java.sun.com/products/cldc/">KVM</a> and contained within the Code attribute of a method. See CLDC
  * specification �5.3.1.2
  *
  * <pre>
@@ -48,7 +48,7 @@ public final class StackMap extends Attribute {
     private StackMapEntry[] table; // Table of stack map entries
 
     /**
-     * Construct object from input stream.
+     * Constructs object from input stream.
      *
      * @param nameIndex Index of name
      * @param length Content length in bytes

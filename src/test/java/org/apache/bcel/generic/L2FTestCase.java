@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class L2FTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final L2F l2f = new L2F();
         l2f.accept(countVisitor);

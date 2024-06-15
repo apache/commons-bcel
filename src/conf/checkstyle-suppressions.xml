@@ -17,16 +17,15 @@ limitations under the License.
 -->
 
 <!DOCTYPE suppressions PUBLIC
-    "-//Checkstyle//DTD SuppressionFilter Configuration 1.0//EN"
-    "https://checkstyle.org/dtds/suppressions_1_0.dtd">
+    "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+    "https://checkstyle.org/dtds/suppressions_1_2.dtd">
 <!-- SEE: http://checkstyle.sourceforge.net/config.html#Examples -->
 <suppressions>
     <suppress checks="LineLength"  files="InstructionFinder.java"/> <!-- TODO later -->
-
     <suppress checks="MagicNumber" files="VerifierAppFrame.java"/> <!-- Swing files use lots of numbers -->
     <suppress checks="MagicNumber" files="VerifyDialog.java"/> <!-- Swing files use lots of numbers -->
     <suppress checks="MagicNumber" files="src[/\\]test[/\\]"/> <!-- test files need numbers -->
-
-     <!-- Maven generated code -->
     <suppress checks=".*"          files="[/\\]target[/\\]"/>
+    <suppress checks="VisibilityModifier" files="StaticFieldVerifierSuperClass.java" lines="22,23,24,26"/>
+    <suppress checks="VisibilityModifier" files="FieldVerifierSuperClass.java" lines="22,16,24,19"/>
 </suppressions>

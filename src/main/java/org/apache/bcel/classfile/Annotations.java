@@ -47,7 +47,7 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
     public Annotations(final byte annotationType, final int nameIndex, final int length, final AnnotationEntry[] annotationTable,
             final ConstantPool constantPool, final boolean isRuntimeVisible) {
         super(annotationType, nameIndex, length, constantPool);
-        this.annotationTable = annotationTable;
+        setAnnotationTable(annotationTable);
         this.isRuntimeVisible = isRuntimeVisible;
     }
 
@@ -103,9 +103,6 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
      * @return the number of annotation entries in this annotation
      */
     public final int getNumAnnotations() {
-        if (annotationTable == null) {
-            return 0;
-        }
         return annotationTable.length;
     }
 
@@ -124,7 +121,7 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
      * @param annotationTable the entries to set in this annotation
      */
     public final void setAnnotationTable(final AnnotationEntry[] annotationTable) {
-        this.annotationTable = annotationTable;
+        this.annotationTable = annotationTable != null ? annotationTable : AnnotationEntry.EMPTY_ARRAY;
     }
 
     /**
@@ -146,9 +143,6 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
     }
 
     protected void writeAnnotations(final DataOutputStream dos) throws IOException {
-        if (annotationTable == null) {
-            return;
-        }
         dos.writeShort(annotationTable.length);
         for (final AnnotationEntry element : annotationTable) {
             element.dump(dos);

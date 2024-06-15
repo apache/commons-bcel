@@ -37,7 +37,9 @@ public interface InstructionConstants {
     /**
      * Deprecated, consider private and ignore.
      */
-    class Clinit {}
+    class Clinit {
+        // empty
+    }
 
     /*
      * NOTE these are not currently immutable, because Instruction has mutable protected fields opcode and length.

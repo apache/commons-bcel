@@ -35,6 +35,7 @@ import org.apache.bcel.HelloWorldCreator;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.generic.BinaryOpCreator;
+import org.apache.commons.lang3.SystemProperties;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -42,14 +43,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class BCELifierTestCase extends AbstractTestCase {
 
     private static final String EOL = System.lineSeparator();
-    public static final String CLASSPATH = "." + File.pathSeparator + System.getProperty("java.class.path");
+    public static final String CLASSPATH = "." + File.pathSeparator + SystemProperties.getJavaClassPath();
 
     // Canonicalise the javap output so it compares better
     private String canonHashRef(String input) {
         input = input.replaceAll("#\\d+", "#n"); // numbers may vary in length
         input = input.replaceAll(" +", " "); // collapse spaces
-        input = input.replaceAll("//.+", ""); // comments may vary
-        return input;
+        return input.replaceAll("//.+", "");
     }
 
     private String exec(final File workDir, final String... args) throws Exception {
@@ -173,8 +173,9 @@ public class BCELifierTestCase extends AbstractTestCase {
     }
 
     /*
-     * Dump a class using "javap" and compare with the same class recreated using BCELifier, "javac", "java" and dumped with
-     * "javap" TODO: detect if JDK present and skip test if not
+     * Dumps a class using "javap" and compare with the same class recreated using BCELifier, "javac", "java" and dumped with "javap".
+     *
+     * TODO: detect if JDK present and skip test if not
      */
     @ParameterizedTest
     @ValueSource(strings = {

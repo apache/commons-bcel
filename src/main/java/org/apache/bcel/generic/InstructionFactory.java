@@ -30,7 +30,7 @@ import org.apache.bcel.Const;
  */
 public class InstructionFactory implements InstructionConstants {
 
-    private static class MethodObject {
+    private static final class MethodObject {
 
         final Type[] argTypes;
         final Type resultType;
@@ -49,10 +49,12 @@ public class InstructionFactory implements InstructionConstants {
 
     private static final String FQCN_STRING_BUFFER = "java.lang.StringBuffer";
 
-    // N.N. These must agree with the order of Constants.T_CHAR through T_LONG
-    private static final String[] shortNames = {"C", "F", "D", "B", "S", "I", "L"};
+    /**
+     * These must agree with the order of Constants.T_CHAR through T_LONG.
+     */
+    private static final String[] SHORT_NAMES = {"C", "F", "D", "B", "S", "I", "L"};
 
-    private static final MethodObject[] appendMethodObjects = {
+    private static final MethodObject[] APPEND_METHOD_OBJECTS = {
             new MethodObject(FQCN_STRING_BUFFER, APPEND, Type.STRINGBUFFER, new Type[] { Type.STRING }),
             new MethodObject(FQCN_STRING_BUFFER, APPEND, Type.STRINGBUFFER, new Type[] { Type.OBJECT }), null, null, // indices 2, 3
             new MethodObject(FQCN_STRING_BUFFER, APPEND, Type.STRINGBUFFER, new Type[] { Type.BOOLEAN }),
@@ -480,7 +482,7 @@ public class InstructionFactory implements InstructionConstants {
     public Instruction createAppend(final Type type) {
         final byte t = type.getType();
         if (isString(type)) {
-            return createInvoke(appendMethodObjects[0], Const.INVOKEVIRTUAL);
+            return createInvoke(APPEND_METHOD_OBJECTS[0], Const.INVOKEVIRTUAL);
         }
         switch (t) {
         case Const.T_BOOLEAN:
@@ -491,10 +493,10 @@ public class InstructionFactory implements InstructionConstants {
         case Const.T_SHORT:
         case Const.T_INT:
         case Const.T_LONG:
-            return createInvoke(appendMethodObjects[t], Const.INVOKEVIRTUAL);
+            return createInvoke(APPEND_METHOD_OBJECTS[t], Const.INVOKEVIRTUAL);
         case Const.T_ARRAY:
         case Const.T_OBJECT:
-            return createInvoke(appendMethodObjects[1], Const.INVOKEVIRTUAL);
+            return createInvoke(APPEND_METHOD_OBJECTS[1], Const.INVOKEVIRTUAL);
         default:
             throw new IllegalArgumentException("No append for this type? " + type);
         }
@@ -511,10 +513,10 @@ public class InstructionFactory implements InstructionConstants {
             if (dest == Const.T_LONG && (src == Const.T_CHAR || src == Const.T_BYTE || src == Const.T_SHORT)) {
                 src = Const.T_INT;
             }
-            final String name = "org.apache.bcel.generic." + shortNames[src - Const.T_CHAR] + "2" + shortNames[dest - Const.T_CHAR];
+            final String name = "org.apache.bcel.generic." + SHORT_NAMES[src - Const.T_CHAR] + "2" + SHORT_NAMES[dest - Const.T_CHAR];
             Instruction i = null;
             try {
-                i = (Instruction) Class.forName(name).newInstance();
+                i = (Instruction) Class.forName(name).getConstructor().newInstance();
             } catch (final Exception e) {
                 throw new IllegalArgumentException("Could not find instruction: " + name, e);
             }
@@ -638,8 +640,10 @@ public class InstructionFactory implements InstructionConstants {
         int index;
         int nargs = 0;
         final String signature = Type.getMethodSignature(retType, argTypes);
-        for (final Type argType : argTypes) {
-            nargs += argType.getSize();
+        if (argTypes != null) {
+            for (final Type argType : argTypes) {
+                nargs += argType.getSize();
+            }
         }
         if (useInterface) {
             index = cp.addInterfaceMethodref(className, name, signature);

@@ -20,6 +20,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantDouble;
+import org.apache.bcel.classfile.ConstantDynamic;
 import org.apache.bcel.classfile.ConstantFloat;
 import org.apache.bcel.classfile.ConstantInteger;
 import org.apache.bcel.classfile.ConstantLong;
@@ -70,7 +71,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     private ConstantPoolGen cpg;
 
     /**
-     * Constructor. Constructs a new instance of this class.
+     * Constructs a new instance of this class.
      */
     public ExecutionVisitor() {
     }
@@ -1053,6 +1054,9 @@ public class ExecutionVisitor extends EmptyVisitor {
         }
         if (c instanceof ConstantClass) {
             stack().push(Type.CLASS);
+        }
+        if (c instanceof ConstantDynamic) {
+            stack().push(Type.OBJECT);
         }
     }
 

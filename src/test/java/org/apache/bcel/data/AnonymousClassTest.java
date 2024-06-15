@@ -18,7 +18,7 @@
 package org.apache.bcel.data;
 
 public class AnonymousClassTest {
-    class X {
+    final class X {
     }
 
     static class Y {

@@ -98,11 +98,11 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
     }
 
     /**
-     * Since InvokeDynamic doesn't refer to a reference type, just return java.lang.Object, as that is the only type we can
+     * Since InvokeDynamic doesn't refer to a reference type, just return {@link Object}, as that is the only type we can
      * say for sure the reference will be.
      *
      * @param cpg the ConstantPoolGen used to create the instruction
-     * @return an ObjectType for java.lang.Object
+     * @return an ObjectType for {@link Object}
      * @since 6.1
      */
     @Override

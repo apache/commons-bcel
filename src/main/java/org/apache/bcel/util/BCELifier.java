@@ -392,7 +392,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
             printWriter.print("new StackMapType[] {");
             for (int i = 0; i < types.length; i++) {
                 types[i].accept(this);
-                if (i < types.length -1) {
+                if (i < types.length - 1) {
                     printWriter.print(", ");
                 } else {
                     printWriter.print(" }");

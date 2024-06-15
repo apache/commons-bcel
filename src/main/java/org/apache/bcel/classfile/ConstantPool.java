@@ -68,7 +68,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * @param constantPool Array of constants
      */
     public ConstantPool(final Constant[] constantPool) {
-        this.constantPool = constantPool;
+        setConstantPool(constantPool);
     }
 
     /**
@@ -399,7 +399,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * @return Length of constant pool.
      */
     public int getLength() {
-        return constantPool == null ? 0 : constantPool.length;
+        return constantPool.length;
     }
 
     @Override
@@ -418,7 +418,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * @param constantPool
      */
     public void setConstantPool(final Constant[] constantPool) {
-        this.constantPool = constantPool;
+        this.constantPool = constantPool != null ? constantPool : Constant.EMPTY_ARRAY;
     }
 
     /**

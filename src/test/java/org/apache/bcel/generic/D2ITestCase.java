@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class D2ITestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final D2I d2i = new D2I();
         d2i.accept(countVisitor);

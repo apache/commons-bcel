@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class I2BTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final I2B i2b = new I2B();
         i2b.accept(countVisitor);

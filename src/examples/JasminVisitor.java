@@ -72,7 +72,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
             final String path = className.substring(0, index + 1).replace('.', File.separatorChar);
             className = className.substring(index + 1);
 
-            if (!path.equals("")) {
+            if (!path.isEmpty()) {
                 final File f = new File(path);
                 f.mkdirs();
             }

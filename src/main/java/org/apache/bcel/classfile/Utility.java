@@ -37,6 +37,7 @@ import java.util.zip.GZIPOutputStream;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.util.ByteSequence;
+import org.apache.commons.lang3.ArrayFill;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
@@ -48,7 +49,7 @@ public abstract class Utility {
     /**
      * Decode characters into bytes. Used by <a href="Utility.html#decode(java.lang.String, boolean)">decode()</a>
      */
-    private static class JavaReader extends FilterReader {
+    private static final class JavaReader extends FilterReader {
 
         public JavaReader(final Reader in) {
             super(in);
@@ -85,10 +86,10 @@ public abstract class Utility {
     }
 
     /**
-     * Encode bytes into valid java identifier characters. Used by
+     * Encode bytes into valid Java identifier characters. Used by
      * <a href="Utility.html#encode(byte[], boolean)">encode()</a>
      */
-    private static class JavaWriter extends FilterWriter {
+    private static final class JavaWriter extends FilterWriter {
 
         public JavaWriter(final Writer out) {
             super(out);
@@ -432,7 +433,9 @@ public abstract class Utility {
         case Const.NEW:
         case Const.CHECKCAST:
             buf.append("\t");
-            //$FALL-THROUGH$
+            index = bytes.readUnsignedShort();
+            buf.append("\t<").append(constantPool.constantToString(index, Const.CONSTANT_Class)).append(">").append(verbose ? " (" + index + ")" : "");
+            break;
         case Const.INSTANCEOF:
             index = bytes.readUnsignedShort();
             buf.append("\t<").append(constantPool.constantToString(index, Const.CONSTANT_Class)).append(">").append(verbose ? " (" + index + ")" : "");
@@ -713,8 +716,7 @@ public abstract class Utility {
      */
     public static String fillup(final String str, final int length, final boolean leftJustify, final char fill) {
         final int len = length - str.length();
-        final char[] buf = new char[Math.max(len, 0)];
-        Arrays.fill(buf, fill);
+        final char[] buf = ArrayFill.fill(new char[Math.max(len, 0)], fill);
         if (leftJustify) {
             return str + new String(buf);
         }
@@ -1167,7 +1169,7 @@ public abstract class Utility {
             type = typeParams + typeSignaturesToString(signature.substring(index), chopit, ')');
             index += unwrap(CONSUMER_CHARS); // update position
             // add return type
-            type = type + typeSignatureToString(signature.substring(index), chopit);
+            type += typeSignatureToString(signature.substring(index), chopit);
             index += unwrap(CONSUMER_CHARS); // update position
             // ignore any throws information in the signature
             return type;

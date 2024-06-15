@@ -67,7 +67,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     }
 
     /**
-     * Construct object from file stream.
+     * Constructs object from file stream.
      *
      * @param file Input stream
      * @throws IOException if an I/O error occurs.
@@ -83,7 +83,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     }
 
     /**
-     * Construct object from file stream.
+     * Constructs object from file stream.
      *
      * @param file Input stream
      * @throws IOException if an I/O error occurs.
@@ -132,7 +132,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
             Arrays.setAll(c.attributes, i -> attributes[i].copy(constantPool));
             return c;
         } catch (final CloneNotSupportedException e) {
-            throw new IllegalStateException(e);
+            throw new UnsupportedOperationException(e);
         }
     }
 
@@ -147,10 +147,8 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         file.writeShort(name_index);
         file.writeShort(signature_index);
         file.writeShort(attributes_count);
-        if (attributes != null) {
-            for (final Attribute attribute : attributes) {
-                attribute.dump(file);
-            }
+        for (final Attribute attribute : attributes) {
+            attribute.dump(file);
         }
     }
 
@@ -232,7 +230,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     }
 
     /**
-     * @return String representation of object's type signature (java style)
+     * @return String representation of object's type signature (Java style)
      */
     public final String getSignature() {
         return constant_pool.getConstantUtf8(signature_index).getBytes();
@@ -249,8 +247,8 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @param attributes Collection of object attributes.
      */
     public final void setAttributes(final Attribute[] attributes) {
-        this.attributes = attributes;
-        this.attributes_count = attributes != null ? attributes.length : 0; // init deprecated field
+        this.attributes = attributes != null ? attributes : Attribute.EMPTY_ARRAY;
+        this.attributes_count = this.attributes.length; // init deprecated field
     }
 
     /**

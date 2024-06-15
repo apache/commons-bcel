@@ -41,7 +41,7 @@ public class ExceptionHandlers {
     private final Map<InstructionHandle, Set<ExceptionHandler>> exceptionHandlers;
 
     /**
-     * Constructor. Creates a new ExceptionHandlers instance.
+     * Constructs a new ExceptionHandlers instance.
      */
     public ExceptionHandlers(final MethodGen mg) {
         exceptionHandlers = new HashMap<>();

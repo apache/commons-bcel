@@ -59,6 +59,8 @@ import org.apache.bcel.classfile.NestMembers;
 import org.apache.bcel.classfile.Node;
 import org.apache.bcel.classfile.ParameterAnnotationEntry;
 import org.apache.bcel.classfile.ParameterAnnotations;
+import org.apache.bcel.classfile.Record;
+import org.apache.bcel.classfile.RecordComponentInfo;
 import org.apache.bcel.classfile.Signature;
 import org.apache.bcel.classfile.SourceFile;
 import org.apache.bcel.classfile.StackMap;
@@ -398,6 +400,16 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     }
 
     @Override
+    public void visitRecord(final Record obj) {
+        tostring = toString(obj);
+    }
+
+    @Override
+    public void visitRecordComponent(final RecordComponentInfo obj) {
+        tostring = toString(obj);
+    }
+
+    @Override
     public void visitSignature(final Signature obj) {
         tostring = toString(obj);
     }
@@ -429,4 +441,5 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     public void visitUnknown(final Unknown obj) {
         tostring = toString(obj);
     }
+
 }

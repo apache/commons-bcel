@@ -64,7 +64,7 @@ public class Subroutines {
     /**
      * This inner class implements the Subroutine interface.
      */
-    private class SubroutineImpl implements Subroutine {
+    private final class SubroutineImpl implements Subroutine {
         /**
          * UNSET, a symbol for an uninitialized localVariable field. This is used for the "top-level" Subroutine; i.e. no
          * subroutine.
@@ -332,7 +332,7 @@ public class Subroutines {
             return ret.toString();
         }
 
-    }// end Inner Class SubrouteImpl
+    } // end Inner Class SubrouteImpl
 
     /**
      * A utility method that calculates the successors of a given InstructionHandle <B>in the same subroutine</B>. That
@@ -398,7 +398,7 @@ public class Subroutines {
     // CHECKSTYLE:ON
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      *
      * @param mg A MethodGen object representing method to create the Subroutine objects of. Assumes that JustIce strict
      *        checks are needed.
@@ -408,7 +408,7 @@ public class Subroutines {
     }
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      *
      * @param mg A MethodGen object representing method to create the Subroutine objects of.
      * @param enableJustIceCheck whether to enable additional JustIce checks
@@ -510,7 +510,7 @@ public class Subroutines {
                     instructionsAssigned.add(element);
                 }
             }
-            if (actual != all[0]) {// If we don't deal with the top-level 'subroutine'
+            if (actual != all[0]) { // If we don't deal with the top-level 'subroutine'
                 ((SubroutineImpl) getSubroutine(actual)).setLeavingRET();
             }
         }

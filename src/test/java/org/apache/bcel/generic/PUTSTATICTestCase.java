@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class PUTSTATICTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final PUTSTATIC putstatic = new PUTSTATIC(0);
         putstatic.accept(countVisitor);

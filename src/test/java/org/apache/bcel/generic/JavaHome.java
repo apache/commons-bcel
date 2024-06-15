@@ -20,8 +20,6 @@ package org.apache.bcel.generic;
 import static com.sun.jna.platform.win32.WinReg.HKEY_LOCAL_MACHINE;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -39,6 +37,7 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Module;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.ModularRuntimeImage;
+import org.apache.commons.io.function.Uncheck;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 
@@ -69,12 +68,8 @@ public class JavaHome {
 
     private static Stream<Path> find(final Path start, final int maxDepth, final BiPredicate<Path, BasicFileAttributes> matcher,
             final FileVisitOption... options) {
-        try {
-            // TODO Replace with Apache Commons IO UncheckedFiles later.
-            return Files.exists(start) ? Files.find(start, maxDepth, matcher, options) : Stream.empty();
-        } catch (final IOException e) {
-            throw new UncheckedIOException(e);
-        }
+        // TODO Apache Commons 2.14.0: Use FilesUncheck
+        return Files.exists(start) ? Uncheck.apply(Files::find, start, maxDepth, matcher, options) : Stream.empty();
     }
 
     private static JavaHome from(final String javaHome) {
@@ -218,11 +213,7 @@ public class JavaHome {
     }
 
     ModularRuntimeImage getModularRuntimeImage() {
-        try {
-            return new ModularRuntimeImage(path.toString());
-        } catch (final IOException e) {
-            throw new UncheckedIOException(e);
-        }
+        return Uncheck.get(() -> new ModularRuntimeImage(path.toString()));
     }
 
     Path getPath() {
@@ -258,11 +249,7 @@ public class JavaHome {
     }
 
     private JarFile toJarFile(final Path path) {
-        try {
-            return new JarFile(path.toFile());
-        } catch (final IOException e) {
-            throw new UncheckedIOException(e);
-        }
+        return Uncheck.get(() -> new JarFile(path.toFile()));
     }
 
     @Override

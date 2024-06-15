@@ -32,11 +32,11 @@ import org.apache.bcel.Const;
  * The following system properties govern caching this class performs.
  * </p>
  * <ul>
- * <li>{@value #SYS_PROP_CACHE_MAX_ENTRIES} (since 6.4): The size of the cache, by default 0, meaning caching is
+ * <li>{@link #SYS_PROP_CACHE_MAX_ENTRIES} (since 6.4): The size of the cache, by default 0, meaning caching is
  * disabled.</li>
- * <li>{@value #SYS_PROP_CACHE_MAX_ENTRY_SIZE} (since 6.0): The maximum size of the values to cache, by default 200, 0
+ * <li>{@link #SYS_PROP_CACHE_MAX_ENTRY_SIZE} (since 6.0): The maximum size of the values to cache, by default 200, 0
  * disables caching. Values larger than this are <em>not</em> cached.</li>
- * <li>{@value #SYS_PROP_STATISTICS} (since 6.0): Prints statistics on the console when the JVM exits.</li>
+ * <li>{@link #SYS_PROP_STATISTICS} (since 6.0): Prints statistics on the console when the JVM exits.</li>
  * </ul>
  * <p>
  * Here is a sample Maven invocation with caching disabled:
@@ -57,7 +57,7 @@ import org.apache.bcel.Const;
  */
 public final class ConstantUtf8 extends Constant {
 
-    private static class Cache {
+    private static final class Cache {
 
         private static final boolean BCEL_STATISTICS = Boolean.getBoolean(SYS_PROP_STATISTICS);
         private static final int MAX_ENTRIES = Integer.getInteger(SYS_PROP_CACHE_MAX_ENTRIES, 0).intValue();
@@ -110,6 +110,11 @@ public final class ConstantUtf8 extends Constant {
     // for access by test code
     static synchronized void clearStats() {
         hits = considered = skipped = created = 0;
+    }
+
+    // Avoid Spotbugs complaint about Write to static field
+    private static void countCreated() {
+        created++;
     }
 
     /**
@@ -198,7 +203,7 @@ public final class ConstantUtf8 extends Constant {
     ConstantUtf8(final DataInput dataInput) throws IOException {
         super(Const.CONSTANT_Utf8);
         value = dataInput.readUTF();
-        created++;
+        countCreated();
     }
 
     /**
@@ -207,7 +212,7 @@ public final class ConstantUtf8 extends Constant {
     public ConstantUtf8(final String value) {
         super(Const.CONSTANT_Utf8);
         this.value = Objects.requireNonNull(value, "value");
-        created++;
+        countCreated();
     }
 
     /**

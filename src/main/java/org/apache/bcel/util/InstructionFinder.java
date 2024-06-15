@@ -65,7 +65,6 @@ public class InstructionFinder {
     /**
      * Code patterns found may be checked using an additional user-defined constraint object whether they really match the
      * needed criterion. I.e., check constraints that can not expressed with regular expressions.
-     *
      */
     public interface CodeConstraint {
 
@@ -369,7 +368,7 @@ public class InstructionFinder {
 //    }
 
 //    private static final String pattern2string( String pattern, boolean make_string ) {
-//        StringBuffer buf = new StringBuffer();
+//        StringBuilder buf = new StringBuilder();
 //        for (int i = 0; i < pattern.length(); i++) {
 //            char ch = pattern.charAt(i);
 //            if (ch >= OFFSET) {

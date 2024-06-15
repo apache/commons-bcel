@@ -2415,7 +2415,7 @@ public interface Constants {
     byte ATTR_RUNTIMEINVISIBLE_PARAMETER_ANNOTATIONS = 15;
     byte ATTR_ANNOTATION_DEFAULT = 16;
 
-    short KNOWN_ATTRIBUTES = 12;// should be 17
+    short KNOWN_ATTRIBUTES = 12; // should be 17
 
     // TODO: mutable public array!!
     String[] ATTRIBUTE_NAMES = {"SourceFile", "ConstantValue", "Code", "Exceptions", "LineNumberTable", "LocalVariableTable", "InnerClasses", "Synthetic",

@@ -39,7 +39,7 @@ public class ElementValuePairGen {
         // Could assert nvp.getNameString() points to the same thing as
         // constantPoolGen.getConstant(nvp.getNameIndex())
         // if
-        // (!nvp.getNameString().equals(((ConstantUtf8)constantPoolGen.getConstant(nvp.getNameIndex())).getBytes()))
+        // (!nvp.getNameString().equals(((ConstantUtf8) constantPoolGen.getConstant(nvp.getNameIndex())).getBytes()))
         // {
         // throw new IllegalArgumentException("envp buggered");
         // }
@@ -81,7 +81,7 @@ public class ElementValuePairGen {
     }
 
     public final String getNameString() {
-        // ConstantString cu8 = (ConstantString)constantPoolGen.getConstant(nameIdx);
+        // ConstantString cu8 = (ConstantString) constantPoolGen.getConstant(nameIdx);
         return ((ConstantUtf8) constantPoolGen.getConstant(nameIdx)).getBytes();
     }
 

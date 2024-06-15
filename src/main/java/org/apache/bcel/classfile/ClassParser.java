@@ -32,7 +32,7 @@ import org.apache.bcel.Const;
  * appropriate exception is propagated back to the caller.
  *
  * The structure and the names comply, except for a few conveniences, exactly with the
- * <a href="http://docs.oracle.com/javase/specs/"> JVM specification 1.0</a>. See this paper for further details about
+ * <a href="https://docs.oracle.com/javase/specs/"> JVM specification 1.0</a>. See this paper for further details about
  * the structure of a bytecode file.
  */
 public final class ClassParser {
@@ -99,7 +99,7 @@ public final class ClassParser {
     /**
      * Parses the given Java class file and return an object that represents the contained data, i.e., constants, methods,
      * fields and commands. A <em>ClassFormatException</em> is raised, if the file is not a valid .class file. (This does
-     * not include verification of the byte code as it is performed by the java interpreter).
+     * not include verification of the byte code as it is performed by the Java interpreter).
      *
      * @return Class object representing the parsed class file
      * @throws IOException if an I/O error occurs.
@@ -146,11 +146,11 @@ public final class ClassParser {
             // for (int i=0; i < u.length; i++)
             // System.err.println("WARNING: " + u[i]);
             // Everything should have been read now
-            // if(file.available() > 0) {
+            // if (file.available() > 0) {
             // int bytes = file.available();
             // byte[] buf = new byte[bytes];
             // file.read(buf);
-            // if(!(isZip && (buf.length == 1))) {
+            // if (!(isZip && (buf.length == 1))) {
             // System.err.println("WARNING: Trailing garbage at end of " + fileName);
             // System.err.println(bytes + " extra bytes: " + Utility.toHexString(buf));
             // }

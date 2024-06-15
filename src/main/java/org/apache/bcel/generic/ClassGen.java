@@ -38,39 +38,36 @@ import org.apache.bcel.util.BCELComparator;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
- * Template class for building up a java class. May be initialized with an existing java class (file).
+ * Template class for building up a java class. May be initialized with an existing Java class (file).
  *
  * @see JavaClass
  */
 public class ClassGen extends AccessFlags implements Cloneable {
 
-    private static BCELComparator bcelComparator = new BCELComparator() {
+    private static BCELComparator<ClassGen> bcelComparator = new BCELComparator<ClassGen>() {
 
         @Override
-        public boolean equals(final Object o1, final Object o2) {
-            final ClassGen THIS = (ClassGen) o1;
-            final ClassGen THAT = (ClassGen) o2;
-            return Objects.equals(THIS.getClassName(), THAT.getClassName());
+        public boolean equals(final ClassGen a, final ClassGen b) {
+            return a == b || a != null && b != null && Objects.equals(a.getClassName(), b.getClassName());
         }
 
         @Override
-        public int hashCode(final Object o) {
-            final ClassGen THIS = (ClassGen) o;
-            return THIS.getClassName().hashCode();
+        public int hashCode(final ClassGen o) {
+            return o != null ? Objects.hashCode(o.getClassName()) : 0;
         }
     };
 
     /**
      * @return Comparison strategy object
      */
-    public static BCELComparator getComparator() {
+    public static BCELComparator<ClassGen> getComparator() {
         return bcelComparator;
     }
 
     /**
      * @param comparator Comparison strategy object
      */
-    public static void setComparator(final BCELComparator comparator) {
+    public static void setComparator(final BCELComparator<ClassGen> comparator) {
         bcelComparator = comparator;
     }
 
@@ -98,7 +95,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     private List<ClassObserver> observers;
 
     /**
-     * Initialize with existing class.
+     * Constructs a new instance from an existing class.
      *
      * @param clazz JavaClass object (e.g. read from file)
      */
@@ -115,15 +112,26 @@ public class ClassGen extends AccessFlags implements Cloneable {
         final Attribute[] attributes = clazz.getAttributes();
         // J5TODO: Could make unpacking lazy, done on first reference
         final AnnotationEntryGen[] annotations = unpackAnnotations(attributes);
-        Collections.addAll(interfaceList, clazz.getInterfaceNames());
-        for (final Attribute attribute : attributes) {
-            if (!(attribute instanceof Annotations)) {
-                addAttribute(attribute);
+        final String[] interfaceNames = clazz.getInterfaceNames();
+        if (interfaceNames != null) {
+            Collections.addAll(interfaceList, interfaceNames);
+        }
+        if (attributes != null) {
+            for (final Attribute attribute : attributes) {
+                if (!(attribute instanceof Annotations)) {
+                    addAttribute(attribute);
+                }
             }
         }
         Collections.addAll(annotationList, annotations);
-        Collections.addAll(methodList, clazz.getMethods());
-        Collections.addAll(fieldList, clazz.getFields());
+        final Method[] methods = clazz.getMethods();
+        if (methods != null) {
+            Collections.addAll(methodList, methods);
+        }
+        final Field[] fields = clazz.getFields();
+        if (fields != null) {
+            Collections.addAll(fieldList, fields);
+        }
     }
 
     /**
@@ -239,7 +247,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
         try {
             return super.clone();
         } catch (final CloneNotSupportedException e) {
-            throw new Error("Clone Not Supported"); // never happens
+            throw new UnsupportedOperationException("Clone Not Supported", e); // never happens
         }
     }
 
@@ -279,7 +287,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
      */
     @Override
     public boolean equals(final Object obj) {
-        return bcelComparator.equals(this, obj);
+        return obj instanceof ClassGen && bcelComparator.equals(this, (ClassGen) obj);
     }
 
     // J5TODO: Should we make calling unpackAnnotations() lazy and put it in here?
@@ -376,7 +384,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
     /**
-     * Return value as defined by given BCELComparator strategy. By default return the hashcode of the class name.
+     * Return value as defined by given BCELComparator strategy. By default return the hash code of the class name.
      *
      * @see Object#hashCode()
      */
@@ -475,7 +483,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
     /**
-     * Set major version number of class file, default value is 45 (JDK 1.1)
+     * Sets major version number of class file, default value is 45 (JDK 1.1)
      *
      * @param major major version number
      */
@@ -489,11 +497,13 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     public void setMethods(final Method[] methods) {
         methodList.clear();
-        Collections.addAll(methodList, methods);
+        if (methods != null) {
+            Collections.addAll(methodList, methods);
+        }
     }
 
     /**
-     * Set minor version number of class file, default value is 3 (JDK 1.1)
+     * Sets minor version number of class file, default value is 3 (JDK 1.1)
      *
      * @param minor minor version number
      */
@@ -512,17 +522,19 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
     /**
-     * Look for attributes representing annotations and unpack them.
+     * Unpacks attributes representing annotations.
      */
-    private AnnotationEntryGen[] unpackAnnotations(final Attribute[] attrs) {
+    private AnnotationEntryGen[] unpackAnnotations(final Attribute[] attributes) {
         final List<AnnotationEntryGen> annotationGenObjs = new ArrayList<>();
-        for (final Attribute attr : attrs) {
-            if (attr instanceof RuntimeVisibleAnnotations) {
-                final RuntimeVisibleAnnotations rva = (RuntimeVisibleAnnotations) attr;
-                rva.forEach(a -> annotationGenObjs.add(new AnnotationEntryGen(a, getConstantPool(), false)));
-            } else if (attr instanceof RuntimeInvisibleAnnotations) {
-                final RuntimeInvisibleAnnotations ria = (RuntimeInvisibleAnnotations) attr;
-                ria.forEach(a -> annotationGenObjs.add(new AnnotationEntryGen(a, getConstantPool(), false)));
+        if (attributes != null) {
+            for (final Attribute attr : attributes) {
+                if (attr instanceof RuntimeVisibleAnnotations) {
+                    final RuntimeVisibleAnnotations rva = (RuntimeVisibleAnnotations) attr;
+                    rva.forEach(a -> annotationGenObjs.add(new AnnotationEntryGen(a, getConstantPool(), false)));
+                } else if (attr instanceof RuntimeInvisibleAnnotations) {
+                    final RuntimeInvisibleAnnotations ria = (RuntimeInvisibleAnnotations) attr;
+                    ria.forEach(a -> annotationGenObjs.add(new AnnotationEntryGen(a, getConstantPool(), false)));
+                }
             }
         }
         return annotationGenObjs.toArray(AnnotationEntryGen.EMPTY_ARRAY);

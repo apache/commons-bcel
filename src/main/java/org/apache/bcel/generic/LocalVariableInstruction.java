@@ -157,7 +157,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     }
 
     /**
-     * Set the local variable index. also updates opcode and length TODO Why?
+     * Sets the local variable index. also updates opcode and length TODO Why?
      *
      * @see #setIndexOnly(int)
      */

@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class IDIVTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final IDIV idiv = new IDIV();
         idiv.accept(countVisitor);

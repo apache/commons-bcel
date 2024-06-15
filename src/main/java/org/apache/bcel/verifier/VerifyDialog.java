@@ -46,8 +46,8 @@ import org.apache.bcel.classfile.Utility;
  */
 public class VerifyDialog extends JDialog {
 
-    /** Machine-generated. */
-    class IvjEventHandler implements ActionListener {
+    /** Machine-generated, made final. */
+    final class IvjEventHandler implements ActionListener {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
@@ -67,6 +67,7 @@ public class VerifyDialog extends JDialog {
     }
 
     private static final long serialVersionUID = -6374807677043142313L;
+
     /**
      * This field is here to count the number of open VerifyDialog instances so the JVM can be exited afer every Dialog had
      * been closed.
@@ -177,9 +178,9 @@ public class VerifyDialog extends JDialog {
     }
 
     /**
-     * Use this constructor if you want a possibility to verify other class files than java.lang.Object.
+     * Use this constructor if you want a possibility to verify other class files than {@link Object}.
      *
-     * @param fullyQualifiedClassName java.lang.String
+     * @param fullyQualifiedClassName "java.lang.String"
      */
     public VerifyDialog(String fullyQualifiedClassName) {
         final int dotclasspos = fullyQualifiedClassName.lastIndexOf(JavaClass.EXTENSION);

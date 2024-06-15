@@ -38,6 +38,7 @@ import org.apache.bcel.verifier.input.FieldVerifierChildClass;
 import org.apache.bcel.verifier.input.StaticFieldVerifierChildClass;
 import org.apache.bcel.verifier.statics.StringRepresentation;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemProperties;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledForJreRange;
@@ -89,7 +90,7 @@ public class VerifierTestCase {
     }
 
     private static void testNestHostWithJavaVersion(final String className) throws ClassNotFoundException {
-        final String version = System.getProperty("java.version");
+        final String version = SystemProperties.getJavaVersion();
         assertNotNull(version);
         try {
             testDefaultMethodValidation(className);
@@ -133,7 +134,7 @@ public class VerifierTestCase {
 
     @Test
     public void testJvmOpCodes() throws ClassNotFoundException {
-    	testDefaultMethodValidation("org.apache.bcel.verifier.tests.JvmOpCodes");
+        testDefaultMethodValidation("org.apache.bcel.verifier.tests.JvmOpCodes");
     }
 
     @Test
@@ -160,6 +161,6 @@ public class VerifierTestCase {
 
     @Test
     public void testWSDL() throws IOException, URISyntaxException, ClassNotFoundException {
-        testJarFile(getJarFile(javax.wsdl.Port.class), "WSDLReaderImpl",  "DefinitionImpl");
+        testJarFile(getJarFile(javax.wsdl.Port.class), "WSDLReaderImpl", "DefinitionImpl");
     }
 }

@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class FADDTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final FADD fadd = new FADD();
         fadd.accept(countVisitor);

@@ -24,6 +24,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.Attribute;
@@ -33,6 +34,8 @@ import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeInvisibleParameterAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleParameterAnnotations;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.stream.Streams;
 
 /**
  * @since 6.0
@@ -48,7 +51,7 @@ public class AnnotationEntryGen {
      * @param annotationEntryGens An array of AnnotationGen objects
      */
     static Attribute[] getAnnotationAttributes(final ConstantPoolGen cp, final AnnotationEntryGen[] annotationEntryGens) {
-        if (annotationEntryGens.length == 0) {
+        if (ArrayUtils.isEmpty(annotationEntryGens)) {
             return Attribute.EMPTY_ARRAY;
         }
 
@@ -250,11 +253,7 @@ public class AnnotationEntryGen {
     }
 
     private List<ElementValuePairGen> copyValues(final ElementValuePair[] in, final ConstantPoolGen cpool, final boolean copyPoolEntries) {
-        final List<ElementValuePairGen> out = new ArrayList<>();
-        for (final ElementValuePair nvp : in) {
-            out.add(new ElementValuePairGen(nvp, cpool, copyPoolEntries));
-        }
-        return out;
+        return Streams.of(in).map(nvp -> new ElementValuePairGen(nvp, cpool, copyPoolEntries)).collect(Collectors.toList());
     }
 
     public void dump(final DataOutputStream dos) throws IOException {
@@ -281,12 +280,12 @@ public class AnnotationEntryGen {
     }
 
     public final String getTypeName() {
-        return getTypeSignature();// BCELBUG: Should I use this instead?
+        return getTypeSignature(); // BCELBUG: Should I use this instead?
         // Utility.signatureToString(getTypeSignature());
     }
 
     public final String getTypeSignature() {
-        // ConstantClass c = (ConstantClass)cpool.getConstant(typeIndex);
+        // ConstantClass c = (ConstantClass) cpool.getConstant(typeIndex);
         final ConstantUtf8 utf8 = (ConstantUtf8) cpool.getConstant(typeIndex/* c.getNameIndex() */);
         return utf8.getBytes();
     }

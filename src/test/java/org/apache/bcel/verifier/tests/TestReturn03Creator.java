@@ -39,7 +39,8 @@ public abstract class TestReturn03Creator extends TestCreator {
     private final String genClassSuffix;
 
     protected TestReturn03Creator(final Type returnType, final String genClassSuffix) {
-        classGen = new ClassGen(TEST_PACKAGE + ".TestReturn03" + genClassSuffix, "java.lang.Object", "TestReturn03.java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
+        classGen = new ClassGen(TEST_PACKAGE + ".TestReturn03" + genClassSuffix, "java.lang.Object", "TestReturn03.java", Const.ACC_PUBLIC | Const.ACC_SUPER,
+                new String[] {});
 
         constantPoolGen = classGen.getConstantPool();
         instructionFactory = new InstructionFactory(classGen, constantPoolGen);
@@ -56,7 +57,8 @@ public abstract class TestReturn03Creator extends TestCreator {
 
     private void createMethod_0() {
         final InstructionList il = new InstructionList();
-        final MethodGen method = new MethodGen(Const.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {}, "<init>", TEST_PACKAGE + ".TestReturn03", il, constantPoolGen);
+        final MethodGen method = new MethodGen(Const.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {}, "<init>", TEST_PACKAGE + ".TestReturn03", il,
+                constantPoolGen);
 
         final InstructionHandle ih_0 = il.append(InstructionFactory.createLoad(Type.OBJECT, 0));
         assertNotNull(ih_0); // TODO why is this not used
@@ -72,7 +74,7 @@ public abstract class TestReturn03Creator extends TestCreator {
     private void createMethod_1() {
         final InstructionList il = new InstructionList();
         final MethodGen method = new MethodGen(Const.ACC_PUBLIC | Const.ACC_STATIC, Type.INT, Type.NO_ARGS, new String[] {}, "test3",
-            TEST_PACKAGE + ".TestReturn03" + genClassSuffix, il, constantPoolGen);
+                TEST_PACKAGE + ".TestReturn03" + genClassSuffix, il, constantPoolGen);
 
         final InstructionHandle ih_0 = il.append(InstructionConst.ACONST_NULL);
         assertNotNull(ih_0); // TODO why is this not used

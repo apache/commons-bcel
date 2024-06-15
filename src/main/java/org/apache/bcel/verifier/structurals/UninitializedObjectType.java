@@ -43,7 +43,6 @@ public class UninitializedObjectType extends ReferenceType implements Constants 
     /**
      * Returns true on equality of this and o. Equality means the ObjectType instances of "initialized" equal one another in
      * this and the o instance.
-     *
      */
     @Override
     public boolean equals(final Object o) {

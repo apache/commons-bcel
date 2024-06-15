@@ -37,7 +37,7 @@ public final class ModulePackages extends Attribute {
     private int[] packageIndexTable;
 
     /**
-     * Construct object from input stream.
+     * Constructs object from input stream.
      *
      * @param nameIndex Index in constant pool
      * @param length Content length in bytes
@@ -62,7 +62,7 @@ public final class ModulePackages extends Attribute {
      */
     public ModulePackages(final int nameIndex, final int length, final int[] packageIndexTable, final ConstantPool constantPool) {
         super(Const.ATTR_MODULE_PACKAGES, nameIndex, length, constantPool);
-        this.packageIndexTable = packageIndexTable != null ? packageIndexTable : ArrayUtils.EMPTY_INT_ARRAY;
+        this.packageIndexTable = ArrayUtils.nullToEmpty(packageIndexTable);
         Args.requireU2(this.packageIndexTable.length, "packageIndexTable.length");
     }
 
@@ -142,7 +142,7 @@ public final class ModulePackages extends Attribute {
      * @param packageIndexTable the list of package indexes Also redefines number_of_packages according to table length.
      */
     public void setPackageIndexTable(final int[] packageIndexTable) {
-        this.packageIndexTable = packageIndexTable != null ? packageIndexTable : ArrayUtils.EMPTY_INT_ARRAY;
+        this.packageIndexTable = ArrayUtils.nullToEmpty(packageIndexTable);
     }
 
     /**

@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class DSUBTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final DSUB dsub = new DSUB();
         dsub.accept(countVisitor);

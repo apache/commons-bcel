@@ -25,9 +25,10 @@ import org.apache.bcel.Const;
 import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.InvalidMethodSignatureException;
 import org.apache.bcel.classfile.Utility;
+import org.apache.commons.lang3.StringUtils;
 
 /**
- * Abstract super class for all possible java types, namely basic types such as int, object types like String and array
+ * Abstract super class for all possible Java types, namely basic types such as int, object types like String and array
  * types, e.g. int[]
  */
 public abstract class Type {
@@ -172,7 +173,7 @@ public abstract class Type {
     }
 
     /**
-     * Convert runtime java.lang.Class to BCEL Type object.
+     * Convert runtime {@link Class} to BCEL Type object.
      *
      * @param cls Java class
      * @return corresponding Type object
@@ -180,7 +181,7 @@ public abstract class Type {
     public static Type getType(final Class<?> cls) {
         Objects.requireNonNull(cls, "cls");
         /*
-         * That's an amzingly easy case, because getName() returns the signature. That's what we would have liked anyway.
+         * That's an amazingly easy case, because getName() returns the signature. That's what we would have liked anyway.
          */
         if (cls.isArray()) {
             return getType(cls.getName());
@@ -251,7 +252,7 @@ public abstract class Type {
     }
 
     /**
-     * Convert runtime java.lang.Class[] to BCEL Type objects.
+     * Convert runtime {@code java.lang.Class[]} to BCEL Type objects.
      *
      * @param classes an array of runtime class objects
      * @return array of corresponding Type objects
@@ -281,6 +282,24 @@ public abstract class Type {
             throw new ClassFormatException("Invalid signature: " + signature);
         }
         return encode(1, index + 1);
+    }
+
+    static String internalTypeNameToSignature(final String internalTypeName) {
+        if (StringUtils.isEmpty(internalTypeName) || StringUtils.equalsAny(internalTypeName, Const.SHORT_TYPE_NAMES)) {
+            return internalTypeName;
+        }
+        switch (internalTypeName.charAt(0)) {
+            case '[':
+                return internalTypeName;
+            case 'L':
+            case 'T':
+                if (internalTypeName.charAt(internalTypeName.length() - 1) == ';') {
+                    return internalTypeName;
+                }
+                return 'L' + internalTypeName + ';';
+            default:
+                return 'L' + internalTypeName + ';';
+        }
     }
 
     static int size(final int coded) {
@@ -358,7 +377,7 @@ public abstract class Type {
     }
 
     /**
-     * @return hashcode of Type
+     * @return hash code of Type
      */
     @Override
     public int hashCode() {
@@ -376,14 +395,6 @@ public abstract class Type {
             return Type.INT;
         }
         return this;
-    }
-
-    /*
-     * Currently only used by the ArrayType constructor. The signature has a complicated dependency on other parameter so
-     * it's tricky to do it in a call to the super ctor.
-     */
-    void setSignature(final String signature) {
-        this.signature = signature;
     }
 
     /**

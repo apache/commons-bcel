@@ -29,10 +29,14 @@ import java.util.stream.Stream;
  */
 public abstract class ParameterAnnotations extends Attribute implements Iterable<ParameterAnnotationEntry> {
 
+    private static final ParameterAnnotationEntry[] EMPTY_ARRAY = {};
+
     /** Table of parameter annotations */
     private ParameterAnnotationEntry[] parameterAnnotationTable;
 
     /**
+     * Constructs a new instance.
+     *
      * @param parameterAnnotationType the subclass type of the parameter annotation
      * @param nameIndex Index pointing to the name <em>Code</em>
      * @param length Content length in bytes
@@ -50,6 +54,8 @@ public abstract class ParameterAnnotations extends Attribute implements Iterable
     }
 
     /**
+     * Constructs a new instance.
+     *
      * @param parameterAnnotationType the subclass type of the parameter annotation
      * @param nameIndex Index pointing to the name <em>Code</em>
      * @param length Content length in bytes
@@ -115,6 +121,6 @@ public abstract class ParameterAnnotations extends Attribute implements Iterable
      * @param parameterAnnotationTable the entries to set in this parameter annotation
      */
     public final void setParameterAnnotationTable(final ParameterAnnotationEntry[] parameterAnnotationTable) {
-        this.parameterAnnotationTable = parameterAnnotationTable;
+        this.parameterAnnotationTable = parameterAnnotationTable != null ? parameterAnnotationTable : EMPTY_ARRAY;
     }
 }

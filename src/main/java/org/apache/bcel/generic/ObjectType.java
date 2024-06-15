@@ -22,7 +22,7 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Utility;
 
 /**
- * Denotes reference such as java.lang.String.
+ * Denotes reference such as {@link String}.
  */
 public class ObjectType extends ReferenceType {
 
@@ -42,7 +42,7 @@ public class ObjectType extends ReferenceType {
     /**
      * Constructs a new instance.
      *
-     * @param className fully qualified class name, e.g. java.lang.String
+     * @param className fully qualified class name, e.g. {@link String}
      */
     public ObjectType(final String className) {
         super(Const.T_REFERENCE, "L" + Utility.packageToPath(className) + ";");

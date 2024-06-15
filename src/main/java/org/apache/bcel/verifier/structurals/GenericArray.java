@@ -20,7 +20,7 @@ import java.io.Serializable;
 
 /**
  * A placeholder class that can be used to create an ObjectType of which has some of the properties arrays have. They
- * implement java.lang.Cloneable and java.io.Serializable and they extend java.lang.Object.
+ * implement {@link Cloneable} and {@link java.io.Serializable} and they extend {@link Object}.
  */
 public class GenericArray implements Cloneable, Serializable {
 

@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class LXORTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final LXOR lxor = new LXOR();
         lxor.accept(countVisitor);

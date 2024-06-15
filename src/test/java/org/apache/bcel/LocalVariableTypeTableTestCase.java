@@ -139,13 +139,13 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
         final Class<?> cls = loader.findClass(targetClass, getBytesFromClass(targetClass));
 
         java.lang.reflect.Method method = cls.getDeclaredMethod("a", String.class, List.class);
-        method.invoke(null, "a1", new LinkedList<String>());
+        method.invoke(null, "a1", new LinkedList<>());
         method = cls.getDeclaredMethod("b", String.class, List.class);
-        method.invoke(null, "b1", new LinkedList<String>());
+        method.invoke(null, "b1", new LinkedList<>());
         method = cls.getDeclaredMethod("c", String.class, String.class);
         method.invoke(null, "c1", "c2");
         method = cls.getDeclaredMethod("d", List.class, String.class);
-        method.invoke(null, new LinkedList<String>(), "d2");
+        method.invoke(null, new LinkedList<>(), "d2");
     }
 
     @Test

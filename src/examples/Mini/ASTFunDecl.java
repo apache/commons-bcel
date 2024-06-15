@@ -317,7 +317,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants {
         }
 
         if (!ignore) {
-            final StringBuffer buf = new StringBuffer();
+            final StringBuilder buf = new StringBuilder();
 
             body.code(buf);
             out.println(getVarDecls());
@@ -466,7 +466,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants {
 
         /*
          * Update entry of this function, i.e. set argument references. The entry is already in there by garantuee, but may be
-         * of wrong type, i.e. the user defined a function 'TRUE', e.g. and 'TRUE' is of type 'Variable'.
+         * of wrong type, i.e. the user-defined a function 'TRUE', e.g. and 'TRUE' is of type 'Variable'.
          */
         try {
             final Function fun = (Function) env.get(name.getName());

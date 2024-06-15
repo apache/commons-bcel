@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class PUTFIELDTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final PUTFIELD putfield = new PUTFIELD(0);
         putfield.accept(countVisitor);

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-
    Licensed to the Apache Software Foundation (ASF) under one or more
    contributor license agreements.  See the NOTICE file distributed with
    this work for additional information regarding copyright ownership.
@@ -15,7 +14,6 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-
 -->
 <!--
 This file is also used by the maven-changes-plugin to generate the release notes.
@@ -38,7 +36,6 @@ and commit
 
 The <action> type attribute can be add,update,fix,remove.
 -->
-
 <document xmlns="http://maven.apache.org/changes/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
@@ -46,7 +43,6 @@ The <action> type attribute can be add,update,fix,remove.
     <title>Apache Commons BCEL Release Notes</title>
     <author email="dev@commons.apache.org">Apache Commons developers</author>
   </properties>
-
   <!-- NOTE:
   The description below is specially formatted so as to improve the layout of the generated release notes:
   The parsing process removes all line feeds, replacing them with a single space.
@@ -62,9 +58,88 @@ The <action> type attribute can be add,update,fix,remove.
 
   Defining changes.version allows one to create the RN without first removing the SNAPSHOT suffix.
    -->
-
   <body>
-    <release version="6.8.0" date="TBD" description="Maintenance and bug fix release.">
+    <release version="6.9.1" date="YYYY-MM-DD" description="Maintenance and bug fix release. Requires a minimum of Java 8.">
+      <!-- FIX -->
+      <!-- ADD -->
+      <!-- UPDATE -->
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.assertj:assertj-core from 3.25.3 to 3.26.0 #322.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.jetbrains.kotlin:kotlin-stdlib from 1.9.23 to 2.0.0 #309, #318.</action> 
+    </release>
+    <release version="6.9.0" date="2024-04-21" description="Maintenance and bug fix release.">
+      <!-- ADD -->
+      <action                  type="update" dev="ggregory" due-to="Pablo Nicolas Diaz, Gary Gregory, Paul King, Mark Roberts">Add Support for Java 16 records #290.</action>
+      <!-- FIX -->
+      <action                  type="update" dev="ggregory" due-to="Heewon Lee">Add null guard for InstructionFactory.createInvoke() #289.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid possible NullPointerException in org.apache.bcel.classfile.DescendingVisitor.accept(E[]).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid possible NullPointerException in AnnotationEntryGen.getAnnotationAttributes(ConstantPoolGen, AnnotationEntryGen[]).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid possible NullPointerException in AnnotationEntryGen.copyValues(ElementValuePair[], ConstantPoolGen, boolean).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid possible NullPointerException in ArrayElementValueGen.ArrayElementValueGen(int, ElementValue[], ConstantPoolGen).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid possible NullPointerException in org.apache.bcel.generic.ClassGen.setMethods(Method[]).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid possible NullPointerException in org.apache.bcel.generic.ClassGen.unpackAnnotations(Attribute[]).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid possible NullPointerException in org.apache.bcel.classfile.ParameterAnnotationEntry.createParameterAnnotationEntries(Attribute[]).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid possible NullPointerException in org.apache.bcel.generic.ClassGen.ClassGen(JavaClass).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid possible NullPointerException in org.apache.bcel.generic.FieldGenOrMethodGen.addAll(Attribute[]).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid possible NullPointerException in org.apache.bcel.classfile.ParameterAnnotationEntry.createParameterAnnotationEntries(Attribute[]).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.MethodParameters.setParameters(MethodParameter[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.ParameterAnnotations.setParameterAnnotationTable(ParameterAnnotationEntry[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.LocalVariableTypeTable.setLocalVariableTable(LocalVariable[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.LocalVariableTable.setLocalVariableTable(LocalVariable[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.LineNumberTable.setLineNumberTable(LineNumber[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setMethods(Method[] with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setInterfaces(int[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setInterfaceNames(String[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setFields(Field[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.JavaClass.setAttributes(Attribute[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.ConstantPool.setConstantPool(Constant[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.FieldOrMethod.setAttributes(Attribute[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.Annotations.setAnnotationTable(AnnotationEntry[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.ArrayElementValue.ArrayElementValue(int, ElementValue[], ConstantPool) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.BootstrapMethod.BootstrapMethod(int, int[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.BootstrapMethod.setBootstrapArguments(int[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.BootstrapMethods.BootstrapMethods(int, int, BootstrapMethod[], ConstantPool) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException after calling org.apache.bcel.classfile.BootstrapMethods.setBootstrapMethods(BootstrapMethod[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException calling org.apache.bcel.generic.InstructionList.redirectLocalVariables(LocalVariableGen[], InstructionHandle, InstructionHandle) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException calling org.apache.bcel.generic.InstructionList.redirectExceptionHandlers(CodeExceptionGen[], InstructionHandle, InstructionHandle) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException calling org.apache.bcel.generic.InstructionList.findHandle(InstructionHandle[], int[], int, int) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException calling org.apache.bcel.generic.MethodGen.setArgumentTypes(Type[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException calling org.apache.bcel.generic.MethodGen.setArgumentNames(String[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException calling org.apache.bcel.generic.MethodGen.removeRuntimeAttributes(Attribute[]) with null.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException calling org.apache.bcel.generic.MethodGen.makeMutableVersion(AnnotationEntry[]) with null.</action>
+      <!-- UPDATE -->
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.apache.commons:commons-parent from 66 to 69 #283, #297.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.jetbrains.kotlin:kotlin-stdlib from 1.9.22 to 1.9.23 #284.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump commons-io:commons-io from 2.15.1 to 2.16.1 #295, #300.</action>
+    </release>
+    <release version="6.8.2" date="2024-02-21" description="Maintenance and bug fix release.">
+      <!-- FIX -->
+      <action type="add" dev="ggregory" due-to="Guillaume Nodet">Fix ConcurrentModificationException in org.apache.bcel.util.SyntheticRepository.getInstance() #275.</action>
+      <!-- ADD -->
+      <action type="add" dev="ggregory" due-to="Gary Gregory">Add Maven property project.build.outputTimestamp for build reproducibility.</action>
+      <!-- UPDATE -->
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump GitHub various actions for CI builds.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.assertj:assertj-core from 3.25.1 to 3.25.2.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.apache.commons:commons-parent from 65 to 66.</action>
+    </release>
+    <release version="6.8.1" date="2024-01-07" description="Maintenance and bug fix release.">
+      <!-- FIX  -->
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Replace internal use of StringBuffer with StringBuilder.</action>
+      <action issue="BCEL-370" type="fix" dev="ggregory" due-to="Gary Gregory">CONSTANT_Dynamic is not handled in LDC #254.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">BCELComparator now uses generics.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException in ClassGen.BCELComparator#equals() and ClassGen.BCELComparator#hashCode().</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException in Constant.BCELComparator#equals() and Constant.BCELComparator#hashCode().</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException in Field.BCELComparator#equals() and Field.BCELComparator#hashCode().</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException in FieldGen.BCELComparator#equals() and FieldGen.BCELComparator#hashCode().</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException in JavaClass.BCELComparator#equals() and JavaClass.BCELComparator#hashCode().</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException in Method.BCELComparator#equals() and Method.BCELComparator#hashCode().</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Avoid NullPointerException in MethodGen.BCELComparator#equals() and MethodGen.BCELComparator#hashCode().</action>
+      <!-- UPDATE -->
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump GitHub various actions for CI builds.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump jna.version from 5.13.0 to 5.14.0 #250.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.jetbrains.kotlin:kotlin-stdlib from 1.9.21 to 1.9.22 #252.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump org.apache.commons:commons-exec from 1.3 to 1.4.0 #255.</action>
+    </release>
+    <release version="6.8.0" date="2023-12-03" description="Maintenance and bug fix release.">
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add and use InvalidMethodSignatureException extending ClassFormatException.</action>
       <action                  type="add" dev="ggregory" due-to="nbauma109">Increase code coverage in Class2HTMLTestCase with new test input Java4Example #186.</action>
@@ -72,7 +147,11 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="add" dev="ggregory" due-to="nbauma109">Added signature test cases for class/method, and bad signatures #182.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_20.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_20.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_21.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_21.</action>
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory, Mark Roberts">[Bcelifier] stackmap support to pass JDK verifier #177.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs [ERROR] Class org.apache.bcel.util.ClassVector defines non-transient non-serializable instance field vec [org.apache.bcel.util.ClassVector] In ClassVector.java SE_BAD_FIELD.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs [ERROR] Switch statement found in org.apache.bcel.util.BCELFactory.visitAllocationInstruction(AllocationInstruction) where one case falls through to the next case [org.apache.bcel.util.BCELFactory, org.apache.bcel.util.BCELFactory] At BCELFactory.java:[lines 188-191]Another occurrence at BCELFactory.java:[lines 192-196] SF_SWITCH_FALLTHROUGH.</action>      
       <!-- FIX -->
       <action                  type="fix" dev="markt" due-to="OSS-Fuzz">When parsing an class with an invalid constant reference, ensure ClassParser.parse() throws ClassFormatException, not NullPointerException.</action>
       <action                  type="fix" dev="markt" due-to="OSS-Fuzz">Ensure that references to a constant pool entry with index zero trigger a ClassFormatException, not a NullPointerException.</action>
@@ -82,11 +161,18 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Jason Copenhaver, Gary Gregory">Exception parsing Kotlin class with 'fun `method name with () in it`()' #205.</action>
       <action                  type="fix" dev="ggregory" due-to="nbauma109, Gary Gregory">Fix null pointers in AnnotationEntry #213.</action>
       <action                  type="fix" dev="ggregory" due-to="nbauma109">Field not found, search field in both super class and implemented interfaces (5x duplicated code to find field by name and type is refactored to a new method and now supports package-private) #181.</action>
-      <action issue="BCEL-366" type="fix" dev="ggregory" due-to="Slawomir Jaranowski">Use alternative name for broken classes under test (#220).</action>
+      <action issue="BCEL-366" type="fix" dev="ggregory" due-to="Slawomir Jaranowski">Use alternative name for broken classes under test #220.</action>
+      <action issue="BCEL-367" type="fix" dev="ggregory" due-to="Katherine Hough, Gary Gregory">Fixes java.lang.IndexOutOfBoundsException for ATHROW on empty stack #223.</action>
+      <action issue="BCEL-368" type="fix" dev="ggregory" due-to="Katherine Hough, Gary Gregory">Fixes java.lang.StackOverflowError in Select#toString(boolean) #229.</action>
+      <action                  type="fix" dev="ggregory" due-to="nbauma109, Judit Knoll, Gary Gregory">Fix for type.getType(...) use on non-signature type names #221.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix EmptyVisitorTestCase on Java 21.</action>
       <!-- UPDATE -->
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-parent from 54 to 56 #189, #198.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory, Dependabot">Bump commons-parent from 54 to 65 #189, #198, #222.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump jna.version from 5.12.1 to 5.13.0 #203.</action>
-      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump kotlin-stdlib from 1.8.10 to 1.8.21 #217, #219.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump kotlin-stdlib from 1.8.10 to 1.9.21 #217, #219, #227, #231, #235, #245, #247.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot">Bump commons-io from 2.11.0 to 2.15.1.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-lang3 from 3.12.0 to 3.14.0.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.codehaus.mojo:exec-maven-plugin from 3.1.0 to 3.1.1 #246.</action>
     </release>
     <release version="6.7.0" date="2022-11-28" description="Maintenance and bug fix release.">
       <!-- ADD -->

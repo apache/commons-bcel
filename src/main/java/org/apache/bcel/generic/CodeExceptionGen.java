@@ -59,7 +59,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
         try {
             return super.clone();
         } catch (final CloneNotSupportedException e) {
-            throw new Error("Clone Not Supported"); // never happens
+            throw new UnsupportedOperationException("Clone Not Supported", e); // never happens
         }
     }
 
@@ -77,7 +77,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     }
 
     /**
-     * Get CodeException object.<BR>
+     * Gets CodeException object.<BR>
      *
      * This relies on that the instruction list has already been dumped to byte code or that the 'setPositions' methods
      * has been called for the instruction list.
@@ -116,7 +116,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     }
 
     /*
-     * Set end of handler
+     * Sets end of handler
      *
      * @param endPc End of handled region (inclusive)
      */
@@ -126,7 +126,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     }
 
     /*
-     * Set handler code
+     * Sets handler code
      *
      * @param handlerPc Start of handler
      */
@@ -136,7 +136,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     }
 
     /*
-     * Set start of handler
+     * Sets start of handler
      *
      * @param startPc Start of handled region (inclusive)
      */

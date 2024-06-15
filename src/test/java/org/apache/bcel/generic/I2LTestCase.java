@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 public class I2LTestCase {
     @Test
-    public void accept() {
+    public void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final I2L i2l = new I2L();
         i2l.accept(countVisitor);

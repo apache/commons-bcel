@@ -212,10 +212,31 @@ public interface Visitor {
      */
     void visitParameterAnnotation(ParameterAnnotations obj);
 
+
     /**
      * @since 6.0
      */
     void visitParameterAnnotationEntry(ParameterAnnotationEntry obj);
+
+    /**
+     * Visits a {@link Record} object.
+     *
+     * @param obj Record to visit
+     * @since 6.9.0
+     */
+    default void visitRecord(final Record obj) {
+        // empty
+    }
+
+    /**
+     * Visits a {@link RecordComponentInfo} object.
+     *
+     * @param record component to visit
+     * @since 6.9.0
+     */
+    default void visitRecordComponent(final RecordComponentInfo record) {
+     // noop
+    }
 
     void visitSignature(Signature obj);
 
@@ -227,14 +248,16 @@ public interface Visitor {
 
     /**
      * Visits a {@link StackMapType} object.
+     *
      * @param obj object to visit
      * @since 6.8.0
      */
-    default void visitStackMapType(StackMapType obj) {
+    default void visitStackMapType(final StackMapType obj) {
       // empty
     }
 
     void visitSynthetic(Synthetic obj);
 
     void visitUnknown(Unknown obj);
+
 }

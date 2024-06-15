@@ -37,7 +37,7 @@ public final class ModuleRequires implements Cloneable, Node {
     private final int requiresVersionIndex; // either 0 or points to CONSTANT_Utf8_info
 
     /**
-     * Construct object from file stream.
+     * Constructs object from file stream.
      *
      * @param file Input stream
      * @throws IOException if an I/O Exception occurs in readUnsignedShort
