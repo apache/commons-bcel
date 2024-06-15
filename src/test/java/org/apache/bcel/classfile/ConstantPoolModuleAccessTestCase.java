@@ -250,7 +250,7 @@ public class ConstantPoolModuleAccessTestCase {
                             expected.add("org.assertj.core.presentation.Representation");
                             assertEquals(expected, Arrays.asList(usedClassNames));
                         } else {
-                            assertEquals(0, usedClassNames.length);
+                            assertEquals(0, usedClassNames.length, url.getPath());
                         }
                         super.visitModule(obj);
                     }
