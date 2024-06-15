@@ -164,7 +164,7 @@ public class ConstantPoolModuleAccessTestCase {
                             expected.add("sun.util.resources.LocaleData$SupplementaryResourceBundleProvider");
                             expected.add("sun.util.spi.CalendarProvider");
                             assertEquals(expected, Arrays.asList(usedClassNames));
-                        } else if (url.getPath().contains("/jdk.management.agent/module-info.class")) {
+                        } else if (url.getPath().contains("/jdk.management.agent/module-info.class") && javaClass.getMajor() < Const.MAJOR_21) {
                             final List<String> expected = new ArrayList<>();
                             expected.add("jdk.internal.agent.spi.AgentProvider");
                             assertEquals(expected, Arrays.asList(usedClassNames));
