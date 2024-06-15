@@ -47,7 +47,11 @@ public class ConstantPoolModuleAccessTestCase {
                 final EmptyVisitor visitor = new EmptyVisitor() {
                     @Override
                     public void visitModule(final Module obj) {
-                        assertEquals(0, obj.getModuleFlags(), url.toString());
+                        if (url.getPath().contains("/commons-")) {
+                            assertEquals(4096, obj.getModuleFlags(), url.toString());
+                        } else {
+                            assertEquals(0, obj.getModuleFlags(), url.toString());
+                        }
                         final String[] usedClassNames = obj.getUsedClassNames(constantPool, true);
                         if (url.getPath().contains("junit-jupiter-engine")) {
                             assertEquals(1, usedClassNames.length);
@@ -239,6 +243,11 @@ public class ConstantPoolModuleAccessTestCase {
                         } else if (url.getPath().contains("/jdk.jsobject/module-info.class") && javaClass.getMajor() == Const.MAJOR_11) {
                             final List<String> expected = new ArrayList<>();
                             expected.add("jdk.internal.netscape.javascript.spi.JSObjectProvider");
+                            assertEquals(expected, Arrays.asList(usedClassNames));
+                        } else if (url.getPath().contains("/org/assertj/assertj-core/3.25.3/assertj-core-3.25.3.jar!/META-INF/versions/9/module-info.class")) {
+                            final List<String> expected = new ArrayList<>();
+                            expected.add("org.assertj.core.configuration.Configuration");
+                            expected.add("org.assertj.core.presentation.Representation");
                             assertEquals(expected, Arrays.asList(usedClassNames));
                         } else {
                             assertEquals(0, usedClassNames.length);
