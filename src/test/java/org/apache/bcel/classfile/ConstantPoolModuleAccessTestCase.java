@@ -244,7 +244,7 @@ public class ConstantPoolModuleAccessTestCase {
                             final List<String> expected = new ArrayList<>();
                             expected.add("jdk.internal.netscape.javascript.spi.JSObjectProvider");
                             assertEquals(expected, Arrays.asList(usedClassNames));
-                        } else if (url.getPath().contains("/org/assertj/assertj-core/3.25.3/assertj-core-3.25.3.jar!/META-INF/versions/9/module-info.class")) {
+                        } else if (url.getPath().contains("/org/assertj/assertj-core/")) {
                             final List<String> expected = new ArrayList<>();
                             expected.add("org.assertj.core.configuration.Configuration");
                             expected.add("org.assertj.core.presentation.Representation");
