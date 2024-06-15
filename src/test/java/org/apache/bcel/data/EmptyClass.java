@@ -18,6 +18,5 @@
 package org.apache.bcel.data;
 
 public class EmptyClass {
-    
 }
 
