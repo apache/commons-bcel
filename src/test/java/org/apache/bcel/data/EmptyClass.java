@@ -17,4 +17,7 @@
 
 package org.apache.bcel.data;
 
-public class EmptyClass {}
+public class EmptyClass {
+    
+}
+

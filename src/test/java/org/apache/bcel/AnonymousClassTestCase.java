@@ -58,7 +58,7 @@ public class AnonymousClassTestCase extends AbstractTestCase {
         assertEquals(3, innerClassArray.length);
         assertNull(Repository.lookupClass(EmptyClass.class).getAttribute(Const.ATTR_INNER_CLASSES));
     }
-    
+
     @Test
     public void testStaticInnerClassIsNotAnonymous() throws ClassNotFoundException {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.AnonymousClassTest$Y");

@@ -267,7 +267,11 @@ public class ConstantPoolModuleAccessTestCase {
                             switch (packageName) {
                                 case "org.junit.platform.commons.util":
                                     expected.add("org.junit.platform.suite.commons");
-                                    // fall through
+                                    expected.add("org.junit.platform.suite.engine");
+                                    expected.add("org.junit.platform.testkit");
+                                    expected.add("org.junit.vintage.engine");
+                                    assertEquals(expected, Arrays.asList(toModuleNames));
+                                    break;
                                 case "org.junit.platform.commons.logging":
                                     expected.add("org.junit.platform.suite.engine");
                                     expected.add("org.junit.platform.testkit");
