@@ -56,7 +56,7 @@ public final class ModuleProvides implements Cloneable, Node {
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @param compactClassName false for original constant pool value, true to replace '/' with '.'
      * @return array of implementation class names
-     * @since 6.8.0
+     * @since 6.10.0
      */
     public String[] getImplementationClassNames(final ConstantPool constantPool, final boolean compactClassName) {
         final String[] implementationClassNames = new String[providesWithCount];
@@ -78,7 +78,7 @@ public final class ModuleProvides implements Cloneable, Node {
      * Gets the interface name for this ModuleProvides.
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @return interface name
-     * @since 6.8.0
+     * @since 6.10.0
      */
     public String getInterfaceName(final ConstantPool constantPool) {
         return constantPool.constantToString(providesIndex, Const.CONSTANT_Class);

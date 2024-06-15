@@ -56,7 +56,7 @@ public final class ModuleOpens implements Cloneable, Node {
     /**
      * Gets the flags for this ModuleOpens.
      * @return the opensFlags
-     * @since 6.8.0
+     * @since 6.10.0
      */
     public int getOpensFlags() {
         return opensFlags;
@@ -66,7 +66,7 @@ public final class ModuleOpens implements Cloneable, Node {
      * Gets an array of module names for this ModuleOpens.
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @return array of module names following 'opens to'
-     * @since 6.8.0
+     * @since 6.10.0
      */
     public String[] getToModuleNames(final ConstantPool constantPool) {
         final String[] toModuleNames = new String[opensToCount];
@@ -84,7 +84,7 @@ public final class ModuleOpens implements Cloneable, Node {
      * Gets the opened package name.
      * @param constantPool the constant pool from the ClassFile
      * @return the opened package name
-     * @since 6.8.0
+     * @since 6.10.0
      */
     public String getPackageName(final ConstantPool constantPool) {
         return constantPool.constantToString(opensIndex, Const.CONSTANT_Package);

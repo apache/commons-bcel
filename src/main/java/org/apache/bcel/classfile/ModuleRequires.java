@@ -51,7 +51,7 @@ public final class ModuleRequires implements Cloneable, Node {
     /**
      * Gets the flags for this ModuleRequires.
      * @return the requiresFlags
-     * @since 6.8.0
+     * @since 6.10.0
      */
     public int getRequiresFlags() {
         return requiresFlags;
@@ -61,7 +61,7 @@ public final class ModuleRequires implements Cloneable, Node {
      * Gets the required version from the constant pool.
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @return required version, "0" if version index is 0.
-     * @since 6.8.0
+     * @since 6.10.0
      */
     public String getVersion(final ConstantPool constantPool) {
         return requiresVersionIndex == 0 ? "0" : constantPool.getConstantString(requiresVersionIndex, Const.CONSTANT_Utf8);
@@ -71,7 +71,7 @@ public final class ModuleRequires implements Cloneable, Node {
      * Gets the module name from the constant pool.
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @return module name
-     * @since 6.8.0
+     * @since 6.10.0
      */
     public String getModuleName(final ConstantPool constantPool) {
         return constantPool.constantToString(requiresIndex, Const.CONSTANT_Module);

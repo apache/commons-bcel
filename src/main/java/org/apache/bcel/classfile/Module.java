@@ -113,7 +113,7 @@ public final class Module extends Attribute {
      * Gets version for this module.
      * @param cp Array of constants
      * @return version from constant pool, "0" if version index is 0
-     * @since 6.8.0
+     * @since 6.10.0
      */
     public String getVersion(final ConstantPool cp) {
         return moduleVersionIndex == 0 ? "0" : cp.getConstantString(moduleVersionIndex, Const.CONSTANT_Utf8);
@@ -122,7 +122,7 @@ public final class Module extends Attribute {
     /**
      * Gets flags for this module.
      * @return module flags
-     * @since 6.8.0
+     * @since 6.10.0
      */
     public int getModuleFlags() {
         return moduleFlags;
@@ -132,7 +132,7 @@ public final class Module extends Attribute {
      * Gets module name.
      * @param cp Array of constants
      * @return module name
-     * @since 6.8.0
+     * @since 6.10.0
      */
     public String getModuleName(final ConstantPool cp) {
         return cp.getConstantString(moduleNameIndex, Const.CONSTANT_Module);
@@ -143,7 +143,7 @@ public final class Module extends Attribute {
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @param compactClassName false for original constant pool value, true to replace '/' with '.'
      * @return array of used class names
-     * @since 6.8.0
+     * @since 6.10.0
      */
     public String[] getUsedClassNames(final ConstantPool constantPool, final boolean compactClassName) {
         final String[] usedClassNames = new String[usesCount];
