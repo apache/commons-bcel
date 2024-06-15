@@ -56,6 +56,7 @@ public class ConstantPoolModuleAccessTestCase {
                             final List<String> expected = new ArrayList<>();
                             expected.add("org.junit.platform.engine.TestEngine");
                             expected.add("org.junit.platform.launcher.LauncherDiscoveryListener");
+                            expected.add("org.junit.platform.launcher.LauncherInterceptor");
                             expected.add("org.junit.platform.launcher.LauncherSessionListener");
                             expected.add("org.junit.platform.launcher.PostDiscoveryFilter");
                             expected.add("org.junit.platform.launcher.TestExecutionListener");
