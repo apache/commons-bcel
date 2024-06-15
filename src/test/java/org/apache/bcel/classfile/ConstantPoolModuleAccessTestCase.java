@@ -218,7 +218,6 @@ public class ConstantPoolModuleAccessTestCase {
                             assertEquals(expected, Arrays.asList(usedClassNames));
                         } else if (url.getPath().contains("/jdk.internal.le/module-info.class")) {
                             final List<String> expected = new ArrayList<>();
-                            expected.add("jdk.internal.org.jline.terminal.spi.JnaSupport");
                             assertEquals(expected, Arrays.asList(usedClassNames));
                         } else if (url.getPath().contains("/jdk.jlink/module-info.class")) {
                             final List<String> expected = new ArrayList<>();
