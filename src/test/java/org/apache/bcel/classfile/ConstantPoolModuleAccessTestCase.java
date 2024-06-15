@@ -123,6 +123,9 @@ public class ConstantPoolModuleAccessTestCase {
                             final List<String> expected = new ArrayList<>();
                             expected.add("java.lang.System$LoggerFinder");
                             expected.add("java.net.ContentHandlerFactory");
+                            if (javaClass.getMajor() > Const.MAJOR_17) {
+                                expected.add("java.net.spi.InetAddressResolverProvider");
+                            }
                             expected.add("java.net.spi.URLStreamHandlerProvider");
                             expected.add("java.nio.channels.spi.AsynchronousChannelProvider");
                             expected.add("java.nio.channels.spi.SelectorProvider");
@@ -151,7 +154,10 @@ public class ConstantPoolModuleAccessTestCase {
                             expected.add("java.util.spi.TimeZoneNameProvider");
                             expected.add("java.util.spi.ToolProvider");
                             expected.add("javax.security.auth.spi.LoginModule");
-                            expected.add("jdk.internal.logger.DefaultLoggerFinder");
+                            if (javaClass.getMajor() > Const.MAJOR_17) {
+                                expected.add("jdk.internal.io.JdkConsoleProvider");
+                            }
+                           expected.add("jdk.internal.logger.DefaultLoggerFinder");
                             expected.add("sun.text.spi.JavaTimeDateTimePatternProvider");
                             expected.add("sun.util.locale.provider.LocaleDataMetaInfo");
                             expected.add("sun.util.resources.LocaleData$CommonResourceBundleProvider");
