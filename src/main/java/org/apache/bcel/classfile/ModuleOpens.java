@@ -54,6 +54,43 @@ public final class ModuleOpens implements Cloneable, Node {
     }
 
     /**
+     * Gets the flags for this ModuleOpens.
+     * @return the opensFlags
+     * @since 6.10.0
+     */
+    public int getOpensFlags() {
+        return opensFlags;
+    }
+
+    /**
+     * Gets an array of module names for this ModuleOpens.
+     * @param constantPool Array of constants usually obtained from the ClassFile object
+     * @return array of module names following 'opens to'
+     * @since 6.10.0
+     */
+    public String[] getToModuleNames(final ConstantPool constantPool) {
+        final String[] toModuleNames = new String[opensToCount];
+        for (int i = 0; i < opensToCount; i++) {
+            toModuleNames[i] = getToModuleNameAtIndex(constantPool, opensToIndex[i]);
+        }
+        return toModuleNames;
+    }
+
+    private static String getToModuleNameAtIndex(final ConstantPool constantPool, final int index) {
+        return constantPool.getConstantString(index, Const.CONSTANT_Module);
+    }
+
+    /**
+     * Gets the opened package name.
+     * @param constantPool the constant pool from the ClassFile
+     * @return the opened package name
+     * @since 6.10.0
+     */
+    public String getPackageName(final ConstantPool constantPool) {
+        return constantPool.constantToString(opensIndex, Const.CONSTANT_Package);
+    }
+
+    /**
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
@@ -63,8 +100,6 @@ public final class ModuleOpens implements Cloneable, Node {
     public void accept(final Visitor v) {
         v.visitModuleOpens(this);
     }
-
-    // TODO add more getters and setters?
 
     /**
      * @return deep copy of this object
@@ -106,13 +141,13 @@ public final class ModuleOpens implements Cloneable, Node {
      */
     public String toString(final ConstantPool constantPool) {
         final StringBuilder buf = new StringBuilder();
-        final String packageName = constantPool.constantToString(opensIndex, Const.CONSTANT_Package);
-        buf.append(Utility.compactClassName(packageName, false));
+        final String packageName = getPackageName(constantPool);
+        buf.append(packageName);
         buf.append(", ").append(String.format("%04x", opensFlags));
         buf.append(", to(").append(opensToCount).append("):\n");
         for (final int index : opensToIndex) {
-            final String moduleName = constantPool.getConstantString(index, Const.CONSTANT_Module);
-            buf.append("      ").append(Utility.compactClassName(moduleName, false)).append("\n");
+            final String moduleName = getToModuleNameAtIndex(constantPool, index);
+            buf.append("      ").append(moduleName).append("\n");
         }
         return buf.substring(0, buf.length() - 1); // remove the last newline
     }

@@ -61,7 +61,8 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
     <release version="6.10.0" date="YYYY-MM-DD" description="Maintenance and bug fix release. Requires a minimum of Java 8.">
       <!-- FIX -->
-      <!-- ADD -->
+      <!-- ADD --> 
+      <action                  type="update" dev="ggregory" due-to="nbauma109, Gary Gregory, Mark Roberts">Add accessors to model and unit tests, Javadoc #183.</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump tests from org.assertj:assertj-core 3.25.3 to 3.26.0 #322.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump tests from org.jetbrains.kotlin:kotlin-stdlib 1.9.23 to 2.0.0 #309, #318.</action> 
