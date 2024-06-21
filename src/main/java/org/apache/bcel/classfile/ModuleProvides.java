@@ -52,6 +52,39 @@ public final class ModuleProvides implements Cloneable, Node {
     }
 
     /**
+     * Gets the array of implementation class names for this ModuleProvides.
+     * @param constantPool Array of constants usually obtained from the ClassFile object
+     * @param compactClassName false for original constant pool value, true to replace '/' with '.'
+     * @return array of implementation class names
+     * @since 6.10.0
+     */
+    public String[] getImplementationClassNames(final ConstantPool constantPool, final boolean compactClassName) {
+        final String[] implementationClassNames = new String[providesWithCount];
+        for (int i = 0; i < providesWithCount; i++) {
+            implementationClassNames[i] = getImplementationClassNameAtIndex(constantPool, providesWithIndex[i], compactClassName);
+        }
+        return implementationClassNames;
+    }
+
+    private static String getImplementationClassNameAtIndex(final ConstantPool constantPool, final int index, final boolean compactClassName) {
+        final String className = constantPool.getConstantString(index, Const.CONSTANT_Class);
+        if (compactClassName) {
+            return Utility.compactClassName(className, false);
+        }
+        return className;
+    }
+
+    /**
+     * Gets the interface name for this ModuleProvides.
+     * @param constantPool Array of constants usually obtained from the ClassFile object
+     * @return interface name
+     * @since 6.10.0
+     */
+    public String getInterfaceName(final ConstantPool constantPool) {
+        return constantPool.constantToString(providesIndex, Const.CONSTANT_Class);
+    }
+
+    /**
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
@@ -61,8 +94,6 @@ public final class ModuleProvides implements Cloneable, Node {
     public void accept(final Visitor v) {
         v.visitModuleProvides(this);
     }
-
-    // TODO add more getters and setters?
 
     /**
      * @return deep copy of this object
@@ -103,12 +134,12 @@ public final class ModuleProvides implements Cloneable, Node {
      */
     public String toString(final ConstantPool constantPool) {
         final StringBuilder buf = new StringBuilder();
-        final String interfaceName = constantPool.constantToString(providesIndex, Const.CONSTANT_Class);
-        buf.append(Utility.compactClassName(interfaceName, false));
+        final String interfaceName = getInterfaceName(constantPool);
+        buf.append(interfaceName);
         buf.append(", with(").append(providesWithCount).append("):\n");
         for (final int index : providesWithIndex) {
-            final String className = constantPool.getConstantString(index, Const.CONSTANT_Class);
-            buf.append("      ").append(Utility.compactClassName(className, false)).append("\n");
+            final String className = getImplementationClassNameAtIndex(constantPool, index, true);
+            buf.append("      ").append(className).append("\n");
         }
         return buf.substring(0, buf.length() - 1); // remove the last newline
     }
