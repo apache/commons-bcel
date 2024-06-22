@@ -78,7 +78,8 @@ The <action> type attribute can be add,update,fix,remove.
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump tests from org.assertj:assertj-core 3.25.3 to 3.26.0 #322.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump tests from org.jetbrains.kotlin:kotlin-stdlib 1.9.23 to 2.0.0 #309, #318.</action> 
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump tests from org.apache.commons:commons-collections4 4.4 to 4.5.0-M2.</action> 
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump tests from org.apache.commons:commons-collections4 4.4 to 4.5.0-M2.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 69 to 70.</action> 
     </release>
     <release version="6.9.0" date="2024-04-21" description="Maintenance and bug fix release.">
       <!-- ADD -->
