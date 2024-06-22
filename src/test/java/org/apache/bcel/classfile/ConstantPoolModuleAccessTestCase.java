@@ -317,8 +317,7 @@ public final class ConstantPoolModuleAccessTestCase {
                         assertEquals("org.junit.jupiter.engine.extension", packageName);
                         assertEquals(1, toModuleNames.length);
                         assertEquals("org.junit.platform.commons", toModuleNames[0]);
-                    }
-                    if (urlPath.contains("junit-jupiter-api")) {
+                    } else if (urlPath.contains("junit-jupiter-api")) {
                         assertEquals("org.junit.jupiter.api.condition", packageName);
                         assertEquals(1, toModuleNames.length);
                         assertEquals("org.junit.platform.commons", toModuleNames[0]);
