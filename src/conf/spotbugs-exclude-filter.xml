@@ -154,4 +154,29 @@
     <Bug pattern="MS_PKGPROTECT"/>
   </Match>
 
+  <!-- Skip JavaCC generated code. -->
+  <Match>
+    <Class name="Mini.MiniParser"/>
+  </Match>
+  <!-- Skip JavaCC generated code. -->
+  <Match>
+    <Class name="Mini.ASCII_CharStream"/>
+  </Match>
+  <!-- Skip JavaCC generated code. -->
+  <Match>
+    <Class name="Mini.MiniParserTokenManager"/>
+  </Match>
+  <!-- Skip JavaCC generated code. -->
+  <Match>
+    <Class name="Mini.MiniParserConstants"/>
+  </Match>
+  <!-- Skip JavaCC generated code. -->
+  <Match>
+    <Class name="Mini.SimpleNode"/>
+  </Match>
+  <!-- Skip JavaCC generated code. -->
+  <Match>
+    <Class name="Mini.Token"/>
+  </Match>
+
 </FindBugsFilter>
