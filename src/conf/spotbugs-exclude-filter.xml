@@ -65,14 +65,19 @@
     <Class name="org.apache.bcel.Repository"/>
     <Method name="setRepository"/>
     <Bug pattern="EI_EXPOSE_STATIC_REP2"/>
-  </Match>
-  
+  </Match>  
+  <!-- Binary compatibility -->
   <Match>
     <Class name="org.apache.bcel.Repository"/>
     <Method name="getRepository"/>
     <Bug pattern="MS_EXPOSE_REP"/>
   </Match>
-
+  <!-- Binary compatibility -->
+  <Match>
+    <Class name="TransitiveHull"/>
+    <Field name="IGNORED"/>
+    <Bug pattern="MS_PKGPROTECT"/>
+  </Match>
 
   <!--
     TODO: this should probably be sinplified
@@ -160,6 +165,11 @@
     <Method name="optimizeIFs"/>
     <Bug pattern="EC_UNRELATED_TYPES_USING_POINTER_EQUALITY"/>
   </Match>
+  <!-- TODO Needs a redo, looks like very old code. -->
+  <Match>
+    <Class name="Mini.Environment"/>
+    <Bug pattern="CN_IDIOM_NO_SUPER_CALL"/>
+  </Match>
 
   <!-- Skip JavaCC generated code. -->
   <Match>
@@ -188,5 +198,17 @@
   <!-- Skip JavaCC generated code. -->
   <Match>
     <Class name="Mini.ASTIfExpr"/>
+  </Match>
+  <!-- Skip JavaCC generated code. -->
+  <Match>
+    <Class name="Mini.MiniParserTreeConstants"/>
+  </Match>
+  <!-- FALSE POSITIVE. -->
+  <Match>
+    <Class name="Mini.MiniC"/>
+    <Field name="errors"/>
+    <Field name="file"/>
+    <Field name="warnings"/>
+    <Bug pattern="UWF_UNWRITTEN_FIELD"/>
   </Match>
 </FindBugsFilter>

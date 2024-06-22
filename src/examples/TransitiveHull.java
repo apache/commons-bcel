@@ -35,6 +35,7 @@ import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.Type;
 import org.apache.bcel.util.ClassQueue;
 import org.apache.bcel.util.ClassSet;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Find all classes referenced by given start class and all classes referenced by those and so on. In other words:
@@ -52,6 +53,12 @@ import org.apache.bcel.util.ClassSet;
  */
 public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
 
+    /**
+     * Should be private.
+     *
+     * @deprecated Use {@link #getIgnored()}.
+     */
+    @Deprecated
     public static final String[] IGNORED = {"java[.].*", "javax[.].*", "sun[.].*", "sunw[.].*", "com[.]sun[.].*", "org[.]omg[.].*", "org[.]w3c[.].*",
         "org[.]xml[.].*", "net[.]jini[.].*"};
 
@@ -129,7 +136,7 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
     }
 
     public String[] getIgnored() {
-        return ignored;
+        return ignored != null ? ignored.clone() : null;
     }
 
     /**
@@ -138,7 +145,7 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
      * @param v Value to assign to ignored.
      */
     public void setIgnored(final String[] v) {
-        ignored = v;
+        ignored = ArrayUtils.clone(v);
     }
 
     /**
