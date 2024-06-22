@@ -41,7 +41,7 @@ import org.apache.bcel.generic.PUSH;
  *
  * A node with kind == -1 denotes the fact that this expression node has just one child branch and thus may be replaced
  * by this branch (or leaf) directly without altering the expression semantics. Term and Factor nodes are used only to
- * build the parse tree obeying the aritmetical precedences (* stronger than +, etc.) and are discarded in the first
+ * build the parse tree obeying the arithmetical precedences (* stronger than +, etc.) and are discarded in the first
  * pass.
  */
 public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniParserTreeConstants {
