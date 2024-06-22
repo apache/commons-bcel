@@ -86,7 +86,7 @@ public class BootstrapMethod implements Cloneable {
     public BootstrapMethod copy() {
         try {
             return (BootstrapMethod) clone();
-        } catch (final CloneNotSupportedException e) {
+        } catch (final CloneNotSupportedException ignore) {
             // TODO should this throw?
         }
         return null;
