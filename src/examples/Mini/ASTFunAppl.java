@@ -25,6 +25,7 @@ import org.apache.bcel.generic.INVOKESTATIC;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.Type;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  */
@@ -72,7 +73,7 @@ public class ASTFunAppl extends ASTExpr {
             ASTFunDecl.pop();
             il.append(new INVOKESTATIC(cp.addMethodref(className, "_writeInt", "(I)I")));
         } else { // Normal function
-            final int size = exprs.length;
+            final int size = ArrayUtils.getLength(exprs);
             Type[] argv = null;
 
             if (exprs != null) {
