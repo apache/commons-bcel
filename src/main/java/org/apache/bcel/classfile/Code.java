@@ -103,7 +103,7 @@ public final class Code extends Attribute {
         final int attributesCount = file.readUnsignedShort();
         attributes = new Attribute[attributesCount];
         for (int i = 0; i < attributesCount; i++) {
-            attributes[i] = Attribute.readAttribute(file, constantPool);
+            attributes[i] = readAttribute(file, constantPool);
         }
         /*
          * Adjust length, because of setAttributes in this(), s.b. length is incorrect, because it didn't take the internal
