@@ -29,7 +29,6 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
 
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
@@ -464,7 +463,7 @@ public class VerifyDialog extends JDialog {
             // user code begin {1}
             // user code end
             setName("VerifyDialog");
-            setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             setSize(430, 280);
             setVisible(true);
             setModal(true);
