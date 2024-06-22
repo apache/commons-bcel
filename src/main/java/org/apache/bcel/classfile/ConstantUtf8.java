@@ -77,7 +77,7 @@ public final class ConstantUtf8 extends Constant {
         private static final int MAX_ENTRY_SIZE = Integer.getInteger(SYS_PROP_CACHE_MAX_ENTRY_SIZE, 200).intValue();
 
         static boolean isEnabled() {
-            return Cache.MAX_ENTRIES > 0 && MAX_ENTRY_SIZE > 0;
+            return MAX_ENTRIES > 0 && MAX_ENTRY_SIZE > 0;
         }
 
     }
