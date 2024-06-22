@@ -1466,8 +1466,8 @@ public abstract class Utility {
                 } else {
                     type.append(typeSignatureToString(signature.substring(consumedChars), chopit));
                     // update our consumed count by the number of characters the for type argument
-                    consumedChars = unwrap(Utility.CONSUMER_CHARS) + consumedChars;
-                    wrap(Utility.CONSUMER_CHARS, consumedChars);
+                    consumedChars = unwrap(CONSUMER_CHARS) + consumedChars;
+                    wrap(CONSUMER_CHARS, consumedChars);
                 }
 
                 // are there more TypeArguments?
@@ -1487,8 +1487,8 @@ public abstract class Utility {
                     } else {
                         type.append(typeSignatureToString(signature.substring(consumedChars), chopit));
                         // update our consumed count by the number of characters the for type argument
-                        consumedChars = unwrap(Utility.CONSUMER_CHARS) + consumedChars;
-                        wrap(Utility.CONSUMER_CHARS, consumedChars);
+                        consumedChars = unwrap(CONSUMER_CHARS) + consumedChars;
+                        wrap(CONSUMER_CHARS, consumedChars);
                     }
                 }
 
@@ -1505,14 +1505,14 @@ public abstract class Utility {
                     // update our consumed count by the number of characters the for type argument
                     // note that this count includes the "L" we added, but that is ok
                     // as it accounts for the "." we didn't consume
-                    consumedChars = unwrap(Utility.CONSUMER_CHARS) + consumedChars;
-                    wrap(Utility.CONSUMER_CHARS, consumedChars);
+                    consumedChars = unwrap(CONSUMER_CHARS) + consumedChars;
+                    wrap(CONSUMER_CHARS, consumedChars);
                     return type.toString();
                 }
                 if (signature.charAt(consumedChars) != ';') {
                     throw new ClassFormatException("Invalid signature: " + signature);
                 }
-                wrap(Utility.CONSUMER_CHARS, consumedChars + 1); // remove final ";"
+                wrap(CONSUMER_CHARS, consumedChars + 1); // remove final ";"
                 return type.toString();
             }
             case 'S':
@@ -1533,9 +1533,9 @@ public abstract class Utility {
                 // The rest of the string denotes a '<field_type>'
                 type = typeSignatureToString(signature.substring(n), chopit);
                 // corrected concurrent private static field acess
-                // Utility.consumed_chars += consumed_chars; is replaced by:
-                final int temp = unwrap(Utility.CONSUMER_CHARS) + consumedChars;
-                wrap(Utility.CONSUMER_CHARS, temp);
+                // consumed_chars += consumed_chars; is replaced by:
+                final int temp = unwrap(CONSUMER_CHARS) + consumedChars;
+                wrap(CONSUMER_CHARS, temp);
                 return type + brackets.toString();
             }
             case 'V':
