@@ -15,10 +15,13 @@
  *  limitations under the License.
  */
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.StringTokenizer;
@@ -99,7 +102,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
     public JasminVisitor(final JavaClass clazz, final OutputStream out) {
         this.javaClass = clazz;
-        this.printWriter = new PrintWriter(out);
+        this.printWriter = new PrintWriter(new BufferedWriter(new OutputStreamWriter(out, StandardCharsets.UTF_8)), false);
         this.className = clazz.getClassName();
         this.cp = new ConstantPoolGen(clazz.getConstantPool());
     }
