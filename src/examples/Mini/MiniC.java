@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.util.Objects;
 import java.util.Vector;
 
 import org.apache.bcel.Const;
@@ -65,9 +66,10 @@ public class MiniC {
 
     public static void main(final String[] argv) {
         final String[] fileName = new String[argv.length];
+
         int files = 0;
-        // MiniParser parser = null;
-        String baseName = null;
+        MiniParser parser;
+        String baseName;
         boolean byteCode = true;
 
         try {
@@ -98,7 +100,9 @@ public class MiniC {
                 pass = 0;
 
                 if (j == 0) {
-                    // parser = new MiniParser(new FileInputStream(fileName[0]));
+                    // side-effects
+                    parser = new MiniParser(new FileInputStream(fileName[0]));
+                    Objects.requireNonNull(parser, "parser");
                 } else {
                     MiniParser.ReInit(new FileInputStream(fileName[j]));
                 }
