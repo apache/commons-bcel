@@ -158,7 +158,7 @@ public abstract class Type {
 
     static int getReturnTypeSize(final String signature) {
         final int index = signature.lastIndexOf(')') + 1;
-        return Type.size(getTypeSize(signature.substring(index)));
+        return size(getTypeSize(signature.substring(index)));
     }
 
     public static String getSignature(final java.lang.reflect.Method meth) {
@@ -385,14 +385,14 @@ public abstract class Type {
     }
 
     /**
-     * boolean, short and char variable are considered as int in the stack or local variable area. Returns {@link Type#INT}
-     * for {@link Type#BOOLEAN}, {@link Type#SHORT} or {@link Type#CHAR}, otherwise returns the given type.
+     * boolean, short and char variable are considered as int in the stack or local variable area. Returns {@link #INT}
+     * for {@link #BOOLEAN}, {@link #SHORT} or {@link #CHAR}, otherwise returns the given type.
      *
      * @since 6.0
      */
     public Type normalizeForStackOrLocal() {
-        if (this == Type.BOOLEAN || this == Type.BYTE || this == Type.SHORT || this == Type.CHAR) {
-            return Type.INT;
+        if (this == BOOLEAN || this == BYTE || this == SHORT || this == CHAR) {
+            return INT;
         }
         return this;
     }
@@ -402,6 +402,6 @@ public abstract class Type {
      */
     @Override
     public String toString() {
-        return this.equals(Type.NULL) || type >= Const.T_UNKNOWN ? signature : Utility.signatureToString(signature, false);
+        return this.equals(NULL) || type >= Const.T_UNKNOWN ? signature : Utility.signatureToString(signature, false);
     }
 }
