@@ -87,19 +87,19 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
         }
     }
 
-    private final JavaClass clazz;
-    private final PrintWriter out;
+    private final JavaClass javaClass;
+    private final PrintWriter printWriter;
     private final String className;
 
     private final ConstantPoolGen cp;
 
-    private Method _method;
+    private Method method;
 
     private Hashtable<InstructionHandle, String> map;
 
     public JasminVisitor(final JavaClass clazz, final OutputStream out) {
-        this.clazz = clazz;
-        this.out = new PrintWriter(out);
+        this.javaClass = clazz;
+        this.printWriter = new PrintWriter(out);
         this.className = clazz.getClassName();
         this.cp = new ConstantPoolGen(clazz.getConstantPool());
     }
@@ -108,8 +108,8 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
      * Start traversal using DefaultVisitor pattern.
      */
     public void disassemble() {
-        new org.apache.bcel.classfile.DescendingVisitor(clazz, this).visit();
-        out.close();
+        new org.apache.bcel.classfile.DescendingVisitor(javaClass, this).visit();
+        printWriter.close();
     }
 
     private String get(final InstructionHandle ih) {
@@ -122,10 +122,10 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
      * attributes if it's the last one and print ".end method" then.
      */
     private void printEndMethod(final Attribute attr) {
-        final Attribute[] attributes = _method.getAttributes();
+        final Attribute[] attributes = method.getAttributes();
 
         if (attr == attributes[attributes.length - 1]) {
-            out.println(".end method");
+            printWriter.println(".end method");
         }
     }
 
@@ -147,10 +147,10 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     public void visitCode(final Code code) {
         int labelCounter = 0;
 
-        out.println(".limit stack " + code.getMaxStack());
-        out.println(".limit locals " + code.getMaxLocals());
+        printWriter.println(".limit stack " + code.getMaxStack());
+        printWriter.println(".limit locals " + code.getMaxLocals());
 
-        final MethodGen mg = new MethodGen(_method, className, cp);
+        final MethodGen mg = new MethodGen(method, className, cp);
         final InstructionList il = mg.getInstructionList();
         final InstructionHandle[] ihs = il.getInstructionHandles();
 
@@ -201,18 +201,18 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
         // Pass 2: Output code.
         for (final LocalVariableGen l : lvs) {
-            out.println(
+            printWriter.println(
                 ".var " + l.getIndex() + " is " + l.getName() + " " + l.getType().getSignature() + " from " + get(l.getStart()) + " to " + get(l.getEnd()));
         }
 
-        out.print("\n");
+        printWriter.print("\n");
 
         for (InstructionHandle ih : ihs) {
             final Instruction inst = ih.getInstruction();
             String str = map.get(ih);
 
             if (str != null) {
-                out.println(str);
+                printWriter.println(str);
             }
 
             if (inst instanceof BranchInstruction) {
@@ -222,40 +222,40 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
                     final InstructionHandle[] targets = s.getTargets();
 
                     if (s instanceof TABLESWITCH) {
-                        out.println("\ttableswitch " + matchs[0] + " " + matchs[matchs.length - 1]);
+                        printWriter.println("\ttableswitch " + matchs[0] + " " + matchs[matchs.length - 1]);
 
                         for (final InstructionHandle target : targets) {
-                            out.println("\t\t" + get(target));
+                            printWriter.println("\t\t" + get(target));
                         }
 
                     } else { // LOOKUPSWITCH
-                        out.println("\tlookupswitch ");
+                        printWriter.println("\tlookupswitch ");
 
                         for (int j = 0; j < targets.length; j++) {
-                            out.println("\t\t" + matchs[j] + " : " + get(targets[j]));
+                            printWriter.println("\t\t" + matchs[j] + " : " + get(targets[j]));
                         }
                     }
 
-                    out.println("\t\tdefault: " + get(s.getTarget())); // Applies for both
+                    printWriter.println("\t\tdefault: " + get(s.getTarget())); // Applies for both
                 } else {
                     final BranchInstruction bi = (BranchInstruction) inst;
                     ih = bi.getTarget();
                     str = get(ih);
-                    out.println("\t" + Const.getOpcodeName(bi.getOpcode()) + " " + str);
+                    printWriter.println("\t" + Const.getOpcodeName(bi.getOpcode()) + " " + str);
                 }
             } else {
-                out.println("\t" + inst.toString(cp.getConstantPool()));
+                printWriter.println("\t" + inst.toString(cp.getConstantPool()));
             }
         }
 
-        out.print("\n");
+        printWriter.print("\n");
 
         for (final CodeExceptionGen c : ehs) {
             final ObjectType caught = c.getCatchType();
             final String className = caught == null ? // catch any exception, used when compiling finally
                 "all" : Utility.packageToPath(caught.getClassName());
 
-            out.println(".catch " + className + " from " + get(c.getStartPC()) + " to " + get(c.getEndPC()) + " using " + get(c.getHandlerPC()));
+            printWriter.println(".catch " + className + " from " + get(c.getStartPC()) + " to " + get(c.getEndPC()) + " using " + get(c.getHandlerPC()));
         }
 
         printEndMethod(code);
@@ -263,7 +263,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
     @Override
     public void visitConstantValue(final ConstantValue cv) {
-        out.println(" = " + cv);
+        printWriter.println(" = " + cv);
     }
 
     @Override
@@ -274,7 +274,7 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     @Override
     public void visitExceptionTable(final ExceptionTable e) {
         for (final String name : e.getExceptionNames()) {
-            out.println(".throws " + Utility.packageToPath(name));
+            printWriter.println(".throws " + Utility.packageToPath(name));
         }
 
         printEndMethod(e);
@@ -282,45 +282,45 @@ public class JasminVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
     @Override
     public void visitField(final Field field) {
-        out.print(".field " + Utility.accessToString(field.getAccessFlags()) + " \"" + field.getName() + "\"" + field.getSignature());
+        printWriter.print(".field " + Utility.accessToString(field.getAccessFlags()) + " \"" + field.getName() + "\"" + field.getSignature());
         if (field.getAttributes().length == 0) {
-            out.print("\n");
+            printWriter.print("\n");
         }
     }
 
     @Override
     public void visitJavaClass(final JavaClass clazz) {
-        out.println(";; Produced by JasminVisitor (BCEL)");
-        out.println(";; https://commons.apache.org/bcel/");
-        out.println(";; " + new Date() + "\n");
+        printWriter.println(";; Produced by JasminVisitor (BCEL)");
+        printWriter.println(";; https://commons.apache.org/bcel/");
+        printWriter.println(";; " + new Date() + "\n");
 
-        out.println(".source " + clazz.getSourceFileName());
-        out.println("." + Utility.classOrInterface(clazz.getAccessFlags()) + " " + Utility.accessToString(clazz.getAccessFlags(), true) + " "
+        printWriter.println(".source " + clazz.getSourceFileName());
+        printWriter.println("." + Utility.classOrInterface(clazz.getAccessFlags()) + " " + Utility.accessToString(clazz.getAccessFlags(), true) + " "
             + Utility.packageToPath(clazz.getClassName()));
-        out.println(".super " + Utility.packageToPath(clazz.getSuperclassName()));
+        printWriter.println(".super " + Utility.packageToPath(clazz.getSuperclassName()));
 
         for (final String iface : clazz.getInterfaceNames()) {
-            out.println(".implements " + Utility.packageToPath(iface));
+            printWriter.println(".implements " + Utility.packageToPath(iface));
         }
 
-        out.print("\n");
+        printWriter.print("\n");
     }
 
     @Override
-    public void visitMethod(final Method method) {
-        this._method = method; // Remember for use in subsequent visitXXX calls
+    public void visitMethod(final Method visitMethod) {
+        this.method = visitMethod; // Remember for use in subsequent visitXXX calls
 
-        out.println("\n.method " + Utility.accessToString(_method.getAccessFlags()) + " " + _method.getName() + _method.getSignature());
+        printWriter.println("\n.method " + Utility.accessToString(method.getAccessFlags()) + " " + method.getName() + method.getSignature());
 
-        final Attribute[] attributes = _method.getAttributes();
+        final Attribute[] attributes = method.getAttributes();
         if (attributes == null || attributes.length == 0) {
-            out.println(".end method");
+            printWriter.println(".end method");
         }
     }
 
     @Override
     public void visitSynthetic(final Synthetic attribute) {
-        if (_method != null) {
+        if (method != null) {
             printEndMethod(attribute);
         }
     }
