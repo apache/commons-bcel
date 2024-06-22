@@ -467,7 +467,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
                 queue.enqueue(iface);
             }
         }
-        return allInterfaces.toArray(JavaClass.EMPTY_ARRAY);
+        return allInterfaces.toArray(EMPTY_ARRAY);
     }
 
     /**
@@ -681,7 +681,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         for (clazz = clazz.getSuperClass(); clazz != null; clazz = clazz.getSuperClass()) {
             allSuperClasses.add(clazz);
         }
-        return allSuperClasses.toArray(JavaClass.EMPTY_ARRAY);
+        return allSuperClasses.toArray(EMPTY_ARRAY);
     }
 
     /**
