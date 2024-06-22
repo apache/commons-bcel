@@ -72,6 +72,10 @@ public final class ConstantPoolModuleAccessTestCase {
                         expected.add("org.junit.platform.launcher.PostDiscoveryFilter");
                         expected.add("org.junit.platform.launcher.TestExecutionListener");
                         assertEquals(expected, Arrays.asList(usedClassNames));
+                    } else if (urlPath.contains("junit-platform-engine")) {
+                        final List<String> expected = new ArrayList<>();
+                        expected.add("org.junit.platform.engine.discovery.DiscoverySelectorIdentifierParser");
+                        assertEquals(expected, Arrays.asList(usedClassNames));
                     } else if (urlPath.contains("/java.rmi/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("java.rmi.server.RMIClassLoaderSpi");
