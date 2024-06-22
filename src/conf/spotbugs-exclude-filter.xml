@@ -154,6 +154,13 @@
     <Bug pattern="MS_PKGPROTECT"/>
   </Match>
 
+  <!-- TODO Is this really identity equality and not object equality? -->
+  <Match>
+    <Class name="Mini.ASTFunDecl"/>
+    <Method name="optimizeIFs"/>
+    <Bug pattern="EC_UNRELATED_TYPES_USING_POINTER_EQUALITY"/>
+  </Match>
+
   <!-- Skip JavaCC generated code. -->
   <Match>
     <Class name="Mini.MiniParser"/>

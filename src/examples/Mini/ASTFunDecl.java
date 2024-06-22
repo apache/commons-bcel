@@ -111,6 +111,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants {
                     final InstructionTargeter[] targeters = target.getTargeters();
 
                     for (final InstructionTargeter targeter : targeters) {
+                        // TODO Is this really identity equality and not object equality? 
                         if (target != match[4] || targeter != match[2]) {
                             System.err.println("Unexpected: " + e);
                         }
