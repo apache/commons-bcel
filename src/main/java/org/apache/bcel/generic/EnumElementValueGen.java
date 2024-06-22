@@ -48,7 +48,7 @@ public class EnumElementValueGen extends ElementValueGen {
      * This ctor is used for deserialization
      */
     protected EnumElementValueGen(final int typeIdx, final int valueIdx, final ConstantPoolGen cpool) {
-        super(ElementValueGen.ENUM_CONSTANT, cpool);
+        super(ENUM_CONSTANT, cpool);
         if (super.getElementValueType() != ENUM_CONSTANT) {
             throw new IllegalArgumentException("Only element values of type enum can be built with this ctor - type specified: " + super.getElementValueType());
         }
@@ -57,7 +57,7 @@ public class EnumElementValueGen extends ElementValueGen {
     }
 
     public EnumElementValueGen(final ObjectType t, final String value, final ConstantPoolGen cpool) {
-        super(ElementValueGen.ENUM_CONSTANT, cpool);
+        super(ENUM_CONSTANT, cpool);
         typeIdx = cpool.addUtf8(t.getSignature()); // was addClass(t);
         valueIdx = cpool.addUtf8(value); // was addString(value);
     }
