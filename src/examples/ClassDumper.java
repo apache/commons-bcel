@@ -44,8 +44,8 @@ final class ClassDumper {
     private int[] interfaces; // Names of implemented interfaces
     private ConstantPool constantPool; // collection of constants
     private Constant[] constantItems; // collection of constants
-    private Field[] fields; // class fields, i.e., its variables
-    private Method[] methods; // methods defined in the class
+    // private Field[] fields; // class fields, i.e., its variables
+    // private Method[] methods; // methods defined in the class
     private Attribute[] attributes; // attributes defined in the class
 
     /**
@@ -249,7 +249,7 @@ final class ClassDumper {
      */
     private final void processFields() throws IOException, ClassFormatException {
         final int fieldsCount = file.readUnsignedShort();
-        fields = new Field[fieldsCount];
+        // fields = new Field[fieldsCount];
 
         // sometimes fields[0] is magic used for serialization
         System.out.printf("%nFields(%d):%n", fieldsCount);
@@ -313,7 +313,7 @@ final class ClassDumper {
      */
     private final void processMethods() throws IOException, ClassFormatException {
         final int methodsCount = file.readUnsignedShort();
-        methods = new Method[methodsCount];
+        // methods = new Method[methodsCount];
 
         System.out.printf("%nMethods(%d):%n", methodsCount);
 
