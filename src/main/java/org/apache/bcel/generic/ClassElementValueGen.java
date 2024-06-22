@@ -43,12 +43,12 @@ public class ClassElementValueGen extends ElementValueGen {
     }
 
     protected ClassElementValueGen(final int typeIdx, final ConstantPoolGen cpool) {
-        super(ElementValueGen.CLASS, cpool);
+        super(CLASS, cpool);
         this.idx = typeIdx;
     }
 
     public ClassElementValueGen(final ObjectType t, final ConstantPoolGen cpool) {
-        super(ElementValueGen.CLASS, cpool);
+        super(CLASS, cpool);
         // this.idx = cpool.addClass(t);
         idx = cpool.addUtf8(t.getSignature());
     }
