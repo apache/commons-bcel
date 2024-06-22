@@ -53,16 +53,17 @@ public final class ConstantPoolModuleAccessTestCase {
             final EmptyVisitor visitor = new EmptyVisitor() {
                 @Override
                 public void visitModule(final Module obj) {
-                    if (url.getPath().contains("/commons-")) {
+                    final String urlPath = url.getPath();
+                    if (urlPath.contains("/commons-")) {
                         assertEquals(4096, obj.getModuleFlags(), url.toString());
                     } else {
                         assertEquals(0, obj.getModuleFlags(), url.toString());
                     }
                     final String[] usedClassNames = obj.getUsedClassNames(constantPool, true);
-                    if (url.getPath().contains("junit-jupiter-engine")) {
+                    if (urlPath.contains("junit-jupiter-engine")) {
                         assertEquals(1, usedClassNames.length);
                         assertEquals("org.junit.jupiter.api.extension.Extension", usedClassNames[0]);
-                    } else if (url.getPath().contains("junit-platform-launcher")) {
+                    } else if (urlPath.contains("junit-platform-launcher")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("org.junit.platform.engine.TestEngine");
                         expected.add("org.junit.platform.launcher.LauncherDiscoveryListener");
@@ -71,11 +72,11 @@ public final class ConstantPoolModuleAccessTestCase {
                         expected.add("org.junit.platform.launcher.PostDiscoveryFilter");
                         expected.add("org.junit.platform.launcher.TestExecutionListener");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/java.rmi/module-info.class")) {
+                    } else if (urlPath.contains("/java.rmi/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("java.rmi.server.RMIClassLoaderSpi");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/java.xml/module-info.class")) {
+                    } else if (urlPath.contains("/java.xml/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("javax.xml.datatype.DatatypeFactory");
                         expected.add("javax.xml.parsers.DocumentBuilderFactory");
@@ -88,11 +89,11 @@ public final class ConstantPoolModuleAccessTestCase {
                         expected.add("javax.xml.xpath.XPathFactory");
                         expected.add("org.xml.sax.XMLReader");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/java.datatransfer/module-info.class")) {
+                    } else if (urlPath.contains("/java.datatransfer/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("sun.datatransfer.DesktopDatatransferService");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/java.desktop/module-info.class")) {
+                    } else if (urlPath.contains("/java.desktop/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("java.awt.im.spi.InputMethodDescriptor");
                         expected.add("javax.accessibility.AccessibilityProvider");
@@ -113,7 +114,7 @@ public final class ConstantPoolModuleAccessTestCase {
                         expected.add("javax.sound.sampled.spi.MixerProvider");
                         expected.add("sun.swing.InteropProvider");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/java.naming/module-info.class")) {
+                    } else if (urlPath.contains("/java.naming/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("javax.naming.ldap.StartTlsResponse");
                         expected.add("javax.naming.spi.InitialContextFactory");
@@ -121,11 +122,11 @@ public final class ConstantPoolModuleAccessTestCase {
                             expected.add("javax.naming.ldap.spi.LdapDnsProvider");
                         }
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/java.prefs/module-info.class")) {
+                    } else if (urlPath.contains("/java.prefs/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("java.util.prefs.PreferencesFactory");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/java.base/module-info.class")) {
+                    } else if (urlPath.contains("/java.base/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("java.lang.System$LoggerFinder");
                         expected.add("java.net.ContentHandlerFactory");
@@ -170,47 +171,47 @@ public final class ConstantPoolModuleAccessTestCase {
                         expected.add("sun.util.resources.LocaleData$SupplementaryResourceBundleProvider");
                         expected.add("sun.util.spi.CalendarProvider");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/jdk.management.agent/module-info.class") && javaClass.getMajor() < Const.MAJOR_21) {
+                    } else if (urlPath.contains("/jdk.management.agent/module-info.class") && javaClass.getMajor() < Const.MAJOR_21) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("jdk.internal.agent.spi.AgentProvider");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/java.management/module-info.class")) {
+                    } else if (urlPath.contains("/java.management/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("javax.management.remote.JMXConnectorProvider");
                         expected.add("javax.management.remote.JMXConnectorServerProvider");
                         expected.add("sun.management.spi.PlatformMBeanProvider");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/java.sql/module-info.class")) {
+                    } else if (urlPath.contains("/java.sql/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("java.sql.Driver");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/jdk.httpserver/module-info.class")) {
+                    } else if (urlPath.contains("/jdk.httpserver/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("com.sun.net.httpserver.spi.HttpServerProvider");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/java.sql.rowset/module-info.class")) {
+                    } else if (urlPath.contains("/java.sql.rowset/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("javax.sql.rowset.RowSetFactory");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/java.compiler/module-info.class")) {
+                    } else if (urlPath.contains("/java.compiler/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("javax.tools.DocumentationTool");
                         expected.add("javax.tools.JavaCompiler");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/java.scripting/module-info.class")) {
+                    } else if (urlPath.contains("/java.scripting/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("javax.script.ScriptEngineFactory");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/jdk.dynalink/module-info.class")) {
+                    } else if (urlPath.contains("/jdk.dynalink/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("jdk.dynalink.linker.GuardingDynamicLinkerExporter");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/jdk.jdi/module-info.class")) {
+                    } else if (urlPath.contains("/jdk.jdi/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("com.sun.jdi.connect.Connector");
                         expected.add("com.sun.jdi.connect.spi.TransportService");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/jdk.compiler/module-info.class")) {
+                    } else if (urlPath.contains("/jdk.compiler/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("javax.annotation.processing.Processor");
                         expected.add("com.sun.source.util.Plugin");
@@ -219,50 +220,50 @@ public final class ConstantPoolModuleAccessTestCase {
                         }
                         expected.add("com.sun.tools.javac.platform.PlatformProvider");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/jdk.jconsole/module-info.class")) {
+                    } else if (urlPath.contains("/jdk.jconsole/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("com.sun.tools.jconsole.JConsolePlugin");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/jdk.attach/module-info.class")) {
+                    } else if (urlPath.contains("/jdk.attach/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("com.sun.tools.attach.spi.AttachProvider");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/jdk.jshell/module-info.class")) {
+                    } else if (urlPath.contains("/jdk.jshell/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("jdk.jshell.spi.ExecutionControlProvider");
                         expected.add("jdk.internal.editor.spi.BuildInEditorProvider");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/jdk.internal.le/module-info.class")) {
+                    } else if (urlPath.contains("/jdk.internal.le/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/jdk.jlink/module-info.class")) {
+                    } else if (urlPath.contains("/jdk.jlink/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("jdk.tools.jlink.plugin.Plugin");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/jdk.internal.jvmstat/module-info.class")) {
+                    } else if (urlPath.contains("/jdk.internal.jvmstat/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("sun.jvmstat.monitor.MonitoredHostService");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/jdk.jpackage/module-info.class")) {
+                    } else if (urlPath.contains("/jdk.jpackage/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("jdk.jpackage.internal.Bundler");
                         expected.add("jdk.jpackage.internal.Bundlers");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/jdk.naming.ldap/module-info.class")) {
+                    } else if (urlPath.contains("/jdk.naming.ldap/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("com.sun.jndi.ldap.spi.LdapDnsProvider");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/jdk.jsobject/module-info.class") && javaClass.getMajor() == Const.MAJOR_11) {
+                    } else if (urlPath.contains("/jdk.jsobject/module-info.class") && javaClass.getMajor() == Const.MAJOR_11) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("jdk.internal.netscape.javascript.spi.JSObjectProvider");
                         assertEquals(expected, Arrays.asList(usedClassNames));
-                    } else if (url.getPath().contains("/org/assertj/assertj-core/")) {
+                    } else if (urlPath.contains("/org/assertj/assertj-core/")) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("org.assertj.core.configuration.Configuration");
                         expected.add("org.assertj.core.presentation.Representation");
                         assertEquals(expected, Arrays.asList(usedClassNames));
                     } else {
-                        assertEquals(0, usedClassNames.length, "Found " + Arrays.toString(usedClassNames) + " in " + url.getPath());
+                        assertEquals(0, usedClassNames.length, "Found " + Arrays.toString(usedClassNames) + " in " + urlPath);
                     }
                     super.visitModule(obj);
                 }
@@ -311,12 +312,13 @@ public final class ConstantPoolModuleAccessTestCase {
                     assertEquals(0, obj.getOpensFlags(), url.toString());
                     final String packageName = obj.getPackageName(constantPool);
                     final String[] toModuleNames = obj.getToModuleNames(constantPool);
-                    if (url.getPath().contains("junit-jupiter-engine")) {
+                    final String urlPath = url.getPath();
+                    if (urlPath.contains("junit-jupiter-engine")) {
                         assertEquals("org.junit.jupiter.engine.extension", packageName);
                         assertEquals(1, toModuleNames.length);
                         assertEquals("org.junit.platform.commons", toModuleNames[0]);
                     }
-                    if (url.getPath().contains("junit-jupiter-api")) {
+                    if (urlPath.contains("junit-jupiter-api")) {
                         assertEquals("org.junit.jupiter.api.condition", packageName);
                         assertEquals(1, toModuleNames.length);
                         assertEquals("org.junit.platform.commons", toModuleNames[0]);
@@ -328,11 +330,12 @@ public final class ConstantPoolModuleAccessTestCase {
                 public void visitModuleProvides(final ModuleProvides obj) {
                     final String interfaceName = obj.getInterfaceName(constantPool);
                     final String[] implementationClassNames = obj.getImplementationClassNames(constantPool, true);
-                    if (url.getPath().contains("junit-jupiter-engine")) {
+                    final String urlPath = url.getPath();
+                    if (urlPath.contains("junit-jupiter-engine")) {
                         assertEquals("org.junit.platform.engine.TestEngine", interfaceName);
                         assertEquals(1, implementationClassNames.length);
                         assertEquals("org.junit.jupiter.engine.JupiterTestEngine", implementationClassNames[0]);
-                    } else if (url.getPath().contains("junit-platform-launcher")) {
+                    } else if (urlPath.contains("junit-platform-launcher")) {
                         assertEquals("org.junit.platform.launcher.TestExecutionListener", interfaceName);
                         assertEquals(1, implementationClassNames.length);
                         assertEquals("org.junit.platform.launcher.listeners.UniqueIdTrackingListener", implementationClassNames[0]);
