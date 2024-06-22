@@ -178,5 +178,8 @@
   <Match>
     <Class name="Mini.Token"/>
   </Match>
-
+  <!-- Skip JavaCC generated code. -->
+  <Match>
+    <Class name="Mini.ASTIfExpr"/>
+  </Match>
 </FindBugsFilter>
