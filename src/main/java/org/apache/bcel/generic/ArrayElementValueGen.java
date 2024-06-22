@@ -43,7 +43,7 @@ public class ArrayElementValueGen extends ElementValueGen {
         evalues = new ArrayList<>();
         final ElementValue[] in = value.getElementValuesArray();
         for (final ElementValue element : in) {
-            evalues.add(ElementValueGen.copy(element, cpool, copyPoolEntries));
+            evalues.add(copy(element, cpool, copyPoolEntries));
         }
     }
 
@@ -57,7 +57,7 @@ public class ArrayElementValueGen extends ElementValueGen {
         if (type != ARRAY) {
             throw new IllegalArgumentException("Only element values of type array can be built with this ctor - type specified: " + type);
         }
-        this.evalues = Streams.of(elementValues).map(e -> ElementValueGen.copy(e, cpool, true)).collect(Collectors.toList());
+        this.evalues = Streams.of(elementValues).map(e -> copy(e, cpool, true)).collect(Collectors.toList());
     }
 
     public void addElement(final ElementValueGen gen) {
