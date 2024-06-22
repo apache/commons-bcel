@@ -32,9 +32,13 @@ import org.apache.bcel.Const;
  */
 public final class ModuleExports implements Cloneable, Node {
 
+    private static String getToModuleNameAtIndex(final ConstantPool constantPool, final int index) {
+        return constantPool.getConstantString(index, Const.CONSTANT_Module);
+    }
     private final int exportsIndex; // points to CONSTANT_Package_info
     private final int exportsFlags;
     private final int exportsToCount;
+
     private final int[] exportsToIndex; // points to CONSTANT_Module_info
 
     /**
@@ -51,43 +55,6 @@ public final class ModuleExports implements Cloneable, Node {
         for (int i = 0; i < exportsToCount; i++) {
             exportsToIndex[i] = file.readUnsignedShort();
         }
-    }
-
-    /**
-     * Gets the flags for this ModuleExports.
-     * @return the exportsFlags
-     * @since 6.10.0
-     */
-    public int getExportsFlags() {
-        return exportsFlags;
-    }
-
-    /**
-     * Gets an array of module names for this ModuleExports.
-     * @param constantPool Array of constants usually obtained from the ClassFile object
-     * @return array of module names following 'exports to'
-     * @since 6.10.0
-     */
-    public String[] getToModuleNames(final ConstantPool constantPool) {
-        final String[] toModuleNames = new String[exportsToCount];
-        for (int i = 0; i < exportsToCount; i++) {
-            toModuleNames[i] = getToModuleNameAtIndex(constantPool, exportsToIndex[i]);
-        }
-        return toModuleNames;
-    }
-
-    private static String getToModuleNameAtIndex(final ConstantPool constantPool, final int index) {
-        return constantPool.getConstantString(index, Const.CONSTANT_Module);
-    }
-
-    /**
-     * Gets the exported package name.
-     * @param constantPool the constant pool from the ClassFile
-     * @return the exported package name
-     * @since 6.10.0
-     */
-    public String getPackageName(final ConstantPool constantPool) {
-        return constantPool.constantToString(exportsIndex, Const.CONSTANT_Package);
     }
 
     /**
@@ -126,6 +93,39 @@ public final class ModuleExports implements Cloneable, Node {
         for (final int entry : exportsToIndex) {
             file.writeShort(entry);
         }
+    }
+
+    /**
+     * Gets the flags for this ModuleExports.
+     * @return the exportsFlags
+     * @since 6.10.0
+     */
+    public int getExportsFlags() {
+        return exportsFlags;
+    }
+
+    /**
+     * Gets the exported package name.
+     * @param constantPool the constant pool from the ClassFile
+     * @return the exported package name
+     * @since 6.10.0
+     */
+    public String getPackageName(final ConstantPool constantPool) {
+        return constantPool.constantToString(exportsIndex, Const.CONSTANT_Package);
+    }
+
+    /**
+     * Gets an array of module names for this ModuleExports.
+     * @param constantPool Array of constants usually obtained from the ClassFile object
+     * @return array of module names following 'exports to'
+     * @since 6.10.0
+     */
+    public String[] getToModuleNames(final ConstantPool constantPool) {
+        final String[] toModuleNames = new String[exportsToCount];
+        for (int i = 0; i < exportsToCount; i++) {
+            toModuleNames[i] = getToModuleNameAtIndex(constantPool, exportsToIndex[i]);
+        }
+        return toModuleNames;
     }
 
     /**

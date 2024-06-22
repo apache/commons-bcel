@@ -32,9 +32,13 @@ import org.apache.bcel.Const;
  */
 public final class ModuleOpens implements Cloneable, Node {
 
+    private static String getToModuleNameAtIndex(final ConstantPool constantPool, final int index) {
+        return constantPool.getConstantString(index, Const.CONSTANT_Module);
+    }
     private final int opensIndex; // points to CONSTANT_Package_info
     private final int opensFlags;
     private final int opensToCount;
+
     private final int[] opensToIndex; // points to CONSTANT_Module_info
 
     /**
@@ -51,43 +55,6 @@ public final class ModuleOpens implements Cloneable, Node {
         for (int i = 0; i < opensToCount; i++) {
             opensToIndex[i] = file.readUnsignedShort();
         }
-    }
-
-    /**
-     * Gets the flags for this ModuleOpens.
-     * @return the opensFlags
-     * @since 6.10.0
-     */
-    public int getOpensFlags() {
-        return opensFlags;
-    }
-
-    /**
-     * Gets an array of module names for this ModuleOpens.
-     * @param constantPool Array of constants usually obtained from the ClassFile object
-     * @return array of module names following 'opens to'
-     * @since 6.10.0
-     */
-    public String[] getToModuleNames(final ConstantPool constantPool) {
-        final String[] toModuleNames = new String[opensToCount];
-        for (int i = 0; i < opensToCount; i++) {
-            toModuleNames[i] = getToModuleNameAtIndex(constantPool, opensToIndex[i]);
-        }
-        return toModuleNames;
-    }
-
-    private static String getToModuleNameAtIndex(final ConstantPool constantPool, final int index) {
-        return constantPool.getConstantString(index, Const.CONSTANT_Module);
-    }
-
-    /**
-     * Gets the opened package name.
-     * @param constantPool the constant pool from the ClassFile
-     * @return the opened package name
-     * @since 6.10.0
-     */
-    public String getPackageName(final ConstantPool constantPool) {
-        return constantPool.constantToString(opensIndex, Const.CONSTANT_Package);
     }
 
     /**
@@ -126,6 +93,39 @@ public final class ModuleOpens implements Cloneable, Node {
         for (final int entry : opensToIndex) {
             file.writeShort(entry);
         }
+    }
+
+    /**
+     * Gets the flags for this ModuleOpens.
+     * @return the opensFlags
+     * @since 6.10.0
+     */
+    public int getOpensFlags() {
+        return opensFlags;
+    }
+
+    /**
+     * Gets the opened package name.
+     * @param constantPool the constant pool from the ClassFile
+     * @return the opened package name
+     * @since 6.10.0
+     */
+    public String getPackageName(final ConstantPool constantPool) {
+        return constantPool.constantToString(opensIndex, Const.CONSTANT_Package);
+    }
+
+    /**
+     * Gets an array of module names for this ModuleOpens.
+     * @param constantPool Array of constants usually obtained from the ClassFile object
+     * @return array of module names following 'opens to'
+     * @since 6.10.0
+     */
+    public String[] getToModuleNames(final ConstantPool constantPool) {
+        final String[] toModuleNames = new String[opensToCount];
+        for (int i = 0; i < opensToCount; i++) {
+            toModuleNames[i] = getToModuleNameAtIndex(constantPool, opensToIndex[i]);
+        }
+        return toModuleNames;
     }
 
     /**

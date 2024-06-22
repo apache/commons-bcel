@@ -133,22 +133,6 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
     }
 
     @Test
-    public void testWithGenericArguement() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        final String targetClass = PACKAGE_BASE_NAME + ".data.SimpleClassHasMethodIncludeGenericArgument";
-        final TestClassLoader loader = new TestClassLoader(getClass().getClassLoader());
-        final Class<?> cls = loader.findClass(targetClass, getBytesFromClass(targetClass));
-
-        java.lang.reflect.Method method = cls.getDeclaredMethod("a", String.class, List.class);
-        method.invoke(null, "a1", new LinkedList<>());
-        method = cls.getDeclaredMethod("b", String.class, List.class);
-        method.invoke(null, "b1", new LinkedList<>());
-        method = cls.getDeclaredMethod("c", String.class, String.class);
-        method.invoke(null, "c1", "c2");
-        method = cls.getDeclaredMethod("d", List.class, String.class);
-        method.invoke(null, new LinkedList<>(), "d2");
-    }
-
-    @Test
     public void testGetLocalVariableTypeTable() throws ClassNotFoundException, NoSuchMethodException, SecurityException {
         final JavaClass testJavaClass = getTestJavaClass("org/apache/commons/lang3/function/TriFunction");
         final String expectedToString = "LocalVariableTypes(startPc = 0, length = 17, index = 0:org.apache.commons.lang3.function.TriFunction<T, U, V, R> this)";
@@ -162,5 +146,21 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
             }
         }
         assertNull(Repository.lookupClass(Object.class).getMethod(Object.class.getMethod("toString")).getLocalVariableTypeTable());
+    }
+
+    @Test
+    public void testWithGenericArguement() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        final String targetClass = PACKAGE_BASE_NAME + ".data.SimpleClassHasMethodIncludeGenericArgument";
+        final TestClassLoader loader = new TestClassLoader(getClass().getClassLoader());
+        final Class<?> cls = loader.findClass(targetClass, getBytesFromClass(targetClass));
+
+        java.lang.reflect.Method method = cls.getDeclaredMethod("a", String.class, List.class);
+        method.invoke(null, "a1", new LinkedList<>());
+        method = cls.getDeclaredMethod("b", String.class, List.class);
+        method.invoke(null, "b1", new LinkedList<>());
+        method = cls.getDeclaredMethod("c", String.class, String.class);
+        method.invoke(null, "c1", "c2");
+        method = cls.getDeclaredMethod("d", List.class, String.class);
+        method.invoke(null, new LinkedList<>(), "d2");
     }
 }

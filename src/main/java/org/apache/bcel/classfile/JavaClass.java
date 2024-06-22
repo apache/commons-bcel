@@ -483,13 +483,6 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * @return Attributes of the class.
-     */
-    public Attribute[] getAttributes() {
-        return attributes;
-    }
-
-    /**
      * Gets attribute for given tag.
      * @return Attribute for given tag, null if not found.
      * Refer to {@link org.apache.bcel.Const#ATTR_UNKNOWN} constants named ATTR_* for possible values.
@@ -503,6 +496,13 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
             }
         }
         return null;
+    }
+
+    /**
+     * @return Attributes of the class.
+     */
+    public Attribute[] getAttributes() {
+        return attributes;
     }
 
     /**

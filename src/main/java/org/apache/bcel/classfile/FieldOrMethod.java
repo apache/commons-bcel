@@ -165,13 +165,6 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     }
 
     /**
-     * @return Collection of object attributes.
-     */
-    public final Attribute[] getAttributes() {
-        return attributes;
-    }
-
-    /**
      * Gets attribute for given tag.
      * @return Attribute for given tag, null if not found.
      * Refer to {@link org.apache.bcel.Const#ATTR_UNKNOWN} constants named ATTR_* for possible values.
@@ -185,6 +178,13 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
             }
         }
         return null;
+    }
+
+    /**
+     * @return Collection of object attributes.
+     */
+    public final Attribute[] getAttributes() {
+        return attributes;
     }
 
     /**

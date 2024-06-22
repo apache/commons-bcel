@@ -32,8 +32,16 @@ import org.apache.bcel.Const;
  */
 public final class ModuleProvides implements Cloneable, Node {
 
+    private static String getImplementationClassNameAtIndex(final ConstantPool constantPool, final int index, final boolean compactClassName) {
+        final String className = constantPool.getConstantString(index, Const.CONSTANT_Class);
+        if (compactClassName) {
+            return Utility.compactClassName(className, false);
+        }
+        return className;
+    }
     private final int providesIndex; // points to CONSTANT_Class_info
     private final int providesWithCount;
+
     private final int[] providesWithIndex; // points to CONSTANT_Class_info
 
     /**
@@ -49,39 +57,6 @@ public final class ModuleProvides implements Cloneable, Node {
         for (int i = 0; i < providesWithCount; i++) {
             providesWithIndex[i] = file.readUnsignedShort();
         }
-    }
-
-    /**
-     * Gets the array of implementation class names for this ModuleProvides.
-     * @param constantPool Array of constants usually obtained from the ClassFile object
-     * @param compactClassName false for original constant pool value, true to replace '/' with '.'
-     * @return array of implementation class names
-     * @since 6.10.0
-     */
-    public String[] getImplementationClassNames(final ConstantPool constantPool, final boolean compactClassName) {
-        final String[] implementationClassNames = new String[providesWithCount];
-        for (int i = 0; i < providesWithCount; i++) {
-            implementationClassNames[i] = getImplementationClassNameAtIndex(constantPool, providesWithIndex[i], compactClassName);
-        }
-        return implementationClassNames;
-    }
-
-    private static String getImplementationClassNameAtIndex(final ConstantPool constantPool, final int index, final boolean compactClassName) {
-        final String className = constantPool.getConstantString(index, Const.CONSTANT_Class);
-        if (compactClassName) {
-            return Utility.compactClassName(className, false);
-        }
-        return className;
-    }
-
-    /**
-     * Gets the interface name for this ModuleProvides.
-     * @param constantPool Array of constants usually obtained from the ClassFile object
-     * @return interface name
-     * @since 6.10.0
-     */
-    public String getInterfaceName(final ConstantPool constantPool) {
-        return constantPool.constantToString(providesIndex, Const.CONSTANT_Class);
     }
 
     /**
@@ -119,6 +94,31 @@ public final class ModuleProvides implements Cloneable, Node {
         for (final int entry : providesWithIndex) {
             file.writeShort(entry);
         }
+    }
+
+    /**
+     * Gets the array of implementation class names for this ModuleProvides.
+     * @param constantPool Array of constants usually obtained from the ClassFile object
+     * @param compactClassName false for original constant pool value, true to replace '/' with '.'
+     * @return array of implementation class names
+     * @since 6.10.0
+     */
+    public String[] getImplementationClassNames(final ConstantPool constantPool, final boolean compactClassName) {
+        final String[] implementationClassNames = new String[providesWithCount];
+        for (int i = 0; i < providesWithCount; i++) {
+            implementationClassNames[i] = getImplementationClassNameAtIndex(constantPool, providesWithIndex[i], compactClassName);
+        }
+        return implementationClassNames;
+    }
+
+    /**
+     * Gets the interface name for this ModuleProvides.
+     * @param constantPool Array of constants usually obtained from the ClassFile object
+     * @return interface name
+     * @since 6.10.0
+     */
+    public String getInterfaceName(final ConstantPool constantPool) {
+        return constantPool.constantToString(providesIndex, Const.CONSTANT_Class);
     }
 
     /**

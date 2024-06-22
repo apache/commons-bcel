@@ -35,12 +35,12 @@ public class Environment implements Cloneable {
         this(SIZE);
     }
 
-    public Environment(final int size) {
-        table = new ConcurrentHashMap<>(size);
-    }
-
     private Environment(final ConcurrentHashMap<String, EnvEntry> table) {
         this.table = table;
+    }
+
+    public Environment(final int size) {
+        table = new ConcurrentHashMap<>(size);
     }
 
     @Override
