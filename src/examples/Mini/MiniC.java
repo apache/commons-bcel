@@ -66,7 +66,7 @@ public class MiniC {
     public static void main(final String[] argv) {
         final String[] file_name = new String[argv.length];
         int files = 0;
-        MiniParser parser = null;
+        // MiniParser parser = null;
         String base_name = null;
         boolean byte_code = true;
 
@@ -98,7 +98,7 @@ public class MiniC {
                 pass = 0;
 
                 if (j == 0) {
-                    parser = new MiniParser(new FileInputStream(file_name[0]));
+                    // parser = new MiniParser(new FileInputStream(file_name[0]));
                 } else {
                     MiniParser.ReInit(new FileInputStream(file_name[j]));
                 }
