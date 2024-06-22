@@ -32,7 +32,7 @@ public class PatchClass {
         int files = 0;
 
         if (argv.length < 3) {
-            System.err.println("Usage: patch <oldstring> <newstring> file1.class ...");
+            System.err.println("Usage: patch <oldstring> <newstring> file1.class...");
             System.exit(-1);
         }
 

@@ -116,7 +116,7 @@ public class ProxyCreator {
             final String s = Utility.encode(bytes, true);
             System.out.println("Encoded class: " + s.length());
 
-            System.out.print("Creating proxy ... ");
+            System.out.print("Creating proxy... ");
             final ActionListener a = (ActionListener) createProxy("foo.bar.", s);
             System.out.println("Done. Now calling actionPerformed()");
 

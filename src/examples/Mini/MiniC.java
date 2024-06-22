@@ -116,22 +116,22 @@ public class MiniC {
 
                 file = fileName[j];
 
-                System.out.println("Parsing ...");
+                System.out.println("Parsing...");
                 MiniParser.Program();
                 ASTProgram program = (ASTProgram) MiniParser.jjtree.rootNode();
 
-                System.out.println("Pass 1: Optimizing parse tree ...");
+                System.out.println("Pass 1: Optimizing parse tree...");
                 pass = 1;
                 program = program.traverse();
                 // program.dump(">");
 
                 if (errors.isEmpty()) {
-                    System.out.println("Pass 2: Type checking (I) ...");
+                    System.out.println("Pass 2: Type checking (I)...");
                     program.eval(pass = 2);
                 }
 
                 if (errors.isEmpty()) {
-                    System.out.println("Pass 3: Type checking (II) ...");
+                    System.out.println("Pass 3: Type checking (II)...");
                     program.eval(pass = 3);
                 }
 
@@ -141,7 +141,7 @@ public class MiniC {
 
                 if (errors.isEmpty()) {
                     if (byteCode) {
-                        System.out.println("Pass 5: Generating byte code ...");
+                        System.out.println("Pass 5: Generating byte code...");
                         final ClassGen classGen = new ClassGen(baseName, "java.lang.Object", fileName[j],
                                 Const.ACC_PUBLIC | Const.ACC_FINAL | Const.ACC_SUPER, null);
                         final ConstantPoolGen cp = classGen.getConstantPool();
@@ -150,12 +150,12 @@ public class MiniC {
                         final JavaClass clazz = classGen.getJavaClass();
                         clazz.dump(baseName + JavaClass.EXTENSION);
                     } else {
-                        System.out.println("Pass 5: Generating Java code ...");
+                        System.out.println("Pass 5: Generating Java code...");
                         try (final PrintWriter out = new PrintWriter(new FileOutputStream(baseName + ".java"))) {
                             program.code(out, baseName);
                         }
 
-                        System.out.println("Pass 6: Compiling Java code ...");
+                        System.out.println("Pass 6: Compiling Java code...");
 
                         final String[] args = { "javac", baseName + ".java" };
                         // sun.tools.javac.Main compiler = new sun.tools.javac.Main(System.err, "javac");
