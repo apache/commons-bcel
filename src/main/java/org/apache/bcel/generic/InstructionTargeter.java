@@ -18,7 +18,7 @@
 package org.apache.bcel.generic;
 
 /**
- * Denote that a class targets InstructionHandles within an InstructionList. Namely the following implementers:
+ * Denotes that a class targets InstructionHandles within an InstructionList.
  *
  * @see BranchHandle
  * @see LocalVariableGen
