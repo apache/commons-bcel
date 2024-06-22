@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Vector;
 
@@ -155,7 +156,7 @@ public class MiniC {
                         clazz.dump(baseName + JavaClass.EXTENSION);
                     } else {
                         System.out.println("Pass 5: Generating Java code...");
-                        try (final PrintWriter out = new PrintWriter(new FileOutputStream(baseName + ".java"))) {
+                        try (final PrintWriter out = new PrintWriter(baseName + ".java", StandardCharsets.UTF_8.name())) {
                             program.code(out, baseName);
                         }
 
