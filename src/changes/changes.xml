@@ -69,6 +69,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs URF_UNREAD_FIELD in ClassDumper.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs DM_DEFAULT_ENCODING in JasminVisitor.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE in ASTFunAppl.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs RV_ABSOLUTE_VALUE_OF_HASHCODE in Mini.Environment.</action>
       <!-- ADD --> 
       <action                  type="update" dev="ggregory" due-to="nbauma109, Gary Gregory, Mark Roberts">Add accessors to model and unit tests, Javadoc #183.</action>
       <!-- UPDATE -->
