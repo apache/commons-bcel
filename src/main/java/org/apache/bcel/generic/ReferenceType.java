@@ -38,10 +38,10 @@ public abstract class ReferenceType extends Type {
 
     /**
      * This commutative operation returns the first common superclass (narrowest ReferenceType referencing a class, not an
-     * interface). If one of the types is a superclass of the other, the former is returned. If "this" is Type.NULL, then t
-     * is returned. If t is Type.NULL, then "this" is returned. If "this" equals t ['this.equals(t)'] "this" is returned. If
-     * "this" or t is an ArrayType, then Type.OBJECT is returned. If "this" or t is a ReferenceType referencing an
-     * interface, then Type.OBJECT is returned. If not all of the two classes' superclasses cannot be found, "null" is
+     * interface). If one of the types is a superclass of the other, the former is returned. If "this" is NULL, then t
+     * is returned. If t is NULL, then "this" is returned. If "this" equals t ['this.equals(t)'] "this" is returned. If
+     * "this" or t is an ArrayType, then {@link #OBJECT} is returned. If "this" or t is a ReferenceType referencing an
+     * interface, then {@link #OBJECT} is returned. If not all of the two classes' superclasses cannot be found, "null" is
      * returned. See the JVM specification edition 2, "�4.9.2 The Bytecode Verifier".
      *
      * @deprecated use getFirstCommonSuperclass(ReferenceType t) which has slightly changed semantics.
@@ -49,45 +49,45 @@ public abstract class ReferenceType extends Type {
      */
     @Deprecated
     public ReferenceType firstCommonSuperclass(final ReferenceType t) throws ClassNotFoundException {
-        if (this.equals(Type.NULL)) {
+        if (this.equals(NULL)) {
             return t;
         }
-        if (t.equals(Type.NULL) || this.equals(t)) {
+        if (t.equals(NULL) || this.equals(t)) {
             return this;
             /*
-             * TODO: Above sounds a little arbitrary. On the other hand, there is no object referenced by Type.NULL so we can also
-             * say all the objects referenced by Type.NULL were derived from {@link Object}. However, the Java Language's
+             * TODO: Above sounds a little arbitrary. On the other hand, there is no object referenced by {@link #NULL} so we can also
+             * say all the objects referenced by {@link #NULL} were derived from {@link Object}. However, the Java Language's
              * "instanceof" operator proves us wrong: "null" is not referring to an instance of {@link Object} :)
              */
         }
         if (this instanceof ArrayType || t instanceof ArrayType) {
-            return Type.OBJECT;
-            // TODO: Is there a proof of OBJECT being the direct ancestor of every ArrayType?
+            return OBJECT;
+            // TODO: Is there a proof of {@link #OBJECT} being the direct ancestor of every ArrayType?
         }
         return getFirstCommonSuperclassInternal(t);
     }
 
     /**
      * This commutative operation returns the first common superclass (narrowest ReferenceType referencing a class, not an
-     * interface). If one of the types is a superclass of the other, the former is returned. If "this" is Type.NULL, then t
-     * is returned. If t is Type.NULL, then "this" is returned. If "this" equals t ['this.equals(t)'] "this" is returned. If
-     * "this" or t is an ArrayType, then Type.OBJECT is returned; unless their dimensions match. Then an ArrayType of the
+     * interface). If one of the types is a superclass of the other, the former is returned. If "this" is NULL, then t
+     * is returned. If t is NULL, then "this" is returned. If "this" equals t ['this.equals(t)'] "this" is returned. If
+     * "this" or t is an ArrayType, then {@link #OBJECT} is returned; unless their dimensions match. Then an ArrayType of the
      * same number of dimensions is returned, with its basic type being the first common super class of the basic types of
-     * "this" and t. If "this" or t is a ReferenceType referencing an interface, then Type.OBJECT is returned. If not all of
+     * "this" and t. If "this" or t is a ReferenceType referencing an interface, then {@link #OBJECT} is returned. If not all of
      * the two classes' superclasses cannot be found, "null" is returned. See the JVM specification edition 2, "�4.9.2 The
      * Bytecode Verifier".
      *
      * @throws ClassNotFoundException on failure to find superclasses of this type, or the type passed as a parameter
      */
     public ReferenceType getFirstCommonSuperclass(final ReferenceType t) throws ClassNotFoundException {
-        if (this.equals(Type.NULL)) {
+        if (this.equals(NULL)) {
             return t;
         }
-        if (t.equals(Type.NULL) || this.equals(t)) {
+        if (t.equals(NULL) || this.equals(t)) {
             return this;
             /*
-             * TODO: Above sounds a little arbitrary. On the other hand, there is no object referenced by Type.NULL so we can also
-             * say all the objects referenced by Type.NULL were derived from {@link Object}. However, the Java Language's
+             * TODO: Above sounds a little arbitrary. On the other hand, there is no object referenced by {@link #NULL} so we can also
+             * say all the objects referenced by {@link #NULL} were derived from {@link Object}. However, the Java Language's
              * "instanceof" operator proves us wrong: "null" is not referring to an instance of {@link Object} :)
              */
         }
@@ -102,8 +102,8 @@ public abstract class ReferenceType extends Type {
             }
         }
         if (this instanceof ArrayType || t instanceof ArrayType) {
-            return Type.OBJECT;
-            // TODO: Is there a proof of OBJECT being the direct ancestor of every ArrayType?
+            return OBJECT;
+            // TODO: Is there a proof of {@link #OBJECT} being the direct ancestor of every ArrayType?
         }
         return getFirstCommonSuperclassInternal(t);
     }
@@ -111,7 +111,7 @@ public abstract class ReferenceType extends Type {
     private ReferenceType getFirstCommonSuperclassInternal(final ReferenceType t) throws ClassNotFoundException {
         if (this instanceof ObjectType && ((ObjectType) this).referencesInterfaceExact()
             || t instanceof ObjectType && ((ObjectType) t).referencesInterfaceExact()) {
-            return Type.OBJECT;
+            return OBJECT;
             // TODO: The above line is correct comparing to the vmspec2. But one could
             // make class file verification a bit stronger here by using the notion of
             // superinterfaces or even castability or assignment compatibility.
@@ -138,7 +138,7 @@ public abstract class ReferenceType extends Type {
                 }
             }
         }
-        // Huh? Did you ask for Type.OBJECT's superclass??
+        // Huh? Did you ask for OBJECT's superclass??
         return null;
     }
 
@@ -154,7 +154,7 @@ public abstract class ReferenceType extends Type {
             return false;
         }
         final ReferenceType T = (ReferenceType) t;
-        if (this.equals(Type.NULL)) {
+        if (this.equals(NULL)) {
             return true; // This is not explicitly stated, but clear. Isn't it?
         }
         /*
@@ -183,7 +183,7 @@ public abstract class ReferenceType extends Type {
             /*
              * If T is a class type, then T must be Object (�2.4.7).
              */
-            if (T instanceof ObjectType && ((ObjectType) T).referencesClassExact() && T.equals(Type.OBJECT)) {
+            if (T instanceof ObjectType && ((ObjectType) T).referencesClassExact() && T.equals(OBJECT)) {
                 return true;
             }
             /*
@@ -201,7 +201,7 @@ public abstract class ReferenceType extends Type {
             /*
              * If T is a class type, then T must be Object (�2.4.7).
              */
-            if (T instanceof ObjectType && ((ObjectType) T).referencesClassExact() && T.equals(Type.OBJECT)) {
+            if (T instanceof ObjectType && ((ObjectType) T).referencesClassExact() && T.equals(OBJECT)) {
                 return true;
             }
             /*
@@ -242,14 +242,14 @@ public abstract class ReferenceType extends Type {
 
     /**
      * Return true iff this type is castable to another type t as defined in the JVM specification. The case where this is
-     * Type.NULL is not defined (see the CHECKCAST definition in the JVM specification). However, because e.g. CHECKCAST
+     * {@link #NULL} is not defined (see the CHECKCAST definition in the JVM specification). However, because e.g. CHECKCAST
      * doesn't throw a ClassCastException when casting a null reference to any Object, true is returned in this case.
      *
      * @throws ClassNotFoundException if any classes or interfaces required to determine assignment compatibility can't be
      *         found
      */
     public boolean isCastableTo(final Type t) throws ClassNotFoundException {
-        if (this.equals(Type.NULL)) {
+        if (this.equals(NULL)) {
             return t instanceof ReferenceType; // If this is ever changed in isAssignmentCompatible()
         }
         return isAssignmentCompatibleWith(t);
