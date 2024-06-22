@@ -71,6 +71,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE in ASTFunAppl.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs RV_ABSOLUTE_VALUE_OF_HASHCODE in Mini.Environment.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs DM_DEFAULT_ENCODING in Mini.MiniC.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs WMI_WRONG_MAP_ITERATOR in Package.go(String[]).</action>
       <!-- ADD --> 
       <action                  type="update" dev="ggregory" due-to="nbauma109, Gary Gregory, Mark Roberts">Add accessors to model and unit tests, Javadoc #183.</action>
       <!-- UPDATE -->

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.jar.JarOutputStream;
 import java.util.zip.ZipEntry;
@@ -217,9 +218,9 @@ public class Package {
         try (final JarOutputStream jarFile = new JarOutputStream(new FileOutputStream(defaultJar))) {
             jarFile.setLevel(5); // use compression
             int written = 0;
-            for (final String name : allClasses.keySet()) { // add entries for every class
-                final JavaClass claz = allClasses.get(name);
-                final ZipEntry zipEntry = new ZipEntry(name + JavaClass.EXTENSION);
+            for (final Entry<String, JavaClass> entry : allClasses.entrySet()) { // add entries for every class
+                final JavaClass claz = allClasses.get(entry.getKey());
+                final ZipEntry zipEntry = new ZipEntry(entry.getValue() + JavaClass.EXTENSION);
                 final byte[] bytes = claz.getBytes();
                 final int length = bytes.length;
                 jarFile.putNextEntry(zipEntry);
