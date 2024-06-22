@@ -64,11 +64,11 @@ public class MiniC {
     }
 
     public static void main(final String[] argv) {
-        final String[] file_name = new String[argv.length];
+        final String[] fileName = new String[argv.length];
         int files = 0;
         // MiniParser parser = null;
-        String base_name = null;
-        boolean byte_code = true;
+        String baseName = null;
+        boolean byteCode = true;
 
         try {
             /*
@@ -77,14 +77,14 @@ public class MiniC {
             for (final String element : argv) {
                 if (element.charAt(0) == '-') { // command line switch
                     if (element.equals("-java")) {
-                        byte_code = false;
+                        byteCode = false;
                     } else if (element.equals("-bytecode")) {
-                        byte_code = true;
+                        byteCode = true;
                     } else {
                         throw new Exception("Unknown option: " + element);
                     }
                 } else { // add file name to list
-                    file_name[files++] = element;
+                    fileName[files++] = element;
                 }
             }
 
@@ -98,23 +98,23 @@ public class MiniC {
                 pass = 0;
 
                 if (j == 0) {
-                    // parser = new MiniParser(new FileInputStream(file_name[0]));
+                    // parser = new MiniParser(new FileInputStream(fileName[0]));
                 } else {
-                    MiniParser.ReInit(new FileInputStream(file_name[j]));
+                    MiniParser.ReInit(new FileInputStream(fileName[j]));
                 }
 
-                int index = file_name[j].lastIndexOf('.');
+                int index = fileName[j].lastIndexOf('.');
                 if (index > 0) {
-                    base_name = file_name[j].substring(0, index);
+                    baseName = fileName[j].substring(0, index);
                 } else {
-                    base_name = file_name[j];
+                    baseName = fileName[j];
                 }
 
-                if ((index = base_name.lastIndexOf(File.separatorChar)) > 0) {
-                    base_name = base_name.substring(index + 1);
+                if ((index = baseName.lastIndexOf(File.separatorChar)) > 0) {
+                    baseName = baseName.substring(index + 1);
                 }
 
-                file = file_name[j];
+                file = fileName[j];
 
                 System.out.println("Parsing ...");
                 MiniParser.Program();
@@ -140,24 +140,24 @@ public class MiniC {
                 warnings.forEach(System.out::println);
 
                 if (errors.isEmpty()) {
-                    if (byte_code) {
+                    if (byteCode) {
                         System.out.println("Pass 5: Generating byte code ...");
-                        final ClassGen class_gen = new ClassGen(base_name, "java.lang.Object", file_name[j],
+                        final ClassGen classGen = new ClassGen(baseName, "java.lang.Object", fileName[j],
                                 Const.ACC_PUBLIC | Const.ACC_FINAL | Const.ACC_SUPER, null);
-                        final ConstantPoolGen cp = class_gen.getConstantPool();
+                        final ConstantPoolGen cp = classGen.getConstantPool();
 
-                        program.byte_code(class_gen, cp);
-                        final JavaClass clazz = class_gen.getJavaClass();
-                        clazz.dump(base_name + JavaClass.EXTENSION);
+                        program.byte_code(classGen, cp);
+                        final JavaClass clazz = classGen.getJavaClass();
+                        clazz.dump(baseName + JavaClass.EXTENSION);
                     } else {
                         System.out.println("Pass 5: Generating Java code ...");
-                        try (final PrintWriter out = new PrintWriter(new FileOutputStream(base_name + ".java"))) {
-                            program.code(out, base_name);
+                        try (final PrintWriter out = new PrintWriter(new FileOutputStream(baseName + ".java"))) {
+                            program.code(out, baseName);
                         }
 
                         System.out.println("Pass 6: Compiling Java code ...");
 
-                        final String[] args = { "javac", base_name + ".java" };
+                        final String[] args = { "javac", baseName + ".java" };
                         // sun.tools.javac.Main compiler = new sun.tools.javac.Main(System.err, "javac");
                         try {
                             final Process p = Runtime.getRuntime().exec(args);
