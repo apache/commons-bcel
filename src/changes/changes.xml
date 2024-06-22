@@ -64,6 +64,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Fix PMD UnnecessaryFullyQualifiedName.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Fix PMD EmptyCatchBlock by allowing commented blocks.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Fix PMD EmptyControlStatement by allowing commented blocks.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs RV_RETURN_VALUE_IGNORED_BAD_PRACTICE in JasminVisitor.</action>
       <!-- ADD --> 
       <action                  type="update" dev="ggregory" due-to="nbauma109, Gary Gregory, Mark Roberts">Add accessors to model and unit tests, Javadoc #183.</action>
       <!-- UPDATE -->
