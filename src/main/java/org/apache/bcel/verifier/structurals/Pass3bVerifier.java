@@ -276,14 +276,14 @@ public final class Pass3bVerifier extends PassVerifier {
                 final LocalVariables lvs = f.getLocals();
                 for (int i = 0; i < lvs.maxLocals(); i++) {
                     if (lvs.get(i) instanceof UninitializedObjectType) {
-                        this.addMessage("Warning: ReturnInstruction '" + ic + "' may leave method with an uninitialized object in the local variables array '"
+                        addMessage("Warning: ReturnInstruction '" + ic + "' may leave method with an uninitialized object in the local variables array '"
                             + lvs + "'.");
                     }
                 }
                 final OperandStack os = f.getStack();
                 for (int i = 0; i < os.size(); i++) {
                     if (os.peek(i) instanceof UninitializedObjectType) {
-                        this.addMessage(
+                        addMessage(
                             "Warning: ReturnInstruction '" + ic + "' may leave method with an uninitialized object on the operand stack '" + os + "'.");
                     }
                 }
