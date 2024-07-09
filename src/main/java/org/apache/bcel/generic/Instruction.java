@@ -456,7 +456,7 @@ public abstract class Instruction implements Cloneable {
     public Instruction copy() {
         Instruction i = null;
         // "Constant" instruction, no need to duplicate
-        if (InstructionConst.getInstruction(this.getOpcode()) != null) {
+        if (InstructionConst.getInstruction(getOpcode()) != null) {
             i = this;
         } else {
             try {
