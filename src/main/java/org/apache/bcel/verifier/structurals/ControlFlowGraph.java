@@ -238,7 +238,7 @@ public class ControlFlowGraph {
          * the surrounding ControlFlowGraph.
          */
         private String getExecutionChain() {
-            final StringBuilder s = new StringBuilder(this.toString());
+            final StringBuilder s = new StringBuilder(toString());
             for (int i = executionPredecessors.size() - 1; i >= 0; i--) {
                 s.insert(0, executionPredecessors.get(i) + "\n");
             }
