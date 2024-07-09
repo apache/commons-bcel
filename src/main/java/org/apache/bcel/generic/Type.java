@@ -402,6 +402,6 @@ public abstract class Type {
      */
     @Override
     public String toString() {
-        return this.equals(NULL) || type >= Const.T_UNKNOWN ? signature : Utility.signatureToString(signature, false);
+        return equals(NULL) || type >= Const.T_UNKNOWN ? signature : Utility.signatureToString(signature, false);
     }
 }
