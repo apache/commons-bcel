@@ -719,7 +719,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         if (!inter.isInterface()) {
             throw new IllegalArgumentException(inter.getClassName() + " is no interface");
         }
-        if (this.equals(inter)) {
+        if (equals(inter)) {
             return true;
         }
         final JavaClass[] superInterfaces = getAllInterfaces();
@@ -738,7 +738,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @throws ClassNotFoundException if superclasses or superinterfaces of this object can't be found
      */
     public final boolean instanceOf(final JavaClass superclass) throws ClassNotFoundException {
-        if (this.equals(superclass)) {
+        if (equals(superclass)) {
             return true;
         }
         for (final JavaClass clazz : getSuperClasses()) {
