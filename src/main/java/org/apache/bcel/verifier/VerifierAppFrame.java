@@ -128,11 +128,11 @@ public class VerifierAppFrame extends JFrame {
     /** Initizalization of the components. */
     private void jbInit() {
         // setIconImage(Toolkit.getDefaultToolkit().createImage(Frame1.class.getResource("[Ihr Symbol]")));
-        contentPane = (JPanel) this.getContentPane();
+        contentPane = (JPanel) getContentPane();
         contentPane.setLayout(cardLayout1);
-        this.setJMenuBar(jMenuBar1);
+        setJMenuBar(jMenuBar1);
         this.setSize(new Dimension(708, 451));
-        this.setTitle("JustIce");
+        setTitle("JustIce");
         jPanel1.setMinimumSize(new Dimension(100, 100));
         jPanel1.setPreferredSize(new Dimension(100, 100));
         jPanel1.setLayout(gridLayout1);
