@@ -49,10 +49,10 @@ public abstract class ReferenceType extends Type {
      */
     @Deprecated
     public ReferenceType firstCommonSuperclass(final ReferenceType t) throws ClassNotFoundException {
-        if (this.equals(NULL)) {
+        if (equals(NULL)) {
             return t;
         }
-        if (t.equals(NULL) || this.equals(t)) {
+        if (t.equals(NULL) || equals(t)) {
             return this;
             /*
              * TODO: Above sounds a little arbitrary. On the other hand, there is no object referenced by {@link #NULL} so we can also
@@ -80,10 +80,10 @@ public abstract class ReferenceType extends Type {
      * @throws ClassNotFoundException on failure to find superclasses of this type, or the type passed as a parameter
      */
     public ReferenceType getFirstCommonSuperclass(final ReferenceType t) throws ClassNotFoundException {
-        if (this.equals(NULL)) {
+        if (equals(NULL)) {
             return t;
         }
-        if (t.equals(NULL) || this.equals(t)) {
+        if (t.equals(NULL) || equals(t)) {
             return this;
             /*
              * TODO: Above sounds a little arbitrary. On the other hand, there is no object referenced by {@link #NULL} so we can also
@@ -154,7 +154,7 @@ public abstract class ReferenceType extends Type {
             return false;
         }
         final ReferenceType T = (ReferenceType) t;
-        if (this.equals(NULL)) {
+        if (equals(NULL)) {
             return true; // This is not explicitly stated, but clear. Isn't it?
         }
         /*
@@ -165,7 +165,7 @@ public abstract class ReferenceType extends Type {
              * If T is a class type, then this must be the same class as T, or this must be a subclass of T;
              */
             if (T instanceof ObjectType && ((ObjectType) T).referencesClassExact()
-                && (this.equals(T) || Repository.instanceOf(((ObjectType) this).getClassName(), ((ObjectType) T).getClassName()))) {
+                && (equals(T) || Repository.instanceOf(((ObjectType) this).getClassName(), ((ObjectType) T).getClassName()))) {
                 return true;
             }
             /*
@@ -190,7 +190,7 @@ public abstract class ReferenceType extends Type {
              * If T is an interface type, then T must be the same interface as this or a superinterface of this (�2.13.2).
              */
             if (T instanceof ObjectType && ((ObjectType) T).referencesInterfaceExact()
-                && (this.equals(T) || Repository.implementationOf(((ObjectType) this).getClassName(), ((ObjectType) T).getClassName()))) {
+                && (equals(T) || Repository.implementationOf(((ObjectType) this).getClassName(), ((ObjectType) T).getClassName()))) {
                 return true;
             }
         }
@@ -249,7 +249,7 @@ public abstract class ReferenceType extends Type {
      *         found
      */
     public boolean isCastableTo(final Type t) throws ClassNotFoundException {
-        if (this.equals(NULL)) {
+        if (equals(NULL)) {
             return t instanceof ReferenceType; // If this is ever changed in isAssignmentCompatible()
         }
         return isAssignmentCompatibleWith(t);
