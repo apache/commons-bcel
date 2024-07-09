@@ -219,7 +219,7 @@ public class Subroutines {
             for (final int lv : lvs) {
                 s.add(Integer.valueOf(lv));
             }
-            getRecursivelyAccessedLocalsIndicesHelper(s, this.subSubs());
+            getRecursivelyAccessedLocalsIndicesHelper(s, subSubs());
             final int[] ret = new int[s.size()];
             int j = -1;
             for (final Integer index : s) {
