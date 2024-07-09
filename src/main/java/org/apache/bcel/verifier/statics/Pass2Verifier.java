@@ -1444,7 +1444,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * Leave that to JustIce.
      */
     public LocalVariablesInfo getLocalVariablesInfo(final int methodNr) {
-        if (this.verify() != VerificationResult.VR_OK) {
+        if (verify() != VerificationResult.VR_OK) {
             return null; // It's cached, don't worry.
         }
         if (methodNr < 0 || methodNr >= localVariablesInfos.length) {
