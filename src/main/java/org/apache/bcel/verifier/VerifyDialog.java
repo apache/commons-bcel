@@ -50,16 +50,16 @@ public class VerifyDialog extends JDialog {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            if (e.getSource() == VerifyDialog.this.getPass1Button()) {
+            if (e.getSource() == getPass1Button()) {
                 connEtoC1(e);
             }
-            if (e.getSource() == VerifyDialog.this.getPass2Button()) {
+            if (e.getSource() == getPass2Button()) {
                 connEtoC2(e);
             }
-            if (e.getSource() == VerifyDialog.this.getPass3Button()) {
+            if (e.getSource() == getPass3Button()) {
                 connEtoC3(e);
             }
-            if (e.getSource() == VerifyDialog.this.getFlushButton()) {
+            if (e.getSource() == getFlushButton()) {
                 connEtoC4(e);
             }
         }
@@ -196,7 +196,7 @@ public class VerifyDialog extends JDialog {
         try {
             // user code begin {1}
             // user code end
-            this.pass1Button_ActionPerformed(arg1);
+            pass1Button_ActionPerformed(arg1);
             // user code begin {2}
             // user code end
         } catch (final Throwable ivjExc) {
@@ -211,7 +211,7 @@ public class VerifyDialog extends JDialog {
         try {
             // user code begin {1}
             // user code end
-            this.pass2Button_ActionPerformed(arg1);
+            pass2Button_ActionPerformed(arg1);
             // user code begin {2}
             // user code end
         } catch (final Throwable ivjExc) {
@@ -226,7 +226,7 @@ public class VerifyDialog extends JDialog {
         try {
             // user code begin {1}
             // user code end
-            this.pass4Button_ActionPerformed(arg1);
+            pass4Button_ActionPerformed(arg1);
             // user code begin {2}
             // user code end
         } catch (final Throwable ivjExc) {
@@ -241,7 +241,7 @@ public class VerifyDialog extends JDialog {
         try {
             // user code begin {1}
             // user code end
-            this.flushButton_ActionPerformed(arg1);
+            flushButton_ActionPerformed(arg1);
             // user code begin {2}
             // user code end
         } catch (final Throwable ivjExc) {
