@@ -293,6 +293,14 @@ public final class Const {
     public static final short MINOR_21 = 0;
 
     /**
+     * Minor version number of class files for Java 22: {@value}.
+     *
+     * @see #MAJOR_22
+     * @since 6.10.0
+     */
+    public static final short MINOR_22 = 0;
+
+    /**
      * Major version number of class files for Java 14: {@value}.
      *
      * @see #MINOR_14
@@ -355,6 +363,14 @@ public final class Const {
      * @since 6.8.0
      */
     public static final short MAJOR_21 = 65;
+
+    /**
+     * Major version number of class files for Java 22: {@value}.
+     *
+     * @see #MINOR_22
+     * @since 6.10.0
+     */
+    public static final short MAJOR_22 = 66;
 
     /**
      * Default major version number. Class file is for Java 1.1: {@value}.
