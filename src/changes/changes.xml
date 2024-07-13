@@ -79,6 +79,8 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_22.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_23.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_23.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_24.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_24.</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump tests from org.assertj:assertj-core 3.25.3 to 3.26.3 #322, #332.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot">Bump tests from org.jetbrains.kotlin:kotlin-stdlib 1.9.23 to 2.0.0 #309, #318.</action> 
