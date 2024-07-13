@@ -31,4 +31,10 @@ public class ConstTest {
         assertEquals(66, Const.MAJOR_22);
         assertEquals(0, Const.MINOR_22);
     }
+
+    @Test
+    public void testJava23() throws Exception {
+        assertEquals(67, Const.MAJOR_23);
+        assertEquals(0, Const.MINOR_23);
+    }
 }
