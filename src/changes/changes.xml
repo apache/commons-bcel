@@ -59,7 +59,7 @@ The <action> type attribute can be add,update,fix,remove.
   Defining changes.version allows one to create the RN without first removing the SNAPSHOT suffix.
    -->
   <body>
-    <release version="6.10.0" date="YYYY-MM-DD" description="Maintenance and bug fix release. Requires a minimum of Java 8.">
+    <release version="6.10.0" date="2024-07-13" description="Maintenance and bug fix release. Requires a minimum of Java 8.">
       <!-- FIX -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Fix PMD UnnecessaryFullyQualifiedName.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Fix PMD EmptyCatchBlock by allowing commented blocks.</action>
