@@ -431,12 +431,12 @@ public class ClassPath implements Closeable {
     }
 
     private static final FilenameFilter ARCHIVE_FILTER = (dir, name) -> {
-        name = name.toLowerCase(Locale.ENGLISH);
+        name = name.toLowerCase(Locale.ROOT);
         return name.endsWith(".zip") || name.endsWith(".jar");
     };
 
     private static final FilenameFilter MODULES_FILTER = (dir, name) -> {
-        name = name.toLowerCase(Locale.ENGLISH);
+        name = name.toLowerCase(Locale.ROOT);
         return name.endsWith(org.apache.bcel.classfile.Module.EXTENSION);
     };
 

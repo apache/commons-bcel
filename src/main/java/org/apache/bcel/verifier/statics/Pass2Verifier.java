@@ -964,7 +964,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             checkIndex(obj, obj.getSourceFileIndex(), CONST_Utf8);
 
             final String sourceFileName = ((ConstantUtf8) cp.getConstant(obj.getSourceFileIndex())).getBytes(); // ==obj.getSourceFileName() ?
-            final String sourceFileNameLc = sourceFileName.toLowerCase(Locale.ENGLISH);
+            final String sourceFileNameLc = sourceFileName.toLowerCase(Locale.ROOT);
 
             if (sourceFileName.indexOf('/') != -1 || sourceFileName.indexOf('\\') != -1 || sourceFileName.indexOf(':') != -1
                 || sourceFileNameLc.lastIndexOf(".java") == -1) {

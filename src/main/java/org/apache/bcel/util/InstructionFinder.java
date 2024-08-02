@@ -171,7 +171,7 @@ public class InstructionFinder {
      */
     private static String compilePattern(final String pattern) {
         // Bug: BCEL-77 - Instructions are assumed to be english, to avoid odd Locale issues
-        final String lower = pattern.toLowerCase(Locale.ENGLISH);
+        final String lower = pattern.toLowerCase(Locale.ROOT);
         final StringBuilder buf = new StringBuilder();
         final int size = pattern.length();
         for (int i = 0; i < size; i++) {

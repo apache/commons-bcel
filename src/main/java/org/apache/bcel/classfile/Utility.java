@@ -1119,7 +1119,7 @@ public abstract class Utility {
      * Map opcode names to opcode numbers. E.g., return Constants.ALOAD for "aload"
      */
     public static short searchOpcode(String name) {
-        name = name.toLowerCase(Locale.ENGLISH);
+        name = name.toLowerCase(Locale.ROOT);
         for (short i = 0; i < Const.OPCODE_NAMES_LENGTH; i++) {
             if (Const.getOpcodeName(i).equals(name)) {
                 return i;
