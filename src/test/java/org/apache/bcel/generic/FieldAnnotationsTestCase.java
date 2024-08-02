@@ -98,6 +98,7 @@ public class FieldAnnotationsTestCase extends AbstractTestCase {
         if (dbg) {
             System.err.println("Field in freshly constructed class is: " + f);
         }
+        assertEquals("[@Lorg/apache/bcel/data/SimpleAnnotation;(id=1)]", dumpAnnotationEntries(f.getAnnotationEntries()));
         if (dbg) {
             System.err.println("AnnotationEntrys on field are: " + dumpAnnotationEntries(f.getAnnotationEntries()));
         }
