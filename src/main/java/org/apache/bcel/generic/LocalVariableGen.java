@@ -173,7 +173,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     @Override
     public int hashCode() {
         // If the user changes the name or type, problems with the targeter hashmap will occur.
-        // Note: index cannot be part of hash as it may be changed by the user.
+        // Note: Index cannot be part of hash as it may be changed by the user.
         return name.hashCode() ^ type.hashCode();
     }
 
