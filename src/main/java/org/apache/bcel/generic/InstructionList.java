@@ -40,7 +40,7 @@ import org.apache.commons.lang3.stream.Streams;
  * <p>
  * A list is finally dumped to a byte code array with <a href="#getByteCode()">getByteCode</a>.
  * </p>
- * 
+ *
  * @see Instruction
  * @see InstructionHandle
  * @see BranchHandle
