@@ -372,7 +372,7 @@ final class CodeHTML {
         gotoSet = new BitSet(bytes.available());
         int opcode;
         /*
-         * First get Code attribute from method and the exceptions handled (try .. catch) in this method. We only need the line
+         * First get Code attribute from method and the exceptions handled (try-catch) in this method. We only need the line
          * number here.
          */
         if (code != null) {

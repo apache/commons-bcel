@@ -138,7 +138,7 @@ public abstract class Utility {
 
     /*
      * The 'WIDE' instruction is used in the byte code to allow 16-bit wide indices for local variables. This opcode
-     * precedes an 'ILOAD', e.g.. The opcode immediately following takes an extra byte which is combined with the following
+     * precedes an 'ILOAD', for example. The opcode immediately following takes an extra byte which is combined with the following
      * byte to form a 16-bit value.
      */
     private static boolean wide;
@@ -547,7 +547,7 @@ public abstract class Utility {
     }
 
     /**
-     * Shorten long class names, <em>java/lang/String</em> becomes <em>java.lang.String</em>, e.g.. If <em>chopit</em> is
+     * Shorten long class names, <em>java/lang/String</em> becomes <em>java.lang.String</em>, for example. If <em>chopit</em> is
      * <em>true</em> the prefix <em>java.lang</em> is also removed.
      *
      * @param str The long class name

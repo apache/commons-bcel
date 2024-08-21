@@ -34,14 +34,13 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.stream.Streams;
 
 /**
- * This class is a container for a list of <a href="Instruction.html">Instruction</a> objects. Instructions can be
- * appended, inserted, moved, deleted, etc.. Instructions are being wrapped into
- * <a href="InstructionHandle.html">InstructionHandles</a> objects that are returned upon append/insert operations. They
- * give the user (read only) access to the list structure, such that it can be traversed and manipulated in a controlled
- * way.
- *
+ * This class is a container for a list of <a href="Instruction.html">Instruction</a> objects. Instructions can be appended, inserted, moved, deleted, and so
+ * on. Instructions are being wrapped into <a href="InstructionHandle.html">InstructionHandles</a> objects that are returned upon append/insert operations. They
+ * give the user (read only) access to the list structure, such that it can be traversed and manipulated in a controlled way.
+ * <p>
  * A list is finally dumped to a byte code array with <a href="#getByteCode()">getByteCode</a>.
- *
+ * </p>
+ * 
  * @see Instruction
  * @see InstructionHandle
  * @see BranchHandle
