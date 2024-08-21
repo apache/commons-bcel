@@ -156,7 +156,7 @@ public final class Field extends FieldOrMethod {
     }
 
     /**
-     * Return string representation close to declaration format, 'public static final short MAX = 100', e.g..
+     * Return string representation close to declaration format, for example: 'public static final short MAX = 100'.
      *
      * @return String representation of field, including the signature.
      */

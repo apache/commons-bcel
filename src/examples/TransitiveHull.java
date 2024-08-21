@@ -42,7 +42,7 @@ import org.apache.commons.lang3.ArrayUtils;
  * Compute the transitive hull of classes used by a given class. This is done by checking all ConstantClass entries and
  * all method and field signatures.
  * <p>
- * This may be useful in order to put all class files of an application into a single JAR file, e.g..
+ * This may be useful in order to put all class files of an application into a single JAR file.
  * </p>
  * <p>
  * It fails however in the presence of reflexive code aka introspection.
