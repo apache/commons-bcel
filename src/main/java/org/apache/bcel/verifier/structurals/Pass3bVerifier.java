@@ -55,7 +55,7 @@ import org.apache.bcel.verifier.exc.VerifierConstraintViolatedException;
 public final class Pass3bVerifier extends PassVerifier {
     /*
      * TODO: Throughout pass 3b, upper halves of LONG and DOUBLE are represented by Type.UNKNOWN. This should be changed in
-     * favour of LONG_Upper and DOUBLE_Upper as in pass 2.
+     * favor of LONG_Upper and DOUBLE_Upper as in pass 2.
      */
 
     /**
