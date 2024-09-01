@@ -17,6 +17,7 @@
 package org.apache.bcel.generic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -479,11 +480,11 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         assertEquals(1, a.getValues().size(), "Wrong number of values for the annotation");
         final ElementValuePairGen nvp = a.getValues().get(0);
         final ElementValueGen value = nvp.getValue();
-        assertTrue(value instanceof ArrayElementValueGen, "Value should be ArrayElementValueGen but is " + value);
+        assertInstanceOf(ArrayElementValueGen.class, value, "Value should be ArrayElementValueGen but is " + value);
         final ArrayElementValueGen arrayValue = (ArrayElementValueGen) value;
         assertEquals(1, arrayValue.getElementValuesSize(), "Wrong size of the array");
         final ElementValueGen innerValue = arrayValue.getElementValues().get(0);
-        assertTrue(innerValue instanceof AnnotationElementValueGen, "Value in the array should be AnnotationElementValueGen but is " + innerValue);
+        assertInstanceOf(AnnotationElementValueGen.class, innerValue, "Value in the array should be AnnotationElementValueGen but is " + innerValue);
         final AnnotationElementValueGen innerAnnotationValue = (AnnotationElementValueGen) innerValue;
         assertEquals("L" + PACKAGE_BASE_SIG + "/data/SimpleAnnotation;", innerAnnotationValue.getAnnotation().getTypeSignature(), "Wrong type signature");
 
