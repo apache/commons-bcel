@@ -30,17 +30,16 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-13]
         java: [ 8, 11, 17, 21 ]
         experimental: [false]
-#        include:
-#          - java: 22-ea
-#            os: ubuntu-latest
-#            experimental: true
-#          - java: 22-ea
-#            os: windows-latest
-#            experimental: true
-#          - java: 22-ea
-#            os: macos-latest
-#            experimental: true
-      fail-fast: false
+        include:
+          - java: 22
+            os: ubuntu-latest
+            experimental: true
+          - java: 23-ea
+            os: ubuntu-latest
+            experimental: true
+          - java: 24-ea
+            os: ubuntu-latest
+            experimental: true
 
     steps:
     - name: Prepare git
