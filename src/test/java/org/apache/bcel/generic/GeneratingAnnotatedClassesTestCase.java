@@ -493,15 +493,20 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         assertEquals(3, methods.length);
         for (final Method method : methods) {
             final String methodName = method.getName();
-            if (methodName.equals("<init>")) {
+            switch (methodName) {
+            case "<init>":
                 assertMethodAnnotations(method, 0, 1);
                 assertParameterAnnotations(method, 0, 1);
-            } else if (methodName.equals("methodWithArrayOfZeroAnnotations")) {
+                break;
+            case "methodWithArrayOfZeroAnnotations":
                 assertMethodAnnotations(method, 1, 0);
-            } else if (methodName.equals("methodWithArrayOfTwoAnnotations")) {
+                break;
+            case "methodWithArrayOfTwoAnnotations":
                 assertMethodAnnotations(method, 1, 2);
-            } else {
+                break;
+            default:
                 fail(() -> "unexpected method " + method.getName());
+                break;
             }
         }
     }
