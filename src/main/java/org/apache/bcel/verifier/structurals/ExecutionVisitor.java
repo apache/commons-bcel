@@ -434,7 +434,6 @@ public class ExecutionVisitor extends EmptyVisitor {
                 stack().push(v);
             }
             stack().push(u);
-            stack().push(t);
         } else { // t.getSize() is 1
             final Type u = stack().pop();
             final Type v = stack().pop();
@@ -449,8 +448,8 @@ public class ExecutionVisitor extends EmptyVisitor {
             }
             stack().push(v);
             stack().push(u);
-            stack().push(t);
         }
+        stack().push(t);
     }
 
     /** Symbolically executes the corresponding Java Virtual Machine instruction. */
