@@ -136,29 +136,39 @@ public class ListClass {
         // Parse command line arguments.
         for (final String arg : argv) {
             if (arg.charAt(0) == '-') { // command line switch
-                if (arg.equals("-constants")) {
+                switch (arg) {
+                case "-constants":
                     constants = true;
-                } else if (arg.equals("-code")) {
+                    break;
+                case "-code":
                     code = true;
-                } else if (arg.equals("-brief")) {
+                    break;
+                case "-brief":
                     verbose = false;
-                } else if (arg.equals("-dependencies")) {
+                    break;
+                case "-dependencies":
                     classdep = true;
-                } else if (arg.equals("-nocontents")) {
+                    break;
+                case "-nocontents":
                     nocontents = true;
-                } else if (arg.equals("-recurse")) {
+                    break;
+                case "-recurse":
                     recurse = true;
-                } else if (arg.equals("-exclude")) {
+                    break;
+                case "-exclude":
                     exclude = true;
-                } else if (arg.equals("-help")) {
+                    break;
+                case "-help":
                     System.out.println("Usage: java listclass [-constants] [-code] [-brief] " + "[-dependencies] [-nocontents] [-recurse] class... "
                         + "[-exclude <list>]\n" + "-constants       Print constants table (constant pool)\n" + "-code            Dump byte code of methods\n"
                         + "-brief           Brief listing\n" + "-dependencies    Show class dependencies\n"
                         + "-nocontents      Do not print field/method information\n" + "-recurse         Recurse into dependent classes\n"
                         + "-exclude <list>  Do not list classes beginning with " + "strings in <list>");
                     System.exit(0);
-                } else {
+                    break;
+                default:
                     System.err.println("Unknown switch " + arg + " ignored.");
+                    break;
                 }
             } else if (exclude) { // add file name to list
                 excludeName.add(arg);
