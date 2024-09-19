@@ -31,10 +31,7 @@ jobs:
         java: [ 8, 11, 17, 21 ]
         experimental: [false]
         include:
-          - java: 22
-            os: ubuntu-latest
-            experimental: true
-          - java: 23-ea
+          - java: 23
             os: ubuntu-latest
             experimental: true
           - java: 24-ea
