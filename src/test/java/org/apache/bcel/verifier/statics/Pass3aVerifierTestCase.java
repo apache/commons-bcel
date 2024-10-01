@@ -16,7 +16,9 @@
  */
 package org.apache.bcel.verifier.statics;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -105,8 +107,8 @@ class Pass3aVerifierTestCase {
         final Pass3aVerifier pass3aVerifier = new Pass3aVerifier(verifier, 0);
         final VerificationResult verificationResult = pass3aVerifier.do_verify();
 
-        assertThat(verificationResult.getStatus()).isEqualTo(VerificationResult.VERIFIED_REJECTED);
-        assertThat(verificationResult.getMessage()).startsWith("Instruction ldc[18](2) 0 constraint violated: Operand of LDC");
+        assertEquals(VerificationResult.VERIFIED_REJECTED, verificationResult.getStatus());
+        assertTrue(verificationResult.getMessage().startsWith("Instruction ldc[18](2) 0 constraint violated: Operand of LDC"));
     }
 
     @BeforeEach
