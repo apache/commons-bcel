@@ -44,7 +44,7 @@ Apache Commons BCEL
 ===================
 
 [![Java CI](https://github.com/apache/commons-bcel/actions/workflows/maven.yml/badge.svg)](https://github.com/apache/commons-bcel/actions/workflows/maven.yml)
-[![Maven Central](https://img.shields.io/maven-central/v/org.apache.bcel/bcel?label=Maven%20Central)](https://search.maven.org/artifact/org.apache.bcel/bcel/badge.svg?gav=true))
+[![Maven Central](https://img.shields.io/maven-central/v/org.apache.bcel/bcel?label=Maven%20Central)](https://search.maven.org/artifact/org.apache.bcel/bcel/badge.svg?gav=true)
 [![Javadocs](https://javadoc.io/badge/org.apache.bcel/bcel/6.10.0.svg)](https://javadoc.io/doc/org.apache.bcel/bcel/6.10.0)
 [![CodeQL](https://github.com/apache/commons-bcel/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/apache/commons-bcel/actions/workflows/codeql-analysis.yml)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/apache/commons-bcel/badge)](https://api.securityscorecards.dev/projects/github.com/apache/commons-bcel)
