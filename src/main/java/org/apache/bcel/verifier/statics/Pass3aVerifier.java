@@ -118,7 +118,9 @@ public final class Pass3aVerifier extends PassVerifier {
         /** The ConstantPoolGen instance this Visitor operates on. */
         private final ConstantPoolGen constantPoolGen;
 
-        /** The only Constructor. */
+        /**
+         * Constructs a new instance.
+         */
         InstOperandConstraintVisitor(final ConstantPoolGen constantPoolGen) {
             this.constantPoolGen = constantPoolGen;
         }
