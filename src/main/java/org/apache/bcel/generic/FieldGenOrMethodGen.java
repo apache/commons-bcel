@@ -167,7 +167,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     @Override
     public void setType(final Type type) { // TODO could be package-protected?
         if (type.getType() == Const.T_ADDRESS) {
-            throw new IllegalArgumentException("Type can not be " + type);
+            throw new IllegalArgumentException("Type cannot be " + type);
         }
         this.type = type;
     }

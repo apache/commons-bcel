@@ -247,7 +247,7 @@ public class ASTProgram extends SimpleNode implements MiniParserConstants, MiniP
                 final ASTIdent name = fun_decl.getName();
 
                 if (name.getType() == Const.T_UNKNOWN) {
-                    MiniC.addError(name.getColumn(), name.getLine(), "Type of function " + name.getName() + " can not be determined (infinite recursion?).");
+                    MiniC.addError(name.getColumn(), name.getLine(), "Type of function " + name.getName() + " cannot be determined (infinite recursion?).");
                 }
             }
         }

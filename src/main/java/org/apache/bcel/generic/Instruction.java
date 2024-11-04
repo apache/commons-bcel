@@ -439,7 +439,7 @@ public abstract class Instruction implements Cloneable {
      * This method also gives right results for instructions whose effect on the stack depends on the constant pool entry
      * they reference.
      *
-     * @return Number of words consumed from stack by this instruction, or Constants.UNPREDICTABLE, if this can not be
+     * @return Number of words consumed from stack by this instruction, or Constants.UNPREDICTABLE, if this cannot be
      *         computed statically
      */
     public int consumeStack(final ConstantPoolGen cpg) {
@@ -541,7 +541,7 @@ public abstract class Instruction implements Cloneable {
      * This method also gives right results for instructions whose effect on the stack depends on the constant pool entry
      * they reference.
      *
-     * @return Number of words produced onto stack by this instruction, or Constants.UNPREDICTABLE, if this can not be
+     * @return Number of words produced onto stack by this instruction, or Constants.UNPREDICTABLE, if this cannot be
      *         computed statically
      */
     public int produceStack(final ConstantPoolGen cpg) {
