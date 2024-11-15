@@ -175,7 +175,7 @@ public final class Pass1Verifier extends PassVerifier {
      * Currently this returns an empty array of String. One could parse the error messages of BCEL (written to
      * java.lang.System.err) when loading a class file such as detecting unknown attributes or trailing garbage at the end
      * of a class file. However, Markus Dahm does not like the idea so this method is currently useless and therefore marked
-     * as <b>TODO</b>.
+     * as <strong>TODO</strong>.
      */
     @Override
     public String[] getMessages() {

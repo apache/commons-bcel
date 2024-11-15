@@ -41,7 +41,7 @@ import org.apache.bcel.generic.*;
  * are two Type.INT on top of the stack). Monitor-specific behavior is not simulated.
  * </p>
  *
- * <b>Conventions:</b>
+ * <strong>Conventions:</strong>
  *
  * <p>
  * Type.VOID will never be pushed onto the stack. Type.DOUBLE and Type.LONG that would normally take up two stack slots
