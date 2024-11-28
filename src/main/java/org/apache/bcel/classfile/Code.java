@@ -161,7 +161,6 @@ public final class Code extends Attribute {
 
     /**
      * @return deep copy of this attribute
-     *
      * @param constantPool the constant pool to duplicate
      */
     @Override

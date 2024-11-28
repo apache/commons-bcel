@@ -58,7 +58,6 @@ public class ModularRuntimeImage implements Closeable {
      * Constructs an instance using the JRT file system implementation from a specific Java Home.
      *
      * @param javaHome Path to a Java 9 or greater home.
-     *
      * @throws IOException an I/O error occurs accessing the file system
      */
     public ModularRuntimeImage(final String javaHome) throws IOException {

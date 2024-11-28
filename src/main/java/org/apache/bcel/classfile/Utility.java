@@ -219,7 +219,6 @@ public abstract class Utility {
 
     /**
      * @param accessFlags the class flags
-     *
      * @return "class" or "interface", depending on the ACC_INTERFACE flag
      */
     public static String classOrInterface(final int accessFlags) {
@@ -278,7 +277,6 @@ public abstract class Utility {
      * @param constantPool Array of constants
      * @param verbose be verbose, e.g. print constant pool index
      * @return String representation of byte code
-     *
      * @throws IOException if a failure from reading from the bytes argument occurs
      */
     public static String codeToString(final ByteSequence bytes, final ConstantPool constantPool, final boolean verbose) throws IOException {
@@ -643,7 +641,6 @@ public abstract class Utility {
      *
      * @param s the string to convert
      * @param uncompress use gzip to uncompress the stream of bytes
-     *
      * @throws IOException if there's a gzip exception
      */
     public static byte[] decode(final String s, final boolean uncompress) throws IOException {
@@ -684,7 +681,6 @@ public abstract class Utility {
      *
      * @param bytes the byte array to convert
      * @param compress use gzip to minimize string
-     *
      * @throws IOException if there's a gzip exception
      */
     public static String encode(byte[] bytes, final boolean compress) throws IOException {
@@ -821,7 +817,6 @@ public abstract class Utility {
 
     /**
      * @param ch the character to test if it's part of an identifier
-     *
      * @return true, if character is one of (a, ... z, A, ... Z, 0, ... 9, _)
      */
     public static boolean isJavaIdentifierPart(final char ch) {
@@ -999,7 +994,6 @@ public abstract class Utility {
      * @param ret Return type of method
      * @param argv Types of method arguments
      * @return Byte code representation of method signature
-     *
      * @throws ClassFormatException if the signature is for Void
      */
     public static String methodTypeToSignature(final String ret, final String[] argv) throws ClassFormatException {
@@ -1202,7 +1196,6 @@ public abstract class Utility {
      * Convert bytes into hexadecimal string
      *
      * @param bytes an array of bytes to convert to hexadecimal
-     *
      * @return bytes as hexadecimal string, e.g. 00 fa 12 ...
      */
     public static String toHexString(final byte[] bytes) {
@@ -1227,7 +1220,6 @@ public abstract class Utility {
      * @param signature in format described above
      * @return type of method signature
      * @see Const
-     *
      * @throws ClassFormatException if signature is not a method signature
      */
     public static byte typeOfMethodSignature(final String signature) throws ClassFormatException {
@@ -1249,7 +1241,6 @@ public abstract class Utility {
      * @param signature in format described above
      * @return type of signature
      * @see Const
-     *
      * @throws ClassFormatException if signature isn't a known type
      */
     public static byte typeOfSignature(final String signature) throws ClassFormatException {

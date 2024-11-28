@@ -21,7 +21,6 @@ package org.apache.bcel.classfile;
  * Attribute.addAttributeReader method. These factory objects should implement this interface.
  *
  * @see Attribute
- *
  * @deprecated Use UnknownAttributeReader instead
  */
 @java.lang.Deprecated
@@ -33,12 +32,10 @@ public interface AttributeReader {
      * name of the attributes it is constructing.
      *
      * @param nameIndex An index into the constant pool, indexing a ConstantUtf8 that represents the name of the attribute.
-     *
      * @param length The length of the data contained in the attribute. This is written into the constant pool and should
      *        agree with what the factory expects the length to be.
      *
      * @param file This is the data input stream that the factory needs to read its data from.
-     *
      * @param constantPool This is the constant pool associated with the Attribute that we are constructing.
      *
      * @return The user-defined AttributeReader should take this data and use it to construct an attribute. In the case of

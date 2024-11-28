@@ -31,7 +31,6 @@ import org.apache.bcel.util.Args;
  * LocalVariableTypeTable attribute does have a signatureIndex.
  *
  * @see org.apache.bcel.classfile.Utility for more details on the difference.
- *
  * @see LocalVariableTable
  * @see LocalVariableTypeTable
  */

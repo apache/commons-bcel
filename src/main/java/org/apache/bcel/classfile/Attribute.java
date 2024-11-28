@@ -100,7 +100,6 @@ public abstract class Attribute implements Cloneable, Node {
      *
      * @see Field
      * @see Method
-     *
      * @param dataInput Input stream
      * @param constantPool Array of constants
      * @return Attribute
@@ -205,7 +204,6 @@ public abstract class Attribute implements Cloneable, Node {
      *
      * @see Field
      * @see Method
-     *
      * @param dataInputStream Input stream
      * @param constantPool Array of constants
      * @return Attribute

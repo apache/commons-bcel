@@ -30,7 +30,6 @@ public interface Subroutine {
      *
      * @param inst The InstructionHandle to test.
      * @return Whether the given InstructionHandle refers to an instruction that is part of this subroutine.
-     *
      * @see #getInstructions()
      */
     boolean contains(InstructionHandle inst);
@@ -66,7 +65,6 @@ public interface Subroutine {
      * <B>Must not be invoked on the 'top-level subroutine'.</B>
      *
      * @return The one and only RET that leaves the subroutine.
-     *
      * @see Subroutines
      */
     InstructionHandle getLeavingRET();
