@@ -121,7 +121,6 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
      *
      * @param index the variable slot
      * @return the first LocalVariable that matches the slot or null if not found
-     *
      * @deprecated since 5.2 because multiple variables can share the same slot, use getLocalVariable(int index, int pc)
      *             instead.
      */

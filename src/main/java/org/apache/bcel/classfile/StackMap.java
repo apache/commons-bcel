@@ -68,7 +68,6 @@ public final class StackMap extends Attribute {
     /*
      * @param nameIndex Index of name
      * @param length Content length in bytes
-     *
      * @param map Table of stack map entries
      * @param constantPool Array of constants
      */
