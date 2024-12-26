@@ -212,7 +212,6 @@ public interface Visitor {
      */
     void visitParameterAnnotation(ParameterAnnotations obj);
 
-
     /**
      * @since 6.0
      */

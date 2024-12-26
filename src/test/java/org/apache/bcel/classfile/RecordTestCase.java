@@ -54,7 +54,6 @@ public class RecordTestCase extends AbstractTestCase {
         assertEquals(2, countVisitor.recordComponentCount, "should count two record components");
     }
 
-
     /**
      * Check that we can save and load the attribute correctly.
      */
