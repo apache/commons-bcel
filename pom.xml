@@ -21,25 +21,20 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
     <version>78</version>
   </parent>
-
   <groupId>org.apache.bcel</groupId>
   <artifactId>bcel</artifactId>
   <packaging>jar</packaging>
   <version>6.10.1-SNAPSHOT</version>
   <name>Apache Commons BCEL</name>
   <description>Apache Commons Bytecode Engineering Library</description>
-
   <url>https://commons.apache.org/proper/commons-bcel</url>
   <inceptionYear>2004</inceptionYear>
-
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -77,7 +72,6 @@
     <commons.jacoco.lineRatio>0.68</commons.jacoco.lineRatio>
     <commons.jacoco.complexityRatio>0.58</commons.jacoco.complexityRatio>
   </properties>
-
   <distributionManagement>
     <site>
       <id>apache.website</id>
@@ -85,23 +79,19 @@
       <url>scm:svn:https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-bcel/</url>
     </site>
   </distributionManagement>
-
   <ciManagement>
     <system>GitHub</system>
     <url>https://github.com/apache/commons-bcel/actions</url>
   </ciManagement>
-
   <issueManagement>
     <system>jira</system>
     <url>https://issues.apache.org/jira/browse/BCEL</url>
   </issueManagement>
-
   <scm>
     <connection>scm:git:https://gitbox.apache.org/repos/asf/commons-bcel.git</connection>
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/commons-bcel.git</developerConnection>
     <url>https://gitbox.apache.org/repos/asf?p=commons-bcel.git</url>
   </scm>
-
   <build>
     <defaultGoal>clean verify apache-rat:check japicmp:cmp checkstyle:check pmd:check spotbugs:check javadoc:javadoc</defaultGoal>
     <plugins>
@@ -264,7 +254,6 @@
       </plugin>
     </plugins>
   </build>
-
   <reporting>
     <plugins>
       <plugin>
@@ -339,7 +328,6 @@
       </plugin>
     </plugins>
   </reporting>
-
   <dependencies>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -416,7 +404,6 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
   <profiles>
     <!-- Profile to build and run PerformanceTest. Use 'mvn test -Pjdk-rt' -->
     <profile>
@@ -435,17 +422,14 @@
         </plugins>
       </build>
     </profile>
-
     <!-- Profile to build and run the benchmarks. Use 'mvn test -Pbenchmark', and add '-Dbenchmark=foo' to run only the foo benchmark -->
     <profile>
       <id>benchmark</id>
-
       <properties>
         <skipTests>true</skipTests>
         <benchmark>org.apache</benchmark>
         <jmh.version>1.37</jmh.version>
       </properties>
-
       <dependencies>
         <dependency>
           <groupId>org.openjdk.jmh</groupId>
@@ -453,21 +437,18 @@
           <version>${jmh.version}</version>
           <scope>test</scope>
         </dependency>
-
         <dependency>
           <groupId>org.openjdk.jmh</groupId>
           <artifactId>jmh-generator-annprocess</artifactId>
           <version>${jmh.version}</version>
           <scope>test</scope>
         </dependency>
-
         <dependency>
           <groupId>commons-io</groupId>
           <artifactId>commons-io</artifactId>
           <version>2.18.0</version>
           <scope>test</scope>
         </dependency>
-
         <dependency>
           <groupId>org.apache.commons</groupId>
           <artifactId>commons-collections4</artifactId>
@@ -475,7 +456,6 @@
           <scope>test</scope>
         </dependency>
       </dependencies>
-
       <build>
         <plugins>
           <!-- Enable the compilation of the benchmarks -->
@@ -536,7 +516,6 @@
       </properties>
     </profile>
   </profiles>
-
   <developers>
     <developer>
       <name>Dave Brosius</name>
