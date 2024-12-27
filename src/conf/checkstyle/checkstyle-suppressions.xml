@@ -26,5 +26,5 @@ limitations under the License.
     <suppress checks="MagicNumber" files="src[/\\]test[/\\]"/> <!-- test files need numbers -->
     <suppress checks=".*"          files="[/\\]target[/\\]"/>
     <suppress checks="VisibilityModifier" files="StaticFieldVerifierSuperClass.java" lines="22,23,24,26"/>
-    <suppress checks="VisibilityModifier" files="FieldVerifierSuperClass.java" lines="22,16,24,19"/>
+    <suppress checks="VisibilityModifier" files="FieldVerifierSuperClass.java" lines="18,21,24,26"/>
 </suppressions>
