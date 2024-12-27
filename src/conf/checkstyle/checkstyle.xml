@@ -185,7 +185,7 @@ limitations under the License.
 
   <module name="SuppressionFilter">
     <!-- config_loc is used by Eclipse plugin -->
-    <property name="file" value="${config_loc}/src/conf/checkstyle-suppressions.xml"/>
+    <property name="file" value="src/conf/checkstyle/checkstyle-suppressions.xml"/>
   </module>
   <module name="RegexpSingleline">
     <!-- \s matches whitespace character, $ matches end of line. -->
