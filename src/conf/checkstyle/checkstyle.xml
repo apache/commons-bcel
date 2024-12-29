@@ -20,16 +20,14 @@ limitations under the License.
     "https://checkstyle.org/dtds/configuration_1_3.dtd">
 <module name="Checker">
   <property name="localeLanguage" value="en" />
-  <module name="FileTabCharacter">
-    <property name="fileExtensions" value="java" />
-  </module>
+  <module name="FileTabCharacter" />
   <module name="Header">
     <property name="headerFile" value="${checkstyle.header.file}" />
-    <property name="fileExtensions" value="java"/>
+    <property name="fileExtensions" value="java" />
   </module>
   <module name="JavadocPackage" />
   <module name="LineLength">
-    <property name="max" value="180"/>
+    <property name="max" value="180" />
   </module>
   <module name="NewlineAtEndOfFile">
     <!-- The files are saved in the repo with LF, and on Windows you should use git config core.autocrlf input -->
@@ -48,59 +46,58 @@ limitations under the License.
     <property name="message" value="Line has trailing spaces." />
   </module>
   <module name="TreeWalker">
-    <module name="ArrayTypeStyle"/>
+    <module name="ArrayTypeStyle" />
     <module name="AvoidStarImport">
-        <property name="excludes" value="org.junit.Assert"/>
+      <property name="excludes" value="org.junit.Assert" />
     </module>
-    <module name="CovariantEquals"/>
-    <module name="DefaultComesLast"/>
-    <module name="EmptyForIteratorPad"/>
+    <module name="CovariantEquals" />
+    <module name="DefaultComesLast" />
+    <module name="EmptyForIteratorPad" />
     <module name="EmptyBlock">
-      <property name="option" value="text"/>
+      <property name="option" value="text" />
     </module>
-    <module name="EqualsHashCode"/>
+    <module name="EqualsHashCode" />
     <module name="ExplicitInitializationCheck" />
     <module name="FallThrough">
-        <property name="reliefPattern" value="\$FALL-THROUGH\$"/>
+      <property name="reliefPattern" value="\$FALL-THROUGH\$" />
     </module>
-    <module name="IllegalImport"/>
-    <module name="IllegalInstantiation"/>
-    <module name="ModifierOrder"/>
-    <module name="MultipleVariableDeclarations"/>
-    <module name="NeedBraces"/>
+    <module name="IllegalImport" />
+    <module name="IllegalInstantiation" />
+    <module name="ModifierOrder" />
+    <module name="MultipleVariableDeclarations" />
+    <module name="NeedBraces" />
     <!--module name="SuperClone"/-->
-    <module name="SuperFinalize"/>
+    <module name="SuperFinalize" />
     <!--module name="ExplicitInitialization"/-->
-    <module name="RedundantImport"/>
-    <module name="SimplifyBooleanExpression"/>
-    <module name="SimplifyBooleanReturn"/>
-    <module name="StringLiteralEquality"/>
-    <module name="SuppressionCommentFilter"/>
+    <module name="RedundantImport" />
+    <module name="SimplifyBooleanExpression" />
+    <module name="SimplifyBooleanReturn" />
+    <module name="StringLiteralEquality" />
+    <module name="SuppressionCommentFilter" />
     <module name="SuppressWithNearbyCommentFilter">
-      <property name="commentFormat" value="CHECKSTYLE IGNORE (\w+)"/>
-      <property name="checkFormat" value="$1"/>
+      <property name="commentFormat" value="CHECKSTYLE IGNORE (\w+)" />
+      <property name="checkFormat" value="$1" />
     </module>
     <module name="TypeName">
         <!-- Allow underscore in class names -->
-        <property name="format" value="^[A-Z][A-Za-z0-9]*(_[A-Za-z0-9]+)*$"/>
+      <property name="format" value="^[A-Z][A-Za-z0-9]*(_[A-Za-z0-9]+)*$" />
     </module>
-    <module name="UnusedImports"/>
-    <module name="UnnecessaryParentheses"/>
-    <module name="UpperEll"/>
+    <module name="UnusedImports" />
+    <module name="UnnecessaryParentheses" />
+    <module name="UpperEll" />
     <module name="VisibilityModifier">
-        <property name="ignoreAnnotationCanonicalNames" value="java.lang.Deprecated"/>
-        <property name="protectedAllowed" value="false"/>
-        <property name="packageAllowed" value="true"/>
+      <property name="ignoreAnnotationCanonicalNames" value="java.lang.Deprecated" />
+      <property name="protectedAllowed" value="false" />
+      <property name="packageAllowed" value="true" />
     </module>
-    <module name="WhitespaceAfter"/>
-    <module name="WhitespaceAround"/>
+    <module name="WhitespaceAfter" />
+    <module name="WhitespaceAround" />
   </module>
   <module name="SuppressionFilter">
-    <property name="file" value="src/conf/checkstyle/checkstyle-suppressions.xml"/>
+    <property name="file" value="src/conf/checkstyle/checkstyle-suppressions.xml" />
   </module>
   <module name="RegexpSingleline">
     <property name="format" value="\s+$" />
     <property name="message" value="Line has trailing spaces." />
   </module>
 </module>
-
