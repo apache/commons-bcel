@@ -48,9 +48,7 @@ limitations under the License.
   </module>
   <module name="TreeWalker">
     <module name="ArrayTypeStyle" />
-    <module name="AvoidStarImport">
-      <property name="excludes" value="org.junit.Assert" />
-    </module>
+    <module name="AvoidStarImport" />
     <module name="CovariantEquals" />
     <module name="DefaultComesLast" />
     <module name="EmptyForIteratorPad" />
