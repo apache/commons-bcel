@@ -16,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 package org.apache.bcel;
 
 import java.io.ByteArrayInputStream;
@@ -31,6 +30,7 @@ import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
+import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.iterators.EnumerationIterator;
 import org.apache.commons.collections4.iterators.FilterIterator;
 import org.apache.commons.collections4.iterators.IteratorIterable;
@@ -39,6 +39,7 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Threads;
 import org.openjdk.jmh.annotations.Warmup;
@@ -51,37 +52,29 @@ import org.openjdk.jmh.infra.Blackhole;
 @Measurement(iterations = 20)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class BCELBenchmark {
-
     /**
      * Baseline benchmark. Read the classes but don't parse them.
      */
     @Benchmark
     public void baseline(Blackhole bh) throws IOException {
-        JarFile jar = getJarFile();
-
+        final JarFile jar = getJarFile();
         for (JarEntry entry : getClasses(jar)) {
-            byte[] bytes = IOUtils.toByteArray(jar.getInputStream(entry));
+            final byte[] bytes = IOUtils.toByteArray(jar.getInputStream(entry));
             bh.consume(bytes);
         }
-
         jar.close();
     }
 
     @Benchmark
     public void generator(Blackhole bh) throws IOException {
-        JarFile jar = getJarFile();
-
+        final JarFile jar = getJarFile();
         for (JarEntry entry : getClasses(jar)) {
-            byte[] bytes = IOUtils.toByteArray(jar.getInputStream(entry));
-
-            JavaClass clazz = new ClassParser(new ByteArrayInputStream(bytes), entry.getName()).parse();
-
-            ClassGen cg = new ClassGen(clazz);
-
+            final byte[] bytes = IOUtils.toByteArray(jar.getInputStream(entry));
+            final JavaClass clazz = new ClassParser(new ByteArrayInputStream(bytes), entry.getName()).parse();
+            final ClassGen cg = new ClassGen(clazz);
             for (Method m : cg.getMethods()) {
-                MethodGen mg = new MethodGen(m, cg.getClassName(), cg.getConstantPool());
-                InstructionList il = mg.getInstructionList();
-
+                final MethodGen mg = new MethodGen(m, cg.getClassName(), cg.getConstantPool());
+                final InstructionList il = mg.getInstructionList();
                 if (il != null) {
                     mg.getInstructionList().setPositions();
                     mg.setMaxLocals();
@@ -89,10 +82,8 @@ public class BCELBenchmark {
                 }
                 cg.replaceMethod(m, mg.getMethod());
             }
-
             bh.consume(cg.getJavaClass().getBytes());
         }
-
         jar.close();
     }
 
@@ -111,16 +102,13 @@ public class BCELBenchmark {
     }
 
     @Benchmark
-    public void parser(Blackhole bh) throws IOException {
-        JarFile jar = getJarFile();
-
+    public void parser(final Blackhole bh) throws IOException {
+        final JarFile jar = getJarFile();
         for (JarEntry entry : getClasses(jar)) {
-            byte[] bytes = IOUtils.toByteArray(jar.getInputStream(entry));
-
-            JavaClass clazz = new ClassParser(new ByteArrayInputStream(bytes), entry.getName()).parse();
+            final byte[] bytes = IOUtils.toByteArray(jar.getInputStream(entry));
+            final JavaClass clazz = new ClassParser(new ByteArrayInputStream(bytes), entry.getName()).parse();
             bh.consume(clazz);
         }
-
         jar.close();
     }
 }
