@@ -62,6 +62,12 @@ limitations under the License.
     <module name="FinalLocalVariable" />
     <module name="IllegalImport" />
     <module name="IllegalInstantiation" />
+    <module name="ImportOrder">
+      <property name="option" value="top" />
+      <property name="groups" value="java,javax,org" />
+      <property name="ordered" value="true" />
+      <property name="separated" value="true" />
+    </module>
     <module name="ModifierOrder" />
     <module name="MultipleVariableDeclarations" />
     <module name="NeedBraces" />

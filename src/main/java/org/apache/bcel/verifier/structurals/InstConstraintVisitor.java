@@ -31,14 +31,15 @@ import org.apache.bcel.classfile.ConstantLong;
 import org.apache.bcel.classfile.ConstantString;
 import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.JavaClass;
-//CHECKSTYLE:OFF (there are lots of references!)
-import org.apache.bcel.generic.*;
-//CHECKSTYLE:ON
 import org.apache.bcel.verifier.VerificationResult;
 import org.apache.bcel.verifier.Verifier;
 import org.apache.bcel.verifier.VerifierFactory;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
 import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
+
+//CHECKSTYLE:OFF (there are lots of references!)
+import org.apache.bcel.generic.*;
+//CHECKSTYLE:ON
 
 /**
  * A Visitor class testing for valid preconditions of JVM instructions. The instance of this class will throw a
