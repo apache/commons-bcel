@@ -150,7 +150,7 @@ public class ConstantPoolGen {
                 }
             } else if (c instanceof ConstantCP) {
                 final ConstantCP m = (ConstantCP) c;
-                String className;
+                final String className;
                 ConstantUtf8 u8;
 
                 if (c instanceof ConstantInvokeDynamic) {

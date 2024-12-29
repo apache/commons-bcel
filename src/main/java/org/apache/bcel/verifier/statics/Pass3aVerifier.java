@@ -612,7 +612,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 // INVOKEVIRTUAL is an InvokeInstruction, the argument and return types are resolved/verified,
                 // too. So are the allowed method names.
                 final String className = o.getClassName(constantPoolGen);
-                JavaClass jc;
+                final JavaClass jc;
                 if (className.charAt(0) == '[') { // array type, e.g. invoke can be someArray.clone()
                     jc = Repository.lookupClass("java.lang.Object");
                 } else {

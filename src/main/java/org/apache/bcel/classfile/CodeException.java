@@ -220,7 +220,7 @@ public final class CodeException implements Cloneable, Node, Constants {
      * @return String representation.
      */
     public String toString(final ConstantPool cp, final boolean verbose) {
-        String str;
+        final String str;
         if (catchType == 0) {
             str = "<Any exception>(0)";
         } else {

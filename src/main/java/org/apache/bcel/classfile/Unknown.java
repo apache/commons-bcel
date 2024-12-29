@@ -148,7 +148,7 @@ public final class Unknown extends Attribute {
         if (super.getLength() == 0 || bytes == null) {
             return "(Unknown attribute " + name + ")";
         }
-        String hex;
+        final String hex;
         final int limit = 10;
         if (super.getLength() > limit) {
             final byte[] tmp = Arrays.copyOf(bytes, limit);

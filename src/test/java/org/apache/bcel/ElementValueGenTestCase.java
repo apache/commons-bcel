@@ -45,7 +45,7 @@ public class ElementValueGenTestCase extends AbstractTestCase {
             evgBefore.dump(dos);
             dos.flush();
         }
-        ElementValueGen evgAfter;
+        final ElementValueGen evgAfter;
         try (DataInputStream dis = new DataInputStream(new ByteArrayInputStream(baos.toByteArray()))) {
             evgAfter = ElementValueGen.readElementValue(dis, cpg);
         }

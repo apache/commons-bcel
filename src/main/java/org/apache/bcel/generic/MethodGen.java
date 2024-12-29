@@ -482,7 +482,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                 maxLocals = slot + add;
             }
             final LocalVariableGen l = new LocalVariableGen(slot, name, type, start, end, origIndex);
-            int i;
+            final int i;
             if ((i = variableList.indexOf(l)) >= 0) {
                 variableList.set(i, l);
             } else {

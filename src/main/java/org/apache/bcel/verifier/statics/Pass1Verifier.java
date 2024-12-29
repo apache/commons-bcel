@@ -123,7 +123,7 @@ public final class Pass1Verifier extends PassVerifier {
      */
     @Override
     public VerificationResult do_verify() {
-        JavaClass jc;
+        final JavaClass jc;
         try {
             jc = getJavaClass(); // loads in the class file if not already done.
 

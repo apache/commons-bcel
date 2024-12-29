@@ -150,7 +150,7 @@ public class Class2HTML implements Constants {
     static String toHTML(final String str) {
         final StringBuilder buf = new StringBuilder();
         for (int i = 0; i < str.length(); i++) {
-            char ch;
+            final char ch;
             switch (ch = str.charAt(i)) {
             case '<':
                 buf.append("&lt;");

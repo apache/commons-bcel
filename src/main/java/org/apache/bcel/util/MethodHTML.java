@@ -75,7 +75,7 @@ final class MethodHTML {
         final String type = Utility.signatureToString(field.getSignature());
         final String name = field.getName();
         String access = Utility.accessToString(field.getAccessFlags());
-        Attribute[] attributes;
+        final Attribute[] attributes;
         access = Utility.replace(access, " ", "&nbsp;");
         printWriter.print("<TR><TD><FONT COLOR=\"#FF0000\">" + access + "</FONT></TD>\n<TD>" + Class2HTML.referenceType(type) + "</TD><TD><A NAME=\"field"
             + name + "\">" + name + "</A></TD>");
@@ -104,7 +104,6 @@ final class MethodHTML {
         final String type = Utility.methodSignatureReturnType(signature, false);
         // Get method name
         final String name = method.getName();
-        String htmlName;
         // Get method's access flags
         String access = Utility.accessToString(method.getAccessFlags());
         // Get the method's attributes, the Code Attribute in particular
@@ -113,7 +112,7 @@ final class MethodHTML {
          * HTML doesn't like names like <clinit> and spaces are places to break lines. Both we don't want...
          */
         access = Utility.replace(access, " ", "&nbsp;");
-        htmlName = Class2HTML.toHTML(name);
+        final String htmlName = Class2HTML.toHTML(name);
         printWriter.print("<TR VALIGN=TOP><TD><FONT COLOR=\"#FF0000\"><A NAME=method" + methodNumber + ">" + access + "</A></FONT></TD>");
         printWriter.print("<TD>" + Class2HTML.referenceType(type) + "</TD><TD>" + "<A HREF=" + className + "_code.html#method" + methodNumber + " TARGET=Code>"
             + htmlName + "</A></TD>\n<TD>(");

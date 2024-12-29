@@ -159,7 +159,7 @@ public final class StackMapEntry implements Node, Cloneable {
      * @return deep copy of this object
      */
     public StackMapEntry copy() {
-        StackMapEntry e;
+        final StackMapEntry e;
         try {
             e = (StackMapEntry) clone();
         } catch (final CloneNotSupportedException ex) {

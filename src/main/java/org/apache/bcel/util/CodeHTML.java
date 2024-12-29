@@ -78,17 +78,17 @@ final class CodeHTML {
     private String codeToHTML(final ByteSequence bytes, final int methodNumber) throws IOException {
         final short opcode = (short) bytes.readUnsignedByte();
         String name;
-        String signature;
+        final String signature;
         int defaultOffset = 0;
-        int low;
-        int high;
+        final int low;
+        final int high;
         int index;
-        int classIndex;
-        int vindex;
-        int constant;
-        int[] jumpTable;
+        final int classIndex;
+        final int vindex;
+        final int constant;
+        final int[] jumpTable;
         int noPadBytes = 0;
-        int offset;
+        final int offset;
         final StringBuilder buf = new StringBuilder(256); // CHECKSTYLE IGNORE MagicNumber
         buf.append("<TT>").append(Const.getOpcodeName(opcode)).append("</TT></TD><TD>");
         /*
@@ -255,7 +255,7 @@ final class CodeHTML {
         case Const.INVOKEINTERFACE:
         case Const.INVOKEDYNAMIC:
             final int mIndex = bytes.readShort();
-            String str;
+            final String str;
             if (opcode == Const.INVOKEINTERFACE) { // Special treatment needed
                 bytes.readUnsignedByte(); // Redundant
                 bytes.readUnsignedByte(); // Reserved
@@ -408,7 +408,7 @@ final class CodeHTML {
                 final int remainder = bytes.getIndex() % 4;
                 final int noPadBytes = remainder == 0 ? 0 : 4 - remainder;
                 int defaultOffset;
-                int offset;
+                final int offset;
                 for (int j = 0; j < noPadBytes; j++) {
                     bytes.readByte();
                 }
@@ -545,7 +545,7 @@ final class CodeHTML {
                     if (gotoSet.get(offset)) {
                         anchor = "<A NAME=code" + methodNumber + "@" + offset + "></A>";
                     }
-                    String anchor2;
+                    final String anchor2;
                     if (stream.getIndex() == code.length) {
                         anchor2 = "<A NAME=code" + methodNumber + "@" + code.length + ">" + offset + "</A>";
                     } else {

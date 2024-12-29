@@ -740,7 +740,7 @@ public class ClassPath implements Closeable {
      */
     public URL getResource(final String name) {
         for (final AbstractPathEntry path : paths) {
-            URL url;
+            final URL url;
             if ((url = path.getResource(name)) != null) {
                 return url;
             }
@@ -755,7 +755,7 @@ public class ClassPath implements Closeable {
      */
     public InputStream getResourceAsStream(final String name) {
         for (final AbstractPathEntry path : paths) {
-            InputStream is;
+            final InputStream is;
             if ((is = path.getResourceAsStream(name)) != null) {
                 return is;
             }
@@ -771,7 +771,7 @@ public class ClassPath implements Closeable {
     public Enumeration<URL> getResources(final String name) {
         final Vector<URL> results = new Vector<>();
         for (final AbstractPathEntry path : paths) {
-            URL url;
+            final URL url;
             if ((url = path.getResource(name)) != null) {
                 results.add(url);
             }

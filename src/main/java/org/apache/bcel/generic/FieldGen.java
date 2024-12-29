@@ -309,13 +309,11 @@ public class FieldGen extends FieldGenOrMethodGen {
      */
     @Override
     public final String toString() {
-        String name;
-        String signature;
-        String access; // Short cuts to constant pool
-        access = Utility.accessToString(super.getAccessFlags());
+        // Short cuts to constant pool
+        String access = Utility.accessToString(super.getAccessFlags());
         access = access.isEmpty() ? "" : access + " ";
-        signature = super.getType().toString();
-        name = getName();
+        final String signature = super.getType().toString();
+        final String name = getName();
         final StringBuilder buf = new StringBuilder(32); // CHECKSTYLE IGNORE MagicNumber
         buf.append(access).append(signature).append(" ").append(name);
         final String value = getInitValue();

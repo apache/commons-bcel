@@ -249,12 +249,8 @@ public class ControlFlowGraph {
 
         @Override
         public Frame getInFrame() {
-            Frame org;
-
             final InstructionContext jsr = lastExecutionJSR();
-
-            org = inFrames.get(jsr);
-
+            final Frame org = inFrames.get(jsr);
             if (org == null) {
                 throw new AssertionViolatedException("inFrame not set! This:\n" + this + "\nInFrames: '" + inFrames + "'.");
             }
@@ -272,16 +268,11 @@ public class ControlFlowGraph {
         @Override
         public Frame getOutFrame(final ArrayList<InstructionContext> execChain) {
             executionPredecessors = execChain;
-
-            Frame org;
-
             final InstructionContext jsr = lastExecutionJSR();
-
-            org = outFrames.get(jsr);
-
+            final Frame org = outFrames.get(jsr);
             if (org == null) {
                 throw new AssertionViolatedException(
-                    "outFrame not set! This:\n" + this + "\nExecutionChain: " + getExecutionChain() + "\nOutFrames: '" + outFrames + "'.");
+                        "outFrame not set! This:\n" + this + "\nExecutionChain: " + getExecutionChain() + "\nOutFrames: '" + outFrames + "'.");
             }
             return org.getClone();
         }

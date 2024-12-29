@@ -546,7 +546,7 @@ public class InstructionFactory implements InstructionConstants {
      * @param value must be of type Number, Boolean, Character or String
      */
     public Instruction createConstant(final Object value) {
-        PUSH push;
+        final PUSH push;
         if (value instanceof Number) {
             push = new PUSH(cp, (Number) value);
         } else if (value instanceof String) {
@@ -571,9 +571,8 @@ public class InstructionFactory implements InstructionConstants {
      * @see Const
      */
     public FieldInstruction createFieldAccess(final String className, final String name, final Type type, final short kind) {
-        int index;
         final String signature = type.getSignature();
-        index = cp.addFieldref(className, name, signature);
+        final int index = cp.addFieldref(className, name, signature);
         switch (kind) {
         case Const.GETFIELD:
             return new GETFIELD(index);
@@ -639,7 +638,7 @@ public class InstructionFactory implements InstructionConstants {
             && kind != Const.INVOKEDYNAMIC) {
             throw new IllegalArgumentException("Unknown invoke kind: " + kind);
         }
-        int index;
+        final int index;
         int nargs = 0;
         final String signature = Type.getMethodSignature(retType, argTypes);
         if (argTypes != null) {
@@ -692,7 +691,7 @@ public class InstructionFactory implements InstructionConstants {
             }
             return new NEWARRAY(t.getType());
         }
-        ArrayType at;
+        final ArrayType at;
         if (t instanceof ArrayType) {
             at = (ArrayType) t;
         } else {

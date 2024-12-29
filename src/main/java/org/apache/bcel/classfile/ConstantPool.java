@@ -121,8 +121,8 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * @throws IllegalArgumentException if c is unknown constant type
      */
     public String constantToString(Constant c) throws IllegalArgumentException {
-        String str;
-        int i;
+        final String str;
+        final int i;
         final byte tag = c.getTag();
         switch (tag) {
         case Const.CONSTANT_Class:
@@ -357,7 +357,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * @throws IllegalArgumentException if tag is invalid
      */
     public String getConstantString(final int index, final byte tag) throws IllegalArgumentException {
-        int i;
+        final int i;
         /*
          * This switch() is not that elegant, since the four classes have the same contents, they just differ in the name of the index field variable. But we
          * want to stick to the JVM naming conventions closely though we could have solved these more elegantly by using the same variable name or by

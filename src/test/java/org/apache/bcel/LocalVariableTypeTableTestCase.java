@@ -123,7 +123,7 @@ public class LocalVariableTypeTableTestCase extends AbstractTestCase {
         }
 
         final LocalVariableGen localVariableGen = methodGen.getLocalVariables()[firstStringOffset];
-        Instruction instruction;
+        final Instruction instruction;
 
         if (localVariableGen != null) {
             instruction = new ALOAD(localVariableGen.getIndex());

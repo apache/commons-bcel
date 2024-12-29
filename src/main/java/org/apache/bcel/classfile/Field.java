@@ -164,15 +164,11 @@ public final class Field extends FieldOrMethod {
      */
     @Override
     public String toString() {
-        String name;
-        String signature;
-        String access; // Short cuts to constant pool
-
         // Get names from constant pool
-        access = Utility.accessToString(super.getAccessFlags());
+        String access = Utility.accessToString(super.getAccessFlags());
         access = access.isEmpty() ? "" : access + " ";
-        signature = Utility.signatureToString(getSignature());
-        name = getName();
+        final String signature = Utility.signatureToString(getSignature());
+        final String name = getName();
         final StringBuilder buf = new StringBuilder(64); // CHECKSTYLE IGNORE MagicNumber
         buf.append(access).append(signature).append(" ").append(name);
         final ConstantValue cv = getConstantValue();

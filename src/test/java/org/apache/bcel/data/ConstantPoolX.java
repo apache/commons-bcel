@@ -96,8 +96,8 @@ public abstract class ConstantPoolX implements Cloneable, Node {
      * @return String representation
      */
     public String constantToString(Constant c) throws ClassFormatException {
-        String str;
-        int i;
+        final String str;
+        final int i;
         final byte tag = c.getTag();
         switch (tag) {
         case Const.CONSTANT_Class:
@@ -217,8 +217,7 @@ public abstract class ConstantPoolX implements Cloneable, Node {
      * @throws ClassFormatException
      */
     public Constant getConstant(final int index, final byte tag) throws ClassFormatException {
-        Constant c;
-        c = getConstant(index);
+        final Constant c = getConstant(index);
         if (c == null) {
             throw new ClassFormatException("Constant pool at index " + index + " is null.");
         }
@@ -249,9 +248,8 @@ public abstract class ConstantPoolX implements Cloneable, Node {
      * @throws ClassFormatException
      */
     public String getConstantString(final int index, final byte tag) throws ClassFormatException {
-        Constant c;
-        int i;
-        c = getConstant(index, tag);
+        final int i;
+        Constant c = getConstant(index, tag);
         /*
          * This switch() is not that elegant, since the four classes have the same contents, they just differ in the name of the
          * index field variable. But we want to stick to the JVM naming conventions closely though we could have solved these

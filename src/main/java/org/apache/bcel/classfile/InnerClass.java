@@ -174,7 +174,6 @@ public final class InnerClass implements Cloneable, Node {
      */
     public String toString(final ConstantPool constantPool) {
         String outerClassName;
-        String innerName;
         String innerClassName = constantPool.getConstantString(innerClassIndex, Const.CONSTANT_Class);
         innerClassName = Utility.compactClassName(innerClassName, false);
         if (outerClassIndex != 0) {
@@ -183,6 +182,7 @@ public final class InnerClass implements Cloneable, Node {
         } else {
             outerClassName = "";
         }
+        final String innerName;
         if (innerNameIndex != 0) {
             innerName = constantPool.getConstantUtf8(innerNameIndex).getBytes();
         } else {

@@ -111,8 +111,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
      */
     public InstructionList(final byte[] code) {
         int count = 0; // Contains actual length
-        int[] pos;
-        InstructionHandle[] ihs;
+        final int[] pos;
+        final InstructionHandle[] ihs;
         try (ByteSequence bytes = new ByteSequence(code)) {
             ihs = new InstructionHandle[code.length];
             pos = new int[code.length]; // Can't be more than that
@@ -127,7 +127,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
                  * Read one instruction from the byte stream, the byte position is set accordingly.
                  */
                 final Instruction i = Instruction.readInstruction(bytes);
-                InstructionHandle ih;
+                final InstructionHandle ih;
                 if (i instanceof BranchInstruction) {
                     ih = append((BranchInstruction) i);
                 } else {
@@ -265,7 +265,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * @return instruction handle pointing to the <B>first</B> appended instruction
      */
     public InstructionHandle append(final Instruction i, final InstructionList il) {
-        InstructionHandle ih;
+        final InstructionHandle ih;
         if ((ih = findInstruction2(i)) == null) {
             throw new ClassGenException("Instruction " + i + " is not contained in this list.");
         }
@@ -454,7 +454,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * @param i instruction to remove
      */
     public void delete(final Instruction i) throws TargetLostException {
-        InstructionHandle ih;
+        final InstructionHandle ih;
         if ((ih = findInstruction1(i)) == null) {
             throw new ClassGenException("Instruction " + i + " is not contained in this list.");
         }
@@ -469,8 +469,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * @param to where to end deleting (inclusive)
      */
     public void delete(final Instruction from, final Instruction to) throws TargetLostException {
-        InstructionHandle fromIh;
-        InstructionHandle toIh;
+        final InstructionHandle fromIh;
+        final InstructionHandle toIh;
         if ((fromIh = findInstruction1(from)) == null) {
             throw new ClassGenException("Instruction " + from + " is not contained in this list.");
         }
@@ -708,7 +708,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * @return instruction handle pointing to the first inserted instruction, i.e., il.getStart()
      */
     public InstructionHandle insert(final Instruction i, final InstructionList il) {
-        InstructionHandle ih;
+        final InstructionHandle ih;
         if ((ih = findInstruction1(i)) == null) {
             throw new ClassGenException("Instruction " + i + " is not contained in this list.");
         }
@@ -1000,8 +1000,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * @param next where to end deleting (successor, exclusive)
      */
     private void remove(final InstructionHandle prev, InstructionHandle next) throws TargetLostException {
-        InstructionHandle first;
-        InstructionHandle last; // First and last deleted instruction
+        final InstructionHandle first;
+        final InstructionHandle last; // First and last deleted instruction
         if (prev == null && next == null) {
             first = start;
             last = end;

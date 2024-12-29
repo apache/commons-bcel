@@ -95,9 +95,9 @@ final class ConstantHTML {
 
     private void writeConstant(final int index) {
         final byte tag = constants[index].getTag();
-        int classIndex;
-        int nameIndex;
-        String ref;
+        final int classIndex;
+        final int nameIndex;
+        final String ref;
         // The header is always the same
         printWriter.println("<H4> <A NAME=cp" + index + ">" + index + "</A> " + Const.getConstantName(tag) + "</H4>");
         /*
