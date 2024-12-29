@@ -30,7 +30,7 @@ limitations under the License.
     <property name="max" value="180" />
   </module>
   <module name="NewlineAtEndOfFile">
-    <!-- The files are saved in the repo with LF, and on Windows you should use git config core.autocrlf input -->
+    <!-- Files are saved in the repository with LF line endings; on Windows, use git config core.autocrlf input -->
     <property name="lineSeparator" value="lf" />
   </module>
   <module name="RegexpSingleline">
