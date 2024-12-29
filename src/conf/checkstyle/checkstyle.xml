@@ -20,16 +20,19 @@ limitations under the License.
     "https://checkstyle.org/dtds/configuration_1_3.dtd">
 <module name="Checker">
   <property name="localeLanguage" value="en" />
+  <module name="FileTabCharacter">
+    <property name="fileExtensions" value="java" />
+  </module>
   <module name="Header">
     <property name="headerFile" value="${checkstyle.header.file}" />
     <property name="fileExtensions" value="java"/>
   </module>
+  <module name="LineLength">
+    <property name="max" value="180"/>
+  </module>
   <module name="NewlineAtEndOfFile">
     <!-- The files are saved in the repo with LF, and on Windows you should use git config core.autocrlf input -->
     <property name="lineSeparator" value="lf" />
-  </module>
-  <module name="FileTabCharacter">
-    <property name="fileExtensions" value="java" />
   </module>
   <module name="RegexpSingleline">
     <property name="format" value="^\s+\*\s+@author\s" />
@@ -42,9 +45,6 @@ limitations under the License.
     <property name="minimum" value="0" />
     <property name="maximum" value="0" />
     <property name="message" value="Line has trailing spaces." />
-  </module>
-  <module name="LineLength">
-    <property name="max" value="180"/>
   </module>
   <module name="TreeWalker">
     <module name="ExplicitInitializationCheck" />
