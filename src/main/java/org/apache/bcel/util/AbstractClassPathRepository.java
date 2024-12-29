@@ -47,7 +47,7 @@ abstract class AbstractClassPathRepository implements Repository {
     public abstract void clear();
 
     @Override
-    public abstract JavaClass findClass(final String className);
+    public abstract JavaClass findClass(String className);
 
     @Override
     public ClassPath getClassPath() {
@@ -124,8 +124,8 @@ abstract class AbstractClassPathRepository implements Repository {
     }
 
     @Override
-    public abstract void removeClass(final JavaClass javaClass);
+    public abstract void removeClass(JavaClass javaClass);
 
     @Override
-    public abstract void storeClass(final JavaClass javaClass);
+    public abstract void storeClass(JavaClass javaClass);
 }

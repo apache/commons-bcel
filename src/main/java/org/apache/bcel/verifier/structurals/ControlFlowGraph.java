@@ -80,11 +80,10 @@ public class ControlFlowGraph {
          * Creates an InstructionHandleImpl object from an InstructionHandle. Creation of one per InstructionHandle suffices.
          * Don't create more.
          */
-        public InstructionContextImpl(final InstructionHandle inst) {
+        InstructionContextImpl(final InstructionHandle inst) {
             if (inst == null) {
                 throw new AssertionViolatedException("Cannot instantiate InstructionContextImpl from NULL.");
             }
-
             instruction = inst;
             inFrames = new HashMap<>();
             outFrames = new HashMap<>();

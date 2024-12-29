@@ -39,9 +39,9 @@ public class ClassPathRepositoryTestCase {
 
     @Test
     public void testClassPath() throws IOException {
-        try (final ClassPath classPath = new ClassPath("")) {
+        try (ClassPath classPath = new ClassPath("")) {
             final ClassPathRepository repository = new ClassPathRepository(classPath);
-            try (final ClassPath repoCp = repository.getClassPath()) {
+            try (ClassPath repoCp = repository.getClassPath()) {
                 assertEquals(classPath, repoCp);
             }
         }
@@ -49,14 +49,14 @@ public class ClassPathRepositoryTestCase {
 
     @Test
     public void testClassPathRepository() throws ClassNotFoundException, IOException {
-        try (final ClassPath classPath = new ClassPath("")) {
+        try (ClassPath classPath = new ClassPath("")) {
             verifyCaching(new ClassPathRepository(classPath));
         }
     }
 
     @Test
     public void testClassWithoutPackage() throws IOException {
-        try (final ClassPath classPath = new ClassPath("")) {
+        try (ClassPath classPath = new ClassPath("")) {
             final ClassPathRepository repository = new ClassPathRepository(classPath);
             assertThrows(ClassNotFoundException.class, () -> repository.loadClass("ClassXYZ"));
         }
@@ -64,7 +64,7 @@ public class ClassPathRepositoryTestCase {
 
     @Test
     public void testEmptyInput() throws IOException {
-        try (final ClassPath classPath = new ClassPath("")) {
+        try (ClassPath classPath = new ClassPath("")) {
             final ClassPathRepository repository = new ClassPathRepository(classPath);
             assertThrows(IllegalArgumentException.class, () -> repository.loadClass(""));
         }
@@ -72,21 +72,21 @@ public class ClassPathRepositoryTestCase {
 
     @Test
     public void testLruCacheClassPathRepository() throws ClassNotFoundException, IOException {
-        try (final ClassPath classPath = new ClassPath("")) {
+        try (ClassPath classPath = new ClassPath("")) {
             verifyCaching(new LruCacheClassPathRepository(classPath, 10));
         }
     }
 
     @Test
     public void testMemorySensitiveClassPathRepository() throws ClassNotFoundException, IOException {
-        try (final ClassPath classPath = new ClassPath("")) {
+        try (ClassPath classPath = new ClassPath("")) {
             verifyCaching(new MemorySensitiveClassPathRepository(classPath));
         }
     }
 
     @Test
     public void testNoClassNotFound() throws IOException {
-        try (final ClassPath classPath = new ClassPath("")) {
+        try (ClassPath classPath = new ClassPath("")) {
             final ClassPathRepository repository = new ClassPathRepository(classPath);
             assertThrows(ClassNotFoundException.class, () -> repository.loadClass("no.such.Class"));
         }
@@ -94,7 +94,7 @@ public class ClassPathRepositoryTestCase {
 
     @Test
     public void testNullInput() throws IOException {
-        try (final ClassPath classPath = new ClassPath("")) {
+        try (ClassPath classPath = new ClassPath("")) {
             final ClassPathRepository repository = new ClassPathRepository(classPath);
             assertThrows(IllegalArgumentException.class, () -> repository.loadClass((String) null));
         }

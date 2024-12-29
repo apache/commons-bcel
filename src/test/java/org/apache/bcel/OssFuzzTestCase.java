@@ -80,7 +80,7 @@ public class OssFuzzTestCase {
     private void testOssFuzzReproducer(final String issue) throws Exception {
         // Class names here use non-".class" suffix so that Maven plugins like surefire do not try to read the file and fail the build.
         final File reproducerFile = new File("target/test-classes/ossfuzz/issue" + issue + "/Test.classx");
-        try (final FileInputStream reproducerInputStream = new FileInputStream(reproducerFile)) {
+        try (FileInputStream reproducerInputStream = new FileInputStream(reproducerFile)) {
             final ClassParser cp = new ClassParser(reproducerInputStream, "Test");
             assertThrows(ClassFormatException.class, () -> cp.parse());
         }

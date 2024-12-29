@@ -157,7 +157,7 @@ public class MiniC {
                         clazz.dump(baseName + JavaClass.EXTENSION);
                     } else {
                         System.out.println("Pass 5: Generating Java code...");
-                        try (final PrintWriter out = new PrintWriter(baseName + ".java", StandardCharsets.UTF_8.name())) {
+                        try (PrintWriter out = new PrintWriter(baseName + ".java", StandardCharsets.UTF_8.name())) {
                             program.code(out, baseName);
                         }
 

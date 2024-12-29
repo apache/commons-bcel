@@ -16,12 +16,11 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 package org.apache.bcel.verifier;
 
 final class JiraBcel369TestFixture {
 
-    public JiraBcel369TestFixture(int i) {
+    JiraBcel369TestFixture(int i) {
         try {
             i++;
         } finally {

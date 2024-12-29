@@ -35,7 +35,7 @@ public class LruCacheClassPathRepositoryTestCase {
 
     @Test
     public void testCacheEviction() throws ClassNotFoundException, IOException {
-        try (final ClassPath classPath = new ClassPath("")) {
+        try (ClassPath classPath = new ClassPath("")) {
             final LruCacheClassPathRepository repository = new LruCacheClassPathRepository(classPath, 2);
             final JavaClass class1 = repository.loadClass("java.lang.String");
             assertNotNull(class1);
@@ -52,7 +52,7 @@ public class LruCacheClassPathRepositoryTestCase {
 
     @Test
     public void testLeastRecentlyUsedEviction() throws ClassNotFoundException, IOException {
-        try (final ClassPath classPath = new ClassPath("")) {
+        try (ClassPath classPath = new ClassPath("")) {
             final LruCacheClassPathRepository repository = new LruCacheClassPathRepository(classPath, 2);
             final JavaClass class1 = repository.loadClass("java.lang.String");
             assertNotNull(class1);
@@ -70,7 +70,7 @@ public class LruCacheClassPathRepositoryTestCase {
 
     @Test
     public void testZeroCacheSize() throws IOException {
-        try (final ClassPath classPath = new ClassPath("")) {
+        try (ClassPath classPath = new ClassPath("")) {
             assertThrows(IllegalArgumentException.class, () -> new LruCacheClassPathRepository(classPath, 0));
         }
     }

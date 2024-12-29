@@ -52,7 +52,7 @@ public class ConstantPoolTestCase extends AbstractTestCase {
 
     @Test
     public void testClassWithDoubleConstantPoolItem() throws ClassNotFoundException, IOException {
-        try (final ClassPath cp = new ClassPath("target/test-classes/org/apache/bcel/classfile")) {
+        try (ClassPath cp = new ClassPath("target/test-classes/org/apache/bcel/classfile")) {
             final ClassWithDoubleConstantPoolItem classWithDoubleConstantPoolItem = new ClassWithDoubleConstantPoolItem();
             final JavaClass c = new ClassPathRepository(cp).loadClass(classWithDoubleConstantPoolItem.getClass());
             final Field[] fields = c.getFields();
@@ -78,7 +78,7 @@ public class ConstantPoolTestCase extends AbstractTestCase {
 
     @Test
     public void testClassWithLongConstantPoolItem() throws ClassNotFoundException, IOException {
-        try (final ClassPath cp = new ClassPath("target/test-classes/org/apache/bcel/classfile")) {
+        try (ClassPath cp = new ClassPath("target/test-classes/org/apache/bcel/classfile")) {
             final ClassWithLongConstantPoolItem classWithLongConstantPoolItem = new ClassWithLongConstantPoolItem();
             final JavaClass c = new ClassPathRepository(cp).loadClass(classWithLongConstantPoolItem.getClass());
             final Field[] fields = c.getFields();

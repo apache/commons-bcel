@@ -75,7 +75,7 @@ public class InvalidMethodSigantureTestCase {
     @Test
     //@Disabled("TODO?")
     public void testMethodWithParens() throws Exception {
-        try (final InputStream inputStream = Files.newInputStream(Paths.get(SRC_TEST_RESOURCES_KOTLIN, CLASS_NAME + ".class"))) {
+        try (InputStream inputStream = Files.newInputStream(Paths.get(SRC_TEST_RESOURCES_KOTLIN, CLASS_NAME + ".class"))) {
             final ClassParser classParser = new ClassParser(inputStream, CLASS_NAME);
             final JavaClass javaClass = classParser.parse();
             final TestVisitor visitor = new TestVisitor();

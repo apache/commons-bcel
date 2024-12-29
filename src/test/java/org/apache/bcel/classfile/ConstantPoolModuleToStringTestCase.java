@@ -49,7 +49,7 @@ public class ConstantPoolModuleToStringTestCase {
         private final ConstantPool pool;
         private int count;
 
-        public ToStringVisitor(final ConstantPool pool) {
+        ToStringVisitor(final ConstantPool pool) {
             this.pool = pool;
         }
 
@@ -499,7 +499,7 @@ public class ConstantPoolModuleToStringTestCase {
         "src/test/resources/jpms/java19-ea/commons-io/module-info.class"})
     // @formatter:on
     public void test(final String first) throws Exception {
-        try (final InputStream inputStream = Files.newInputStream(Paths.get(first))) {
+        try (InputStream inputStream = Files.newInputStream(Paths.get(first))) {
             test(inputStream);
         }
     }

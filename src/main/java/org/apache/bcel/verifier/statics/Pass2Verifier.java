@@ -1125,7 +1125,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         private final ConstantPool cp;
 
         /** Constructs an InnerClassDetector working on the JavaClass _jc. */
-        public InnerClassDetector(final JavaClass javaClass) {
+        InnerClassDetector(final JavaClass javaClass) {
             this.jc = javaClass;
             this.cp = jc.getConstantPool();
             new DescendingVisitor(jc, this).visit();

@@ -88,7 +88,7 @@ public class JdkGenericDumpTestCase {
         private void find(final Path path) throws IOException {
             final Path name = path.getFileName();
             if (name != null && matcher.matches(name)) {
-                try (final InputStream inputStream = Files.newInputStream(path)) {
+                try (InputStream inputStream = Files.newInputStream(path)) {
                     final ClassParser classParser = new ClassParser(inputStream, name.toAbsolutePath().toString());
                     assertNotNull(classParser.parse());
                 }
@@ -188,7 +188,7 @@ public class JdkGenericDumpTestCase {
     @MethodSource("org.apache.bcel.generic.JavaHome#streamJavaHome")
     public void testJreModules(final JavaHome javaHome) throws Exception {
         assumeTrue(SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_9));
-        try (final ModularRuntimeImage mri = javaHome.getModularRuntimeImage()) {
+        try (ModularRuntimeImage mri = javaHome.getModularRuntimeImage()) {
             for (final Path path : mri.modules()) {
                 Files.walkFileTree(path, new ClassParserFilesVisitor("*.class"));
             }

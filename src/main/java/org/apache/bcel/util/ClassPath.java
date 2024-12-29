@@ -133,7 +133,7 @@ public class ClassPath implements Closeable {
             }
         }
 
-        protected abstract String toEntryName(final String name, final String suffix);
+        protected abstract String toEntryName(String name, String suffix);
 
         @Override
         public String toString() {
@@ -274,7 +274,7 @@ public class ClassPath implements Closeable {
 
         private final Path modulePath;
 
-        public JrtModule(final Path modulePath) {
+        JrtModule(final Path modulePath) {
             this.modulePath = Objects.requireNonNull(modulePath, "modulePath");
         }
 
@@ -358,7 +358,7 @@ public class ClassPath implements Closeable {
         private final ModularRuntimeImage modularRuntimeImage;
         private final JrtModule[] modules;
 
-        public JrtModules(final String path) throws IOException {
+        JrtModules(final String path) throws IOException {
             this.modularRuntimeImage = new ModularRuntimeImage();
             this.modules = modularRuntimeImage.list(path).stream().map(JrtModule::new).toArray(JrtModule[]::new);
         }

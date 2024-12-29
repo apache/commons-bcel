@@ -53,7 +53,7 @@ public abstract class Utility {
      */
     private static final class JavaReader extends FilterReader {
 
-        public JavaReader(final Reader in) {
+        JavaReader(final Reader in) {
             super(in);
         }
 
@@ -93,7 +93,7 @@ public abstract class Utility {
      */
     private static final class JavaWriter extends FilterWriter {
 
-        public JavaWriter(final Writer out) {
+        JavaWriter(final Writer out) {
             super(out);
         }
 

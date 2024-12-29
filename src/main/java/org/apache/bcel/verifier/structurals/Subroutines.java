@@ -97,7 +97,8 @@ public class Subroutines {
         /**
          * The default constructor.
          */
-        public SubroutineImpl() {
+        SubroutineImpl() {
+            // empty
         }
 
         /**

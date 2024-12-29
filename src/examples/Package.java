@@ -181,7 +181,7 @@ public class Package {
                 clName = clName.substring(0, clName.length() - JavaClass.EXTENSION.length());
             }
             clName = Utility.packageToPath(clName);
-            try (final InputStream inputStream = classPath.getInputStream(clName)) {
+            try (InputStream inputStream = classPath.getInputStream(clName)) {
                 clazz = new ClassParser(inputStream, clName).parse();
             }
             // here we create the root set of classes to process
@@ -202,7 +202,7 @@ public class Package {
             final String name = dependents.firstKey();
             final String from = dependents.remove(name);
             if (allClasses.get(name) == null) {
-                try (final InputStream inputStream = classPath.getInputStream(name)) {
+                try (InputStream inputStream = classPath.getInputStream(name)) {
                     clazz = new ClassParser(inputStream, name).parse();
                     addDependents(clazz);
                 } catch (final IOException e) {
@@ -217,7 +217,7 @@ public class Package {
         }
 
         // create the jar
-        try (final JarOutputStream jarFile = new JarOutputStream(new FileOutputStream(defaultJar))) {
+        try (JarOutputStream jarFile = new JarOutputStream(new FileOutputStream(defaultJar))) {
             jarFile.setLevel(5); // use compression
             int written = 0;
             for (final Entry<String, JavaClass> entry : allClasses.entrySet()) { // add entries for every class
