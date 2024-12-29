@@ -15,138 +15,65 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-
 <!DOCTYPE module PUBLIC
     "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
     "https://checkstyle.org/dtds/configuration_1_3.dtd">
-
-<!-- commons codec customization of default Checkstyle behavior -->
 <module name="Checker">
   <property name="localeLanguage" value="en" />
   <module name="Header">
     <property name="headerFile" value="${checkstyle.header.file}" />
     <property name="fileExtensions" value="java"/>
   </module>
-  <!-- Checks whether files end with a new line. -->
-  <!-- See http://checkstyle.sf.net/config_misc.html#NewlineAtEndOfFile -->
   <module name="NewlineAtEndOfFile">
     <!-- The files are saved in the repo with LF, and on Windows you should use git config core.autocrlf input -->
     <property name="lineSeparator" value="lf" />
   </module>
-
-  <!-- Checks for Tab characters -->
-  <!-- See http://checkstyle.sourceforge.net/config_whitespace.html#FileTabCharacter -->
   <module name="FileTabCharacter">
     <property name="fileExtensions" value="java" />
   </module>
-
-  <!-- Checks for white space at the end of the line -->
-  <!-- See http://checkstyle.sourceforge.net/config_regexp.html -->
-  <!-- 706
-  <module name="RegexpSingleline">
-    <property name="format" value="\s+$" />
-    <property name="message" value="Line has trailing spaces." />
-    <property name="fileExtensions" value="java" />
-  </module>
-  -->
-
-  <!-- @author tags are deprecated -->
   <module name="RegexpSingleline">
     <property name="format" value="^\s+\*\s+@author\s" />
     <property name="message" value="Deprecated @author tag" />
     <property name="fileExtensions" value="java" />
     <property name="severity" value="warning" />
   </module>
-
   <module name="RegexpSingleline">
     <property name="format" value="\s+$" />
     <property name="minimum" value="0" />
     <property name="maximum" value="0" />
     <property name="message" value="Line has trailing spaces." />
   </module>
-
   <module name="LineLength">
     <property name="max" value="180"/>
   </module>
-
   <module name="TreeWalker">
-
     <module name="ExplicitInitializationCheck" />
-    <!-- Checks for Naming Conventions.                  -->
-    <!-- See http://checkstyle.sf.net/config_naming.html -->
-    <!-- allow CONSTANT_Long etc -->
-    <!--
-    <module name="ConstantName">
-      <property name="format" value="^[A-Z][A-Z0-9]*(_[A-Za-z0-9]+)*$"/>
-    </module>
-    <module name="LocalFinalVariableName"/>
-    <module name="LocalVariableName"/>
-    <module name="MemberName">
-      <property name="format" value="^[a-z][a-zA-Z0-9_]*(_[a-zA-Z0-9]+)*$"/>
-    </module>
-    <module name="MethodName"/>
-    <module name="PackageName"/>
-    <module name="ParameterName"/>
-    <module name="StaticVariableName"/>
-     -->
     <module name="TypeName">
         <!-- Allow underscore in class names -->
         <property name="format" value="^[A-Z][A-Za-z0-9]*(_[A-Za-z0-9]+)*$"/>
     </module>
-
-    <!-- Checks for imports                              -->
-    <!-- See http://checkstyle.sf.net/config_imports.html -->
     <module name="AvoidStarImport">
         <property name="excludes" value="org.junit.Assert"/>
     </module>
-    <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
+    <module name="IllegalImport"/>
     <module name="RedundantImport"/>
     <module name="UnusedImports"/>
-
-    <!-- Checks for whitespace                               -->
-    <!-- See http://checkstyle.sf.net/config_whitespace.html -->
     <module name="EmptyForIteratorPad"/>
     <module name="WhitespaceAfter"/>
     <module name="WhitespaceAround"/>
-    <!-- Modifier Checks                                    -->
-    <!-- See http://checkstyle.sf.net/config_modifiers.html -->
     <module name="ModifierOrder"/>
-
-    <!--module name="RedundantModifier"/-->
-
-    <!-- Checks for blocks. You know, those {}'s         -->
-    <!-- See http://checkstyle.sf.net/config_blocks.html -->
-    <!--module name="AvoidNestedBlocks"/-->
     <module name="EmptyBlock">
       <property name="option" value="text"/>
     </module>
-    <!--
-    <module name="LeftCurly">
-        <property name="option" value="nl"/>
-    </module>
-    -->
     <module name="NeedBraces"/>
-    <!--
-    <module name="RightCurly">
-        <property name="option" value="alone"/>
-    </module>
-    -->
-
-    <!-- Checks for common coding problems               -->
-    <!-- See http://checkstyle.sf.net/config_coding.html -->
     <module name="CovariantEquals"/>
     <module name="EqualsHashCode"/>
     <module name="IllegalInstantiation"/>
-    <!--module name="InnerAssignment"/--><!-- Inner assignments are OK -->
-    <!-- module name="MagicNumber">
-        <property name="ignoreNumbers" value="-1,0,1,2,3"/>
-    </module-->
     <module name="SimplifyBooleanExpression"/>
     <module name="SimplifyBooleanReturn"/>
     <module name="StringLiteralEquality"/>
     <!--module name="SuperClone"/-->
     <module name="SuperFinalize"/>
-    <!--module name="DeclarationOrder"/-->
     <!--module name="ExplicitInitialization"/-->
     <module name="DefaultComesLast"/>
     <module name="FallThrough">
@@ -154,44 +81,23 @@ limitations under the License.
     </module>
     <module name="MultipleVariableDeclarations"/>
     <module name="UnnecessaryParentheses"/>
-
-    <!-- Checks for class design                         -->
-    <!-- See http://checkstyle.sf.net/config_design.html -->
-    <!--module name="FinalClass"/-->
-    <!--module name="HideUtilityClassConstructor"/-->
-    <!--module name="InterfaceIsType"/-->
-
     <module name="VisibilityModifier">
         <property name="ignoreAnnotationCanonicalNames" value="java.lang.Deprecated"/>
         <property name="protectedAllowed" value="false"/>
         <property name="packageAllowed" value="true"/>
     </module>
-
-    <!-- Miscellaneous other checks.                   -->
-    <!-- See http://checkstyle.sf.net/config_misc.html -->
     <module name="ArrayTypeStyle"/>
-    <!--module name="TodoComment"/-->
     <module name="UpperEll"/>
-
     <module name="SuppressionCommentFilter"/>
-
-    <!--
-        Allow comment to suppress checkstyle for a single line
-        e.g. // CHECKSTYLE IGNORE MagicNumber
-     -->
     <module name="SuppressWithNearbyCommentFilter">
       <property name="commentFormat" value="CHECKSTYLE IGNORE (\w+)"/>
       <property name="checkFormat" value="$1"/>
     </module>
-
   </module>
-
   <module name="SuppressionFilter">
-    <!-- config_loc is used by Eclipse plugin -->
     <property name="file" value="src/conf/checkstyle/checkstyle-suppressions.xml"/>
   </module>
   <module name="RegexpSingleline">
-    <!-- \s matches whitespace character, $ matches end of line. -->
     <property name="format" value="\s+$" />
     <property name="message" value="Line has trailing spaces." />
   </module>
