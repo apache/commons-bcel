@@ -43,6 +43,9 @@ limitations under the License.
     <property name="format" value="\s+$" />
     <property name="message" value="Line has trailing spaces." />
   </module>
+  <module name="SuppressionFilter">
+    <property name="file" value="src/conf/checkstyle/checkstyle-suppressions.xml" />
+  </module>
   <module name="TreeWalker">
     <module name="ArrayTypeStyle" />
     <module name="AvoidStarImport">
@@ -90,12 +93,5 @@ limitations under the License.
     </module>
     <module name="WhitespaceAfter" />
     <module name="WhitespaceAround" />
-  </module>
-  <module name="SuppressionFilter">
-    <property name="file" value="src/conf/checkstyle/checkstyle-suppressions.xml" />
-  </module>
-  <module name="RegexpSingleline">
-    <property name="format" value="\s+$" />
-    <property name="message" value="Line has trailing spaces." />
   </module>
 </module>
