@@ -48,52 +48,52 @@ limitations under the License.
     <property name="message" value="Line has trailing spaces." />
   </module>
   <module name="TreeWalker">
-    <module name="ExplicitInitializationCheck" />
-    <module name="TypeName">
-        <!-- Allow underscore in class names -->
-        <property name="format" value="^[A-Z][A-Za-z0-9]*(_[A-Za-z0-9]+)*$"/>
-    </module>
+    <module name="ArrayTypeStyle"/>
     <module name="AvoidStarImport">
         <property name="excludes" value="org.junit.Assert"/>
     </module>
-    <module name="IllegalImport"/>
-    <module name="RedundantImport"/>
-    <module name="UnusedImports"/>
+    <module name="CovariantEquals"/>
+    <module name="DefaultComesLast"/>
     <module name="EmptyForIteratorPad"/>
-    <module name="WhitespaceAfter"/>
-    <module name="WhitespaceAround"/>
-    <module name="ModifierOrder"/>
     <module name="EmptyBlock">
       <property name="option" value="text"/>
     </module>
-    <module name="NeedBraces"/>
-    <module name="CovariantEquals"/>
     <module name="EqualsHashCode"/>
+    <module name="ExplicitInitializationCheck" />
+    <module name="FallThrough">
+        <property name="reliefPattern" value="\$FALL-THROUGH\$"/>
+    </module>
+    <module name="IllegalImport"/>
     <module name="IllegalInstantiation"/>
-    <module name="SimplifyBooleanExpression"/>
-    <module name="SimplifyBooleanReturn"/>
-    <module name="StringLiteralEquality"/>
+    <module name="ModifierOrder"/>
+    <module name="MultipleVariableDeclarations"/>
+    <module name="NeedBraces"/>
     <!--module name="SuperClone"/-->
     <module name="SuperFinalize"/>
     <!--module name="ExplicitInitialization"/-->
-    <module name="DefaultComesLast"/>
-    <module name="FallThrough">
-        <property name="reliefPattern" value="\$FALL-THROUGH\$"/><!-- to agree with Eclipse -->
-    </module>
-    <module name="MultipleVariableDeclarations"/>
-    <module name="UnnecessaryParentheses"/>
-    <module name="VisibilityModifier">
-        <property name="ignoreAnnotationCanonicalNames" value="java.lang.Deprecated"/>
-        <property name="protectedAllowed" value="false"/>
-        <property name="packageAllowed" value="true"/>
-    </module>
-    <module name="ArrayTypeStyle"/>
-    <module name="UpperEll"/>
+    <module name="RedundantImport"/>
+    <module name="SimplifyBooleanExpression"/>
+    <module name="SimplifyBooleanReturn"/>
+    <module name="StringLiteralEquality"/>
     <module name="SuppressionCommentFilter"/>
     <module name="SuppressWithNearbyCommentFilter">
       <property name="commentFormat" value="CHECKSTYLE IGNORE (\w+)"/>
       <property name="checkFormat" value="$1"/>
     </module>
+    <module name="TypeName">
+        <!-- Allow underscore in class names -->
+        <property name="format" value="^[A-Z][A-Za-z0-9]*(_[A-Za-z0-9]+)*$"/>
+    </module>
+    <module name="UnusedImports"/>
+    <module name="UnnecessaryParentheses"/>
+    <module name="UpperEll"/>
+    <module name="VisibilityModifier">
+        <property name="ignoreAnnotationCanonicalNames" value="java.lang.Deprecated"/>
+        <property name="protectedAllowed" value="false"/>
+        <property name="packageAllowed" value="true"/>
+    </module>
+    <module name="WhitespaceAfter"/>
+    <module name="WhitespaceAround"/>
   </module>
   <module name="SuppressionFilter">
     <property name="file" value="src/conf/checkstyle/checkstyle-suppressions.xml"/>
