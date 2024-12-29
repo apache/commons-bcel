@@ -1199,9 +1199,7 @@ public final class Pass3aVerifier extends PassVerifier {
         String ret;
         try {
             ret = obj.toString();
-        }
-
-        catch (final RuntimeException e) {
+        } catch (final RuntimeException e) {
             // including ClassFormatException, trying to convert the "signature" of a ReturnaddressType LocalVariable
             // (shouldn't occur, but people do crazy things)
             String s = obj.getClass().getName();

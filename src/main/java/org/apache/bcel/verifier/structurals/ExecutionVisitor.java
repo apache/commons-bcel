@@ -127,12 +127,11 @@ public class ExecutionVisitor extends EmptyVisitor {
     @Override
     public void visitAALOAD(final AALOAD o) {
         stack().pop(); // pop the index int
-//System.out.print(stack().peek());
+        // System.out.print(stack().peek());
         final Type t = stack().pop(); // Pop Array type
         if (t == Type.NULL) {
             stack().push(Type.NULL);
-        } // Do nothing stackwise --- a NullPointerException is thrown at Run-Time
-        else {
+        } else {
             final ArrayType at = (ArrayType) t;
             stack().push(at.getElementType());
         }
