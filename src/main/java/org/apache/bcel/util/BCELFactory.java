@@ -188,12 +188,12 @@ final class BCELFactory extends EmptyVisitor {
             break;
         case Const.MULTIANEWARRAY:
             dim = ((MULTIANEWARRAY) i).getDimensions();
-            //$FALL-THROUGH$
+            // FALL-THROUGH
         case Const.NEWARRAY:
             if (type instanceof ArrayType) {
                 type = ((ArrayType) type).getBasicType();
             }
-            //$FALL-THROUGH$
+            // FALL-THROUGH
         case Const.ANEWARRAY:
             printWriter.println("il.append(_factory.createNewArray(" + BCELifier.printType(type) + ", (short) " + dim + "));");
             break;

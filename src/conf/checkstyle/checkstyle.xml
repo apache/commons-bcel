@@ -57,7 +57,7 @@ limitations under the License.
     <module name="EqualsHashCode" />
     <module name="ExplicitInitialization" />
     <module name="FallThrough">
-      <property name="reliefPattern" value="\$FALL-THROUGH\$" />
+      <property name="reliefPattern" value="FALL-THROUGH" />
     </module>
     <module name="FinalLocalVariable" />
     <module name="IllegalImport" />
