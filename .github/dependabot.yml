@@ -20,6 +20,10 @@ updates:
     schedule:
       interval: "weekly"
       day: "friday"
+    ignore:
+      # Requires Java 11https://github.com/mockito/mockito/releases/tag/v5.0.0
+      - name: "org.mockito:mockito-core"
+        update-types: [ "sem-ver:major" ]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
