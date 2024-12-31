@@ -66,7 +66,7 @@ public class JSR_W extends JsrInstruction {
     }
 
     /**
-     * Read needed data (e.g. index) from file.
+     * Read needed data (for example index) from file.
      */
     @Override
     protected void initFromFile(final ByteSequence bytes, final boolean wide) throws IOException {

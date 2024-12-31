@@ -595,7 +595,7 @@ public class ClassPath implements Closeable {
     }
 
     /**
-     * @param name fully qualified file name, e.g. java/lang/String
+     * @param name fully qualified file name, for example java/lang/String
      * @return byte array for class
      * @throws IOException if an I/O error occurs.
      */
@@ -604,8 +604,8 @@ public class ClassPath implements Closeable {
     }
 
     /**
-     * @param name fully qualified file name, e.g. java/lang/String
-     * @param suffix file name ends with suffix, e.g. .java
+     * @param name fully qualified file name, for example java/lang/String
+     * @param suffix file name ends with suffix, for example .java
      * @return byte array for file on class path
      * @throws IOException if an I/O error occurs.
      */
@@ -627,7 +627,7 @@ public class ClassPath implements Closeable {
     }
 
     /**
-     * @param name fully qualified class name, e.g. java.lang.String
+     * @param name fully qualified class name, for example java.lang.String
      * @return input stream for class
      * @throws IOException if an I/O error occurs.
      */
@@ -636,8 +636,8 @@ public class ClassPath implements Closeable {
     }
 
     /**
-     * @param name fully qualified file name, e.g. java/lang/String
-     * @param suffix file name ends with suff, e.g. .java
+     * @param name fully qualified file name, for example java/lang/String
+     * @param suffix file name ends with suff, for example .java
      * @return class file for the Java class
      * @throws IOException if an I/O error occurs.
      */
@@ -674,7 +674,7 @@ public class ClassPath implements Closeable {
      * <p>
      * The caller is responsible for closing the InputStream.
      * </p>
-     * @param name fully qualified class name, e.g. java.lang.String
+     * @param name fully qualified class name, for example java.lang.String
      * @return input stream for class
      * @throws IOException if an I/O error occurs.
      */
@@ -688,8 +688,8 @@ public class ClassPath implements Closeable {
      * The caller is responsible for closing the InputStream.
      * </p>
      *
-     * @param name   fully qualified file name, e.g. java/lang/String
-     * @param suffix file name ends with suff, e.g. .java
+     * @param name   fully qualified file name, for example java/lang/String
+     * @param suffix file name ends with suff, for example .java
      * @return input stream for file on class path
      * @throws IOException if an I/O error occurs.
      */
@@ -709,7 +709,7 @@ public class ClassPath implements Closeable {
     }
 
     /**
-     * @param name name of file to search for, e.g. java/lang/String.java
+     * @param name name of file to search for, for example java/lang/String.java
      * @return full (canonical) path for file
      * @throws IOException if an I/O error occurs.
      */
@@ -724,8 +724,8 @@ public class ClassPath implements Closeable {
     }
 
     /**
-     * @param name name of file to search for, e.g. java/lang/String
-     * @param suffix file name suffix, e.g. .java
+     * @param name name of file to search for, for example java/lang/String
+     * @param suffix file name suffix, for example .java
      * @return full (canonical) path for file, if it exists
      * @throws IOException if an I/O error occurs.
      */
@@ -734,7 +734,7 @@ public class ClassPath implements Closeable {
     }
 
     /**
-     * @param name fully qualified resource name, e.g. java/lang/String.class
+     * @param name fully qualified resource name, for example java/lang/String.class
      * @return URL supplying the resource, or null if no resource with that name.
      * @since 6.0
      */
@@ -749,7 +749,7 @@ public class ClassPath implements Closeable {
     }
 
     /**
-     * @param name fully qualified resource name, e.g. java/lang/String.class
+     * @param name fully qualified resource name, for example java/lang/String.class
      * @return InputStream supplying the resource, or null if no resource with that name.
      * @since 6.0
      */
@@ -764,7 +764,7 @@ public class ClassPath implements Closeable {
     }
 
     /**
-     * @param name fully qualified resource name, e.g. java/lang/String.class
+     * @param name fully qualified resource name, for example java/lang/String.class
      * @return An Enumeration of URLs supplying the resource, or an empty Enumeration if no resource with that name.
      * @since 6.0
      */

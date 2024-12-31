@@ -85,8 +85,8 @@ public final class Pass1Verifier extends PassVerifier {
      * the actually size of the attribute content should be uncovered. For example, in an Exceptions attribute, the actual
      * number of exceptions as required by the number_of_exceptions field might yeild an attribute size that doesn't match
      * the attribute_length. Such an anomaly should be detected.
-     * <LI>all attributes should have proper length. In particular, under certain context (e.g. while parsing method_info),
-     * recognizable attributes (e.g. "Code" attribute) should have correct format (e.g. attribute_length is 2).
+     * <LI>all attributes should have proper length. In particular, under certain context (for example while parsing method_info),
+     * recognizable attributes (for example "Code" attribute) should have correct format (for example attribute_length is 2).
      * </UL>
      * <LI>Also, certain constant values are checked for validity:
      * <UL>
@@ -140,7 +140,7 @@ public final class Pass1Verifier extends PassVerifier {
         } catch (final LoadingException | ClassFormatException e) {
             return new VerificationResult(VerificationResult.VERIFIED_REJECTED, e.getMessage());
         } catch (final RuntimeException e) {
-            // BCEL does not catch every possible RuntimeException; e.g. if
+            // BCEL does not catch every possible RuntimeException; for example if
             // a constant pool index is referenced that does not exist.
             return new VerificationResult(VerificationResult.VERIFIED_REJECTED, "Parsing via BCEL did not succeed. " + " exception occurred:\n" + e.toString());
             // Don't think we want to dump a stack trace unless we have some sort of a debug option.

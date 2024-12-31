@@ -26,10 +26,10 @@ package org.apache.bcel.classfile;
 public interface ConstantObject {
 
     /**
-     * Gets the object representing the constant, e.g., Long for ConstantLong.
+     * Gets the object representing the constant, for example, Long for ConstantLong.
      *
      * @param constantPool the constant.
-     * @return object representing the constant, e.g., Long for ConstantLong.
+     * @return object representing the constant, for example, Long for ConstantLong.
      */
     Object getConstantValue(ConstantPool constantPool);
 }

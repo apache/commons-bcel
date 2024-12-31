@@ -150,7 +150,7 @@ public final class InstructionConst {
 
     /**
      * You can use these constants in multiple places safely, if you can guarantee that you will never alter their internal
-     * values, e.g. call setIndex().
+     * values, for example call setIndex().
      */
     public static final LocalVariableInstruction THIS = new ALOAD(0);
     public static final LocalVariableInstruction ALOAD_0 = THIS;
@@ -284,7 +284,7 @@ public final class InstructionConst {
     /**
      * Gets the Instruction.
      *
-     * @param index the index, e.g. {@link Const#RETURN}
+     * @param index the index, for example {@link Const#RETURN}
      * @return the entry from the private INSTRUCTIONS table
      */
     public static Instruction getInstruction(final int index) {

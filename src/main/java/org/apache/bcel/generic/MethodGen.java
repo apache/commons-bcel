@@ -805,7 +805,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         LineNumberTable lnt = null;
         LocalVariableTable lvt = null;
         /*
-         * Create LocalVariableTable and LineNumberTable attributes (for debuggers, e.g.)
+         * Create LocalVariableTable and LineNumberTable attributes (for debuggers, for example)
          */
         if (!variableList.isEmpty() && !stripAttributes) {
             updateLocalVariableTable(getLocalVariableTable(cp));
@@ -1113,7 +1113,7 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     /**
      * Return string representation close to declaration format, 'public static void main(String[]) throws IOException',
-     * e.g.
+     * for example.
      *
      * @return String representation of the method.
      */

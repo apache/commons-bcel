@@ -98,7 +98,7 @@ public class IINC extends LocalVariableInstruction {
     }
 
     /**
-     * Reads needed data (e.g. index) from file.
+     * Reads needed data (for example index) from file.
      */
     @Override
     protected void initFromFile(final ByteSequence bytes, final boolean wide) throws IOException {

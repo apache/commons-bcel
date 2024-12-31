@@ -341,7 +341,7 @@ public class ControlFlowGraph {
          */
         @Override
         public String toString() {
-            // TODO: Put information in the brackets, e.g.
+            // TODO: Put information in the brackets, for example
             // Is this an ExceptionHandler? Is this a RET? Is this the start of
             // a subroutine?
             return getInstruction().toString(false) + "\t[InstructionContext]";

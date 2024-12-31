@@ -35,7 +35,7 @@ import org.apache.bcel.generic.InstructionList;
 
 /**
  * InstructionFinder is a tool to search for given instructions patterns, i.e., match sequences of instructions in an
- * instruction list via regular expressions. This can be used, e.g., in order to implement a peep hole optimizer that
+ * instruction list via regular expressions. This can be used, for example, in order to implement a peep hole optimizer that
  * looks for code patterns and replaces them with faster equivalents.
  *
  * <p>
@@ -263,7 +263,7 @@ public class InstructionFinder {
     }
 
     /**
-     * Reread the instruction list, e.g., after you've altered the list upon a match.
+     * Reread the instruction list, for example, after you've altered the list upon a match.
      */
     public final void reread() {
         final int size = il.getLength();
@@ -309,8 +309,8 @@ public class InstructionFinder {
     }
 
     /**
-     * Search for the given pattern in the instruction list. You can search for any valid opcode via its symbolic name, e.g.
-     * "istore". You can also use a super class or an interface name to match a whole set of instructions, e.g.
+     * Search for the given pattern in the instruction list. You can search for any valid opcode via its symbolic name, for example
+     * "istore". You can also use a super class or an interface name to match a whole set of instructions, for example
      * "BranchInstruction" or "LoadInstruction". "istore" is also an alias for all "istore_x" instructions. Additional
      * aliases are "if" for "ifxx", "if_icmp" for "if_icmpxx", "if_acmp" for "if_acmpxx".
      *

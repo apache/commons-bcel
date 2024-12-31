@@ -31,7 +31,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Abstract super class for all possible Java types, namely basic types such as int, object types like String and array
- * types, e.g. int[]
+ * types, for example int[]
  */
 public abstract class Type {
 
@@ -124,7 +124,7 @@ public abstract class Type {
     }
 
     /**
-     * Convert type to Java method signature, e.g. int[] f(java.lang.String x) becomes (Ljava/lang/String;)[I
+     * Convert type to Java method signature, for example int[] f(java.lang.String x) becomes (Ljava/lang/String;)[I
      *
      * @param returnType what the method returns
      * @param argTypes what are the argument types
@@ -400,7 +400,7 @@ public abstract class Type {
     }
 
     /**
-     * @return Type string, e.g. 'int[]'
+     * @return Type string, for example 'int[]'
      */
     @Override
     public String toString() {

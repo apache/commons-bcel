@@ -31,7 +31,7 @@ public class ObjectType extends ReferenceType {
     /**
      * Constructs a new instance.
      *
-     * @param className fully qualified class name, e.g. java.lang.String
+     * @param className fully qualified class name, for example java.lang.String
      * @return a new instance.
      * @since 6.0
      */
@@ -44,7 +44,7 @@ public class ObjectType extends ReferenceType {
     /**
      * Constructs a new instance.
      *
-     * @param className fully qualified class name, e.g. {@link String}
+     * @param className fully qualified class name, for example {@link String}
      */
     public ObjectType(final String className) {
         super(Const.T_REFERENCE, "L" + Utility.packageToPath(className) + ";");

@@ -38,7 +38,7 @@ public abstract class IfInstruction extends BranchInstruction implements StackCo
     }
 
     /**
-     * @return negation of instruction, e.g. IFEQ.negate() == IFNE
+     * @return negation of instruction, for example IFEQ.negate() == IFNE
      */
     public abstract IfInstruction negate();
 }

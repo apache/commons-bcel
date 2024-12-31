@@ -224,8 +224,7 @@ public class ConstantPoolGen {
     }
 
     /**
-     * Add a reference to an array class (e.g. String[][]) as needed by MULTIANEWARRAY instruction, e.g. to the
-     * ConstantPool.
+     * Add a reference to an array class (for example, String[][]) as needed by MULTIANEWARRAY instruction, for example, to the ConstantPool.
      *
      * @param type type of array class
      * @return index of entry

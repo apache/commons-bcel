@@ -132,7 +132,7 @@ public class JdkGenericDumpTestCase {
         // System.out.println("Method: " + m);
         final Code code = method.getCode();
         if (code == null) {
-            return; // e.g. abstract method
+            return; // for example abstract method
         }
         final byte[] src = code.getCode();
         final InstructionList instructionList = new InstructionList(src);

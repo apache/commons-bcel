@@ -25,7 +25,7 @@ import org.apache.bcel.util.ClassPath;
 import org.apache.bcel.util.SyntheticRepository;
 
 /**
- * The repository maintains informations about class interdependencies, e.g., whether a class is a sub-class of another.
+ * The repository maintains informations about class interdependencies, for example, whether a class is a sub-class of another.
  * Delegates actual class loading to SyntheticRepository with current class path by default.
  *
  * @see org.apache.bcel.util.Repository

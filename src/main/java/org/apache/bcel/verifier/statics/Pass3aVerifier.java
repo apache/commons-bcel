@@ -613,7 +613,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 // too. So are the allowed method names.
                 final String className = o.getClassName(constantPoolGen);
                 final JavaClass jc;
-                if (className.charAt(0) == '[') { // array type, e.g. invoke can be someArray.clone()
+                if (className.charAt(0) == '[') { // array type, for example invoke can be someArray.clone()
                     jc = Repository.lookupClass("java.lang.Object");
                 } else {
                     jc = Repository.lookupClass(className);

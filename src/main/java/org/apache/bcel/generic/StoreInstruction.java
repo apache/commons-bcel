@@ -19,7 +19,7 @@
 package org.apache.bcel.generic;
 
 /**
- * Denotes an unparameterized instruction to store a value into a local variable, e.g. ISTORE.
+ * Denotes an unparameterized instruction to store a value into a local variable, for example ISTORE.
  */
 public abstract class StoreInstruction extends LocalVariableInstruction implements PopInstruction {
 
@@ -33,7 +33,7 @@ public abstract class StoreInstruction extends LocalVariableInstruction implemen
 
     /**
      * @param opcode Instruction opcode
-     * @param cTag Instruction number for compact version, ASTORE_0, e.g.
+     * @param cTag Instruction number for compact version, ASTORE_0, for example
      * @param n local variable index (unsigned short)
      */
     protected StoreInstruction(final short opcode, final short cTag, final int n) {

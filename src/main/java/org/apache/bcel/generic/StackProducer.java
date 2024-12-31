@@ -19,7 +19,7 @@
 package org.apache.bcel.generic;
 
 /**
- * Denotes an instruction that may produce a value on top of the stack (this excludes DUP_X1, e.g.)
+ * Denotes an instruction that may produce a value on top of the stack (this excludes DUP_X1, for example)
  */
 public interface StackProducer {
 

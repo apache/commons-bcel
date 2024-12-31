@@ -233,7 +233,7 @@ public final class Method extends FieldOrMethod {
 
     /**
      * Return string representation close to declaration format, 'public static void main(String[] args) throws
-     * IOException', e.g.
+     * IOException', for example.
      *
      * @return String representation of the method.
      */

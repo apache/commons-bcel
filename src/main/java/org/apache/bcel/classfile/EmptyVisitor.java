@@ -19,7 +19,7 @@
 package org.apache.bcel.classfile;
 
 /**
- * Visitor with empty method bodies, can be extended and used in conjunction with the DescendingVisitor class, e.g. By
+ * Visitor with empty method bodies, can be extended and used in conjunction with the DescendingVisitor class, for example. By
  * courtesy of David Spencer.
  *
  * @see DescendingVisitor

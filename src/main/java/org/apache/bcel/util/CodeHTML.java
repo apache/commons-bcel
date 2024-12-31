@@ -526,7 +526,7 @@ final class CodeHTML {
             }
             printWriter.println("</UL>");
         }
-        if (code != null) { // No code, an abstract method, e.g.
+        if (code != null) { // No code, an abstract method, for example
             // System.out.println(name + "\n" + Utility.codeToString(code, constantPool, 0, -1));
             // Print the byte code
             try (ByteSequence stream = new ByteSequence(code)) {

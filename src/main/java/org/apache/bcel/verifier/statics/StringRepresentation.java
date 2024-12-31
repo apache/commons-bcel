@@ -74,7 +74,7 @@ import org.apache.bcel.verifier.exc.AssertionViolatedException;
 /**
  * BCEL's Node classes (those from the classfile API that <B>accept()</B> Visitor instances) have <B>toString()</B>
  * methods that were not designed to be robust, this gap is closed by this class. When performing class file
- * verification, it may be useful to output which entity (e.g. a <B>Code</B> instance) is not satisfying the verifier's
+ * verification, it may be useful to output which entity (for example a <B>Code</B> instance) is not satisfying the verifier's
  * constraints, but in this case it could be possible for the <B>toString()</B> method to throw a RuntimeException. A
  * (new StringRepresentation(Node n)).toString() never throws any exception. Note that this class also serves as a
  * placeholder for more sophisticated message handling in future versions of JustIce.
@@ -168,7 +168,7 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     // Visitor methods start here //
     ////////////////////////////////
     // We don't of course need to call some default implementation:
-    // e.g. we could also simply output "Code" instead of a possibly
+    // for example we could also simply output "Code" instead of a possibly
     // lengthy Code attribute's toString().
     @Override
     public void visitCode(final Code obj) {

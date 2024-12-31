@@ -247,7 +247,7 @@ public abstract class Utility {
      * @param constantPool Array of constants
      * @param index offset in 'code' array <EM>(number of opcodes, not bytes!)</EM>
      * @param length number of opcodes to decompile, -1 for all
-     * @param verbose be verbose, e.g. print constant pool index
+     * @param verbose be verbose, for example print constant pool index
      * @return String representation of byte codes
      */
     public static String codeToString(final byte[] code, final ConstantPool constantPool, final int index, final int length, final boolean verbose) {
@@ -277,7 +277,7 @@ public abstract class Utility {
      *
      * @param bytes stream of bytes
      * @param constantPool Array of constants
-     * @param verbose be verbose, e.g. print constant pool index
+     * @param verbose be verbose, for example print constant pool index
      * @return String representation of byte code
      * @throws IOException if a failure from reading from the bytes argument occurs
      */
@@ -759,7 +759,7 @@ public abstract class Utility {
      */
 
     /**
-     * Parse Java type such as "char", or "java.lang.String[]" and return the signature in byte code format, e.g. "C" or
+     * Parse Java type such as "char", or "java.lang.String[]" and return the signature in byte code format, for example "C" or
      * "[Ljava/lang/String;" respectively.
      *
      * @param type Java type
@@ -1195,7 +1195,7 @@ public abstract class Utility {
      * Convert bytes into hexadecimal string
      *
      * @param bytes an array of bytes to convert to hexadecimal
-     * @return bytes as hexadecimal string, e.g. 00 fa 12 ...
+     * @return bytes as hexadecimal string, for example 00 fa 12 ...
      */
     public static String toHexString(final byte[] bytes) {
         final StringBuilder buf = new StringBuilder();

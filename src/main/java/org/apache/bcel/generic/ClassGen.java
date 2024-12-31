@@ -99,7 +99,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Constructs a new instance from an existing class.
      *
-     * @param clazz JavaClass object (e.g. read from file)
+     * @param clazz JavaClass object (for example read from file)
      */
     public ClassGen(final JavaClass clazz) {
         super(clazz.getAccessFlags());

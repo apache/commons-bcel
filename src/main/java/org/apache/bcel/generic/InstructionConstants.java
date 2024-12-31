@@ -156,7 +156,7 @@ public interface InstructionConstants {
 
     /**
      * You can use these constants in multiple places safely, if you can guarantee that you will never alter their internal
-     * values, e.g. call setIndex().
+     * values, for example call setIndex().
      */
     LocalVariableInstruction THIS = InstructionConst.THIS;
     LocalVariableInstruction ALOAD_0 = InstructionConst.ALOAD_0;

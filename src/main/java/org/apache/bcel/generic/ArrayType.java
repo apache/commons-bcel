@@ -29,9 +29,9 @@ public final class ArrayType extends ReferenceType {
     private final Type basicType;
 
     /**
-     * Convenience constructor for array type, e.g. int[]
+     * Convenience constructor for array type, for example int[]
      *
-     * @param type array type, e.g. T_INT
+     * @param type array type, for example T_INT
      * @param dimensions array dimensions
      */
     public ArrayType(final byte type, final int dimensions) {
@@ -39,7 +39,7 @@ public final class ArrayType extends ReferenceType {
     }
 
     /**
-     * Convenience constructor for reference array type, e.g. Object[]
+     * Convenience constructor for reference array type, for example Object[]
      *
      * @param className complete name of class ({@link String}, for example)
      * @param dimensions array dimensions

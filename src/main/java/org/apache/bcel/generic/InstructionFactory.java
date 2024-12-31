@@ -21,7 +21,7 @@ package org.apache.bcel.generic;
 import org.apache.bcel.Const;
 
 /**
- * Instances of this class may be used, e.g., to generate typed versions of instructions. Its main purpose is to be used
+ * Instances of this class may be used, for example, to generate typed versions of instructions. Its main purpose is to be used
  * as the byte code generating backend of a compiler. You can subclass it to add your own create methods.
  * <p>
  * Note: The static createXXX methods return singleton instances from the {@link InstructionConst} class.
@@ -308,21 +308,21 @@ public class InstructionFactory implements InstructionConstants {
     }
 
     /**
-     * @param size size of operand, either 1 (int, e.g.) or 2 (double)
+     * @param size size of operand, either 1 (int, for example) or 2 (double)
      */
     public static StackInstruction createDup(final int size) {
         return size == 2 ? InstructionConst.DUP2 : InstructionConst.DUP;
     }
 
     /**
-     * @param size size of operand, either 1 (int, e.g.) or 2 (double)
+     * @param size size of operand, either 1 (int, for example) or 2 (double)
      */
     public static StackInstruction createDup_1(final int size) {
         return size == 2 ? InstructionConst.DUP2_X1 : InstructionConst.DUP_X1;
     }
 
     /**
-     * @param size size of operand, either 1 (int, e.g.) or 2 (double)
+     * @param size size of operand, either 1 (int, for example) or 2 (double)
      */
     public static StackInstruction createDup_2(final int size) {
         return size == 2 ? InstructionConst.DUP2_X2 : InstructionConst.DUP_X2;
@@ -381,7 +381,7 @@ public class InstructionFactory implements InstructionConstants {
     }
 
     /**
-     * @param size size of operand, either 1 (int, e.g.) or 2 (double)
+     * @param size size of operand, either 1 (int, for example) or 2 (double)
      */
     public static StackInstruction createPop(final int size) {
         return size == 2 ? InstructionConst.POP2 : InstructionConst.POP;
@@ -505,7 +505,7 @@ public class InstructionFactory implements InstructionConstants {
     }
 
     /**
-     * Create conversion operation for two stack operands, this may be an I2C, instruction, e.g., if the operands are basic
+     * Create conversion operation for two stack operands, this may be an I2C, instruction, for example, if the operands are basic
      * types and CHECKCAST if they are reference types.
      */
     public Instruction createCast(final Type srcType, final Type destType) {

@@ -244,7 +244,7 @@ public abstract class ReferenceType extends Type {
 
     /**
      * Return true iff this type is castable to another type t as defined in the JVM specification. The case where this is
-     * {@link #NULL} is not defined (see the CHECKCAST definition in the JVM specification). However, because e.g. CHECKCAST
+     * {@link #NULL} is not defined (see the CHECKCAST definition in the JVM specification). However, because for example CHECKCAST
      * doesn't throw a ClassCastException when casting a null reference to any Object, true is returned in this case.
      *
      * @throws ClassNotFoundException if any classes or interfaces required to determine assignment compatibility can't be

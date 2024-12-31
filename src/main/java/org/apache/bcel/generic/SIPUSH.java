@@ -83,7 +83,7 @@ public class SIPUSH extends Instruction implements ConstantPushInstruction {
     }
 
     /**
-     * Read needed data (e.g. index) from file.
+     * Read needed data (for example index) from file.
      */
     @Override
     protected void initFromFile(final ByteSequence bytes, final boolean wide) throws IOException {

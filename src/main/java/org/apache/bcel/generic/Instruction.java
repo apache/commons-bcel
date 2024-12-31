@@ -529,7 +529,7 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * Reads needed data (e.g. index) from file.
+     * Reads needed data (for example index) from file.
      *
      * @param bytes byte sequence to read from
      * @param wide "wide" instruction flag

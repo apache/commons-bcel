@@ -28,7 +28,7 @@ import org.apache.bcel.generic.MethodGen;
 
 /**
  * Test BCEL if an input file is identical to the outfile generated with BCEL. Of course there may some small
- * differences, e.g., because BCEL generates local variable tables by default.
+ * differences, for example, because BCEL generates local variable tables by default.
  *
  * Try to:
  *

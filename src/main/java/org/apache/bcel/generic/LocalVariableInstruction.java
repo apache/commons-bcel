@@ -55,7 +55,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
 
     /**
      * @param opcode Instruction opcode
-     * @param cTag Instruction number for compact version, ALOAD_0, e.g.
+     * @param cTag Instruction number for compact version, ALOAD_0, for example.
      * @param n local variable index (unsigned short)
      */
     protected LocalVariableInstruction(final short opcode, final short cTag, final int n) {
@@ -76,7 +76,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
             out.writeByte(Const.WIDE);
         }
         out.writeByte(super.getOpcode());
-        if (super.getLength() > 1) { // Otherwise ILOAD_n, instruction, e.g.
+        if (super.getLength() > 1) { // Otherwise ILOAD_n, instruction, for example.
             if (wide()) {
                 out.writeShort(n);
             } else {
@@ -86,7 +86,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     }
 
     /**
-     * @return canonical tag for instruction, e.g., ALOAD for ALOAD_0
+     * @return canonical tag for instruction, for example, ALOAD for ALOAD_0
      */
     public short getCanonicalTag() {
         return canonTag;
@@ -131,7 +131,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     }
 
     /**
-     * Read needed data (e.g. index) from file.
+     * Read needed data (for example index) from file.
      *
      * <pre>
      * (ILOAD &lt;= tag &lt;= ALOAD_3) || (ISTORE &lt;= tag &lt;= ASTORE_3)

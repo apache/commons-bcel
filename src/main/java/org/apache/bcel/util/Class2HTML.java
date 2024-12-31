@@ -50,7 +50,7 @@ import org.apache.bcel.classfile.Utility;
  * <LI>"package"."class"_methods.html contains references to all methods and fields of the class
  * </OL>
  *
- * All subfiles reference each other appropriately, e.g. clicking on a method in the Method's frame will jump to the
+ * All subfiles reference each other appropriately, for example clicking on a method in the Method's frame will jump to the
  * appropriate method in the Code frame.
  */
 public class Class2HTML implements Constants {

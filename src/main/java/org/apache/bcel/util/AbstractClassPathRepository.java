@@ -29,7 +29,7 @@ import org.apache.bcel.classfile.Utility;
  * This abstract class provides a logic of a loading {@link JavaClass} objects class names via {@link ClassPath}.
  *
  * <p>
- * Subclasses can choose caching strategy of the objects by implementing the abstract methods (e.g.,
+ * Subclasses can choose caching strategy of the objects by implementing the abstract methods (for example,
  * {@link #storeClass(JavaClass)} and {@link #findClass(String)}).
  * </p>
  *

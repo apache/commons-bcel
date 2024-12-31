@@ -52,7 +52,7 @@ public class IFEQ extends IfInstruction {
     }
 
     /**
-     * @return negation of instruction, e.g. IFEQ.negate() == IFNE
+     * @return negation of instruction, for example IFEQ.negate() == IFNE
      */
     @Override
     public IfInstruction negate() {

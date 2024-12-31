@@ -19,7 +19,7 @@
 package org.apache.bcel.generic;
 
 /**
- * Denotes an unparameterized instruction to load a value from a local variable, e.g. ILOAD.
+ * Denotes an unparameterized instruction to load a value from a local variable, for example ILOAD.
  */
 public abstract class LoadInstruction extends LocalVariableInstruction implements PushInstruction {
 
@@ -33,7 +33,7 @@ public abstract class LoadInstruction extends LocalVariableInstruction implement
 
     /**
      * @param opcode Instruction opcode
-     * @param cTag Instruction number for compact version, ALOAD_0, e.g.
+     * @param cTag Instruction number for compact version, ALOAD_0, for example
      * @param n local variable index (unsigned short)
      */
     protected LoadInstruction(final short opcode, final short cTag, final int n) {

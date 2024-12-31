@@ -1026,7 +1026,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
         last.setNext(null);
         final List<InstructionHandle> targetList = new ArrayList<>();
         for (InstructionHandle ih = first; ih != null; ih = ih.getNext()) {
-            ih.getInstruction().dispose(); // e.g. BranchInstructions release their targets
+            ih.getInstruction().dispose(); // for example BranchInstructions release their targets
         }
         final StringBuilder buf = new StringBuilder("{ ");
         for (InstructionHandle ih = first; ih != null; ih = next) {
@@ -1076,7 +1076,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Give all instructions their position number (offset in byte stream), i.e., make the list ready to be dumped.
      *
-     * @param check Perform sanity checks, e.g. if all targeted instructions really belong to this list
+     * @param check Perform sanity checks, for example if all targeted instructions really belong to this list
      */
     public void setPositions(final boolean check) { // called by code in other packages
         int maxAdditionalBytes = 0;
