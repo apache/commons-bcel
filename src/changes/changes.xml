@@ -36,9 +36,9 @@ and commit
 
 The <action> type attribute can be add,update,fix,remove.
 -->
-<document xmlns="http://maven.apache.org/changes/1.0.0"
+<document xmlns="http://maven.apache.org/changes/2.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+          xsi:schemaLocation="http://maven.apache.org/changes/2.0.0 https://maven.apache.org/xsd/changes-2.0.0.xsd">
   <properties>
     <title>Apache Commons BCEL Release Notes</title>
     <author email="dev@commons.apache.org">Apache Commons developers</author>
@@ -66,7 +66,7 @@ The <action> type attribute can be add,update,fix,remove.
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.apache.commons:commons-lang3 from 3.14.0 to 3.17.0 #334, #341, #351.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.jetbrains.kotlin:kotlin-stdlib from 2.0.0 to 2.1.0 #340, #347, #369, #390.</action>
-      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.apache.commons:commons-parent from 72 to 78 #346, #349, #559, #364, #368, #378.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.apache.commons:commons-parent from 72 to 79 #346, #349, #559, #364, #368, #378.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump commons-io:commons-io from 2.16.1 to 2.18.0 #357, #387.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump jna.version from 5.14.0 to 5.16.0 #358, #399.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.codehaus.mojo:taglist-maven-plugin from 3.1.0 to 3.2.1 #376.</action>
