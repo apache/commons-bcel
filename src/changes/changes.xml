@@ -62,6 +62,7 @@ The <action> type attribute can be add,update,fix,remove.
     <release version="6.10.1" date="YYYY-MM-DD" description="This is a feature and maintenance release. Java 8 or later is required.">
       <!-- FIX -->
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Replace internal use of Locale.ENGLISH with Locale.ROOT.</action>
+      <action issue="BCEL-375" type="fix" dev="ggregory" due-to="J. Lewis Muir, Gary Gregory">Wrong permissions on bcel .jar file in binary .tar.gz distribution file.</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.apache.commons:commons-lang3 from 3.14.0 to 3.17.0 #334, #341, #351.</action>
