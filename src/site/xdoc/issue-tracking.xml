@@ -46,7 +46,7 @@ limitations under the License.
   xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
   <properties>
     <title>Apache Commons BCEL Issue tracking</title>
-    <author email="dev@commons.apache.org">Apache Commons Documentation Team</author>
+    <author email="dev@commons.apache.org">Apache Commons Team</author>
   </properties>
   <body>
 

@@ -22,7 +22,8 @@
   xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
 	<properties>
-		<title>Projects using BCEL</title>
+      <title>Projects using BCEL</title>
+      <author email="dev@commons.apache.org">Apache Commons Team</author>
 	</properties>
 
 	<body>
