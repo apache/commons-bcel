@@ -22,7 +22,7 @@
   xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd"
   name="Apache Commons BCEL">
   <bannerRight name="Commons BCEL" href="/index.html">
-    <image src="/images/logo.gif"/>
+    <image src="/images/logo.png"/>
   </bannerRight>
   <body>
     <menu name="Commons BCEL">
