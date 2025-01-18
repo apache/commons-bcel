@@ -395,8 +395,7 @@ public class ConstantPoolModuleToStringTestCase {
                     "org.opentest4j",
                     "net.bytebuddy",
                     "com.sun.jna",
-                    "junit",
-                    "org.hamcrest");
+                    "junit");
             assertTrue(condition, s);
         }
 
