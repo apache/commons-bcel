@@ -60,7 +60,6 @@
     <commons.osgi.private />
     <commons.jira.id>BCEL</commons.jira.id>
     <commons.jira.pid>12314220</commons.jira.pid>
-    <mockito.version>4.11.0</mockito.version>
     <jna.version>5.16.0</jna.version>
     <japicmp.skip>false</japicmp.skip>
     <!-- JaCoCo on Java 8 is different from other versions. On JDK9+ there is a profile -->
@@ -345,7 +344,7 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>${mockito.version}</version>
+      <version>${commons.mockito.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
