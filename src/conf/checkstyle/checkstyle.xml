@@ -88,8 +88,8 @@ limitations under the License.
         <!-- Allow underscore in class names -->
       <property name="format" value="^[A-Z][A-Za-z0-9]*(_[A-Za-z0-9]+)*$" />
     </module>
-    <module name="UnusedImports" />
     <module name="UnnecessaryParentheses" />
+    <module name="UnusedImports" />
     <module name="UpperEll" />
     <module name="VisibilityModifier">
       <property name="ignoreAnnotationCanonicalNames" value="java.lang.Deprecated" />
