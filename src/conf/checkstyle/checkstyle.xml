@@ -84,6 +84,7 @@ limitations under the License.
       <property name="commentFormat" value="CHECKSTYLE IGNORE (\w+)" />
       <property name="checkFormat" value="$1" />
     </module>
+    <module name="TypecastParenPad" />    
     <module name="TypeName">
         <!-- Allow underscore in class names -->
       <property name="format" value="^[A-Z][A-Za-z0-9]*(_[A-Za-z0-9]+)*$" />
