@@ -17,7 +17,9 @@
  specific language governing permissions and limitations
  under the License.
 -->
-<document>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
   <properties>
     <title>Appendix</title>
     <author email="dev@commons.apache.org">Apache Commons Team</author>
@@ -56,7 +58,7 @@ public class HelloWorld {
 
       <p>
         We will sketch here how the above Java class can be created from the
-        scratch using the <font face="helvetica,arial">BCEL</font> API. For
+        scratch using the BCEL API. For
         ease of reading we will use textual signatures and not create them
         dynamically. For example, the signature
       </p>
@@ -346,8 +348,8 @@ public class Peephole {
     <subsection name="Constant pool UML diagram">
 
       <p align="center">
-        <a name="Figure 8">
-          <img src="../images/constantpool.gif"/>
+        <a id="Figure-8">
+          <img src="../images/constantpool.gif" alt="Figure 8"/>
           <br/>
           Figure 8: UML diagram for constant pool classes
         </a>
@@ -361,29 +363,30 @@ public class Peephole {
       <source>
 java org.apache.bcel.verifier.Verifier fully.qualified.class.Name
       </source>
-
+      <p>
       lets JustIce work standalone.
       If you get a "java.lang.OutOfMemoryError", you should increase the
       maximum Java heap space. A command like
-
+      </p>
       <source>
 java -Xmx1887436800 org.apache.bcel.verifier.Verifier f.q.c.Name
       </source>
-
+      <p>
       will usually resolve the problem. The value above is suitable for
       big server machines; if your machine starts swapping to disk, try
       to lower the value.
-
+      </p>
       <h4>Running a graphics based verifier</h4>
-
+      <p>
       If you prefer a graphical application, you should use a command like
-
+      </p>
       <source>
 java org.apache.bcel.verifier.GraphicalVerifier
       </source>
-
+      <p>
       to launch one. Again, you may have to resolve a memory issue depending
       on the classes to verify.
+      </p>
     </subsection>
   </section>
   </body>

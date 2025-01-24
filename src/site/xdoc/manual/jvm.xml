@@ -17,7 +17,9 @@
  specific language governing permissions and limitations
  under the License.
 -->
-<document>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
   <properties>
     <title>The Java Virtual Machine</title>
     <author email="dev@commons.apache.org">Apache Commons Team</author>
@@ -53,8 +55,8 @@
       </p>
 
       <p align="center">
-        <a name="Figure 1">
-          <img src="../images/jvm.gif"/>
+        <a id="Figure-1">
+          <img src="../images/jvm.gif" alt="Figure 1"/>
           <br/>
           Figure 1: Compilation and execution of Java classes</a>
       </p>
@@ -103,8 +105,8 @@
       </p>
 
       <p align="center">
-        <a name="Figure 2">
-          <img src="../images/classfile.gif"/>
+        <a id="Figure-2">
+          <img src="../images/classfile.gif" alt="Figure 2"/>
           <br/>
           Figure 2: Java class file format</a>
       </p>
@@ -320,8 +322,7 @@
         its scope. This makes it difficult to insert or delete code areas
         on this level of abstraction, since one has to recompute the
         offsets every time and update the referring objects. We will see
-        in <a href="bcel-api.html#ClassGen">section 3.3</a> how <font
-              face="helvetica,arial">BCEL</font> remedies this restriction.
+        in <a href="bcel-api.html#ClassGen">section 3.3</a> how BCEL remedies this restriction.
       </p>
 
     </subsection>

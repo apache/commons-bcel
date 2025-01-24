@@ -17,7 +17,9 @@
  specific language governing permissions and limitations
  under the License.
 -->
-<document>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
   <properties>
     <title>The BCEL API</title>
     <author email="dev@commons.apache.org">Apache Commons Team</author>
@@ -26,13 +28,11 @@
   <body>
     <section name="The BCEL API">
       <p>
-        The <font face="helvetica,arial">BCEL</font> API abstracts from
+        The BCEL API abstracts from
         the concrete circumstances of the Java Virtual Machine and how to
         read and write binary Java class files. The API mainly consists
         of three parts:
       </p>
-
-      <p>
 
         <ol type="1">
           <li> A package that contains classes that describe "static"
@@ -55,12 +55,10 @@
                     href="https://jasmin.sourceforge.net">Jasmin</a> assembly
             language.</li>
         </ol>
-      </p>
 
     <subsection name="JavaClass">
       <p>
-        The "static" component of the <font
-              face="helvetica,arial">BCEL</font> API resides in the package
+        The "static" component of the BCEL API resides in the package
         <tt>org.apache.bcel.classfile</tt> and closely represents class
         files. All of the binary components and data structures declared
         in the <a
@@ -69,14 +67,14 @@
               href="#2 The Java Virtual Machine">2</a> are mapped to classes.
 
         <a href="#Figure 3">Figure 3</a> shows an UML diagram of the
-        hierarchy of classes of the <font face="helvetica,arial">BCEL
-      </font>API. <a href="#Figure 8">Figure 8</a> in the appendix also
+        hierarchy of classes of the BCEL
+        API. <a href="#Figure-8">Figure 8</a> in the appendix also
         shows a detailed diagram of the <tt>ConstantPool</tt> components.
       </p>
 
       <p align="center">
-        <a name="Figure 3">
-          <img src="../images/javaclass.gif"/> <br/>
+        <a id="Figure-3">
+          <img src="../images/javaclass.gif" alt=""/> <br/>
           Figure 3: UML diagram for the JavaClass API</a>
       </p>
 
@@ -175,7 +173,7 @@ public static void printCode(Method[] methods) {
 
     <h4>Analyzing class data</h4>
       <p>
-        Last but not least, <font face="helvetica,arial">BCEL</font>
+        Last but not least, BCEL
         supports the <em>Visitor</em> design pattern, so one can write
         visitor objects to traverse and analyze the contents of a class
         file. Included in the distribution is a class
@@ -198,8 +196,8 @@ public static void printCode(Method[] methods) {
       </p>
 
       <p align="center">
-        <a name="Figure 4">
-          <img src="../images/classgen.gif"/>
+        <a id="Figure-4">
+          <img src="../images/classgen.gif" alt="Figure 3"/>
           <br/>
           Figure 4: UML diagram of the ClassGen API</a>
       </p>
@@ -432,8 +430,8 @@ il.dispose(); // Reuse instruction handles of list
       </p>
 
       <p align="center">
-        <a name="Figure 5">
-          <img src="../images/il.gif"/>
+        <a id="Figure-5">
+          <img src="../images/il.gif" alt="Figure 5"/>
           <br/>
           Figure 5: Instruction list for <tt>readInt()</tt> method</a>
       </p>
@@ -449,7 +447,7 @@ il.dispose(); // Reuse instruction handles of list
         arithmetic or comparison expressions. You certainly do not want
         to rewrite the code that translates such expressions into byte
         code in every place they may appear. In order to support this, the
-        <font face="helvetica,arial">BCEL</font> API includes a <em>compound
+        BCEL API includes a <em>compound
         instruction</em> (an interface with a single
         <tt>getInstructionList()</tt> method). Instances of this class
         may be used in any place where normal instructions would occur,
@@ -493,8 +491,7 @@ il.append(f.createReturn(type));
         When transforming code, for instance during optimization or when
         inserting analysis method calls, one typically searches for
         certain patterns of code to perform the transformation at. To
-        simplify handling such situations <font
-              face="helvetica,arial">BCEL </font>introduces a special feature:
+        simplify handling such situations BCEL introduces a special feature:
         One can search for given code patterns within an instruction list
         using <em>regular expressions</em>. In such expressions,
         instructions are represented by their opcode names, e.g.,
@@ -591,13 +588,12 @@ for (Iterator e = f.search(pat, constraint); e.hasNext(); ) {
 
       <p>
         can be mapped to both of the chunks of byte code shown in <a
-              href="#Figure 6">figure 6</a>. The left column represents the
+              href="#Figure-6">figure 6</a>. The left column represents the
         unoptimized code while the right column displays the same code
         after the peep hole algorithm has been applied:
       </p>
 
-      <p align="center"><a name="Figure 6">
-        <table>
+        <table align="center" id="Figure-6">
           <tr>
             <td valign="top"><pre>
               5:  aload_0
@@ -638,8 +634,6 @@ for (Iterator e = f.search(pat, constraint); e.hasNext(); ) {
             </pre></td>
           </tr>
         </table>
-      </a>
-      </p>
     </subsection>
     </section>
   </body>

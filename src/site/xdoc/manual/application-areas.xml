@@ -17,7 +17,9 @@
  specific language governing permissions and limitations
  under the License.
 -->
-<document>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
   <properties>
     <title>Application areas</title>
     <author email="dev@commons.apache.org">Apache Commons Team</author>
@@ -26,8 +28,7 @@
   <body>
     <section name="Application areas">
       <p>
-        There are many possible application areas for <font
-              face="helvetica,arial">BCEL</font> ranging from class
+        There are many possible application areas for BCEL ranging from class
         browsers, profilers, byte code optimizers, and compilers to
         sophisticated run-time analysis tools and extensions to the Java
         language.
@@ -35,15 +36,14 @@
 
       <p>
         Compilers like the <a
-              href="https://barat.sourceforge.net">Barat</a> compiler use <font
-              face="helvetica,arial">BCEL</font> to implement a byte code
+              href="https://barat.sourceforge.net">Barat</a> compiler use BCEL to implement a byte code
         generating back end. Other possible application areas are the
         static analysis of byte code or examining the run-time behavior of
         classes by inserting calls to profiling methods into the
         code. Further examples are extending Java with Eiffel-like
         assertions, automated delegation, or with the concepts of <a
               href="https://www.eclipse.org/aspectj/">Aspect-Oriented Programming</a>.<br/> A
-        list of projects using <font face="helvetica,arial">BCEL</font> can
+        list of projects using BCEL can
         be found <a href="../projects.html">here</a>.
       </p>
 
@@ -58,7 +58,7 @@
       </p>
 
       <p>
-        A  possible  scenario is  described  in <a href="#Figure 7">figure
+        A  possible  scenario is  described  in <a href="#Figure-7">figure
         7</a>:
         During run-time the Virtual Machine requests a custom class loader
         to load a given class. But before the JVM actually sees the byte
@@ -69,8 +69,8 @@
       </p>
 
       <p align="center">
-        <a name="Figure 7">
-          <img src="../images/classloader.gif"/>
+        <a id="Figure-7">
+          <img src="../images/classloader.gif" alt="Figure 7"/>
           <br/>
           Figure 7: Class loaders
         </a>
@@ -90,8 +90,7 @@
         benefit from new features. Such transformations may be executed on
         demand and neither interfere with other users, nor alter the
         original byte code. In fact, class loaders may even create classes
-        <em>ad hoc</em> without loading a file at all.<br/> <font
-              face="helvetica,arial">BCEL</font> has already builtin support for
+        <em>ad hoc</em> without loading a file at all.<br/> BCEL has already builtin support for
         dynamically creating classes, an example is the ProxyCreator class.
       </p>
 
@@ -100,8 +99,7 @@
     <subsection name="Example: Poor Man's Genericity">
       <p>
         The former "Poor Man's Genericity" project that extended Java with
-        parameterized classes, for example, used <font
-              face="helvetica,arial">BCEL</font> in two places to generate
+        parameterized classes, for example, used BCEL in two places to generate
         instances of parameterized classes: During compile-time (with the
         standard <tt>javac</tt> with some slightly changed classes) and at
         run-time using a custom class loader. The compiler puts some
@@ -113,7 +111,6 @@
         class, e.g., <tt>Stack&lt;String&gt;</tt>
       </p>
 
-      <p>
         <ol type="1">
           <li> Search for class <tt>Stack</tt>, load it, and check for a
             certain class attribute containing additional type
@@ -123,7 +120,6 @@
           <li>Replace all occurrences and references to the formal type
             <tt>A</tt> with references to the actual type <tt>String</tt>. For
             example the method
-          </li>
 
           <source>
             void push(A obj) { ... }
@@ -136,10 +132,10 @@
           <source>
             void push(String obj) { ... }
           </source>
+          </li>
 
           <li> Return the resulting class to the Virtual Machine.</li>
         </ol>
-      </p>
 
     </subsection>
     </section>
