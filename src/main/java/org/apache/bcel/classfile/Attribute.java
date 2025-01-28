@@ -18,6 +18,7 @@
  */
 package org.apache.bcel.classfile;
 
+import java.security.InvalidParameterException;
 import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -108,25 +109,36 @@ public abstract class Attribute implements Cloneable, Node {
      * @throws IOException if an I/O error occurs.
      * @since 6.0
      */
-    public static Attribute readAttribute(final DataInput dataInput, final ConstantPool constantPool) throws IOException {
-        byte tag = Const.ATTR_UNKNOWN; // Unknown attribute
-        // Get class name from constant pool via 'name_index' indirection
-        final int nameIndex = dataInput.readUnsignedShort();
-        final String name = constantPool.getConstantUtf8(nameIndex).getBytes();
+public static Attribute readAttribute(final DataInput dataInput, final ConstantPool constantPool) throws IOException {
+    byte tag = Const.ATTR_UNKNOWN; // Unknown attribute
 
-        // Length of data in bytes
-        final int length = dataInput.readInt();
+    // Get class name from constant pool via 'name_index' indirection
+    final int nameIndex = dataInput.readUnsignedShort();
+    final String name = constantPool.getConstantUtf8(nameIndex).getBytes();
 
-        // Compare strings to find known attribute
-        for (byte i = 0; i < Const.KNOWN_ATTRIBUTES; i++) {
-            if (name.equals(Const.getAttributeName(i))) {
-                tag = i; // found!
-                break;
-            }
+    // Validate name
+    if (name == null || name.isEmpty()) {
+        throw new InvalidParameterException("Attribute name is invalid or empty");
+    }
+
+    // Length of data in bytes
+    final int length = dataInput.readInt();
+
+    // Validate length
+    if (length < 0) {
+        throw new InvalidParameterException("Attribute length is negative");
+    }
+
+    // Compare strings to find known attribute
+    for (byte i = 0; i < Const.KNOWN_ATTRIBUTES; i++) {
+        if (name.equals(Const.getAttributeName(i))) {
+            tag = i; // found!
+            break;
         }
+    }
 
-        // Call proper constructor, depending on 'tag'
-        switch (tag) {
+    // Call proper constructor, depending on 'tag'
+    switch (tag) {
         case Const.ATTR_UNKNOWN:
             final Object r = READERS.get(name);
             if (r instanceof UnknownAttributeReader) {
@@ -197,8 +209,8 @@ public abstract class Attribute implements Cloneable, Node {
         default:
             // Never reached
             throw new IllegalStateException("Unrecognized attribute type tag parsed: " + tag);
-        }
     }
+}
 
     /**
      * Class method reads one attribute from the input data stream. This method must not be accessible from the outside. It
