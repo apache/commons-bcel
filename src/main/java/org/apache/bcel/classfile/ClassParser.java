@@ -25,6 +25,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
+import java.util.jar.JarInputStream;
+
 
 import org.apache.bcel.Const;
 
@@ -65,8 +68,9 @@ public final class ClassParser {
     public ClassParser(final InputStream inputStream, final String fileName) {
         this.fileName = fileName;
         this.fileOwned = false;
-        final String clazz = inputStream.getClass().getName(); // Not a very clean solution ...
-        this.isZip = clazz.startsWith("java.util.zip.") || clazz.startsWith("java.util.jar.");
+        
+        this.isZip = (inputStream instanceof ZipInputStream) || (inputStream instanceof JarInputStream);
+
         if (inputStream instanceof DataInputStream) {
             this.dataInputStream = (DataInputStream) inputStream;
         } else {
