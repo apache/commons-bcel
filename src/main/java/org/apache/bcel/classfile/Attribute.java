@@ -109,33 +109,28 @@ public abstract class Attribute implements Cloneable, Node {
      * @throws IOException if an I/O error occurs.
      * @since 6.0
      */
-public static Attribute readAttribute(final DataInput dataInput, final ConstantPool constantPool) throws IOException {
-    byte tag = Const.ATTR_UNKNOWN; // Unknown attribute
-
-    // Get class name from constant pool via 'name_index' indirection
-    final int nameIndex = dataInput.readUnsignedShort();
-    final String name = constantPool.getConstantUtf8(nameIndex).getBytes();
-
-    // Validate name
-    if (name == null || name.isEmpty()) {
-        throw new InvalidParameterException("Attribute name is invalid or empty");
-    }
-
-    // Length of data in bytes
-    final int length = dataInput.readInt();
-
-    // Validate length
-    if (length < 0) {
-        throw new InvalidParameterException("Attribute length is negative");
-    }
-
-    // Compare strings to find known attribute
-    for (byte i = 0; i < Const.KNOWN_ATTRIBUTES; i++) {
-        if (name.equals(Const.getAttributeName(i))) {
-            tag = i; // found!
-            break;
+    public static Attribute readAttribute(final DataInput dataInput, final ConstantPool constantPool) throws IOException {
+        byte tag = Const.ATTR_UNKNOWN; // Unknown attribute
+        // Get class name from constant pool via 'name_index' indirection
+        final int nameIndex = dataInput.readUnsignedShort();
+        final String name = constantPool.getConstantUtf8(nameIndex).getBytes();
+        // Validate name
+        if (name == null || name.isEmpty()) {
+            throw new InvalidParameterException("Attribute name is invalid or empty");
         }
-    }
+        // Length of data in bytes
+        final int length = dataInput.readInt();
+        // Validate length
+        if (length < 0) {
+            throw new InvalidParameterException("Attribute length is negative");
+        }
+        // Compare strings to find known attribute
+        for (byte i = 0; i < Const.KNOWN_ATTRIBUTES; i++) {
+            if (name.equals(Const.getAttributeName(i))) {
+                tag = i; // found!
+                break;
+            }
+        }
 
     // Call proper constructor, depending on 'tag'
     switch (tag) {
