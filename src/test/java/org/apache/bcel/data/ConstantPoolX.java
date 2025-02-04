@@ -182,7 +182,7 @@ public abstract class ConstantPoolX implements Cloneable, Node {
      * Dump constant pool to file stream in binary format.
      *
      * @param file Output file stream
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     public void dump(final DataOutputStream file) throws IOException {
         file.writeShort(constantPool.length);
