@@ -81,7 +81,11 @@ public class ModularRuntimeImage implements Closeable {
             classLoader.close();
         }
         if (fileSystem != null) {
-            fileSystem.close();
+            try {
+                fileSystem.close();
+            } catch (final UnsupportedOperationException e) {
+                // do nothing
+            }
         }
     }
 

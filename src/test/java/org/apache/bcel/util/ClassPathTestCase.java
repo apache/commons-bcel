@@ -16,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 package org.apache.bcel.util;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -28,6 +27,13 @@ import org.apache.bcel.AbstractTestCase;
 import org.junit.jupiter.api.Test;
 
 public class ClassPathTestCase extends AbstractTestCase {
+
+    @Test
+    void testClose() throws IOException {
+        try (ClassPath cp = new ClassPath(ClassPath.getClassPath())) {
+            assertNotNull(cp);
+        }
+    }
 
     @Test
     public void testGetClassFile() throws IOException {

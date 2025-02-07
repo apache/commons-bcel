@@ -63,6 +63,7 @@ The <action> type attribute can be add,update,fix,remove.
       <!-- FIX -->
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Replace internal use of Locale.ENGLISH with Locale.ROOT.</action>
       <action issue="BCEL-375" type="fix" dev="ggregory" due-to="J. Lewis Muir, Gary Gregory">Wrong permissions on bcel .jar file in binary .tar.gz distribution file.</action>
+      <action issue="BCEL-376" type="fix" dev="ggregory" due-to="Dominik Stadler, Gary Gregory">ClassPath.close() throws UnsupportedOperationException when created with system-classpath.</action>
       <!-- ADD -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_25.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_25.</action>
