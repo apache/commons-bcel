@@ -633,7 +633,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * @return returns either HEAP (generated), FILE, or ZIP
+     * @return either HEAP (generated), FILE, or ZIP
      */
     public final byte getSource() {
         return source;
