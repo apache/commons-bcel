@@ -103,7 +103,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     /**
      * Returns the type associated with the instruction - in case of ALOAD or ASTORE Type.OBJECT is returned. This is just a
      * bit incorrect, because ALOAD and ASTORE may work on every ReferenceType (including Type.NULL) and ASTORE may even
-     * work on a ReturnaddressType .
+     * work on a ReturnaddressType.
      *
      * @return type associated with the instruction
      */

@@ -462,7 +462,7 @@ public class Subroutines {
         // we don't want to assign an instruction to two or more Subroutine objects.
         final Set<InstructionHandle> instructionsAssigned = new HashSet<>();
 
-        // Graph coloring. Key: InstructionHandle, Value: ColourConstants enum .
+        // Graph coloring. Key: InstructionHandle, Value: ColourConstants enum.
         final Map<InstructionHandle, ColourConstants> colors = new HashMap<>();
 
         final List<InstructionHandle> qList = new ArrayList<>();

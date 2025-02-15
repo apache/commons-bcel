@@ -132,7 +132,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         il.append(InstructionConst.ACONST_NULL);
         lg.setStart(il.append(new ASTORE(name))); // "name" valid from here
         // Create try-catch block: We remember the start of the block, read a
-        // line from the standard input and store it into the variable name .
+        // line from the standard input and store it into the variable name.
         // InstructionHandle try_start = il.append(factory.createFieldAccess(
         // "java.lang.System", "out", p_stream, Constants.GETSTATIC));
         // il.append(new PUSH(cp, "Please enter your name> "));
@@ -208,7 +208,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         il.append(InstructionConst.ACONST_NULL);
         lg.setStart(il.append(new ASTORE(name))); // "name" valid from here
         // Create try-catch block: We remember the start of the block, read a
-        // line from the standard input and store it into the variable name .
+        // line from the standard input and store it into the variable name.
         // InstructionHandle try_start = il.append(factory.createFieldAccess(
         // "java.lang.System", "out", p_stream, Constants.GETSTATIC));
         // il.append(new PUSH(cp, "Please enter your name> "));
