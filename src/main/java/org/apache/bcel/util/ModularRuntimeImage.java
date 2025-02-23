@@ -35,6 +35,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
+
 /**
  * Wraps a Java 9 JEP 220 modular runtime image. Requires the JRT NIO file system.
  *
@@ -77,9 +79,7 @@ public class ModularRuntimeImage implements Closeable {
 
     @Override
     public void close() throws IOException {
-        if (classLoader != null) {
-            classLoader.close();
-        }
+        IOUtils.close(classLoader);
         if (fileSystem != null) {
             try {
                 fileSystem.close();

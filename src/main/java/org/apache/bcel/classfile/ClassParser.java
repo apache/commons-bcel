@@ -27,6 +27,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.apache.bcel.Const;
+import org.apache.commons.io.IOUtils;
 
 /**
  * Wrapper class that parses a given Java .class file. The method <a href ="#parse">parse</a> returns a
@@ -160,21 +161,9 @@ public final class ClassParser {
         } finally {
             // Read everything of interest, so close the file
             if (fileOwned) {
-                try {
-                    if (dataInputStream != null) {
-                        dataInputStream.close();
-                    }
-                } catch (final IOException ignored) {
-                    // ignore close exceptions
-                }
+                IOUtils.closeQuietly(dataInputStream);
             }
-            try {
-                if (zip != null) {
-                    zip.close();
-                }
-            } catch (final IOException ignored) {
-                // ignore close exceptions
-            }
+            IOUtils.closeQuietly(zip);
         }
         // Return the information we have gathered in a new object
         return new JavaClass(classNameIndex, superclassNameIndex, fileName, major, minor, accessFlags, constantPool, interfaces, fields, methods, attributes,

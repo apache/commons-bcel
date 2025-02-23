@@ -44,6 +44,7 @@ import java.util.zip.ZipFile;
 
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Utility;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SystemProperties;
 
 /**
@@ -70,10 +71,7 @@ public class ClassPath implements Closeable {
 
         @Override
         public void close() throws IOException {
-            if (zipFile != null) {
-                zipFile.close();
-            }
-
+            IOUtils.close(zipFile);
         }
 
         @Override

@@ -365,7 +365,6 @@
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
       <version>2.18.0</version>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <!-- BCEL-336 refers to this specific version.  -->
