@@ -95,7 +95,7 @@ public class Subroutines {
         private InstructionHandle theRET;
 
         /**
-         * The default constructor.
+         * Constructs a new instance.
          */
         SubroutineImpl() {
             // empty
