@@ -57,7 +57,7 @@
     <commons.osgi.export>org.apache.bcel.*;version=${project.version};-noimport:=true</commons.osgi.export>
     <commons.jira.id>BCEL</commons.jira.id>
     <commons.jira.pid>12314220</commons.jira.pid>
-    <jna.version>5.16.0</jna.version>
+    <jna.version>5.17.0</jna.version>
     <japicmp.skip>false</japicmp.skip>
     <!-- JaCoCo on Java 8 is different from other versions. On JDK9+ there is a profile -->
     <!-- JaCoCo: Don't make code coverage worse than: -->
