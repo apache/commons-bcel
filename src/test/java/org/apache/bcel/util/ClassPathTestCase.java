@@ -19,6 +19,7 @@
 package org.apache.bcel.util;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,5 +51,10 @@ public class ClassPathTestCase extends AbstractTestCase {
         try (InputStream inputStream = ClassPath.SYSTEM_CLASS_PATH.getResourceAsStream("java/lang/String.class")) {
             assertNotNull(inputStream);
         }
+    }
+
+    @Test
+    public void testGetResources() {
+        assertTrue(ClassPath.SYSTEM_CLASS_PATH.getResources("java/lang/String.class").hasMoreElements());
     }
 }

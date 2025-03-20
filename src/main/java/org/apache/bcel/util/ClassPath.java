@@ -32,12 +32,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.StringTokenizer;
-import java.util.Vector;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -767,14 +767,14 @@ public class ClassPath implements Closeable {
      * @since 6.0
      */
     public Enumeration<URL> getResources(final String name) {
-        final Vector<URL> results = new Vector<>();
+        final List<URL> list = new ArrayList<>();
         for (final AbstractPathEntry path : paths) {
             final URL url;
             if ((url = path.getResource(name)) != null) {
-                results.add(url);
+                list.add(url);
             }
         }
-        return results.elements();
+        return Collections.enumeration(list);
     }
 
     @Override
