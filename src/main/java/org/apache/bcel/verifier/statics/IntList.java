@@ -39,7 +39,7 @@ public class IntList {
         list.add(Integer.valueOf(i));
     }
 
-    /** Checks if the specified int is already in the list. */
+    /** Tests if the specified int is already in the list. */
     boolean contains(final int i) {
         return list.contains(i);
     }

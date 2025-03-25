@@ -815,7 +815,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * Test for empty list.
+     * Tests for empty list.
      */
     public boolean isEmpty() {
         return start == null;
