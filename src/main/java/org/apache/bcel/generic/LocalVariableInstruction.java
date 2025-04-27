@@ -131,7 +131,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     }
 
     /**
-     * Read needed data (for example index) from file.
+     * Reads needed data (for example index) from file.
      *
      * <pre>
      * (ILOAD &lt;= tag &lt;= ALOAD_3) || (ISTORE &lt;= tag &lt;= ASTORE_3)

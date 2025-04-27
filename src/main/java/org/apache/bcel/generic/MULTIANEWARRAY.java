@@ -112,7 +112,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
     }
 
     /**
-     * Read needed data (i.e., no. dimension) from file.
+     * Reads needed data (i.e., no. dimension) from file.
      */
     @Override
     protected void initFromFile(final ByteSequence bytes, final boolean wide) throws IOException {

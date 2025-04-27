@@ -97,7 +97,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
     }
 
     /**
-     * Read needed data (for example index) from file.
+     * Reads needed data (for example index) from file.
      */
     @Override
     protected void initFromFile(final ByteSequence bytes, final boolean wide) throws IOException {

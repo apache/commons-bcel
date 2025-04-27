@@ -106,7 +106,7 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
     }
 
     /**
-     * Read needed data (i.e., index) from file.
+     * Reads needed data (i.e., index) from file.
      */
     @Override
     protected void initFromFile(final ByteSequence bytes, final boolean wide) throws IOException {

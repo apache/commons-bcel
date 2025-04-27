@@ -156,7 +156,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     }
 
     /**
-     * Read needed data (for example index) from file. Conversion to a InstructionHandle is done in InstructionList(byte[]).
+     * Reads needed data (for example index) from file. Conversion to a InstructionHandle is done in InstructionList(byte[]).
      *
      * @param bytes input stream
      * @param wide wide prefix?

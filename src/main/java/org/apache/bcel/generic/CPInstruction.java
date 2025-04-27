@@ -89,7 +89,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
     }
 
     /**
-     * Read needed data (i.e., index) from file.
+     * Reads needed data (i.e., index) from file.
      *
      * @param bytes input stream
      * @param wide wide prefix?

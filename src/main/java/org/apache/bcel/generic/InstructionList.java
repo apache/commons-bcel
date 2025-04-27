@@ -124,7 +124,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
                 final int off = bytes.getIndex();
                 pos[count] = off;
                 /*
-                 * Read one instruction from the byte stream, the byte position is set accordingly.
+                 * Reads one instruction from the byte stream, the byte position is set accordingly.
                  */
                 final Instruction i = Instruction.readInstruction(bytes);
                 final InstructionHandle ih;
