@@ -176,7 +176,7 @@ public class Class2HTML implements Constants {
     private final String dir;
 
     /**
-     * Write contents of the given JavaClass into HTML files.
+     * Writes contents of the given JavaClass into HTML files.
      *
      * @param javaClass The class to write
      * @param dir The directory to put the files in

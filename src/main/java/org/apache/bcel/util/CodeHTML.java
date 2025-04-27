@@ -473,7 +473,7 @@ final class CodeHTML {
     }
 
     /**
-     * Write a single method with the byte code associated with it.
+     * Writes a single method with the byte code associated with it.
      */
     private void writeMethod(final Method method, final int methodNumber) throws IOException {
         // Get raw signature
