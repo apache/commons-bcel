@@ -110,8 +110,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         final MethodGen mg = createMethodGen("main", il, cp);
         final InstructionFactory factory = new InstructionFactory(cg);
         // We now define some often used types:
-        final ObjectType iStream = new ObjectType("java.io.InputStream");
-        final ObjectType pStream = new ObjectType("java.io.PrintStream");
+        final ObjectType inStream = new ObjectType("java.io.InputStream");
+        final ObjectType printStream = new ObjectType("java.io.PrintStream");
         // Create variables in and name : We call the constructors, i.e.,
         // execute BufferedReader(InputStreamReader(System.in)) . The reference
         // to the BufferedReader object stays on top of the stack and is stored
@@ -120,8 +120,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         il.append(InstructionConst.DUP); // Use predefined constant
         il.append(factory.createNew("java.io.InputStreamReader"));
         il.append(InstructionConst.DUP);
-        il.append(factory.createFieldAccess("java.lang.System", "in", iStream, Const.GETSTATIC));
-        il.append(factory.createInvoke("java.io.InputStreamReader", "<init>", Type.VOID, new Type[] {iStream}, Const.INVOKESPECIAL));
+        il.append(factory.createFieldAccess("java.lang.System", "in", inStream, Const.GETSTATIC));
+        il.append(factory.createInvoke("java.io.InputStreamReader", "<init>", Type.VOID, new Type[] {inStream}, Const.INVOKESPECIAL));
         il.append(factory.createInvoke("java.io.BufferedReader", "<init>", Type.VOID, new Type[] {new ObjectType("java.io.Reader")}, Const.INVOKESPECIAL));
         LocalVariableGen lg = mg.addLocalVariable("in", new ObjectType("java.io.BufferedReader"), null, null);
         final int in = lg.getIndex();
@@ -157,7 +157,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         mg.addExceptionHandler(tryStart, tryEnd, handler, new ObjectType("java.io.IOException"));
         // "Normal" code continues, now we can set the branch target of the GOTO
         // .
-        final InstructionHandle ih = il.append(factory.createFieldAccess("java.lang.System", "out", pStream, Const.GETSTATIC));
+        final InstructionHandle ih = il.append(factory.createFieldAccess("java.lang.System", "out", printStream, Const.GETSTATIC));
         g.setTarget(ih);
         // Printing "Hello": String concatenation compiles to StringBuffer
         // operations.
@@ -186,8 +186,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         final InstructionFactory factory = new InstructionFactory(cg);
         mg.addAnnotationEntry(createSimpleVisibleAnnotation(mg.getConstantPool()));
         // We now define some often used types:
-        final ObjectType iStream = new ObjectType("java.io.InputStream");
-        final ObjectType pStream = new ObjectType("java.io.PrintStream");
+        final ObjectType inStream = new ObjectType("java.io.InputStream");
+        final ObjectType printStream = new ObjectType("java.io.PrintStream");
         // Create variables in and name : We call the constructors, i.e.,
         // execute BufferedReader(InputStreamReader(System.in)) . The reference
         // to the BufferedReader object stays on top of the stack and is stored
@@ -196,8 +196,8 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         il.append(InstructionConst.DUP); // Use predefined constant
         il.append(factory.createNew("java.io.InputStreamReader"));
         il.append(InstructionConst.DUP);
-        il.append(factory.createFieldAccess("java.lang.System", "in", iStream, Const.GETSTATIC));
-        il.append(factory.createInvoke("java.io.InputStreamReader", "<init>", Type.VOID, new Type[] {iStream}, Const.INVOKESPECIAL));
+        il.append(factory.createFieldAccess("java.lang.System", "in", inStream, Const.GETSTATIC));
+        il.append(factory.createInvoke("java.io.InputStreamReader", "<init>", Type.VOID, new Type[] {inStream}, Const.INVOKESPECIAL));
         il.append(factory.createInvoke("java.io.BufferedReader", "<init>", Type.VOID, new Type[] {new ObjectType("java.io.Reader")}, Const.INVOKESPECIAL));
         LocalVariableGen lg = mg.addLocalVariable("in", new ObjectType("java.io.BufferedReader"), null, null);
         final int in = lg.getIndex();
@@ -233,7 +233,7 @@ public class GeneratingAnnotatedClassesTestCase extends AbstractTestCase {
         mg.addExceptionHandler(tryStart, tryEnd, handler, new ObjectType("java.io.IOException"));
         // "Normal" code continues, now we can set the branch target of the GOTO
         // .
-        final InstructionHandle ih = il.append(factory.createFieldAccess("java.lang.System", "out", pStream, Const.GETSTATIC));
+        final InstructionHandle ih = il.append(factory.createFieldAccess("java.lang.System", "out", printStream, Const.GETSTATIC));
         g.setTarget(ih);
         // Printing "Hello": String concatenation compiles to StringBuffer
         // operations.
