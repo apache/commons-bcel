@@ -82,7 +82,7 @@ public class JDKClassDumpTest {
     }
 
     @Test
-    public void testPerformanceJmod() throws Exception {
+    void testPerformanceJmod() throws Exception {
         JavaHome.streamModulePath().forEach(path -> assertDoesNotThrow(() -> testJar(path)));
     }
 }

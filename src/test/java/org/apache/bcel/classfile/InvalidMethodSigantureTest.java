@@ -63,7 +63,7 @@ public class InvalidMethodSigantureTest {
     private static final String SRC_TEST_RESOURCES_KOTLIN = "src/test/resources/kotlin/";
 
     @Test
-    public void testLoadClass() throws Exception {
+    void testLoadClass() throws Exception {
         final Path path = Paths.get(SRC_TEST_RESOURCES_KOTLIN);
         assertTrue(Files.exists(path));
         assertTrue(Files.isDirectory(path));

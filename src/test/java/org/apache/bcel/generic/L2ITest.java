@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class L2ITest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final L2I l2i = new L2I();
         l2i.accept(countVisitor);

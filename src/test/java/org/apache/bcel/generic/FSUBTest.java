@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class FSUBTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final FSUB fsub = new FSUB();
         fsub.accept(countVisitor);

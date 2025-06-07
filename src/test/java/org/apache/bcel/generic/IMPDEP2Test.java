@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class IMPDEP2Test {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final IMPDEP2 impdep2 = new IMPDEP2();
         impdep2.accept(countVisitor);

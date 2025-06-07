@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class LADDTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final LADD ladd = new LADD();
         ladd.accept(countVisitor);

@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 
 public class InstructionFinderTest extends AbstractTest {
     @Test
-    public void testSearchAll() throws Exception {
+    void testSearchAll() throws Exception {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".util.InstructionFinder");
         final Method[] methods = clazz.getMethods();
         Method searchM = null;

@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class IXORTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final IXOR ixor = new IXOR();
         ixor.accept(countVisitor);

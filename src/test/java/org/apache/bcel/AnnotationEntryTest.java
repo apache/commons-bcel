@@ -37,26 +37,26 @@ import org.junit.jupiter.api.Test;
 public class AnnotationEntryTest {
 
     @Test
-    public void testAddElementNameValuePair() {
+    void testAddElementNameValuePair() {
         final AnnotationEntry annotationEntry = new AnnotationEntry(0, null, false);
         annotationEntry.addElementNameValuePair(new ElementValuePair(0, new SimpleElementValue(0, 0, null), null));
         assertEquals(1, annotationEntry.getNumElementValuePairs());
     }
 
     @Test
-    public void testDump() throws IOException {
+    void testDump() throws IOException {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         new AnnotationEntry(0, null, false).dump(new DataOutputStream(out));
         assertArrayEquals(new byte[4], out.toByteArray());
     }
 
     @Test
-    public void testGetElementValuePairs() {
+    void testGetElementValuePairs() {
         assertEquals(0, new AnnotationEntry(0, null, false).getElementValuePairs().length);
     }
 
     @Test
-    public void testGetNumElementValuePairs() {
+    void testGetNumElementValuePairs() {
         assertEquals(0, new AnnotationEntry(0, null, false).getNumElementValuePairs());
     }
 }

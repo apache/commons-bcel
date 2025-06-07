@@ -72,7 +72,7 @@ public class MethodGenTest {
     }
 
     @Test
-    public void testAnnotationsAreUnpacked() throws Exception {
+    void testAnnotationsAreUnpacked() throws Exception {
         final JavaClass jc = Repository.lookupClass(Bar.Inner.class);
         final ClassGen cg = new ClassGen(jc);
         final MethodGen mg = new MethodGen(cg.getMethodAt(0), cg.getClassName(), cg.getConstantPool());
@@ -91,17 +91,17 @@ public class MethodGenTest {
     }
 
     @Test
-    public void testInvalidNullMethodBody_EmptyStaticInit() throws Exception {
+    void testInvalidNullMethodBody_EmptyStaticInit() throws Exception {
         testInvalidNullMethodBody("org.apache.bcel.generic.EmptyStaticInit");
     }
 
     @Test
-    public void testInvalidNullMethodBody_MailDateFormat() {
+    void testInvalidNullMethodBody_MailDateFormat() {
         assertThrows(IllegalStateException.class, () -> testInvalidNullMethodBody("javax.mail.internet.MailDateFormat"));
     }
 
     @Test
-    public void testRemoveLocalVariable() throws Exception {
+    void testRemoveLocalVariable() throws Exception {
         final MethodGen mg = getMethod(Foo.class, "bar");
 
         final LocalVariableGen lv = mg.getLocalVariables()[1];
@@ -123,7 +123,7 @@ public class MethodGenTest {
     }
 
     @Test
-    public void testRemoveLocalVariables() throws Exception {
+    void testRemoveLocalVariables() throws Exception {
         final MethodGen mg = getMethod(Foo.class, "bar");
 
         final LocalVariableGen lv = mg.getLocalVariables()[1];

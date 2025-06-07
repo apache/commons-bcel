@@ -479,7 +479,7 @@ public class ConstantPoolModuleToStringTest {
     }
 
     @Test
-    public void test() throws Exception {
+    void test() throws Exception {
         final Enumeration<URL> moduleURLs = getClass().getClassLoader().getResources("module-info.class");
         while (moduleURLs.hasMoreElements()) {
             final URL url = moduleURLs.nextElement();

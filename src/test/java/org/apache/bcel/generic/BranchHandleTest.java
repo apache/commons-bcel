@@ -26,12 +26,12 @@ import org.junit.jupiter.api.Test;
 public class BranchHandleTest {
 
     @Test
-    public void testGetBHnull() {
+    void testGetBHnull() {
         assertThrows(ClassGenException.class, () -> BranchHandle.getBranchHandle(null));
     }
 
     @Test
-    public void testsetInstructionBI() {
+    void testsetInstructionBI() {
         final BranchHandle bh = BranchHandle.getBranchHandle(new GOTO(null)); // have to start with a valid BI
         assertNotNull(bh);
         bh.setInstruction(new GOTO(null));
@@ -39,7 +39,7 @@ public class BranchHandleTest {
     }
 
     @Test
-    public void testsetInstructionnotBI() {
+    void testsetInstructionnotBI() {
         final BranchHandle bh = BranchHandle.getBranchHandle(new GOTO(null)); // have to start with a valid BI
         assertNotNull(bh);
         assertThrows(ClassGenException.class, () -> bh.setInstruction(new NOP()));
@@ -47,7 +47,7 @@ public class BranchHandleTest {
 
     // Test that setInstruction only allows BranchInstructions
     @Test
-    public void testsetInstructionNull() {
+    void testsetInstructionNull() {
         final BranchHandle bh = BranchHandle.getBranchHandle(new GOTO(null)); // have to start with a valid BI
         assertNotNull(bh);
         assertThrows(ClassGenException.class, () -> bh.setInstruction(null));

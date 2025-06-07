@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class LDIVTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final LDIV ldiv = new LDIV();
         ldiv.accept(countVisitor);

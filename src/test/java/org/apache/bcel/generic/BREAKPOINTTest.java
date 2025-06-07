@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class BREAKPOINTTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final BREAKPOINT breakpoint = new BREAKPOINT();
         breakpoint.accept(countVisitor);

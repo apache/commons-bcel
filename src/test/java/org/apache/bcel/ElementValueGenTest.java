@@ -58,7 +58,7 @@ public class ElementValueGenTest extends AbstractTest {
     }
 
     @Test
-    public void testCreateBooleanElementValue() throws Exception {
+    void testCreateBooleanElementValue() throws Exception {
         final ClassGen cg = createClassGen("HelloWorld");
         final ConstantPoolGen cp = cg.getConstantPool();
         final SimpleElementValueGen evg = new SimpleElementValueGen(ElementValueGen.PRIMITIVE_BOOLEAN, cp, true);
@@ -70,7 +70,7 @@ public class ElementValueGenTest extends AbstractTest {
     }
 
     @Test
-    public void testCreateByteElementValue() throws Exception {
+    void testCreateByteElementValue() throws Exception {
         final ClassGen cg = createClassGen("HelloWorld");
         final ConstantPoolGen cp = cg.getConstantPool();
         final SimpleElementValueGen evg = new SimpleElementValueGen(ElementValueGen.PRIMITIVE_BYTE, cp, (byte) 'z');
@@ -82,7 +82,7 @@ public class ElementValueGenTest extends AbstractTest {
     }
 
     @Test
-    public void testCreateCharElementValue() throws Exception {
+    void testCreateCharElementValue() throws Exception {
         final ClassGen cg = createClassGen("HelloWorld");
         final ConstantPoolGen cp = cg.getConstantPool();
         final SimpleElementValueGen evg = new SimpleElementValueGen(ElementValueGen.PRIMITIVE_CHAR, cp, 't');
@@ -96,7 +96,7 @@ public class ElementValueGenTest extends AbstractTest {
     // //
     // Create class element value
     @Test
-    public void testCreateClassElementValue() throws Exception {
+    void testCreateClassElementValue() throws Exception {
         final ClassGen cg = createClassGen("HelloWorld");
         final ConstantPoolGen cp = cg.getConstantPool();
         final ObjectType classType = new ObjectType("java.lang.Integer");
@@ -106,7 +106,7 @@ public class ElementValueGenTest extends AbstractTest {
     }
 
     @Test
-    public void testCreateDoubleElementValue() throws Exception {
+    void testCreateDoubleElementValue() throws Exception {
         final ClassGen cg = createClassGen("HelloWorld");
         final ConstantPoolGen cp = cg.getConstantPool();
         final SimpleElementValueGen evg = new SimpleElementValueGen(ElementValueGen.PRIMITIVE_DOUBLE, cp, 333.44);
@@ -120,7 +120,7 @@ public class ElementValueGenTest extends AbstractTest {
     // //
     // Create enum element value
     @Test
-    public void testCreateEnumElementValue() throws Exception {
+    void testCreateEnumElementValue() throws Exception {
         final ClassGen cg = createClassGen("HelloWorld");
         final ConstantPoolGen cp = cg.getConstantPool();
         final ObjectType enumType = new ObjectType("SimpleEnum"); // Supports rainbow
@@ -139,7 +139,7 @@ public class ElementValueGenTest extends AbstractTest {
     }
 
     @Test
-    public void testCreateFloatElementValue() throws Exception {
+    void testCreateFloatElementValue() throws Exception {
         final ClassGen cg = createClassGen("HelloWorld");
         final ConstantPoolGen cp = cg.getConstantPool();
         final SimpleElementValueGen evg = new SimpleElementValueGen(ElementValueGen.PRIMITIVE_FLOAT, cp, 111.222f);
@@ -153,7 +153,7 @@ public class ElementValueGenTest extends AbstractTest {
      * Create primitive element values
      */
     @Test
-    public void testCreateIntegerElementValue() throws Exception {
+    void testCreateIntegerElementValue() throws Exception {
         final ClassGen cg = createClassGen("HelloWorld");
         final ConstantPoolGen cp = cg.getConstantPool();
         final SimpleElementValueGen evg = new SimpleElementValueGen(ElementValueGen.PRIMITIVE_INT, cp, 555);
@@ -164,7 +164,7 @@ public class ElementValueGenTest extends AbstractTest {
     }
 
     @Test
-    public void testCreateLongElementValue() throws Exception {
+    void testCreateLongElementValue() throws Exception {
         final ClassGen cg = createClassGen("HelloWorld");
         final ConstantPoolGen cp = cg.getConstantPool();
         final SimpleElementValueGen evg = new SimpleElementValueGen(ElementValueGen.PRIMITIVE_LONG, cp, 3334455L);
@@ -176,7 +176,7 @@ public class ElementValueGenTest extends AbstractTest {
     }
 
     @Test
-    public void testCreateShortElementValue() throws Exception {
+    void testCreateShortElementValue() throws Exception {
         final ClassGen cg = createClassGen("HelloWorld");
         final ConstantPoolGen cp = cg.getConstantPool();
         final SimpleElementValueGen evg = new SimpleElementValueGen(ElementValueGen.PRIMITIVE_SHORT, cp, (short) 42);
@@ -190,7 +190,7 @@ public class ElementValueGenTest extends AbstractTest {
     // //
     // Create string element values
     @Test
-    public void testCreateStringElementValue() throws Exception {
+    void testCreateStringElementValue() throws Exception {
         // Create HelloWorld
         final ClassGen cg = createClassGen("HelloWorld");
         final ConstantPoolGen cp = cg.getConstantPool();

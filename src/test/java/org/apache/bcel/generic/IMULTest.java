@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class IMULTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final IMUL imul = new IMUL();
         imul.accept(countVisitor);

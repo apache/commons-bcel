@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class FNEGTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final FNEG fneg = new FNEG();
         fneg.accept(countVisitor);

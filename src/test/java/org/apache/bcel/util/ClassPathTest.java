@@ -37,24 +37,24 @@ public class ClassPathTest extends AbstractTest {
     }
 
     @Test
-    public void testGetClassFile() throws IOException {
+    void testGetClassFile() throws IOException {
         assertNotNull(ClassPath.SYSTEM_CLASS_PATH.getClassFile("java.lang.String"));
     }
 
     @Test
-    public void testGetResource() {
+    void testGetResource() {
         assertNotNull(ClassPath.SYSTEM_CLASS_PATH.getResource("java/lang/String.class"));
     }
 
     @Test
-    public void testGetResourceAsStream() throws IOException {
+    void testGetResourceAsStream() throws IOException {
         try (InputStream inputStream = ClassPath.SYSTEM_CLASS_PATH.getResourceAsStream("java/lang/String.class")) {
             assertNotNull(inputStream);
         }
     }
 
     @Test
-    public void testGetResources() {
+    void testGetResources() {
         assertTrue(ClassPath.SYSTEM_CLASS_PATH.getResources("java/lang/String.class").hasMoreElements());
     }
 }

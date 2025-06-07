@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 
 public class VerifierThrowTest extends AbstractVerifierTest {
     @Test
-    public void testThrowEmptyStack() throws IOException, ClassNotFoundException {
+    void testThrowEmptyStack() throws IOException, ClassNotFoundException {
         new TestThrow01Creator().create();
         assertVerifyRejected("TestThrow01", "Verification of a method with ATHROW instruction on an empty stack must fail.");
     }

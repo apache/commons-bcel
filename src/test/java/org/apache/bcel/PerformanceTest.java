@@ -132,7 +132,7 @@ public final class PerformanceTest {
     }
 
     @Test
-    public void testPerformance() {
+    void testPerformance() {
         final File javaLib = new File(SystemProperties.getJavaHome(), "lib");
         javaLib.listFiles(file -> {
             if (file.getName().endsWith(".jar")) {

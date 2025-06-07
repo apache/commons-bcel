@@ -35,7 +35,7 @@ import org.junit.jupiter.api.Test;
 public class VerifierArrayAccessTest extends AbstractVerifierTest {
 
     @Test
-    public void testInvalidArrayAccess() throws IOException, ClassNotFoundException {
+    void testInvalidArrayAccess() throws IOException, ClassNotFoundException {
         new TestArrayAccess03Creator().create();
         assertVerifyRejected("TestArrayAccess03", "Verification of an arraystore instruction on an object must fail.");
         new TestArrayAccess04IntCreator().create();
@@ -53,7 +53,7 @@ public class VerifierArrayAccessTest extends AbstractVerifierTest {
     }
 
     @Test
-    public void testValidArrayAccess() throws IOException, ClassNotFoundException {
+    void testValidArrayAccess() throws IOException, ClassNotFoundException {
         assertVerifyOK("TestArrayAccess01", "Verification of an arraystore instruction on an array that is not compatible with the stored element must pass.");
         new TestArrayAccess02Creator().create();
         assertVerifyOK("TestArrayAccess02", "Verification of an arraystore instruction on an array that is not compatible with the stored element must pass.");

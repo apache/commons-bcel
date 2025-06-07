@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class IANDTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final IAND iand = new IAND();
         iand.accept(countVisitor);

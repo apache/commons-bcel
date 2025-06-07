@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class LCMPTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final LCMP lcmp = new LCMP();
         lcmp.accept(countVisitor);

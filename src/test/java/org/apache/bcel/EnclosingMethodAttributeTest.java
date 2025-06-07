@@ -38,7 +38,7 @@ public class EnclosingMethodAttributeTest extends AbstractTest {
      * Check that we can save and load the attribute correctly.
      */
     @Test
-    public void testAttributeSerializtion() throws ClassNotFoundException, IOException {
+    void testAttributeSerializtion() throws ClassNotFoundException, IOException {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.AttributeTestClassEM02$1");
         final ConstantPool pool = clazz.getConstantPool();
         final Attribute[] encMethodAttrs = findAttribute("EnclosingMethod", clazz);
@@ -62,7 +62,7 @@ public class EnclosingMethodAttributeTest extends AbstractTest {
      * null value)
      */
     @Test
-    public void testCheckClassLevelNamedInnerClass() throws ClassNotFoundException {
+    void testCheckClassLevelNamedInnerClass() throws ClassNotFoundException {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.AttributeTestClassEM02$1");
         final ConstantPool pool = clazz.getConstantPool();
         final Attribute[] encMethodAttrs = findAttribute("EnclosingMethod", clazz);
@@ -77,7 +77,7 @@ public class EnclosingMethodAttributeTest extends AbstractTest {
      * Verify for an inner class declared inside the 'main' method that the enclosing method attribute is set correctly.
      */
     @Test
-    public void testCheckMethodLevelNamedInnerClass() throws ClassNotFoundException {
+    void testCheckMethodLevelNamedInnerClass() throws ClassNotFoundException {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.AttributeTestClassEM01$1S");
         final ConstantPool pool = clazz.getConstantPool();
         final Attribute[] encMethodAttrs = findAttribute("EnclosingMethod", clazz);

@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 public class StackMapTest {
 
     @Test
-    public void testSetStackMap() {
+    void testSetStackMap() {
         final StackMap stackMap = new StackMap(0, 0, StackMapEntry.EMPTY_ARRAY, new ConstantPool(new Constant[] { new ConstantLong(0) }));
         // No NPE
         stackMap.setStackMap(null);

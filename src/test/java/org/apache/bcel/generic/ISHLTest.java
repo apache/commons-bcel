@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class ISHLTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final ISHL ishl = new ISHL();
         ishl.accept(countVisitor);

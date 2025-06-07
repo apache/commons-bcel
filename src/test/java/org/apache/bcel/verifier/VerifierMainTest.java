@@ -45,7 +45,7 @@ import org.junit.jupiter.api.Test;
 public class VerifierMainTest extends AbstractTest {
 
     @Test
-    public void testSWAP() throws Exception {
+    void testSWAP() throws Exception {
         final String[] argv = { "src/test/java/org/apache/bcel/data/SWAP.java", "-g", "-source", "1.4", "-target", "1.4", "-d", "target/test-classes" };
         new Main(new PrintWriter(System.out), new PrintWriter(System.err), false/*systemExit*/, null/*options*/, null/*progress*/).compile(argv);
         final String javaAgent = getJavaAgent();

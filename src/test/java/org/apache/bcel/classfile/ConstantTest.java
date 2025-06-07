@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 public class ConstantTest {
 
     @Test
-    public void testBCELComparator() throws Exception {
+    void testBCELComparator() throws Exception {
         final Constant obj = new ConstantClass(1);
         assertTrue(Constant.getComparator().equals(null, null));
         assertTrue(Constant.getComparator().equals(obj, obj));

@@ -135,7 +135,7 @@ public class LocalVariableTypeTableTest extends AbstractTest {
     }
 
     @Test
-    public void testGetLocalVariableTypeTable() throws ClassNotFoundException, NoSuchMethodException, SecurityException {
+    void testGetLocalVariableTypeTable() throws ClassNotFoundException, NoSuchMethodException, SecurityException {
         final JavaClass testJavaClass = getTestJavaClass("org/apache/commons/lang3/function/TriFunction");
         final String expectedToString = "LocalVariableTypes(startPc = 0, length = 17, index = 0:org.apache.commons.lang3.function.TriFunction<T, U, V, R> this)";
         for (final Method method : testJavaClass.getMethods()) {
@@ -151,7 +151,7 @@ public class LocalVariableTypeTableTest extends AbstractTest {
     }
 
     @Test
-    public void testWithGenericArguement() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    void testWithGenericArguement() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         final String targetClass = PACKAGE_BASE_NAME + ".data.SimpleClassHasMethodIncludeGenericArgument";
         final TestClassLoader loader = new TestClassLoader(getClass().getClassLoader());
         final Class<?> cls = loader.findClass(targetClass, getBytesFromClass(targetClass));

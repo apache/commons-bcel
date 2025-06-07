@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
 public class VerifierReturnTest extends AbstractVerifierTest {
 
     @Test
-    public void testInvalidReturn() throws IOException, ClassNotFoundException {
+    void testInvalidReturn() throws IOException, ClassNotFoundException {
         new TestReturn01Creator().create();
         assertVerifyRejected("TestReturn01", "Verification of a void method that returns an object must fail.");
         new TestReturn03IntCreator().create();
@@ -58,7 +58,7 @@ public class VerifierReturnTest extends AbstractVerifierTest {
     }
 
     @Test
-    public void testValidReturn() throws ClassNotFoundException {
+    void testValidReturn() throws ClassNotFoundException {
         assertVerifyOK("TestReturn02", "Verification of a method that returns a newly created object must pass.");
         assertVerifyOK("TestArray01", "Verification of a method that returns an array must pass.");
     }

@@ -28,17 +28,17 @@ import org.junit.jupiter.api.Test;
 public class VerifyJavaUtilTest extends AbstractVerifierTest {
 
     @Test
-    public void testHashMap() throws ClassNotFoundException {
+    void testHashMap() throws ClassNotFoundException {
         assertTrue(doAllPasses("java.util.HashMap"));
     }
 
     @Test
-    public void testLinkedHashMap() throws ClassNotFoundException {
+    void testLinkedHashMap() throws ClassNotFoundException {
         assertTrue(doAllPasses("java.util.LinkedHashMap"));
     }
 
     @Test
-    public void testTreeMap() throws ClassNotFoundException {
+    void testTreeMap() throws ClassNotFoundException {
         assertTrue(doAllPasses("java.util.TreeMap"));
     }
 

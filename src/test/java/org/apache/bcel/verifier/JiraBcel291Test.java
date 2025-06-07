@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 public class JiraBcel291Test {
 
     @Test
-    public void test() throws ClassNotFoundException {
+    void test() throws ClassNotFoundException {
         Verifier.verifyType("org.apache.bcel.verifier.tests.JiraBcel291TestFixture");
     }
 }

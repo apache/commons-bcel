@@ -136,7 +136,7 @@ public class HandleTest {
      * Assert that two independent instruction lists can be modified concurrently. Here: inserting branch instructions.
      */
     @Test
-    public void testBranchHandle() throws Throwable {
+    void testBranchHandle() throws Throwable {
         perform(HandleTest::branchHandles);
     }
 
@@ -144,7 +144,7 @@ public class HandleTest {
      * Assert that two independent instruction lists can be modified concurrently. Here: inserting regular instructions.
      */
     @Test
-    public void testInstructionHandle() throws Throwable {
+    void testInstructionHandle() throws Throwable {
         perform(HandleTest::handles);
     }
 }

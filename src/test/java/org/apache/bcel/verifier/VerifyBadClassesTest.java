@@ -110,7 +110,7 @@ public class VerifyBadClassesTest {
      * BCEL-303: AssertionViolatedException in Pass 3A Verification of invoke instructions
      */
     @Test
-    public void testB303() {
+    void testB303() {
         testVerify("issue303/example", "A");
     }
 
@@ -118,7 +118,7 @@ public class VerifyBadClassesTest {
      * BCEL-307: ClassFormatException thrown in Pass 3A verification
      */
     @Test
-    public void testB307() {
+    void testB307() {
         testVerify("issue307/example", "A");
     }
 
@@ -126,7 +126,7 @@ public class VerifyBadClassesTest {
      * BCEL-308: NullPointerException in Verifier Pass 3A
      */
     @Test
-    public void testB308() {
+    void testB308() {
         testVerify("issue308", "Hello");
     }
 
@@ -134,7 +134,7 @@ public class VerifyBadClassesTest {
      * BCEL-309: NegativeArraySizeException when Code attribute length is negative
      */
     @Test
-    public void testB309() {
+    void testB309() {
         testVerify("issue309", "Hello");
     }
 
@@ -142,7 +142,7 @@ public class VerifyBadClassesTest {
      * BCEL-310: ArrayIndexOutOfBounds in Verifier Pass 3A
      */
     @Test
-    public void testB310() {
+    void testB310() {
         testVerify("issue310", "Hello");
     }
 
@@ -150,7 +150,7 @@ public class VerifyBadClassesTest {
      * BCEL-311: ClassCastException in Verifier Pass 2
      */
     @Test
-    public void testB311() {
+    void testB311() {
         testVerify("issue311", "Hello");
     }
 
@@ -159,7 +159,7 @@ public class VerifyBadClassesTest {
      * Verifier Pass 2
      */
     @Test
-    public void testB312() {
+    void testB312() {
         testVerify("issue312", "Hello");
     }
 
@@ -167,7 +167,7 @@ public class VerifyBadClassesTest {
      * BCEL-313: ClassFormatException: Invalid signature: Ljava/lang/String)V in Verifier Pass 3A
      */
     @Test
-    public void testB313() {
+    void testB313() {
         testVerify("issue313", "Hello");
     }
 
@@ -175,7 +175,7 @@ public class VerifyBadClassesTest {
      * BCEL-337: StringIndexOutOfBounds in Pass 2 Verification of empty method names in the constant pool
      */
     @Test
-    public void testB337() {
+    void testB337() {
         testVerify("issue337/example", "A");
     }
 

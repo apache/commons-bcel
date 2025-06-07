@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class LMULTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final LMUL lmul = new LMUL();
         lmul.accept(countVisitor);

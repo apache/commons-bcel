@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test;
 public class LruCacheClassPathRepositoryTest {
 
     @Test
-    public void testCacheEviction() throws ClassNotFoundException, IOException {
+    void testCacheEviction() throws ClassNotFoundException, IOException {
         try (ClassPath classPath = new ClassPath("")) {
             final LruCacheClassPathRepository repository = new LruCacheClassPathRepository(classPath, 2);
             final JavaClass class1 = repository.loadClass("java.lang.String");
@@ -51,7 +51,7 @@ public class LruCacheClassPathRepositoryTest {
     }
 
     @Test
-    public void testLeastRecentlyUsedEviction() throws ClassNotFoundException, IOException {
+    void testLeastRecentlyUsedEviction() throws ClassNotFoundException, IOException {
         try (ClassPath classPath = new ClassPath("")) {
             final LruCacheClassPathRepository repository = new LruCacheClassPathRepository(classPath, 2);
             final JavaClass class1 = repository.loadClass("java.lang.String");
@@ -69,7 +69,7 @@ public class LruCacheClassPathRepositoryTest {
     }
 
     @Test
-    public void testZeroCacheSize() throws IOException {
+    void testZeroCacheSize() throws IOException {
         try (ClassPath classPath = new ClassPath("")) {
             assertThrows(IllegalArgumentException.class, () -> new LruCacheClassPathRepository(classPath, 0));
         }

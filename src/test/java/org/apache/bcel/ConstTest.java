@@ -29,25 +29,25 @@ import org.junit.jupiter.api.Test;
 public class ConstTest {
 
     @Test
-    public void testJava22() throws Exception {
+    void testJava22() throws Exception {
         assertEquals(66, Const.MAJOR_22);
         assertEquals(0, Const.MINOR_22);
     }
 
     @Test
-    public void testJava23() throws Exception {
+    void testJava23() throws Exception {
         assertEquals(67, Const.MAJOR_23);
         assertEquals(0, Const.MINOR_23);
     }
 
     @Test
-    public void testJava24() throws Exception {
+    void testJava24() throws Exception {
         assertEquals(68, Const.MAJOR_24);
         assertEquals(0, Const.MINOR_24);
     }
 
     @Test
-    public void testJava25() throws Exception {
+    void testJava25() throws Exception {
         assertEquals(69, Const.MAJOR_25);
         assertEquals(0, Const.MINOR_25);
     }

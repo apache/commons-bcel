@@ -27,7 +27,7 @@ public class LocalVariableTest {
      * Tests that we do not break binary compatibility with BCEL-330.
      */
     @Test
-    public void testReferenceToConstant() {
+    void testReferenceToConstant() {
         @SuppressWarnings("unused")
         final short referenceToConstant = Constants.AALOAD;
     }

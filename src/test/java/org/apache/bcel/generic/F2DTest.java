@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class F2DTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final F2D f2d = new F2D();
         f2d.accept(countVisitor);

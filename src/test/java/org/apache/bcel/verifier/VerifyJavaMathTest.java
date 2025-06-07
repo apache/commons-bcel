@@ -35,7 +35,7 @@ public class VerifyJavaMathTest extends AbstractVerifierTest {
 
     @Disabled
     @Test
-    public void testBigInteger() throws ClassNotFoundException {
+    void testBigInteger() throws ClassNotFoundException {
         assertTrue(doAllPasses("java.math.BigInteger"));
     }
 

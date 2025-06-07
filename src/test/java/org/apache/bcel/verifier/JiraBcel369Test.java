@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 public class JiraBcel369Test extends AbstractTest {
 
     @Test
-    public void testCompileAndVerify() throws ClassNotFoundException {
+    void testCompileAndVerify() throws ClassNotFoundException {
         Verifier.verifyType(org.apache.bcel.verifier.JiraBcel369TestFixture.class.getName());
     }
 

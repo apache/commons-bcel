@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class I2CTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final I2C i2c = new I2C();
         i2c.accept(countVisitor);

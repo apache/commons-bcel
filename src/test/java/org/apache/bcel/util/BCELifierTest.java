@@ -162,7 +162,7 @@ public class BCELifierTest extends AbstractTest {
     }
 
     @Test
-    public void testHelloWorld() throws Exception {
+    void testHelloWorld() throws Exception {
         HelloWorldCreator.main(new String[] {});
         final File workDir = new File("target");
         final String javaAgent = getJavaAgent();
@@ -198,7 +198,7 @@ public class BCELifierTest extends AbstractTest {
     }
 
     @Test
-    public void testMainNoArg() throws Exception {
+    void testMainNoArg() throws Exception {
         final PrintStream sysout = System.out;
         try {
             final ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -220,7 +220,7 @@ public class BCELifierTest extends AbstractTest {
     }
 
     @Test
-    public void testStart() throws Exception {
+    void testStart() throws Exception {
         final OutputStream os = new ByteArrayOutputStream();
         final JavaClass javaClass = BCELifier.getJavaClass("Java8Example");
         assertNotNull(javaClass);

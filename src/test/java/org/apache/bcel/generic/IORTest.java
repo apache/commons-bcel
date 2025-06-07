@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class IORTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final IOR ior = new IOR();
         ior.accept(countVisitor);

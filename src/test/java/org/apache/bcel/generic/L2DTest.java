@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class L2DTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final L2D l2d = new L2D();
         l2d.accept(countVisitor);

@@ -32,7 +32,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class TypeTest {
     @Test
-    public void testBCEL243() {
+    void testBCEL243() {
         // expectedValue = "Ljava/util/Map<TX;Ljava/util/List<TY;>;>;";
         // The line commented out above is the correct expected value; however,
         // the constructor for ObjectType is yet another place where BCEL does
@@ -43,7 +43,7 @@ public class TypeTest {
     }
 
     @Test
-    public void testInternalTypeNametoSignature() {
+    void testInternalTypeNametoSignature() {
         assertNull(Type.internalTypeNameToSignature(null));
         assertEquals("", Type.internalTypeNameToSignature(""));
         assertEquals("TT;", Type.internalTypeNameToSignature("TT;"));

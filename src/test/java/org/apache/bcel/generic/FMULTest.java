@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class FMULTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final FMUL fmul = new FMUL();
         fmul.accept(countVisitor);

@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test;
 public class UtilityTest {
 
     @Test
-    public void testClearBit() {
+    void testClearBit() {
         assertEquals(0, Utility.clearBit(0, 0));
         assertEquals(0, Utility.clearBit(1, 0), "1 bit 0 set to 0 -> 0");
         assertEquals(1, Utility.clearBit(1, 1), "1 bit 1 is 0 hence no change");
@@ -45,7 +45,7 @@ public class UtilityTest {
     }
 
     @Test
-    public void testCodeToString() throws Exception {
+    void testCodeToString() throws Exception {
         final class CodeToString {
             int[][] a = new int[0][0];
 
@@ -88,7 +88,7 @@ public class UtilityTest {
     }
 
     @Test
-    public void testConvertString() {
+    void testConvertString() {
         assertEquals("\\n", Utility.convertString("\n"));
         assertEquals("\\r", Utility.convertString("\r"));
         assertEquals("\\\"", Utility.convertString("\""));
@@ -98,7 +98,7 @@ public class UtilityTest {
     }
 
     @Test
-    public void testIsSet() {
+    void testIsSet() {
         assertTrue(Utility.isSet(1, 0));
         assertTrue(Utility.isSet(7, 1));
         assertTrue(Utility.isSet(8, 3));
@@ -110,7 +110,7 @@ public class UtilityTest {
     }
 
     @Test
-    public void testPrintArray() {
+    void testPrintArray() {
         assertNull(Utility.printArray(null, false, false));
         assertEquals("", Utility.printArray(new Object[0], false, false));
         assertEquals("{}", Utility.printArray(new Object[0], true, false));
@@ -122,7 +122,7 @@ public class UtilityTest {
     }
 
     @Test
-    public void testSearchOpcode() {
+    void testSearchOpcode() {
         assertEquals(Const.ALOAD, Utility.searchOpcode("aload"));
         assertEquals(Const.NOP, Utility.searchOpcode("nop"));
         assertEquals(Const.BREAKPOINT, Utility.searchOpcode("breakpoint"));
@@ -132,7 +132,7 @@ public class UtilityTest {
     }
 
     @Test
-    public void testSetBit() {
+    void testSetBit() {
         assertEquals(1, Utility.setBit(0, 0), "0 bit 0 set to 1 -> 1");
         assertEquals(1, Utility.setBit(1, 0), "1 bit 0 is 1 hence no change");
         assertEquals(3, Utility.setBit(1, 1), "1 bit 1 set to 1 -> 3");
@@ -143,7 +143,7 @@ public class UtilityTest {
     }
 
     @Test
-    public void testSignatureToStringWithGenerics() throws Exception {
+    void testSignatureToStringWithGenerics() throws Exception {
         // tests for BCEL-197
         assertEquals("java.util.Map<X, java.util.List<Y>>", Utility.signatureToString("Ljava/util/Map<TX;Ljava/util/List<TY;>;>;"), "generic signature");
         assertEquals("java.util.Set<? extends java.nio.file.OpenOption>", Utility.signatureToString("Ljava/util/Set<+Ljava/nio/file/OpenOption;>;"),

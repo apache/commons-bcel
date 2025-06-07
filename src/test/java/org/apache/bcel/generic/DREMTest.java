@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class DREMTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final DREM drem = new DREM();
         drem.accept(countVisitor);

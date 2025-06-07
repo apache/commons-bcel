@@ -26,62 +26,62 @@ import org.junit.jupiter.api.Test;
 public class ArrayTypeTest {
 
     @Test
-    public void testGetBasicType() {
+    void testGetBasicType() {
         final BasicType type = Type.BYTE;
         final ArrayType objectType = new ArrayType(type, 1);
         assertEquals(type, objectType.getBasicType());
     }
 
     @Test
-    public void testGetClassName() {
+    void testGetClassName() {
         final ArrayType objectType = new ArrayType(Type.BYTE, 1);
         assertEquals("[B", objectType.getClassName());
         assertEquals(byte[].class.getName(), objectType.getClassName());
     }
 
     @Test
-    public void testGetDimensions() {
+    void testGetDimensions() {
         final int dimensions = 1;
         final ArrayType objectType = new ArrayType(Type.BYTE, dimensions);
         assertEquals(dimensions, objectType.getDimensions());
     }
 
     @Test
-    public void testGetElementType() {
+    void testGetElementType() {
         final BasicType type = Type.BYTE;
         final ArrayType objectType = new ArrayType(Type.BYTE, 1);
         assertEquals(type, objectType.getElementType());
     }
 
     @Test
-    public void testGetSignatureDim1() {
+    void testGetSignatureDim1() {
         final ArrayType objectType = new ArrayType(Type.BYTE, 1);
         assertEquals("[B", objectType.getSignature());
         assertEquals(byte[].class.getName(), objectType.getSignature());
     }
 
     @Test
-    public void testGetSignatureDim2() {
+    void testGetSignatureDim2() {
         final ArrayType objectType = new ArrayType(Type.BYTE, 2);
         assertEquals("[[B", objectType.getSignature());
         assertEquals(byte[][].class.getName(), objectType.getSignature());
     }
 
     @Test
-    public void testGetSignatureDim4() {
+    void testGetSignatureDim4() {
         final ArrayType objectType = new ArrayType(Type.BYTE, 4);
         assertEquals("[[[[B", objectType.getSignature());
         assertEquals(byte[][][][].class.getName(), objectType.getSignature());
     }
 
     @Test
-    public void testGetSize() {
+    void testGetSize() {
         final ArrayType objectType = new ArrayType(Type.BYTE, 1);
         assertEquals(1, objectType.getSize());
     }
 
     @Test
-    public void testGetType() {
+    void testGetType() {
         final ArrayType objectType = new ArrayType(Type.BYTE, 1);
         assertEquals(13, objectType.getType());
     }

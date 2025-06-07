@@ -37,7 +37,7 @@ import org.junit.jupiter.api.Test;
 public class InstructionFactoryTest extends AbstractTest {
 
     @Test
-    public void testArrayLoad() throws Exception {
+    void testArrayLoad() throws Exception {
         assertEquals(InstructionConst.BALOAD, createArrayLoad(Type.BOOLEAN));
         assertEquals(InstructionConst.BALOAD, createArrayLoad(Type.BYTE));
         assertEquals(InstructionConst.CALOAD, createArrayLoad(Type.CHAR));
@@ -51,7 +51,7 @@ public class InstructionFactoryTest extends AbstractTest {
     }
 
     @Test
-    public void testArrayStore() throws Exception {
+    void testArrayStore() throws Exception {
         assertEquals(InstructionConst.BASTORE, createArrayStore(Type.BOOLEAN));
         assertEquals(InstructionConst.BASTORE, createArrayStore(Type.BYTE));
         assertEquals(InstructionConst.CASTORE, createArrayStore(Type.CHAR));
@@ -65,13 +65,13 @@ public class InstructionFactoryTest extends AbstractTest {
     }
 
     @Test
-    public void testCreateInvokeNullArgTypes() throws Exception {
+    void testCreateInvokeNullArgTypes() throws Exception {
         final InstructionFactory factory = new InstructionFactory(new ClassGen(Repository.lookupClass(Object.class)));
         factory.createInvoke("", "", Type.VOID, null, Const.INVOKESPECIAL, false); // Mustn't throw an NPE
     }
 
     @Test
-    public void testExceptions() throws Exception {
+    void testExceptions() throws Exception {
         final InstructionFactory factory = new InstructionFactory(new ClassGen(Repository.lookupClass(Object.class)));
         assertThrowsExactly(IllegalArgumentException.class, () -> createArrayLoad(Type.UNKNOWN));
         assertThrowsExactly(IllegalArgumentException.class, () -> createArrayStore(Type.UNKNOWN));
@@ -92,7 +92,7 @@ public class InstructionFactoryTest extends AbstractTest {
     }
 
     @Test
-    public void testNull() throws Exception {
+    void testNull() throws Exception {
         assertEquals(InstructionConst.ICONST_0, createNull(Type.BOOLEAN));
         assertEquals(InstructionConst.ICONST_0, createNull(Type.BYTE));
         assertEquals(InstructionConst.ICONST_0, createNull(Type.CHAR));

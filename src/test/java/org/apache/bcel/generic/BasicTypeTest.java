@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 public class BasicTypeTest {
 
     @Test
-    public void testClassName() {
+    void testClassName() {
         assertEquals(boolean.class.getName(), BasicType.getType(Const.T_BOOLEAN).getClassName());
         assertEquals(byte.class.getName(), BasicType.getType(Const.T_BYTE).getClassName());
         assertEquals(char.class.getName(), BasicType.getType(Const.T_CHAR).getClassName());
@@ -40,12 +40,12 @@ public class BasicTypeTest {
     }
 
     @Test
-    public void testGetType() {
+    void testGetType() {
         assertEquals(Type.BYTE, BasicType.getType(Const.T_BYTE));
     }
 
     @Test
-    public void testSignature() {
+    void testSignature() {
         assertEquals("Z", BasicType.getType(Const.T_BOOLEAN).getSignature());
         assertEquals("B", BasicType.getType(Const.T_BYTE).getSignature());
         assertEquals("C", BasicType.getType(Const.T_CHAR).getSignature());

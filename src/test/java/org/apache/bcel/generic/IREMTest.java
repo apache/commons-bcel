@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class IREMTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final IREM irem = new IREM();
         irem.accept(countVisitor);

@@ -63,7 +63,7 @@ public class FieldAnnotationsTest extends AbstractTest {
      * Check field AnnotationEntrys are retrievable.
      */
     @Test
-    public void testFieldAnnotationEntrys() throws ClassNotFoundException {
+    void testFieldAnnotationEntrys() throws ClassNotFoundException {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.AnnotatedFields");
         // TODO L...;?
         checkAnnotatedField(clazz, "i", "L" + PACKAGE_BASE_SIG + "/data/SimpleAnnotation;", "id", "1");
@@ -74,7 +74,7 @@ public class FieldAnnotationsTest extends AbstractTest {
      * Check field AnnotationEntrys (de)serialize ok.
      */
     @Test
-    public void testFieldAnnotationEntrysReadWrite() throws ClassNotFoundException, IOException {
+    void testFieldAnnotationEntrysReadWrite() throws ClassNotFoundException, IOException {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.AnnotatedFields");
         checkAnnotatedField(clazz, "i", "L" + PACKAGE_BASE_SIG + "/data/SimpleAnnotation;", "id", "1");
         checkAnnotatedField(clazz, "s", "L" + PACKAGE_BASE_SIG + "/data/SimpleAnnotation;", "id", "2");
@@ -92,7 +92,7 @@ public class FieldAnnotationsTest extends AbstractTest {
      * Check we can load in a class, modify its field AnnotationEntrys, save it, reload it and everything is correct.
      */
     @Test
-    public void testFieldAnnotationModification() throws ClassNotFoundException {
+    void testFieldAnnotationModification() throws ClassNotFoundException {
         final boolean dbg = false;
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.AnnotatedFields");
         final ClassGen clg = new ClassGen(clazz);

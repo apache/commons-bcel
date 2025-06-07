@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class LSUBTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final LSUB lsub = new LSUB();
         lsub.accept(countVisitor);

@@ -115,27 +115,27 @@ public class VerifierTest {
     }
 
     @Test
-    public void testArrayUtils() throws ClassNotFoundException {
+    void testArrayUtils() throws ClassNotFoundException {
         testNestHostWithJavaVersion("org.apache.commons.lang.ArrayUtils");
     }
 
     @Test
-    public void testCollection() throws ClassNotFoundException {
+    void testCollection() throws ClassNotFoundException {
         testDefaultMethodValidation("java.util.Collection");
     }
 
     @Test
-    public void testCommonsLang2() throws IOException, URISyntaxException, ClassNotFoundException {
+    void testCommonsLang2() throws IOException, URISyntaxException, ClassNotFoundException {
         testJarFile(getJarFile(org.apache.commons.lang.StringUtils.class), "ArrayUtils", "SerializationUtils");
     }
 
     @Test
-    public void testDefinitionImpl() throws ClassNotFoundException {
+    void testDefinitionImpl() throws ClassNotFoundException {
         testNestHostWithJavaVersion("com.ibm.wsdl.DefinitionImpl");
     }
 
     @Test
-    public void testJvmOpCodes() throws ClassNotFoundException {
+    void testJvmOpCodes() throws ClassNotFoundException {
         testDefaultMethodValidation("org.apache.bcel.verifier.tests.JvmOpCodes");
     }
 
@@ -152,17 +152,17 @@ public class VerifierTest {
     }
 
     @Test
-    public void testPackagePrivateField() throws ClassNotFoundException {
+    void testPackagePrivateField() throws ClassNotFoundException {
         testDefaultMethodValidation(FieldVerifierChildClass.class.getName());
     }
 
     @Test
-    public void testPackagePrivateStaticField() throws ClassNotFoundException {
+    void testPackagePrivateStaticField() throws ClassNotFoundException {
         testDefaultMethodValidation(StaticFieldVerifierChildClass.class.getName());
     }
 
     @Test
-    public void testWSDL() throws IOException, URISyntaxException, ClassNotFoundException {
+    void testWSDL() throws IOException, URISyntaxException, ClassNotFoundException {
         testJarFile(getJarFile(javax.wsdl.Port.class), "WSDLReaderImpl", "DefinitionImpl");
     }
 }

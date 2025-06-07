@@ -30,22 +30,22 @@ import org.junit.jupiter.api.Test;
 public class OssFuzzTest {
 
     @Test
-    public void testIssue51980() throws Exception {
+    void testIssue51980() throws Exception {
         testOssFuzzReproducer("51980");
     }
 
     @Test
-    public void testIssue51989() throws Exception {
+    void testIssue51989() throws Exception {
         testOssFuzzReproducer("51989");
     }
 
     @Test
-    public void testIssue52168() throws Exception {
+    void testIssue52168() throws Exception {
         testOssFuzzReproducer("52168");
     }
 
     @Test
-    public void testIssue53543() throws Exception {
+    void testIssue53543() throws Exception {
         testOssFuzzReproducer("53543");
     }
 
@@ -53,27 +53,27 @@ public class OssFuzzTest {
      * The original issue 53544 was a false positive but reviewing that issue did find a valid issue nearby.
      */
     @Test
-    public void testIssue53544a() throws Exception {
+    void testIssue53544a() throws Exception {
         testOssFuzzReproducer("53544a");
     }
 
     @Test
-    public void testIssue53620() throws Exception {
+    void testIssue53620() throws Exception {
         testOssFuzzReproducer("53620");
     }
 
     @Test
-    public void testIssue53676() throws Exception {
+    void testIssue53676() throws Exception {
         testOssFuzzReproducer("53676");
     }
 
     @Test
-    public void testIssue54119() throws Exception {
+    void testIssue54119() throws Exception {
         testOssFuzzReproducer("54119");
     }
 
     @Test
-    public void testIssue54254() throws Exception {
+    void testIssue54254() throws Exception {
         testOssFuzzReproducer("54254");
     }
 

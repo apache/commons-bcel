@@ -340,7 +340,7 @@ public class GeneratingAnnotatedClassesTest extends AbstractTest {
      * </ol>
      */
     @Test
-    public void testGenerateClassLevelAnnotations() throws ClassNotFoundException {
+    void testGenerateClassLevelAnnotations() throws ClassNotFoundException {
         // Create HelloWorld
         final ClassGen cg = createClassGen("HelloWorld");
         cg.setMajor(49);
@@ -371,7 +371,7 @@ public class GeneratingAnnotatedClassesTest extends AbstractTest {
      * Just check that we can dump a class that has a method annotation on it and it is still there when we read it back in
      */
     @Test
-    public void testGenerateMethodLevelAnnotations1() throws ClassNotFoundException {
+    void testGenerateMethodLevelAnnotations1() throws ClassNotFoundException {
         // Create HelloWorld
         final ClassGen cg = createClassGen("HelloWorld");
         final ConstantPoolGen cp = cg.getConstantPool();
@@ -404,7 +404,7 @@ public class GeneratingAnnotatedClassesTest extends AbstractTest {
      * annotations.
      */
     @Test
-    public void testGenerateMethodLevelAnnotations2() throws ClassNotFoundException {
+    void testGenerateMethodLevelAnnotations2() throws ClassNotFoundException {
         // Create HelloWorld
         final ClassGen cg = createClassGen("HelloWorld");
         final ConstantPoolGen cp = cg.getConstantPool();
@@ -440,7 +440,7 @@ public class GeneratingAnnotatedClassesTest extends AbstractTest {
      * Load a class in and modify it with a new attribute - A SimpleAnnotation annotation
      */
     @Test
-    public void testModifyingClasses1() throws ClassNotFoundException {
+    void testModifyingClasses1() throws ClassNotFoundException {
         final JavaClass jc = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleAnnotatedClass");
         final ClassGen cgen = new ClassGen(jc);
         final ConstantPoolGen cp = cgen.getConstantPool();
@@ -454,7 +454,7 @@ public class GeneratingAnnotatedClassesTest extends AbstractTest {
      * Load a class in and modify it with a new attribute - A ComplexAnnotation annotation
      */
     @Test
-    public void testModifyingClasses2() throws ClassNotFoundException {
+    void testModifyingClasses2() throws ClassNotFoundException {
         final JavaClass jc = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleAnnotatedClass");
         final ClassGen cgen = new ClassGen(jc);
         final ConstantPoolGen cp = cgen.getConstantPool();
@@ -472,7 +472,7 @@ public class GeneratingAnnotatedClassesTest extends AbstractTest {
      * array of SimpleAnnotations.
      */
     @Test
-    public void testTransformClassToClassGen_ArrayAndAnnotationTypes() throws ClassNotFoundException {
+    void testTransformClassToClassGen_ArrayAndAnnotationTypes() throws ClassNotFoundException {
         final JavaClass jc = getTestJavaClass(PACKAGE_BASE_NAME + ".data.AnnotatedWithCombinedAnnotation");
         final ClassGen cgen = new ClassGen(jc);
         // Check annotations are correctly preserved
@@ -518,7 +518,7 @@ public class GeneratingAnnotatedClassesTest extends AbstractTest {
      * enum.
      */
     @Test
-    public void testTransformClassToClassGen_EnumType() throws ClassNotFoundException {
+    void testTransformClassToClassGen_EnumType() throws ClassNotFoundException {
         final JavaClass jc = getTestJavaClass(PACKAGE_BASE_NAME + ".data.AnnotatedWithEnumClass");
         final ClassGen cgen = new ClassGen(jc);
         // Check annotations are correctly preserved
@@ -531,7 +531,7 @@ public class GeneratingAnnotatedClassesTest extends AbstractTest {
      * Transform simple class from an immutable to a mutable object.
      */
     @Test
-    public void testTransformClassToClassGen_SimpleTypes() throws ClassNotFoundException {
+    void testTransformClassToClassGen_SimpleTypes() throws ClassNotFoundException {
         final JavaClass jc = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleAnnotatedClass");
         final ClassGen cgen = new ClassGen(jc);
         // Check annotations are correctly preserved
@@ -543,7 +543,7 @@ public class GeneratingAnnotatedClassesTest extends AbstractTest {
      * Transform complex class from an immutable to a mutable object.
      */
     @Test
-    public void testTransformComplexClassToClassGen() throws ClassNotFoundException {
+    void testTransformComplexClassToClassGen() throws ClassNotFoundException {
         final JavaClass jc = getTestJavaClass(PACKAGE_BASE_NAME + ".data.ComplexAnnotatedClass");
         final ClassGen cgen = new ClassGen(jc);
         // Check annotations are correctly preserved

@@ -36,13 +36,13 @@ import org.junit.jupiter.api.Test;
 public class SignatureTest extends AbstractTest {
 
     @Test
-    public void testBadSignatures() throws Exception {
+    void testBadSignatures() throws Exception {
         assertThrowsExactly(IllegalArgumentException.class, () -> Signature.translate("<"));
         assertThrowsExactly(IllegalArgumentException.class, () -> Signature.translate("<>"));
     }
 
     @Test
-    public void testMap() throws Exception {
+    void testMap() throws Exception {
         final JavaClass jc = Repository.lookupClass(Map.class);
         final Signature classSignature = (Signature) findAttribute("Signature", jc.getAttributes());
         final String translatedSignature = Signature.translate(classSignature.getSignature());
@@ -59,7 +59,7 @@ public class SignatureTest extends AbstractTest {
     }
 
     @Test
-    public void testString() throws Exception {
+    void testString() throws Exception {
         final JavaClass jc = Repository.lookupClass(String.class);
         final Signature classSignature = (Signature) findAttribute("Signature", jc.getAttributes());
         final String translatedSignature = Signature.translate(classSignature.getSignature());
@@ -69,7 +69,7 @@ public class SignatureTest extends AbstractTest {
     }
 
     @Test
-    public void testType() throws Exception {
+    void testType() throws Exception {
         assertEquals("(I)I", Type.getSignature(Math.class.getMethod("abs", int.class)));
         assertEquals("(J)J", Type.getSignature(Math.class.getMethod("abs", long.class)));
         assertEquals("(D)D", Type.getSignature(Math.class.getMethod("abs", double.class)));

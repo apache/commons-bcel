@@ -71,7 +71,7 @@ public class AnnotationGenTest extends AbstractTest {
      * Programmatically construct an mutable annotation (AnnotationGen) object.
      */
     @Test
-    public void testConstructMutableAnnotation() throws IOException {
+    void testConstructMutableAnnotation() throws IOException {
         // Create the containing class
         final ClassGen cg = createClassGen("HelloWorld");
         final ConstantPoolGen cp = cg.getConstantPool();
@@ -92,7 +92,7 @@ public class AnnotationGenTest extends AbstractTest {
     }
 
     @Test
-    public void testVisibleInvisibleAnnotationGen() {
+    void testVisibleInvisibleAnnotationGen() {
         // Create the containing class
         final ClassGen cg = createClassGen("HelloWorld");
         final ConstantPoolGen cp = cg.getConstantPool();

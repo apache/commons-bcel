@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class I2STest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final I2S i2s = new I2S();
         i2s.accept(countVisitor);

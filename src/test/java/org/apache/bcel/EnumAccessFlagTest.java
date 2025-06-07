@@ -31,7 +31,7 @@ public class EnumAccessFlagTest extends AbstractTest {
      * access flags (through BCEL) that it was originally an enum type declaration.
      */
     @Test
-    public void testEnumClassSaysItIs() throws ClassNotFoundException {
+    void testEnumClassSaysItIs() throws ClassNotFoundException {
         JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleEnum");
         assertTrue(clazz.isEnum(), "Expected SimpleEnum class to say it was an enum - but it didn't !");
         clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleClass");

@@ -37,7 +37,7 @@ public class RecordTest extends AbstractTest {
      * Check that we can copy a attribute correctly.
      */
     @Test
-    public void recordsCanBeCopied() throws ClassNotFoundException, IOException {
+    void recordsCanBeCopied() throws ClassNotFoundException, IOException {
         final JavaClass clazz = new ClassParser("src/test/resources/record/SimpleRecord.class").parse();
         final JavaClass copyClazz = clazz.copy();
         assertEquals(clazz.toString(), copyClazz.toString(), "both records should have the same value");
@@ -47,7 +47,7 @@ public class RecordTest extends AbstractTest {
      * Check that a record can be visited by our visitors
      */
     @Test
-    public void recordsCanBeVisited() throws ClassNotFoundException, IOException {
+    void recordsCanBeVisited() throws ClassNotFoundException, IOException {
         final JavaClass clazz = new ClassParser("src/test/resources/record/SimpleRecord.class").parse();
         final CountingVisitor countVisitor = new CountingVisitor();
         final DescendingVisitor desendingVisitor = new DescendingVisitor(clazz, countVisitor);
@@ -60,7 +60,7 @@ public class RecordTest extends AbstractTest {
      * Check that we can save and load the attribute correctly.
      */
     @Test
-    public void testAttributeSerializtion() throws ClassNotFoundException, IOException {
+    void testAttributeSerializtion() throws ClassNotFoundException, IOException {
         final JavaClass clazz = new ClassParser("src/test/resources/record/SimpleRecord.class").parse();
         final File tfile = createTestdataFile("SimpleRecord.class");
         final Record recordAttribute = (Record) findAttribute("Record", clazz)[0];
@@ -83,7 +83,7 @@ public class RecordTest extends AbstractTest {
      * @throws ClassFormatException
      */
     @Test
-    public void testRecordClassSaysItIs() throws ClassNotFoundException, ClassFormatException, IOException {
+    void testRecordClassSaysItIs() throws ClassNotFoundException, ClassFormatException, IOException {
         final JavaClass clazz = new ClassParser("src/test/resources/record/SimpleRecord.class").parse();
         assertTrue(clazz.isRecord(), "Expected SimpleRecord class to say it was a record - but it didn't !");
         final JavaClass simpleClazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleClass");
@@ -99,7 +99,7 @@ public class RecordTest extends AbstractTest {
      * @throws IOException if an I/O error occurs.
      */
     @Test
-    public void testRecordToString() throws ClassNotFoundException, ClassFormatException, IOException {
+    void testRecordToString() throws ClassNotFoundException, ClassFormatException, IOException {
         final JavaClass clazz = new ClassParser("src/test/resources/record/SimpleRecord.class").parse();
         final Attribute[] attributes = clazz.getAttributes();
         final Record recordAttribute = (Record) findAttribute("Record", clazz)[0];

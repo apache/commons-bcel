@@ -51,7 +51,7 @@ public class ConstantPoolTest extends AbstractTest {
     }
 
     @Test
-    public void testClassWithDoubleConstantPoolItem() throws ClassNotFoundException, IOException {
+    void testClassWithDoubleConstantPoolItem() throws ClassNotFoundException, IOException {
         try (ClassPath cp = new ClassPath("target/test-classes/org/apache/bcel/classfile")) {
             final ClassWithDoubleConstantPoolItem classWithDoubleConstantPoolItem = new ClassWithDoubleConstantPoolItem();
             final JavaClass c = new ClassPathRepository(cp).loadClass(classWithDoubleConstantPoolItem.getClass());
@@ -77,7 +77,7 @@ public class ConstantPoolTest extends AbstractTest {
     }
 
     @Test
-    public void testClassWithLongConstantPoolItem() throws ClassNotFoundException, IOException {
+    void testClassWithLongConstantPoolItem() throws ClassNotFoundException, IOException {
         try (ClassPath cp = new ClassPath("target/test-classes/org/apache/bcel/classfile")) {
             final ClassWithLongConstantPoolItem classWithLongConstantPoolItem = new ClassWithLongConstantPoolItem();
             final JavaClass c = new ClassPathRepository(cp).loadClass(classWithLongConstantPoolItem.getClass());
@@ -103,7 +103,7 @@ public class ConstantPoolTest extends AbstractTest {
     }
 
     @Test
-    public void testConstantToString() throws ClassNotFoundException {
+    void testConstantToString() throws ClassNotFoundException {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleClassWithDefaultConstructor");
         final ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
         final Method[] methods = clazz.getMethods();
@@ -131,7 +131,7 @@ public class ConstantPoolTest extends AbstractTest {
     }
 
     @Test
-    public void testTooManyConstants() throws ClassNotFoundException {
+    void testTooManyConstants() throws ClassNotFoundException {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleClassWithDefaultConstructor");
         final ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
         int i = cp.getSize();

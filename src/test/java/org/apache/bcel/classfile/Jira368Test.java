@@ -36,7 +36,7 @@ public class Jira368Test {
     }
 
     @Test
-    public void testInstructionListStringBrief() throws Exception {
+    void testInstructionListStringBrief() throws Exception {
         for (final Method method : parseJavaClass().getMethods()) {
             if (!method.isAbstract() && !method.isNative()) {
                 final InstructionList instructionList = new InstructionList(method.getCode().getCode());
@@ -47,7 +47,7 @@ public class Jira368Test {
     }
 
     @Test
-    public void testInstructionListStringVerbose() throws Exception {
+    void testInstructionListStringVerbose() throws Exception {
         for (final Method method : parseJavaClass().getMethods()) {
             if (!method.isAbstract() && !method.isNative()) {
                 final InstructionList instructionList = new InstructionList(method.getCode().getCode());
@@ -58,7 +58,7 @@ public class Jira368Test {
     }
 
     @Test
-    public void testMethodSignature() throws Exception {
+    void testMethodSignature() throws Exception {
         final String string = parseJavaClass().toString();
         // System.out.println(string);
         assertNotNull(string);

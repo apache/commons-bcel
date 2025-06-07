@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class INEGTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final INEG ineg = new INEG();
         ineg.accept(countVisitor);

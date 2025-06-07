@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class LORTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final LOR lor = new LOR();
         lor.accept(countVisitor);

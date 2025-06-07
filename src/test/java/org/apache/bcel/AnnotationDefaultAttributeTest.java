@@ -34,7 +34,7 @@ public class AnnotationDefaultAttributeTest extends AbstractTest {
      * against the method to discover the default value that was originally declared.
      */
     @Test
-    public void testMethodAnnotations() throws ClassNotFoundException {
+    void testMethodAnnotations() throws ClassNotFoundException {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleAnnotation");
         final Method m = getMethod(clazz, "fruit");
         final AnnotationDefault a = (AnnotationDefault) findAttribute("AnnotationDefault", m.getAttributes());

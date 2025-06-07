@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class GETFIELDTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final GETFIELD getfield = new GETFIELD(0);
         getfield.accept(countVisitor);

@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 public class LSHRTest {
     @Test
-    public void testAccept() {
+    void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();
         final LSHR lshr = new LSHR();
         lshr.accept(countVisitor);

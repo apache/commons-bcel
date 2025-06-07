@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test;
 public class InstructionFinderTest extends AbstractTest {
 
     @Test
-    public void testSearch() {
+    void testSearch() {
         final InstructionList il = new InstructionList();
         il.append(new ILOAD(1));
         il.append(new ILOAD(2));

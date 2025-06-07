@@ -31,197 +31,197 @@ public class CounterVisitorTest extends AbstractCounterVisitorTest {
     }
 
     @Test
-    public void testAnnotationDefaultCount() {
+    void testAnnotationDefaultCount() {
         assertEquals(0, getVisitor().annotationDefaultCount, "annotationDefaultCount");
     }
 
     @Test
-    public void testAnnotationEntryCount() {
+    void testAnnotationEntryCount() {
         assertEquals(2, getVisitor().annotationEntryCount, "annotationEntryCount");
     }
 
     @Test
-    public void testAnnotationsCount() {
+    void testAnnotationsCount() {
         assertEquals(2, getVisitor().annotationCount, "annotationCount");
     }
 
     @Test
-    public void testCodeCount() {
+    void testCodeCount() {
         assertEquals(1, getVisitor().codeCount, "codeCount");
     }
 
     @Test
-    public void testCodeExceptionCount() {
+    void testCodeExceptionCount() {
         assertEquals(0, getVisitor().codeExceptionCount, "codeExceptionCount");
     }
 
     @Test
-    public void testConstantClassCount() {
+    void testConstantClassCount() {
         assertEquals(2, getVisitor().constantClassCount, "constantClassCount");
     }
 
     @Test
-    public void testConstantDoubleCount() {
+    void testConstantDoubleCount() {
         assertEquals(0, getVisitor().constantDoubleCount, "constantDoubleCount");
     }
 
     @Test
-    public void testConstantFieldrefCount() {
+    void testConstantFieldrefCount() {
         assertEquals(0, getVisitor().constantFieldrefCount, "constantFieldrefCount");
     }
 
     @Test
-    public void testConstantFloatCount() {
+    void testConstantFloatCount() {
         assertEquals(0, getVisitor().constantFloatCount, "constantFloatCount");
     }
 
     @Test
-    public void testConstantIntegerCount() {
+    void testConstantIntegerCount() {
         assertEquals(0, getVisitor().constantIntegerCount, "constantIntegerCount");
     }
 
     @Test
-    public void testConstantInterfaceMethodrefCount() {
+    void testConstantInterfaceMethodrefCount() {
         assertEquals(0, getVisitor().constantInterfaceMethodrefCount, "constantInterfaceMethodrefCount");
     }
 
     @Test
-    public void testConstantLongCount() {
+    void testConstantLongCount() {
         assertEquals(0, getVisitor().constantLongCount, "constantLongCount");
     }
 
     @Test
-    public void testConstantMethodrefCount() {
+    void testConstantMethodrefCount() {
         assertEquals(1, getVisitor().constantMethodrefCount, "constantMethodrefCount");
     }
 
     @Test
-    public void testConstantNameAndTypeCount() {
+    void testConstantNameAndTypeCount() {
         assertEquals(1, getVisitor().constantNameAndTypeCount, "constantNameAndTypeCount");
     }
 
     @Test
-    public void testConstantPoolCount() {
+    void testConstantPoolCount() {
         assertEquals(1, getVisitor().constantPoolCount, "constantPoolCount");
     }
 
     @Test
-    public void testConstantStringCount() {
+    void testConstantStringCount() {
         assertEquals(0, getVisitor().constantStringCount, "constantStringCount");
     }
 
     @Test
-    public void testConstantValueCount() {
+    void testConstantValueCount() {
         assertEquals(0, getVisitor().constantValueCount, "constantValueCount");
     }
 
     @Test
-    public void testDeprecatedCount() {
+    void testDeprecatedCount() {
         assertEquals(0, getVisitor().deprecatedCount, "deprecatedCount");
     }
 
     @Test
-    public void testEnclosingMethodCount() {
+    void testEnclosingMethodCount() {
         assertEquals(0, getVisitor().enclosingMethodCount, "enclosingMethodCount");
     }
 
     @Test
-    public void testExceptionTableCount() {
+    void testExceptionTableCount() {
         assertEquals(0, getVisitor().exceptionTableCount, "exceptionTableCount");
     }
 
     @Test
-    public void testFieldCount() {
+    void testFieldCount() {
         assertEquals(0, getVisitor().fieldCount, "fieldCount");
     }
 
     @Test
-    public void testInnerClassCount() {
+    void testInnerClassCount() {
         assertEquals(0, getVisitor().innerClassCount, "innerClassCount");
     }
 
     @Test
-    public void testInnerClassesCount() {
+    void testInnerClassesCount() {
         assertEquals(0, getVisitor().innerClassesCount, "innerClassesCount");
     }
 
     @Test
-    public void testJavaClassCount() {
+    void testJavaClassCount() {
         assertEquals(1, getVisitor().javaClassCount, "javaClassCount");
     }
 
     @Test
-    public void testLineNumberCount() {
+    void testLineNumberCount() {
         assertEquals(1, getVisitor().lineNumberCount, "lineNumberCount");
     }
 
     @Test
-    public void testLineNumberTableCount() {
+    void testLineNumberTableCount() {
         assertEquals(1, getVisitor().lineNumberTableCount, "lineNumberTableCount");
     }
 
     @Test
-    public void testLocalVariableCount() {
+    void testLocalVariableCount() {
         assertEquals(1, getVisitor().localVariableCount, "localVariableCount");
     }
 
     @Test
-    public void testLocalVariableTableCount() {
+    void testLocalVariableTableCount() {
         assertEquals(1, getVisitor().localVariableTableCount, "localVariableTableCount");
     }
 
     @Test
-    public void testLocalVariableTypeTableCount() {
+    void testLocalVariableTypeTableCount() {
         assertEquals(0, getVisitor().localVariableTypeTableCount, "localVariableTypeTableCount");
     }
 
     @Test
-    public void testMethodCount() {
+    void testMethodCount() {
         assertEquals(1, getVisitor().methodCount, "methodCount");
     }
 
     @Test
-    public void testParameterAnnotationCount() {
+    void testParameterAnnotationCount() {
         assertEquals(0, getVisitor().parameterAnnotationCount, "parameterAnnotationCount");
     }
 
     @Test
-    public void testRecordCount() {
+    void testRecordCount() {
         assertEquals(0, getVisitor().recordCount, "recordCount");
     }
 
     @Test
-    public void testSignatureCount() {
+    void testSignatureCount() {
         assertEquals(0, getVisitor().signatureAnnotationCount, "signatureAnnotationCount");
     }
 
     @Test
-    public void testSourceFileCount() {
+    void testSourceFileCount() {
         assertEquals(1, getVisitor().sourceFileCount, "sourceFileCount");
     }
 
     @Test
-    public void testStackMapCount() {
+    void testStackMapCount() {
         assertEquals(0, getVisitor().stackMapCount, "stackMapCount");
     }
 
     @Test
-    public void testStackMapEntryCount() {
+    void testStackMapEntryCount() {
         assertEquals(0, getVisitor().stackMapEntryCount, "stackMapEntryCount");
     }
 
     @Test
-    public void testStackMapTypeCount() {
+    void testStackMapTypeCount() {
         assertEquals(0, getVisitor().stackMapTypeCount, "stackMapTypeCount");
     }
 
     @Test
-    public void testSyntheticCount() {
+    void testSyntheticCount() {
         assertEquals(0, getVisitor().syntheticCount, "syntheticCount");
     }
 
     @Test
-    public void testUnknownCount() {
+    void testUnknownCount() {
         assertEquals(0, getVisitor().unknownCount, "unknownCount");
     }
 }
