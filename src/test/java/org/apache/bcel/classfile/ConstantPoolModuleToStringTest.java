@@ -497,7 +497,7 @@ public class ConstantPoolModuleToStringTest {
         "src/test/resources/jpms/java18/commons-io/module-info.class",
         "src/test/resources/jpms/java19-ea/commons-io/module-info.class"})
     // @formatter:on
-    public void test(final String first) throws Exception {
+    void test(final String first) throws Exception {
         try (InputStream inputStream = Files.newInputStream(Paths.get(first))) {
             test(inputStream);
         }
@@ -517,7 +517,7 @@ public class ConstantPoolModuleToStringTest {
         "javax.annotation.ManagedBean",                         // contains attribute AnnotationDefault
         "javax.management.remote.rmi.RMIConnectionImpl_Stub"})  // contains attribute Synthetic
     // @formatter:on
-    public void testClass(final String className) throws Exception {
+    void testClass(final String className) throws Exception {
         testJavaClass(SyntheticRepository.getInstance().loadClass(className));
     }
 }

@@ -35,7 +35,7 @@ public class FieldGenTest {
 
     @Test
     @Disabled
-    public void testBCELComparator() throws Exception {
+    void testBCELComparator() throws Exception {
         final ConstantLong[] constantPool = { new ConstantLong(0), new ConstantLong(0) };
         final FieldGen obj = new FieldGen(new Field(0, 0, 0, null, new ConstantPool(constantPool)), new ConstantPoolGen(constantPool));
         assertTrue(FieldGen.getComparator().equals(null, null));

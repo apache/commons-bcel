@@ -144,7 +144,7 @@ public class PLSETest extends AbstractTest {
      */
     @ParameterizedTest
     @ValueSource(booleans = { true, false })
-    public void testCoverage(final boolean compress) throws ClassNotFoundException, java.io.IOException {
+    void testCoverage(final boolean compress) throws ClassNotFoundException, java.io.IOException {
         // load a class with a wide variety of byte codes - including tableswitch and lookupswitch
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.ConstantPoolX");
         for (final Method m : clazz.getMethods()) {

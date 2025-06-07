@@ -47,7 +47,7 @@ public final class ConstantPoolModuleAccessTest {
 
     @ParameterizedTest
     @MethodSource
-    public void testJREModules(final URL url) throws Exception {
+    void testJREModules(final URL url) throws Exception {
         try (InputStream inputStream = url.openStream()) {
             final ClassParser classParser = new ClassParser(inputStream, "module-info.class");
             final JavaClass javaClass = classParser.parse();

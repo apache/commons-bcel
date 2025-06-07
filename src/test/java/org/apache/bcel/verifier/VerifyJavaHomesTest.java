@@ -41,7 +41,7 @@ public class VerifyJavaHomesTest extends AbstractVerifierTest {
     @Disabled("Run once in a while, it takes a very long time.")
     @ParameterizedTest
     @MethodSource("org.apache.bcel.generic.JavaHome#streamJarEntryClassName")
-    public void testJarEntryClassName(final String name) throws ClassNotFoundException {
+    void testJarEntryClassName(final String name) throws ClassNotFoundException {
         // System.out.println(jarEntry.getName());
         // Skip $ classes for now
         count++;

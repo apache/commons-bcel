@@ -141,13 +141,13 @@ public class VerifierTest {
 
     @Test
     @DisabledForJreRange(max = JRE.JAVA_8)
-    public void testObjectInputStream() throws ClassNotFoundException {
+    void testObjectInputStream() throws ClassNotFoundException {
         testNestHostWithJavaVersion("java.io.ObjectInputStream");
     }
 
     @Test
     @DisabledForJreRange(min = JRE.JAVA_9)
-    public void testObjectInputStreamJDK8() {
+    void testObjectInputStreamJDK8() {
         assertThrowsExactly(UnsupportedOperationException.class, () -> testNestHostWithJavaVersion("java.io.ObjectInputStream"));
     }
 

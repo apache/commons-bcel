@@ -111,7 +111,7 @@ public class BCELifierTest extends AbstractTest {
         "drem 3 2 = 1.0"
     // @formatter:on
     })
-    public void testBinaryOp(final String exp) throws Exception {
+    void testBinaryOp(final String exp) throws Exception {
         BinaryOpCreator.main(new String[] {});
         final File workDir = new File("target");
         final Pattern pattern = Pattern.compile("([a-z]{3,5}) ([-+]?\\d*\\.?\\d+) ([-+]?\\d*\\.?\\d+) = ([-+]?\\d*\\.?\\d+)");
@@ -193,7 +193,7 @@ public class BCELifierTest extends AbstractTest {
         "target/test-classes/Java4Example.class"
     // @formatter:on
     })
-    public void testJavapCompare(final String pathToClass) throws Exception {
+    void testJavapCompare(final String pathToClass) throws Exception {
         testClassOnPath(pathToClass);
     }
 
@@ -213,7 +213,7 @@ public class BCELifierTest extends AbstractTest {
 
     @ParameterizedTest
     @ValueSource(strings = { "StackMapExample", "StackMapExample2" })
-    public void testStackMap(final String className) throws Exception {
+    void testStackMap(final String className) throws Exception {
         testJavapCompare(className);
         final File workDir = new File("target");
         assertEquals("Hello World" + EOL, exec(workDir, "java", "-cp", CLASSPATH, className, "Hello"));

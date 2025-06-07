@@ -70,7 +70,7 @@ final class EmptyVisitorTest {
         "org.apache.commons.lang.SerializationUtils"     // contains instruction JSR
     // @formatter:on
     })
-    public void test(final String className) throws ClassNotFoundException {
+    void test(final String className) throws ClassNotFoundException {
         // "java.io.Bits" is not in Java 21.
         assumeFalse(SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_21) && className.equals("java.io.Bits"));
         final JavaClass javaClass = SyntheticRepository.getInstance().loadClass(className);

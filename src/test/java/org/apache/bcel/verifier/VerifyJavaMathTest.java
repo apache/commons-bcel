@@ -29,7 +29,7 @@ public class VerifyJavaMathTest extends AbstractVerifierTest {
     @Test
     @Disabled
     //@EnabledOnJre(JRE.JAVA_8)
-    public void testBigDecimal() throws ClassNotFoundException {
+    void testBigDecimal() throws ClassNotFoundException {
         assertTrue(doAllPasses("java.math.BigDecimal"));
     }
 

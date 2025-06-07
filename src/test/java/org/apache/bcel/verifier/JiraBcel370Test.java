@@ -45,7 +45,7 @@ public class JiraBcel370Test extends AbstractTest {
         "target/test-classes/com/foo/Foo.class"
     })
     // @formatter:on
-    public void testLdcGetType(final String classFileName) throws Exception {
+    void testLdcGetType(final String classFileName) throws Exception {
         try (FileInputStream file = new FileInputStream(classFileName)) {
             final ClassParser parser = new ClassParser(file, new File(classFileName).getName());
             final JavaClass clazz = parser.parse();
@@ -74,7 +74,7 @@ public class JiraBcel370Test extends AbstractTest {
         "com.foo.Foo"
     })
     // @formatter:on
-    public void testVerify(final String className) throws ClassNotFoundException {
+    void testVerify(final String className) throws ClassNotFoundException {
         // Without the changes to the verifier this fails because it doesn't allow LDC CONSTANT_Dynamic
         Verifier.verifyType(className);
     }

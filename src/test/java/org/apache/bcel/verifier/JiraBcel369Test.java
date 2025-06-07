@@ -118,7 +118,7 @@ Slots used: 0 MaxStack: 1.
      */
     @Test
     @Disabled
-    public void testCompiledClass() throws ClassNotFoundException {
+    void testCompiledClass() throws ClassNotFoundException {
         Verifier.verifyType("issue369.Issue369");
     }
 

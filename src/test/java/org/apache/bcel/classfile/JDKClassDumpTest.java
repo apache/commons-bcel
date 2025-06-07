@@ -77,7 +77,7 @@ public class JDKClassDumpTest {
 
     @ParameterizedTest
     @MethodSource("org.apache.bcel.generic.JavaHome#streamJarPath")
-    public void testPerformance(final Path path) throws Exception {
+    void testPerformance(final Path path) throws Exception {
         assertDoesNotThrow(() -> testJar(path));
     }
 

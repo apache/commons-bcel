@@ -173,20 +173,20 @@ public class JdkGenericDumpTest {
 
     @ParameterizedTest
     @MethodSource("org.apache.bcel.generic.JavaHome#streamJarPath")
-    public void testJdkJars(final Path jarPath) throws Exception {
+    void testJdkJars(final Path jarPath) throws Exception {
         testJar(jarPath);
     }
 
     @ParameterizedTest
     @MethodSource("org.apache.bcel.generic.JavaHome#streamModulePath")
     @DisabledOnJre(value = JRE.JAVA_8)
-    public void testJdkModules(final Path jmodPath) throws Exception {
+    void testJdkModules(final Path jmodPath) throws Exception {
         testJar(jmodPath);
     }
 
     @ParameterizedTest
     @MethodSource("org.apache.bcel.generic.JavaHome#streamJavaHome")
-    public void testJreModules(final JavaHome javaHome) throws Exception {
+    void testJreModules(final JavaHome javaHome) throws Exception {
         assumeTrue(SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_9));
         try (ModularRuntimeImage mri = javaHome.getModularRuntimeImage()) {
             for (final Path path : mri.modules()) {

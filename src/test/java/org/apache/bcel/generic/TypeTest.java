@@ -84,7 +84,7 @@ public class TypeTest {
         "org/apache/bcel/generic/MethodGen",
         "com/foo/Foo"})
     // @formatter:on
-    public void testLDC(final String className) throws Exception {
+    void testLDC(final String className) throws Exception {
         final JavaClass jc = Repository.lookupClass(className);
         final ConstantPoolGen cpg = new ConstantPoolGen(jc.getConstantPool());
         for (final Method method : jc.getMethods()) {

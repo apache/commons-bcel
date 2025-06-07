@@ -38,7 +38,7 @@ public class Class2HTMLTest {
         "target/test-classes/Java8Example.class",
         "target/test-classes/Java4Example.class"})
     // @formatter:on
-    public void testConvertJavaUtil(final String classFileName) throws Exception {
+    void testConvertJavaUtil(final String classFileName) throws Exception {
         final File outputDir = new File("target/test-output/html");
         if (!outputDir.mkdirs()) { // either was not created or already existed
             assertTrue(outputDir.isDirectory()); // fail if missing
