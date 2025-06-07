@@ -1,0 +1,77 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.apache.bcel.util;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.io.IOException;
+
+import org.apache.bcel.classfile.JavaClass;
+import org.junit.jupiter.api.Test;
+
+/**
+ * Tests {@link LruCacheClassPathRepository}.
+ */
+public class LruCacheClassPathRepositoryTest {
+
+    @Test
+    public void testCacheEviction() throws ClassNotFoundException, IOException {
+        try (ClassPath classPath = new ClassPath("")) {
+            final LruCacheClassPathRepository repository = new LruCacheClassPathRepository(classPath, 2);
+            final JavaClass class1 = repository.loadClass("java.lang.String");
+            assertNotNull(class1);
+            final JavaClass class2 = repository.loadClass("java.lang.Long");
+            assertNotNull(class2);
+            final JavaClass class3 = repository.loadClass("java.lang.Integer"); // Evicts class1
+            assertNotNull(class3);
+
+            assertNull(repository.findClass("java.lang.String"));
+            final JavaClass cachedClass2 = repository.findClass("java.lang.Long");
+            assertEquals(class2, cachedClass2);
+        }
+    }
+
+    @Test
+    public void testLeastRecentlyUsedEviction() throws ClassNotFoundException, IOException {
+        try (ClassPath classPath = new ClassPath("")) {
+            final LruCacheClassPathRepository repository = new LruCacheClassPathRepository(classPath, 2);
+            final JavaClass class1 = repository.loadClass("java.lang.String");
+            assertNotNull(class1);
+            final JavaClass class2 = repository.loadClass("java.lang.Long");
+            assertNotNull(class2);
+            repository.findClass("java.lang.String"); // Uses class1
+            final JavaClass class3 = repository.loadClass("java.lang.Integer"); // Evicts class2
+            assertNotNull(class3);
+
+            assertNull(repository.findClass("java.lang.Long"));
+            final JavaClass cachedClass1 = repository.findClass("java.lang.String");
+            assertEquals(class1, cachedClass1);
+        }
+    }
+
+    @Test
+    public void testZeroCacheSize() throws IOException {
+        try (ClassPath classPath = new ClassPath("")) {
+            assertThrows(IllegalArgumentException.class, () -> new LruCacheClassPathRepository(classPath, 0));
+        }
+    }
+}

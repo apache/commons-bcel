@@ -16,36 +16,47 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
-package org.apache.bcel.util;
+package org.apache.bcel;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Iterator;
 
-import org.apache.bcel.AbstractTest;
-import org.apache.bcel.generic.IADD;
-import org.apache.bcel.generic.ILOAD;
-import org.apache.bcel.generic.ISTORE;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.util.InstructionFinder;
 import org.junit.jupiter.api.Test;
 
 public class InstructionFinderTest extends AbstractTest {
-
     @Test
-    public void testSearch() {
-        final InstructionList il = new InstructionList();
-        il.append(new ILOAD(1));
-        il.append(new ILOAD(2));
-        il.append(new IADD());
-        il.append(new ISTORE(3));
-        final InstructionFinder finder = new InstructionFinder(il);
+    public void testSearchAll() throws Exception {
+        final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".util.InstructionFinder");
+        final Method[] methods = clazz.getMethods();
+        Method searchM = null;
+        for (final Method m : methods) {
+            if (m.getName().equals("search") && m.getArgumentTypes().length == 3) {
+                searchM = m;
+                break;
+            }
+        }
 
-        final Iterator<?> it = finder.search("ILOAD IADD", il.getInstructionHandles()[0], null);
+        if (searchM == null) {
+            throw new Exception("search method not found");
+        }
+
+        final byte[] bytes = searchM.getCode().getCode();
+        final InstructionList il = new InstructionList(bytes);
+        final InstructionFinder finder = new InstructionFinder(il);
+        final Iterator<?> it = finder.search(".*", il.getStart(), null);
+
         final InstructionHandle[] ihs = (InstructionHandle[]) it.next();
-        assertEquals(2, ihs.length);
-        assertEquals(ihs[0].getInstruction(), new ILOAD(2));
-        assertEquals(ihs[1].getInstruction(), new IADD());
+        int size = 0;
+        for (final InstructionHandle ih : ihs) {
+            size += ih.getInstruction().getLength();
+        }
+        assertEquals(bytes.length, size);
+
     }
 }
