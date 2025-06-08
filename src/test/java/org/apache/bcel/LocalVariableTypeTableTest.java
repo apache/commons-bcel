@@ -44,7 +44,7 @@ class LocalVariableTypeTableTest extends AbstractTest {
 
     public class TestClassLoader extends ClassLoader {
 
-        public TestClassLoader(final ClassLoader parent) {
+        TestClassLoader(final ClassLoader parent) {
             super(parent);
         }
 
