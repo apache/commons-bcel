@@ -24,7 +24,7 @@ import java.io.IOException;
 import org.apache.bcel.verifier.tests.TestThrow01Creator;
 import org.junit.jupiter.api.Test;
 
-public class VerifierThrowTest extends AbstractVerifierTest {
+class VerifierThrowTest extends AbstractVerifierTest {
     @Test
     void testThrowEmptyStack() throws IOException, ClassNotFoundException {
         new TestThrow01Creator().create();

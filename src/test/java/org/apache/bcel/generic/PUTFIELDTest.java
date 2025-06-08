@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class PUTFIELDTest {
+class PUTFIELDTest {
     @Test
     void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();

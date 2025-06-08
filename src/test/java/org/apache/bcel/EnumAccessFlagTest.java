@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.apache.bcel.classfile.JavaClass;
 import org.junit.jupiter.api.Test;
 
-public class EnumAccessFlagTest extends AbstractTest {
+class EnumAccessFlagTest extends AbstractTest {
     /**
      * An enumerated type, once compiled, should result in a class file that is marked such that we can determine from the
      * access flags (through BCEL) that it was originally an enum type declaration.

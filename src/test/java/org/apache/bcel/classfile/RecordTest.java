@@ -31,7 +31,7 @@ import org.apache.bcel.util.SyntheticRepository;
 import org.apache.bcel.visitors.CountingVisitor;
 import org.junit.jupiter.api.Test;
 
-public class RecordTest extends AbstractTest {
+class RecordTest extends AbstractTest {
 
     /**
      * Check that we can copy a attribute correctly.

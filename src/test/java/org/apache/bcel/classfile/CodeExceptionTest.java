@@ -21,7 +21,7 @@ package org.apache.bcel.classfile;
 import org.apache.bcel.Constants;
 import org.junit.jupiter.api.Test;
 
-public class CodeExceptionTest {
+class CodeExceptionTest {
 
     /**
      * Tests that we do not break binary compatibility with BCEL-330.

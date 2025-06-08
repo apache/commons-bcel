@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 /**
  *  Tests signatures, including primitives, generics, and bad signatures for exceptions.
  */
-public class SignatureTest extends AbstractTest {
+class SignatureTest extends AbstractTest {
 
     @Test
     void testBadSignatures() throws Exception {

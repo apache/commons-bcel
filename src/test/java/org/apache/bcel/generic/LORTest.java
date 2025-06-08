@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class LORTest {
+class LORTest {
     @Test
     void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();

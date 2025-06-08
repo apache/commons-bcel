@@ -42,7 +42,7 @@ import org.apache.commons.lang3.SystemProperties;
 import org.eclipse.jdt.internal.compiler.batch.Main;
 import org.junit.jupiter.api.Test;
 
-public class VerifierMainTest extends AbstractTest {
+class VerifierMainTest extends AbstractTest {
 
     @Test
     void testSWAP() throws Exception {

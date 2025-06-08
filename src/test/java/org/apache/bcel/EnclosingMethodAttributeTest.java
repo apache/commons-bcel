@@ -32,7 +32,7 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.SyntheticRepository;
 import org.junit.jupiter.api.Test;
 
-public class EnclosingMethodAttributeTest extends AbstractTest {
+class EnclosingMethodAttributeTest extends AbstractTest {
 
     /**
      * Check that we can save and load the attribute correctly.

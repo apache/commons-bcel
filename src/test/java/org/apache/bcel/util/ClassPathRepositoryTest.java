@@ -35,7 +35,7 @@ import org.junit.jupiter.api.Test;
  * <p>
  * Without memory scarcity, these classes behave in the same manner.
  */
-public class ClassPathRepositoryTest {
+class ClassPathRepositoryTest {
 
     @Test
     void testClassPath() throws IOException {

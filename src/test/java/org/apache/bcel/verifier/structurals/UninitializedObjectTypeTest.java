@@ -22,7 +22,7 @@ package org.apache.bcel.verifier.structurals;
 import org.apache.bcel.Constants;
 import org.junit.jupiter.api.Test;
 
-public class UninitializedObjectTypeTest {
+class UninitializedObjectTypeTest {
 
     /**
      * Tests that we do not break binary compatibility with BCEL-330.

@@ -27,7 +27,7 @@ import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.ClassParser;
 import org.junit.jupiter.api.Test;
 
-public class OssFuzzTest {
+class OssFuzzTest {
 
     @Test
     void testIssue51980() throws Exception {

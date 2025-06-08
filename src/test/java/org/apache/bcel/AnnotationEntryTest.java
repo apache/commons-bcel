@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link AnnotationEntry}.
  */
-public class AnnotationEntryTest {
+class AnnotationEntryTest {
 
     @Test
     void testAddElementNameValuePair() {

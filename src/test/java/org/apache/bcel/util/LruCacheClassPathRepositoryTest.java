@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link LruCacheClassPathRepository}.
  */
-public class LruCacheClassPathRepositoryTest {
+class LruCacheClassPathRepositoryTest {
 
     @Test
     void testCacheEviction() throws ClassNotFoundException, IOException {

@@ -40,7 +40,7 @@ import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.Type;
 import org.junit.jupiter.api.Test;
 
-public class LocalVariableTypeTableTest extends AbstractTest {
+class LocalVariableTypeTableTest extends AbstractTest {
 
     public class TestClassLoader extends ClassLoader {
 

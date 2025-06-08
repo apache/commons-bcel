@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
  * Test for https://issues.apache.org/jira/browse/BCEL-267 "Race conditions on static fields in BranchHandle and
  * InstructionHandle".
  */
-public class HandleTest {
+class HandleTest {
 
     static Throwable exception;
     static final int MAXI = 100;

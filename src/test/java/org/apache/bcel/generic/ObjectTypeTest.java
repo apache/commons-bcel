@@ -25,7 +25,7 @@ import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
 
-public class ObjectTypeTest {
+class ObjectTypeTest {
 
     @Test
     void testGetClassName() {

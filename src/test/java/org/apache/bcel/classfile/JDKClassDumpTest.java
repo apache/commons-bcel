@@ -39,7 +39,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 /**
  * Test that dump() methods work on the JDK classes
  */
-public class JDKClassDumpTest {
+class JDKClassDumpTest {
 
     private void compare(final JavaClass jc, final InputStream inputStream, final String name) throws Exception {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();

@@ -43,7 +43,7 @@ final class ClassWithLongConstantPoolItem {
     long l = 42; // here is the key; we need a double constant value
 }
 
-public class ConstantPoolTest extends AbstractTest {
+class ConstantPoolTest extends AbstractTest {
 
     private static InstructionHandle[] getInstructionHandles(final JavaClass clazz, final ConstantPoolGen cp, final Method method) {
         final MethodGen methodGen = new MethodGen(method, clazz.getClassName(), cp);

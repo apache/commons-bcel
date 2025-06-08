@@ -22,7 +22,7 @@ package org.apache.bcel.verifier.statics;
 import org.apache.bcel.Constants;
 import org.junit.jupiter.api.Test;
 
-public class Pass2VerifierTest {
+class Pass2VerifierTest {
 
     /**
      * Tests that we do not break binary compatibility with BCEL-330.

@@ -42,7 +42,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class BCELifierTest extends AbstractTest {
+class BCELifierTest extends AbstractTest {
 
     private static final String EOL = System.lineSeparator();
     public static final String CLASSPATH = "." + File.pathSeparator + SystemProperties.getJavaClassPath();

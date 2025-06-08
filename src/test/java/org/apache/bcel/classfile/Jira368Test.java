@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests BCEL-368.
  */
-public class Jira368Test {
+class Jira368Test {
 
     private JavaClass parseJavaClass() throws IOException {
         return new ClassParser("src/test/resources/jira368/Jira368.class").parse();

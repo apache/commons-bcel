@@ -30,7 +30,7 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.data.EmptyClass;
 import org.junit.jupiter.api.Test;
 
-public class AnonymousClassTest extends AbstractTest {
+class AnonymousClassTest extends AbstractTest {
     @Test
     void testAnonymousInnerClassIsAnonymous() throws ClassNotFoundException {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.AnonymousClassTest$1");

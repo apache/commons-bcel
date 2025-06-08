@@ -31,7 +31,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
 import org.junit.jupiter.api.Test;
 
-public class UtilityTest {
+class UtilityTest {
 
     @Test
     void testClearBit() {

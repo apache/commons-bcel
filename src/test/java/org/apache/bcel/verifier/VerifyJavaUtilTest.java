@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 @Disabled
-public class VerifyJavaUtilTest extends AbstractVerifierTest {
+class VerifyJavaUtilTest extends AbstractVerifierTest {
 
     @Test
     void testHashMap() throws ClassNotFoundException {

@@ -46,7 +46,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledForJreRange;
 import org.junit.jupiter.api.condition.JRE;
 
-public class VerifierTest {
+class VerifierTest {
 
     private static File getJarFile(final Class<?> clazz) throws URISyntaxException {
         return new File(clazz.getProtectionDomain().getCodeSource().getLocation().toURI());

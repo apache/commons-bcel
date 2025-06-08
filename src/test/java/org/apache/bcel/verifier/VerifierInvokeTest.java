@@ -21,7 +21,7 @@ package org.apache.bcel.verifier;
 
 import org.junit.jupiter.api.Test;
 
-public class VerifierInvokeTest extends AbstractVerifierTest {
+class VerifierInvokeTest extends AbstractVerifierTest {
 
     @Test
     void testLegalInvokeInterface() throws ClassNotFoundException {

@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link Constant}.
  */
-public class ConstantTest {
+class ConstantTest {
 
     @Test
     void testBCELComparator() throws Exception {

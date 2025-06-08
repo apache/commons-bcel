@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link Const}.
  */
-public class ConstTest {
+class ConstTest {
 
     @Test
     void testJava22() throws Exception {

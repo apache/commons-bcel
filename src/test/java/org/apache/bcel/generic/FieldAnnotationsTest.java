@@ -36,7 +36,7 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.SyntheticRepository;
 import org.junit.jupiter.api.Test;
 
-public class FieldAnnotationsTest extends AbstractTest {
+class FieldAnnotationsTest extends AbstractTest {
     // helper methods
     public void checkAnnotatedField(final JavaClass clazz, final String fieldname, final String AnnotationEntryName, final String AnnotationEntryElementName,
         final String AnnotationEntryElementValue) {

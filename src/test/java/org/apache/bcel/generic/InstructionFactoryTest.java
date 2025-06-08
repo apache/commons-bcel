@@ -34,7 +34,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
 import org.junit.jupiter.api.Test;
 
-public class InstructionFactoryTest extends AbstractTest {
+class InstructionFactoryTest extends AbstractTest {
 
     @Test
     void testArrayLoad() throws Exception {

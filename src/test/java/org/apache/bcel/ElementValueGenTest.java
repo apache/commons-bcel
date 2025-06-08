@@ -37,7 +37,7 @@ import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.SimpleElementValueGen;
 import org.junit.jupiter.api.Test;
 
-public class ElementValueGenTest extends AbstractTest {
+class ElementValueGenTest extends AbstractTest {
     private void checkSerialize(final ElementValueGen evgBefore, final ConstantPoolGen cpg) throws IOException {
         final String beforeValue = evgBefore.stringifyValue();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();

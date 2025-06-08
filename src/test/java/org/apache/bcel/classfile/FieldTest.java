@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link Field}.
  */
-public class FieldTest {
+class FieldTest {
 
     @Test
     void testBCELComparator() throws Exception {

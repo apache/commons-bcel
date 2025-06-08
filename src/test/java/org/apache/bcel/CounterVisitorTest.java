@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.apache.bcel.classfile.JavaClass;
 import org.junit.jupiter.api.Test;
 
-public class CounterVisitorTest extends AbstractCounterVisitorTest {
+class CounterVisitorTest extends AbstractCounterVisitorTest {
     @Override
     protected JavaClass getTestClass() throws ClassNotFoundException {
         return getTestJavaClass(PACKAGE_BASE_NAME + ".data.MarkedType");

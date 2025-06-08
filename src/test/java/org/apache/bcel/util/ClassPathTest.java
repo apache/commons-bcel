@@ -27,7 +27,7 @@ import java.io.InputStream;
 import org.apache.bcel.AbstractTest;
 import org.junit.jupiter.api.Test;
 
-public class ClassPathTest extends AbstractTest {
+class ClassPathTest extends AbstractTest {
 
     @Test
     void testClose() throws IOException {

@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 @Disabled
-public class JiraBcel291Test {
+class JiraBcel291Test {
 
     @Test
     void test() throws ClassNotFoundException {

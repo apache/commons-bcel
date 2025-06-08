@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class F2ITest {
+class F2ITest {
     @Test
     void testAccept() {
         final CountingVisitor countVisitor = new CountingVisitor();

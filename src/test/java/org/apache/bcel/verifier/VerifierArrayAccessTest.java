@@ -32,7 +32,7 @@ import org.apache.bcel.verifier.tests.TestArrayAccess04UnknownCreator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class VerifierArrayAccessTest extends AbstractVerifierTest {
+class VerifierArrayAccessTest extends AbstractVerifierTest {
 
     @Test
     void testInvalidArrayAccess() throws IOException, ClassNotFoundException {

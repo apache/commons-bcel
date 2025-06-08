@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link FieldGen}.
  */
-public class FieldGenTest {
+class FieldGenTest {
 
     @Test
     @Disabled

@@ -37,7 +37,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 /**
  * Tests BCEL-370.
  */
-public class JiraBcel370Test extends AbstractTest {
+class JiraBcel370Test extends AbstractTest {
     @ParameterizedTest
     @ValueSource(strings = {
     // @formatter:off

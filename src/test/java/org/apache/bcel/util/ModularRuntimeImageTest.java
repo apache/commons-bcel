@@ -36,7 +36,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 /**
  * Tests {@link ModularRuntimeImage}.
  */
-public class ModularRuntimeImageTest {
+class ModularRuntimeImageTest {
 
     @BeforeAll
     public static void before() {

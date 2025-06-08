@@ -39,7 +39,7 @@ import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
 import org.junit.jupiter.api.Test;
 
-public class AnnotationGenTest extends AbstractTest {
+class AnnotationGenTest extends AbstractTest {
     private void checkSerialize(final AnnotationEntryGen a, final ConstantPoolGen cpg) throws IOException {
         final String beforeName = a.getTypeName();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();

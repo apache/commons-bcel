@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests BCEL-369.
  */
-public class JiraBcel369Test extends AbstractTest {
+class JiraBcel369Test extends AbstractTest {
 
     @Test
     void testCompileAndVerify() throws ClassNotFoundException {

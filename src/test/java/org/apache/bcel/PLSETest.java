@@ -44,7 +44,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class PLSETest extends AbstractTest {
+class PLSETest extends AbstractTest {
     /**
      * BCEL-208: A couple of methods in MethodGen.java need to test for an empty instruction list.
      */

@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link ClassGen}.
  */
-public class ClassGenTest {
+class ClassGenTest {
 
     @Test
     void testBCELComparator() throws Exception {

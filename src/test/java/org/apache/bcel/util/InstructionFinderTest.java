@@ -31,7 +31,7 @@ import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
 import org.junit.jupiter.api.Test;
 
-public class InstructionFinderTest extends AbstractTest {
+class InstructionFinderTest extends AbstractTest {
 
     @Test
     void testSearch() {

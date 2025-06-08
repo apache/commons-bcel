@@ -74,7 +74,7 @@ import org.junit.jupiter.params.provider.MethodSource;
  * <li>jdk-8.0.345.1-hotspot</li>
  * </ul>
  */
-public class JdkGenericDumpTest {
+class JdkGenericDumpTest {
 
     private static class ClassParserFilesVisitor extends SimpleFileVisitor<Path> {
 

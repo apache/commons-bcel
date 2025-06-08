@@ -35,7 +35,7 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
 import org.junit.jupiter.api.Test;
 
-public class MethodGenTest {
+class MethodGenTest {
 
     @interface A {
     }

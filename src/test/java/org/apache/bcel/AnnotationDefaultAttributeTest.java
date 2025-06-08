@@ -28,7 +28,7 @@ import org.apache.bcel.classfile.Method;
 import org.apache.bcel.classfile.SimpleElementValue;
 import org.junit.jupiter.api.Test;
 
-public class AnnotationDefaultAttributeTest extends AbstractTest {
+class AnnotationDefaultAttributeTest extends AbstractTest {
     /**
      * For values in an annotation that have default values, we should be able to query the AnnotationDefault attribute
      * against the method to discover the default value that was originally declared.

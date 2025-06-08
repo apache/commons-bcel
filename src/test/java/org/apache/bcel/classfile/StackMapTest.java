@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link StackMap}.
  */
-public class StackMapTest {
+class StackMapTest {
 
     @Test
     void testSetStackMap() {

@@ -29,7 +29,7 @@ import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.util.InstructionFinder;
 import org.junit.jupiter.api.Test;
 
-public class InstructionFinderTest extends AbstractTest {
+class InstructionFinderTest extends AbstractTest {
     @Test
     void testSearchAll() throws Exception {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".util.InstructionFinder");

@@ -41,7 +41,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 /**
  * Tests {@code module-info.class} files.
  */
-public class ConstantPoolModuleToStringTest {
+class ConstantPoolModuleToStringTest {
 
     static class ToStringVisitor extends EmptyVisitor {
 

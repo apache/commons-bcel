@@ -50,7 +50,7 @@ final class test$method name with () in it$1 extends kotlin.jvm.internal.Lambda 
   static {};
  * </pre>
  */
-public class InvalidMethodSigantureTest {
+class InvalidMethodSigantureTest {
 
     final class TestVisitor extends org.apache.bcel.classfile.EmptyVisitor {
         @Override

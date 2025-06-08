@@ -44,7 +44,7 @@ import org.junit.jupiter.api.Test;
  * Test a number of BCEL issues related to running the Verifier on a bad or malformed .class file and having it die with
  * an exception rather than report a verification failure.
  */
-public class VerifyBadClassesTest {
+class VerifyBadClassesTest {
 
     private List<String> buildVerifyCommand(final String className, final String testDir) {
         final List<String> command = new ArrayList<>();

@@ -61,7 +61,7 @@ import org.junit.jupiter.api.Test;
  * }
  * </pre>
  */
-public class GeneratingAnnotatedClassesTest extends AbstractTest {
+class GeneratingAnnotatedClassesTest extends AbstractTest {
     private void assertArrayElementValue(final int nExpectedArrayValues, final AnnotationEntry anno) {
         final ElementValuePair elementValuePair = anno.getElementValuePairs()[0];
         assertEquals("value", elementValuePair.getNameString());
