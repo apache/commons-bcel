@@ -185,9 +185,10 @@ public abstract class Utility {
 
     /**
      * Convert bit field of flags into string such as 'static final'.
-     *
+     * <p>
      * Special case: Classes compiled with new compilers and with the 'ACC_SUPER' flag would be said to be "synchronized".
      * This is because SUN used the same value for the flags 'ACC_SUPER' and 'ACC_SYNCHRONIZED'.
+     * </p>
      *
      * @param accessFlags Access flags
      * @param forClass access flags are for class qualifiers ?
