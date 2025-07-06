@@ -29,6 +29,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
@@ -73,6 +75,10 @@ public final class ConstantPoolModuleAccessTest {
                         expected.add("org.junit.platform.launcher.LauncherSessionListener");
                         expected.add("org.junit.platform.launcher.PostDiscoveryFilter");
                         expected.add("org.junit.platform.launcher.TestExecutionListener");
+                        assertEquals(expected, Arrays.asList(usedClassNames));
+                    } else if (urlPath.contains("junit-platform-common")) {
+                        final List<String> expected = new ArrayList<>();
+                        expected.add("org.junit.platform.commons.support.scanning.ClasspathScanner");
                         assertEquals(expected, Arrays.asList(usedClassNames));
                     } else if (urlPath.contains("junit-platform-engine")) {
                         final List<String> expected = new ArrayList<>();
@@ -264,7 +270,7 @@ public final class ConstantPoolModuleAccessTest {
                         expected.add("jdk.internal.netscape.javascript.spi.JSObjectProvider");
                         assertEquals(expected, Arrays.asList(usedClassNames));
                     } else {
-                        assertEquals(0, usedClassNames.length, "Found " + Arrays.toString(usedClassNames) + " in " + urlPath);
+                        assertEquals(0, usedClassNames.length, () -> "Found " + Arrays.toString(usedClassNames) + " in " + urlPath);
                     }
                     super.visitModule(obj);
                 }
@@ -275,7 +281,7 @@ public final class ConstantPoolModuleAccessTest {
                     final String packageName = obj.getPackageName(constantPool);
                     final String[] toModuleNames = obj.getToModuleNames(constantPool);
                     if (url.getPath().contains("junit-platform-commons")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("org.junit.jupiter.api");
                         expected.add("org.junit.jupiter.engine");
                         expected.add("org.junit.jupiter.migrationsupport");
@@ -292,13 +298,14 @@ public final class ConstantPoolModuleAccessTest {
                             expected.add("org.junit.platform.suite.engine");
                             expected.add("org.junit.platform.testkit");
                             expected.add("org.junit.vintage.engine");
-                            assertEquals(expected, Arrays.asList(toModuleNames));
+                            expected.add("org.junit.platform.jfr");
+                            assertEquals(expected, new TreeSet<>(Arrays.asList(toModuleNames)));
                             break;
                         case "org.junit.platform.commons.logging":
                             expected.add("org.junit.platform.suite.engine");
                             expected.add("org.junit.platform.testkit");
                             expected.add("org.junit.vintage.engine");
-                            assertEquals(expected, Arrays.asList(toModuleNames));
+                            assertEquals(expected, new TreeSet<>(Arrays.asList(toModuleNames)));
                             break;
                         default:
                             assertEquals(0, toModuleNames.length);

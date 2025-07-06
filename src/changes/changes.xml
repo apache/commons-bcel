@@ -65,13 +65,16 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="BCEL-375" type="fix" dev="ggregory" due-to="J. Lewis Muir, Gary Gregory">Wrong permissions on bcel .jar file in binary .tar.gz distribution file.</action>
       <action issue="BCEL-376" type="fix" dev="ggregory" due-to="Dominik Stadler, Gary Gregory">ClassPath.close() throws UnsupportedOperationException when created with system-classpath.</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">ClassPath.getResources(String) can use an ArrayList instead of a Vector.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs [ERROR] Medium: Operation on the "created" shared variable in "ConstantUtf8" class is not atomic [org.apache.bcel.classfile.ConstantUtf8] At ConstantUtf8.java:[line 119] AT_NONATOMIC_OPERATIONS_ON_SHARED_VARIABLE.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs [ERROR] Medium: Operation on the "considered" shared variable in "ConstantUtf8" class is not atomic [org.apache.bcel.classfile.ConstantUtf8] At ConstantUtf8.java:[line 137] AT_NONATOMIC_OPERATIONS_ON_SHARED_VARIABLE.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs [ERROR] Medium: Operation on the "skipped" shared variable in "ConstantUtf8" class is not atomic [org.apache.bcel.classfile.ConstantUtf8] At ConstantUtf8.java:[line 134] AT_NONATOMIC_OPERATIONS_ON_SHARED_VARIABLE.</action>      
       <!-- ADD -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_25.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_25.</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.apache.commons:commons-lang3 from 3.14.0 to 3.17.0 #334, #341, #351.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.jetbrains.kotlin:kotlin-stdlib from 2.0.0 to 2.2.0 #340, #347, #369, #390, #407, #422, #434, #441.</action>
-      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.apache.commons:commons-parent from 72 to 79 #346, #349, #559, #364, #368, #378.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.apache.commons:commons-parent from 72 to 85 #346, #349, #559, #364, #368, #378.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump commons-io:commons-io from 2.16.1 to 2.19.0 #357, #387.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump jna.version from 5.14.0 to 5.17.0 #358, #399.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.codehaus.mojo:taglist-maven-plugin from 3.1.0 to 3.2.1 #376.</action>

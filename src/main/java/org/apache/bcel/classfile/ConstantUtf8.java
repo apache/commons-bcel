@@ -115,7 +115,7 @@ public final class ConstantUtf8 extends Constant {
     }
 
     // Avoid Spotbugs complaint about Write to static field
-    private static void countCreated() {
+    private static synchronized void countCreated() {
         created++;
     }
 
@@ -129,7 +129,7 @@ public final class ConstantUtf8 extends Constant {
      * @return a new or cached instance of the given value.
      * @since 6.0
      */
-    public static ConstantUtf8 getCachedInstance(final String value) {
+    public static synchronized ConstantUtf8 getCachedInstance(final String value) {
         if (value.length() > Cache.MAX_ENTRY_SIZE) {
             skipped++;
             return new ConstantUtf8(value);
