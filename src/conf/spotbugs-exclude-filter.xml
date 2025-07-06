@@ -24,32 +24,28 @@
 <FindBugsFilter
     xmlns="https://github.com/spotbugs/filter/3.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="https://github.com/spotbugs/filter/3.0.0 https://raw.githubusercontent.com/spotbugs/spotbugs/3.1.0/spotbugs/etc/findbugsfilter.xsd"><!-- Using wild-card class names so exclusions work regardless of the top-level package -->
-
+    xsi:schemaLocation="https://github.com/spotbugs/filter/3.0.0 https://raw.githubusercontent.com/spotbugs/spotbugs/3.1.0/spotbugs/etc/findbugsfilter.xsd">
+  <!-- Using wild-card class names so exclusions work regardless of the top-level package -->
   <!-- https://github.com/spotbugs/spotbugs/issues/2710 -->
   <Match>
     <Class name="~.*" />
     <Bug pattern="CT_CONSTRUCTOR_THROW" />
   </Match>
-
   <!-- Waiting on BCEL-252 -->
   <Match>
     <Class name="~.*\.util\.Class2HTML" />
     <Bug pattern="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD" />
   </Match>
-
   <!-- Class is not supposed to be an Exception itself -->
   <Match>
     <Class name="~.*\.classfile\.CodeException" />
     <Bug pattern="NM_CLASS_NOT_EXCEPTION" />
   </Match>
-
   <!-- Ignore GC here -->
   <Match>
     <Class name="~.*\.verifier\.TransitiveHull" />
     <Bug pattern="DM_GC" />
   </Match>
-
   <!-- clone() creates a new instance so does not need to call super.clone() -->
   <Match>
     <Bug pattern="CN_IDIOM_NO_SUPER_CALL"/>
@@ -59,7 +55,6 @@
       <Class name="~.*\.verifier\.structurals\.OperandStack"/>
     </Or>
   </Match>
-
   <!-- Binary compatibility -->
   <Match>
     <Class name="org.apache.bcel.Repository"/>
@@ -78,7 +73,6 @@
     <Field name="IGNORED"/>
     <Bug pattern="MS_PKGPROTECT"/>
   </Match>
-
   <!--
     TODO: this should probably be sinplified
      Medium: Complicated, subtle or wrong increment in for-loop
@@ -91,7 +85,6 @@
     <Method name="printFlags" params="int, org.apache.bcel.util.BCELifier$FLAGS" returns="java.lang.String"/>
     <Bug pattern="QF_QUESTIONABLE_FOR_LOOP"/>
   </Match>
-
   <!-- Reason: TODO, perhaps? -->
   <Match>
     <Class name="~.*" />
@@ -100,13 +93,11 @@
       <Bug pattern="EI_EXPOSE_REP2" />
     </Or>
   </Match>
-
   <!-- TODO - enable later -->
   <Match>
     <Class name="~.*" />
     <Bug pattern="MS_MUTABLE_ARRAY" />
   </Match>
-
   <!-- Test data classes -->
   <Match>
     <Or>
@@ -114,7 +105,6 @@
       <Class name="~.*\.tests\.Test.*" />
     </Or>
   </Match>
-
   <!--
     This is intentional
     Error:  Switch statement found in org.apache.bcel.util.BCELFactory.visitAllocationInstruction(AllocationInstruction)
@@ -128,7 +118,6 @@
     <Method name="visitAllocationInstruction"/>
     <Bug pattern="SF_SWITCH_FALLTHROUGH"/>
   </Match>
-
   <!--
     Class is deprecated
     Error:  The class name org.apache.bcel.util.ClassLoader
@@ -146,7 +135,6 @@
       <Bug pattern="MS_PKGPROTECT"/>
     </Or>
   </Match>
-
   <!--
     TODO: field is deprecated in preparation for making it private later
     Error:  org.apache.bcel.verifier.structurals.Frame._this should be package protected
@@ -158,7 +146,6 @@
     <Field name="_this"/>
     <Bug pattern="MS_PKGPROTECT"/>
   </Match>
-
   <!-- TODO Is this really identity equality and not object equality? -->
   <Match>
     <Class name="Mini.ASTFunDecl"/>
@@ -170,7 +157,6 @@
     <Class name="Mini.Environment"/>
     <Bug pattern="CN_IDIOM_NO_SUPER_CALL"/>
   </Match>
-
   <!-- Skip JavaCC generated code. -->
   <Match>
     <Class name="Mini.MiniParser"/>
