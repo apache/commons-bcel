@@ -23,7 +23,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,6 +31,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.generic.ClassGenException;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * InstructionFinder is a tool to search for given instructions patterns, i.e., match sequences of instructions in an
@@ -173,7 +173,7 @@ public class InstructionFinder {
      */
     private static String compilePattern(final String pattern) {
         // Bug: BCEL-77 - Instructions are assumed to be english, to avoid odd Locale issues
-        final String lower = pattern.toLowerCase(Locale.ROOT);
+        final String lower = StringUtils.toRootLowerCase(pattern);
         final StringBuilder buf = new StringBuilder();
         final int size = pattern.length();
         for (int i = 0; i < size; i++) {

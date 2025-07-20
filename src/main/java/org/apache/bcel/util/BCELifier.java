@@ -23,7 +23,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.Locale;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
@@ -126,7 +125,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
                 } else if (pow == Const.ACC_TRANSIENT && location == FLAGS.METHOD) {
                     buf.append(CONSTANT_PREFIX).append("ACC_VARARGS | ");
                 } else if (i < Const.ACCESS_NAMES_LENGTH) {
-                    buf.append(CONSTANT_PREFIX).append("ACC_").append(Const.getAccessName(i).toUpperCase(Locale.ROOT)).append(" | ");
+                    buf.append(CONSTANT_PREFIX).append("ACC_").append(StringUtils.toRootUpperCase(Const.getAccessName(i))).append(" | ");
                 } else {
                     buf.append(String.format(CONSTANT_PREFIX + "ACC_BIT %x | ", pow));
                 }
@@ -141,7 +140,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         final Type type = Type.getType(signature);
         final byte t = type.getType();
         if (t <= Const.T_VOID) {
-            return "Type." + Const.getTypeName(t).toUpperCase(Locale.ROOT);
+            return "Type." + StringUtils.toRootUpperCase(Const.getTypeName(t));
         }
         if (type.toString().equals("java.lang.String")) {
             return "Type.STRING";

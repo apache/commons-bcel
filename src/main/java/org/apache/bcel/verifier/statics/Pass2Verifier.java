@@ -20,7 +20,6 @@ package org.apache.bcel.verifier.statics;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -74,6 +73,7 @@ import org.apache.bcel.verifier.VerifierFactory;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
 import org.apache.bcel.verifier.exc.ClassConstraintException;
 import org.apache.bcel.verifier.exc.LocalVariableInfoInconsistentException;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * This PassVerifier verifies a class file according to pass 2 as described in The Java Virtual Machine Specification,
@@ -966,7 +966,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             checkIndex(obj, obj.getSourceFileIndex(), CONST_Utf8);
 
             final String sourceFileName = ((ConstantUtf8) cp.getConstant(obj.getSourceFileIndex())).getBytes(); // ==obj.getSourceFileName() ?
-            final String sourceFileNameLc = sourceFileName.toLowerCase(Locale.ROOT);
+            final String sourceFileNameLc = StringUtils.toRootLowerCase(sourceFileName);
 
             if (sourceFileName.indexOf('/') != -1 || sourceFileName.indexOf('\\') != -1 || sourceFileName.indexOf(':') != -1
                 || sourceFileNameLc.lastIndexOf(".java") == -1) {

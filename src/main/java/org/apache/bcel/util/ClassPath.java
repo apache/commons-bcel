@@ -35,7 +35,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
@@ -45,6 +44,7 @@ import java.util.zip.ZipFile;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Utility;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemProperties;
 
 /**
@@ -431,12 +431,12 @@ public class ClassPath implements Closeable {
     }
 
     private static final FilenameFilter ARCHIVE_FILTER = (dir, name) -> {
-        name = name.toLowerCase(Locale.ROOT);
+        name = StringUtils.toRootLowerCase(name);
         return name.endsWith(".zip") || name.endsWith(".jar");
     };
 
     private static final FilenameFilter MODULES_FILTER = (dir, name) -> {
-        name = name.toLowerCase(Locale.ROOT);
+        name = StringUtils.toRootLowerCase(name);
         return name.endsWith(org.apache.bcel.classfile.Module.EXTENSION);
     };
 

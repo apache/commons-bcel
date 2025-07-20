@@ -33,7 +33,6 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -41,6 +40,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.util.ByteSequence;
 import org.apache.commons.lang3.ArrayFill;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Utility functions that do not really belong to any class in particular.
@@ -1110,12 +1110,15 @@ public abstract class Utility {
     }
 
     /**
-     * Map opcode names to opcode numbers. E.g., return Constants.ALOAD for "aload"
+     * Map opcode names to opcode numbers. E.g., return Constants.ALOAD for "aload".
+     *
+     * @param name The opcode name.
+     * @return the value.
      */
-    public static short searchOpcode(String name) {
-        name = name.toLowerCase(Locale.ROOT);
+    public static short searchOpcode(final String name) {
+        final String lcName = StringUtils.toRootLowerCase(name);
         for (short i = 0; i < Const.OPCODE_NAMES_LENGTH; i++) {
-            if (Const.getOpcodeName(i).equals(name)) {
+            if (Const.getOpcodeName(i).equals(lcName)) {
                 return i;
             }
         }
