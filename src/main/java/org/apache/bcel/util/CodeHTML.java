@@ -490,7 +490,7 @@ final class CodeHTML {
         access = Utility.replace(access, " ", "&nbsp;");
         // Get the method's attributes, the Code Attribute in particular
         final Attribute[] attributes = method.getAttributes();
-        printWriter.print("<P><B><FONT COLOR=\"#FF0000\">" + access + "</FONT>&nbsp;" + "<A NAME=method" + methodNumber + ">" + Class2HTML.referenceType(type)
+        printWriter.print("<P><B><FONT COLOR=\"#FF0000\">" + access + "</FONT>&nbsp;<A NAME=method" + methodNumber + ">" + Class2HTML.referenceType(type)
             + "</A>&nbsp<A HREF=\"" + className + "_methods.html#method" + methodNumber + "\" TARGET=Methods>" + htmlName + "</A>(");
         for (int i = 0; i < args.length; i++) {
             printWriter.print(Class2HTML.referenceType(args[i]));
@@ -518,7 +518,7 @@ final class CodeHTML {
                     printWriter.print("<UL>");
                     for (int j = 0; j < attributes2.length; j++) {
                         tag = attributes2[j].getTag();
-                        printWriter.print("<LI><A HREF=\"" + className + "_attributes.html#" + "method" + methodNumber + "@" + i + "@" + j
+                        printWriter.print("<LI><A HREF=\"" + className + "_attributes.html#method" + methodNumber + "@" + i + "@" + j
                             + "\" TARGET=Attributes>" + Const.getAttributeName(tag) + "</A></LI>\n");
                     }
                     printWriter.print("</UL>");
@@ -533,7 +533,7 @@ final class CodeHTML {
                 stream.mark(stream.available());
                 findGotos(stream, c);
                 stream.reset();
-                printWriter.println("<TABLE BORDER=0><TR><TH ALIGN=LEFT>Byte<BR>offset</TH>" + "<TH ALIGN=LEFT>Instruction</TH><TH ALIGN=LEFT>Argument</TH>");
+                printWriter.println("<TABLE BORDER=0><TR><TH ALIGN=LEFT>Byte<BR>offset</TH><TH ALIGN=LEFT>Instruction</TH><TH ALIGN=LEFT>Argument</TH>");
                 while (stream.available() > 0) {
                     final int offset = stream.getIndex();
                     final String str = codeToHTML(stream, methodNumber);

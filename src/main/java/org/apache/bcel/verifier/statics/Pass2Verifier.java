@@ -709,7 +709,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                         foundInnerClasses = true;
                     } else if (hasInnerClass) {
                         throw new ClassConstraintException("A Classfile structure (like '" + tostring(obj) + "') must have exactly one InnerClasses attribute"
-                            + " if at least one Inner Class is referenced (which is the case)." + " More than one InnerClasses attribute was found.");
+                            + " if at least one Inner Class is referenced (which is the case). More than one InnerClasses attribute was found.");
                     }
                     if (!hasInnerClass) {
                         addMessage("No referenced Inner Class found, but InnerClasses attribute '" + tostring(att)
@@ -837,7 +837,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             // it!
             if (name.equals(Const.STATIC_INITIALIZER_NAME) && ts.length != 0) {
                 throw new ClassConstraintException("Method '" + tostring(obj) + "' has illegal name '" + name + "'."
-                    + " Its name resembles the class or interface initialization method" + " which it isn't because of its arguments (==descriptor).");
+                    + " Its name resembles the class or interface initialization method which it isn't because of its arguments (==descriptor).");
             }
 
             if (jc.isClass()) {
@@ -888,7 +888,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 if (jc.getMajor() >= Const.MAJOR_1_8) {
                     if (obj.isPublic() == obj.isPrivate()) {
                         throw new ClassConstraintException(
-                            "Interface method '" + tostring(obj) + "' must have" + " exactly one of its ACC_PUBLIC and ACC_PRIVATE modifiers set.");
+                            "Interface method '" + tostring(obj) + "' must have exactly one of its ACC_PUBLIC and ACC_PRIVATE modifiers set.");
                     }
                     if (obj.isProtected() || obj.isFinal() || obj.isSynchronized() || obj.isNative()) {
                         throw new ClassConstraintException("Interface method '" + tostring(obj) + "' must not have"
@@ -912,7 +912,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             if ((obj.getAccessFlags() & ~(Const.ACC_PUBLIC | Const.ACC_PRIVATE | Const.ACC_PROTECTED | Const.ACC_STATIC | Const.ACC_FINAL |
                 Const.ACC_SYNCHRONIZED | Const.ACC_NATIVE | Const.ACC_ABSTRACT | Const.ACC_STRICT)) > 0) {
-                addMessage("Method '" + tostring(obj) + "' has access flag(s) other than" + " ACC_PUBLIC, ACC_PRIVATE, ACC_PROTECTED, ACC_STATIC, ACC_FINAL,"
+                addMessage("Method '" + tostring(obj) + "' has access flag(s) other than ACC_PUBLIC, ACC_PRIVATE, ACC_PROTECTED, ACC_STATIC, ACC_FINAL,"
                     + " ACC_SYNCHRONIZED, ACC_NATIVE, ACC_ABSTRACT, ACC_STRICT set (ignored).");
             }
 

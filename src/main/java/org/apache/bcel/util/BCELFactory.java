@@ -167,8 +167,8 @@ final class BCELFactory extends EmptyVisitor {
         final CodeExceptionGen[] handlers = methodGen.getExceptionHandlers();
         for (final CodeExceptionGen h : handlers) {
             final String type = h.getCatchType() == null ? "null" : BCELifier.printType(h.getCatchType());
-            printWriter.println("    method.addExceptionHandler(" + "ih_" + h.getStartPC().getPosition() + ", " + "ih_" + h.getEndPC().getPosition() + ", "
-                + "ih_" + h.getHandlerPC().getPosition() + ", " + type + ");");
+            printWriter.println("    method.addExceptionHandler(ih_" + h.getStartPC().getPosition() + ", ih_" + h.getEndPC().getPosition() + ", ih_"
+                    + h.getHandlerPC().getPosition() + ", " + type + ");");
         }
     }
 

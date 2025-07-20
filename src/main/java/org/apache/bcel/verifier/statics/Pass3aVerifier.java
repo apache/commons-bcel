@@ -254,7 +254,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 final int dimensions = ((ArrayType) t).getDimensions();
                 if (dimensions > Const.MAX_ARRAY_DIMENSIONS) {
                     constraintViolated(o,
-                        "Not allowed to create an array with more than " + Const.MAX_ARRAY_DIMENSIONS + " dimensions;" + " actual: " + dimensions);
+                        "Not allowed to create an array with more than " + Const.MAX_ARRAY_DIMENSIONS + " dimensions; actual: " + dimensions);
                 }
             }
         }
@@ -926,7 +926,7 @@ public final class Pass3aVerifier extends PassVerifier {
                     if (instructionPosition == offset) {
                         if (offsets.contains(offset)) {
                             addMessage("LineNumberTable attribute '" + code.getLineNumberTable() + "' refers to the same code offset ('" + offset
-                                + "') more than once" + " which is violating the semantics [but is sometimes produced by IBM's 'jikes' compiler].");
+                                + "') more than once which is violating the semantics [but is sometimes produced by IBM's 'jikes' compiler].");
                         } else {
                             offsets.add(offset);
                         }
@@ -1127,7 +1127,7 @@ public final class Pass3aVerifier extends PassVerifier {
         final Instruction last = instructionList.getEnd().getInstruction();
         if (!(last instanceof ReturnInstruction || last instanceof RET || last instanceof GotoInstruction || last instanceof ATHROW)) {
             throw new StaticCodeInstructionConstraintException(
-                "Execution must not fall off the bottom of the code array." + " This constraint is enforced statically as some existing verifiers do"
+                "Execution must not fall off the bottom of the code array. This constraint is enforced statically as some existing verifiers do"
                     + " - so it may be a false alarm if the last instruction is not reachable.");
         }
     }

@@ -213,13 +213,26 @@ public class Class2HTML implements Constants {
 
     private void writeMainHTML(final AttributeHTML attributeHtml, final Charset charset) throws FileNotFoundException, UnsupportedEncodingException {
         try (PrintWriter file = new PrintWriter(dir + className + ".html", charset.name())) {
-            file.println("<HTML>\n" + "<HEAD><TITLE>Documentation for " + className + "</TITLE>" + "</HEAD>\n" + "<FRAMESET BORDER=1 cols=\"30%,*\">\n"
-                + "<FRAMESET BORDER=1 rows=\"80%,*\">\n" + "<FRAME NAME=\"ConstantPool\" SRC=\"" + className + "_cp.html" + "\"\n MARGINWIDTH=\"0\" "
-                + "MARGINHEIGHT=\"0\" FRAMEBORDER=\"1\" SCROLLING=\"AUTO\">\n" + "<FRAME NAME=\"Attributes\" SRC=\"" + className + "_attributes.html"
-                + "\"\n MARGINWIDTH=\"0\" " + "MARGINHEIGHT=\"0\" FRAMEBORDER=\"1\" SCROLLING=\"AUTO\">\n" + "</FRAMESET>\n"
-                + "<FRAMESET BORDER=1 rows=\"80%,*\">\n" + "<FRAME NAME=\"Code\" SRC=\"" + className + "_code.html\"\n MARGINWIDTH=0 "
-                + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n" + "<FRAME NAME=\"Methods\" SRC=\"" + className + "_methods.html\"\n MARGINWIDTH=0 "
-                + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n" + "</FRAMESET></FRAMESET></HTML>");
+            // @formatter:off
+            file.println("<HTML>\n"
+                + "<HEAD><TITLE>Documentation for " + className + "</TITLE></HEAD>\n"
+                + "<FRAMESET BORDER=1 cols=\"30%,*\">\n"
+                + "<FRAMESET BORDER=1 rows=\"80%,*\">\n"
+                + "<FRAME NAME=\"ConstantPool\" SRC=\"" + className + "_cp.html" + "\"\n"
+                + "MARGINWIDTH=\"0\" "
+                + "MARGINHEIGHT=\"0\" FRAMEBORDER=\"1\" SCROLLING=\"AUTO\">\n"
+                + "<FRAME NAME=\"Attributes\" SRC=\"" + className + "_attributes.html\"\n"
+                + " MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" FRAMEBORDER=\"1\" SCROLLING=\"AUTO\">\n"
+                + "</FRAMESET>\n"
+                + "<FRAMESET BORDER=1 rows=\"80%,*\">\n"
+                + "<FRAME NAME=\"Code\" SRC=\"" + className + "_code.html\"\n"
+                + " MARGINWIDTH=0 "
+                + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n"
+                + "<FRAME NAME=\"Methods\" SRC=\"" + className + "_methods.html\"\n"
+                + " MARGINWIDTH=0 "
+                + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n"
+                + "</FRAMESET></FRAMESET></HTML>");
+            // @formatter:on
         }
         final Attribute[] attributes = javaClass.getAttributes();
         for (int i = 0; i < attributes.length; i++) {

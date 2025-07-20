@@ -704,7 +704,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         }
         // stack().peek(1).getSize == 1.
         if (stack().peek(2).getSize() != 1) {
-            constraintViolated(o, "If stack top's size is 1 and stack next-to-top's size is 1," + " stack next-to-next-to-top's size must also be 1, but is: '"
+            constraintViolated(o, "If stack top's size is 1 and stack next-to-top's size is 1, stack next-to-next-to-top's size must also be 1, but is: '"
                 + stack().peek(2) + "' of size '" + stack().peek(2).getSize() + "'.");
         }
     }
@@ -2366,7 +2366,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
                 constraintViolated(o, "Expecting a class type (ObjectType) to work on. Found: '" + obj + "'.");
             }
         } catch (final ClassNotFoundException e) {
-            constraintViolated(o, "Expecting a class type (ObjectType) to work on. Found: '" + obj + "'." + " which threw " + e);
+            constraintViolated(o, "Expecting a class type (ObjectType) to work on. Found: '" + obj + "'. which threw " + e);
         }
     }
 

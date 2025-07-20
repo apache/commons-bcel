@@ -142,7 +142,7 @@ public final class Pass1Verifier extends PassVerifier {
         } catch (final RuntimeException e) {
             // BCEL does not catch every possible RuntimeException; for example if
             // a constant pool index is referenced that does not exist.
-            return new VerificationResult(VerificationResult.VERIFIED_REJECTED, "Parsing via BCEL did not succeed. " + " exception occurred:\n" + e.toString());
+            return new VerificationResult(VerificationResult.VERIFIED_REJECTED, "Parsing via BCEL did not succeed.  exception occurred:\n" + e.toString());
             // Don't think we want to dump a stack trace unless we have some sort of a debug option.
             // e.getClass().getName()+" occurred:\n"+Utility.getStackTrace(e));
         }

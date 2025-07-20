@@ -266,7 +266,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         printWriter.println();
         printWriter.println("  public " + className + "Creator() {");
         printWriter.println("    _cg = new ClassGen(\"" + (packageName.isEmpty() ? className : packageName + "." + className) + "\", \"" + superName
-            + "\", " + "\"" + clazz.getSourceFileName() + "\", " + printFlags(clazz.getAccessFlags(), FLAGS.CLASS) + ", " + "new String[] { " + inter + " });");
+            + "\", \"" + clazz.getSourceFileName() + "\", " + printFlags(clazz.getAccessFlags(), FLAGS.CLASS) + ", " + "new String[] { " + inter + " });");
         printWriter.println("    _cg.setMajor(" + clazz.getMajor() + ");");
         printWriter.println("    _cg.setMinor(" + clazz.getMinor() + ");");
         printWriter.println();
@@ -301,7 +301,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         final MethodGen mg = new MethodGen(method, clazz.getClassName(), constantPoolGen);
         printWriter.println("    InstructionList il = new InstructionList();");
         printWriter.println("    MethodGen method = new MethodGen(" + printFlags(method.getAccessFlags(), FLAGS.METHOD) + ", " + printType(mg.getReturnType())
-            + ", " + printArgumentTypes(mg.getArgumentTypes()) + ", " + "new String[] { " + Utility.printArray(mg.getArgumentNames(), false, true) + " }, \""
+            + ", " + printArgumentTypes(mg.getArgumentTypes()) + ", new String[] { " + Utility.printArray(mg.getArgumentNames(), false, true) + " }, \""
             + method.getName() + "\", \"" + clazz.getClassName() + "\", il, _cp);");
         final ExceptionTable exceptionTable = method.getExceptionTable();
         if (exceptionTable != null) {

@@ -143,11 +143,11 @@ final class ConstantHTML {
             if (methodClass.equals(className)) {
                 ref = "<A HREF=\"" + className + "_code.html#method" + getMethodNumber(methodName + signature) + "\" TARGET=Code>" + htmlMethodName + "</A>";
             } else {
-                ref = "<A HREF=\"" + methodClass + ".html" + "\" TARGET=_top>" + shortMethodClass + "</A>." + htmlMethodName;
+                ref = "<A HREF=\"" + methodClass + ".html\" TARGET=_top>" + shortMethodClass + "</A>." + htmlMethodName;
             }
             constantRef[index] = retType + "&nbsp;<A HREF=\"" + className + "_cp.html#cp" + classIndex + "\" TARGET=Constants>" + shortMethodClass
                 + "</A>.<A HREF=\"" + className + "_cp.html#cp" + index + "\" TARGET=ConstantPool>" + htmlMethodName + "</A>&nbsp;" + argTypes;
-            printWriter.println("<P><TT>" + retType + "&nbsp;" + ref + argTypes + "&nbsp;</TT>\n<UL>" + "<LI><A HREF=\"#cp" + classIndex + "\">Class index("
+            printWriter.println("<P><TT>" + retType + "&nbsp;" + ref + argTypes + "&nbsp;</TT>\n<UL><LI><A HREF=\"#cp" + classIndex + "\">Class index("
                 + classIndex + ")</A>\n" + "<LI><A HREF=\"#cp" + nameIndex + "\">NameAndType index(" + nameIndex + ")</A></UL>");
             break;
         case Const.CONSTANT_Fieldref:
