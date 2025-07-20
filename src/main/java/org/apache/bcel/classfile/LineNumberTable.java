@@ -27,6 +27,7 @@ import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.util.Args;
+import org.apache.commons.lang3.SystemProperties;
 
 /**
  * This class represents a table of line numbers for debugging purposes. This attribute is used by the <em>Code</em>
@@ -198,7 +199,7 @@ public final class LineNumberTable extends Attribute implements Iterable<LineNum
     public String toString() {
         final StringBuilder buf = new StringBuilder();
         final StringBuilder line = new StringBuilder();
-        final String newLine = System.getProperty("line.separator", "\n");
+        final String newLine = SystemProperties.getLineSeparator(() -> "\n");
         for (int i = 0; i < lineNumberTable.length; i++) {
             line.append(lineNumberTable[i].toString());
             if (i < lineNumberTable.length - 1) {
