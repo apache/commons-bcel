@@ -443,7 +443,7 @@ public class ClassPath implements Closeable {
     public static final ClassPath SYSTEM_CLASS_PATH = new ClassPath(getClassPath());
 
     private static void addJdkModules(final String javaHome, final List<String> list) {
-        String modulesPath = System.getProperty("java.modules.path");
+        String modulesPath = SystemProperties.getJdkModulePath();
         if (modulesPath == null || modulesPath.trim().isEmpty()) {
             // Default to looking in JAVA_HOME/jmods
             modulesPath = javaHome + File.separator + "jmods";
