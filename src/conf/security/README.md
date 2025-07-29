@@ -38,7 +38,7 @@ Each SBOM lists the library’s required and optional dependencies, helping cons
 
 An experimental [VEX](https://cyclonedx.org/capabilities/vex/) document is also published:
 
-👉 [`https://raw.githubusercontent.com/apache/commons-bcel/refs/heads/master/src/cyclonedx/VEX.cyclonedx.xml`](VEX.cyclonedx.xml)
+👉 [`https://raw.githubusercontent.com/apache/commons-bcel/refs/heads/master/src/conf/security/VEX.cyclonedx.xml`](VEX.cyclonedx.xml)
 
 This document provides information about the **exploitability of known vulnerabilities** in the **dependencies** of Apache Commons BCEL.
 
