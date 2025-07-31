@@ -59,6 +59,8 @@
     <commons.jira.pid>12314220</commons.jira.pid>
     <jna.version>5.17.0</jna.version>
     <japicmp.skip>false</japicmp.skip>
+    <!-- 3.26.0 is the last JDK8-compatible version -->
+    <ecj.version>3.26.0</ecj.version>
     <!-- JaCoCo on Java 8 is different from other versions. On JDK9+ there is a profile -->
     <!-- JaCoCo: Don't make code coverage worse than: -->
     <commons.jacoco.haltOnFailure>true</commons.jacoco.haltOnFailure>
@@ -399,7 +401,7 @@
       <!-- Eclipse compiler: useful to generate specific .class file patterns -->
       <groupId>org.eclipse.jdt</groupId>
       <artifactId>ecj</artifactId>
-      <version>3.26.0</version> <!-- last JDK8-compatible version -->
+      <version>${ecj.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
