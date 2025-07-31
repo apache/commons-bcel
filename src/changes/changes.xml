@@ -70,9 +70,10 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs [ERROR] Medium: Operation on the "skipped" shared variable in "ConstantUtf8" class is not atomic [org.apache.bcel.classfile.ConstantUtf8] At ConstantUtf8.java:[line 134] AT_NONATOMIC_OPERATIONS_ON_SHARED_VARIABLE.</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.util.ClassPath.addJdkModules(String, List&lt;String&gt;) now reads the system property "jdk.module.path" instead of "java.modules.path"; see https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/System.html#jdk.module.path.</action>
       <!-- ADD -->
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_25.</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_25.</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Refactor to use new Maven POM variable ecj.version.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_25.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_25.</action>
+      <action                  type="add" dev="ggregory" due-to="Piotr P. Karwasz, Gary Gregory">Add experimental CycloneDX VEX file #446.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Refactor to use new Maven POM variable ecj.version.</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.apache.commons:commons-lang3 from 3.14.0 to 3.18.0 #334, #341, #351, #444.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.jetbrains.kotlin:kotlin-stdlib from 2.0.0 to 2.2.0 #340, #347, #369, #390, #407, #422, #434, #441.</action>
@@ -81,7 +82,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump jna.version from 5.14.0 to 5.17.0 #358, #399.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.codehaus.mojo:taglist-maven-plugin from 3.1.0 to 3.2.1 #376.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.apache.commons:commons-collections4 from 4.5.0-M2 to 4.5.0 #395.</action>
-<!--       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.apache.commons:commons-exec from 1.4.0 to 1.5.0.</action> -->
+      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.apache.commons:commons-exec from 1.4.0 to 1.5.0.</action>
     </release>
     <release version="6.10.0" date="2024-07-13" description="Maintenance and bug fix release. Requires a minimum of Java 8.">
       <!-- FIX -->
