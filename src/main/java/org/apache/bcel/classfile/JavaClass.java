@@ -674,7 +674,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * @return list of super classes of this class in ascending order, i.e., java.lang.Object is always the last element
+     * @return list of super classes of this class in ascending order, i.e., {@link Object} is always the last element.
      * @throws ClassNotFoundException if any of the superclasses can't be found
      */
     public JavaClass[] getSuperClasses() throws ClassNotFoundException {

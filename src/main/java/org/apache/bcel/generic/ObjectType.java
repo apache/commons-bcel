@@ -31,7 +31,7 @@ public class ObjectType extends ReferenceType {
     /**
      * Constructs a new instance.
      *
-     * @param className fully qualified class name, for example java.lang.String
+     * @param className fully qualified class name, for example {@link String}.
      * @return a new instance.
      * @since 6.0
      */
