@@ -1,0 +1,361 @@
+name: Build, Sonar + AI Analysis (BCEL)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: sonar-ai-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    env:
+      SONAR_URL: https://sonarcloud.io
+      # ⬇️ CHANGE THIS to your SonarCloud project key for BCEL fork
+      PROJECT_KEY: Raygama_bcel-demo
+      # ⬇️ CHANGE THIS to your SonarCloud organization
+      SONAR_ORG: raygama
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-mvn-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-mvn-
+
+      - name: Build (skip tests & RAT)
+        run: mvn -B -DskipTests -Drat.skip=true -Ddoclint=none -DtrimStackTrace=false package
+
+      # Sonar runs only when PR comes from the same repository (secrets are available)
+      - name: SonarCloud scan
+        if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+            -Dsonar.projectKey=${{ env.PROJECT_KEY }} \
+            -Dsonar.organization=${{ env.SONAR_ORG }} \
+            -Dsonar.host.url=${{ env.SONAR_URL }}
+
+      - name: Install CLI tools
+        run: sudo apt-get update && sudo apt-get install -y jq gh
+
+      - name: Get PR changed files
+        id: files
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh pr diff ${{ github.event.pull_request.number }} --name-only > changed.txt || true
+          jq -R -s -c 'split("\n") | map(select(length>0))' changed.txt > changed.json
+          echo "list=$(cat changed.json)" >> "$GITHUB_OUTPUT"
+          echo "Changed files count: $(jq 'length' changed.json)"
+
+      # Fetch Sonar issues only for trusted PRs (same repo); otherwise create empty issues.json
+      - name: Fetch Sonar issues + code snippets (token-safe)
+        id: sonar-issues
+        if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # ---- Tunables ----
+          MAX_ISSUES=120
+          MAX_ISSUES_PER_RULE=25
+          MAX_ISSUES_PER_FILE=20
+          MAX_SNIPPET_CHARS=380
+          CONTEXT_BEFORE=1
+          CONTEXT_AFTER=1
+          SONAR_SEVERITIES="BLOCKER,CRITICAL,MAJOR"
+          SONAR_TYPES="BUG,VULNERABILITY,CODE_SMELL"
+          # -------------------
+
+          echo "[]" > all-issues.json
+          PAGE=1
+          PAGESIZE=500
+
+          while : ; do
+            PAGE_JSON=$(curl -s -G "${{ env.SONAR_URL }}/api/issues/search" \
+              --data-urlencode "componentKeys=${{ env.PROJECT_KEY }}" \
+              --data-urlencode "pullRequest=${{ github.event.pull_request.number }}" \
+              --data-urlencode "statuses=OPEN" \
+              --data-urlencode "severities=${SONAR_SEVERITIES}" \
+              --data-urlencode "types=${SONAR_TYPES}" \
+              --data-urlencode "p=${PAGE}" \
+              --data-urlencode "ps=${PAGESIZE}" \
+              -H "Authorization: Bearer ${{ secrets.SONAR_TOKEN }}")
+
+            COUNT=$(echo "$PAGE_JSON" | jq '.issues | length')
+            echo "Fetched page $PAGE with $COUNT issues"
+            [ "$COUNT" -eq 0 ] && break
+
+            TMP=$(mktemp)
+            jq -c --slurp 'add' \
+              <(cat all-issues.json) \
+              <(echo "$PAGE_JSON" | jq '.issues') > "$TMP"
+            mv "$TMP" all-issues.json
+
+            [ "$(jq 'length' all-issues.json)" -ge "$MAX_ISSUES" ] && break
+            PAGE=$((PAGE+1))
+          done
+
+          if [ "$(jq 'length' all-issues.json)" -eq 0 ]; then
+            echo '[]' > trimmed-issues.json
+            echo '[]' > issues.json
+            echo "has_issues=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          PRIORITIZED=$(
+            jq -c '
+              def sev_rank:
+                if .severity=="BLOCKER" then 5
+                elif .severity=="CRITICAL" then 4
+                elif .severity=="MAJOR" then 3
+                elif .severity=="MINOR" then 2
+                else 1 end;
+              map({
+                key: .key,
+                rule: .rule,
+                severity: .severity,
+                sevRank: (sev_rank),
+                component: (.component | split(":")[1:] | join(":")),
+                line: (.line // 1),
+                message: .message
+              })
+              | unique_by([.rule, .component, .line, .message])
+              | sort_by(-.sevRank, .rule, .component, .line)
+            ' all-issues.json
+          )
+
+          # Cap per rule/file and globally, then force array-of-objects
+          TRIMMED=$(
+            echo "$PRIORITIZED" \
+            | jq -c --argjson maxPerRule "$MAX_ISSUES_PER_RULE" --argjson maxPerFile "$MAX_ISSUES_PER_FILE" '
+                (group_by(.rule) | map(.[0:$maxPerRule]) | flatten) as $byRule
+                | ($byRule | group_by(.component) | map(.[0:$maxPerFile]) | flatten)
+              ' \
+            | jq -c --argjson maxIssues "$MAX_ISSUES" '.[0:$maxIssues]' \
+            | jq -c '[ .[] | objects ]'
+          )
+
+          echo "$TRIMMED" > trimmed-issues.json
+          echo "After trimming: $(jq 'length' trimmed-issues.json) issues"
+
+          # Build tiny snippets around the line hit
+          echo '[' > issues.json
+          FIRST=true
+          while IFS= read -r issue; do
+            comp=$(jq -r '.component' <<<"$issue")
+            ln=$(jq -r '.line' <<<"$issue")
+
+            [ ! -f "$comp" ] && continue
+
+            start=$((ln - ${CONTEXT_BEFORE})); [ $start -lt 1 ] && start=1
+            end=$((ln + ${CONTEXT_AFTER}))
+            snippet=$(sed -n "${start},${end}p" "$comp" \
+                      | sed 's/"/\\"/g' \
+                      | sed ':a;N;$!ba;s/\n/\\n/g' \
+                      | cut -c1-"$MAX_SNIPPET_CHARS")
+
+            entry=$(jq -n --argjson i "$issue" --arg snip "$snippet" '$i + {snippet: $snip}')
+            if $FIRST; then FIRST=false; echo "$entry" >> issues.json; else echo ",$entry" >> issues.json; fi
+          done < <(jq -c '.[]' trimmed-issues.json)
+          echo ']' >> issues.json
+          echo "has_issues=$(jq 'length>0' issues.json)" >> $GITHUB_OUTPUT
+
+      # If PR is from an external fork, create empty files so later steps don't crash.
+      - name: Create empty issues on external forks
+        if: ${{ github.event.pull_request.head.repo.full_name != github.repository }}
+        run: |
+          echo '[]' > issues.json
+          echo '[]' > trimmed-issues.json
+          echo "has_issues=false" >> $GITHUB_OUTPUT
+
+      - name: Build compact issues + tiny summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Tunables
+          MAX_TOTAL_ISSUES=60
+          MAX_PER_RULE=10
+          MAX_PER_FILE=5
+          NON_TEST_ONLY=true
+          RULE_BLOCKLIST='["java:S1604","java:S108"]'
+          MAX_EXEMPLARS_PER_RULE=1
+
+          SRC=trimmed-issues.json
+          [ ! -s "$SRC" ] && { echo '[]' > issues_compact.json; echo 'No issues.' > question_summary.txt; exit 0; }
+
+          echo "Source length: $(jq 'length' "$SRC")"
+
+          # Normalize to array of objects with minimal keys
+          NORM=$(
+            jq -c '
+              ( if type=="array" then . else [.] end )
+              | map(select(type=="object"))
+              | map({
+                  rule:      (.rule      // ""),
+                  component: (.component // ""),
+                  severity:  (.severity  // "UNKNOWN"),
+                  line:      (.line      // 0),
+                  message:   (.message   // "")
+                })
+            ' "$SRC"
+          )
+
+          FILTERED=$(
+            jq -c \
+              --argjson block "$RULE_BLOCKLIST" \
+              --arg ntest "$NON_TEST_ONLY" '
+                [ .[]
+                  | select(.rule != "" and .component != "")
+                  | select( ( ($ntest=="true") | not ) or ( (.component | test("^src/test/") | not) ) )
+                  | select( ($block | index(.rule)) == null )
+                ]
+              ' <<<"$NORM"
+          )
+
+          [ "$(jq 'length' <<<"$FILTERED")" -eq 0 ] && {
+            echo '[]' > issues_compact.json
+            echo 'No eligible issues after filtering.' > question_summary.txt
+            exit 0
+          }
+
+          SORTED=$(
+            jq -c '
+              def rank:
+                if .severity=="BLOCKER" then 3
+                elif .severity=="CRITICAL" then 2
+                elif .severity=="MAJOR" then 1
+                else 0 end;
+              sort_by([ - (rank), .rule, .component, (.line // 0) ])
+            ' <<<"$FILTERED"
+          )
+
+          CAPPED=$(
+            jq -c \
+              --argjson maxRule "$MAX_PER_RULE" \
+              --argjson maxFile "$MAX_PER_FILE" '
+                (group_by(.rule) | map(.[0:$maxRule]) | flatten) as $byRule
+                | ($byRule | group_by(.component) | map(.[0:$maxFile]) | flatten)
+              ' <<<"$SORTED" \
+            | jq -c --argjson m "$MAX_TOTAL_ISSUES" '.[0:$m]'
+          )
+
+          echo "$CAPPED" | jq -c '[ .[] | objects ]' > issues_compact.json
+          echo "Compact issue count: $(jq 'length' issues_compact.json)"
+
+          jq -r --argjson k "$MAX_EXEMPLARS_PER_RULE" '
+            group_by(.rule)
+            | map({
+                rule: .[0].rule,
+                severity: (.[0].severity // "UNKNOWN"),
+                count: length,
+                samples: (.[0:$k] | map("\(.component):\(.line)"))
+              })
+            | sort_by(.rule)
+            | map("• \(.rule) [\(.severity)] — \(.count) hits; e.g. \(.samples|join(", "))")
+            | .[]
+          ' issues_compact.json > question_summary.txt
+
+          echo "Summary preview:"
+          head -n 10 question_summary.txt || true
+
+      - name: Send issues to Technical Debt Analyzer (compact + robust)
+        if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+        env:
+          FLOWISE_BEARER_TOKEN: ${{ secrets.FLOWISE_BEARER_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE_HDR="You're analyzing SonarCloud issues from PR #${{ github.event.pull_request.number }} in '${{ github.repository }}' (owner: '${{ github.repository_owner }}'), targeting '${{ github.event.pull_request.head.ref }}'. Analyze duplicates once."
+          SUMMARY=$(tr '\n' '\\n' < question_summary.txt | head -c 14000)
+          QUESTION_TEXT="$BASE_HDR\\n\\n## Issue summary (by rule)\\n$SUMMARY"
+
+          ISSUES_JSON=$(cat issues_compact.json)
+          CHANGED_FILES=$(cat changed.json)
+
+          make_payload () {
+            jq -cn \
+              --arg pr "${{ github.event.pull_request.number }}" \
+              --arg proj "${{ env.PROJECT_KEY }}" \
+              --arg question "$QUESTION_TEXT" \
+              --argjson issues "$1" \
+              --argjson changedFiles "$2" \
+              '{question:$question, overrideConfig:{projectKey:$proj, prNumber:$pr, changedFiles:$changedFiles}, issues:$issues}'
+          }
+
+          PAYLOAD=$(make_payload "$ISSUES_JSON" "$CHANGED_FILES")
+
+          RESP_BODY=flowise_output_raw.txt
+          HTTP_CODE=$(curl -sS -o "$RESP_BODY" -w "%{http_code}" \
+            -H "Authorization: Bearer $FLOWISE_BEARER_TOKEN" \
+            -H "Content-Type: application/json" \
+            -H "Accept: application/json" \
+            --max-time 55 \
+            --retry 2 --retry-delay 2 --retry-max-time 60 \
+            -d "$PAYLOAD" \
+            https://cloud.flowiseai.com/api/v1/prediction/ae8b5cb1-b90b-4f25-9395-a839e92e2bf6)
+
+          echo "HTTP status: $HTTP_CODE"
+          if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ] && jq -e . "$RESP_BODY" >/dev/null 2>&1; then
+            cp "$RESP_BODY" flowise_output.json
+          else
+            RAW=$(head -c 6000 "$RESP_BODY" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
+            printf '{"text":"Flowise response issue (HTTP %s). Body (first 6KB):\\n```\\n%s\\n```"}' "$HTTP_CODE" "$RAW" > flowise_output.json
+          fi
+
+      - name: Comment on PR
+        uses: actions/github-script@v6
+        if: success()
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const path = 'flowise_output.json';
+            if (!fs.existsSync(path)) {
+              core.warning('Flowise output file not found.');
+              return;
+            }
+            const raw = fs.readFileSync(path, 'utf8').trim();
+            if (!raw || raw[0] !== '{') {
+              core.warning('Flowise did not return valid JSON. Skipping comment.');
+              return;
+            }
+            let parsed;
+            try { parsed = JSON.parse(raw); } catch (e) {
+              core.warning(`JSON parse error: ${e.message}`); return;
+            }
+            const body = parsed.text || 'Flowise returned:\n```json\n' + JSON.stringify(parsed, null, 2) + '\n```';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body
+            });
