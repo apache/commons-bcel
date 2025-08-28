@@ -81,7 +81,6 @@ final class BCELFactory extends EmptyVisitor {
     }
 
     private void createConstant(final Object value) {
-        System.out.println("Jawaj awa jawa");
         String embed = value.toString();
         if (value instanceof String) {
             embed = '"' + Utility.convertString(embed) + '"';
