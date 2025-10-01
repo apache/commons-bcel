@@ -46,18 +46,24 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class BCELifierTest extends AbstractTest {
 
+    private static Pattern CANON1 = Pattern.compile("#\\d+"); // numbers may vary in length
+    private static Pattern CANON2 = Pattern.compile(" +"); // collapse spaces
+    private static Pattern CANON3 = Pattern.compile("//.+");
+
     private static final String EOL = System.lineSeparator();
     public static final String CLASSPATH = "." + File.pathSeparator + SystemProperties.getJavaClassPath();
 
     // Canonicalise the javap output so it compares better
     private String canonHashRef(String input) {
-        input = input.replaceAll("#\\d+", "#n"); // numbers may vary in length
-        input = input.replaceAll(" +", " "); // collapse spaces
-        return input.replaceAll("//.+", "");
+        input = CANON1.matcher(input).replaceAll("#n");
+        input = CANON2.matcher(input).replaceAll(" ");
+        return CANON3.matcher(input).replaceAll("");
     }
 
     private String exec(final File workDir, final String... args) throws Exception {
-        // System.out.println("ProcessBuilder: " + java.util.Arrays.toString(args));
+        // System.out.print(workDir + ": ");
+        // Stream.of(args).forEach(e -> System.out.print(e + " "));
+        // System.out.println();
         final ProcessBuilder pb = new ProcessBuilder(args);
         pb.directory(workDir);
         pb.redirectErrorStream(true);
@@ -77,19 +83,19 @@ class BCELifierTest extends AbstractTest {
     }
 
     private String getJava() {
-        return getJavaBin().resolve("java").toAbsolutePath().toString();
+        return getJavaBinPath().resolve("java").toAbsolutePath().toString();
     }
 
-    private Path getJavaBin() {
+    private Path getJavaBinPath() {
         return SystemUtils.getJavaHomePath().resolve("bin");
     }
 
     private String getJavaC() {
-        return getJavaBin().resolve("javac").toAbsolutePath().toString();
+        return getJavaBinPath().resolve("javac").toAbsolutePath().toString();
     }
 
     private String getJavaP() {
-        return getJavaBin().resolve("javap").toAbsolutePath().toString();
+        return getJavaBinPath().resolve("javap").toAbsolutePath().toString();
     }
 
     @ParameterizedTest
