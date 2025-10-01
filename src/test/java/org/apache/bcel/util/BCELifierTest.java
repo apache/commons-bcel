@@ -82,20 +82,31 @@ class BCELifierTest extends AbstractTest {
         }
     }
 
-    private String getJava() {
-        return getJavaBinPath().resolve("java").toAbsolutePath().toString();
+    private String getAppJava() {
+        return getJavaHomeApp("java");
     }
 
-    private Path getJavaBinPath() {
+    private String getAppJavaC() {
+        return getJavaHomeApp("javac");
+    }
+
+    private String getAppJavaP() {
+        return getJavaHomeApp("javap");
+    }
+
+    private String getJavaHomeApp(final String app) {
+        final Path path = getJavaHomeBinPath().resolve(app);
+        if (Files.exists(path)) {
+            return path.toAbsolutePath().toString();
+        }
+        if (SystemUtils.IS_OS_WINDOWS && Files.exists(getJavaHomeBinPath().resolve(app + ".exe"))) {
+            return path.toAbsolutePath().toString();
+        }
+        return app;
+    }
+
+    private Path getJavaHomeBinPath() {
         return SystemUtils.getJavaHomePath().resolve("bin");
-    }
-
-    private String getJavaC() {
-        return getJavaBinPath().resolve("javac").toAbsolutePath().toString();
-    }
-
-    private String getJavaP() {
-        return getJavaBinPath().resolve("javap").toAbsolutePath().toString();
     }
 
     @ParameterizedTest
@@ -147,10 +158,10 @@ class BCELifierTest extends AbstractTest {
         final String expected = matcher.group(4);
         final String javaAgent = getJavaAgent();
         if (javaAgent == null) {
-            assertEquals(expected + EOL, exec(workDir, getJava(), "-cp", CLASSPATH, "org.apache.bcel.generic.BinaryOp", op, a, b));
+            assertEquals(expected + EOL, exec(workDir, getAppJava(), "-cp", CLASSPATH, "org.apache.bcel.generic.BinaryOp", op, a, b));
         } else {
             final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_org.apache.bcel.generic.BinaryOp.exec");
-            assertEquals(expected + EOL, exec(workDir, getJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.generic.BinaryOp", op, a, b));
+            assertEquals(expected + EOL, exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.generic.BinaryOp", op, a, b));
         }
     }
 
@@ -162,27 +173,27 @@ class BCELifierTest extends AbstractTest {
 
         // Get javap of the input class
         // System.out.println(exec(null, getJavaP(), "-version"));
-        final String initial = exec(null, getJavaP(), "-cp", CLASSPATH, "-p", "-c", javaClass.getClassName());
+        final String initial = exec(null, getAppJavaP(), "-cp", CLASSPATH, "-p", "-c", javaClass.getClassName());
         final String outFileName = javaClass.getSourceFilePath().replace(".java", "Creator.java");
         final File outfile = new File(workDir, outFileName);
         Files.createDirectories(outfile.getParentFile().toPath());
         final String javaAgent = getJavaAgent();
         String creatorSourceContents = null;
         if (javaAgent == null) {
-            creatorSourceContents = exec(workDir, getJava(), "-cp", CLASSPATH, "org.apache.bcel.util.BCELifier", javaClass.getClassName());
+            creatorSourceContents = exec(workDir, getAppJava(), "-cp", CLASSPATH, "org.apache.bcel.util.BCELifier", javaClass.getClassName());
         } else {
             final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_" + infile.getName() + ".exec");
-            creatorSourceContents = exec(workDir, getJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.util.BCELifier", javaClass.getClassName());
+            creatorSourceContents = exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.util.BCELifier", javaClass.getClassName());
         }
         Files.write(outfile.toPath(), creatorSourceContents.getBytes(StandardCharsets.UTF_8));
-        assertEquals("", exec(workDir, getJavaC(), "-cp", CLASSPATH, outFileName.toString()));
+        assertEquals("", exec(workDir, getAppJavaC(), "-cp", CLASSPATH, outFileName.toString()));
         if (javaAgent == null) {
-            assertEquals("", exec(workDir, getJava(), "-cp", CLASSPATH, javaClass.getClassName() + "Creator"));
+            assertEquals("", exec(workDir, getAppJava(), "-cp", CLASSPATH, javaClass.getClassName() + "Creator"));
         } else {
             final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_" + Utility.pathToPackage(outFileName) + ".exec");
-            assertEquals("", exec(workDir, getJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, javaClass.getClassName() + "Creator"));
+            assertEquals("", exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, javaClass.getClassName() + "Creator"));
         }
-        final String output = exec(workDir, getJavaP(), "-p", "-c", infile.getName());
+        final String output = exec(workDir, getAppJavaP(), "-p", "-c", infile.getName());
         assertEquals(canonHashRef(initial), canonHashRef(output));
     }
 
@@ -192,10 +203,10 @@ class BCELifierTest extends AbstractTest {
         final File workDir = new File("target");
         final String javaAgent = getJavaAgent();
         if (javaAgent == null) {
-            assertEquals("Hello World!" + EOL, exec(workDir, getJava(), "-cp", CLASSPATH, "org.apache.bcel.HelloWorld"));
+            assertEquals("Hello World!" + EOL, exec(workDir, getAppJava(), "-cp", CLASSPATH, "org.apache.bcel.HelloWorld"));
         } else {
             final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_org.apache.bcel.HelloWorld.exec");
-            assertEquals("Hello World!" + EOL, exec(workDir, getJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.HelloWorld"));
+            assertEquals("Hello World!" + EOL, exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.HelloWorld"));
         }
     }
 
@@ -241,7 +252,7 @@ class BCELifierTest extends AbstractTest {
     void testStackMap(final String className) throws Exception {
         testJavapCompare(className);
         final File workDir = new File("target");
-        assertEquals("Hello World" + EOL, exec(workDir, getJava(), "-cp", CLASSPATH, className, "Hello"));
+        assertEquals("Hello World" + EOL, exec(workDir, getAppJava(), "-cp", CLASSPATH, className, "Hello"));
     }
 
     @Test
