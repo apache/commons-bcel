@@ -161,7 +161,7 @@ public final class ConstantPoolModuleAccessTest {
                         expected.add("java.time.chrono.AbstractChronology");
                         expected.add("java.time.chrono.Chronology");
                         expected.add("java.time.zone.ZoneRulesProvider");
-                        if (javaClass.getMajor() > Const.MAJOR_11) {
+                        if (javaClass.getMajor() > Const.MAJOR_11 && javaClass.getMajor() < Const.MAJOR_24) {
                             expected.add("java.util.random.RandomGenerator");
                         }
                         expected.add("java.util.spi.CalendarDataProvider");
@@ -231,6 +231,9 @@ public final class ConstantPoolModuleAccessTest {
                             expected.add("com.sun.tools.doclint.DocLint");
                         }
                         expected.add("com.sun.tools.javac.platform.PlatformProvider");
+                        if (javaClass.getMajor() > Const.MAJOR_23) {
+                            expected.add("com.sun.tools.javac.api.JavacTrees$DocCommentTreeTransformer");
+                        }
                         assertEquals(expected, Arrays.asList(usedClassNames));
                     } else if (urlPath.contains("/jdk.jconsole/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
@@ -268,6 +271,10 @@ public final class ConstantPoolModuleAccessTest {
                     } else if (urlPath.contains("/jdk.jsobject/module-info.class") && javaClass.getMajor() == Const.MAJOR_11) {
                         final List<String> expected = new ArrayList<>();
                         expected.add("jdk.internal.netscape.javascript.spi.JSObjectProvider");
+                        assertEquals(expected, Arrays.asList(usedClassNames));
+                    } else if (urlPath.contains("/jdk.jdeps/module-info.class") && javaClass.getMajor() > Const.MAJOR_24) {
+                        final List<String> expected = new ArrayList<>();
+                        expected.add("com.sun.tools.javac.platform.PlatformProvider");
                         assertEquals(expected, Arrays.asList(usedClassNames));
                     } else {
                         assertEquals(0, usedClassNames.length, () -> "Found " + Arrays.toString(usedClassNames) + " in " + urlPath);
