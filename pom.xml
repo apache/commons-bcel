@@ -57,7 +57,7 @@
     <commons.osgi.export>org.apache.bcel.*;version=${project.version};-noimport:=true</commons.osgi.export>
     <commons.jira.id>BCEL</commons.jira.id>
     <commons.jira.pid>12314220</commons.jira.pid>
-    <jna.version>5.18.0</jna.version>
+    <jna.version>5.18.1</jna.version>
     <japicmp.skip>false</japicmp.skip>
     <!-- 3.26.0 is the last JDK8-compatible version -->
     <!-- 3.27.0 says "class file has wrong version 55.0, should be 52.0" -->
