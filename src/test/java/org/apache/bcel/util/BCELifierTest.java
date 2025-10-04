@@ -173,26 +173,28 @@ class BCELifierTest extends AbstractTest {
         assertNotNull(javaClass);
         // Get javap of the input class
         // System.out.println(exec(null, getJavaP(), "-version"));
-        final String initial = exec(null, getAppJavaP(), "-cp", CLASSPATH, "-p", "-c", javaClass.getClassName());
+        final String javaClassName = javaClass.getClassName();
+        final String initial = exec(null, getAppJavaP(), "-cp", CLASSPATH, "-p", "-c", javaClassName);
         final String outFileName = javaClass.getSourceFilePath().replace(".java", "Creator.java");
         final File outfile = new File(workDir, outFileName);
         Files.createDirectories(outfile.getParentFile().toPath());
         final String javaAgent = getJavaAgent();
         String creatorSourceContents = null;
+        final String bcelifierClassName = BCELifier.class.getName();
         if (javaAgent == null) {
-            creatorSourceContents = exec(workDir, getAppJava(), "-cp", CLASSPATH, "org.apache.bcel.util.BCELifier", javaClass.getClassName());
+            creatorSourceContents = exec(workDir, getAppJava(), "-cp", CLASSPATH, bcelifierClassName, javaClassName);
         } else {
             final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_" + infile.getName() + ".exec");
-            creatorSourceContents = exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.util.BCELifier",
-                    javaClass.getClassName());
+            creatorSourceContents = exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, bcelifierClassName, javaClassName);
         }
         Files.write(outfile.toPath(), creatorSourceContents.getBytes(StandardCharsets.UTF_8));
         assertEquals("", exec(workDir, getAppJavaC(), "-cp", CLASSPATH, outFileName.toString()));
+        final String creatorClassName = javaClassName + "Creator";
         if (javaAgent == null) {
-            assertEquals("", exec(workDir, getAppJava(), "-cp", CLASSPATH, javaClass.getClassName() + "Creator"));
+            assertEquals("", exec(workDir, getAppJava(), "-cp", CLASSPATH, creatorClassName));
         } else {
             final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_" + Utility.pathToPackage(outFileName) + ".exec");
-            assertEquals("", exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, javaClass.getClassName() + "Creator"));
+            assertEquals("", exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, creatorClassName));
         }
         final String output = exec(workDir, getAppJavaP(), "-p", "-c", infile.getName());
         assertEquals(canonHashRef(initial), canonHashRef(output));
