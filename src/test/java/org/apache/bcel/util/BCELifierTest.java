@@ -166,11 +166,11 @@ class BCELifierTest extends AbstractTest {
     }
 
     private void testClassOnPath(final String javaClassFileName) throws Exception {
-        final File workDir = new File("target");
+        final File workDir = new File("target", getClass().getSimpleName());
+        Files.createDirectories(workDir.getParentFile().toPath());
         final File infile = new File(javaClassFileName);
         final JavaClass javaClass = BCELifier.getJavaClass(infile.getName().replace(JavaClass.EXTENSION, ""));
         assertNotNull(javaClass);
-
         // Get javap of the input class
         // System.out.println(exec(null, getJavaP(), "-version"));
         final String initial = exec(null, getAppJavaP(), "-cp", CLASSPATH, "-p", "-c", javaClass.getClassName());
@@ -183,7 +183,8 @@ class BCELifierTest extends AbstractTest {
             creatorSourceContents = exec(workDir, getAppJava(), "-cp", CLASSPATH, "org.apache.bcel.util.BCELifier", javaClass.getClassName());
         } else {
             final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_" + infile.getName() + ".exec");
-            creatorSourceContents = exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.util.BCELifier", javaClass.getClassName());
+            creatorSourceContents = exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.util.BCELifier",
+                    javaClass.getClassName());
         }
         Files.write(outfile.toPath(), creatorSourceContents.getBytes(StandardCharsets.UTF_8));
         assertEquals("", exec(workDir, getAppJavaC(), "-cp", CLASSPATH, outFileName.toString()));
