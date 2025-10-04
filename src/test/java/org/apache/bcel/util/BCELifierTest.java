@@ -168,36 +168,42 @@ class BCELifierTest extends AbstractTest {
     private void testClassOnPath(final String javaClassFileName) throws Exception {
         final File workDir = new File("target", getClass().getSimpleName());
         Files.createDirectories(workDir.getParentFile().toPath());
-        final File infile = new File(javaClassFileName);
-        final JavaClass javaClass = BCELifier.getJavaClass(infile.getName().replace(JavaClass.EXTENSION, ""));
+        final File inFile = new File(javaClassFileName);
+        final JavaClass javaClass = BCELifier.getJavaClass(inFile.getName().replace(JavaClass.EXTENSION, ""));
         assertNotNull(javaClass);
-        // Get javap of the input class
+        // Gets javap output of the input class
         // System.out.println(exec(null, getJavaP(), "-version"));
         final String javaClassName = javaClass.getClassName();
-        final String initial = exec(null, getAppJavaP(), "-cp", CLASSPATH, "-p", "-c", javaClassName);
-        final String outFileName = javaClass.getSourceFilePath().replace(".java", "Creator.java");
-        final File outfile = new File(workDir, outFileName);
-        Files.createDirectories(outfile.getParentFile().toPath());
+        final String javapOutInital = exec(null, getAppJavaP(), "-cp", CLASSPATH, "-p", "-c", javaClassName);
+        final String outCreatorFileName = javaClass.getSourceFilePath().replace(".java", "Creator.java");
+        final File outCreatorFile = new File(workDir, outCreatorFileName);
+        Files.createDirectories(outCreatorFile.getParentFile().toPath());
         final String javaAgent = getJavaAgent();
-        String creatorSourceContents = null;
         final String bcelifierClassName = BCELifier.class.getName();
+        final String creatorJavaSource;
+        // Creates the BCEL Java app source in creatorJavaSource
         if (javaAgent == null) {
-            creatorSourceContents = exec(workDir, getAppJava(), "-cp", CLASSPATH, bcelifierClassName, javaClassName);
+            creatorJavaSource = exec(workDir, getAppJava(), "-cp", CLASSPATH, bcelifierClassName, javaClassName);
         } else {
-            final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_" + infile.getName() + ".exec");
-            creatorSourceContents = exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, bcelifierClassName, javaClassName);
+            final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_" + inFile.getName() + ".exec");
+            creatorJavaSource = exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, bcelifierClassName, javaClassName);
         }
-        Files.write(outfile.toPath(), creatorSourceContents.getBytes(StandardCharsets.UTF_8));
-        assertEquals("", exec(workDir, getAppJavaC(), "-cp", CLASSPATH, outFileName.toString()));
+        // Write the BCEL Java app source to a file
+        Files.write(outCreatorFile.toPath(), creatorJavaSource.getBytes(StandardCharsets.UTF_8));
+        // Compiles the BCEL Java app
+        assertEquals("", exec(workDir, getAppJavaC(), "-cp", CLASSPATH, outCreatorFileName.toString()));
         final String creatorClassName = javaClassName + "Creator";
+        // Runs the BCEL Java app to create a class file
         if (javaAgent == null) {
             assertEquals("", exec(workDir, getAppJava(), "-cp", CLASSPATH, creatorClassName));
         } else {
-            final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_" + Utility.pathToPackage(outFileName) + ".exec");
+            final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_" + Utility.pathToPackage(outCreatorFileName) + ".exec");
             assertEquals("", exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, creatorClassName));
         }
-        final String output = exec(workDir, getAppJavaP(), "-p", "-c", infile.getName());
-        assertEquals(canonHashRef(initial), canonHashRef(output));
+        // Runs javap on the BCEL generated class file
+        final String javapOutput = exec(workDir, getAppJavaP(), "-p", "-c", inFile.getName());
+        // Finally compares the output of the roundtrip
+        assertEquals(canonHashRef(javapOutInital), canonHashRef(javapOutput));
     }
 
     @Test
