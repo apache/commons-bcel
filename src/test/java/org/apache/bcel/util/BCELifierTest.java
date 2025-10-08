@@ -41,6 +41,8 @@ import org.apache.bcel.generic.BinaryOpCreator;
 import org.apache.commons.lang3.SystemProperties;
 import org.apache.commons.lang3.SystemUtils;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledForJreRange;
+import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -233,12 +235,25 @@ class BCELifierTest extends AbstractTest {
         "org.apache.commons.lang.builder.ToStringBuilder.class",
         "org.apache.commons.lang.SerializationUtils.class",
         "org.apache.commons.lang.ArrayUtils.class",
-        "target/test-classes/Java8Example.class",
-        "target/test-classes/Java8Example2.class",
         "target/test-classes/Java4Example.class"
     // @formatter:on
     })
     void testJavapCompare(final String pathToClass) throws Exception {
+        testClassOnPath(pathToClass);
+    }
+
+    /*
+     * See https://issues.apache.org/jira/browse/BCEL-378
+     */
+    @ParameterizedTest
+    @ValueSource(strings = {
+    // @formatter:off
+        "target/test-classes/Java8Example.class",
+        "target/test-classes/Java8Example2.class",
+    // @formatter:on
+    })
+    @DisabledForJreRange(min = JRE.JAVA_25)
+    void testJavapCompareJava25KnownBroken(final String pathToClass) throws Exception {
         testClassOnPath(pathToClass);
     }
 
