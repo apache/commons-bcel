@@ -25,7 +25,7 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>88</version>
+    <version>89</version>
   </parent>
   <groupId>org.apache.bcel</groupId>
   <artifactId>bcel</artifactId>
