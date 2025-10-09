@@ -32,11 +32,13 @@ import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.PathMatcher;
+import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.stream.Stream;
 
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.Code;
@@ -128,6 +130,12 @@ class JdkGenericDumpTest {
         return new String(hexChars);
     }
 
+    static Stream<Path> testJdkModules() {
+        // JUnit requires at least one parameter.
+        // Make sure we have at least one JMOD file, since Java 25 and up may not have them present by default, depending on your installation.
+        return Stream.concat(JavaHome.streamModulePath(), Stream.of(Paths.get("src/test/resources/jpms/empty/empty.jmod")));
+    }
+
     private void compare(final String name, final Method method) {
         // System.out.println("Method: " + m);
         final Code code = method.getCode();
@@ -178,8 +186,8 @@ class JdkGenericDumpTest {
     }
 
     @ParameterizedTest
-    @MethodSource("org.apache.bcel.generic.JavaHome#streamModulePath")
     @DisabledOnJre(value = JRE.JAVA_8)
+    @MethodSource
     void testJdkModules(final Path jmodPath) throws Exception {
         testJar(jmodPath);
     }
