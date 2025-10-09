@@ -45,7 +45,7 @@ import org.apache.bcel.classfile.Method;
 import org.apache.bcel.util.ModularRuntimeImage;
 import org.apache.commons.lang3.JavaVersion;
 import org.apache.commons.lang3.SystemUtils;
-import org.junit.jupiter.api.condition.DisabledOnJre;
+import org.junit.jupiter.api.condition.EnabledForJreRange;
 import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -179,7 +179,7 @@ class JdkGenericDumpTest {
 
     @ParameterizedTest
     @MethodSource("org.apache.bcel.generic.JavaHome#streamModulePath")
-    @DisabledOnJre(value = JRE.JAVA_8)
+    @EnabledForJreRange(min = JRE.JAVA_9, max = JRE.JAVA_24)
     void testJdkModules(final Path jmodPath) throws Exception {
         testJar(jmodPath);
     }
