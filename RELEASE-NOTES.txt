@@ -1,3 +1,79 @@
+Apache Commons BCEL Version 6.11.0
+RELEASE NOTES
+
+
+Introduction
+------------
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.11.0.
+
+The Byte Code Engineering Library (BCEL) is intended to give users a convenient
+way to analyze, create, and manipulate compiled .class files. Classes are
+represented by objects containing all the symbolic information of the given
+class: methods, fields, and byte code instructions.
+
+This is a feature and maintenance release. Java 8 or later is required.
+
+New Features
+------------
+*           Add Const.MAJOR_25. Thanks to Gary Gregory.
+*           Add Const.MINOR_25. Thanks to Gary Gregory.
+*           Add experimental CycloneDX VEX file #446. Thanks to Piotr P. Karwasz, Gary Gregory.
+*           Refactor to use new Maven POM variable ecj.version. Thanks to Gary Gregory.
+
+Fixed Bugs
+----------
+*           Replace internal use of Locale.ENGLISH with Locale.ROOT. Thanks to Gary Gregory.
+* BCEL-375: Wrong permissions on bcel .jar file in binary .tar.gz distribution file. Thanks to J. Lewis Muir, Gary Gregory.
+* BCEL-376: ClassPath.close() throws UnsupportedOperationException when created with system-classpath. Thanks to Dominik Stadler, Gary Gregory.
+*           ClassPath.getResources(String) can use an ArrayList instead of a Vector. Thanks to Gary Gregory.
+*           Fix SpotBugs [ERROR] Medium: Operation on the "created" shared variable in "ConstantUtf8" class is not atomic [org.apache.bcel.classfile.ConstantUtf8] At ConstantUtf8.java:[line 119] AT_NONATOMIC_OPERATIONS_ON_SHARED_VARIABLE. Thanks to Gary Gregory.
+*           Fix SpotBugs [ERROR] Medium: Operation on the "considered" shared variable in "ConstantUtf8" class is not atomic [org.apache.bcel.classfile.ConstantUtf8] At ConstantUtf8.java:[line 137] AT_NONATOMIC_OPERATIONS_ON_SHARED_VARIABLE. Thanks to Gary Gregory.
+*           Fix SpotBugs [ERROR] Medium: Operation on the "skipped" shared variable in "ConstantUtf8" class is not atomic [org.apache.bcel.classfile.ConstantUtf8] At ConstantUtf8.java:[line 134] AT_NONATOMIC_OPERATIONS_ON_SHARED_VARIABLE. Thanks to Gary Gregory.
+*           org.apache.bcel.util.ClassPath.addJdkModules(String, List<String>) now reads the system property "jdk.module.path" instead of "java.modules.path"; see https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/System.html#jdk.module.path. Thanks to Gary Gregory.
+*           Fix ConstantPoolModuleAccessTest failures on Java 25. Thanks to Andrey Loskutov.
+* 377:    Fix testing on Java 24 and up. Thanks to Dejan Stojadinović, Gary Gregory, Andrey Loskutov.
+
+Changes
+-------
+*           Bump org.apache.commons:commons-parent from 72 to 89 #346, #349, #559, #364, #368, #378, #464. Thanks to Dependabot, Gary Gregory.
+*           Bump org.apache.commons:commons-lang3 from 3.14.0 to 3.19.0 #334, #341, #351, #444. Thanks to Dependabot, Gary Gregory.
+*           Bump org.jetbrains.kotlin:kotlin-stdlib from 2.0.0 to 2.2.20 #340, #347, #369, #390, #407, #422, #434, #441, #452, #462. Thanks to Dependabot, Gary Gregory.
+*           Bump commons-io:commons-io from 2.16.1 to 2.20.0 #357, #387. Thanks to Dependabot, Gary Gregory.
+*           Bump jna.version from 5.14.0 to 5.18.1 #358, #399, #466, #470. Thanks to Dependabot, Gary Gregory.
+*           Bump org.codehaus.mojo:taglist-maven-plugin from 3.1.0 to 3.2.1 #376. Thanks to Dependabot, Gary Gregory.
+*           Bump org.apache.commons:commons-collections4 from 4.5.0-M2 to 4.5.0 #395. Thanks to Dependabot, Gary Gregory.
+*           Bump org.apache.commons:commons-exec from 1.4.0 to 1.5.0. Thanks to Dependabot, Gary Gregory.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-bcel/changes.html
+
+For complete information on Apache Commons BCEL, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons BCEL website:
+
+https://commons.apache.org/proper/commons-bcel
+
+Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+Open source works best when you give feedback:
+
+    https://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
 Apache Commons BCEL Version 6.10.0
 RELEASE NOTES
 
