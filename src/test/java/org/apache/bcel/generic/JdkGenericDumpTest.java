@@ -20,6 +20,7 @@
 package org.apache.bcel.generic;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
@@ -45,6 +46,7 @@ import org.apache.bcel.classfile.Method;
 import org.apache.bcel.util.ModularRuntimeImage;
 import org.apache.commons.lang3.JavaVersion;
 import org.apache.commons.lang3.SystemUtils;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnJre;
 import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -177,11 +179,9 @@ class JdkGenericDumpTest {
         testJar(jarPath);
     }
 
-    @ParameterizedTest
-    @MethodSource("org.apache.bcel.generic.JavaHome#streamModulePath")
-    @DisabledOnJre(value = JRE.JAVA_8)
-    void testJdkModules(final Path jmodPath) throws Exception {
-        testJar(jmodPath);
+    @Test
+    void testJdkModules() throws Exception {
+    	JavaHome.streamModulePath().forEach(path -> assertDoesNotThrow(() -> testJar(path)));
     }
 
     @ParameterizedTest
