@@ -59,6 +59,12 @@ The <action> type attribute can be add,update,fix,remove.
   Defining changes.version allows one to create the RN without first removing the SNAPSHOT suffix.
    -->
   <body>
+    <release version="6.11.1" date="2025-10-09" description="This is a feature and maintenance release. Java 8 or later is required.">
+      <!-- FIX -->
+      <action                  type="fix" dev="fmantz" due-to="Gary Gregory">Fix infinite loop in example.TransitiveHull #476.</action>
+      <!-- ADD -->
+      <!-- UPDATE -->
+    </release>
     <release version="6.11.0" date="2025-10-09" description="This is a feature and maintenance release. Java 8 or later is required.">
       <!-- FIX -->
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Replace internal use of Locale.ENGLISH with Locale.ROOT.</action>
