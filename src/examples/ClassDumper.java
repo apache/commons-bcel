@@ -143,7 +143,7 @@ final class ClassDumper {
 
         System.out.printf("%nClass info:%n");
         System.out.println("  flags: " + BCELifier.printFlags(accessFlags, BCELifier.FLAGS.CLASS));
-        int classNameIndex = file.readUnsignedShort();
+        final int classNameIndex = file.readUnsignedShort();
         System.out.printf("  this_class: %d (", classNameIndex);
         System.out.println(constantToString(classNameIndex) + ")");
 
