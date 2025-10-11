@@ -102,6 +102,12 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
     private void add(String className) {
         className = Utility.pathToPackage(className);
 
+        for (final String alreadyContained : set.getClassNames()) {
+            if (alreadyContained.equals(className)) {
+                return;
+            }
+        }
+
         for (final String anIgnored : ignored) {
             if (Pattern.matches(anIgnored, className)) {
                 return;
