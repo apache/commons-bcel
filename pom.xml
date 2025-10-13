@@ -32,7 +32,7 @@
   <packaging>jar</packaging>
   <version>6.11.1-SNAPSHOT</version>
   <name>Apache Commons BCEL</name>
-  <description>Apache Commons Bytecode Engineering Library</description>
+  <description>The Commons Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files.</description>
   <url>https://commons.apache.org/proper/commons-bcel</url>
   <inceptionYear>2004</inceptionYear>
   <properties>

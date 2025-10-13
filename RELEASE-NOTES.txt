@@ -7,10 +7,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.11.0.
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields, and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 This is a feature and maintenance release. Java 8 or later is required.
 
@@ -83,10 +81,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.10.0.
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields, and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Maintenance and bug fix release. Requires a minimum of Java 8.
 
@@ -155,10 +151,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.9.0.
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields, and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Maintenance and bug fix release.
 
@@ -243,10 +237,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.8.2.
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields, and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Maintenance and bug fix release.
 
@@ -299,10 +291,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.8.1.
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields, and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Maintenance and bug fix release.
 
@@ -367,10 +357,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.8.0!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Maintenance and bug fix release.
 
@@ -455,10 +443,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.7.0!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Maintenance and bug fix release.
 
@@ -567,10 +553,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.6.1!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Maintenance and bug fix release.
 
@@ -626,10 +610,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.6.0!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 
 New Features
@@ -756,10 +738,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.5.0!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Minor feature and bug fix release.
 
@@ -829,10 +809,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.4.1!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Bug fix release.
 
@@ -885,10 +863,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.4.0!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Feature and bug fix release.
 
@@ -959,10 +935,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.3.1!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Bug fix release
 
@@ -1009,10 +983,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.3!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 
 New Features
@@ -1066,10 +1038,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.2!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Experimental Java 9 Support
 
@@ -1112,10 +1082,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.1!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Apache Commons BCEL 6.1 is a bugfix and feature release supporting bringing
 experimental support for Java 9.
@@ -1199,10 +1167,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.0!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Apache Commons BCEL 6.0 is a major release supporting the new features
 introduced in Java 6, 7 and 8.
