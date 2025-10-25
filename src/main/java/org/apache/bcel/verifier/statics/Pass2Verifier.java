@@ -1284,7 +1284,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * methods. This verification pass is usually invoked when a class is resolved; and it may be possible that this
      * verification pass has to load in other classes such as superclasses or implemented interfaces. Therefore, Pass 1 is
      * run on them.<BR>
-     * Note that most referenced classes are <B>not</B> loaded in for verification or for an existance check by this pass;
+     * Note that most referenced classes are <B>not</B> loaded in for verification or for an existence check by this pass;
      * only the syntactical correctness of their names and descriptors (a.k.a. signatures) is checked.<BR>
      * Very few checks that conceptually belong here are delayed until pass 3a in JustIce. JustIce does not only check for
      * syntactical correctness but also for semantical sanity - therefore it needs access to the "Code" array of methods in
