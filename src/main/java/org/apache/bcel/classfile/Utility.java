@@ -1156,7 +1156,7 @@ public abstract class Utility {
         String typeParams = "";
         int index = 0;
         if (signature.charAt(0) == '<') {
-            // we have type paramters
+            // we have type parameters
             typeParams = typeParamTypesToString(signature, chopit);
             index += unwrap(CONSUMER_CHARS); // update position
         }
