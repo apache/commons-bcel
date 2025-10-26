@@ -24,7 +24,7 @@ This produces a Java class file (max.class) which you can execute with
 
     % java max
 
-Enter a number (4, eg.)  and you will be asked to enter 4 numbers. The
+Enter a number (for example, 4)  and you will be asked to enter 4 numbers. The
 program will then tell you the biggest of them.
 
 Alternatively you can  produce a  Java  file (max.java) which  will be
