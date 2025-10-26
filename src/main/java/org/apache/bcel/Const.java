@@ -3140,12 +3140,14 @@ public final class Const {
     public static final byte ATTR_NEST_HOST = 25;
     public static final byte ATTR_NEST_MEMBERS = 26;
     public static final byte ATTR_RECORD = 27;
+    public static final byte ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS = 28;
 
     public static final short KNOWN_ATTRIBUTES = 28; // count of attributes
     private static final String[] ATTRIBUTE_NAMES = {"SourceFile", "ConstantValue", "Code", "Exceptions", "LineNumberTable", "LocalVariableTable",
         "InnerClasses", "Synthetic", "Deprecated", "PMGClass", "Signature", "StackMap", "RuntimeVisibleAnnotations", "RuntimeInvisibleAnnotations",
         "RuntimeVisibleParameterAnnotations", "RuntimeInvisibleParameterAnnotations", "AnnotationDefault", "LocalVariableTypeTable", "EnclosingMethod",
-        "StackMapTable", "BootstrapMethods", "MethodParameters", "Module", "ModulePackages", "ModuleMainClass", "NestHost", "NestMembers", "Record"};
+        "StackMapTable", "BootstrapMethods", "MethodParameters", "Module", "ModulePackages", "ModuleMainClass", "NestHost", "NestMembers", "Record",
+        "RuntimeVisibleTypeAnnotations"};
     /**
      * Constants used in the StackMap attribute.
      */
