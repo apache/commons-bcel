@@ -65,7 +65,7 @@ The <action> type attribute can be add,update,fix,remove.
       <!-- ADD -->
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.jetbrains.kotlin:kotlin-stdlib from 2.2.20 to 2.2.21 #481.</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 89 to 90 #482.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 89 to 91 #482.</action>
     </release>
     <release version="6.11.0" date="2025-10-09" description="This is a feature and maintenance release. Java 8 or later is required.">
       <!-- FIX -->
