@@ -108,7 +108,7 @@ public final class Pass1Verifier extends PassVerifier {
      * <LI>the name and signature of fields and methods are verified to be of legal format.
      * </UL>
      * </UL>
-     * (From the Paper <A HREF="http://www.cs.sfu.ca/people/GradStudents/pwfong/personal/JVM/pass1/"> The Mysterious Pass
+     * (From the Paper <A href="https://www.cs.sfu.ca/people/GradStudents/pwfong/personal/JVM/pass1/"> The Mysterious Pass
      * One, first draft, September 2, 1997</A>.)
      *
      * <P>
