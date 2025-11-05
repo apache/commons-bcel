@@ -40,23 +40,21 @@ import org.apache.commons.lang3.StringUtils;
  *
  * <p>
  * This class internally uses the java.util.regex package to search for regular expressions.
- *
+ * </p>
+ * <p>
  * A typical application would look like this:
- *
+ * </p>
  * <pre>
- *
- *
- *   InstructionFinder f   = new InstructionFinder(il);
- *   String            pat = &quot;IfInstruction ICONST_0 GOTO ICONST_1 NOP (IFEQ|IFNE)&quot;;
+ *   InstructionFinder f = new InstructionFinder(il);
+ *   String pat = &quot;IfInstruction ICONST_0 GOTO ICONST_1 NOP (IFEQ|IFNE)&quot;;
  *
  *   for (Iterator i = f.search(pat, constraint); i.hasNext(); ) {
- *   InstructionHandle[] match = (InstructionHandle[])i.next();
- *   ...
- *   il.delete(match[1], match[5]);
- *   ...
+ *       InstructionHandle[] match = (InstructionHandle[])i.next();
+ *       ...
+ *       il.delete(match[1], match[5]);
+ *       ...
  *   }
- *
- *
+
  * </pre>
  *
  * @see org.apache.bcel.generic.Instruction
@@ -318,9 +316,9 @@ public class InstructionFinder {
      * pattern.
      *
      * For the rest the usual pattern matching rules for regular expressions apply.
-     * <P>
+     * <p>
      * Example pattern:
-     *
+     * </p>
      * <pre>
      * search(&quot;BranchInstruction NOP ((IfInstruction|GOTO)+ ISTORE Instruction)*&quot;);
      * </pre>
@@ -328,6 +326,7 @@ public class InstructionFinder {
      * <p>
      * If you alter the instruction list upon a match such that other matching areas are affected, you should call reread()
      * to update the finder and call search() again, because the matches are cached.
+     * </p>
      *
      * @param pattern the instruction pattern to search for, where case is ignored
      * @param from where to start the search in the instruction list
