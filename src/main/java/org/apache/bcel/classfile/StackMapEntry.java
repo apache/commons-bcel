@@ -329,7 +329,7 @@ public final class StackMapEntry implements Node, Cloneable {
 
     /**
      *
-     * @deprecated since 6.0
+     * @deprecated Since 6.0
      */
     @java.lang.Deprecated
     public void setNumberOfLocals(final int n) { // TODO unused
@@ -337,7 +337,7 @@ public final class StackMapEntry implements Node, Cloneable {
 
     /**
      *
-     * @deprecated since 6.0
+     * @deprecated Since 6.0
      */
     @java.lang.Deprecated
     public void setNumberOfStackItems(final int n) { // TODO unused
