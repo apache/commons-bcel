@@ -161,7 +161,7 @@ public class ControlFlowGraph {
          * calculates the "outgoing" frame situation. Returns: True iff the "incoming" frame situation changed after merging
          * with "inFrame". The execPreds ArrayList must contain the InstructionContext objects executed so far in the correct
          * order. This is just one execution path [out of many]. This is needed to correctly "merge" in the special case of a
-         * RET's successor. <B>The InstConstraintVisitor and ExecutionVisitor instances must be set up correctly.</B>
+         * RET's successor. <strong>The InstConstraintVisitor and ExecutionVisitor instances must be set up correctly.</strong>
          *
          * @return true - if and only if the "outgoing" frame situation changed from the one before execute()ing.
          */
@@ -411,7 +411,7 @@ public class ControlFlowGraph {
 
     /**
      * Returns an InstructionContext[] with all the InstructionContext instances for the method whose control flow is
-     * represented by this ControlFlowGraph <B>(NOT ORDERED!)</B>.
+     * represented by this ControlFlowGraph <strong>(NOT ORDERED!)</strong>.
      */
     public InstructionContext[] getInstructionContexts() {
         final InstructionContext[] ret = new InstructionContext[instructionContexts.size()];

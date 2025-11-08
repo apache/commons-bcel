@@ -42,7 +42,7 @@ public class ExceptionHandler {
     }
 
     /**
-     * Returns the type of the exception that's handled. <B>'null' means 'ANY'.</B>
+     * Returns the type of the exception that's handled. <strong>'null' means 'ANY'.</strong>
      */
     public ObjectType getExceptionType() {
         return catchType;

@@ -93,7 +93,7 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
     }
 
     /**
-     * The <B>count</B> argument according to the Java Language Specification, Second Edition.
+     * The <strong>count</strong> argument according to the Java Language Specification, Second Edition.
      */
     public int getCount() {
         return nargs;

@@ -96,7 +96,7 @@ public class ExecutionVisitor extends EmptyVisitor {
 
     /**
      * The only method granting access to the single instance of the ExecutionVisitor class. Before actively using this
-     * instance, <B>SET THE ConstantPoolGen FIRST</B>.
+     * instance, <strong>SET THE ConstantPoolGen FIRST</strong>.
      *
      * @see #setConstantPoolGen(ConstantPoolGen)
      */

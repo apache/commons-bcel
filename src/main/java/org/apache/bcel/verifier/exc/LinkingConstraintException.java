@@ -26,7 +26,7 @@ package org.apache.bcel.verifier.exc;
  * referenced classes) that conceptually belong to pass 3; to be precise, that conceptually belong to the data flow
  * analysis of pass 3 (called pass 3b in JustIce). These are the checks necessary for resolution: Compare pages 142-143
  * ("4.9.1 The Verification Process") and pages 50-51 ("2.17.3 Linking: Verification, Preparation, and Resolution") of
- * the above mentioned book. <B>TODO: At this time, this class is not used in JustIce.</B>
+ * the above mentioned book. <strong>TODO: At this time, this class is not used in JustIce.</strong>
  */
 public class LinkingConstraintException extends StructuralCodeConstraintException {
 

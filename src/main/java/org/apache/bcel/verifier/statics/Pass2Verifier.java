@@ -1283,12 +1283,16 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * Pass 2 is the pass where static properties of the class file are checked without looking into "Code" arrays of
      * methods. This verification pass is usually invoked when a class is resolved; and it may be possible that this
      * verification pass has to load in other classes such as superclasses or implemented interfaces. Therefore, Pass 1 is
-     * run on them.<BR>
-     * Note that most referenced classes are <B>not</B> loaded in for verification or for an existence check by this pass;
-     * only the syntactical correctness of their names and descriptors (a.k.a. signatures) is checked.<BR>
+     * run on them.
+     * <p>
+     * Note that most referenced classes are <strong>not</strong> loaded in for verification or for an existence check by this pass;
+     * only the syntactical correctness of their names and descriptors (a.k.a. signatures) is checked.
+     * </p>
+     * <p>
      * Very few checks that conceptually belong here are delayed until pass 3a in JustIce. JustIce does not only check for
      * syntactical correctness but also for semantical sanity - therefore it needs access to the "Code" array of methods in
      * a few cases. Please see the pass 3a documentation, too.
+     * </p>
      *
      * @see Pass3aVerifier
      */
@@ -1322,7 +1326,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
     }
 
     /**
-     * Ensures that every class has a super class and that <B>final</B> classes are not subclassed. This means, the class
+     * Ensures that every class has a super class and that {@code final} classes are not subclassed. This means, the class
      * this Pass2Verifier operates on has proper super classes (transitively) up to {@link Object}. The reason for really
      * loading (and Pass1-verifying) all of those classes here is that we need them in Pass2 anyway to verify no final
      * methods are overridden (that could be declared anywhere in the ancestor hierarchy).
@@ -1392,7 +1396,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
     }
 
     /**
-     * Ensures that <B>final</B> methods are not overridden. <B>Precondition to run this method:
+     * Ensures that {@code final} methods are not overridden. <B>Precondition to run this method:
      * constant_pool_entries_satisfy_static_constraints() and every_class_has_an_accessible_superclass() have to be invoked
      * before (in that order).</B>
      *
@@ -1440,9 +1444,9 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
     /**
      * Returns a LocalVariablesInfo object containing information about the usage of the local variables in the Code
-     * attribute of the said method or <B>null</B> if the class file this Pass2Verifier operates on could not be
+     * attribute of the said method or {@code null} if the class file this Pass2Verifier operates on could not be
      * pass-2-verified correctly. The method number method_nr is the method you get using
-     * <B>Repository.lookupClass(myOwner.getClassname()).getMethods()[method_nr];</B>. You should not add own information.
+     * {@code Repository.lookupClass(myOwner.getClassname()).getMethods()[method_nr];}. You should not add own information.
      * Leave that to JustIce.
      */
     public LocalVariablesInfo getLocalVariablesInfo(final int methodNr) {

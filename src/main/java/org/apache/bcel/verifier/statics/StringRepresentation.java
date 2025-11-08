@@ -72,10 +72,10 @@ import org.apache.bcel.classfile.Unknown;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
 
 /**
- * BCEL's Node classes (those from the classfile API that <B>accept()</B> Visitor instances) have <B>toString()</B>
+ * BCEL's Node classes (those from the classfile API that {@code accept()} Visitor instances) have {@code toString()}
  * methods that were not designed to be robust, this gap is closed by this class. When performing class file
- * verification, it may be useful to output which entity (for example a <B>Code</B> instance) is not satisfying the verifier's
- * constraints, but in this case it could be possible for the <B>toString()</B> method to throw a RuntimeException. A
+ * verification, it may be useful to output which entity (for example a {@code Code} instance) is not satisfying the verifier's
+ * constraints, but in this case it could be possible for the {@code toString()} method to throw a RuntimeException. A
  * (new StringRepresentation(Node n)).toString() never throws any exception. Note that this class also serves as a
  * placeholder for more sophisticated message handling in future versions of JustIce.
  */

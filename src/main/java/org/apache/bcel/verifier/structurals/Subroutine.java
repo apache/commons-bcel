@@ -64,7 +64,7 @@ public interface Subroutine {
 
     /**
      * Returns the one and only RET that leaves the subroutine. Note that JustIce has a pretty rigid notion of a subroutine.
-     * <B>Must not be invoked on the 'top-level subroutine'.</B>
+     * <strong>Must not be invoked on the 'top-level subroutine'.</strong>
      *
      * @return The one and only RET that leaves the subroutine.
      * @see Subroutines

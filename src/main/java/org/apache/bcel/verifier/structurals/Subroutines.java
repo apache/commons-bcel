@@ -338,7 +338,7 @@ public class Subroutines {
     } // end Inner Class SubrouteImpl
 
     /**
-     * A utility method that calculates the successors of a given InstructionHandle <B>in the same subroutine</B>. That
+     * A utility method that calculates the successors of a given InstructionHandle <strong>in the same subroutine</strong>. That
      * means, a RET does not have any successors as defined here. A JsrInstruction has its physical successor as its
      * successor (opposed to its target) as defined here.
      */
@@ -567,7 +567,7 @@ public class Subroutines {
     }
 
     /**
-     * For easy handling, the piece of code that is <B>not</B> a subroutine, the top-level, is also modeled as a Subroutine
+     * For easy handling, the piece of code that is <strong>not</strong> a subroutine, the top-level, is also modeled as a Subroutine
      * object. It is a special Subroutine object where <B>you must not invoke getEnteringJsrInstructions() or
      * getLeavingRET()</B>.
      *

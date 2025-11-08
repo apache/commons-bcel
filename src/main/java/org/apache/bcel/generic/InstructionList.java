@@ -262,7 +262,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
      *
      * @param i where to append the instruction list
      * @param il Instruction list to append to this one
-     * @return instruction handle pointing to the <B>first</B> appended instruction
+     * @return instruction handle pointing to the <strong>first</strong> appended instruction
      */
     public InstructionHandle append(final Instruction i, final InstructionList il) {
         final InstructionHandle ih;
@@ -295,7 +295,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
      *
      * @param ih where to append the instruction list
      * @param i Instruction to append
-     * @return instruction handle pointing to the <B>first</B> appended instruction
+     * @return instruction handle pointing to the <strong>first</strong> appended instruction
      */
     public BranchHandle append(final InstructionHandle ih, final BranchInstruction i) {
         final BranchHandle bh = BranchHandle.getBranchHandle(i);
@@ -321,7 +321,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
      *
      * @param ih where to append the instruction list
      * @param i Instruction to append
-     * @return instruction handle pointing to the <B>first</B> appended instruction
+     * @return instruction handle pointing to the <strong>first</strong> appended instruction
      */
     public InstructionHandle append(final InstructionHandle ih, final Instruction i) {
         return append(ih, new InstructionList(i));
@@ -333,7 +333,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
      *
      * @param ih where to append the instruction list
      * @param il Instruction list to append to this one
-     * @return instruction handle pointing to the <B>first</B> appended instruction
+     * @return instruction handle pointing to the <strong>first</strong> appended instruction
      */
     public InstructionHandle append(final InstructionHandle ih, final InstructionList il) {
         if (il == null) {
@@ -361,7 +361,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * Append another list to this one. Consumes argument list, i.e., it becomes empty.
      *
      * @param il list to append to end of this list
-     * @return instruction handle of the <B>first</B> appended instruction
+     * @return instruction handle of the <strong>first</strong> appended instruction
      */
     public InstructionHandle append(final InstructionList il) {
         if (il == null) {
