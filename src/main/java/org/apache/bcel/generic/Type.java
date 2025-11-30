@@ -28,6 +28,7 @@ import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.InvalidMethodSignatureException;
 import org.apache.bcel.classfile.Utility;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 /**
  * Abstract super class for all possible Java types, namely basic types such as int, object types like String and array
@@ -287,7 +288,7 @@ public abstract class Type {
     }
 
     static String internalTypeNameToSignature(final String internalTypeName) {
-        if (StringUtils.isEmpty(internalTypeName) || StringUtils.equalsAny(internalTypeName, Const.SHORT_TYPE_NAMES)) {
+        if (StringUtils.isEmpty(internalTypeName) || Strings.CS.equalsAny(internalTypeName, Const.SHORT_TYPE_NAMES)) {
             return internalTypeName;
         }
         switch (internalTypeName.charAt(0)) {

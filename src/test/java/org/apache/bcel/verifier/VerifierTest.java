@@ -39,7 +39,7 @@ import org.apache.bcel.verifier.exc.AssertionViolatedException;
 import org.apache.bcel.verifier.input.FieldVerifierChildClass;
 import org.apache.bcel.verifier.input.StaticFieldVerifierChildClass;
 import org.apache.bcel.verifier.statics.StringRepresentation;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.SystemProperties;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -53,7 +53,7 @@ class VerifierTest {
     }
 
     private static void testDefaultMethodValidation(final String className, final String... excludes) throws ClassNotFoundException {
-        if (StringUtils.endsWithAny(className, excludes)) {
+        if (Strings.CS.endsWithAny(className, excludes)) {
             return;
         }
         final Verifier verifier = VerifierFactory.getVerifier(className);

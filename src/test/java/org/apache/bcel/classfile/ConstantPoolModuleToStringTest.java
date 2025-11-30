@@ -34,6 +34,7 @@ import java.util.regex.Pattern;
 
 import org.apache.bcel.util.SyntheticRepository;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -313,10 +314,10 @@ class ConstantPoolModuleToStringTest {
             while (matcher.find()) {
                 switch (matcher.group(2)) {
                     case ":":
-                        assertTrue(StringUtils.containsAny(matcher.group(1), "name", "flags", "version"));
+                        assertTrue(Strings.CS.containsAny(matcher.group(1), "name", "flags", "version"));
                         break;
                     case "(":
-                        assertTrue(StringUtils.containsAny(matcher.group(1), "requires", "exports", "opens", "uses", "provides"));
+                        assertTrue(Strings.CS.containsAny(matcher.group(1), "requires", "exports", "opens", "uses", "provides"));
                         break;
                     default:
                         break;
@@ -387,7 +388,7 @@ class ConstantPoolModuleToStringTest {
             append(constantModule);
             append(constantModule.toString(pool));
             final String s = constantModule.toString(pool).trim();
-            final boolean condition = StringUtils.startsWithAny(s,
+            final boolean condition = Strings.CS.startsWithAny(s,
                     "jdk.",
                     "java.",
                     "org.junit",
