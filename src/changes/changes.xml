@@ -63,6 +63,7 @@ The <action> type attribute can be add,update,fix,remove.
       <!-- FIX -->
       <action                  type="fix" dev="fmantz" due-to="Gary Gregory">Fix infinite loop in example.TransitiveHull #476.</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix Apache RAT plugin console warnings.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix malformed Javadoc comments.</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 89 to 93 #482.</action>

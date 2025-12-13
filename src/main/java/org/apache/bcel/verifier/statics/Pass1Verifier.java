@@ -62,55 +62,58 @@ public final class Pass1Verifier extends PassVerifier {
      * resolution process. Only four constraints to be checked are explicitly stated by The Java Virtual Machine
      * Specification, 2nd edition:
      * <ul>
-     * <li>The first four bytes must contain the right magic number (0xCAFEBABE).
-     * <li>All recognized attributes must be of the proper length.
-     * <li>The class file must not be truncated or have extra bytes at the end.
-     * <li>The constant pool must not contain any superficially unrecognizable information.
+     * <li>The first four bytes must contain the right magic number (0xCAFEBABE).</li>
+     * <li>All recognized attributes must be of the proper length.</li>
+     * <li>The class file must not be truncated or have extra bytes at the end.</li>
+     * <li>The constant pool must not contain any superficially unrecognizable information.</li>
      * </ul>
+     * <p>
      * A more in-depth documentation of what pass one should do was written by <a HREF=mailto:pwfong@cs.sfu.ca>Philip W. L.
      * Fong</a>:
+     * </p>
      * <ul>
-     * <li>the file should not be truncated.
-     * <li>the file should not have extra bytes at the end.
+     * <li>the file should not be truncated.</li>
+     * <li>the file should not have extra bytes at the end.</li>
      * <li>all variable-length structures should be well-formatted:
      * <ul>
-     * <li>there should only be constant_pool_count-1 many entries in the constant pool.
-     * <li>all constant pool entries should have size the same as indicated by their type tag.
-     * <li>there are exactly interfaces_count many entries in the interfaces array of the class file.
-     * <li>there are exactly fields_count many entries in the fields array of the class file.
-     * <li>there are exactly methods_count many entries in the methods array of the class file.
+     * <li>there should only be constant_pool_count-1 many entries in the constant pool.</li>
+     * <li>all constant pool entries should have size the same as indicated by their type tag.</li>
+     * <li>there are exactly interfaces_count many entries in the interfaces array of the class file.</li>
+     * <li>there are exactly fields_count many entries in the fields array of the class file.</li>
+     * <li>there are exactly methods_count many entries in the methods array of the class file.</li>
      * <li>there are exactly attributes_count many entries in the attributes array of the class file, fields, methods, and
-     * code attribute.
+     * code attribute.</li>
      * <li>there should be exactly attribute_length many bytes in each attribute. Inconsistency between attribute_length and
      * the actually size of the attribute content should be uncovered. For example, in an Exceptions attribute, the actual
      * number of exceptions as required by the number_of_exceptions field might yeild an attribute size that doesn't match
-     * the attribute_length. Such an anomaly should be detected.
+     * the attribute_length. Such an anomaly should be detected.</li>
      * <li>all attributes should have proper length. In particular, under certain context (for example while parsing method_info),
-     * recognizable attributes (for example "Code" attribute) should have correct format (for example attribute_length is 2).
+     * recognizable attributes (for example "Code" attribute) should have correct format (for example attribute_length is 2).</li>
      * </ul>
      * <li>Also, certain constant values are checked for validity:
      * <ul>
-     * <li>The magic number should be 0xCAFEBABE.
-     * <li>The major and minor version numbers are valid.
-     * <li>All the constant pool type tags are recognizable.
-     * <li>All undocumented access flags are masked off before use. Strictly speaking, this is not really a check.
+     * <li>The magic number should be 0xCAFEBABE.</li>
+     * <li>The major and minor version numbers are valid.</li>
+     * <li>All the constant pool type tags are recognizable.</li>
+     * <li>All undocumented access flags are masked off before use. Strictly speaking, this is not really a check.</li>
      * <li>The field this_class should point to a string that represents a legal non-array class name, and this name should
-     * be the same as the class file being loaded.
-     * <li>the field super_class should point to a string that represents a legal non-array class name.
+     * be the same as the class file being loaded.</li>
+     * <li>the field super_class should point to a string that represents a legal non-array class name.</li>
      * <li>Because some of the above checks require cross referencing the constant pool entries, guards are set up to make
      * sure that the referenced entries are of the right type and the indices are within the legal range (0 &lt; index &lt;
-     * constant_pool_count).
+     * constant_pool_count).</li>
      * </ul>
      * <li>Extra checks done in pass 1:
      * <ul>
-     * <li>the constant values of static fields should have the same type as the fields.
-     * <li>the number of words in a parameter list does not exceed 255 and locals_max.
-     * <li>the name and signature of fields and methods are verified to be of legal format.
+     * <li>the constant values of static fields should have the same type as the fields.</li>
+     * <li>the number of words in a parameter list does not exceed 255 and locals_max.</li>
+     * <li>the name and signature of fields and methods are verified to be of legal format.</li>
      * </ul>
      * </ul>
+     * <p>
      * (From the Paper <a href="https://www.cs.sfu.ca/people/GradStudents/pwfong/personal/JVM/pass1/"> The Mysterious Pass
      * One, first draft, September 2, 1997</a>.)
-     *
+     * </p>
      * <p>
      * However, most of this is done by parsing a class file or generating a class file into BCEL's internal data structure.
      * <strong>Therefore, all that is really done here is look up the class file from BCEL's repository.</strong> This is also
