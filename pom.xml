@@ -391,6 +391,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <!-- Test expects 1.5.3 -->
       <groupId>wsdl4j</groupId>
       <artifactId>wsdl4j</artifactId>
       <version>1.5.3</version>
