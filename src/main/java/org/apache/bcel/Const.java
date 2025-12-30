@@ -327,6 +327,14 @@ public final class Const {
     public static final short MINOR_25 = 0;
 
     /**
+     * Minor version number of class files for Java 26: {@value}.
+     *
+     * @see #MAJOR_26
+     * @since 6.12.0
+     */
+    public static final short MINOR_26 = 0;
+
+    /**
      * Major version number of class files for Java 14: {@value}.
      *
      * @see #MINOR_14
@@ -421,6 +429,14 @@ public final class Const {
      * @since 6.11.0
      */
     public static final short MAJOR_25 = 69;
+
+    /**
+     * Major version number of class files for Java 26: {@value}.
+     *
+     * @see #MINOR_26
+     * @since 6.12.0
+     */
+    public static final short MAJOR_26 = 70;
 
     /**
      * Default major version number. Class file is for Java 1.1: {@value}.
