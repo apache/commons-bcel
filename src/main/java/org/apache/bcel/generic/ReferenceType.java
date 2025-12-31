@@ -46,8 +46,8 @@ public abstract class ReferenceType extends Type {
      * interface, then {@link #OBJECT} is returned. If not all of the two classes' superclasses cannot be found, "null" is
      * returned. See the JVM specification edition 2, "�4.9.2 The Bytecode Verifier".
      *
-     * @deprecated Use getFirstCommonSuperclass(ReferenceType t) which has slightly changed semantics.
      * @throws ClassNotFoundException on failure to find superclasses of this type, or the type passed as a parameter.
+     * @deprecated Use getFirstCommonSuperclass(ReferenceType t) which has slightly changed semantics.
      */
     @Deprecated
     public ReferenceType firstCommonSuperclass(final ReferenceType t) throws ClassNotFoundException {
