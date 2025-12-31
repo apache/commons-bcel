@@ -43,6 +43,7 @@ import org.apache.bcel.Const;
  *   full_frame;
  * }
  * </pre>
+ *
  * @see StackMap
  * @see StackMapType
  */

@@ -672,6 +672,7 @@ public class ClassPath implements Closeable {
      * <p>
      * The caller is responsible for closing the InputStream.
      * </p>
+     *
      * @param name fully qualified class name, for example {@link String}.
      * @return input stream for class
      * @throws IOException if an I/O error occurs.

@@ -72,6 +72,7 @@ public abstract class Instruction implements Cloneable {
      * <p>
      * If the Instruction is defined in {@link InstructionConst}, then the singleton instance is returned.
      * </p>
+     *
      * @param bytes input stream bytes
      * @return instruction object being read
      * @throws IOException Thrown when an I/O exception of some sort has occurred.

@@ -409,6 +409,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
     /**
      * Finds a visible field by name and type in this class and its super classes.
+     *
      * @param fieldName the field name to find
      * @param fieldType the field type to find
      * @return field matching given name and type, null if field is not found or not accessible from this class.
@@ -486,6 +487,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
     /**
      * Gets attribute for given tag.
+     *
      * @return Attribute for given tag, null if not found.
      * Refer to {@link org.apache.bcel.Const#ATTR_UNKNOWN} constants named ATTR_* for possible values.
      * @since 6.10.0

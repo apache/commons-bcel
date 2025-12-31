@@ -91,6 +91,7 @@ public class ObjectType extends ReferenceType {
 
     /**
      * If "this" doesn't reference a class, it references an interface or a non-existant entity.
+     *
      * @deprecated (since 6.0) this method returns an inaccurate result if the class or interface referenced cannot be
      *             found: use referencesClassExact() instead
      */

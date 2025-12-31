@@ -54,6 +54,7 @@ import org.apache.commons.lang3.ArrayUtils;
  *   attribute_info attributes[attributes_count];
  * }
  * </pre>
+ *
  * @see Attribute
  * @see CodeException
  * @see LineNumberTable
@@ -262,6 +263,7 @@ public final class Code extends Attribute {
 
     /**
      * Gets the local variable type table attribute {@link LocalVariableTypeTable}.
+     *
      * @return LocalVariableTypeTable of Code, if it has one, null otherwise.
      * @since 6.10.0
      */
@@ -290,6 +292,7 @@ public final class Code extends Attribute {
 
     /**
      * Finds the attribute of {@link StackMap} instance.
+     *
      * @return StackMap of Code, if it has one, else null.
      * @since 6.8.0
      */

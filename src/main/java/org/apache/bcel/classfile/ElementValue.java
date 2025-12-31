@@ -48,6 +48,7 @@ import org.apache.bcel.Const;
  *    } value;
  *}
  *</pre>
+ *
  * @since 6.0
  */
 public abstract class ElementValue {

@@ -42,6 +42,7 @@ import org.apache.commons.lang3.ArrayUtils;
  *   u2 exception_index_table[number_of_exceptions];
  * }
  * </pre>
+ *
  * @see Code
  */
 public final class ExceptionTable extends Attribute {

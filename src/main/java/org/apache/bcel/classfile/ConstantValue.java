@@ -36,6 +36,7 @@ import org.apache.bcel.util.Args;
  *   u2 constantvalue_index;
  * }
  * </pre>
+ *
  * @see Attribute
  */
 public final class ConstantValue extends Attribute {

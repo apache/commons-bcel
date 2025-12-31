@@ -87,6 +87,7 @@ public final class ModuleRequires implements Cloneable, Node {
 
     /**
      * Gets the module name from the constant pool.
+     *
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @return module name
      * @since 6.10.0
@@ -97,6 +98,7 @@ public final class ModuleRequires implements Cloneable, Node {
 
     /**
      * Gets the flags for this ModuleRequires.
+     *
      * @return the requiresFlags
      * @since 6.10.0
      */
@@ -106,6 +108,7 @@ public final class ModuleRequires implements Cloneable, Node {
 
     /**
      * Gets the required version from the constant pool.
+     *
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @return required version, "0" if version index is 0.
      * @since 6.10.0

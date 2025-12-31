@@ -100,6 +100,7 @@ public final class ModuleProvides implements Cloneable, Node {
 
     /**
      * Gets the array of implementation class names for this ModuleProvides.
+     *
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @param compactClassName false for original constant pool value, true to replace '/' with '.'
      * @return array of implementation class names
@@ -115,6 +116,7 @@ public final class ModuleProvides implements Cloneable, Node {
 
     /**
      * Gets the interface name for this ModuleProvides.
+     *
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @return interface name
      * @since 6.10.0

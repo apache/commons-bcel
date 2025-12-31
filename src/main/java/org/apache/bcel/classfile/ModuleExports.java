@@ -99,6 +99,7 @@ public final class ModuleExports implements Cloneable, Node {
 
     /**
      * Gets the flags for this ModuleExports.
+     *
      * @return the exportsFlags
      * @since 6.10.0
      */
@@ -108,6 +109,7 @@ public final class ModuleExports implements Cloneable, Node {
 
     /**
      * Gets the exported package name.
+     *
      * @param constantPool the constant pool from the ClassFile
      * @return the exported package name
      * @since 6.10.0
@@ -118,6 +120,7 @@ public final class ModuleExports implements Cloneable, Node {
 
     /**
      * Gets an array of module names for this ModuleExports.
+     *
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @return array of module names following 'exports to'
      * @since 6.10.0

@@ -192,6 +192,7 @@ public final class Module extends Attribute {
 
     /**
      * Gets flags for this module.
+     *
      * @return module flags
      * @since 6.10.0
      */
@@ -201,6 +202,7 @@ public final class Module extends Attribute {
 
     /**
      * Gets module name.
+     *
      * @param cp Array of constants
      * @return module name
      * @since 6.10.0
@@ -235,6 +237,7 @@ public final class Module extends Attribute {
 
     /**
      * Gets the array of class names for this module's uses.
+     *
      * @param constantPool Array of constants usually obtained from the ClassFile object
      * @param compactClassName false for original constant pool value, true to replace '/' with '.'
      * @return array of used class names
@@ -250,6 +253,7 @@ public final class Module extends Attribute {
 
     /**
      * Gets version for this module.
+     *
      * @param cp Array of constants
      * @return version from constant pool, "0" if version index is 0
      * @since 6.10.0

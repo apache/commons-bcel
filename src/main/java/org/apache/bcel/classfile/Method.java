@@ -191,6 +191,7 @@ public final class Method extends FieldOrMethod {
 
     /**
      * Gets the local variable type table attribute {@link LocalVariableTypeTable}.
+     *
      * @return LocalVariableTypeTable of code attribute if any, i.e. the call is forwarded to the Code attribute.
      * @since 6.10.0
      */
