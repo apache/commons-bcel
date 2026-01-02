@@ -68,7 +68,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_26.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_26.</action>
       <!-- UPDATE -->
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 89 to 93 #482.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 89 to 94 #482.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">[test] Bump org.jetbrains.kotlin:kotlin-stdlib from 2.2.20 to 2.3.0 #481.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-io:commons-io from 2.20.0 to 2.21.0.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-lang3 from 3.19.0 to 3.20.0.</action>
