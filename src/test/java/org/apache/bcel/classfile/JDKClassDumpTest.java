@@ -19,12 +19,12 @@
 
 package org.apache.bcel.classfile;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.Enumeration;
@@ -32,6 +32,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 import org.apache.bcel.generic.JavaHome;
+import org.apache.commons.io.function.IOStream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -41,7 +42,7 @@ import org.junit.jupiter.params.provider.MethodSource;
  */
 class JDKClassDumpTest {
 
-    private void compare(final JavaClass jc, final InputStream inputStream, final String name) throws Exception {
+    private void compare(final JavaClass jc, final InputStream inputStream, final String name) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try (DataOutputStream dos = new DataOutputStream(baos)) {
             jc.dump(dos);
@@ -57,7 +58,7 @@ class JDKClassDumpTest {
         }
     }
 
-    private void testJar(final Path path) throws Exception {
+    private void testJar(final Path path) throws IOException {
         try (JarFile jar = new JarFile(path.toFile())) {
             System.out.println("Parsing " + jar.getName());
             final Enumeration<JarEntry> en = jar.entries();
@@ -78,11 +79,11 @@ class JDKClassDumpTest {
     @ParameterizedTest
     @MethodSource("org.apache.bcel.generic.JavaHome#streamJarPath")
     void testPerformance(final Path path) throws Exception {
-        assertDoesNotThrow(() -> testJar(path));
+        testJar(path);
     }
 
     @Test
     void testPerformanceJmod() throws Exception {
-        JavaHome.streamModulePath().forEach(path -> assertDoesNotThrow(() -> testJar(path)));
+        IOStream.adapt(JavaHome.streamModulePath()).forEach(this::testJar);
     }
 }
