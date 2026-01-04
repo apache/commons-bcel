@@ -19,7 +19,6 @@
 
 package org.apache.bcel.generic;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.apache.bcel.AbstractTest;
@@ -35,7 +34,7 @@ class JiraBcel362Test extends AbstractTest {
     @Test
     void testProcessConstantPoolWithCondyEntry() throws ClassNotFoundException {
         final JavaClass clazz = getTestJavaClass("issue362.Bcel362");
-        final ConstantPoolGen constantPoolGen = assertDoesNotThrow(() -> new ConstantPoolGen(clazz.getConstantPool()));
+        final ConstantPoolGen constantPoolGen = new ConstantPoolGen(clazz.getConstantPool());
         assertTrue(constantPoolGen.lookupUtf8("$jacocoData") != -1);
     }
 
