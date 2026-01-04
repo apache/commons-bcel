@@ -245,6 +245,7 @@ public interface Constants {
     short ACC_ENUM = Const.ACC_ENUM;
 
     // Applies to classes compiled by new compilers only
+
     /**
      * One of the access flags for fields, methods, or classes.
      *

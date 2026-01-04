@@ -49,6 +49,7 @@ public final class ExceptionConst {
      * Super class of any linking exception (aka Linkage Error)
      */
     public static final Class<LinkageError> LINKING_EXCEPTION = LinkageError.class;
+
     /**
      * Linking Exceptions
      */
@@ -67,6 +68,7 @@ public final class ExceptionConst {
     public static final Class<VerifyError> VERIFY_ERROR = VerifyError.class;
     /* UnsupportedClassVersionError is new in JDK 1.2 */
 //    public static final Class UnsupportedClassVersionError = UnsupportedClassVersionError.class;
+
     /**
      * Run-Time Exceptions
      */
@@ -77,6 +79,7 @@ public final class ExceptionConst {
     public static final Class<ClassCastException> CLASS_CAST_EXCEPTION = ClassCastException.class;
 
     public static final Class<IllegalMonitorStateException> ILLEGAL_MONITOR_STATE = IllegalMonitorStateException.class;
+
     /**
      * Pre-defined exception arrays according to chapters 5.1-5.4 of the Java Virtual Machine Specification
      */

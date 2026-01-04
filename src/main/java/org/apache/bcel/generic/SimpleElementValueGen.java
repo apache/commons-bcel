@@ -89,6 +89,7 @@ public class SimpleElementValueGen extends ElementValueGen {
 
     // ctors for each supported type... type could be inferred but for now lets
     // force it to be passed
+
     /**
      * Protected ctor used for deserialization, doesn't *put* an entry in the constant pool, assumes the one at the supplied
      * index is correct.

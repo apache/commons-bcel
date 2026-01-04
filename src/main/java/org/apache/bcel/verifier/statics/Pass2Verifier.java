@@ -1247,6 +1247,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * variables of method number i in the JavaClass this verifier operates on.
      */
     private LocalVariablesInfo[] localVariablesInfos;
+
     /** The Verifier that created this. */
     private final Verifier verifier;
 

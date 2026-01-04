@@ -70,8 +70,10 @@ public final class Pass3bVerifier extends PassVerifier {
      */
     private static final class InstructionContextQueue {
         // The following two fields together represent the queue.
+
         /** The first elements from pairs in the queue. */
         private final List<InstructionContext> ics = new Vector<>();
+
         /** The second elements from pairs in the queue. */
         private final List<ArrayList<InstructionContext>> ecs = new Vector<>();
 

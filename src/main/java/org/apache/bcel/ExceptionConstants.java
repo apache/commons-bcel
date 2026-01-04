@@ -30,14 +30,17 @@ public interface ExceptionConstants {
      * The mother of all exceptions
      */
     Class<Throwable> THROWABLE = Throwable.class;
+
     /**
      * Super class of any run-time exception
      */
     Class<RuntimeException> RUNTIME_EXCEPTION = RuntimeException.class;
+
     /**
      * Super class of any linking exception (aka Linkage Error)
      */
     Class<LinkageError> LINKING_EXCEPTION = LinkageError.class;
+
     /**
      * Linking Exceptions
      */
@@ -55,6 +58,7 @@ public interface ExceptionConstants {
     Class<VerifyError> VERIFY_ERROR = VerifyError.class;
     /* UnsupportedClassVersionError is new in JDK 1.2 */
 //    Class UnsupportedClassVersionError = UnsupportedClassVersionError.class;
+
     /**
      * Run-Time Exceptions
      */

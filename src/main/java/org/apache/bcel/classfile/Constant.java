@@ -119,6 +119,7 @@ public abstract class Constant implements Cloneable, Node {
      * First, we want match the specification as closely as possible. Second we need the tag as an index to select the
      * corresponding class name from the 'CONSTANT_NAMES' array.
      */
+
     /**
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */

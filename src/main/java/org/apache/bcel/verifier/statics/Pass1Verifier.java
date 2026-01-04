@@ -34,6 +34,7 @@ import org.apache.commons.lang3.ArrayUtils;
  * @see #do_verify()
  */
 public final class Pass1Verifier extends PassVerifier {
+
     /**
      * DON'T USE THIS EVEN PRIVATELY! USE getJavaClass() INSTEAD.
      *

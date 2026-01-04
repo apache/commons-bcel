@@ -194,6 +194,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
     /* "generic"visitXXXX methods where XXXX is an interface */
     /* therefore, we don't know the order of visiting; but we know */
     /* these methods are called before the visitYYYY methods below */
+
     /***************************************************************/
 
     /**
@@ -373,6 +374,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
 
     /***************************************************************/
     /* "special"visitXXXX methods for one type of instruction each */
+
     /***************************************************************/
 
     /**
@@ -446,6 +448,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
     /* "generic" visitYYYY methods where YYYY is a superclass. */
     /* therefore, we know the order of visiting; we know */
     /* these methods are called after the visitXXXX methods above. */
+
     /***************************************************************/
     /**
      * Ensures the general preconditions of a CPInstruction instance.
@@ -2582,6 +2585,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
 
     /***************************************************************/
     /* MISC */
+
     /***************************************************************/
     /**
      * Ensures the general preconditions of an instruction that accesses the stack. This method is here because BCEL has no

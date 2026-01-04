@@ -117,6 +117,7 @@ public final class Pass3aVerifier extends PassVerifier {
      * This visitor class does the actual checking for the instruction operand's constraints.
      */
     private final class InstOperandConstraintVisitor extends org.apache.bcel.generic.EmptyVisitor {
+
         /** The ConstantPoolGen instance this Visitor operates on. */
         private final ConstantPoolGen constantPoolGen;
 
@@ -697,6 +698,7 @@ public final class Pass3aVerifier extends PassVerifier {
         ///////////////////////////////////////////////////////////
         // The Java Virtual Machine Specification, pages 134-137 //
         ///////////////////////////////////////////////////////////
+
         /**
          * Assures the generic preconditions of a LoadClass instance. The referenced class is loaded and pass2-verified.
          */

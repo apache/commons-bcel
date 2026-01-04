@@ -52,6 +52,7 @@ import org.openjdk.jmh.infra.Blackhole;
 @Measurement(iterations = 20)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class BCELBenchmark {
+
     /**
      * Baseline benchmark. Read the classes but don't parse them.
      */

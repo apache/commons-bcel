@@ -108,16 +108,22 @@ public class VerifyDialog extends JDialog {
 
     /** Machine-generated. */
     private JPanel ivjJDialogContentPane;
+
     /** Machine-generated. */
     private JPanel ivjPass1Panel;
+
     /** Machine-generated. */
     private JPanel ivjPass2Panel;
+
     /** Machine-generated. */
     private JPanel ivjPass3Panel;
+
     /** Machine-generated. */
     private JButton ivjPass1Button;
+
     /** Machine-generated. */
     private JButton ivjPass2Button;
+
     /** Machine-generated. */
     private JButton ivjPass3Button;
 

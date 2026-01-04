@@ -27,6 +27,7 @@ import java.io.StringWriter;
  * @see Throwable
  */
 public final class Utility {
+
     /** This method returns the stack trace of a Throwable instance as a String. */
     public static String getStackTrace(final Throwable t) {
         final StringWriter sw = new StringWriter();

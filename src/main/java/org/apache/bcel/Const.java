@@ -617,6 +617,7 @@ public final class Const {
     public static final short ACC_ENUM = 0x4000;
 
     // Applies to classes compiled by new compilers only
+
     /**
      * One of the access flags for MethodParameter or Module attributes: {@value}.
      *
@@ -653,6 +654,7 @@ public final class Const {
     // 'volatile' is for fields, might be 'bridge' (if method) or 'static_phase' (if Module)
     // 'transient' is for fields, might be 'varargs' (if method)
     // 'module' is for classes, might be 'mandated' (if Module or MethodParameters)
+
     /**
      * The names of the access flags.
      */
@@ -3162,6 +3164,7 @@ public final class Const {
         "InnerClasses", "Synthetic", "Deprecated", "PMGClass", "Signature", "StackMap", "RuntimeVisibleAnnotations", "RuntimeInvisibleAnnotations",
         "RuntimeVisibleParameterAnnotations", "RuntimeInvisibleParameterAnnotations", "AnnotationDefault", "LocalVariableTypeTable", "EnclosingMethod",
         "StackMapTable", "BootstrapMethods", "MethodParameters", "Module", "ModulePackages", "ModuleMainClass", "NestHost", "NestMembers", "Record"};
+
     /**
      * Constants used in the StackMap attribute.
      */

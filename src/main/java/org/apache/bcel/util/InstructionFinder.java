@@ -238,6 +238,7 @@ public class InstructionFinder {
     private InstructionHandle[] handles; // map instruction
 
     // list to array
+
     /**
      * @param il instruction list to search for given patterns
      */

@@ -101,6 +101,7 @@ public abstract class AccessFlags {
     public final void isAnnotation(final boolean flag) {
         setFlag(Const.ACC_ANNOTATION, flag);
     }
+
     /**
      * Tests whether the enum bit is on.
      *

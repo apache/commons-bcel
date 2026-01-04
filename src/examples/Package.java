@@ -92,10 +92,12 @@ public class Package {
      * See wheather we print the classes that were not found (default = false)
      */
     boolean showNotFound = false;
+
     /**
      * Remember wheather to print allClasses at the end (default = false)
      */
     boolean printClasses = false;
+
     /**
      * Wheather we log classes during processing (default = false)
      */

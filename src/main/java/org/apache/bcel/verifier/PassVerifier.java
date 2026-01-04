@@ -42,6 +42,7 @@ public abstract class PassVerifier {
 
     /** The (warning) messages. */
     private final List<String> messages = new ArrayList<>();
+
     /** The VerificationResult cache. */
     private VerificationResult verificationResult;
 

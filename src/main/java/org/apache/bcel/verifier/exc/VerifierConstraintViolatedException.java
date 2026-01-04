@@ -28,6 +28,7 @@ public abstract class VerifierConstraintViolatedException extends RuntimeExcepti
     // String name_of_offending_class;
 
     private static final long serialVersionUID = 2946136970490179465L;
+
     /** The specified error message. */
     private String detailMessage;
 

@@ -527,6 +527,7 @@ class GeneratingAnnotatedClassesTest extends AbstractTest {
     }
 
     // J5TODO: Need to add deleteFile calls to many of these tests
+
     /**
      * Transform simple class from an immutable to a mutable object.
      */

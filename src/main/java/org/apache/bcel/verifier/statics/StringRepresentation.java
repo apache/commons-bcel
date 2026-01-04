@@ -80,8 +80,10 @@ import org.apache.bcel.verifier.exc.AssertionViolatedException;
  * placeholder for more sophisticated message handling in future versions of JustIce.
  */
 public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor {
+
     /** The string representation, created by a visitXXX() method, output by toString(). */
     private String tostring;
+
     /** The node we ask for its string representation. Not really needed; only for debug output. */
     private final Node n;
 

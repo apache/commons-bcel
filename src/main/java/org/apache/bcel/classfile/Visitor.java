@@ -23,6 +23,7 @@ package org.apache.bcel.classfile;
  * traverse the contents of a Java class just by calling the 'accept' method which all classes have.
  */
 public interface Visitor {
+
     /**
      * @since 6.0
      */

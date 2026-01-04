@@ -26,6 +26,7 @@ import org.apache.bcel.classfile.JavaClass;
 import org.junit.jupiter.api.Test;
 
 class AnnotationAccessFlagTest extends AbstractTest {
+
     /**
      * If you write an annotation and compile it, the class file generated should be marked as an annotation type - which is
      * detectable through BCEL.
