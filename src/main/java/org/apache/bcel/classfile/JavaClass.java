@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -48,6 +49,8 @@ import org.apache.commons.lang3.ArrayUtils;
  * @see org.apache.bcel.generic.ClassGen
  */
 public class JavaClass extends AccessFlags implements Cloneable, Node, Comparable<JavaClass> {
+
+    private static final String CLASS_NAME_OBJECT = "java.lang.Object";
 
     /**
      * The standard class file extension.
@@ -231,7 +234,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
             superclassName = constantPool.getConstantString(superclassNameIndex, Const.CONSTANT_Class);
             superclassName = Utility.compactClassName(superclassName, false);
         } else {
-            superclassName = "java.lang.Object";
+            superclassName = CLASS_NAME_OBJECT;
         }
         interfaceNames = new String[interfaces.length];
         for (int i = 0; i < interfaces.length; i++) {
@@ -417,35 +420,43 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @since 6.8.0
      */
     public Field findField(final String fieldName, final Type fieldType) throws ClassNotFoundException {
-        for (final Field field : fields) {
-            if (field.getName().equals(fieldName)) {
-                final Type fType = Type.getType(field.getSignature());
-                /*
-                 * TODO: Check if assignment compatibility is sufficient. What does Sun do?
-                 */
-                if (fType.equals(fieldType)) {
-                    return field;
+        return findFieldVisit(fieldName, fieldType, new HashSet<>());
+    }
+
+    private Field findFieldVisit(final String fieldName, final Type fieldType, final Set<JavaClass> visiting) throws ClassNotFoundException {
+        if (!visiting.add(this)) {
+            throw new ClassCircularityError(getClassName());
+        }
+        try {
+            for (final Field field : fields) {
+                if (field.getName().equals(fieldName)) {
+                    final Type fType = Type.getType(field.getSignature());
+                    // TODO: Check if assignment compatibility is sufficient. What does Sun do?
+                    if (fType.equals(fieldType)) {
+                        return field;
+                    }
                 }
             }
-        }
-
-        final JavaClass superclass = getSuperClass();
-        if (superclass != null && !"java.lang.Object".equals(superclass.getClassName())) {
-            final Field f = superclass.findField(fieldName, fieldType);
-            if (f != null && (f.isPublic() || f.isProtected() || !f.isPrivate() && packageName.equals(superclass.getPackageName()))) {
-                return f;
-            }
-        }
-        final JavaClass[] implementedInterfaces = getInterfaces();
-        if (implementedInterfaces != null) {
-            for (final JavaClass implementedInterface : implementedInterfaces) {
-                final Field f = implementedInterface.findField(fieldName, fieldType);
-                if (f != null) {
+            final JavaClass superclass = getSuperClass();
+            if (superclass != null && !CLASS_NAME_OBJECT.equals(superclass.getClassName())) {
+                final Field f = superclass.findFieldVisit(fieldName, fieldType, visiting);
+                if (f != null && (f.isPublic() || f.isProtected() || !f.isPrivate() && packageName.equals(superclass.getPackageName()))) {
                     return f;
                 }
             }
+            final JavaClass[] implementedInterfaces = getInterfaces();
+            if (implementedInterfaces != null) {
+                for (final JavaClass implementedInterface : implementedInterfaces) {
+                    final Field f = implementedInterface.findFieldVisit(fieldName, fieldType, visiting);
+                    if (f != null) {
+                        return f;
+                    }
+                }
+            }
+            return null;
+        } finally {
+            visiting.remove(this);
         }
-        return null;
     }
 
     /**
@@ -669,7 +680,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @throws ClassNotFoundException if the superclass can't be found
      */
     public JavaClass getSuperClass() throws ClassNotFoundException {
-        if ("java.lang.Object".equals(getClassName())) {
+        if (CLASS_NAME_OBJECT.equals(getClassName())) {
             return null;
         }
         return repository.loadClass(getSuperclassName());
