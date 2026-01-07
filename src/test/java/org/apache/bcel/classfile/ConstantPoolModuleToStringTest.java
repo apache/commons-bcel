@@ -396,7 +396,8 @@ class ConstantPoolModuleToStringTest {
                     "org.opentest4j",
                     "net.bytebuddy",
                     "com.sun.jna",
-                    "junit");
+                    "junit",
+                    "com.azul.tooling"); // com.azul.tooling for reproducibility with Azul JDK
             assertTrue(condition, s);
         }
 
