@@ -501,6 +501,16 @@
       </build>
     </profile>
     <profile>
+      <id>spdx-java-11</id>
+      <activation>
+	    <jdk>11</jdk>
+      </activation>
+      <properties>
+        <!-- spdx can require Java 17 depending on undocumented behavior which kicks in for us here on macOS (but not on Java 8 somehow). -->
+       <commons.spdx.version>0.5.5</commons.spdx.version>
+      </properties>
+    </profile>
+    <profile>
       <!-- Java 9 and up -->
       <id>java-9-up</id>
       <activation>
