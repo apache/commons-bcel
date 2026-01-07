@@ -25,7 +25,7 @@ import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,12 +41,16 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemProperties;
 import org.eclipse.jdt.internal.compiler.batch.Main;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 class VerifierMainTest extends AbstractTest {
 
+    @TempDir
+    Path tempDir;
+
     @Test
     void testSWAP() throws Exception {
-        final String[] argv = { "src/test/java/org/apache/bcel/data/SWAP.java", "-g", "-source", "1.4", "-target", "1.4", "-d", "target/test-classes" };
+        final String[] argv = { "src/test/java/org/apache/bcel/data/SWAP.java", "-g", "-source", "1.4", "-target", "1.4", "-d", tempDir.toString() };
         new Main(new PrintWriter(System.out), new PrintWriter(System.err), false/*systemExit*/, null/*options*/, null/*progress*/).compile(argv);
         final String javaAgent = getJavaAgent();
         final List<String> args = new ArrayList<>();
@@ -81,7 +85,7 @@ class VerifierMainTest extends AbstractTest {
                 super.visitSWAP(obj);
             }
         };
-        try (InputStream in = Files.newInputStream(Paths.get("target/test-classes/org/apache/bcel/data/SWAP.class"))) {
+        try (InputStream in = Files.newInputStream(tempDir.resolve("org/apache/bcel/data/SWAP.class"))) {
             final ClassParser classParser = new ClassParser(in, "SWAP.class");
             final JavaClass javaClass = classParser.parse();
             final Method method = javaClass.getMethod(org.apache.bcel.data.SWAP.class.getMethod("getTestConstructor", Class.class));
