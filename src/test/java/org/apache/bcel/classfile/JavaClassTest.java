@@ -242,9 +242,9 @@ class JavaClassTest {
 //    private interface InterfaceB extends InterfaceA {
 //    }
 
-    private static final Class<?>[] CLASSES_JAVA_TIME = { Clock.class, DateTimeException.class, DayOfWeek.class, Duration.class, Instant.class, LocalDate.class, LocalDateTime.class,
-            LocalTime.class, Month.class, MonthDay.class, OffsetDateTime.class, OffsetTime.class, Period.class, Year.class, YearMonth.class,
-            ZonedDateTime.class, ZoneId.class, ZoneOffset.class };
+    private static final Class<?>[] CLASSES_JAVA_TIME = { Clock.class, DateTimeException.class, DayOfWeek.class, Duration.class, Instant.class, LocalDate.class,
+            LocalDateTime.class, LocalTime.class, Month.class, MonthDay.class, OffsetDateTime.class, OffsetTime.class, Period.class, Year.class,
+            YearMonth.class, ZonedDateTime.class, ZoneId.class, ZoneOffset.class };
 
     private static final Class<?>[] CLASSES_JAVA_UTIL = { AbstractCollection.class, AbstractList.class, AbstractMap.class, AbstractMap.SimpleEntry.class,
             AbstractMap.SimpleImmutableEntry.class, AbstractQueue.class, AbstractSequentialList.class, AbstractSet.class, ArrayDeque.class, ArrayList.class,
@@ -270,14 +270,14 @@ class JavaClassTest {
             StringTokenizer.class, Timer.class, TimerTask.class, TimeZone.class, TooManyListenersException.class, TreeMap.class, TreeSet.class,
             UnknownFormatConversionException.class, UnknownFormatFlagsException.class, UUID.class, Vector.class, WeakHashMap.class };
 
-    private static final Class<?>[] CLASSES_JAVA_UTIL_STREAM = { BiConsumer.class, BiFunction.class, BinaryOperator.class, BiPredicate.class, BooleanSupplier.class, Consumer.class,
-            DoubleBinaryOperator.class, DoubleConsumer.class, DoubleFunction.class, DoublePredicate.class, DoubleSupplier.class, DoubleToIntFunction.class,
-            DoubleToLongFunction.class, DoubleUnaryOperator.class, Function.class, IntBinaryOperator.class, IntConsumer.class, IntFunction.class,
-            IntPredicate.class, IntSupplier.class, IntToDoubleFunction.class, IntToLongFunction.class, IntUnaryOperator.class, LongBinaryOperator.class,
-            LongConsumer.class, LongFunction.class, LongPredicate.class, LongSupplier.class, LongToDoubleFunction.class, LongToIntFunction.class,
-            LongUnaryOperator.class, ObjDoubleConsumer.class, ObjIntConsumer.class, ObjLongConsumer.class, Predicate.class, Supplier.class,
-            ToDoubleBiFunction.class, ToDoubleFunction.class, ToIntBiFunction.class, ToIntFunction.class, ToLongBiFunction.class, ToLongFunction.class,
-            UnaryOperator.class };
+    private static final Class<?>[] CLASSES_JAVA_UTIL_STREAM = { BiConsumer.class, BiFunction.class, BinaryOperator.class, BiPredicate.class,
+            BooleanSupplier.class, Consumer.class, DoubleBinaryOperator.class, DoubleConsumer.class, DoubleFunction.class, DoublePredicate.class,
+            DoubleSupplier.class, DoubleToIntFunction.class, DoubleToLongFunction.class, DoubleUnaryOperator.class, Function.class, IntBinaryOperator.class,
+            IntConsumer.class, IntFunction.class, IntPredicate.class, IntSupplier.class, IntToDoubleFunction.class, IntToLongFunction.class,
+            IntUnaryOperator.class, LongBinaryOperator.class, LongConsumer.class, LongFunction.class, LongPredicate.class, LongSupplier.class,
+            LongToDoubleFunction.class, LongToIntFunction.class, LongUnaryOperator.class, ObjDoubleConsumer.class, ObjIntConsumer.class, ObjLongConsumer.class,
+            Predicate.class, Supplier.class, ToDoubleBiFunction.class, ToDoubleFunction.class, ToIntBiFunction.class, ToIntFunction.class,
+            ToLongBiFunction.class, ToLongFunction.class, UnaryOperator.class };
 
     @TempDir
     static Path tempDir;
@@ -460,5 +460,4 @@ class JavaClassTest {
     void testGetSuperClasses(final Class<?> clazz) throws ClassNotFoundException {
         assertNotNull(Repository.lookupClass(clazz.getName()).getSuperClasses());
     }
-
 }
