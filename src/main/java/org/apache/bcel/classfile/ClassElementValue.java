@@ -32,6 +32,13 @@ public class ClassElementValue extends ElementValue {
     // For 'class' this points to the class entry in the cpool
     private final int idx;
 
+    /**
+     * Constructs a ClassElementValue.
+     *
+     * @param type the type.
+     * @param idx the index.
+     * @param cpool the constant pool.
+     */
     public ClassElementValue(final int type, final int idx, final ConstantPool cpool) {
         super(type, cpool);
         this.idx = idx;
@@ -43,10 +50,20 @@ public class ClassElementValue extends ElementValue {
         dos.writeShort(idx);
     }
 
+    /**
+     * Gets the class string.
+     *
+     * @return the class string.
+     */
     public String getClassString() {
         return super.getConstantPool().getConstantUtf8(idx).getBytes();
     }
 
+    /**
+     * Gets the index.
+     *
+     * @return the index.
+     */
     public int getIndex() {
         return idx;
     }
