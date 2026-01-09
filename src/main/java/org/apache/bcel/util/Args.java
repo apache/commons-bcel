@@ -30,13 +30,6 @@ import org.apache.bcel.classfile.ClassFormatException;
 public class Args {
 
     /**
-     * Private constructor to prevent instantiation of this utility class.
-     */
-    public Args() {
-        // Utility class
-    }
-
-    /**
      * Requires a specific value.
      *
      * @param value    The value to test.
@@ -149,5 +142,12 @@ public class Args {
      */
     public static int requireU4(final int value, final String message) {
         return requireU4(value, 0, message);
+    }
+
+    /**
+     * Private constructor to prevent instantiation of this utility class.
+     */
+    public Args() {
+        // Utility class
     }
 }
