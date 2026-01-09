@@ -32,7 +32,7 @@ public class Args {
     /**
      * Private constructor to prevent instantiation of this utility class.
      */
-    private Args() {
+    public Args() {
         // Utility class
     }
 
