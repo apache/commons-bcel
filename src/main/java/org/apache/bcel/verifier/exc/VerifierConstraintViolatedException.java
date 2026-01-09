@@ -58,6 +58,9 @@ public abstract class VerifierConstraintViolatedException extends RuntimeExcepti
      * Extends the error message with a string before ("pre") and after ("post") the 'old' error message. All of these three
      * strings are allowed to be null, and null is always replaced by the empty string (""). In particular, after invoking
      * this method, the error message of this object can no longer be null.
+     *
+     * @param pre string to prepend.
+     * @param post string to append.
      */
     public void extendMessage(String pre, String post) {
         if (pre == null) {
