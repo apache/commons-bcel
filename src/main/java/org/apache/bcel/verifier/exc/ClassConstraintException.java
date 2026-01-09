@@ -33,14 +33,18 @@ public class ClassConstraintException extends VerificationException {
 
     /**
      * Constructs a new ClassConstraintException with the specified error message.
+     *
+     * @param message the error message.
      */
     public ClassConstraintException(final String message) {
         super(message);
     }
 
     /**
-     * Constructs a new ClassConstraintException with the specified error message and cause
+     * Constructs a new ClassConstraintException with the specified error message and cause.
      *
+     * @param message the error message.
+     * @param initCause the cause.
      * @since 6.0
      */
     public ClassConstraintException(final String message, final Throwable initCause) {
