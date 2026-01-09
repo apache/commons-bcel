@@ -23,6 +23,9 @@ package org.apache.bcel.generic;
  */
 public class BREAKPOINT extends Instruction {
 
+    /**
+     * Constructs a BREAKPOINT instruction.
+     */
     public BREAKPOINT() {
         super(org.apache.bcel.Const.BREAKPOINT, (short) 1);
     }
@@ -31,7 +34,7 @@ public class BREAKPOINT extends Instruction {
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
      * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
