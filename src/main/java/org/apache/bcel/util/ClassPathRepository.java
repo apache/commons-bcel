@@ -34,6 +34,11 @@ public class ClassPathRepository extends AbstractClassPathRepository {
 
     private final Map<String, JavaClass> loadedClasses = new HashMap<>(); // CLASSNAME X JAVACLASS
 
+    /**
+     * Constructs a ClassPathRepository.
+     *
+     * @param classPath the class path.
+     */
     public ClassPathRepository(final ClassPath classPath) {
         super(classPath);
     }
