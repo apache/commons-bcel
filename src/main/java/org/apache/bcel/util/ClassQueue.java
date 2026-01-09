@@ -33,14 +33,29 @@ public class ClassQueue {
     @Deprecated
     protected LinkedList<JavaClass> vec = new LinkedList<>(); // TODO not used externally
 
+    /**
+     * Removes and returns the first JavaClass from the queue.
+     *
+     * @return the first JavaClass from the queue.
+     */
     public JavaClass dequeue() {
         return vec.removeFirst();
     }
 
+    /**
+     * Checks if the queue is empty.
+     *
+     * @return true if the queue is empty.
+     */
     public boolean empty() {
         return vec.isEmpty();
     }
 
+    /**
+     * Adds a JavaClass to the end of the queue.
+     *
+     * @param clazz the JavaClass to add.
+     */
     public void enqueue(final JavaClass clazz) {
         vec.addLast(clazz);
     }
