@@ -60,14 +60,18 @@ public class ClassGen extends AccessFlags implements Cloneable {
     };
 
     /**
-     * @return Comparison strategy object
+     * Gets the comparison strategy object.
+     *
+     * @return Comparison strategy object.
      */
     public static BCELComparator<ClassGen> getComparator() {
         return bcelComparator;
     }
 
     /**
-     * @param comparator Comparison strategy object
+     * Sets the comparison strategy object.
+     *
+     * @param comparator Comparison strategy object.
      */
     public static void setComparator(final BCELComparator<ClassGen> comparator) {
         bcelComparator = comparator;
@@ -177,6 +181,11 @@ public class ClassGen extends AccessFlags implements Cloneable {
         }
     }
 
+    /**
+     * Adds an annotation entry to this class.
+     *
+     * @param a the annotation entry to add.
+     */
     public void addAnnotationEntry(final AnnotationEntryGen a) {
         annotationList.add(a);
     }
@@ -184,7 +193,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Add an attribute to this class.
      *
-     * @param a attribute to add
+     * @param a attribute to add.
      */
     public void addAttribute(final Attribute a) {
         attributeList.add(a);
@@ -236,6 +245,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     /**
      * Add observer for this object.
+     *
+     * @param o the observer.
      */
     public void addObserver(final ClassObserver o) {
         if (observers == null) {
@@ -258,7 +269,10 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
     /**
-     * @return field object with given name, or null
+     * Gets the field object with given name, or null.
+     *
+     * @param name the field name.
+     * @return field object with given name, or null.
      */
     public Field containsField(final String name) {
         for (final Field f : fieldList) {
@@ -270,7 +284,11 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
     /**
-     * @return method object with given name and signature, or null
+     * Gets the method object with given name and signature, or null.
+     *
+     * @param name the method name.
+     * @param signature the method signature.
+     * @return method object with given name and signature, or null.
      */
     public Method containsMethod(final String name, final String signature) {
         for (final Method m : methodList) {
@@ -292,39 +310,84 @@ public class ClassGen extends AccessFlags implements Cloneable {
         return obj instanceof ClassGen && bcelComparator.equals(this, (ClassGen) obj);
     }
 
+    /**
+     * Gets the annotation entries.
+     *
+     * @return the annotation entries.
+     */
     // J5TODO: Should we make calling unpackAnnotations() lazy and put it in here?
     public AnnotationEntryGen[] getAnnotationEntries() {
         return annotationList.toArray(AnnotationEntryGen.EMPTY_ARRAY);
     }
 
+    /**
+     * Gets the attributes.
+     *
+     * @return the attributes.
+     */
     public Attribute[] getAttributes() {
         return attributeList.toArray(Attribute.EMPTY_ARRAY);
     }
 
+    /**
+     * Gets the class name.
+     *
+     * @return the class name.
+     */
     public String getClassName() {
         return className;
     }
 
+    /**
+     * Gets the class name index.
+     *
+     * @return the class name index.
+     */
     public int getClassNameIndex() {
         return classNameIndex;
     }
 
+    /**
+     * Gets the constant pool.
+     *
+     * @return the constant pool.
+     */
     public ConstantPoolGen getConstantPool() {
         return cp;
     }
 
+    /**
+     * Gets the fields.
+     *
+     * @return the fields.
+     */
     public Field[] getFields() {
         return fieldList.toArray(Field.EMPTY_ARRAY);
     }
 
+    /**
+     * Gets the file name.
+     *
+     * @return the file name.
+     */
     public String getFileName() {
         return fileName;
     }
 
+    /**
+     * Gets the interface names.
+     *
+     * @return the interface names.
+     */
     public String[] getInterfaceNames() {
         return interfaceList.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
+    /**
+     * Gets the interfaces.
+     *
+     * @return the interfaces.
+     */
     public int[] getInterfaces() {
         final int size = interfaceList.size();
         final int[] interfaces = new int[size];
@@ -356,31 +419,56 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
     /**
-     * @return major version number of class file
+     * Gets major version number of class file.
+     *
+     * @return major version number of class file.
      */
     public int getMajor() {
         return major;
     }
 
+    /**
+     * Gets the method at the given position.
+     *
+     * @param pos the position.
+     * @return the method at the given position.
+     */
     public Method getMethodAt(final int pos) {
         return methodList.get(pos);
     }
 
+    /**
+     * Gets the methods.
+     *
+     * @return the methods.
+     */
     public Method[] getMethods() {
         return methodList.toArray(Method.EMPTY_ARRAY);
     }
 
     /**
-     * @return minor version number of class file
+     * Gets minor version number of class file.
+     *
+     * @return minor version number of class file.
      */
     public int getMinor() {
         return minor;
     }
 
+    /**
+     * Gets the superclass name.
+     *
+     * @return the superclass name.
+     */
     public String getSuperclassName() {
         return superClassName;
     }
 
+    /**
+     * Gets the superclass name index.
+     *
+     * @return the superclass name index.
+     */
     public int getSuperclassNameIndex() {
         return superclassNameIndex;
     }
@@ -398,7 +486,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Remove an attribute from this class.
      *
-     * @param a attribute to remove
+     * @param a attribute to remove.
      */
     public void removeAttribute(final Attribute a) {
         attributeList.remove(a);
@@ -407,7 +495,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Remove a field to this class.
      *
-     * @param f field to remove
+     * @param f field to remove.
      */
     public void removeField(final Field f) {
         fieldList.remove(f);
@@ -416,7 +504,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Remove an interface from this class.
      *
-     * @param name interface to remove (fully qualified name)
+     * @param name interface to remove (fully qualified name).
      */
     public void removeInterface(final String name) {
         interfaceList.remove(name);
@@ -425,7 +513,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Remove a method from this class.
      *
-     * @param m method to remove
+     * @param m method to remove.
      */
     public void removeMethod(final Method m) {
         methodList.remove(m);
@@ -433,6 +521,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     /**
      * Remove observer for this object.
+     *
+     * @param o the observer to remove.
      */
     public void removeObserver(final ClassObserver o) {
         if (observers != null) {
@@ -470,33 +560,59 @@ public class ClassGen extends AccessFlags implements Cloneable {
         }
     }
 
+    /**
+     * Sets the class name.
+     *
+     * @param name the class name.
+     */
     public void setClassName(final String name) {
         className = Utility.pathToPackage(name);
         classNameIndex = cp.addClass(name);
     }
 
+    /**
+     * Sets the class name index.
+     *
+     * @param classNameIndex the class name index.
+     */
     public void setClassNameIndex(final int classNameIndex) {
         this.classNameIndex = classNameIndex;
         this.className = Utility.pathToPackage(cp.getConstantPool().getConstantString(classNameIndex, Const.CONSTANT_Class));
     }
 
+    /**
+     * Sets the constant pool.
+     *
+     * @param constantPool the constant pool.
+     */
     public void setConstantPool(final ConstantPoolGen constantPool) {
         cp = constantPool;
     }
 
     /**
-     * Sets major version number of class file, default value is 45 (JDK 1.1)
+     * Sets major version number of class file, default value is 45 (JDK 1.1).
      *
-     * @param major major version number
+     * @param major major version number.
      */
     public void setMajor(final int major) { // TODO could be package-protected - only called by test code
         this.major = major;
     }
 
+    /**
+     * Sets the method at the given position.
+     *
+     * @param method the method.
+     * @param pos the position.
+     */
     public void setMethodAt(final Method method, final int pos) {
         methodList.set(pos, method);
     }
 
+    /**
+     * Sets the methods.
+     *
+     * @param methods the methods.
+     */
     public void setMethods(final Method[] methods) {
         methodList.clear();
         if (methods != null) {
@@ -505,19 +621,29 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
     /**
-     * Sets minor version number of class file, default value is 3 (JDK 1.1)
+     * Sets minor version number of class file, default value is 3 (JDK 1.1).
      *
-     * @param minor minor version number
+     * @param minor minor version number.
      */
     public void setMinor(final int minor) { // TODO could be package-protected - only called by test code
         this.minor = minor;
     }
 
+    /**
+     * Sets the superclass name.
+     *
+     * @param name the superclass name.
+     */
     public void setSuperclassName(final String name) {
         superClassName = Utility.pathToPackage(name);
         superclassNameIndex = cp.addClass(name);
     }
 
+    /**
+     * Sets the superclass name index.
+     *
+     * @param superclassNameIndex the superclass name index.
+     */
     public void setSuperclassNameIndex(final int superclassNameIndex) {
         this.superclassNameIndex = superclassNameIndex;
         superClassName = Utility.pathToPackage(cp.getConstantPool().getConstantString(superclassNameIndex, Const.CONSTANT_Class));
