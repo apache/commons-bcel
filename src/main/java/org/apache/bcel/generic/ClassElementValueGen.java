@@ -97,13 +97,20 @@ public class ClassElementValueGen extends ElementValueGen {
     }
 
     /**
-     * Return immutable variant of this ClassElementValueGen
+     * Return immutable variant of this ClassElementValueGen.
+     *
+     * @return immutable variant of this ClassElementValueGen.
      */
     @Override
     public ElementValue getElementValue() {
         return new ClassElementValue(super.getElementValueType(), idx, getConstantPool().getConstantPool());
     }
 
+    /**
+     * Gets the index.
+     *
+     * @return the index.
+     */
     public int getIndex() {
         return idx;
     }
