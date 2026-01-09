@@ -71,6 +71,12 @@ public class Class2HTML implements Constants {
         basicTypes.add("float");
     }
 
+    /**
+     * Main program to convert class files to HTML.
+     *
+     * @param argv command line arguments.
+     * @throws IOException if an I/O error occurs.
+     */
     public static void main(final String[] argv) throws IOException {
         final String[] fileName = new String[argv.length];
         int files = 0;
