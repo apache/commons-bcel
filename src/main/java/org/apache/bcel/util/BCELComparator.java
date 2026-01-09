@@ -36,10 +36,10 @@ public interface BCELComparator<T> {
     boolean equals(T a, T b);
 
     /**
-     * Gets the hash code for o.hashCode()
+     * Gets the hash code for o.hashCode().
      *
-     * @param o
-     * @return hash code for o.hashCode()
+     * @param o the object.
+     * @return hash code for o.hashCode().
      */
     int hashCode(T o);
 }
