@@ -49,10 +49,12 @@ public class BootstrapMethods extends Attribute implements Iterable<BootstrapMet
     }
 
     /**
-     * @param nameIndex Index in constant pool to CONSTANT_Utf8
-     * @param length Content length in bytes
-     * @param bootstrapMethods array of bootstrap methods
-     * @param constantPool Array of constants
+     * Constructs a BootstrapMethods attribute.
+     *
+     * @param nameIndex Index in constant pool to CONSTANT_Utf8.
+     * @param length Content length in bytes.
+     * @param bootstrapMethods array of bootstrap methods.
+     * @param constantPool Array of constants.
      */
     public BootstrapMethods(final int nameIndex, final int length, final BootstrapMethod[] bootstrapMethods, final ConstantPool constantPool) {
         super(Const.ATTR_BOOTSTRAP_METHODS, nameIndex, length, constantPool);
@@ -62,10 +64,10 @@ public class BootstrapMethods extends Attribute implements Iterable<BootstrapMet
     /**
      * Constructs object from Input stream.
      *
-     * @param nameIndex Index in constant pool to CONSTANT_Utf8
-     * @param length Content length in bytes
-     * @param input Input stream
-     * @param constantPool Array of constants
+     * @param nameIndex Index in constant pool to CONSTANT_Utf8.
+     * @param length Content length in bytes.
+     * @param input Input stream.
+     * @param constantPool Array of constants.
      * @throws IOException if an I/O error occurs.
      */
     BootstrapMethods(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
@@ -79,7 +81,9 @@ public class BootstrapMethods extends Attribute implements Iterable<BootstrapMet
     }
 
     /**
-     * @param v Visitor object
+     * Accepts a visitor.
+     *
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -87,7 +91,10 @@ public class BootstrapMethods extends Attribute implements Iterable<BootstrapMet
     }
 
     /**
-     * @return deep copy of this attribute
+     * Creates a deep copy of this attribute.
+     *
+     * @param constantPool the constant pool.
+     * @return deep copy of this attribute.
      */
     @Override
     public BootstrapMethods copy(final ConstantPool constantPool) {
@@ -104,7 +111,7 @@ public class BootstrapMethods extends Attribute implements Iterable<BootstrapMet
     /**
      * Dump bootstrap methods attribute to file stream in binary format.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     @Override
@@ -118,7 +125,9 @@ public class BootstrapMethods extends Attribute implements Iterable<BootstrapMet
     }
 
     /**
-     * @return array of bootstrap method "records"
+     * Gets the array of bootstrap method records.
+     *
+     * @return array of bootstrap method records.
      */
     public final BootstrapMethod[] getBootstrapMethods() {
         return bootstrapMethods;
@@ -130,7 +139,9 @@ public class BootstrapMethods extends Attribute implements Iterable<BootstrapMet
     }
 
     /**
-     * @param bootstrapMethods the array of bootstrap methods
+     * Sets the bootstrap methods.
+     *
+     * @param bootstrapMethods the array of bootstrap methods.
      */
     public final void setBootstrapMethods(final BootstrapMethod[] bootstrapMethods) {
         this.bootstrapMethods = bootstrapMethods != null ? bootstrapMethods : BootstrapMethod.EMPTY_ARRAY;
