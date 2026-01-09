@@ -30,6 +30,8 @@ import org.apache.bcel.classfile.ElementValue;
 import org.apache.bcel.classfile.SimpleElementValue;
 
 /**
+ * Generates simple element values in annotations.
+ *
  * @since 6.0
  */
 public class SimpleElementValueGen extends ElementValueGen {

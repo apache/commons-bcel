@@ -88,7 +88,7 @@ public abstract class PassVerifier {
 
     /**
      * This method runs a verification pass conforming to the Java Virtual Machine Specification, 2nd edition, on a class
-     * file. PassVerifier instances perform caching; i.e. if the verify() method once determined a VerificationResult, then
+     * file. PassVerifier instances perform caching; for example if the verify() method once determined a VerificationResult, then
      * this result may be returned after every invocation of this method instead of running the verification pass anew;
      * likewise with the result of getMessages().
      *

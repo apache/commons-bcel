@@ -42,7 +42,7 @@ public class LocalVariables implements Cloneable {
     }
 
     /**
-     * Returns a deep copy of this object; i.e. the clone operates on a new local variable array. However, the Type objects
+     * Returns a deep copy of this object; for example the clone operates on a new local variable array. However, the Type objects
      * in the array are shared.
      */
     @Override

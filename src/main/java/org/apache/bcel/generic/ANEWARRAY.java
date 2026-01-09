@@ -35,6 +35,11 @@ public class ANEWARRAY extends CPInstruction implements LoadClass, AllocationIns
     ANEWARRAY() {
     }
 
+    /**
+     * Constructs an ANEWARRAY instruction.
+     *
+     * @param index index into the constant pool.
+     */
     public ANEWARRAY(final int index) {
         super(org.apache.bcel.Const.ANEWARRAY, index);
     }

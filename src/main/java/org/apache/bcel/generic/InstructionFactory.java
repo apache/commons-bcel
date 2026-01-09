@@ -679,7 +679,7 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Create new array of given size and type.
      *
-     * @return an instruction that creates the corresponding array at runtime, i.e. is an AllocationInstruction
+     * @return an instruction that creates the corresponding array at runtime, for example is an AllocationInstruction
      */
     public Instruction createNewArray(final Type t, final short dim) {
         if (dim == 1) {

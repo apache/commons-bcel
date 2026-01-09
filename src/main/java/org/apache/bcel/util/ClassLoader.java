@@ -66,7 +66,7 @@ public class ClassLoader extends java.lang.ClassLoader {
     private Repository repository = SyntheticRepository.getInstance();
 
     /**
-     * Ignored packages are by default ( "java.", "sun.", "javax."), i.e. loaded by system class loader
+     * Ignored packages are by default ( "java.", "sun.", "javax."), for example loaded by system class loader
      */
     public ClassLoader() {
         this(DEFAULT_IGNORED_PACKAGES);

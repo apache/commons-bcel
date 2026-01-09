@@ -31,5 +31,10 @@ package org.apache.bcel.generic;
  */
 public interface ExceptionThrower {
 
+    /**
+     * Gets the exceptions that may be thrown by this instruction.
+     *
+     * @return the exceptions that may be thrown by this instruction.
+     */
     Class<?>[] getExceptions();
 }

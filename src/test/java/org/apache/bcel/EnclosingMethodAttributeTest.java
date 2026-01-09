@@ -58,7 +58,7 @@ class EnclosingMethodAttributeTest extends AbstractTest {
     }
 
     /**
-     * Verify for an inner class declared at the type level that the EnclosingMethod attribute is set correctly (i.e. to a
+     * Verify for an inner class declared at the type level that the EnclosingMethod attribute is set correctly (for example to a
      * null value)
      */
     @Test

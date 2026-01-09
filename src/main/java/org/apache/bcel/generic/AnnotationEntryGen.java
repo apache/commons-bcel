@@ -40,6 +40,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.stream.Streams;
 
 /**
+ * Generates annotation entries.
+ *
  * @since 6.0
  */
 public class AnnotationEntryGen {
@@ -224,6 +226,10 @@ public class AnnotationEntryGen {
      * passed in is for a different class file, then copyPoolEntries should have been passed as true as that will force us
      * to do a deep copy of the annotation and move the cpool entries across. We need to copy the type and the element name
      * value pairs and the visibility.
+     *
+     * @param a the annotation entry.
+     * @param cpool the constant pool generator.
+     * @param copyPoolEntries whether to copy pool entries.
      */
     public AnnotationEntryGen(final AnnotationEntry a, final ConstantPoolGen cpool, final boolean copyPoolEntries) {
         this.cpool = cpool;
@@ -267,7 +273,9 @@ public class AnnotationEntryGen {
     }
 
     /**
-     * Retrieve an immutable version of this AnnotationGen
+     * Retrieves an immutable version of this AnnotationGen.
+     *
+     * @return an immutable version of this AnnotationGen.
      */
     public AnnotationEntry getAnnotation() {
         final AnnotationEntry a = new AnnotationEntry(typeIndex, cpool.getConstantPool(), isRuntimeVisible);

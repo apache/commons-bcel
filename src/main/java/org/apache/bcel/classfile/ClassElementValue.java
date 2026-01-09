@@ -22,6 +22,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
+ * Represents a class element value in an annotation.
+ *
  * @since 6.0
  */
 public class ClassElementValue extends ElementValue {

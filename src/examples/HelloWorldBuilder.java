@@ -79,12 +79,12 @@ public class HelloWorldBuilder {
 
         // Create BufferedReader object and store it in local variable 'in'.
         il.append(factory.createNew("java.io.BufferedReader"));
-        il.append(InstructionConst.DUP); // Use predefined constant, i.e. flyweight
+        il.append(InstructionConst.DUP); // Use predefined constant, for example flyweight
         il.append(factory.createNew("java.io.InputStreamReader"));
         il.append(InstructionConst.DUP);
         il.append(factory.createFieldAccess("java.lang.System", "in", iStream, Const.GETSTATIC));
 
-        // Call constructors, i.e. BufferedReader(InputStreamReader())
+        // Call constructors, for example BufferedReader(InputStreamReader())
         il.append(factory.createInvoke("java.io.InputStreamReader", "<init>", Type.VOID, new Type[] {iStream}, Const.INVOKESPECIAL));
         il.append(factory.createInvoke("java.io.BufferedReader", "<init>", Type.VOID, new Type[] {new ObjectType("java.io.Reader")}, Const.INVOKESPECIAL));
 
@@ -147,7 +147,7 @@ public class HelloWorldBuilder {
 
         il.dispose(); // Reuse instruction handles
 
-        // Add public <init> method, i.e. empty constructor
+        // Add public <init> method, for example empty constructor
         cg.addEmptyConstructor(Const.ACC_PUBLIC);
 
         // Get JavaClass object and dump it to file.

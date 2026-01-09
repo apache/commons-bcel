@@ -23,5 +23,10 @@ package org.apache.bcel.classfile;
  */
 public interface Node {
 
+    /**
+     * Accepts a visitor.
+     *
+     * @param visitor the visitor.
+     */
     void accept(Visitor visitor);
 }

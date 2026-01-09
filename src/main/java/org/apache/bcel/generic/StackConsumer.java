@@ -24,7 +24,10 @@ package org.apache.bcel.generic;
 public interface StackConsumer {
 
     /**
-     * @return how many words are consumed from stack
+     * Gets how many words are consumed from stack.
+     *
+     * @param cpg the constant pool generator.
+     * @return how many words are consumed from stack.
      */
     int consumeStack(ConstantPoolGen cpg);
 }

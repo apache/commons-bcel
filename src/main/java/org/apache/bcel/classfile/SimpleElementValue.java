@@ -24,6 +24,8 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
+ * Represents a simple element value in an annotation.
+ *
  * @since 6.0
  */
 public class SimpleElementValue extends ElementValue {

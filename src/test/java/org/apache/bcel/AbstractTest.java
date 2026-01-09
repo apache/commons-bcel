@@ -52,7 +52,7 @@ public abstract class AbstractTest {
     // Location of test data
     protected static final File TESTDATA = new File("target", "testdata");
 
-    // package base name in signature format, i.e. with '/' separators instead of '.'
+    // package base name in signature format, for example with '/' separators instead of '.'
     protected static final String PACKAGE_BASE_SIG = Utility.packageToPath(PACKAGE_BASE_NAME);
 
     public static void clear() {

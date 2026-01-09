@@ -288,7 +288,7 @@ public class ControlFlowGraph {
 
         /**
          * Returns the InstructionContextImpl with an JSR/JSR_W that was last in the ExecutionChain, without a corresponding
-         * RET, i.e. we were called by this one. Returns null if we were called from the top level.
+         * RET, for example we were called by this one. Returns null if we were called from the top level.
          */
         private InstructionContextImpl lastExecutionJSR() {
 

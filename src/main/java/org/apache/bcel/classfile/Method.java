@@ -168,7 +168,7 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
-     * @return LineNumberTable of code attribute if any, i.e. the call is forwarded to the Code atribute.
+     * @return LineNumberTable of code attribute if any, for example the call is forwarded to the Code atribute.
      */
     public LineNumberTable getLineNumberTable() {
         final Code code = getCode();
@@ -179,7 +179,7 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
-     * @return LocalVariableTable of code attribute if any, i.e. the call is forwarded to the Code attribute.
+     * @return LocalVariableTable of code attribute if any, for example the call is forwarded to the Code attribute.
      */
     public LocalVariableTable getLocalVariableTable() {
         final Code code = getCode();
@@ -192,7 +192,7 @@ public final class Method extends FieldOrMethod {
     /**
      * Gets the local variable type table attribute {@link LocalVariableTypeTable}.
      *
-     * @return LocalVariableTypeTable of code attribute if any, i.e. the call is forwarded to the Code attribute.
+     * @return LocalVariableTypeTable of code attribute if any, for example the call is forwarded to the Code attribute.
      * @since 6.10.0
      */
     public LocalVariableTypeTable getLocalVariableTypeTable() {

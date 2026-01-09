@@ -63,7 +63,7 @@ public class ASTIfExpr extends ASTExpr {
 
         BranchHandle i, g;
 
-        i = il.append(new IFEQ(null)); // If POP() == FALSE(i.e. 0) then branch to ELSE
+        i = il.append(new IFEQ(null)); // If POP() == FALSE(for example 0) then branch to ELSE
         ASTFunDecl.pop();
         il.append(then_code);
         g = il.append(new GOTO(null));

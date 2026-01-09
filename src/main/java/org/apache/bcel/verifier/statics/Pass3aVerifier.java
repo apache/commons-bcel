@@ -1032,7 +1032,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 // Only after that we should try to build an InstructionList and throw an
                 // AssertionViolatedException if after our examination InstructionList building
                 // still fails.
-                // That examination should be implemented in a byte-oriented way, i.e. look for
+                // That examination should be implemented in a byte-oriented way, for example look for
                 // an instruction, make sure its validity, count its length, find the next
                 // instruction and so on.
                 try {

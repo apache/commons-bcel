@@ -69,7 +69,7 @@ public class Subroutines {
     private final class SubroutineImpl implements Subroutine {
 
         /**
-         * UNSET, a symbol for an uninitialized localVariable field. This is used for the "top-level" Subroutine; i.e. no
+         * UNSET, a symbol for an uninitialized localVariable field. This is used for the "top-level" Subroutine; for example no
          * subroutine.
          */
         private static final int UNSET = -1;
@@ -609,7 +609,7 @@ public class Subroutines {
     /**
      * Returns the subroutine object associated with the given instruction. This is a costly operation, you should consider
      * using getSubroutine(InstructionHandle). Returns 'null' if the given InstructionHandle lies in so-called 'dead code',
-     * i.e. code that can never be executed.
+     * for example code that can never be executed.
      *
      * @see #getSubroutine(InstructionHandle)
      * @see #getTopLevel()

@@ -62,7 +62,7 @@ public final class Pass3bVerifier extends PassVerifier {
 
     /**
      * An InstructionContextQueue is a utility class that holds (InstructionContext, ArrayList) pairs in a Queue data
-     * structure. This is used to hold information about InstructionContext objects externally --- i.e. that information is
+     * structure. This is used to hold information about InstructionContext objects externally --- for example that information is
      * not saved inside the InstructionContext object itself. This is useful to save the execution path of the symbolic
      * execution of the Pass3bVerifier - this is not information that belongs into the InstructionContext object itself.
      * Only at "execute()"ing time, an InstructionContext object will get the current information we have about its symbolic

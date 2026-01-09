@@ -31,6 +31,8 @@ import org.apache.bcel.classfile.EnumElementValue;
 import org.apache.bcel.classfile.SimpleElementValue;
 
 /**
+ * Generates element values in annotations.
+ *
  * @since 6.0
  */
 public abstract class ElementValueGen {
@@ -62,6 +64,11 @@ public abstract class ElementValueGen {
 
     /**
      * Creates an (modifiable) ElementValueGen copy of an (immutable) ElementValue - constant pool is assumed correct.
+     *
+     * @param value the element value to copy.
+     * @param cpool the constant pool generator.
+     * @param copyPoolEntries whether to copy pool entries.
+     * @return a copy of the element value.
      */
     public static ElementValueGen copy(final ElementValue value, final ConstantPoolGen cpool, final boolean copyPoolEntries) {
         switch (value.getElementValueType()) {
@@ -147,6 +154,12 @@ public abstract class ElementValueGen {
         this.cpGen = cpGen;
     }
 
+    /**
+     * Dumps this element value to a DataOutputStream.
+     *
+     * @param dos the output stream.
+     * @throws IOException if an I/O error occurs.
+     */
     public abstract void dump(DataOutputStream dos) throws IOException;
 
     protected ConstantPoolGen getConstantPool() {
@@ -154,7 +167,9 @@ public abstract class ElementValueGen {
     }
 
     /**
-     * Subtypes return an immutable variant of the ElementValueGen
+     * Subtypes return an immutable variant of the ElementValueGen.
+     *
+     * @return an immutable variant of the ElementValueGen.
      */
     public abstract ElementValue getElementValue();
 

@@ -54,9 +54,11 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     }
 
     /**
-     * @param opcode Instruction opcode
+     * Constructs a LocalVariableInstruction.
+     *
+     * @param opcode Instruction opcode.
      * @param cTag Instruction number for compact version, ALOAD_0, for example.
-     * @param n local variable index (unsigned short)
+     * @param n local variable index (unsigned short).
      */
     protected LocalVariableInstruction(final short opcode, final short cTag, final int n) {
         super(opcode, (short) 2);
@@ -86,7 +88,9 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     }
 
     /**
-     * @return canonical tag for instruction, for example, ALOAD for ALOAD_0
+     * Gets the canonical tag for instruction, for example, ALOAD for ALOAD_0.
+     *
+     * @return canonical tag for instruction, for example, ALOAD for ALOAD_0.
      */
     public short getCanonicalTag() {
         return canonTag;

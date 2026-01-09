@@ -79,14 +79,18 @@ public class AnnotationDefault extends Attribute {
     }
 
     /**
-     * @return the default value
+     * Gets the default value.
+     *
+     * @return the default value.
      */
     public final ElementValue getDefaultValue() {
         return defaultValue;
     }
 
     /**
-     * @param defaultValue the default value of this methodinfo's annotation
+     * Sets the default value of this methodinfo's annotation.
+     *
+     * @param defaultValue the default value of this methodinfo's annotation.
      */
     public final void setDefaultValue(final ElementValue defaultValue) {
         this.defaultValue = defaultValue;

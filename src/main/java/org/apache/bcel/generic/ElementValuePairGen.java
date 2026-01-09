@@ -26,6 +26,8 @@ import org.apache.bcel.classfile.ElementValue;
 import org.apache.bcel.classfile.ElementValuePair;
 
 /**
+ * Generates element value pairs in annotations.
+ *
  * @since 6.0
  */
 public class ElementValuePairGen {

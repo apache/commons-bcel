@@ -400,6 +400,7 @@ public abstract class Instruction implements Cloneable {
     /**
      * Sets comparator to be used for equals().
      *
+     * @param c the comparator.
      * @deprecated (6.0) use the built in comparator, or wrap this class in another object that implements these methods
      */
     @Deprecated
@@ -442,6 +443,7 @@ public abstract class Instruction implements Cloneable {
      * This method also gives right results for instructions whose effect on the stack depends on the constant pool entry
      * they reference.
      *
+     * @param cpg the constant pool generator.
      * @return Number of words consumed from stack by this instruction, or Constants.UNPREDICTABLE, if this cannot be
      *         computed statically
      */
@@ -498,21 +500,27 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * @return length (in bytes) of instruction
+     * Gets the length (in bytes) of instruction.
+     *
+     * @return length (in bytes) of instruction.
      */
     public int getLength() {
         return length;
     }
 
     /**
-     * @return name of instruction, i.e., opcode name
+     * Gets the name of instruction, i.e., opcode name.
+     *
+     * @return name of instruction, i.e., opcode name.
      */
     public String getName() {
         return Const.getOpcodeName(opcode);
     }
 
     /**
-     * @return this instructions opcode
+     * Gets this instruction's opcode.
+     *
+     * @return this instruction's opcode.
      */
     public short getOpcode() {
         return opcode;
@@ -544,6 +552,7 @@ public abstract class Instruction implements Cloneable {
      * This method also gives right results for instructions whose effect on the stack depends on the constant pool entry
      * they reference.
      *
+     * @param cpg the constant pool generator.
      * @return Number of words produced onto stack by this instruction, or Constants.UNPREDICTABLE, if this cannot be
      *         computed statically
      */
@@ -591,7 +600,10 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * @return mnemonic for instruction with sumbolic references resolved
+     * Gets the mnemonic for instruction with symbolic references resolved.
+     *
+     * @param cp the constant pool.
+     * @return mnemonic for instruction with symbolic references resolved.
      */
     public String toString(final ConstantPool cp) {
         return toString(false);

@@ -22,6 +22,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
+ * Represents an enum element value in an annotation.
+ *
  * @since 6.0
  */
 public class EnumElementValue extends ElementValue {

@@ -22,6 +22,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
+ * Represents an array element value in an annotation.
+ *
  * @since 6.0
  */
 public class ArrayElementValue extends ElementValue {

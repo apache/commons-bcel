@@ -22,12 +22,21 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
+ * Represents an annotation element value.
+ *
  * @since 6.0
  */
 public class AnnotationElementValue extends ElementValue {
     // For annotation element values, this is the annotation
     private final AnnotationEntry annotationEntry;
 
+    /**
+     * Constructs an AnnotationElementValue.
+     *
+     * @param type the type.
+     * @param annotationEntry the annotation entry.
+     * @param cpool the constant pool.
+     */
     public AnnotationElementValue(final int type, final AnnotationEntry annotationEntry, final ConstantPool cpool) {
         super(type, cpool);
         if (type != ANNOTATION) {
@@ -42,6 +51,11 @@ public class AnnotationElementValue extends ElementValue {
         annotationEntry.dump(dos);
     }
 
+    /**
+     * Gets the annotation entry.
+     *
+     * @return the annotation entry.
+     */
     public AnnotationEntry getAnnotationEntry() {
         return annotationEntry;
     }

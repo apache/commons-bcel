@@ -29,6 +29,8 @@ import org.apache.bcel.classfile.ElementValue;
 import org.apache.commons.lang3.stream.Streams;
 
 /**
+ * Generates array element values in annotations.
+ *
  * @since 6.0
  */
 public class ArrayElementValueGen extends ElementValueGen {

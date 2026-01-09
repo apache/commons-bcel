@@ -26,6 +26,8 @@ import org.apache.bcel.classfile.ElementValue;
 import org.apache.bcel.classfile.EnumElementValue;
 
 /**
+ * Generates enum element values in annotations.
+ *
  * @since 6.0
  */
 public class EnumElementValueGen extends ElementValueGen {

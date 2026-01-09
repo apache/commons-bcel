@@ -26,6 +26,8 @@ import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.ElementValue;
 
 /**
+ * Generates class element values in annotations.
+ *
  * @since 6.0
  */
 public class ClassElementValueGen extends ElementValueGen {

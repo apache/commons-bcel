@@ -58,6 +58,8 @@ import org.apache.bcel.util.Args;
 // J5TODO: Needs some testing !
 
 /**
+ * Represents the LocalVariableTypeTable attribute.
+ *
  * @since 6.0
  */
 public class LocalVariableTypeTable extends Attribute implements Iterable<LocalVariable> {

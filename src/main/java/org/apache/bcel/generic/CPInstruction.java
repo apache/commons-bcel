@@ -49,7 +49,10 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
     }
 
     /**
-     * @param index to constant pool
+     * Constructs a CPInstruction.
+     *
+     * @param opcode the opcode.
+     * @param index to constant pool.
      */
     protected CPInstruction(final short opcode, final int index) {
         super(opcode, (short) 3);

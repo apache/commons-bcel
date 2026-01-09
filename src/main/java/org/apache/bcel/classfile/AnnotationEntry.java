@@ -43,12 +43,12 @@ public class AnnotationEntry implements Node {
     }
 
     /**
-     * Factory method to create an AnnotionEntry from a DataInput
+     * Factory method to create an AnnotionEntry from a DataInput.
      *
-     * @param input
-     * @param constantPool
-     * @param isRuntimeVisible
-     * @return the entry
+     * @param input the input stream.
+     * @param constantPool the constant pool.
+     * @param isRuntimeVisible whether the annotation is runtime visible.
+     * @return the entry.
      * @throws IOException if an I/O error occurs.
      */
     public static AnnotationEntry read(final DataInput input, final ConstantPool constantPool, final boolean isRuntimeVisible) throws IOException {
@@ -87,10 +87,21 @@ public class AnnotationEntry implements Node {
         v.visitAnnotationEntry(this);
     }
 
+    /**
+     * Adds an element name value pair.
+     *
+     * @param elementNameValuePair the element name value pair.
+     */
     public void addElementNameValuePair(final ElementValuePair elementNameValuePair) {
         elementValuePairs.add(elementNameValuePair);
     }
 
+    /**
+     * Dumps this annotation entry to a DataOutputStream.
+     *
+     * @param dos the output stream.
+     * @throws IOException if an I/O error occurs.
+     */
     public void dump(final DataOutputStream dos) throws IOException {
         dos.writeShort(typeIndex); // u2 index of type name in cpool
         dos.writeShort(elementValuePairs.size()); // u2 element_value pair
@@ -101,25 +112,36 @@ public class AnnotationEntry implements Node {
     }
 
     /**
-     * @return the annotation type name
+     * Gets the annotation type name.
+     *
+     * @return the annotation type name.
      */
     public String getAnnotationType() {
         return constantPool.getConstantUtf8(typeIndex).getBytes();
     }
 
     /**
-     * @return the annotation type index
+     * Gets the annotation type index.
+     *
+     * @return the annotation type index.
      */
     public int getAnnotationTypeIndex() {
         return typeIndex;
     }
 
+    /**
+     * Gets the constant pool.
+     *
+     * @return the constant pool.
+     */
     public ConstantPool getConstantPool() {
         return constantPool;
     }
 
     /**
-     * @return the element value pairs in this annotation entry
+     * Gets the element value pairs in this annotation entry.
+     *
+     * @return the element value pairs in this annotation entry.
      */
     public ElementValuePair[] getElementValuePairs() {
         // TODO return List
@@ -127,20 +149,37 @@ public class AnnotationEntry implements Node {
     }
 
     /**
-     * @return the number of element value pairs in this annotation entry
+     * Gets the number of element value pairs in this annotation entry.
+     *
+     * @return the number of element value pairs in this annotation entry.
      */
     public final int getNumElementValuePairs() {
         return elementValuePairs.size();
     }
 
+    /**
+     * Gets the type index.
+     *
+     * @return the type index.
+     */
     public int getTypeIndex() {
         return typeIndex;
     }
 
+    /**
+     * Gets whether this annotation is runtime visible.
+     *
+     * @return true if this annotation is runtime visible.
+     */
     public boolean isRuntimeVisible() {
         return isRuntimeVisible;
     }
 
+    /**
+     * Gets a short string representation of this annotation.
+     *
+     * @return a short string representation of this annotation.
+     */
     public String toShortString() {
         final StringBuilder result = new StringBuilder();
         result.append("@");

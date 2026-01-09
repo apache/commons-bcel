@@ -150,9 +150,20 @@ public abstract class ElementValue {
         this.cpool = cpool;
     }
 
+    /**
+     * Dumps this element value to a DataOutputStream.
+     *
+     * @param dos the output stream.
+     * @throws IOException if an I/O error occurs.
+     */
     public abstract void dump(DataOutputStream dos) throws IOException;
 
-    /** @since 6.0 */
+    /**
+     * Gets the constant pool.
+     *
+     * @return the constant pool.
+     * @since 6.0
+     */
     final ConstantPool getConstantPool() {
         return cpool;
     }
@@ -161,7 +172,12 @@ public abstract class ElementValue {
         return type;
     }
 
-    /** @since 6.0 */
+    /**
+     * Gets the type.
+     *
+     * @return the type.
+     * @since 6.0
+     */
     final int getType() {
         return type;
     }

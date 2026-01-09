@@ -32,7 +32,9 @@ public abstract class ArrayInstruction extends Instruction implements ExceptionT
     }
 
     /**
-     * @param opcode of instruction
+     * Constructs an ArrayInstruction.
+     *
+     * @param opcode of instruction.
      */
     protected ArrayInstruction(final short opcode) {
         super(opcode, (short) 1);

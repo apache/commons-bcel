@@ -52,8 +52,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Find the target instruction (handle) that corresponds to the given target position (byte code offset).
      *
-     * @param ihs array of instruction handles, i.e. il.getInstructionHandles()
-     * @param pos array of positions corresponding to ihs, i.e. il.getInstructionPositions()
+     * @param ihs array of instruction handles, for example il.getInstructionHandles()
+     * @param pos array of positions corresponding to ihs, for example il.getInstructionPositions()
      * @param count length of arrays
      * @param target target position to search for
      * @return target position's instruction handle if available

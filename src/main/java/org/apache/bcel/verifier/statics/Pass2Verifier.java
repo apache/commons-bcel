@@ -170,7 +170,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                     return;
                 }
                 final Method m = (Method) carrier.predecessor(); // we can assume this method was visited before;
-                                                                 // i.e. the data consistency was verified.
+                                                                 // for example the data consistency was verified.
 
                 if (obj.getCode().length == 0) {
                     throw new ClassConstraintException("Code array of Code attribute '" + tostring(obj) + "' (method '" + m + "') must not be empty.");

@@ -90,6 +90,11 @@ public abstract class Attribute implements Cloneable, Node {
         READERS.put(name, unknownAttributeReader);
     }
 
+    /**
+     * Prints a message to stderr if debug mode is enabled.
+     *
+     * @param msg the message to print.
+     */
     protected static void println(final String msg) {
         if (debug) {
             System.err.println(msg);
@@ -297,6 +302,8 @@ public abstract class Attribute implements Cloneable, Node {
     }
 
     /**
+     * Creates a deep copy of this attribute.
+     *
      * @param constantPool constant pool to save.
      * @return deep copy of this attribute.
      */
@@ -314,6 +321,8 @@ public abstract class Attribute implements Cloneable, Node {
     }
 
     /**
+     * Gets the constant pool used by this object.
+     *
      * @return Constant pool used by this object.
      * @see ConstantPool
      */
@@ -322,6 +331,8 @@ public abstract class Attribute implements Cloneable, Node {
     }
 
     /**
+     * Gets the length of attribute field in bytes.
+     *
      * @return Length of attribute field in bytes.
      */
     public final int getLength() {
@@ -329,7 +340,9 @@ public abstract class Attribute implements Cloneable, Node {
     }
 
     /**
-     * @return Name of attribute
+     * Gets the name of attribute.
+     *
+     * @return Name of attribute.
      * @since 6.0
      */
     public String getName() {
@@ -337,6 +350,8 @@ public abstract class Attribute implements Cloneable, Node {
     }
 
     /**
+     * Gets the name index in constant pool of attribute name.
+     *
      * @return Name index in constant pool of attribute name.
      */
     public final int getNameIndex() {
@@ -344,6 +359,8 @@ public abstract class Attribute implements Cloneable, Node {
     }
 
     /**
+     * Gets the tag of attribute, i.e., its type.
+     *
      * @return Tag of attribute, i.e., its type. Value may not be altered, thus there is no setTag() method.
      */
     public final byte getTag() {
@@ -351,6 +368,8 @@ public abstract class Attribute implements Cloneable, Node {
     }
 
     /**
+     * Sets the constant pool to be used for this object.
+     *
      * @param constantPool Constant pool to be used for this object.
      * @see ConstantPool
      */
@@ -359,6 +378,8 @@ public abstract class Attribute implements Cloneable, Node {
     }
 
     /**
+     * Sets the length in bytes.
+     *
      * @param length length in bytes.
      */
     public final void setLength(final int length) {
@@ -366,6 +387,8 @@ public abstract class Attribute implements Cloneable, Node {
     }
 
     /**
+     * Sets the name index of attribute.
+     *
      * @param nameIndex of attribute.
      */
     public final void setNameIndex(final int nameIndex) {

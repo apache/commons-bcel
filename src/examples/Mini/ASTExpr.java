@@ -38,7 +38,7 @@ import org.apache.bcel.generic.PUSH;
 
 /**
  * Represents arithmetic expressions such as '(a + 12 == b) OR c'. The parse tree is built initially by the parser and
- * modified, i.e. compacted with 'traverse()'. Each (Expr, Term, Factor) node with kind == -1 is replaced which its
+ * modified, for example compacted with 'traverse()'. Each (Expr, Term, Factor) node with kind == -1 is replaced which its
  * successor node, which is converted to type 'Expr'
  *
  * A node with kind == -1 denotes the fact that this expression node has just one child branch and thus may be replaced
