@@ -38,10 +38,21 @@ public class ClassVector implements Serializable {
     @Deprecated
     protected transient List<JavaClass> vec = new ArrayList<>();
 
+    /**
+     * Adds a JavaClass to the vector.
+     *
+     * @param clazz the JavaClass to add.
+     */
     public void addElement(final JavaClass clazz) {
         vec.add(clazz);
     }
 
+    /**
+     * Gets the JavaClass at the specified index.
+     *
+     * @param index the index.
+     * @return the JavaClass at the specified index.
+     */
     public JavaClass elementAt(final int index) {
         return vec.get(index);
     }
