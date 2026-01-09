@@ -36,6 +36,13 @@ public class ClassElementValueGen extends ElementValueGen {
     // For 'class' this points to the class entry in the cpool
     private final int idx;
 
+    /**
+     * Constructs a ClassElementValueGen.
+     *
+     * @param value the class element value.
+     * @param cpool the constant pool generator.
+     * @param copyPoolEntries whether to copy pool entries.
+     */
     public ClassElementValueGen(final ClassElementValue value, final ConstantPoolGen cpool, final boolean copyPoolEntries) {
         super(CLASS, cpool);
         if (copyPoolEntries) {
@@ -46,11 +53,23 @@ public class ClassElementValueGen extends ElementValueGen {
         }
     }
 
+    /**
+     * Constructs a ClassElementValueGen.
+     *
+     * @param typeIdx the type index.
+     * @param cpool the constant pool generator.
+     */
     protected ClassElementValueGen(final int typeIdx, final ConstantPoolGen cpool) {
         super(CLASS, cpool);
         this.idx = typeIdx;
     }
 
+    /**
+     * Constructs a ClassElementValueGen.
+     *
+     * @param t the object type.
+     * @param cpool the constant pool generator.
+     */
     public ClassElementValueGen(final ObjectType t, final ConstantPoolGen cpool) {
         super(CLASS, cpool);
         // this.idx = cpool.addClass(t);
@@ -63,6 +82,11 @@ public class ClassElementValueGen extends ElementValueGen {
         dos.writeShort(idx);
     }
 
+    /**
+     * Gets the class string.
+     *
+     * @return the class string.
+     */
     public String getClassString() {
         final ConstantUtf8 cu8 = (ConstantUtf8) getConstantPool().getConstant(idx);
         return cu8.getBytes();
