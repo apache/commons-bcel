@@ -467,9 +467,13 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     public JavaClass[] getAllInterfaces() throws ClassNotFoundException {
         final ClassQueue queue = new ClassQueue();
         final Set<JavaClass> allInterfaces = new TreeSet<>();
+        final Set<JavaClass> visited = new HashSet<>();
         queue.enqueue(this);
         while (!queue.empty()) {
             final JavaClass clazz = queue.dequeue();
+            if (!visited.add(clazz)) {
+                continue;
+            }
             final JavaClass souper = clazz.getSuperClass();
             final JavaClass[] interfaces = clazz.getInterfaces();
             if (clazz.isInterface()) {
@@ -693,7 +697,12 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     public JavaClass[] getSuperClasses() throws ClassNotFoundException {
         JavaClass clazz = this;
         final List<JavaClass> allSuperClasses = new ArrayList<>();
+        final Set<JavaClass> visited = new HashSet<>();
+        visited.add(this);
         for (clazz = clazz.getSuperClass(); clazz != null; clazz = clazz.getSuperClass()) {
+            if (!visited.add(clazz)) {
+                throw new ClassCircularityError(clazz.getClassName());
+            }
             allSuperClasses.add(clazz);
         }
         return allSuperClasses.toArray(EMPTY_ARRAY);
