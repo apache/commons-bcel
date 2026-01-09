@@ -346,11 +346,18 @@ public abstract class Type {
         return false;
     }
 
+    /**
+     * Gets the class name.
+     *
+     * @return the class name.
+     */
     public String getClassName() {
         return toString();
     }
 
     /**
+     * Gets the signature for this type.
+     *
      * @return signature for given type.
      */
     public String getSignature() {
@@ -358,7 +365,9 @@ public abstract class Type {
     }
 
     /**
-     * @return stack size of this type (2 for long and double, 0 for void, 1 otherwise)
+     * Gets the stack size of this type.
+     *
+     * @return stack size of this type (2 for long and double, 0 for void, 1 otherwise).
      */
     public int getSize() {
         switch (type) {
@@ -373,14 +382,18 @@ public abstract class Type {
     }
 
     /**
-     * @return type as defined in Constants
+     * Gets the type as defined in Constants.
+     *
+     * @return type as defined in Constants.
      */
     public byte getType() {
         return type;
     }
 
     /**
-     * @return hash code of Type
+     * Gets the hash code of this Type.
+     *
+     * @return hash code of Type.
      */
     @Override
     public int hashCode() {
@@ -391,6 +404,7 @@ public abstract class Type {
      * boolean, short and char variable are considered as int in the stack or local variable area. Returns {@link #INT}
      * for {@link #BOOLEAN}, {@link #SHORT} or {@link #CHAR}, otherwise returns the given type.
      *
+     * @return the normalized type.
      * @since 6.0
      */
     public Type normalizeForStackOrLocal() {

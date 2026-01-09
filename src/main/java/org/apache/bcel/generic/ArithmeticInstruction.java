@@ -32,7 +32,9 @@ public abstract class ArithmeticInstruction extends Instruction implements Typed
     }
 
     /**
-     * @param opcode of instruction
+     * Constructs an ArithmeticInstruction.
+     *
+     * @param opcode of instruction.
      */
     protected ArithmeticInstruction(final short opcode) {
         super(opcode, (short) 1);

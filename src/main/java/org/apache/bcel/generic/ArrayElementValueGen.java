@@ -39,8 +39,11 @@ public class ArrayElementValueGen extends ElementValueGen {
     private final List<ElementValueGen> evalues;
 
     /**
-     * @param value
-     * @param cpool
+     * Constructs an ArrayElementValueGen.
+     *
+     * @param value the array element value.
+     * @param cpool the constant pool generator.
+     * @param copyPoolEntries whether to copy pool entries.
      */
     public ArrayElementValueGen(final ArrayElementValue value, final ConstantPoolGen cpool, final boolean copyPoolEntries) {
         super(ARRAY, cpool);
@@ -51,11 +54,23 @@ public class ArrayElementValueGen extends ElementValueGen {
         }
     }
 
+    /**
+     * Constructs an ArrayElementValueGen.
+     *
+     * @param cp the constant pool generator.
+     */
     public ArrayElementValueGen(final ConstantPoolGen cp) {
         super(ARRAY, cp);
         evalues = new ArrayList<>();
     }
 
+    /**
+     * Constructs an ArrayElementValueGen.
+     *
+     * @param type the type.
+     * @param elementValues the element values.
+     * @param cpool the constant pool generator.
+     */
     public ArrayElementValueGen(final int type, final ElementValue[] elementValues, final ConstantPoolGen cpool) {
         super(type, cpool);
         if (type != ARRAY) {
@@ -64,6 +79,11 @@ public class ArrayElementValueGen extends ElementValueGen {
         this.evalues = Streams.of(elementValues).map(e -> copy(e, cpool, true)).collect(Collectors.toList());
     }
 
+    /**
+     * Adds an element.
+     *
+     * @param gen the element value generator.
+     */
     public void addElement(final ElementValueGen gen) {
         evalues.add(gen);
     }
@@ -78,7 +98,9 @@ public class ArrayElementValueGen extends ElementValueGen {
     }
 
     /**
-     * Return immutable variant of this ArrayElementValueGen
+     * Return immutable variant of this ArrayElementValueGen.
+     *
+     * @return immutable variant of this ArrayElementValueGen.
      */
     @Override
     public ElementValue getElementValue() {
@@ -90,10 +112,20 @@ public class ArrayElementValueGen extends ElementValueGen {
         return new ArrayElementValue(super.getElementValueType(), immutableData, getConstantPool().getConstantPool());
     }
 
+    /**
+     * Gets the element values.
+     *
+     * @return the element values.
+     */
     public List<ElementValueGen> getElementValues() {
         return evalues;
     }
 
+    /**
+     * Gets the element values size.
+     *
+     * @return the element values size.
+     */
     public int getElementValuesSize() {
         return evalues.size();
     }

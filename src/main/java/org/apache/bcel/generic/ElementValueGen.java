@@ -177,5 +177,10 @@ public abstract class ElementValueGen {
         return type;
     }
 
+    /**
+     * Returns a string representation of the element value.
+     *
+     * @return a string representation of the element value.
+     */
     public abstract String stringifyValue();
 }

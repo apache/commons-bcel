@@ -25,6 +25,13 @@ import org.apache.bcel.Const;
  */
 public final class BasicType extends Type {
 
+    /**
+     * Gets the BasicType for the given type constant.
+     *
+     * @param type the type constant.
+     * @return the BasicType.
+     * @since 6.0
+     */
     // @since 6.0 no longer final
     public static BasicType getType(final byte type) {
         switch (type) {

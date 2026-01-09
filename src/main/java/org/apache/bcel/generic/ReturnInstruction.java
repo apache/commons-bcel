@@ -33,7 +33,9 @@ public abstract class ReturnInstruction extends Instruction implements Exception
     }
 
     /**
-     * @param opcode of instruction
+     * Constructs a ReturnInstruction.
+     *
+     * @param opcode of instruction.
      */
     protected ReturnInstruction(final short opcode) {
         super(opcode, (short) 1);

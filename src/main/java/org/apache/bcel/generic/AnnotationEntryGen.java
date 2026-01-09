@@ -201,6 +201,15 @@ public class AnnotationEntryGen {
         return null;
     }
 
+    /**
+     * Reads an AnnotationEntryGen from a DataInput.
+     *
+     * @param dis the data input stream.
+     * @param cpool the constant pool generator.
+     * @param b whether the annotation is runtime visible.
+     * @return the annotation entry generator.
+     * @throws IOException if an I/O error occurs.
+     */
     public static AnnotationEntryGen read(final DataInput dis, final ConstantPoolGen cpool, final boolean b) throws IOException {
         final AnnotationEntryGen a = new AnnotationEntryGen(cpool);
         a.typeIndex = dis.readUnsignedShort();
@@ -246,6 +255,14 @@ public class AnnotationEntryGen {
         this.cpool = cpool;
     }
 
+    /**
+     * Constructs an AnnotationEntryGen.
+     *
+     * @param type the object type.
+     * @param elements the element value pairs.
+     * @param vis whether the annotation is visible.
+     * @param cpool the constant pool generator.
+     */
     public AnnotationEntryGen(final ObjectType type, final List<ElementValuePairGen> elements, final boolean vis, final ConstantPoolGen cpool) {
         this.cpool = cpool;
         this.typeIndex = cpool.addUtf8(type.getSignature());
@@ -253,6 +270,11 @@ public class AnnotationEntryGen {
         isRuntimeVisible = vis;
     }
 
+    /**
+     * Adds an element name value pair.
+     *
+     * @param evp the element value pair generator.
+     */
     public void addElementNameValuePair(final ElementValuePairGen evp) {
         if (evs == null) {
             evs = new ArrayList<>();
@@ -264,6 +286,12 @@ public class AnnotationEntryGen {
         return Streams.of(in).map(nvp -> new ElementValuePairGen(nvp, cpool, copyPoolEntries)).collect(Collectors.toList());
     }
 
+    /**
+     * Dumps this annotation entry to a DataOutputStream.
+     *
+     * @param dos the data output stream.
+     * @throws IOException if an I/O error occurs.
+     */
     public void dump(final DataOutputStream dos) throws IOException {
         dos.writeShort(typeIndex); // u2 index of type name in cpool
         dos.writeShort(evs.size()); // u2 element_value pair count
@@ -285,15 +313,30 @@ public class AnnotationEntryGen {
         return a;
     }
 
+    /**
+     * Gets the type index.
+     *
+     * @return the type index.
+     */
     public int getTypeIndex() {
         return typeIndex;
     }
 
+    /**
+     * Gets the type name.
+     *
+     * @return the type name.
+     */
     public final String getTypeName() {
         return getTypeSignature(); // BCELBUG: Should I use this instead?
         // Utility.signatureToString(getTypeSignature());
     }
 
+    /**
+     * Gets the type signature.
+     *
+     * @return the type signature.
+     */
     public final String getTypeSignature() {
         // ConstantClass c = (ConstantClass) cpool.getConstant(typeIndex);
         final ConstantUtf8 utf8 = (ConstantUtf8) cpool.getConstant(typeIndex/* c.getNameIndex() */);
@@ -309,6 +352,11 @@ public class AnnotationEntryGen {
         return evs;
     }
 
+    /**
+     * Gets whether this annotation is runtime visible.
+     *
+     * @return true if this annotation is runtime visible.
+     */
     public boolean isRuntimeVisible() {
         return isRuntimeVisible;
     }
@@ -317,6 +365,11 @@ public class AnnotationEntryGen {
         isRuntimeVisible = b;
     }
 
+    /**
+     * Returns a short string representation of this annotation.
+     *
+     * @return a short string representation of this annotation.
+     */
     public String toShortString() {
         final StringBuilder s = new StringBuilder();
         s.append("@").append(getTypeName()).append("(");
