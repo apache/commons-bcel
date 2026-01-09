@@ -29,6 +29,8 @@ public final class AssertionViolatedException extends RuntimeException {
 
     /**
      * DO NOT USE. It's for experimental testing during development only.
+     *
+     * @param args command line arguments.
      */
     public static void main(final String[] args) {
         final AssertionViolatedException ave = new AssertionViolatedException(Arrays.toString(args));
@@ -46,6 +48,8 @@ public final class AssertionViolatedException extends RuntimeException {
     /**
      * Constructs a new AssertionViolatedException with the specified error message preceded by &quot;INTERNAL ERROR:
      * &quot;.
+     *
+     * @param message the error message.
      */
     public AssertionViolatedException(String message) {
         super(message = "INTERNAL ERROR: " + message); // Thanks to Java, the constructor call here must be first.
@@ -53,8 +57,10 @@ public final class AssertionViolatedException extends RuntimeException {
     }
 
     /**
-     * Constructs a new AssertionViolationException with the specified error message and initial cause
+     * Constructs a new AssertionViolationException with the specified error message and initial cause.
      *
+     * @param message the error message.
+     * @param initCause the initial cause.
      * @since 6.0
      */
     public AssertionViolatedException(String message, final Throwable initCause) {
@@ -66,6 +72,9 @@ public final class AssertionViolatedException extends RuntimeException {
      * Extends the error message with a string before ("pre") and after ("post") the 'old' error message. All of these three
      * strings are allowed to be null, and null is always replaced by the empty string (""). In particular, after invoking
      * this method, the error message of this object can no longer be null.
+     *
+     * @param pre string to prepend.
+     * @param post string to append.
      */
     public void extendMessage(String pre, String post) {
         if (pre == null) {
