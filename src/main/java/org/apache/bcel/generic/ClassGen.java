@@ -264,6 +264,12 @@ public class ClassGen extends AccessFlags implements Cloneable {
         }
     }
 
+    /**
+     * Checks if this class contains the given field.
+     *
+     * @param f the field to check.
+     * @return true if this class contains the field.
+     */
     public boolean containsField(final Field f) {
         return fieldList.contains(f);
     }
@@ -396,6 +402,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
     /**
+     * Gets the (finally) built up Java class object.
+     *
      * @return the (finally) built up Java class object.
      */
     public JavaClass getJavaClass() {
@@ -532,6 +540,9 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     /**
      * Replace given field with new one. If the old one does not exist add the new_ field to the class anyway.
+     *
+     * @param old the old field.
+     * @param newField the new field.
      */
     public void replaceField(final Field old, final Field newField) {
         if (newField == null) {
@@ -547,6 +558,9 @@ public class ClassGen extends AccessFlags implements Cloneable {
 
     /**
      * Replace given method with new one. If the old one does not exist add the newMethod method to the class anyway.
+     *
+     * @param old the old method.
+     * @param newMethod the new method.
      */
     public void replaceMethod(final Method old, final Method newMethod) {
         if (newMethod == null) {
