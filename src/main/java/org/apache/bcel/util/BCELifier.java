@@ -73,7 +73,10 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     }
 
     /**
-     * Default main method
+     * Default main method.
+     *
+     * @param argv command line arguments.
+     * @throws Exception if an error occurs.
      */
     public static void main(final String[] argv) throws Exception {
         if (argv.length != 1) {
