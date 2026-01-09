@@ -25,13 +25,27 @@ public class ClassGenException extends RuntimeException {
 
     private static final long serialVersionUID = 7247369755051242791L;
 
+    /**
+     * Constructs a new ClassGenException.
+     */
     public ClassGenException() {
     }
 
+    /**
+     * Constructs a new ClassGenException with the specified message.
+     *
+     * @param s the error message.
+     */
     public ClassGenException(final String s) {
         super(s);
     }
 
+    /**
+     * Constructs a new ClassGenException with the specified message and cause.
+     *
+     * @param s the error message.
+     * @param initCause the cause.
+     */
     public ClassGenException(final String s, final Throwable initCause) {
         super(s, initCause);
     }
