@@ -93,7 +93,9 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
     }
 
     /**
-     * Gets the array of annotation entries in this annotation
+     * Gets the array of annotation entries in this annotation.
+     *
+     * @return the array of annotation entries in this annotation.
      */
     public AnnotationEntry[] getAnnotationEntries() {
         return annotationTable;
@@ -102,12 +104,17 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
     /**
      * Gets the number of annotation entries in this annotation.
      *
-     * @return the number of annotation entries in this annotation
+     * @return the number of annotation entries in this annotation.
      */
     public final int getNumAnnotations() {
         return annotationTable.length;
     }
 
+    /**
+     * Gets whether this annotation is runtime visible.
+     *
+     * @return true if this annotation is runtime visible.
+     */
     public boolean isRuntimeVisible() {
         return isRuntimeVisible;
     }
@@ -120,7 +127,7 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
     /**
      * Sets the entries to set in this annotation.
      *
-     * @param annotationTable the entries to set in this annotation
+     * @param annotationTable the entries to set in this annotation.
      */
     public final void setAnnotationTable(final AnnotationEntry[] annotationTable) {
         this.annotationTable = annotationTable != null ? annotationTable : AnnotationEntry.EMPTY_ARRAY;
@@ -129,7 +136,7 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
     /**
      * Converts to a String representation.
      *
-     * @return String representation
+     * @return String representation.
      */
     @Override
     public final String toString() {
@@ -144,6 +151,12 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
         return buf.toString();
     }
 
+    /**
+     * Writes the annotations to a DataOutputStream.
+     *
+     * @param dos the data output stream.
+     * @throws IOException if an I/O error occurs.
+     */
     protected void writeAnnotations(final DataOutputStream dos) throws IOException {
         dos.writeShort(annotationTable.length);
         for (final AnnotationEntry element : annotationTable) {

@@ -34,8 +34,17 @@ import org.apache.commons.lang3.stream.Streams;
  */
 public class AnnotationEntry implements Node {
 
+    /**
+     * Empty array of AnnotationEntry objects.
+     */
     public static final AnnotationEntry[] EMPTY_ARRAY = {};
 
+    /**
+     * Creates annotation entries from attributes.
+     *
+     * @param attributes the attributes.
+     * @return the annotation entries.
+     */
     public static AnnotationEntry[] createAnnotationEntries(final Attribute[] attributes) {
         // Find attributes that contain annotation data
         return Streams.of(attributes).filter(Annotations.class::isInstance).flatMap(e -> Stream.of(((Annotations) e).getAnnotationEntries()))
@@ -69,6 +78,13 @@ public class AnnotationEntry implements Node {
 
     private final List<ElementValuePair> elementValuePairs;
 
+    /**
+     * Constructs an AnnotationEntry.
+     *
+     * @param typeIndex the type index.
+     * @param constantPool the constant pool.
+     * @param isRuntimeVisible whether the annotation is runtime visible.
+     */
     public AnnotationEntry(final int typeIndex, final ConstantPool constantPool, final boolean isRuntimeVisible) {
         this.typeIndex = typeIndex;
         this.constantPool = constantPool;

@@ -30,6 +30,13 @@ public class ArrayElementValue extends ElementValue {
     // For array types, this is the array
     private final ElementValue[] elementValues;
 
+    /**
+     * Constructs an ArrayElementValue.
+     *
+     * @param type the type.
+     * @param elementValues the element values.
+     * @param cpool the constant pool.
+     */
     public ArrayElementValue(final int type, final ElementValue[] elementValues, final ConstantPool cpool) {
         super(type, cpool);
         if (type != ARRAY) {
@@ -47,10 +54,20 @@ public class ArrayElementValue extends ElementValue {
         }
     }
 
+    /**
+     * Gets the element values array.
+     *
+     * @return the element values array.
+     */
     public ElementValue[] getElementValuesArray() {
         return elementValues;
     }
 
+    /**
+     * Gets the element values array size.
+     *
+     * @return the element values array size.
+     */
     public int getElementValuesArraySize() {
         return elementValues.length;
     }

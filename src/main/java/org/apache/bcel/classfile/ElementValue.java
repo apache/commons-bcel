@@ -182,12 +182,27 @@ public abstract class ElementValue {
         return type;
     }
 
+    /**
+     * Returns a string representation of the element value.
+     *
+     * @return a string representation of the element value.
+     */
     public abstract String stringifyValue();
 
+    /**
+     * Returns a short string representation of the element value.
+     *
+     * @return a short string representation of the element value.
+     */
     public String toShortString() {
         return stringifyValue();
     }
 
+    /**
+     * Returns a string representation of the element value.
+     *
+     * @return a string representation of the element value.
+     */
     @Override
     public String toString() {
         return stringifyValue();

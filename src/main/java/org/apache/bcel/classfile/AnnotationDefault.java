@@ -46,10 +46,12 @@ public class AnnotationDefault extends Attribute {
     }
 
     /**
-     * @param nameIndex Index pointing to the name <em>Code</em>
-     * @param length Content length in bytes
-     * @param defaultValue the annotation's default value
-     * @param constantPool Array of constants
+     * Constructs an AnnotationDefault attribute.
+     *
+     * @param nameIndex Index pointing to the name <em>Code</em>.
+     * @param length Content length in bytes.
+     * @param defaultValue the annotation's default value.
+     * @param constantPool Array of constants.
      */
     public AnnotationDefault(final int nameIndex, final int length, final ElementValue defaultValue, final ConstantPool constantPool) {
         super(Const.ATTR_ANNOTATION_DEFAULT, nameIndex, length, constantPool);
