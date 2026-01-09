@@ -70,6 +70,11 @@ public class ClassSet {
         map.remove(clazz.getClassName());
     }
 
+    /**
+     * Converts the set to an array.
+     *
+     * @return an array of JavaClass objects.
+     */
     public JavaClass[] toArray() {
         return map.values().toArray(JavaClass.EMPTY_ARRAY);
     }
