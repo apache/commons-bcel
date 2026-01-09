@@ -112,14 +112,18 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     }
 
     /**
-     * @return target offset in byte code
+     * Gets the target offset in byte code.
+     *
+     * @return target offset in byte code.
      */
     public final int getIndex() {
         return index;
     }
 
     /**
-     * @return the position
+     * Gets the position.
+     *
+     * @return the position.
      * @since 6.0
      */
     protected int getPosition() {
@@ -127,22 +131,28 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     }
 
     /**
-     * @return target of branch instruction
+     * Gets the target of branch instruction.
+     *
+     * @return target of branch instruction.
      */
     public InstructionHandle getTarget() {
         return target;
     }
 
     /**
-     * @return the offset to this instruction's target
+     * Gets the offset to this instruction's target.
+     *
+     * @return the offset to this instruction's target.
      */
     protected int getTargetOffset() {
         return getTargetOffset(target);
     }
 
     /**
-     * @param target branch target
-     * @return the offset to 'target' relative to this instruction
+     * Gets the offset to target relative to this instruction.
+     *
+     * @param target branch target.
+     * @return the offset to 'target' relative to this instruction.
      */
     protected int getTargetOffset(final InstructionHandle target) {
         if (target == null) {
@@ -158,7 +168,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     /**
      * Reads needed data (for example index) from file. Conversion to a InstructionHandle is done in InstructionList(byte[]).
      *
-     * @param bytes input stream
+     * @param bytes input stream.
      * @param wide wide prefix?
      * @see InstructionList
      */
@@ -169,7 +179,9 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     }
 
     /**
-     * @param index the index to set
+     * Sets the index.
+     *
+     * @param index the index to set.
      * @since 6.0
      */
     protected void setIndex(final int index) {
@@ -177,7 +189,9 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     }
 
     /**
-     * @param position the position to set
+     * Sets the position.
+     *
+     * @param position the position to set.
      * @since 6.0
      */
     protected void setPosition(final int position) {
@@ -185,9 +199,9 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     }
 
     /**
-     * Sets branch target
+     * Sets branch target.
      *
-     * @param target branch target
+     * @param target branch target.
      */
     public void setTarget(final InstructionHandle target) {
         notifyTarget(this.target, target, this);
