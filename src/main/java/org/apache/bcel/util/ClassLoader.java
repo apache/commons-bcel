@@ -66,14 +66,17 @@ public class ClassLoader extends java.lang.ClassLoader {
     private Repository repository = SyntheticRepository.getInstance();
 
     /**
-     * Ignored packages are by default ( "java.", "sun.", "javax."), for example loaded by system class loader
+     * Constructs a ClassLoader with default ignored packages.
+     * Ignored packages are by default ( "java.", "sun.", "javax."), for example loaded by system class loader.
      */
     public ClassLoader() {
         this(DEFAULT_IGNORED_PACKAGES);
     }
 
     /**
-     * @param deferTo delegate class loader to use for ignored packages
+     * Constructs a ClassLoader with a delegate class loader.
+     *
+     * @param deferTo delegate class loader to use for ignored packages.
      */
     public ClassLoader(final java.lang.ClassLoader deferTo) {
         super(deferTo);
@@ -82,8 +85,10 @@ public class ClassLoader extends java.lang.ClassLoader {
     }
 
     /**
-     * @param ignoredPackages classes contained in these packages will be loaded with the system class loader
-     * @param deferTo delegate class loader to use for ignored packages
+     * Constructs a ClassLoader with a delegate class loader and ignored packages.
+     *
+     * @param deferTo delegate class loader to use for ignored packages.
+     * @param ignoredPackages classes contained in these packages will be loaded with the system class loader.
      */
     public ClassLoader(final java.lang.ClassLoader deferTo, final String[] ignoredPackages) {
         this(ignoredPackages);
@@ -91,7 +96,9 @@ public class ClassLoader extends java.lang.ClassLoader {
     }
 
     /**
-     * @param ignoredPackages classes contained in these packages will be loaded with the system class loader
+     * Constructs a ClassLoader with specific ignored packages.
+     *
+     * @param ignoredPackages classes contained in these packages will be loaded with the system class loader.
      */
     public ClassLoader(final String[] ignoredPackages) {
         this.ignoredPackages = ignoredPackages;
@@ -100,14 +107,15 @@ public class ClassLoader extends java.lang.ClassLoader {
     /**
      * Override this method to create you own classes on the fly. The name contains the special token $$BCEL$$. Everything
      * before that token is considered to be a package name. You can encode your own arguments into the subsequent string.
-     * You must ensure however not to use any "illegal" characters, i.e., characters that may not appear in a Java class
-     * name too
+     * You must ensure however not to use any "illegal" characters, that is, characters that may not appear in a Java class
+     * name too.
      * <p>
      * The default implementation interprets the string as a encoded compressed Java class, unpacks and decodes it with the
      * Utility.decode() method, and parses the resulting byte array and returns the resulting JavaClass object.
      * </p>
      *
-     * @param className compressed byte code with "$$BCEL$$" in it
+     * @param className compressed byte code with "$$BCEL$$" in it.
+     * @return the created JavaClass.
      */
     protected JavaClass createClass(final String className) {
         final int index = className.indexOf(BCEL_TOKEN);
@@ -175,6 +183,9 @@ public class ClassLoader extends java.lang.ClassLoader {
 
     /**
      * Override this method if you want to alter a class before it gets actually loaded. Does nothing by default.
+     *
+     * @param clazz the class to modify.
+     * @return the modified class.
      */
     protected JavaClass modifyClass(final JavaClass clazz) {
         return clazz;
