@@ -39,6 +39,11 @@ public class ClassLoaderRepository implements Repository {
     private final java.lang.ClassLoader loader;
     private final Map<String, JavaClass> loadedClasses = new HashMap<>(); // CLASSNAME X JAVACLASS
 
+    /**
+     * Constructs a ClassLoaderRepository.
+     *
+     * @param loader the class loader.
+     */
     public ClassLoaderRepository(final java.lang.ClassLoader loader) {
         this.loader = loader;
     }
