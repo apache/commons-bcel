@@ -54,6 +54,8 @@ public final class BranchHandle extends InstructionHandle {
     }
 
     /**
+     * Gets the target of instruction.
+     *
      * @return target of instruction.
      */
     public InstructionHandle getTarget() {
@@ -81,6 +83,8 @@ public final class BranchHandle extends InstructionHandle {
 
     /**
      * Pass new target to instruction.
+     *
+     * @param ih the new target.
      */
     public void setTarget(final InstructionHandle ih) {
         bi.setTarget(ih);
@@ -95,6 +99,9 @@ public final class BranchHandle extends InstructionHandle {
 
     /**
      * Update target of instruction.
+     *
+     * @param oldIh the old instruction handle.
+     * @param newIh the new instruction handle.
      */
     public void updateTarget(final InstructionHandle oldIh, final InstructionHandle newIh) {
         bi.updateTarget(oldIh, newIh);
