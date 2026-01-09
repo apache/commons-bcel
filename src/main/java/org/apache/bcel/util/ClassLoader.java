@@ -58,6 +58,9 @@ public class ClassLoader extends java.lang.ClassLoader {
 
     private static final String BCEL_TOKEN = "$$BCEL$$";
 
+    /**
+     * Default packages that are ignored by the class loader.
+     */
     public static final String[] DEFAULT_IGNORED_PACKAGES = {"java.", "javax.", "sun."};
 
     private final Hashtable<String, Class<?>> classes = new Hashtable<>();
