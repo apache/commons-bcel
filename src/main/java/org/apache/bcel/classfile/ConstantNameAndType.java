@@ -55,8 +55,10 @@ public final class ConstantNameAndType extends Constant {
     }
 
     /**
-     * @param nameIndex Name of field/method
-     * @param signatureIndex and its signature
+     * Constructs a ConstantNameAndType.
+     *
+     * @param nameIndex Name of field/method.
+     * @param signatureIndex and its signature.
      */
     public ConstantNameAndType(final int nameIndex, final int signatureIndex) {
         super(Const.CONSTANT_NameAndType);
@@ -89,13 +91,18 @@ public final class ConstantNameAndType extends Constant {
     }
 
     /**
-     * @return name
+     * Gets the name.
+     *
+     * @param cp the constant pool.
+     * @return name.
      */
     public String getName(final ConstantPool cp) {
         return cp.constantToString(getNameIndex(), Const.CONSTANT_Utf8);
     }
 
     /**
+     * Gets the name index in constant pool of field/method name.
+     *
      * @return Name index in constant pool of field/method name.
      */
     public int getNameIndex() {
@@ -103,13 +110,18 @@ public final class ConstantNameAndType extends Constant {
     }
 
     /**
-     * @return signature
+     * Gets the signature.
+     *
+     * @param cp the constant pool.
+     * @return signature.
      */
     public String getSignature(final ConstantPool cp) {
         return cp.constantToString(getSignatureIndex(), Const.CONSTANT_Utf8);
     }
 
     /**
+     * Gets the index in constant pool of field/method signature.
+     *
      * @return Index in constant pool of field/method signature.
      */
     public int getSignatureIndex() {
@@ -117,14 +129,18 @@ public final class ConstantNameAndType extends Constant {
     }
 
     /**
-     * @param nameIndex the name index of this constant
+     * Sets the name index.
+     *
+     * @param nameIndex the name index of this constant.
      */
     public void setNameIndex(final int nameIndex) {
         this.nameIndex = nameIndex;
     }
 
     /**
-     * @param signatureIndex the signature index in the constant pool of this type
+     * Sets the signature index.
+     *
+     * @param signatureIndex the signature index in the constant pool of this type.
      */
     public void setSignatureIndex(final int signatureIndex) {
         this.signatureIndex = signatureIndex;
