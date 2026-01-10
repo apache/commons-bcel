@@ -34,6 +34,12 @@ public class ClassQueue {
     protected LinkedList<JavaClass> vec = new LinkedList<>(); // TODO not used externally
 
     /**
+     * Constructs a new ClassQueue.
+     */
+    public ClassQueue() {
+    }
+
+    /**
      * Removes and returns the first JavaClass from the queue.
      *
      * @return the first JavaClass from the queue.
