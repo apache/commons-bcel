@@ -58,6 +58,8 @@ public final class ConstantPackage extends Constant implements ConstantObject {
     }
 
     /**
+     * Constructs a ConstantPackage.
+     *
      * @param nameIndex Name index in constant pool. Should refer to a ConstantUtf8.
      */
     public ConstantPackage(final int nameIndex) {
@@ -89,14 +91,20 @@ public final class ConstantPackage extends Constant implements ConstantObject {
     }
 
     /**
-     * @return dereferenced string
+     * Gets the dereferenced string.
+     *
+     * @param cp the constant pool.
+     * @return dereferenced string.
      */
     public String getBytes(final ConstantPool cp) {
         return (String) getConstantValue(cp);
     }
 
     /**
-     * @return String object
+     * Gets the String object.
+     *
+     * @param cp the constant pool.
+     * @return String object.
      */
     @Override
     public Object getConstantValue(final ConstantPool cp) {
@@ -104,6 +112,8 @@ public final class ConstantPackage extends Constant implements ConstantObject {
     }
 
     /**
+     * Gets the name index in constant pool of package name.
+     *
      * @return Name index in constant pool of package name.
      */
     public int getNameIndex() {
@@ -111,7 +121,9 @@ public final class ConstantPackage extends Constant implements ConstantObject {
     }
 
     /**
-     * @param nameIndex the name index in the constant pool of this Constant Package
+     * Sets the name index in the constant pool.
+     *
+     * @param nameIndex the name index in the constant pool of this Constant Package.
      */
     public void setNameIndex(final int nameIndex) {
         this.nameIndex = nameIndex;
