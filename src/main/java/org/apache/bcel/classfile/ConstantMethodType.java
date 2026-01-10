@@ -53,6 +53,11 @@ public final class ConstantMethodType extends Constant {
         this(file.readUnsignedShort());
     }
 
+    /**
+     * Constructs a ConstantMethodType.
+     *
+     * @param descriptorIndex Index to the method descriptor.
+     */
     public ConstantMethodType(final int descriptorIndex) {
         super(Const.CONSTANT_MethodType);
         this.descriptorIndex = descriptorIndex;
@@ -81,10 +86,20 @@ public final class ConstantMethodType extends Constant {
         file.writeShort(descriptorIndex);
     }
 
+    /**
+     * Gets the descriptor index.
+     *
+     * @return the descriptor index.
+     */
     public int getDescriptorIndex() {
         return descriptorIndex;
     }
 
+    /**
+     * Sets the descriptor index.
+     *
+     * @param descriptorIndex the descriptor index.
+     */
     public void setDescriptorIndex(final int descriptorIndex) {
         this.descriptorIndex = descriptorIndex;
     }
