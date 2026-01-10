@@ -146,28 +146,38 @@ public class ClassPath implements Closeable {
     public interface ClassFile {
 
         /**
+         * Gets the base path of found class.
+         *
          * @return base path of found class, for example class is contained relative to that path, which may either denote a directory,
-         *         or ZIP file
+         *         or ZIP file.
          */
         String getBase();
 
         /**
+         * Gets the input stream for class file.
+         *
          * @return input stream for class file.
          * @throws IOException if an I/O error occurs.
          */
         InputStream getInputStream() throws IOException;
 
         /**
+         * Gets the canonical path to class file.
+         *
          * @return canonical path to class file.
          */
         String getPath();
 
         /**
+         * Gets the size of class file.
+         *
          * @return size of class file.
          */
         long getSize();
 
         /**
+         * Gets the modification time of class file.
+         *
          * @return modification time of class file.
          */
         long getTime();
@@ -430,16 +440,19 @@ public class ClassPath implements Closeable {
 
     }
 
+    /** Filter for archive files (.zip and .jar). */
     private static final FilenameFilter ARCHIVE_FILTER = (dir, name) -> {
         name = StringUtils.toRootLowerCase(name);
         return name.endsWith(".zip") || name.endsWith(".jar");
     };
 
+    /** Filter for module files. */
     private static final FilenameFilter MODULES_FILTER = (dir, name) -> {
         name = StringUtils.toRootLowerCase(name);
         return name.endsWith(org.apache.bcel.classfile.Module.EXTENSION);
     };
 
+    /** The system class path. */
     public static final ClassPath SYSTEM_CLASS_PATH = new ClassPath(getClassPath());
 
     private static void addJdkModules(final String javaHome, final List<String> list) {
@@ -531,6 +544,12 @@ public class ClassPath implements Closeable {
         this(getClassPath());
     }
 
+    /**
+     * Constructs a ClassPath with a parent and class path string.
+     *
+     * @param parent the parent ClassPath.
+     * @param classPathString the class path string.
+     */
     @SuppressWarnings("resource")
     public ClassPath(final ClassPath parent, final String classPathString) {
         this.parent = parent;
