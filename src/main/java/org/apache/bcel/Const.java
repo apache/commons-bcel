@@ -661,7 +661,11 @@ public final class Const {
     private static final String[] ACCESS_NAMES = {"public", "private", "protected", "static", "final", "synchronized", "volatile", "transient", "native",
         "interface", "abstract", "strictfp", "synthetic", "annotation", "enum", "module"};
 
-    /** @since 6.0 */
+    /**
+     * The length of the ACCESS_NAMES array.
+     *
+     * @since 6.0
+     */
     public static final int ACCESS_NAMES_LENGTH = ACCESS_NAMES.length;
 
     /**
@@ -3044,6 +3048,8 @@ public final class Const {
         ILLEGAL_OPCODE, ILLEGAL_OPCODE, "impdep1", "impdep2"};
 
     /**
+     * The length of the OPCODE_NAMES array.
+     *
      * @since 6.0
      */
     public static final int OPCODE_NAMES_LENGTH = OPCODE_NAMES.length;
@@ -3119,46 +3125,91 @@ public final class Const {
      */
     public static final byte ATTR_UNKNOWN = -1;
 
+    /** Attribute constant for SourceFile. */
     public static final byte ATTR_SOURCE_FILE = 0;
 
+    /** Attribute constant for ConstantValue. */
     public static final byte ATTR_CONSTANT_VALUE = 1;
 
+    /** Attribute constant for Code. */
     public static final byte ATTR_CODE = 2;
 
+    /** Attribute constant for Exceptions. */
     public static final byte ATTR_EXCEPTIONS = 3;
 
+    /** Attribute constant for LineNumberTable. */
     public static final byte ATTR_LINE_NUMBER_TABLE = 4;
 
+    /** Attribute constant for LocalVariableTable. */
     public static final byte ATTR_LOCAL_VARIABLE_TABLE = 5;
 
+    /** Attribute constant for InnerClasses. */
     public static final byte ATTR_INNER_CLASSES = 6;
 
+    /** Attribute constant for Synthetic. */
     public static final byte ATTR_SYNTHETIC = 7;
 
+    /** Attribute constant for Deprecated. */
     public static final byte ATTR_DEPRECATED = 8;
 
+    /** Attribute constant for PMG. */
     public static final byte ATTR_PMG = 9;
 
+    /** Attribute constant for Signature. */
     public static final byte ATTR_SIGNATURE = 10;
 
+    /** Attribute constant for StackMap. */
     public static final byte ATTR_STACK_MAP = 11;
+
+    /** Attribute constant for RuntimeVisibleAnnotations. */
     public static final byte ATTR_RUNTIME_VISIBLE_ANNOTATIONS = 12;
+
+    /** Attribute constant for RuntimeInvisibleAnnotations. */
     public static final byte ATTR_RUNTIME_INVISIBLE_ANNOTATIONS = 13;
+
+    /** Attribute constant for RuntimeVisibleParameterAnnotations. */
     public static final byte ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS = 14;
+
+    /** Attribute constant for RuntimeInvisibleParameterAnnotations. */
     public static final byte ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS = 15;
+
+    /** Attribute constant for AnnotationDefault. */
     public static final byte ATTR_ANNOTATION_DEFAULT = 16;
+
+    /** Attribute constant for LocalVariableTypeTable. */
     public static final byte ATTR_LOCAL_VARIABLE_TYPE_TABLE = 17;
+
+    /** Attribute constant for EnclosingMethod. */
     public static final byte ATTR_ENCLOSING_METHOD = 18;
+
+    /** Attribute constant for StackMapTable. */
     public static final byte ATTR_STACK_MAP_TABLE = 19;
+
+    /** Attribute constant for BootstrapMethods. */
     public static final byte ATTR_BOOTSTRAP_METHODS = 20;
+
+    /** Attribute constant for MethodParameters. */
     public static final byte ATTR_METHOD_PARAMETERS = 21;
+
+    /** Attribute constant for Module. */
     public static final byte ATTR_MODULE = 22;
+
+    /** Attribute constant for ModulePackages. */
     public static final byte ATTR_MODULE_PACKAGES = 23;
+
+    /** Attribute constant for ModuleMainClass. */
     public static final byte ATTR_MODULE_MAIN_CLASS = 24;
+
+    /** Attribute constant for NestHost. */
     public static final byte ATTR_NEST_HOST = 25;
+
+    /** Attribute constant for NestMembers. */
     public static final byte ATTR_NEST_MEMBERS = 26;
+
+    /** Attribute constant for Record. */
     public static final byte ATTR_RECORD = 27;
 
+    /** Count of known attributes. */
     public static final short KNOWN_ATTRIBUTES = 28; // count of attributes
     private static final String[] ATTRIBUTE_NAMES = {"SourceFile", "ConstantValue", "Code", "Exceptions", "LineNumberTable", "LocalVariableTable",
         "InnerClasses", "Synthetic", "Deprecated", "PMGClass", "Signature", "StackMap", "RuntimeVisibleAnnotations", "RuntimeInvisibleAnnotations",
@@ -3168,14 +3219,31 @@ public final class Const {
     /**
      * Constants used in the StackMap attribute.
      */
+    /** Item type: Bogus. */
     public static final byte ITEM_Bogus = 0;
+
+    /** Item type: Integer. */
     public static final byte ITEM_Integer = 1;
+
+    /** Item type: Float. */
     public static final byte ITEM_Float = 2;
+
+    /** Item type: Double. */
     public static final byte ITEM_Double = 3;
+
+    /** Item type: Long. */
     public static final byte ITEM_Long = 4;
+
+    /** Item type: Null. */
     public static final byte ITEM_Null = 5;
+
+    /** Item type: InitObject. */
     public static final byte ITEM_InitObject = 6;
+
+    /** Item type: Object. */
     public static final byte ITEM_Object = 7;
+
+    /** Item type: NewObject. */
     public static final byte ITEM_NewObject = 8;
     private static final String[] ITEM_NAMES = {"Bogus", "Integer", "Float", "Double", "Long", "Null", "InitObject", "Object", "NewObject"};
 
@@ -3184,36 +3252,68 @@ public final class Const {
      *
      * For those types which can specify a range, the constant names the lowest value.
      */
+    /** StackMapEntry type: SAME_FRAME. */
     public static final int SAME_FRAME = 0;
 
+    /** StackMapEntry type: SAME_LOCALS_1_STACK_ITEM_FRAME. */
     public static final int SAME_LOCALS_1_STACK_ITEM_FRAME = 64;
 
+    /** StackMapEntry type: SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED. */
     public static final int SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED = 247;
 
+    /** StackMapEntry type: CHOP_FRAME. */
     public static final int CHOP_FRAME = 248;
+
+    /** StackMapEntry type: SAME_FRAME_EXTENDED. */
     public static final int SAME_FRAME_EXTENDED = 251;
+
+    /** StackMapEntry type: APPEND_FRAME. */
     public static final int APPEND_FRAME = 252;
+
+    /** StackMapEntry type: FULL_FRAME. */
     public static final int FULL_FRAME = 255;
 
     /**
      * Constants that define the maximum value of those constants which store ranges.
      */
 
+    /** Maximum value for SAME_FRAME. */
     public static final int SAME_FRAME_MAX = 63;
+
+    /** Maximum value for SAME_LOCALS_1_STACK_ITEM_FRAME. */
     public static final int SAME_LOCALS_1_STACK_ITEM_FRAME_MAX = 127;
+
+    /** Maximum value for CHOP_FRAME. */
     public static final int CHOP_FRAME_MAX = 250;
+
+    /** Maximum value for APPEND_FRAME. */
     public static final int APPEND_FRAME_MAX = 254;
+
+    /** Reference kind: getField. */
     public static final byte REF_getField = 1;
 
+    /** Reference kind: getStatic. */
     public static final byte REF_getStatic = 2;
 
+    /** Reference kind: putField. */
     public static final byte REF_putField = 3;
 
+    /** Reference kind: putStatic. */
     public static final byte REF_putStatic = 4;
+
+    /** Reference kind: invokeVirtual. */
     public static final byte REF_invokeVirtual = 5;
+
+    /** Reference kind: invokeStatic. */
     public static final byte REF_invokeStatic = 6;
+
+    /** Reference kind: invokeSpecial. */
     public static final byte REF_invokeSpecial = 7;
+
+    /** Reference kind: newInvokeSpecial. */
     public static final byte REF_newInvokeSpecial = 8;
+
+    /** Reference kind: invokeInterface. */
     public static final byte REF_invokeInterface = 9;
 
     /**
@@ -3223,8 +3323,10 @@ public final class Const {
         "newInvokeSpecial", "invokeInterface"};
 
     /**
+     * Gets the access name at the given index.
+     *
      * @param index index into {@code ACCESS_NAMES}.
-     * @return the ACCESS_NAMES entry at the given index
+     * @return the ACCESS_NAMES entry at the given index.
      * @since 6.0
      */
     public static String getAccessName(final int index) {
@@ -3232,9 +3334,10 @@ public final class Const {
     }
 
     /**
+     * Gets the attribute name at the given index.
      *
      * @param index index into {@code ACCESS_NAMES}.
-     * @return the attribute name
+     * @return the attribute name.
      * @since 6.0
      */
     public static String getAttributeName(final int index) {
@@ -3242,10 +3345,10 @@ public final class Const {
     }
 
     /**
-     * The primitive class names corresponding to the T_XX constants, for example, CLASS_TYPE_NAMES[T_INT] = "java.lang.Integer"
+     * The primitive class names corresponding to the T_XX constants, for example, CLASS_TYPE_NAMES[T_INT] = "java.lang.Integer".
      *
      * @param index index into {@code CLASS_TYPE_NAMES}.
-     * @return the class name
+     * @return the class name.
      * @since 6.0
      */
     public static String getClassTypeName(final int index) {
@@ -3253,9 +3356,10 @@ public final class Const {
     }
 
     /**
+     * Gets the constant name at the given index.
      *
      * @param index index into {@code CONSTANT_NAMES}.
-     * @return the CONSTANT_NAMES entry at the given index
+     * @return the CONSTANT_NAMES entry at the given index.
      * @since 6.0
      */
     public static String getConstantName(final int index) {
@@ -3265,9 +3369,10 @@ public final class Const {
     // Constants defining the behavior of the Method Handles (JVMS �5.4.3.5)
 
     /**
+     * Gets the number of words consumed on operand stack.
      *
      * @param index index into {@code CONSUME_STACK}.
-     * @return Number of words consumed on operand stack
+     * @return Number of words consumed on operand stack.
      * @since 6.0
      */
     public static int getConsumeStack(final int index) {
@@ -3275,6 +3380,9 @@ public final class Const {
     }
 
     /**
+     * Gets the interfaces implemented by arrays.
+     *
+     * @return the interfaces implemented by arrays.
      * @since 6.0
      */
     public static Iterable<String> getInterfacesImplementedByArrays() {
@@ -3282,9 +3390,10 @@ public final class Const {
     }
 
     /**
+     * Gets the item name at the given index.
      *
      * @param index index into {@code ITEM_NAMES}.
-     * @return the item name
+     * @return the item name.
      * @since 6.0
      */
     public static String getItemName(final int index) {
@@ -3292,9 +3401,10 @@ public final class Const {
     }
 
     /**
+     * Gets the method handle name at the given index.
      *
      * @param index index into {@code METHODHANDLE_NAMES}.
-     * @return the method handle name
+     * @return the method handle name.
      * @since 6.0
      */
     public static String getMethodHandleName(final int index) {
@@ -3302,9 +3412,10 @@ public final class Const {
     }
 
     /**
+     * Gets the number of byte code operands.
      *
      * @param index index into {@code NO_OF_OPERANDS}.
-     * @return Number of byte code operands
+     * @return Number of byte code operands.
      * @since 6.0
      */
     public static short getNoOfOperands(final int index) {
@@ -3312,6 +3423,10 @@ public final class Const {
     }
 
     /**
+     * Gets the opcode name at the given index.
+     *
+     * @param index the index.
+     * @return the opcode name.
      * @since 6.0
      */
     public static String getOpcodeName(final int index) {
@@ -3319,6 +3434,11 @@ public final class Const {
     }
 
     /**
+     * Gets the operand type.
+     *
+     * @param opcode the opcode.
+     * @param index the index.
+     * @return the operand type.
      * @since 6.0
      */
     public static short getOperandType(final int opcode, final int index) {
@@ -3326,6 +3446,10 @@ public final class Const {
     }
 
     /**
+     * Gets the operand type count.
+     *
+     * @param opcode the opcode.
+     * @return the operand type count.
      * @since 6.0
      */
     public static long getOperandTypeCount(final int opcode) {
@@ -3333,9 +3457,10 @@ public final class Const {
     }
 
     /**
+     * Gets the number of words produced onto operand stack.
      *
-     * @param index
-     * @return Number of words produced onto operand stack
+     * @param index the index.
+     * @return Number of words produced onto operand stack.
      * @since 6.0
      */
     public static int getProduceStack(final int index) {
@@ -3343,9 +3468,10 @@ public final class Const {
     }
 
     /**
+     * Gets the short type name at the given index.
      *
-     * @param index
-     * @return the short type name
+     * @param index the index.
+     * @return the short type name.
      * @since 6.0
      */
     public static String getShortTypeName(final int index) {
@@ -3353,10 +3479,10 @@ public final class Const {
     }
 
     /**
-     * The primitive type names corresponding to the T_XX constants, for example, TYPE_NAMES[T_INT] = "int"
+     * The primitive type names corresponding to the T_XX constants, for example, TYPE_NAMES[T_INT] = "int".
      *
-     * @param index
-     * @return the type name
+     * @param index the index.
+     * @return the type name.
      * @since 6.0
      */
     public static String getTypeName(final int index) {
