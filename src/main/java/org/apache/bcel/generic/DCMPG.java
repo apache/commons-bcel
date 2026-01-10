@@ -27,6 +27,7 @@ package org.apache.bcel.generic;
  */
 public class DCMPG extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 
+    /** Constructs a DCMPG instruction. */
     public DCMPG() {
         super(org.apache.bcel.Const.DCMPG, (short) 1);
     }
