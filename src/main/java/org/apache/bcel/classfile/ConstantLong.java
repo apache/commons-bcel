@@ -53,7 +53,9 @@ public final class ConstantLong extends Constant implements ConstantObject {
     }
 
     /**
-     * @param bytes Data
+     * Constructs a ConstantLong.
+     *
+     * @param bytes Data.
      */
     public ConstantLong(final long bytes) {
         super(Const.CONSTANT_Long);
@@ -84,14 +86,19 @@ public final class ConstantLong extends Constant implements ConstantObject {
     }
 
     /**
-     * @return data, i.e., 8 bytes.
+     * Gets the data.
+     *
+     * @return data, that is, 8 bytes.
      */
     public long getBytes() {
         return bytes;
     }
 
     /**
-     * @return Long object
+     * Gets the Long object.
+     *
+     * @param cp the constant pool (not used).
+     * @return Long object.
      */
     @Override
     public Object getConstantValue(final ConstantPool cp) {
