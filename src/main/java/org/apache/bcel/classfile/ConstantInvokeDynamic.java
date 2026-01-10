@@ -52,6 +52,12 @@ public final class ConstantInvokeDynamic extends ConstantCP {
         this(file.readUnsignedShort(), file.readUnsignedShort());
     }
 
+    /**
+     * Constructs a ConstantInvokeDynamic.
+     *
+     * @param bootstrapMethodAttrIndex Index to the bootstrap method.
+     * @param nameAndTypeIndex Index to the name and type.
+     */
     public ConstantInvokeDynamic(final int bootstrapMethodAttrIndex, final int nameAndTypeIndex) {
         super(Const.CONSTANT_InvokeDynamic, bootstrapMethodAttrIndex, nameAndTypeIndex);
     }
@@ -68,6 +74,8 @@ public final class ConstantInvokeDynamic extends ConstantCP {
     }
 
     /**
+     * Gets the reference (index) to bootstrap method this constant refers to.
+     *
      * @return Reference (index) to bootstrap method this constant refers to.
      *
      *         Note that this method is a functional duplicate of getClassIndex for use by ConstantInvokeDynamic.
