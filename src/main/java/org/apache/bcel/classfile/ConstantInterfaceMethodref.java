@@ -48,8 +48,10 @@ public final class ConstantInterfaceMethodref extends ConstantCP {
     }
 
     /**
-     * @param classIndex Reference to the class containing the method
-     * @param nameAndTypeIndex and the method signature
+     * Constructs a ConstantInterfaceMethodref.
+     *
+     * @param classIndex Reference to the class containing the method.
+     * @param nameAndTypeIndex and the method signature.
      */
     public ConstantInterfaceMethodref(final int classIndex, final int nameAndTypeIndex) {
         super(Const.CONSTANT_InterfaceMethodref, classIndex, nameAndTypeIndex);
