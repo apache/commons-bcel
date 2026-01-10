@@ -34,6 +34,12 @@ public class ClassSet {
     private final Map<String, JavaClass> map = new HashMap<>();
 
     /**
+     * Constructs a new ClassSet.
+     */
+    public ClassSet() {
+    }
+
+    /**
      * Adds a JavaClass to the set.
      *
      * @param clazz the JavaClass to add.
