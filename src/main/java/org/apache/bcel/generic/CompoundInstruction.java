@@ -31,5 +31,10 @@ package org.apache.bcel.generic;
  */
 public interface CompoundInstruction {
 
+    /**
+     * Gets the instruction list.
+     *
+     * @return the instruction list.
+     */
     InstructionList getInstructionList();
 }
