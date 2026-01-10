@@ -53,6 +53,12 @@ public final class ConstantDynamic extends ConstantCP {
         this(file.readShort(), file.readShort());
     }
 
+    /**
+     * Constructs a ConstantDynamic.
+     *
+     * @param bootstrapMethodAttrIndex Index to the bootstrap method.
+     * @param nameAndTypeIndex Index to the name and type.
+     */
     public ConstantDynamic(final int bootstrapMethodAttrIndex, final int nameAndTypeIndex) {
         super(Const.CONSTANT_Dynamic, bootstrapMethodAttrIndex, nameAndTypeIndex);
     }
@@ -69,6 +75,8 @@ public final class ConstantDynamic extends ConstantCP {
     }
 
     /**
+     * Gets the reference (index) to bootstrap method this constant refers to.
+     *
      * @return Reference (index) to bootstrap method this constant refers to.
      *
      *         Note that this method is a functional duplicate of getClassIndex for use by ConstantInvokeDynamic.
