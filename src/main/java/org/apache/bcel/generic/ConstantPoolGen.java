@@ -402,6 +402,12 @@ public class ConstantPoolGen {
         return ret;
     }
 
+    /**
+     * Adds a new InterfaceMethodref constant to the ConstantPool.
+     *
+     * @param method the method to add.
+     * @return index of entry.
+     */
     public int addInterfaceMethodref(final MethodGen method) {
         return addInterfaceMethodref(method.getClassName(), method.getName(), method.getSignature());
     }
@@ -444,6 +450,13 @@ public class ConstantPoolGen {
         index += 2; // Wastes one entry according to spec
         return ret;
     }
+
+    /**
+     * Adds a new Methodref constant to the ConstantPool.
+     *
+     * @param method the method to add.
+     * @return index of entry.
+     */
     public int addMethodref(final MethodGen method) {
         return addMethodref(method.getClassName(), method.getName(), method.getSignature());
     }
@@ -551,22 +564,28 @@ public class ConstantPoolGen {
     }
 
     /**
-     * @param i index in constant pool
-     * @return constant pool entry at index i
+     * Gets a constant pool entry at the specified index.
+     *
+     * @param i index in constant pool.
+     * @return constant pool entry at index i.
      */
     public Constant getConstant(final int i) {
         return constants[i];
     }
 
     /**
-     * @return intermediate constant pool
+     * Gets the intermediate constant pool.
+     *
+     * @return intermediate constant pool.
      */
     public ConstantPool getConstantPool() {
         return new ConstantPool(constants);
     }
 
     /**
-     * @return constant pool with proper length
+     * Gets the constant pool with proper length.
+     *
+     * @return constant pool with proper length.
      */
     public ConstantPool getFinalConstantPool() {
         return new ConstantPool(Arrays.copyOf(constants, index));
@@ -577,7 +596,9 @@ public class ConstantPoolGen {
     }
 
     /**
-     * @return current size of constant pool
+     * Gets the current size of constant pool.
+     *
+     * @return current size of constant pool.
      */
     public int getSize() {
         return index;
@@ -661,6 +682,12 @@ public class ConstantPoolGen {
         return -1;
     }
 
+    /**
+     * Looks up an InterfaceMethodref in the ConstantPool.
+     *
+     * @param method the method to look for.
+     * @return index on success, -1 otherwise.
+     */
     public int lookupInterfaceMethodref(final MethodGen method) {
         return lookupInterfaceMethodref(method.getClassName(), method.getName(), method.getSignature());
     }
@@ -695,6 +722,12 @@ public class ConstantPoolGen {
         return -1;
     }
 
+    /**
+     * Looks up a Methodref in the ConstantPool.
+     *
+     * @param method the method to look for.
+     * @return index on success, -1 otherwise.
+     */
     public int lookupMethodref(final MethodGen method) {
         return lookupMethodref(method.getClassName(), method.getName(), method.getSignature());
     }
