@@ -68,10 +68,20 @@ public class ClassVector implements Serializable {
         vec = new ArrayList<>();
     }
 
+    /**
+     * Removes the JavaClass at the specified index.
+     *
+     * @param index the index.
+     */
     public void removeElementAt(final int index) {
         vec.remove(index);
     }
 
+    /**
+     * Converts the vector to an array.
+     *
+     * @return an array of JavaClass objects.
+     */
     public JavaClass[] toArray() {
         return vec.toArray(JavaClass.EMPTY_ARRAY);
     }
