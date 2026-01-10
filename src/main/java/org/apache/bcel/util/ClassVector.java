@@ -35,6 +35,11 @@ public class ClassVector implements Serializable {
 
     private static final long serialVersionUID = 5600397075672780806L;
 
+    /**
+     * The vector of JavaClass objects.
+     *
+     * @deprecated Will be made private; do not access directly, use getter/setter.
+     */
     @Deprecated
     protected transient List<JavaClass> vec = new ArrayList<>();
 
