@@ -122,7 +122,9 @@ public final class CodeException implements Cloneable, Node, Constants {
     }
 
     /**
-     * @return deep copy of this object
+     * Creates a deep copy of this object.
+     *
+     * @return deep copy of this object.
      */
     public CodeException copy() {
         try {
@@ -147,6 +149,8 @@ public final class CodeException implements Cloneable, Node, Constants {
     }
 
     /**
+     * Gets the type of exception that is caught.
+     *
      * @return 0, if the handler catches any exception, otherwise it points to the exception class which is to be caught.
      */
     public int getCatchType() {
@@ -154,6 +158,8 @@ public final class CodeException implements Cloneable, Node, Constants {
     }
 
     /**
+     * Gets the exclusive end index of the region where the handler is active.
+     *
      * @return Exclusive end index of the region where the handler is active.
      */
     public int getEndPC() {
@@ -161,6 +167,8 @@ public final class CodeException implements Cloneable, Node, Constants {
     }
 
     /**
+     * Gets the starting address of exception handler, relative to the code.
+     *
      * @return Starting address of exception handler, relative to the code.
      */
     public int getHandlerPC() {
@@ -168,6 +176,8 @@ public final class CodeException implements Cloneable, Node, Constants {
     }
 
     /**
+     * Gets the inclusive start index of the region where the handler is active.
+     *
      * @return Inclusive start index of the region where the handler is active.
      */
     public int getStartPC() {
@@ -175,34 +185,44 @@ public final class CodeException implements Cloneable, Node, Constants {
     }
 
     /**
-     * @param catchType the type of exception that is caught
+     * Sets the type of exception that is caught.
+     *
+     * @param catchType the type of exception that is caught.
      */
     public void setCatchType(final int catchType) {
         this.catchType = catchType;
     }
 
     /**
-     * @param endPc end of handled block
+     * Sets the end of handled block.
+     *
+     * @param endPc end of handled block.
      */
     public void setEndPC(final int endPc) {
         this.endPc = endPc;
     }
 
     /**
-     * @param handlerPc where the actual code is
+     * Sets where the actual code is.
+     *
+     * @param handlerPc where the actual code is.
      */
     public void setHandlerPC(final int handlerPc) { // TODO unused
         this.handlerPc = handlerPc;
     }
 
     /**
-     * @param startPc start of handled block
+     * Sets the start of handled block.
+     *
+     * @param startPc start of handled block.
      */
     public void setStartPC(final int startPc) { // TODO unused
         this.startPc = startPc;
     }
 
     /**
+     * Gets a string representation.
+     *
      * @return String representation.
      */
     @Override
