@@ -36,6 +36,12 @@ public class DCONST extends Instruction implements ConstantPushInstruction {
         this(0);
     }
 
+    /**
+     * Constructs a DCONST instruction.
+     *
+     * @param f the constant value (must be 0.0 or 1.0).
+     * @throws ClassGenException if f is not 0.0 or 1.0.
+     */
     public DCONST(final double f) {
         super(org.apache.bcel.Const.DCONST_0, (short) 1);
         if (f == 0.0) {
