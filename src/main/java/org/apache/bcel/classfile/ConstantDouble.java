@@ -106,7 +106,9 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     }
 
     /**
-     * @param bytes the raw bytes that represent the double value
+     * Sets the raw bytes that represent the double value.
+     *
+     * @param bytes the raw bytes that represent the double value.
      */
     public void setBytes(final double bytes) {
         this.bytes = bytes;
