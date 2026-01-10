@@ -67,10 +67,12 @@ public final class ConstantValue extends Attribute {
     }
 
     /**
-     * @param nameIndex Name index in constant pool
-     * @param length Content length in bytes
-     * @param constantValueIndex Index in constant pool
-     * @param constantPool Array of constants
+     * Constructs a ConstantValue.
+     *
+     * @param nameIndex Name index in constant pool.
+     * @param length Content length in bytes.
+     * @param constantValueIndex Index in constant pool.
+     * @param constantPool Array of constants.
      */
     public ConstantValue(final int nameIndex, final int length, final int constantValueIndex, final ConstantPool constantPool) {
         super(Const.ATTR_CONSTANT_VALUE, nameIndex, Args.require(length, 2, "ConstantValue attribute length"), constantPool);
@@ -89,7 +91,10 @@ public final class ConstantValue extends Attribute {
     }
 
     /**
-     * @return deep copy of this attribute
+     * Creates a deep copy of this attribute.
+     *
+     * @param constantPool the constant pool.
+     * @return deep copy of this attribute.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {
@@ -111,6 +116,8 @@ public final class ConstantValue extends Attribute {
     }
 
     /**
+     * Gets the index in constant pool of constant value.
+     *
      * @return Index in constant pool of constant value.
      */
     public int getConstantValueIndex() {
@@ -118,7 +125,9 @@ public final class ConstantValue extends Attribute {
     }
 
     /**
-     * @param constantValueIndex the index info the constant pool of this constant value
+     * Sets the constant value index.
+     *
+     * @param constantValueIndex the index info the constant pool of this constant value.
      */
     public void setConstantValueIndex(final int constantValueIndex) {
         this.constantValueIndex = constantValueIndex;
