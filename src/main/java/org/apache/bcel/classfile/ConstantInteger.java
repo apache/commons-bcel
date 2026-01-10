@@ -53,7 +53,9 @@ public final class ConstantInteger extends Constant implements ConstantObject {
     }
 
     /**
-     * @param bytes Data
+     * Constructs a ConstantInteger.
+     *
+     * @param bytes Data.
      */
     public ConstantInteger(final int bytes) {
         super(Const.CONSTANT_Integer);
@@ -84,14 +86,19 @@ public final class ConstantInteger extends Constant implements ConstantObject {
     }
 
     /**
-     * @return data, i.e., 4 bytes.
+     * Gets the data.
+     *
+     * @return data, that is, 4 bytes.
      */
     public int getBytes() {
         return bytes;
     }
 
     /**
-     * @return Integer object
+     * Gets the Integer object.
+     *
+     * @param cp the constant pool (not used).
+     * @return Integer object.
      */
     @Override
     public Object getConstantValue(final ConstantPool cp) {
