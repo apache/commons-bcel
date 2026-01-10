@@ -32,7 +32,9 @@ public abstract class ConversionInstruction extends Instruction implements Typed
     }
 
     /**
-     * @param opcode opcode of instruction
+     * Constructs a ConversionInstruction.
+     *
+     * @param opcode opcode of instruction.
      */
     protected ConversionInstruction(final short opcode) {
         super(opcode, (short) 1);
