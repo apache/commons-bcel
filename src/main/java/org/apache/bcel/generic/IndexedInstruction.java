@@ -23,7 +23,17 @@ package org.apache.bcel.generic;
  */
 public interface IndexedInstruction {
 
+    /**
+     * Gets the index.
+     *
+     * @return the index.
+     */
     int getIndex();
 
+    /**
+     * Sets the index.
+     *
+     * @param index the index.
+     */
     void setIndex(int index);
 }
