@@ -65,8 +65,11 @@ public abstract class ConstantCP extends Constant {
     }
 
     /**
-     * @param classIndex Reference to the class containing the field
-     * @param nameAndTypeIndex and the field signature
+     * Constructs a ConstantCP.
+     *
+     * @param tag the constant type tag.
+     * @param classIndex Reference to the class containing the field.
+     * @param nameAndTypeIndex and the field signature.
      */
     protected ConstantCP(final byte tag, final int classIndex, final int nameAndTypeIndex) {
         super(tag);
@@ -86,7 +89,7 @@ public abstract class ConstantCP extends Constant {
     /**
      * Dump constant field reference to file stream in binary format.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     @Override
@@ -97,6 +100,9 @@ public abstract class ConstantCP extends Constant {
     }
 
     /**
+     * Gets the class this field belongs to.
+     *
+     * @param cp the constant pool.
      * @return Class this field belongs to.
      */
     public String getClass(final ConstantPool cp) {
@@ -104,6 +110,8 @@ public abstract class ConstantCP extends Constant {
     }
 
     /**
+     * Gets the reference (index) to class this constant refers to.
+     *
      * @return Reference (index) to class this constant refers to.
      */
     public final int getClassIndex() {
@@ -111,6 +119,8 @@ public abstract class ConstantCP extends Constant {
     }
 
     /**
+     * Gets the reference (index) to signature of the field.
+     *
      * @return Reference (index) to signature of the field.
      */
     public final int getNameAndTypeIndex() {
@@ -118,14 +128,18 @@ public abstract class ConstantCP extends Constant {
     }
 
     /**
-     * @param classIndex points to Constant_class
+     * Sets the class index.
+     *
+     * @param classIndex points to Constant_class.
      */
     public final void setClassIndex(final int classIndex) {
         this.class_index = classIndex;
     }
 
     /**
-     * @param nameAndTypeIndex points to Constant_NameAndType
+     * Sets the name and type index.
+     *
+     * @param nameAndTypeIndex points to Constant_NameAndType.
      */
     public final void setNameAndTypeIndex(final int nameAndTypeIndex) {
         this.name_and_type_index = nameAndTypeIndex;
