@@ -48,6 +48,8 @@ public abstract class Constant implements Cloneable, Node {
     };
 
     /**
+     * Gets the comparison strategy object.
+     *
      * @return Comparison strategy object.
      */
     public static BCELComparator<Constant> getComparator() {
@@ -106,7 +108,9 @@ public abstract class Constant implements Cloneable, Node {
     }
 
     /**
-     * @param comparator Comparison strategy object
+     * Sets the comparison strategy object.
+     *
+     * @param comparator Comparison strategy object.
      */
     public static void setComparator(final BCELComparator<Constant> comparator) {
         bcelComparator = comparator;
@@ -149,7 +153,9 @@ public abstract class Constant implements Cloneable, Node {
     }
 
     /**
-     * @return deep copy of this constant
+     * Creates a deep copy of this constant.
+     *
+     * @return deep copy of this constant.
      */
     public Constant copy() {
         try {
@@ -160,6 +166,12 @@ public abstract class Constant implements Cloneable, Node {
         return null;
     }
 
+    /**
+     * Dumps constant to file stream in binary format.
+     *
+     * @param file the output stream.
+     * @throws IOException if an I/O error occurs.
+     */
     public abstract void dump(DataOutputStream file) throws IOException;
 
     /**
@@ -174,7 +186,9 @@ public abstract class Constant implements Cloneable, Node {
     }
 
     /**
-     * @return Tag of constant, i.e., its type. No setTag() method to avoid confusion.
+     * Gets the tag of constant.
+     *
+     * @return Tag of constant, that is, its type. No setTag() method to avoid confusion.
      */
     public final byte getTag() {
         return tag;
