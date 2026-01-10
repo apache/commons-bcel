@@ -53,7 +53,9 @@ public final class ConstantString extends Constant implements ConstantObject {
     }
 
     /**
-     * @param stringIndex Index of Constant_Utf8 in constant pool
+     * Constructs a ConstantString.
+     *
+     * @param stringIndex Index of Constant_Utf8 in constant pool.
      */
     public ConstantString(final int stringIndex) {
         super(Const.CONSTANT_String);
@@ -84,14 +86,20 @@ public final class ConstantString extends Constant implements ConstantObject {
     }
 
     /**
-     * @return dereferenced string
+     * Gets the dereferenced string.
+     *
+     * @param cp the constant pool.
+     * @return dereferenced string.
      */
     public String getBytes(final ConstantPool cp) {
         return (String) getConstantValue(cp);
     }
 
     /**
-     * @return String object
+     * Gets the String object.
+     *
+     * @param cp the constant pool.
+     * @return String object.
      */
     @Override
     public Object getConstantValue(final ConstantPool cp) {
@@ -99,6 +107,8 @@ public final class ConstantString extends Constant implements ConstantObject {
     }
 
     /**
+     * Gets the index in constant pool of the string.
+     *
      * @return Index in constant pool of the string (ConstantUtf8).
      */
     public int getStringIndex() {
@@ -106,7 +116,9 @@ public final class ConstantString extends Constant implements ConstantObject {
     }
 
     /**
-     * @param stringIndex the index into the constant of the string value
+     * Sets the string index.
+     *
+     * @param stringIndex the index into the constant of the string value.
      */
     public void setStringIndex(final int stringIndex) {
         this.stringIndex = stringIndex;
