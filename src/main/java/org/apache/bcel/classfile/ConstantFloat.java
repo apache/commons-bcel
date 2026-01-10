@@ -54,7 +54,9 @@ public final class ConstantFloat extends Constant implements ConstantObject {
     }
 
     /**
-     * @param bytes Data
+     * Constructs a ConstantFloat.
+     *
+     * @param bytes Data.
      */
     public ConstantFloat(final float bytes) {
         super(Const.CONSTANT_Float);
@@ -85,14 +87,19 @@ public final class ConstantFloat extends Constant implements ConstantObject {
     }
 
     /**
-     * @return data, i.e., 4 bytes.
+     * Gets the data.
+     *
+     * @return data, that is, 4 bytes.
      */
     public float getBytes() {
         return bytes;
     }
 
     /**
-     * @return Float object
+     * Gets the Float object.
+     *
+     * @param cp the constant pool (not used).
+     * @return Float object.
      */
     @Override
     public Object getConstantValue(final ConstantPool cp) {
