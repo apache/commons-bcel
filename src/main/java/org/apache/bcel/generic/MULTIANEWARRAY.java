@@ -78,7 +78,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
     }
 
     /**
-     * Dump instruction as byte code to stream out.
+     * Dumps instruction as byte code to stream out.
      *
      * @param out Output stream
      */

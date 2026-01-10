@@ -60,7 +60,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
     }
 
     /**
-     * Dump instruction as byte code to stream out.
+     * Dumps instruction as byte code to stream out.
      *
      * @param out Output stream
      */

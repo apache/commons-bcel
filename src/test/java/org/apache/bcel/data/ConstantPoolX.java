@@ -179,7 +179,7 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     }
 
     /**
-     * Dump constant pool to file stream in binary format.
+     * Dumps constant pool to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

@@ -95,7 +95,7 @@ public final class StackMapType implements Node, Cloneable {
     }
 
     /**
-     * Dump type entries to file.
+     * Dumps type entries to file.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

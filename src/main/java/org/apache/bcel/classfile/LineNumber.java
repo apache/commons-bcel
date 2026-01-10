@@ -92,7 +92,7 @@ public final class LineNumber implements Cloneable, Node {
     }
 
     /**
-     * Dump line number/pc pair to file stream in binary format.
+     * Dumps line number/pc pair to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O Exception occurs in writeShort

@@ -93,7 +93,7 @@ public final class InnerClass implements Cloneable, Node {
     }
 
     /**
-     * Dump inner class attribute to file stream in binary format.
+     * Dumps inner class attribute to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

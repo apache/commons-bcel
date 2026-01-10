@@ -175,7 +175,7 @@ public final class StackMapEntry implements Node, Cloneable {
     }
 
     /**
-     * Dump stack map entry
+     * Dumps stack map entry
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

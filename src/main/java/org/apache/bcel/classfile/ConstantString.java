@@ -74,7 +74,7 @@ public final class ConstantString extends Constant implements ConstantObject {
     }
 
     /**
-     * Dump constant field reference to file stream in binary format.
+     * Dumps constant field reference to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

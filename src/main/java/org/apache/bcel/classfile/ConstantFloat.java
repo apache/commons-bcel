@@ -75,7 +75,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
     }
 
     /**
-     * Dump constant float to file stream in binary format.
+     * Dumps constant float to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

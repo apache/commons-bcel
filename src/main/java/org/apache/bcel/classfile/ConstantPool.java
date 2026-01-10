@@ -230,7 +230,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
     }
 
     /**
-     * Dump constant pool to file stream in binary format.
+     * Dumps constant pool to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if problem in writeShort or dump

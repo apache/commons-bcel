@@ -61,7 +61,7 @@ public class SIPUSH extends Instruction implements ConstantPushInstruction {
     }
 
     /**
-     * Dump instruction as short code to stream out.
+     * Dumps instruction as short code to stream out.
      */
     @Override
     public void dump(final DataOutputStream out) throws IOException {

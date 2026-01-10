@@ -199,7 +199,7 @@ public class ListClass {
     }
 
     /**
-     * Dump the list of classes this class is dependent on
+     * Dumps the list of classes this class is dependent on
      */
     public static void printClassDependencies(final ConstantPool pool) {
         System.out.println("Dependencies:");
@@ -209,7 +209,7 @@ public class ListClass {
     }
 
     /**
-     * Dump the disassembled code of all methods in the class.
+     * Dumps the disassembled code of all methods in the class.
      */
     public static void printCode(final Method[] methods, final boolean verbose) {
         Streams.of(methods).forEach(method -> {

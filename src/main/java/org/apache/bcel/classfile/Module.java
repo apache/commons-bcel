@@ -143,7 +143,7 @@ public final class Module extends Attribute {
     }
 
     /**
-     * Dump Module attribute to file stream in binary format.
+     * Dumps Module attribute to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

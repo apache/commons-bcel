@@ -99,7 +99,7 @@ public class BootstrapMethod implements Cloneable {
     }
 
     /**
-     * Dump object to file stream in binary format.
+     * Dumps object to file stream in binary format.
      *
      * @param file Output file stream.
      * @throws IOException if an I/O error occurs.

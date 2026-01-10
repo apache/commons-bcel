@@ -109,7 +109,7 @@ public class BootstrapMethods extends Attribute implements Iterable<BootstrapMet
     }
 
     /**
-     * Dump bootstrap methods attribute to file stream in binary format.
+     * Dumps bootstrap methods attribute to file stream in binary format.
      *
      * @param file Output file stream.
      * @throws IOException if an I/O error occurs.

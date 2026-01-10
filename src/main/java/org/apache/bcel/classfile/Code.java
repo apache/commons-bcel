@@ -181,7 +181,7 @@ public final class Code extends Attribute {
     }
 
     /**
-     * Dump code attribute to file stream in binary format.
+     * Dumps code attribute to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

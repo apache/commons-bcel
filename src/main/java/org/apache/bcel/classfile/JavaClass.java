@@ -324,7 +324,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * Dump Java class to output stream in binary format.
+     * Dumps Java class to output stream in binary format.
      *
      * @param file Output stream
      * @throws IOException if an I/O error occurs.
@@ -361,7 +361,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * Dump class to a file.
+     * Dumps class to a file.
      *
      * @param file Output file
      * @throws IOException if an I/O error occurs.
@@ -380,7 +380,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * Dump Java class to output stream in binary format.
+     * Dumps Java class to output stream in binary format.
      *
      * @param file Output stream
      * @throws IOException if an I/O error occurs.
@@ -390,7 +390,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * Dump class to a file named fileName.
+     * Dumps class to a file named fileName.
      *
      * @param fileName Output file name
      * @throws IOException if an I/O error occurs.

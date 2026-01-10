@@ -78,7 +78,7 @@ public final class ConstantMethodHandle extends Constant {
     }
 
     /**
-     * Dump method kind and index to file stream in binary format.
+     * Dumps method kind and index to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

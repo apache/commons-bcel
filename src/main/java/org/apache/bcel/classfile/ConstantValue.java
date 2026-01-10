@@ -104,7 +104,7 @@ public final class ConstantValue extends Attribute {
     }
 
     /**
-     * Dump constant value attribute to file stream on binary format.
+     * Dumps constant value attribute to file stream on binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

@@ -79,7 +79,7 @@ public final class ConstantPackage extends Constant implements ConstantObject {
     }
 
     /**
-     * Dump constant package to file stream in binary format.
+     * Dumps constant package to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

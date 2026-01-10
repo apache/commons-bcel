@@ -105,7 +105,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
     }
 
     /**
-     * Dump local variable table attribute to file stream in binary format.
+     * Dumps local variable table attribute to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

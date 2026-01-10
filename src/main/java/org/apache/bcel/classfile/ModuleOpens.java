@@ -83,7 +83,7 @@ public final class ModuleOpens implements Cloneable, Node {
     }
 
     /**
-     * Dump table entry to file stream in binary format.
+     * Dumps table entry to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O Exception occurs in writeShort

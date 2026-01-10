@@ -93,7 +93,7 @@ public final class SourceFile extends Attribute {
     }
 
     /**
-     * Dump source file attribute to file stream in binary format.
+     * Dumps source file attribute to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

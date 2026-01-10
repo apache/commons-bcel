@@ -74,7 +74,7 @@ public final class ConstantInteger extends Constant implements ConstantObject {
     }
 
     /**
-     * Dump constant integer to file stream in binary format.
+     * Dumps constant integer to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

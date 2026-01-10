@@ -78,7 +78,7 @@ public final class ConstantNameAndType extends Constant {
     }
 
     /**
-     * Dump name and signature index to file stream in binary format.
+     * Dumps name and signature index to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

@@ -52,7 +52,7 @@ public class GOTO extends GotoInstruction implements VariableLengthInstruction {
     }
 
     /**
-     * Dump instruction as byte code to stream out.
+     * Dumps instruction as byte code to stream out.
      *
      * @param out Output stream
      */

@@ -114,7 +114,7 @@ public final class ExceptionTable extends Attribute {
     }
 
     /**
-     * Dump exceptions attribute to file stream in binary format.
+     * Dumps exceptions attribute to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

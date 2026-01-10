@@ -68,7 +68,7 @@ public class MethodParameters extends Attribute implements Iterable<MethodParame
     }
 
     /**
-     * Dump method parameters attribute to file stream in binary format.
+     * Dumps method parameters attribute to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

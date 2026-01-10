@@ -66,7 +66,7 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
     }
 
     /**
-     * Dump instruction as byte code to stream out.
+     * Dumps instruction as byte code to stream out.
      */
     @Override
     public void dump(final DataOutputStream out) throws IOException {

@@ -139,7 +139,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     }
 
     /**
-     * Dump object to file stream on binary format.
+     * Dumps object to file stream on binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

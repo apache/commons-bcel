@@ -109,7 +109,7 @@ public final class LineNumberTable extends Attribute implements Iterable<LineNum
     }
 
     /**
-     * Dump line number table attribute to file stream in binary format.
+     * Dumps line number table attribute to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O Exception occurs in writeShort

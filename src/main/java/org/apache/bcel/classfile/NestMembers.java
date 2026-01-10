@@ -104,7 +104,7 @@ public final class NestMembers extends Attribute {
     }
 
     /**
-     * Dump NestMembers attribute to file stream in binary format.
+     * Dumps NestMembers attribute to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.

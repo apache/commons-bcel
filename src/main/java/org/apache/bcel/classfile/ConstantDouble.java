@@ -74,7 +74,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     }
 
     /**
-     * Dump constant double to file stream in binary format.
+     * Dumps constant double to file stream in binary format.
      *
      * @param file Output file stream
      * @throws IOException if an I/O error occurs.
