@@ -53,7 +53,9 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     }
 
     /**
-     * @param bytes Data
+     * Constructs a ConstantDouble.
+     *
+     * @param bytes Data.
      */
     public ConstantDouble(final double bytes) {
         super(Const.CONSTANT_Double);
@@ -84,14 +86,19 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     }
 
     /**
-     * @return data, i.e., 8 bytes.
+     * Gets the data.
+     *
+     * @return data, that is, 8 bytes.
      */
     public double getBytes() {
         return bytes;
     }
 
     /**
-     * @return Double object
+     * Gets the Double object.
+     *
+     * @param cp the constant pool (not used).
+     * @return Double object.
      */
     @Override
     public Object getConstantValue(final ConstantPool cp) {
