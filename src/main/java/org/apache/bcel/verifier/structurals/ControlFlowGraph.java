@@ -391,6 +391,9 @@ public class ControlFlowGraph {
 
     /**
      * Returns the InstructionContext of a given instruction.
+     *
+     * @param inst the instruction handle.
+     * @return the InstructionContext of the given instruction.
      */
     public InstructionContext contextOf(final InstructionHandle inst) {
         final InstructionContext ic = instructionContexts.get(inst);
@@ -402,6 +405,9 @@ public class ControlFlowGraph {
 
     /**
      * Returns the InstructionContext[] of a given InstructionHandle[], in a naturally ordered manner.
+     *
+     * @param insts the instruction handles.
+     * @return the InstructionContext array of the given instruction handles.
      */
     public InstructionContext[] contextsOf(final InstructionHandle[] insts) {
         final InstructionContext[] ret = new InstructionContext[insts.length];
@@ -412,6 +418,8 @@ public class ControlFlowGraph {
     /**
      * Returns an InstructionContext[] with all the InstructionContext instances for the method whose control flow is
      * represented by this ControlFlowGraph <strong>(NOT ORDERED!)</strong>.
+     *
+     * @return array of InstructionContext instances.
      */
     public InstructionContext[] getInstructionContexts() {
         final InstructionContext[] ret = new InstructionContext[instructionContexts.size()];
@@ -421,6 +429,9 @@ public class ControlFlowGraph {
     /**
      * Returns true, if and only if the said instruction is not reachable; that means, if it is not part of this
      * ControlFlowGraph.
+     *
+     * @param i the instruction handle.
+     * @return true if the instruction is not reachable, false otherwise.
      */
     public boolean isDead(final InstructionHandle i) {
         return subroutines.subroutineOf(i) == null;
