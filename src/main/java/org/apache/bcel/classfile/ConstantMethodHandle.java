@@ -54,6 +54,12 @@ public final class ConstantMethodHandle extends Constant {
         this(file.readUnsignedByte(), file.readUnsignedShort());
     }
 
+    /**
+     * Constructs a ConstantMethodHandle.
+     *
+     * @param referenceKind Kind of method reference.
+     * @param referenceIndex Index to the method reference.
+     */
     public ConstantMethodHandle(final int referenceKind, final int referenceIndex) {
         super(Const.CONSTANT_MethodHandle);
         this.referenceKind = referenceKind;
@@ -84,18 +90,38 @@ public final class ConstantMethodHandle extends Constant {
         file.writeShort(referenceIndex);
     }
 
+    /**
+     * Gets the reference index.
+     *
+     * @return the reference index.
+     */
     public int getReferenceIndex() {
         return referenceIndex;
     }
 
+    /**
+     * Gets the reference kind.
+     *
+     * @return the reference kind.
+     */
     public int getReferenceKind() {
         return referenceKind;
     }
 
+    /**
+     * Sets the reference index.
+     *
+     * @param referenceIndex the reference index.
+     */
     public void setReferenceIndex(final int referenceIndex) {
         this.referenceIndex = referenceIndex;
     }
 
+    /**
+     * Sets the reference kind.
+     *
+     * @param referenceKind the reference kind.
+     */
     public void setReferenceKind(final int referenceKind) {
         this.referenceKind = referenceKind;
     }
