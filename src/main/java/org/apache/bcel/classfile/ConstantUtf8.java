@@ -209,7 +209,9 @@ public final class ConstantUtf8 extends Constant {
     }
 
     /**
-     * @param value Data
+     * Constructs a ConstantUtf8.
+     *
+     * @param value Data.
      */
     public ConstantUtf8(final String value) {
         super(Const.CONSTANT_Utf8);
@@ -241,6 +243,8 @@ public final class ConstantUtf8 extends Constant {
     }
 
     /**
+     * Gets the data converted to string.
+     *
      * @return Data converted to string.
      */
     public String getBytes() {
