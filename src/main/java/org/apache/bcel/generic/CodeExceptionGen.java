@@ -73,7 +73,11 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
         return startPc == ih || endPc == ih || handlerPc == ih;
     }
 
-    /** Gets the type of the Exception to catch, 'null' for ANY. */
+    /**
+     * Gets the type of the Exception to catch, 'null' for ANY.
+     *
+     * @return the type of the Exception to catch, 'null' for ANY.
+     */
     public ObjectType getCatchType() {
         return catchType;
     }
@@ -84,7 +88,8 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
      * This relies on that the instruction list has already been dumped to byte code or that the 'setPositions' methods
      * has been called for the instruction list.
      *
-     * @param cp constant pool
+     * @param cp constant pool.
+     * @return the CodeException object.
      */
     public CodeException getCodeException(final ConstantPoolGen cp) {
         return new CodeException(startPc.getPosition(), endPc.getPosition() + endPc.getInstruction().getLength(), handlerPc.getPosition(),
@@ -92,55 +97,65 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     }
 
     /**
-     * @return end of handled region (inclusive)
+     * Gets the end of handled region (inclusive).
+     *
+     * @return end of handled region (inclusive).
      */
     public InstructionHandle getEndPC() {
         return endPc;
     }
 
     /**
-     * @return start of handler
+     * Gets the start of handler.
+     *
+     * @return start of handler.
      */
     public InstructionHandle getHandlerPC() {
         return handlerPc;
     }
 
     /**
-     * @return start of handled region (inclusive)
+     * Gets the start of handled region (inclusive).
+     *
+     * @return start of handled region (inclusive).
      */
     public InstructionHandle getStartPC() {
         return startPc;
     }
 
-    /** Sets the type of the Exception to catch. Set 'null' for ANY. */
+    /**
+     * Sets the type of the Exception to catch. Set 'null' for ANY.
+     *
+     * @param catchType the type of the Exception to catch.
+     */
     public void setCatchType(final ObjectType catchType) {
         this.catchType = catchType;
     }
 
-    /*
-     * Sets end of handler
+    /**
+     * Sets end of handler.
      *
-     * @param endPc End of handled region (inclusive)
+     * @param endPc End of handled region (inclusive).
      */
     public void setEndPC(final InstructionHandle endPc) { // TODO could be package-protected?
         BranchInstruction.notifyTarget(this.endPc, endPc, this);
         this.endPc = endPc;
     }
 
-    /*
-     * Sets handler code
+    /**
+     * Sets handler code.
      *
-     * @param handlerPc Start of handler
+     * @param handlerPc Start of handler.
      */
     public void setHandlerPC(final InstructionHandle handlerPc) { // TODO could be package-protected?
         BranchInstruction.notifyTarget(this.handlerPc, handlerPc, this);
         this.handlerPc = handlerPc;
     }
 
-    /*
-     * Sets start of handler
+    /**
+     * Sets start of handler.
      *
-     * @param startPc Start of handled region (inclusive)
+     * @param startPc Start of handled region (inclusive).
      */
     public void setStartPC(final InstructionHandle startPc) { // TODO could be package-protected?
         BranchInstruction.notifyTarget(this.startPc, startPc, this);
