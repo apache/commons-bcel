@@ -48,8 +48,10 @@ public final class ConstantMethodref extends ConstantCP {
     }
 
     /**
-     * @param classIndex Reference to the class containing the method
-     * @param nameAndTypeIndex and the method signature
+     * Constructs a ConstantMethodref.
+     *
+     * @param classIndex Reference to the class containing the method.
+     * @param nameAndTypeIndex and the method signature.
      */
     public ConstantMethodref(final int classIndex, final int nameAndTypeIndex) {
         super(Const.CONSTANT_Methodref, classIndex, nameAndTypeIndex);
