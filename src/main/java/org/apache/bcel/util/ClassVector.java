@@ -39,6 +39,12 @@ public class ClassVector implements Serializable {
     protected transient List<JavaClass> vec = new ArrayList<>();
 
     /**
+     * Constructs a new ClassVector.
+     */
+    public ClassVector() {
+    }
+
+    /**
      * Adds a JavaClass to the vector.
      *
      * @param clazz the JavaClass to add.
