@@ -230,11 +230,19 @@ public final class CodeException implements Cloneable, Node, Constants {
         return "CodeException(startPc = " + startPc + ", endPc = " + endPc + ", handlerPc = " + handlerPc + ", catchType = " + catchType + ")";
     }
 
+    /**
+     * Gets a string representation with constant pool.
+     *
+     * @param cp constant pool source.
+     * @return String representation.
+     */
     public String toString(final ConstantPool cp) {
         return toString(cp, true);
     }
 
     /**
+     * Gets a string representation with constant pool.
+     *
      * @param cp constant pool source.
      * @param verbose Output more if true.
      * @return String representation.
