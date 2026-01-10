@@ -32,6 +32,12 @@ public class ClassStack {
     private final Stack<JavaClass> stack = new Stack<>();
 
     /**
+     * Constructs a new ClassStack.
+     */
+    public ClassStack() {
+    }
+
+    /**
      * Checks if the stack is empty.
      *
      * @return true if the stack is empty.
