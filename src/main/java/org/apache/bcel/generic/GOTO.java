@@ -32,6 +32,11 @@ public class GOTO extends GotoInstruction implements VariableLengthInstruction {
     GOTO() {
     }
 
+    /**
+     * Constructs a GOTO instruction.
+     *
+     * @param target the target instruction.
+     */
     public GOTO(final InstructionHandle target) {
         super(org.apache.bcel.Const.GOTO, target);
     }
