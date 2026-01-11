@@ -35,7 +35,10 @@ public interface InstructionContext {
      * This method is JustIce-specific and is usually of no sense for users of the ControlFlowGraph class. They should use
      * getInstruction().accept(Visitor), possibly in conjunction with the ExecutionVisitor.
      *
-     *
+     * @param inFrame the incoming frame.
+     * @param executionPredecessors the execution predecessors.
+     * @param icv the instruction constraint visitor.
+     * @param ev the execution visitor.
      * @see ControlFlowGraph
      * @see ExecutionVisitor
      * @see #getOutFrame(ArrayList)
@@ -45,9 +48,16 @@ public interface InstructionContext {
 
     /**
      * Returns the exception handlers that protect this instruction. They are special control flow successors.
+     *
+     * @return the exception handlers.
      */
     ExceptionHandler[] getExceptionHandlers();
 
+    /**
+     * Gets the incoming frame.
+     *
+     * @return the incoming frame.
+     */
     Frame getInFrame();
 
     /**
@@ -61,6 +71,8 @@ public interface InstructionContext {
      * This method returns the outgoing execution frame situation; therefore <B>it has to be calculated by execute(Frame,
      * ArrayList) first.</B>
      *
+     * @param executionPredecessors the execution predecessors.
+     * @return the outgoing frame.
      * @see #execute(Frame, ArrayList, InstConstraintVisitor, ExecutionVisitor)
      */
     Frame getOutFrame(ArrayList<InstructionContext> executionPredecessors);
@@ -68,6 +80,7 @@ public interface InstructionContext {
     /**
      * Returns the usual control flow successors.
      *
+     * @return the successors.
      * @see #getExceptionHandlers()
      */
     InstructionContext[] getSuccessors();
@@ -76,6 +89,7 @@ public interface InstructionContext {
      * The getTag and setTag methods may be used for temporary flagging, such as graph coloring. Nothing in the
      * InstructionContext object depends on the value of the tag. JustIce does not use it.
      *
+     * @return the tag value.
      * @see #setTag(int tag)
      */
     int getTag();
@@ -84,6 +98,7 @@ public interface InstructionContext {
      * The getTag and setTag methods may be used for temporary flagging, such as graph coloring. Nothing in the
      * InstructionContext object depends on the value of the tag. JustIce does not use it.
      *
+     * @param tag the tag value.
      * @see #getTag()
      */
     void setTag(int tag);
