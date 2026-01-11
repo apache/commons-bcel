@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class INEG extends ArithmeticInstruction {
 
+    /**
+     * Constructs an INEG instruction.
+     */
     public INEG() {
         super(org.apache.bcel.Const.INEG);
     }
