@@ -278,3 +278,4 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
         }
     }
 }
+
