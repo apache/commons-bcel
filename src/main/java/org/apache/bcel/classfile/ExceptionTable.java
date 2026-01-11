@@ -78,10 +78,12 @@ public final class ExceptionTable extends Attribute {
     }
 
     /**
-     * @param nameIndex Index in constant pool
-     * @param length Content length in bytes
-     * @param exceptionIndexTable Table of indices in constant pool
-     * @param constantPool Array of constants
+     * Constructs an ExceptionTable.
+     *
+     * @param nameIndex Index in constant pool.
+     * @param length Content length in bytes.
+     * @param exceptionIndexTable Table of indices in constant pool.
+     * @param constantPool Array of constants.
      */
     public ExceptionTable(final int nameIndex, final int length, final int[] exceptionIndexTable, final ConstantPool constantPool) {
         super(Const.ATTR_EXCEPTIONS, nameIndex, length, constantPool);
@@ -91,9 +93,9 @@ public final class ExceptionTable extends Attribute {
 
     /**
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
-     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
+     * That is, the hierarchy of methods, fields, attributes, and so on spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -101,7 +103,9 @@ public final class ExceptionTable extends Attribute {
     }
 
     /**
-     * @return deep copy of this attribute
+     * Creates a deep copy of this attribute.
+     *
+     * @return deep copy of this attribute.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {
@@ -116,7 +120,7 @@ public final class ExceptionTable extends Attribute {
     /**
      * Dumps exceptions attribute to file stream in binary format.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     @Override
@@ -129,6 +133,8 @@ public final class ExceptionTable extends Attribute {
     }
 
     /**
+     * Gets the array of indices into constant pool of thrown exceptions.
+     *
      * @return Array of indices into constant pool of thrown exceptions.
      */
     public int[] getExceptionIndexTable() {
@@ -136,7 +142,9 @@ public final class ExceptionTable extends Attribute {
     }
 
     /**
-     * @return class names of thrown exceptions
+     * Gets the class names of thrown exceptions.
+     *
+     * @return class names of thrown exceptions.
      */
     public String[] getExceptionNames() {
         final String[] names = new String[exceptionIndexTable.length];
@@ -145,6 +153,8 @@ public final class ExceptionTable extends Attribute {
     }
 
     /**
+     * Gets the length of exception table.
+     *
      * @return Length of exception table.
      */
     public int getNumberOfExceptions() {
@@ -152,6 +162,8 @@ public final class ExceptionTable extends Attribute {
     }
 
     /**
+     * Sets the exception index table.
+     *
      * @param exceptionIndexTable the list of exception indexes Also redefines number_of_exceptions according to table
      *        length.
      */
