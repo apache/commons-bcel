@@ -34,6 +34,11 @@ public class GOTO_W extends GotoInstruction {
     GOTO_W() {
     }
 
+    /**
+     * Constructs a GOTO_W instruction.
+     *
+     * @param target the target instruction.
+     */
     public GOTO_W(final InstructionHandle target) {
         super(org.apache.bcel.Const.GOTO_W, target);
         super.setLength(5);
