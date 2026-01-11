@@ -44,6 +44,8 @@ public class ExceptionHandlers {
 
     /**
      * Constructs a new ExceptionHandlers instance.
+     *
+     * @param mg the method generator.
      */
     public ExceptionHandlers(final MethodGen mg) {
         exceptionHandlers = new HashMap<>();
@@ -58,6 +60,9 @@ public class ExceptionHandlers {
 
     /**
      * Returns all the ExceptionHandler instances representing exception handlers that protect the instruction ih.
+     *
+     * @param ih the instruction handle.
+     * @return array of exception handlers.
      */
     public ExceptionHandler[] getExceptionHandlers(final InstructionHandle ih) {
         final Set<ExceptionHandler> hsSet = exceptionHandlers.get(ih);
