@@ -149,6 +149,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
 
     /**
      * Sets the ConstantPoolGen instance needed for constraint checking prior to execution.
+     *
+     * @param cpg the constant pool generator.
      */
     public void setConstantPoolGen(final ConstantPoolGen cpg) { // TODO could be package-protected?
         this.cpg = cpg;
@@ -158,6 +160,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      * This returns the single instance of the InstConstraintVisitor class. To operate correctly, other values must have
      * been set before actually using the instance. Use this method for performance reasons.
      *
+     * @param f the frame to set.
      * @see #setConstantPoolGen(ConstantPoolGen cpg)
      * @see #setMethodGen(MethodGen mg)
      */
@@ -169,6 +172,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
 
     /**
      * Sets the MethodGen instance needed for constraint checking prior to execution.
+     *
+     * @param mg the method generator.
      */
     public void setMethodGen(final MethodGen mg) {
         this.mg = mg;
@@ -2049,6 +2054,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
 
     /**
      * Ensures the specific preconditions of the said instruction.
+     *
+     * @param o the instruction to visit.
      */
     public void visitLDC_W(final LDC_W o) {
         // visitCPInstruction is called first.
