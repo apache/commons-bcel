@@ -702,7 +702,8 @@ public class InstructionFactory implements InstructionConstants {
      * @param name name of the called method
      * @param retType return type of method
      * @param argTypes argument types of method
-     * @param kind how to invoke, i.e., INVOKEINTERFACE, INVOKESTATIC, INVOKEVIRTUAL, or INVOKESPECIAL
+     * @param kind how to invoke, that is, INVOKEINTERFACE, INVOKESTATIC, INVOKEVIRTUAL, or INVOKESPECIAL
+     * @return the invoke instruction.
      * @see Const
      */
     public InvokeInstruction createInvoke(final String className, final String name, final Type retType, final Type[] argTypes, final short kind) {
@@ -818,26 +819,62 @@ public class InstructionFactory implements InstructionConstants {
         return il;
     }
 
+    /**
+     * Creates a PUTFIELD instruction.
+     *
+     * @param className the class name.
+     * @param name the field name.
+     * @param t the field type.
+     * @return the PUTFIELD instruction.
+     */
     public PUTFIELD createPutField(final String className, final String name, final Type t) {
         return new PUTFIELD(cp.addFieldref(className, name, t.getSignature()));
     }
 
+    /**
+     * Creates a PUTSTATIC instruction.
+     *
+     * @param className the class name.
+     * @param name the field name.
+     * @param t the field type.
+     * @return the PUTSTATIC instruction.
+     */
     public PUTSTATIC createPutStatic(final String className, final String name, final Type t) {
         return new PUTSTATIC(cp.addFieldref(className, name, t.getSignature()));
     }
 
+    /**
+     * Gets the class generator.
+     *
+     * @return the class generator.
+     */
     public ClassGen getClassGen() {
         return cg;
     }
 
+    /**
+     * Gets the constant pool generator.
+     *
+     * @return the constant pool generator.
+     */
     public ConstantPoolGen getConstantPool() {
         return cp;
     }
 
+    /**
+     * Sets the class generator.
+     *
+     * @param c the class generator.
+     */
     public void setClassGen(final ClassGen c) {
         cg = c;
     }
 
+    /**
+     * Sets the constant pool generator.
+     *
+     * @param c the constant pool generator.
+     */
     public void setConstantPool(final ConstantPoolGen c) {
         cp = c;
     }
