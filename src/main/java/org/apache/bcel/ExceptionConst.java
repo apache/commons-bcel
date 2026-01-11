@@ -32,14 +32,19 @@ public final class ExceptionConst {
      * {@link ExceptionConst#createExceptions(EXCS, Class...)}.
      */
     public enum EXCS {
+
         /** Exception class and interface resolution. */
         EXCS_CLASS_AND_INTERFACE_RESOLUTION,
+
         /** Exception field and method resolution. */
         EXCS_FIELD_AND_METHOD_RESOLUTION,
+
         /** Exception interface method resolution. */
         EXCS_INTERFACE_METHOD_RESOLUTION,
+
         /** Exception string resolution. */
         EXCS_STRING_RESOLUTION,
+
         /** Exception array exception. */
         EXCS_ARRAY_EXCEPTION,
     }
@@ -66,26 +71,37 @@ public final class ExceptionConst {
     /**
      * Linking Exceptions.
      */
+
     /** Exception class: ClassCircularityError. */
     public static final Class<ClassCircularityError> CLASS_CIRCULARITY_ERROR = ClassCircularityError.class;
+
     /** Exception class: ClassFormatError. */
     public static final Class<ClassFormatError> CLASS_FORMAT_ERROR = ClassFormatError.class;
+
     /** Exception class: ExceptionInInitializerError. */
     public static final Class<ExceptionInInitializerError> EXCEPTION_IN_INITIALIZER_ERROR = ExceptionInInitializerError.class;
+
     /** Exception class: IncompatibleClassChangeError. */
     public static final Class<IncompatibleClassChangeError> INCOMPATIBLE_CLASS_CHANGE_ERROR = IncompatibleClassChangeError.class;
+
     /** Exception class: AbstractMethodError. */
     public static final Class<AbstractMethodError> ABSTRACT_METHOD_ERROR = AbstractMethodError.class;
+
     /** Exception class: IllegalAccessError. */
     public static final Class<IllegalAccessError> ILLEGAL_ACCESS_ERROR = IllegalAccessError.class;
+
     /** Exception class: InstantiationError. */
     public static final Class<InstantiationError> INSTANTIATION_ERROR = InstantiationError.class;
+
     /** Exception class: NoSuchFieldError. */
     public static final Class<NoSuchFieldError> NO_SUCH_FIELD_ERROR = NoSuchFieldError.class;
+
     /** Exception class: NoSuchMethodError. */
     public static final Class<NoSuchMethodError> NO_SUCH_METHOD_ERROR = NoSuchMethodError.class;
+
     /** Exception class: NoClassDefFoundError. */
     public static final Class<NoClassDefFoundError> NO_CLASS_DEF_FOUND_ERROR = NoClassDefFoundError.class;
+
     /** Exception class: UnsatisfiedLinkError. */
     public static final Class<UnsatisfiedLinkError> UNSATISFIED_LINK_ERROR = UnsatisfiedLinkError.class;
 
@@ -97,14 +113,19 @@ public final class ExceptionConst {
     /**
      * Run-Time Exceptions.
      */
+
     /** Exception class: NullPointerException. */
     public static final Class<NullPointerException> NULL_POINTER_EXCEPTION = NullPointerException.class;
+
     /** Exception class: ArrayIndexOutOfBoundsException. */
     public static final Class<ArrayIndexOutOfBoundsException> ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION = ArrayIndexOutOfBoundsException.class;
+
     /** Exception class: ArithmeticException. */
     public static final Class<ArithmeticException> ARITHMETIC_EXCEPTION = ArithmeticException.class;
+
     /** Exception class: NegativeArraySizeException. */
     public static final Class<NegativeArraySizeException> NEGATIVE_ARRAY_SIZE_EXCEPTION = NegativeArraySizeException.class;
+
     /** Exception class: ClassCastException. */
     public static final Class<ClassCastException> CLASS_CAST_EXCEPTION = ClassCastException.class;
 

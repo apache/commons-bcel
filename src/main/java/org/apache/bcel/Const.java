@@ -3219,6 +3219,7 @@ public final class Const {
     /**
      * Constants used in the StackMap attribute.
      */
+
     /** Item type: Bogus. */
     public static final byte ITEM_Bogus = 0;
 
@@ -3252,6 +3253,7 @@ public final class Const {
      *
      * For those types which can specify a range, the constant names the lowest value.
      */
+
     /** StackMapEntry type: SAME_FRAME. */
     public static final int SAME_FRAME = 0;
 

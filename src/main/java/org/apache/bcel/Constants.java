@@ -2399,40 +2399,58 @@ public interface Constants {
     /**
      * Attributes and their corresponding names.
      */
+
     /** Attribute constant: Unknown. */
     byte ATTR_UNKNOWN = Const.ATTR_UNKNOWN;
+
     /** Attribute constant: SourceFile. */
     byte ATTR_SOURCE_FILE = Const.ATTR_SOURCE_FILE;
+
     /** Attribute constant: ConstantValue. */
     byte ATTR_CONSTANT_VALUE = Const.ATTR_CONSTANT_VALUE;
+
     /** Attribute constant: Code. */
     byte ATTR_CODE = Const.ATTR_CODE;
+
     /** Attribute constant: Exceptions. */
     byte ATTR_EXCEPTIONS = Const.ATTR_EXCEPTIONS;
+
     /** Attribute constant: LineNumberTable. */
     byte ATTR_LINE_NUMBER_TABLE = Const.ATTR_LINE_NUMBER_TABLE;
+
     /** Attribute constant: LocalVariableTable. */
     byte ATTR_LOCAL_VARIABLE_TABLE = Const.ATTR_LOCAL_VARIABLE_TABLE;
+
     /** Attribute constant: InnerClasses. */
     byte ATTR_INNER_CLASSES = Const.ATTR_INNER_CLASSES;
+
     /** Attribute constant: Synthetic. */
     byte ATTR_SYNTHETIC = Const.ATTR_SYNTHETIC;
+
     /** Attribute constant: Deprecated. */
     byte ATTR_DEPRECATED = Const.ATTR_DEPRECATED;
+
     /** Attribute constant: PMG. */
     byte ATTR_PMG = Const.ATTR_PMG;
+
     /** Attribute constant: Signature. */
     byte ATTR_SIGNATURE = Const.ATTR_SIGNATURE;
+
     /** Attribute constant: StackMap. */
     byte ATTR_STACK_MAP = Const.ATTR_STACK_MAP;
+
     /** Attribute constant for runtime visible annotations. */
     byte ATTR_RUNTIMEVISIBLE_ANNOTATIONS = 12;
+
     /** Attribute constant for runtime invisible annotations. */
     byte ATTR_RUNTIMEINVISIBLE_ANNOTATIONS = 13;
+
     /** Attribute constant for runtime visible parameter annotations. */
     byte ATTR_RUNTIMEVISIBLE_PARAMETER_ANNOTATIONS = 14;
+
     /** Attribute constant for runtime invisible parameter annotations. */
     byte ATTR_RUNTIMEINVISIBLE_PARAMETER_ANNOTATIONS = 15;
+
     /** Attribute constant for annotation default. */
     byte ATTR_ANNOTATION_DEFAULT = 16;
 
@@ -2440,6 +2458,7 @@ public interface Constants {
     short KNOWN_ATTRIBUTES = 12; // should be 17
 
     // TODO: mutable public array!!
+
     /** Array of attribute names. */
     String[] ATTRIBUTE_NAMES = {"SourceFile", "ConstantValue", "Code", "Exceptions", "LineNumberTable", "LocalVariableTable", "InnerClasses", "Synthetic",
         "Deprecated", "PMGClass", "Signature", "StackMap", "RuntimeVisibleAnnotations", "RuntimeInvisibleAnnotations", "RuntimeVisibleParameterAnnotations",
@@ -2448,22 +2467,31 @@ public interface Constants {
     /**
      * Constants used in the StackMap attribute.
      */
+
     /** Item type: Bogus. */
     byte ITEM_Bogus = Const.ITEM_Bogus;
+
     /** Item type: Integer. */
     byte ITEM_Integer = Const.ITEM_Integer;
+
     /** Item type: Float. */
     byte ITEM_Float = Const.ITEM_Float;
+
     /** Item type: Double. */
     byte ITEM_Double = Const.ITEM_Double;
+
     /** Item type: Long. */
     byte ITEM_Long = Const.ITEM_Long;
+
     /** Item type: Null. */
     byte ITEM_Null = Const.ITEM_Null;
+
     /** Item type: InitObject. */
     byte ITEM_InitObject = Const.ITEM_InitObject;
+
     /** Item type: Object. */
     byte ITEM_Object = Const.ITEM_Object;
+
     /** Item type: NewObject. */
     byte ITEM_NewObject = Const.ITEM_NewObject;
 

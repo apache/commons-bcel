@@ -54,6 +54,7 @@ public interface InstructionConstants {
     /*
      * NOTE these are not currently immutable, because Instruction has mutable protected fields opcode and length.
      */
+
     /**
      * NOP instruction.
      *

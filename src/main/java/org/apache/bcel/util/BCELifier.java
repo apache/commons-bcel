@@ -55,10 +55,13 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
      * Enum corresponding to flag source.
      */
     public enum FLAGS {
+
         /** Unknown flag source. */
         UNKNOWN,
+
         /** Class flag source. */
         CLASS,
+
         /** Method flag source. */
         METHOD,
     }

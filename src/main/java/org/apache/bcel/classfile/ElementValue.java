@@ -55,30 +55,43 @@ public abstract class ElementValue {
 
     /** Element value type: string. */
     public static final byte STRING = 's';
+
     /** Element value type: enum constant. */
     public static final byte ENUM_CONSTANT = 'e';
+
     /** Element value type: class. */
     public static final byte CLASS = 'c';
+
     /** Element value type: annotation. */
     public static final byte ANNOTATION = '@';
+
     /** Element value type: array. */
     public static final byte ARRAY = '[';
+
     /** Element value type: primitive int. */
     public static final byte PRIMITIVE_INT = 'I';
+
     /** Element value type: primitive byte. */
     public static final byte PRIMITIVE_BYTE = 'B';
+
     /** Element value type: primitive char. */
     public static final byte PRIMITIVE_CHAR = 'C';
+
     /** Element value type: primitive double. */
     public static final byte PRIMITIVE_DOUBLE = 'D';
+
     /** Element value type: primitive float. */
     public static final byte PRIMITIVE_FLOAT = 'F';
+
     /** Element value type: primitive long. */
     public static final byte PRIMITIVE_LONG = 'J';
+
     /** Element value type: primitive short. */
     public static final byte PRIMITIVE_SHORT = 'S';
+
     /** Element value type: primitive boolean. */
     public static final byte PRIMITIVE_BOOLEAN = 'Z';
+
     /** Empty array constant. */
     static final ElementValue[] EMPTY_ARRAY = {};
 

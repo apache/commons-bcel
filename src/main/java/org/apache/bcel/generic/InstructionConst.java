@@ -37,6 +37,7 @@ public final class InstructionConst {
     /**
      * Predefined instruction objects. NOTE these are not currently immutable, because Instruction has mutable protected fields opcode and length.
      */
+
     /** NOP instruction. */
     public static final Instruction NOP = new NOP();
 
