@@ -155,3 +155,4 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     }
 
 }
+
