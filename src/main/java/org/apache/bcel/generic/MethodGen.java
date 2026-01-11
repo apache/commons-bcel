@@ -125,6 +125,8 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
+     * Gets the comparison strategy object.
+     *
      * @return Comparison strategy object.
      */
     public static BCELComparator<FieldGenOrMethodGen> getComparator() {
@@ -134,7 +136,10 @@ public class MethodGen extends FieldGenOrMethodGen {
     /**
      * Computes stack usage of an instruction list by performing control flow analysis.
      *
-     * @return maximum stack depth used by method
+     * @param cp the constant pool generator.
+     * @param il the instruction list.
+     * @param et the exception handlers.
+     * @return maximum stack depth used by method.
      */
     public static int getMaxStack(final ConstantPoolGen cp, final InstructionList il, final CodeExceptionGen[] et) {
         final BranchStack branchTargets = new BranchStack();
@@ -204,6 +209,8 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
+     * Sets the comparison strategy object.
+     *
      * @param comparator Comparison strategy object.
      */
     public static void setComparator(final BCELComparator<FieldGenOrMethodGen> comparator) {
@@ -373,6 +380,9 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
+     * Adds annotations as an attribute.
+     *
+     * @param cp the constant pool generator.
      * @since 6.0
      */
     public void addAnnotationsAsAttribute(final ConstantPoolGen cp) {
@@ -422,8 +432,9 @@ public class MethodGen extends FieldGenOrMethodGen {
     /**
      * Give an instruction a line number corresponding to the source code line.
      *
-     * @param ih instruction to tag
-     * @return new line number object
+     * @param ih instruction to tag.
+     * @param srcLine the source line number.
+     * @return new line number object.
      * @see LineNumber
      */
     public LineNumberGen addLineNumber(final InstructionHandle ih, final int srcLine) {
@@ -495,6 +506,8 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     /**
      * Add observer for this object.
+     *
+     * @param o the observer to add.
      */
     public void addObserver(final MethodObserver o) {
         if (observers == null) {
@@ -522,6 +535,9 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
+     * Adds parameter annotations as an attribute.
+     *
+     * @param cp the constant pool generator.
      * @since 6.0
      */
     public void addParameterAnnotationsAsAttribute(final ConstantPoolGen cp) {
@@ -564,7 +580,11 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * @return deep copy of this method
+     * Creates a deep copy of this method.
+     *
+     * @param className the class name.
+     * @param cp the constant pool generator.
+     * @return deep copy of this method.
      */
     public MethodGen copy(final String className, final ConstantPoolGen cp) {
         final Method m = ((MethodGen) clone()).getMethod();
@@ -641,8 +661,10 @@ public class MethodGen extends FieldGenOrMethodGen {
     // is more likely to suggest to the caller it is readonly (which a List does not).
 
     /**
-     * Return a list of AnnotationGen objects representing parameter annotations
+     * Return a list of AnnotationGen objects representing parameter annotations.
      *
+     * @param i the parameter index.
+     * @return list of AnnotationGen objects.
      * @since 6.0
      */
     public List<AnnotationEntryGen> getAnnotationsOnParameter(final int i) {
@@ -653,30 +675,56 @@ public class MethodGen extends FieldGenOrMethodGen {
         return paramAnnotations[i];
     }
 
+    /**
+     * Gets the argument name at the specified index.
+     *
+     * @param i the argument index.
+     * @return the argument name.
+     */
     public String getArgumentName(final int i) {
         return argNames[i];
     }
 
+    /**
+     * Gets all argument names.
+     *
+     * @return array of argument names.
+     */
     public String[] getArgumentNames() {
         return argNames.clone();
     }
 
+    /**
+     * Gets the argument type at the specified index.
+     *
+     * @param i the argument index.
+     * @return the argument type.
+     */
     public Type getArgumentType(final int i) {
         return argTypes[i];
     }
 
+    /**
+     * Gets all argument types.
+     *
+     * @return array of argument types.
+     */
     public Type[] getArgumentTypes() {
         return argTypes.clone();
     }
 
     /**
-     * @return class that contains this method
+     * Gets the class that contains this method.
+     *
+     * @return class that contains this method.
      */
     public String getClassName() {
         return className;
     }
 
     /**
+     * Gets all attributes of this method.
+     *
      * @return all attributes of this method.
      */
     public Attribute[] getCodeAttributes() {
@@ -729,6 +777,9 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
+     * Gets the 'LineNumberTable' attribute of all the local variables of this method.
+     *
+     * @param cp the constant pool generator.
      * @return 'LineNumberTable' attribute of all the local variables of this method.
      */
     public LineNumberTable getLineNumberTable(final ConstantPoolGen cp) {
@@ -763,6 +814,9 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
+     * Gets the 'LocalVariableTable' attribute of all the local variables of this method.
+     *
+     * @param cp the constant pool generator.
      * @return 'LocalVariableTable' attribute of all the local variables of this method.
      */
     public LocalVariableTable getLocalVariableTable(final ConstantPoolGen cp) {
@@ -774,16 +828,28 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
+     * Gets the 'LocalVariableTypeTable' attribute of this method.
+     *
      * @return 'LocalVariableTypeTable' attribute of this method.
      */
     public LocalVariableTypeTable getLocalVariableTypeTable() {
         return localVariableTypeTable;
     }
 
+    /**
+     * Gets the maximum number of local variables.
+     *
+     * @return the maximum number of local variables.
+     */
     public int getMaxLocals() {
         return maxLocals;
     }
 
+    /**
+     * Gets the maximum stack size.
+     *
+     * @return the maximum stack size.
+     */
     public int getMaxStack() {
         return maxStack;
     }
@@ -903,6 +969,8 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     /**
      * Remove a code attribute.
+     *
+     * @param a the attribute to remove.
      */
     public void removeCodeAttribute(final Attribute a) {
         codeAttrsList.remove(a);
@@ -918,6 +986,8 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     /**
      * Remove an exception.
+     *
+     * @param c the exception to remove.
      */
     public void removeException(final String c) {
         throwsList.remove(c);
@@ -925,6 +995,8 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     /**
      * Remove an exception handler.
+     *
+     * @param c the exception handler to remove.
      */
     public void removeExceptionHandler(final CodeExceptionGen c) {
         exceptionList.remove(c);
@@ -946,6 +1018,8 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     /**
      * Remove a line number.
+     *
+     * @param l the line number to remove.
      */
     public void removeLineNumber(final LineNumberGen l) {
         lineNumberList.remove(l);
@@ -961,6 +1035,8 @@ public class MethodGen extends FieldGenOrMethodGen {
     /**
      * Remove a local variable, its slot will not be reused, if you do not use addLocalVariable with an explicit index
      * argument.
+     *
+     * @param l the local variable to remove.
      */
     public void removeLocalVariable(final LocalVariableGen l) {
         l.dispose();
@@ -1011,6 +1087,8 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     /**
      * Remove observer for this object.
+     *
+     * @param o the observer to remove.
      */
     public void removeObserver(final MethodObserver o) {
         if (observers != null) {
@@ -1022,24 +1100,47 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Would prefer to make this private, but need a way to test if client is using BCEL version 6.5.0 or later that
      * contains fix for BCEL-329.
      *
+     * @param attributes the attributes to remove.
      * @since 6.5.0
      */
     public void removeRuntimeAttributes(final Attribute[] attributes) {
         Streams.of(attributes).forEach(this::removeAttribute);
     }
 
+    /**
+     * Sets the argument name at the specified index.
+     *
+     * @param i the argument index.
+     * @param name the argument name.
+     */
     public void setArgumentName(final int i, final String name) {
         argNames[i] = name;
     }
 
+    /**
+     * Sets all argument names.
+     *
+     * @param argNames the argument names.
+     */
     public void setArgumentNames(final String[] argNames) {
         this.argNames = ArrayUtils.nullToEmpty(argNames);
     }
 
+    /**
+     * Sets the argument type at the specified index.
+     *
+     * @param i the argument index.
+     * @param type the argument type.
+     */
     public void setArgumentType(final int i, final Type type) {
         argTypes[i] = type;
     }
 
+    /**
+     * Sets all argument types.
+     *
+     * @param argTypes the argument types.
+     */
     public void setArgumentTypes(final Type[] argTypes) {
         this.argTypes = argTypes != null ? argTypes : Type.NO_ARGS;
     }
@@ -1078,6 +1179,8 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     /**
      * Sets maximum number of local variables.
+     *
+     * @param m the maximum number of local variables.
      */
     public void setMaxLocals(final int m) {
         maxLocals = m;
@@ -1096,6 +1199,8 @@ public class MethodGen extends FieldGenOrMethodGen {
 
     /**
      * Sets maximum stack size for this method.
+     *
+     * @param m the maximum stack size.
      */
     public void setMaxStack(final int m) { // TODO could be package-protected?
         maxStack = m;
@@ -1106,7 +1211,9 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Do not/Do produce attributes code attributesLineNumberTable and LocalVariableTable, like javac -O
+     * Do not/Do produce attributes code attributesLineNumberTable and LocalVariableTable, like javac -O.
+     *
+     * @param flag whether to strip attributes.
      */
     public void stripAttributes(final boolean flag) {
         stripAttributes = flag;
