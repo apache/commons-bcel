@@ -52,6 +52,8 @@ public final class Method extends FieldOrMethod {
     };
 
     /**
+     * Gets the comparison strategy object.
+     *
      * @return Comparison strategy object.
      */
     public static BCELComparator<Method> getComparator() {
@@ -59,6 +61,8 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
+     * Sets the comparison strategy object.
+     *
      * @param comparator Comparison strategy object.
      */
     public static void setComparator(final BCELComparator<Method> comparator) {
@@ -86,11 +90,13 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
-     * @param accessFlags Access rights of method
-     * @param nameIndex Points to field name in constant pool
-     * @param signatureIndex Points to encoded signature
-     * @param attributes Collection of attributes
-     * @param constantPool Array of constants
+     * Constructs a Method.
+     *
+     * @param accessFlags Access rights of method.
+     * @param nameIndex Points to field name in constant pool.
+     * @param signatureIndex Points to encoded signature.
+     * @param attributes Collection of attributes.
+     * @param constantPool Array of constants.
      */
     public Method(final int accessFlags, final int nameIndex, final int signatureIndex, final Attribute[] attributes, final ConstantPool constantPool) {
         super(accessFlags, nameIndex, signatureIndex, attributes, constantPool);
@@ -118,6 +124,9 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
+     * Creates a deep copy of this method.
+     *
+     * @param constantPool the constant pool.
      * @return deep copy of this method
      */
     public Method copy(final ConstantPool constantPool) {
@@ -136,6 +145,8 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
+     * Gets array of method argument types.
+     *
      * @return array of method argument types
      */
     public Type[] getArgumentTypes() {
@@ -143,6 +154,8 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
+     * Gets Code attribute of method, if any.
+     *
      * @return Code attribute of method, if any
      */
     public Code getCode() {
@@ -155,7 +168,9 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
-     * @return ExceptionTable attribute of method, if any, i.e., list all exceptions the method may throw not exception
+     * Gets ExceptionTable attribute of method, if any.
+     *
+     * @return ExceptionTable attribute of method, if any, that is, list all exceptions the method may throw not exception
      *         handlers!
      */
     public ExceptionTable getExceptionTable() {
@@ -168,7 +183,9 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
-     * @return LineNumberTable of code attribute if any, for example the call is forwarded to the Code atribute.
+     * Gets LineNumberTable of code attribute if any.
+     *
+     * @return LineNumberTable of code attribute if any, for example the call is forwarded to the Code attribute.
      */
     public LineNumberTable getLineNumberTable() {
         final Code code = getCode();
@@ -179,6 +196,8 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
+     * Gets LocalVariableTable of code attribute if any.
+     *
      * @return LocalVariableTable of code attribute if any, for example the call is forwarded to the Code attribute.
      */
     public LocalVariableTable getLocalVariableTable() {
@@ -204,7 +223,9 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
-     * @return Annotations on the parameters of a method
+     * Gets Annotations on the parameters of a method.
+     *
+     * @return Annotations on the parameters of a method.
      * @since 6.0
      */
     public ParameterAnnotationEntry[] getParameterAnnotationEntries() {
@@ -215,6 +236,8 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
+     * Gets return type of method.
+     *
      * @return return type of method
      */
     public Type getReturnType() {
