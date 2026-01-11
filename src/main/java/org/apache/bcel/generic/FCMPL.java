@@ -27,6 +27,7 @@ package org.apache.bcel.generic;
  */
 public class FCMPL extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 
+    /** Constructs an FCMPL instruction. */
     public FCMPL() {
         super(org.apache.bcel.Const.FCMPL, (short) 1);
     }
