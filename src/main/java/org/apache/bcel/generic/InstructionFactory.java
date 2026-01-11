@@ -69,7 +69,10 @@ public class InstructionFactory implements InstructionConstants {
             new MethodObject(FQCN_STRING_BUFFER, APPEND, Type.STRINGBUFFER, new Type[] { Type.LONG })};
 
     /**
-     * @param type type of elements of array, i.e., array.getElementType()
+     * Creates an array load instruction for the given type.
+     *
+     * @param type type of elements of array, that is, array.getElementType().
+     * @return the array load instruction.
      */
     public static ArrayInstruction createArrayLoad(final Type type) {
         switch (type.getType()) {
@@ -97,7 +100,10 @@ public class InstructionFactory implements InstructionConstants {
     }
 
     /**
-     * @param type type of elements of array, i.e., array.getElementType()
+     * Creates an array store instruction for the given type.
+     *
+     * @param type type of elements of array, that is, array.getElementType().
+     * @return the array store instruction.
      */
     public static ArrayInstruction createArrayStore(final Type type) {
         switch (type.getType()) {
@@ -236,6 +242,8 @@ public class InstructionFactory implements InstructionConstants {
      * Create binary operation for simple basic types, such as int and float.
      *
      * @param op operation, such as "+", "*", "&lt;&lt;", etc.
+     * @param type the operand type.
+     * @return the binary arithmetic instruction.
      */
     public static ArithmeticInstruction createBinaryOperation(final String op, final Type type) {
         final char first = op.charAt(0);
@@ -259,6 +267,10 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Create branch instruction by given opcode, except LOOKUPSWITCH and TABLESWITCH. For those you should use the SWITCH
      * compound instruction.
+     *
+     * @param opcode the branch opcode.
+     * @param target the target instruction handle.
+     * @return the branch instruction.
      */
     public static BranchInstruction createBranchInstruction(final short opcode, final InstructionHandle target) {
         switch (opcode) {
@@ -308,28 +320,41 @@ public class InstructionFactory implements InstructionConstants {
     }
 
     /**
-     * @param size size of operand, either 1 (int, for example) or 2 (double)
+     * Creates a DUP instruction.
+     *
+     * @param size size of operand, either 1 (int, for example) or 2 (double).
+     * @return the DUP instruction.
      */
     public static StackInstruction createDup(final int size) {
         return size == 2 ? InstructionConst.DUP2 : InstructionConst.DUP;
     }
 
     /**
-     * @param size size of operand, either 1 (int, for example) or 2 (double)
+     * Creates a DUP_X1 instruction.
+     *
+     * @param size size of operand, either 1 (int, for example) or 2 (double).
+     * @return the DUP instruction.
      */
     public static StackInstruction createDup_1(final int size) {
         return size == 2 ? InstructionConst.DUP2_X1 : InstructionConst.DUP_X1;
     }
 
     /**
-     * @param size size of operand, either 1 (int, for example) or 2 (double)
+     * Creates a DUP_X2 instruction.
+     *
+     * @param size size of operand, either 1 (int, for example) or 2 (double).
+     * @return the DUP instruction.
      */
     public static StackInstruction createDup_2(final int size) {
         return size == 2 ? InstructionConst.DUP2_X2 : InstructionConst.DUP_X2;
     }
 
     /**
-     * @param index index of local variable
+     * Creates a load instruction for the given type.
+     *
+     * @param type the variable type.
+     * @param index index of local variable.
+     * @return the load instruction.
      */
     public static LocalVariableInstruction createLoad(final Type type, final int index) {
         switch (type.getType()) {
@@ -354,7 +379,10 @@ public class InstructionFactory implements InstructionConstants {
     }
 
     /**
-     * Create "null" value for reference types, 0 for basic types like int
+     * Create "null" value for reference types, 0 for basic types like int.
+     *
+     * @param type the type.
+     * @return the null or zero instruction.
      */
     public static Instruction createNull(final Type type) {
         switch (type.getType()) {
@@ -463,24 +491,40 @@ public class InstructionFactory implements InstructionConstants {
     protected ConstantPoolGen cp;
 
     /**
-     * Initialize with ClassGen object
+     * Initialize with ClassGen object.
+     *
+     * @param cg the class generator.
      */
     public InstructionFactory(final ClassGen cg) {
         this(cg, cg.getConstantPool());
     }
 
+    /**
+     * Constructs an InstructionFactory.
+     *
+     * @param cg the class generator.
+     * @param cp the constant pool generator.
+     */
     public InstructionFactory(final ClassGen cg, final ConstantPoolGen cp) {
         this.cg = cg;
         this.cp = cp;
     }
 
     /**
-     * Initialize just with ConstantPoolGen object
+     * Initialize just with ConstantPoolGen object.
+     *
+     * @param cp the constant pool generator.
      */
     public InstructionFactory(final ConstantPoolGen cp) {
         this(null, cp);
     }
 
+    /**
+     * Creates an append instruction for the given type.
+     *
+     * @param type the type to append.
+     * @return the append instruction.
+     */
     public Instruction createAppend(final Type type) {
         final byte t = type.getType();
         if (isString(type)) {
