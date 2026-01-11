@@ -1312,3 +1312,4 @@ public class MethodGen extends FieldGenOrMethodGen {
         }
     }
 }
+
