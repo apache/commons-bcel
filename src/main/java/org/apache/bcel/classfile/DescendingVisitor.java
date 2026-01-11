@@ -36,8 +36,10 @@ public class DescendingVisitor implements Visitor {
     private final Stack<Object> stack = new Stack<>();
 
     /**
-     * @param clazz Class to traverse
-     * @param visitor visitor object to apply to all components
+     * Constructs a DescendingVisitor.
+     *
+     * @param clazz Class to traverse.
+     * @param visitor visitor object to apply to all components.
      */
     public DescendingVisitor(final JavaClass clazz, final Visitor visitor) {
         this.clazz = clazz;
@@ -49,22 +51,28 @@ public class DescendingVisitor implements Visitor {
     }
 
     /**
-     * @return current object
+     * Gets the current object.
+     *
+     * @return current object.
      */
     public Object current() {
         return stack.peek();
     }
 
     /**
-     * @return container of current entitity, i.e., predecessor during traversal
+     * Gets the container of current entity, that is, predecessor during traversal.
+     *
+     * @return container of current entity, that is, predecessor during traversal.
      */
     public Object predecessor() {
         return predecessor(0);
     }
 
     /**
-     * @param level nesting level, i.e., 0 returns the direct predecessor
-     * @return container of current entitity, i.e., predecessor during traversal
+     * Gets the container of current entity, that is, predecessor during traversal.
+     *
+     * @param level nesting level, that is, 0 returns the direct predecessor.
+     * @return container of current entity, that is, predecessor during traversal.
      */
     public Object predecessor(final int level) {
         final int size = stack.size();
