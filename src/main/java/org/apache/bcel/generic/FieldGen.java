@@ -56,6 +56,8 @@ public class FieldGen extends FieldGenOrMethodGen {
     };
 
     /**
+     * Gets the comparison strategy object.
+     *
      * @return Comparison strategy object.
      */
     public static BCELComparator<FieldGen> getComparator() {
@@ -63,6 +65,8 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
     /**
+     * Sets the comparison strategy object.
+     *
      * @param comparator Comparison strategy object.
      */
     public static void setComparator(final BCELComparator<FieldGen> comparator) {
@@ -137,6 +141,8 @@ public class FieldGen extends FieldGenOrMethodGen {
 
     /**
      * Add observer for this object.
+     *
+     * @param o the observer to add.
      */
     public void addObserver(final FieldObserver o) {
         if (observers == null) {
@@ -166,7 +172,10 @@ public class FieldGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * @return deep copy of this field
+     * Creates a deep copy of this field.
+     *
+     * @param cp the constant pool.
+     * @return deep copy of this field.
      */
     public FieldGen copy(final ConstantPoolGen cp) {
         final FieldGen fg = (FieldGen) clone();
@@ -187,6 +196,8 @@ public class FieldGen extends FieldGenOrMethodGen {
 
     /**
      * Gets field object after having set up all necessary values.
+     *
+     * @return the field object.
      */
     public Field getField() {
         final String signature = getSignature();
@@ -201,6 +212,11 @@ public class FieldGen extends FieldGenOrMethodGen {
         return new Field(super.getAccessFlags(), nameIndex, signatureIndex, getAttributes(), super.getConstantPool().getConstantPool()); // sic
     }
 
+    /**
+     * Gets the initial value.
+     *
+     * @return the initial value.
+     */
     public String getInitValue() {
         return Objects.toString(value, null);
     }
@@ -223,6 +239,8 @@ public class FieldGen extends FieldGenOrMethodGen {
 
     /**
      * Remove observer for this object.
+     *
+     * @param o the observer to remove.
      */
     public void removeObserver(final FieldObserver o) {
         if (observers != null) {
@@ -230,6 +248,11 @@ public class FieldGen extends FieldGenOrMethodGen {
         }
     }
 
+    /**
+     * Sets the initial value.
+     *
+     * @param b the boolean value.
+     */
     public void setInitValue(final boolean b) {
         checkType(Type.BOOLEAN);
         if (b) {
@@ -237,6 +260,11 @@ public class FieldGen extends FieldGenOrMethodGen {
         }
     }
 
+    /**
+     * Sets the initial value.
+     *
+     * @param b the byte value.
+     */
     public void setInitValue(final byte b) {
         checkType(Type.BYTE);
         if (b != 0) {
@@ -244,6 +272,11 @@ public class FieldGen extends FieldGenOrMethodGen {
         }
     }
 
+    /**
+     * Sets the initial value.
+     *
+     * @param c the char value.
+     */
     public void setInitValue(final char c) {
         checkType(Type.CHAR);
         if (c != 0) {
@@ -251,6 +284,11 @@ public class FieldGen extends FieldGenOrMethodGen {
         }
     }
 
+    /**
+     * Sets the initial value.
+     *
+     * @param d the double value.
+     */
     public void setInitValue(final double d) {
         checkType(Type.DOUBLE);
         if (d != 0.0) {
@@ -258,6 +296,11 @@ public class FieldGen extends FieldGenOrMethodGen {
         }
     }
 
+    /**
+     * Sets the initial value.
+     *
+     * @param f the float value.
+     */
     public void setInitValue(final float f) {
         checkType(Type.FLOAT);
         if (f != 0.0) {
@@ -265,6 +308,11 @@ public class FieldGen extends FieldGenOrMethodGen {
         }
     }
 
+    /**
+     * Sets the initial value.
+     *
+     * @param i the int value.
+     */
     public void setInitValue(final int i) {
         checkType(Type.INT);
         if (i != 0) {
@@ -272,6 +320,11 @@ public class FieldGen extends FieldGenOrMethodGen {
         }
     }
 
+    /**
+     * Sets the initial value.
+     *
+     * @param l the long value.
+     */
     public void setInitValue(final long l) {
         checkType(Type.LONG);
         if (l != 0L) {
@@ -279,6 +332,11 @@ public class FieldGen extends FieldGenOrMethodGen {
         }
     }
 
+    /**
+     * Sets the initial value.
+     *
+     * @param s the short value.
+     */
     public void setInitValue(final short s) {
         checkType(Type.SHORT);
         if (s != 0) {
@@ -288,6 +346,8 @@ public class FieldGen extends FieldGenOrMethodGen {
 
     /**
      * Sets (optional) initial value of field, otherwise it will be set to null/0/false by the JVM automatically.
+     *
+     * @param str the string value.
      */
     public void setInitValue(final String str) {
         checkType(ObjectType.getInstance("java.lang.String"));
