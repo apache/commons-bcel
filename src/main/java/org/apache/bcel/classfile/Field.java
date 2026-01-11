@@ -53,6 +53,8 @@ public final class Field extends FieldOrMethod {
     };
 
     /**
+     * Gets the comparison strategy object.
+     *
      * @return Comparison strategy object.
      */
     public static BCELComparator<Field> getComparator() {
@@ -60,6 +62,8 @@ public final class Field extends FieldOrMethod {
     }
 
     /**
+     * Sets the comparison strategy object.
+     *
      * @param comparator Comparison strategy object.
      */
     public static void setComparator(final BCELComparator<Field> comparator) {
@@ -70,6 +74,7 @@ public final class Field extends FieldOrMethod {
      * Constructs object from file stream.
      *
      * @param file Input stream.
+     * @param constantPool the constant pool.
      */
     Field(final DataInput file, final ConstantPool constantPool) throws IOException, ClassFormatException {
         super(file, constantPool);
@@ -86,11 +91,13 @@ public final class Field extends FieldOrMethod {
     }
 
     /**
-     * @param accessFlags Access rights of field
-     * @param nameIndex Points to field name in constant pool
-     * @param signatureIndex Points to encoded signature
-     * @param attributes Collection of attributes
-     * @param constantPool Array of constants
+     * Constructs a Field.
+     *
+     * @param accessFlags Access rights of field.
+     * @param nameIndex Points to field name in constant pool.
+     * @param signatureIndex Points to encoded signature.
+     * @param attributes Collection of attributes.
+     * @param constantPool Array of constants.
      */
     public Field(final int accessFlags, final int nameIndex, final int signatureIndex, final Attribute[] attributes, final ConstantPool constantPool) {
         super(accessFlags, nameIndex, signatureIndex, attributes, constantPool);
@@ -108,7 +115,10 @@ public final class Field extends FieldOrMethod {
     }
 
     /**
-     * @return deep copy of this field
+     * Creates a deep copy of this field.
+     *
+     * @param constantPool the constant pool.
+     * @return deep copy of this field.
      */
     public Field copy(final ConstantPool constantPool) {
         return (Field) copy_(constantPool);
@@ -126,7 +136,9 @@ public final class Field extends FieldOrMethod {
     }
 
     /**
-     * @return constant value associated with this field (may be null)
+     * Gets the constant value associated with this field.
+     *
+     * @return constant value associated with this field (may be null).
      */
     public ConstantValue getConstantValue() {
         for (final Attribute attribute : super.getAttributes()) {
