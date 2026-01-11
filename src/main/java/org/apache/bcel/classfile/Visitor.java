@@ -44,12 +44,32 @@ public interface Visitor {
      */
     void visitBootstrapMethods(BootstrapMethods obj);
 
+    /**
+     * Visits a Code attribute.
+     *
+     * @param obj the attribute.
+     */
     void visitCode(Code obj);
 
+    /**
+     * Visits a CodeException.
+     *
+     * @param obj the exception.
+     */
     void visitCodeException(CodeException obj);
 
+    /**
+     * Visits a ConstantClass.
+     *
+     * @param obj the constant.
+     */
     void visitConstantClass(ConstantClass obj);
 
+    /**
+     * Visits a ConstantDouble.
+     *
+     * @param obj the constant.
+     */
     void visitConstantDouble(ConstantDouble obj);
 
     /**
@@ -59,16 +79,46 @@ public interface Visitor {
         // empty
     }
 
+    /**
+     * Visits a ConstantFieldref.
+     *
+     * @param obj the constant.
+     */
     void visitConstantFieldref(ConstantFieldref obj);
 
+    /**
+     * Visits a ConstantFloat.
+     *
+     * @param obj the constant.
+     */
     void visitConstantFloat(ConstantFloat obj);
 
+    /**
+     * Visits a ConstantInteger.
+     *
+     * @param obj the constant.
+     */
     void visitConstantInteger(ConstantInteger obj);
 
+    /**
+     * Visits a ConstantInterfaceMethodref.
+     *
+     * @param obj the constant.
+     */
     void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj);
 
+    /**
+     * Visits a ConstantInvokeDynamic.
+     *
+     * @param obj the constant.
+     */
     void visitConstantInvokeDynamic(ConstantInvokeDynamic obj);
 
+    /**
+     * Visits a ConstantLong.
+     *
+     * @param obj the constant.
+     */
     void visitConstantLong(ConstantLong obj);
 
     /**
@@ -76,6 +126,11 @@ public interface Visitor {
      */
     void visitConstantMethodHandle(ConstantMethodHandle obj);
 
+    /**
+     * Visits a ConstantMethodref.
+     *
+     * @param obj the constant.
+     */
     void visitConstantMethodref(ConstantMethodref obj);
 
     /**
@@ -88,6 +143,11 @@ public interface Visitor {
      */
     void visitConstantModule(ConstantModule constantModule);
 
+    /**
+     * Visits a ConstantNameAndType.
+     *
+     * @param obj the constant.
+     */
     void visitConstantNameAndType(ConstantNameAndType obj);
 
     /**
@@ -95,14 +155,39 @@ public interface Visitor {
      */
     void visitConstantPackage(ConstantPackage constantPackage);
 
+    /**
+     * Visits a ConstantPool.
+     *
+     * @param obj the constant pool.
+     */
     void visitConstantPool(ConstantPool obj);
 
+    /**
+     * Visits a ConstantString.
+     *
+     * @param obj the constant.
+     */
     void visitConstantString(ConstantString obj);
 
+    /**
+     * Visits a ConstantUtf8.
+     *
+     * @param obj the constant.
+     */
     void visitConstantUtf8(ConstantUtf8 obj);
 
+    /**
+     * Visits a ConstantValue attribute.
+     *
+     * @param obj the attribute.
+     */
     void visitConstantValue(ConstantValue obj);
 
+    /**
+     * Visits a Deprecated attribute.
+     *
+     * @param obj the attribute.
+     */
     void visitDeprecated(Deprecated obj);
 
     /**
@@ -110,22 +195,67 @@ public interface Visitor {
      */
     void visitEnclosingMethod(EnclosingMethod obj);
 
+    /**
+     * Visits an ExceptionTable attribute.
+     *
+     * @param obj the attribute.
+     */
     void visitExceptionTable(ExceptionTable obj);
 
+    /**
+     * Visits a Field.
+     *
+     * @param obj the field.
+     */
     void visitField(Field obj);
 
+    /**
+     * Visits an InnerClass.
+     *
+     * @param obj the inner class.
+     */
     void visitInnerClass(InnerClass obj);
 
+    /**
+     * Visits an InnerClasses attribute.
+     *
+     * @param obj the attribute.
+     */
     void visitInnerClasses(InnerClasses obj);
 
+    /**
+     * Visits a JavaClass.
+     *
+     * @param obj the class.
+     */
     void visitJavaClass(JavaClass obj);
 
+    /**
+     * Visits a LineNumber.
+     *
+     * @param obj the line number.
+     */
     void visitLineNumber(LineNumber obj);
 
+    /**
+     * Visits a LineNumberTable attribute.
+     *
+     * @param obj the attribute.
+     */
     void visitLineNumberTable(LineNumberTable obj);
 
+    /**
+     * Visits a LocalVariable.
+     *
+     * @param obj the local variable.
+     */
     void visitLocalVariable(LocalVariable obj);
 
+    /**
+     * Visits a LocalVariableTable attribute.
+     *
+     * @param obj the attribute.
+     */
     void visitLocalVariableTable(LocalVariableTable obj);
 
     /**
@@ -133,6 +263,11 @@ public interface Visitor {
      */
     void visitLocalVariableTypeTable(LocalVariableTypeTable obj);
 
+    /**
+     * Visits a Method.
+     *
+     * @param obj the method.
+     */
     void visitMethod(Method obj);
 
     /**
@@ -240,12 +375,32 @@ public interface Visitor {
      // noop
     }
 
+    /**
+     * Visits a Signature attribute.
+     *
+     * @param obj the attribute.
+     */
     void visitSignature(Signature obj);
 
+    /**
+     * Visits a SourceFile attribute.
+     *
+     * @param obj the attribute.
+     */
     void visitSourceFile(SourceFile obj);
 
+    /**
+     * Visits a StackMap attribute.
+     *
+     * @param obj the attribute.
+     */
     void visitStackMap(StackMap obj);
 
+    /**
+     * Visits a StackMapEntry.
+     *
+     * @param obj the entry.
+     */
     void visitStackMapEntry(StackMapEntry obj);
 
     /**
@@ -258,8 +413,18 @@ public interface Visitor {
       // empty
     }
 
+    /**
+     * Visits a Synthetic attribute.
+     *
+     * @param obj the attribute.
+     */
     void visitSynthetic(Synthetic obj);
 
+    /**
+     * Visits an Unknown attribute.
+     *
+     * @param obj the attribute.
+     */
     void visitUnknown(Unknown obj);
 
 }
