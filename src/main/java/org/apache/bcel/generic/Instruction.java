@@ -426,6 +426,12 @@ public abstract class Instruction implements Cloneable {
     Instruction() {
     }
 
+    /**
+     * Constructs an Instruction.
+     *
+     * @param opcode the opcode.
+     * @param length the instruction length.
+     */
     public Instruction(final short opcode, final short length) {
         this.length = length;
         this.opcode = opcode;
