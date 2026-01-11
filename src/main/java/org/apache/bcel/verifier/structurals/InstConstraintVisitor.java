@@ -195,12 +195,10 @@ public class InstConstraintVisitor extends EmptyVisitor {
         }
     }
 
-    /***************************************************************/
-    /* "generic"visitXXXX methods where XXXX is an interface */
-    /* therefore, we don't know the order of visiting; but we know */
-    /* these methods are called before the visitYYYY methods below */
-
-    /***************************************************************/
+    /*
+     * "generic"visitXXXX methods where XXXX is an interface therefore, we don't know the order of visiting; but we know these methods are called before the
+     * visitYYYY methods below
+     */
 
     /**
      * Ensures the specific preconditions of the said instruction.
@@ -377,10 +375,9 @@ public class InstConstraintVisitor extends EmptyVisitor {
         }
     }
 
-    /***************************************************************/
-    /* "special"visitXXXX methods for one type of instruction each */
-
-    /***************************************************************/
+    /*
+    /* "special"visitXXXX methods for one type of instruction each.
+     */
 
     /**
      * Ensures the specific preconditions of the said instruction.
@@ -449,11 +446,12 @@ public class InstConstraintVisitor extends EmptyVisitor {
         }
     }
 
-    /***************************************************************/
-    /* "generic" visitYYYY methods where YYYY is a superclass. */
-    /* therefore, we know the order of visiting; we know */
-    /* these methods are called after the visitXXXX methods above. */
-    /***************************************************************/
+    /*
+     * "generic" visitYYYY methods where YYYY is a superclass.
+     * therefore, we know the order of visiting; we know
+     * these methods are called after the visitXXXX methods above.
+     */
+
     /**
      * Ensures the general preconditions of a CPInstruction instance.
      */
