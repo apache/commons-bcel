@@ -409,14 +409,20 @@ public class InstructionFactory implements InstructionConstants {
     }
 
     /**
-     * @param size size of operand, either 1 (int, for example) or 2 (double)
+     * Creates a pop instruction.
+     *
+     * @param size size of operand, either 1 (int, for example) or 2 (double).
+     * @return the pop instruction.
      */
     public static StackInstruction createPop(final int size) {
         return size == 2 ? InstructionConst.POP2 : InstructionConst.POP;
     }
 
     /**
-     * Create typed return
+     * Create typed return.
+     *
+     * @param type the return type.
+     * @return the return instruction.
      */
     public static ReturnInstruction createReturn(final Type type) {
         switch (type.getType()) {
@@ -443,7 +449,11 @@ public class InstructionFactory implements InstructionConstants {
     }
 
     /**
-     * @param index index of local variable
+     * Creates a store instruction.
+     *
+     * @param type the variable type.
+     * @param index index of local variable.
+     * @return the store instruction.
      */
     public static LocalVariableInstruction createStore(final Type type, final int index) {
         switch (type.getType()) {
@@ -468,7 +478,9 @@ public class InstructionFactory implements InstructionConstants {
     }
 
     /**
-     * Create reference to 'this'
+     * Create reference to 'this'.
+     *
+     * @return reference to 'this'.
      */
     public static Instruction createThis() {
         return new ALOAD(0);
@@ -551,6 +563,10 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Create conversion operation for two stack operands, this may be an I2C, instruction, for example, if the operands are basic
      * types and CHECKCAST if they are reference types.
+     *
+     * @param srcType the source type.
+     * @param destType the destination type.
+     * @return the conversion instruction.
      */
     public Instruction createCast(final Type srcType, final Type destType) {
         if (srcType instanceof BasicType && destType instanceof BasicType) {
@@ -577,6 +593,12 @@ public class InstructionFactory implements InstructionConstants {
         return new CHECKCAST(cp.addClass(((ObjectType) destType).getClassName()));
     }
 
+    /**
+     * Creates a CHECKCAST instruction.
+     *
+     * @param t the reference type.
+     * @return the CHECKCAST instruction.
+     */
     public CHECKCAST createCheckCast(final ReferenceType t) {
         if (t instanceof ArrayType) {
             return new CHECKCAST(cp.addArrayClass((ArrayType) t));
@@ -587,7 +609,8 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Uses PUSH to push a constant value onto the stack.
      *
-     * @param value must be of type Number, Boolean, Character or String
+     * @param value must be of type Number, Boolean, Character or String.
+     * @return the instruction.
      */
     public Instruction createConstant(final Object value) {
         final PUSH push;
@@ -631,14 +654,36 @@ public class InstructionFactory implements InstructionConstants {
         }
     }
 
+    /**
+     * Creates a GETFIELD instruction.
+     *
+     * @param className the class name.
+     * @param name the field name.
+     * @param t the field type.
+     * @return the GETFIELD instruction.
+     */
     public GETFIELD createGetField(final String className, final String name, final Type t) {
         return new GETFIELD(cp.addFieldref(className, name, t.getSignature()));
     }
 
+    /**
+     * Creates a GETSTATIC instruction.
+     *
+     * @param className the class name.
+     * @param name the field name.
+     * @param t the field type.
+     * @return the GETSTATIC instruction.
+     */
     public GETSTATIC createGetStatic(final String className, final String name, final Type t) {
         return new GETSTATIC(cp.addFieldref(className, name, t.getSignature()));
     }
 
+    /**
+     * Creates an INSTANCEOF instruction.
+     *
+     * @param t the reference type.
+     * @return the INSTANCEOF instruction.
+     */
     public INSTANCEOF createInstanceOf(final ReferenceType t) {
         if (t instanceof ArrayType) {
             return new INSTANCEOF(cp.addArrayClass((ArrayType) t));
@@ -712,10 +757,22 @@ public class InstructionFactory implements InstructionConstants {
         }
     }
 
+    /**
+     * Creates a NEW instruction.
+     *
+     * @param t the object type.
+     * @return the NEW instruction.
+     */
     public NEW createNew(final ObjectType t) {
         return new NEW(cp.addClass(t));
     }
 
+    /**
+     * Creates a NEW instruction.
+     *
+     * @param s the class name.
+     * @return the NEW instruction.
+     */
     public NEW createNew(final String s) {
         return createNew(ObjectType.getInstance(s));
     }
@@ -723,7 +780,9 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Create new array of given size and type.
      *
-     * @return an instruction that creates the corresponding array at runtime, for example is an AllocationInstruction
+     * @param t the array element type.
+     * @param dim the array dimensions.
+     * @return an instruction that creates the corresponding array at runtime, for example is an AllocationInstruction.
      */
     public Instruction createNewArray(final Type t, final short dim) {
         if (dim == 1) {
@@ -747,7 +806,8 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Create a call to the most popular System.out.println() method.
      *
-     * @param s the string to print
+     * @param s the string to print.
+     * @return the instruction list.
      */
     public InstructionList createPrintln(final String s) {
         final InstructionList il = new InstructionList();
