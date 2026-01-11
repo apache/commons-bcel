@@ -42,6 +42,11 @@ public class GETFIELD extends FieldInstruction implements ExceptionThrower, Stac
     GETFIELD() {
     }
 
+    /**
+     * Constructs a GETFIELD instruction.
+     *
+     * @param index the constant pool index.
+     */
     public GETFIELD(final int index) {
         super(Const.GETFIELD, index);
     }
