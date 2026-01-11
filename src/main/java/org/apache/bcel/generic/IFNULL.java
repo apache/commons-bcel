@@ -33,6 +33,11 @@ public class IFNULL extends IfInstruction {
     IFNULL() {
     }
 
+    /**
+     * Constructs an IFNULL instruction.
+     *
+     * @param target the target instruction.
+     */
     public IFNULL(final InstructionHandle target) {
         super(org.apache.bcel.Const.IFNULL, target);
     }
