@@ -66,9 +66,15 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      */
     public static final JavaClass[] EMPTY_ARRAY = {};
 
+    /** Source was read from heap. */
     public static final byte HEAP = 1;
+
+    /** Source was read from file. */
     public static final byte FILE = 2;
+
+    /** Source was read from ZIP. */
     public static final byte ZIP = 3;
+
     private static final boolean debug = Boolean.getBoolean("JavaClass.debug"); // Debugging on/off
 
     private static BCELComparator<JavaClass> bcelComparator = new BCELComparator<JavaClass>() {
@@ -94,6 +100,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
+     * Gets the comparison strategy object.
+     *
      * @return Comparison strategy object.
      */
     public static BCELComparator<JavaClass> getComparator() {
@@ -110,6 +118,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
+     * Sets the comparison strategy object.
+     *
      * @param comparator Comparison strategy object.
      */
     public static void setComparator(final BCELComparator<JavaClass> comparator) {
@@ -303,7 +313,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * @return deep copy of this class
+     * Creates a deep copy of this class.
+     *
+     * @return deep copy of this class.
      */
     public JavaClass copy() {
         try {
@@ -413,10 +425,10 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Finds a visible field by name and type in this class and its super classes.
      *
-     * @param fieldName the field name to find
-     * @param fieldType the field type to find
+     * @param fieldName the field name to find.
+     * @param fieldType the field type to find.
      * @return field matching given name and type, null if field is not found or not accessible from this class.
-     * @throws ClassNotFoundException
+     * @throws ClassNotFoundException if the class cannot be found.
      * @since 6.8.0
      */
     public Field findField(final String fieldName, final Type fieldType) throws ClassNotFoundException {
@@ -462,6 +474,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Gets all interfaces implemented by this JavaClass (transitively).
      *
+     * @return all interfaces.
      * @throws ClassNotFoundException if any of the class's superclasses or interfaces can't be found.
      */
     public JavaClass[] getAllInterfaces() throws ClassNotFoundException {
@@ -489,7 +502,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * @return Annotations on the class
+     * Gets annotations on the class.
+     *
+     * @return Annotations on the class.
      * @since 6.0
      */
     public AnnotationEntry[] getAnnotationEntries() {
@@ -503,6 +518,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Gets attribute for given tag.
      *
+     * @param <T> the attribute type.
+     * @param tag the attribute tag.
      * @return Attribute for given tag, null if not found.
      * Refer to {@link org.apache.bcel.Const#ATTR_UNKNOWN} constants named ATTR_* for possible values.
      * @since 6.10.0
@@ -518,6 +535,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
+     * Gets attributes of the class.
+     *
      * @return Attributes of the class.
      */
     public Attribute[] getAttributes() {
@@ -525,7 +544,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * @return class in binary format
+     * Gets class in binary format.
+     *
+     * @return class in binary format.
      */
     public byte[] getBytes() {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -538,6 +559,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
+     * Gets the class name.
+     *
      * @return Class name.
      */
     public String getClassName() {
@@ -545,6 +568,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
+     * Gets the class name index.
+     *
      * @return Class name index.
      */
     public int getClassNameIndex() {
@@ -552,6 +577,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
+     * Gets the constant pool.
+     *
      * @return Constant pool.
      */
     public ConstantPool getConstantPool() {
@@ -559,7 +586,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * @return Fields, i.e., variables of the class. Like the JVM spec mandates for the classfile format, these fields are
+     * Gets the fields.
+     *
+     * @return Fields, that is, variables of the class. Like the JVM spec mandates for the classfile format, these fields are
      *         those specific to this class, and not those of the superclass or superinterfaces.
      */
     public Field[] getFields() {
@@ -567,13 +596,17 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * @return File name of class, aka SourceFile attribute value
+     * Gets the file name of class.
+     *
+     * @return File name of class, aka SourceFile attribute value.
      */
     public String getFileName() {
         return fileName;
     }
 
     /**
+     * Gets indices in constant pool of implemented interfaces.
+     *
      * @return Indices in constant pool of implemented interfaces.
      */
     public int[] getInterfaceIndices() {
@@ -581,6 +614,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
+     * Gets names of implemented interfaces.
+     *
      * @return Names of implemented interfaces.
      */
     public String[] getInterfaceNames() {
@@ -590,6 +625,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Gets interfaces directly implemented by this JavaClass.
      *
+     * @return the interfaces.
      * @throws ClassNotFoundException if any of the class's interfaces can't be found.
      */
     public JavaClass[] getInterfaces() throws ClassNotFoundException {
@@ -602,6 +638,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
+     * Gets the major number of class file version.
+     *
      * @return Major number of class file version.
      */
     public int getMajor() {
@@ -609,7 +647,10 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * @return A {@link Method} corresponding to java.lang.reflect.Method if any
+     * Gets a Method corresponding to java.lang.reflect.Method if any.
+     *
+     * @param m the method to find.
+     * @return A {@link Method} corresponding to java.lang.reflect.Method if any.
      */
     public Method getMethod(final java.lang.reflect.Method m) {
         for (final Method method : methods) {
@@ -621,6 +662,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
+     * Gets the methods of the class.
+     *
      * @return Methods of the class.
      */
     public Method[] getMethods() {
@@ -628,6 +671,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
+     * Gets the minor number of class file version.
+     *
      * @return Minor number of class file version.
      */
     public int getMinor() {
@@ -635,6 +680,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
+     * Gets the package name.
+     *
      * @return Package name.
      */
     public String getPackageName() {
@@ -643,21 +690,27 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
     /**
      * Gets the ClassRepository which holds its definition. By default this is the same as
-     * SyntheticRepository.getInstance();
+     * SyntheticRepository.getInstance().
+     *
+     * @return the repository.
      */
     public org.apache.bcel.util.Repository getRepository() {
         return repository;
     }
 
     /**
-     * @return either HEAP (generated), FILE, or ZIP
+     * Gets the source.
+     *
+     * @return either HEAP (generated), FILE, or ZIP.
      */
     public final byte getSource() {
         return source;
     }
 
     /**
-     * @return file name where this class was read from
+     * Gets the file name where this class was read from.
+     *
+     * @return file name where this class was read from.
      */
     public String getSourceFileName() {
         return sourceFileName;
@@ -680,8 +733,10 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * @return the superclass for this JavaClass object, or null if this is {@link Object}
-     * @throws ClassNotFoundException if the superclass can't be found
+     * Gets the superclass for this JavaClass object, or null if this is {@link Object}.
+     *
+     * @return the superclass for this JavaClass object, or null if this is {@link Object}.
+     * @throws ClassNotFoundException if the superclass can't be found.
      */
     public JavaClass getSuperClass() throws ClassNotFoundException {
         if (CLASS_NAME_OBJECT.equals(getClassName())) {
@@ -691,8 +746,10 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * @return list of super classes of this class in ascending order, i.e., {@link Object} is always the last element.
-     * @throws ClassNotFoundException if any of the superclasses can't be found
+     * Gets list of super classes of this class in ascending order.
+     *
+     * @return list of super classes of this class in ascending order, that is, {@link Object} is always the last element.
+     * @throws ClassNotFoundException if any of the superclasses can't be found.
      */
     public JavaClass[] getSuperClasses() throws ClassNotFoundException {
         JavaClass clazz = this;
@@ -719,6 +776,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
+     * Gets the class name index.
+     *
      * @return Class name index.
      */
     public int getSuperclassNameIndex() {
@@ -736,8 +795,11 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * @return true, if this class is an implementation of interface inter
-     * @throws ClassNotFoundException if superclasses or superinterfaces of this class can't be found
+     * Checks if this class is an implementation of interface inter.
+     *
+     * @param inter the interface to check.
+     * @return true, if this class is an implementation of interface inter.
+     * @throws ClassNotFoundException if superclasses or superinterfaces of this class can't be found.
      */
     public boolean implementationOf(final JavaClass inter) throws ClassNotFoundException {
         if (!inter.isInterface()) {
@@ -758,8 +820,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Equivalent to runtime "instanceof" operator.
      *
-     * @return true if this JavaClass is derived from the super class
-     * @throws ClassNotFoundException if superclasses or superinterfaces of this object can't be found
+     * @param superclass the superclass to check.
+     * @return true if this JavaClass is derived from the super class.
+     * @throws ClassNotFoundException if superclasses or superinterfaces of this object can't be found.
      */
     public final boolean instanceOf(final JavaClass superclass) throws ClassNotFoundException {
         if (equals(superclass)) {
@@ -777,6 +840,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
+     * Checks if this class is anonymous.
+     *
+     * @return true if anonymous.
      * @since 6.0
      */
     public final boolean isAnonymous() {
@@ -784,11 +850,19 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         return this.isAnonymous;
     }
 
+    /**
+     * Checks if this is a class.
+     *
+     * @return true if this is a class.
+     */
     public final boolean isClass() {
         return (super.getAccessFlags() & Const.ACC_INTERFACE) == 0;
     }
 
     /**
+     * Checks if this class is nested.
+     *
+     * @return true if nested.
      * @since 6.0
      */
     public final boolean isNested() {
@@ -807,82 +881,109 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         return this.isRecord;
     }
 
+    /**
+     * Checks if this is a super class.
+     *
+     * @return true if this is a super class.
+     */
     public final boolean isSuper() {
         return (super.getAccessFlags() & Const.ACC_SUPER) != 0;
     }
 
     /**
-     * @param attributes .
+     * Sets the attributes.
+     *
+     * @param attributes the attributes.
      */
     public void setAttributes(final Attribute[] attributes) {
         this.attributes = attributes != null ? attributes : Attribute.EMPTY_ARRAY;
     }
 
     /**
-     * @param className .
+     * Sets the class name.
+     *
+     * @param className the class name.
      */
     public void setClassName(final String className) {
         this.className = className;
     }
 
     /**
-     * @param classNameIndex .
+     * Sets the class name index.
+     *
+     * @param classNameIndex the class name index.
      */
     public void setClassNameIndex(final int classNameIndex) {
         this.classNameIndex = classNameIndex;
     }
 
     /**
-     * @param constantPool .
+     * Sets the constant pool.
+     *
+     * @param constantPool the constant pool.
      */
     public void setConstantPool(final ConstantPool constantPool) {
         this.constantPool = constantPool;
     }
 
     /**
-     * @param fields .
+     * Sets the fields.
+     *
+     * @param fields the fields.
      */
     public void setFields(final Field[] fields) {
         this.fields = fields != null ? fields : Field.EMPTY_ARRAY;
     }
 
     /**
-     * Sets File name of class, aka SourceFile attribute value
+     * Sets File name of class, aka SourceFile attribute value.
+     *
+     * @param fileName the file name.
      */
     public void setFileName(final String fileName) {
         this.fileName = fileName;
     }
 
     /**
-     * @param interfaceNames .
+     * Sets the interface names.
+     *
+     * @param interfaceNames the interface names.
      */
     public void setInterfaceNames(final String[] interfaceNames) {
         this.interfaceNames = ArrayUtils.nullToEmpty(interfaceNames);
     }
 
     /**
-     * @param interfaces .
+     * Sets the interfaces.
+     *
+     * @param interfaces the interfaces.
      */
     public void setInterfaces(final int[] interfaces) {
         this.interfaces = ArrayUtils.nullToEmpty(interfaces);
     }
 
     /**
-     * @param major .
+     * Sets the major version.
+     *
+     * @param major the major version.
      */
     public void setMajor(final int major) {
         this.major = major;
     }
 
     /**
-     * @param methods .
+     * Sets the methods.
+     *
+     * @param methods the methods.
      */
     public void setMethods(final Method[] methods) {
         this.methods = methods != null ? methods : Method.EMPTY_ARRAY;
     }
 
     /**
-     * @param minor .
+     * Sets the minor version.
+     *
+     * @param minor the minor version.
      */
     public void setMinor(final int minor) {
         this.minor = minor;
@@ -890,6 +991,8 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
     /**
      * Sets the ClassRepository which loaded the JavaClass. Should be called immediately after parsing is done.
+     *
+     * @param repository the repository.
      */
     public void setRepository(final org.apache.bcel.util.Repository repository) { // TODO make protected?
         this.repository = repository;
@@ -897,20 +1000,26 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
     /**
      * Sets absolute path to file this class was read from.
+     *
+     * @param sourceFileName the source file name.
      */
     public void setSourceFileName(final String sourceFileName) {
         this.sourceFileName = sourceFileName;
     }
 
     /**
-     * @param superclassName .
+     * Sets the superclass name.
+     *
+     * @param superclassName the superclass name.
      */
     public void setSuperclassName(final String superclassName) {
         this.superclassName = superclassName;
     }
 
     /**
-     * @param superclassNameIndex .
+     * Sets the superclass name index.
+     *
+     * @param superclassNameIndex the superclass name index.
      */
     public void setSuperclassNameIndex(final int superclassNameIndex) {
         this.superclassNameIndex = superclassNameIndex;
