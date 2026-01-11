@@ -27,6 +27,7 @@ package org.apache.bcel.generic;
  */
 public class DNEG extends ArithmeticInstruction {
 
+    /** Constructs a DNEG instruction. */
     public DNEG() {
         super(org.apache.bcel.Const.DNEG);
     }
