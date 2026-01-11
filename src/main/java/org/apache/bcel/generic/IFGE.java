@@ -33,6 +33,11 @@ public class IFGE extends IfInstruction {
     IFGE() {
     }
 
+    /**
+     * Constructs an IFGE instruction.
+     *
+     * @param target the target instruction.
+     */
     public IFGE(final InstructionHandle target) {
         super(org.apache.bcel.Const.IFGE, target);
     }
