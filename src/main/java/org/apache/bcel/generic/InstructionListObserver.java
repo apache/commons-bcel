@@ -24,5 +24,10 @@ package org.apache.bcel.generic;
  */
 public interface InstructionListObserver {
 
+    /**
+     * Notifies observer of changes.
+     *
+     * @param list the instruction list.
+     */
     void notify(InstructionList list);
 }
