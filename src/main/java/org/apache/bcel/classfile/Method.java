@@ -286,3 +286,4 @@ public final class Method extends FieldOrMethod {
         return buf.toString();
     }
 }
+
