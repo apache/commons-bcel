@@ -57,10 +57,12 @@ public final class InnerClass implements Cloneable, Node {
     }
 
     /**
-     * @param innerClassIndex Class index in constant pool of inner class
-     * @param outerClassIndex Class index in constant pool of outer class
-     * @param innerNameIndex Name index in constant pool of inner class
-     * @param innerAccessFlags Access flags of inner class
+     * Constructs an InnerClass.
+     *
+     * @param innerClassIndex Class index in constant pool of inner class.
+     * @param outerClassIndex Class index in constant pool of outer class.
+     * @param innerNameIndex Name index in constant pool of inner class.
+     * @param innerAccessFlags Access flags of inner class.
      */
     public InnerClass(final int innerClassIndex, final int outerClassIndex, final int innerNameIndex, final int innerAccessFlags) {
         this.innerClassIndex = innerClassIndex;
@@ -81,7 +83,9 @@ public final class InnerClass implements Cloneable, Node {
     }
 
     /**
-     * @return deep copy of this object
+     * Creates a deep copy of this object.
+     *
+     * @return deep copy of this object.
      */
     public InnerClass copy() {
         try {
@@ -106,6 +110,8 @@ public final class InnerClass implements Cloneable, Node {
     }
 
     /**
+     * Gets the access flags of inner class.
+     *
      * @return access flags of inner class.
      */
     public int getInnerAccessFlags() {
@@ -113,6 +119,8 @@ public final class InnerClass implements Cloneable, Node {
     }
 
     /**
+     * Gets the class index of inner class.
+     *
      * @return class index of inner class.
      */
     public int getInnerClassIndex() {
@@ -120,6 +128,8 @@ public final class InnerClass implements Cloneable, Node {
     }
 
     /**
+     * Gets the name index of inner class.
+     *
      * @return name index of inner class.
      */
     public int getInnerNameIndex() {
@@ -127,6 +137,8 @@ public final class InnerClass implements Cloneable, Node {
     }
 
     /**
+     * Gets the class index of outer class.
+     *
      * @return class index of outer class.
      */
     public int getOuterClassIndex() {
@@ -134,34 +146,44 @@ public final class InnerClass implements Cloneable, Node {
     }
 
     /**
-     * @param innerAccessFlags access flags for this inner class
+     * Sets the access flags for this inner class.
+     *
+     * @param innerAccessFlags access flags for this inner class.
      */
     public void setInnerAccessFlags(final int innerAccessFlags) {
         this.innerAccessFlags = innerAccessFlags;
     }
 
     /**
-     * @param innerClassIndex index into the constant pool for this class
+     * Sets the index into the constant pool for this class.
+     *
+     * @param innerClassIndex index into the constant pool for this class.
      */
     public void setInnerClassIndex(final int innerClassIndex) {
         this.innerClassIndex = innerClassIndex;
     }
 
     /**
-     * @param innerNameIndex index into the constant pool for this class's name
+     * Sets the index into the constant pool for this class's name.
+     *
+     * @param innerNameIndex index into the constant pool for this class's name.
      */
     public void setInnerNameIndex(final int innerNameIndex) { // TODO unused
         this.innerNameIndex = innerNameIndex;
     }
 
     /**
-     * @param outerClassIndex index into the constant pool for the owning class
+     * Sets the index into the constant pool for the owning class.
+     *
+     * @param outerClassIndex index into the constant pool for the owning class.
      */
     public void setOuterClassIndex(final int outerClassIndex) { // TODO unused
         this.outerClassIndex = outerClassIndex;
     }
 
     /**
+     * Gets the string representation.
+     *
      * @return String representation.
      */
     @Override
@@ -170,7 +192,10 @@ public final class InnerClass implements Cloneable, Node {
     }
 
     /**
-     * @return Resolved string representation
+     * Gets the resolved string representation.
+     *
+     * @param constantPool the constant pool.
+     * @return Resolved string representation.
      */
     public String toString(final ConstantPool constantPool) {
         String outerClassName;
