@@ -27,6 +27,7 @@ package org.apache.bcel.generic;
  */
 public class DUP2 extends StackInstruction implements PushInstruction {
 
+    /** Constructs a DUP2 instruction. */
     public DUP2() {
         super(org.apache.bcel.Const.DUP2);
     }
