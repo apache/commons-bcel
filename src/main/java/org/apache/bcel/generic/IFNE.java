@@ -33,6 +33,11 @@ public class IFNE extends IfInstruction {
     IFNE() {
     }
 
+    /**
+     * Constructs an IFNE instruction.
+     *
+     * @param target the target instruction.
+     */
     public IFNE(final InstructionHandle target) {
         super(org.apache.bcel.Const.IFNE, target);
     }
