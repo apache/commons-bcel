@@ -25,21 +25,33 @@ package org.apache.bcel.classfile;
 public interface Visitor {
 
     /**
+     * Visits an Annotations attribute.
+     *
+     * @param obj the attribute.
      * @since 6.0
      */
     void visitAnnotation(Annotations obj);
 
     /**
+     * Visits an AnnotationDefault attribute.
+     *
+     * @param obj the attribute.
      * @since 6.0
      */
     void visitAnnotationDefault(AnnotationDefault obj);
 
     /**
+     * Visits an AnnotationEntry.
+     *
+     * @param obj the annotation entry.
      * @since 6.0
      */
     void visitAnnotationEntry(AnnotationEntry obj);
 
     /**
+     * Visits a BootstrapMethods attribute.
+     *
+     * @param obj the attribute.
      * @since 6.0
      */
     void visitBootstrapMethods(BootstrapMethods obj);
@@ -73,6 +85,9 @@ public interface Visitor {
     void visitConstantDouble(ConstantDouble obj);
 
     /**
+     * Visits a ConstantDynamic.
+     *
+     * @param constantDynamic the constant.
      * @since 6.3
      */
     default void visitConstantDynamic(final ConstantDynamic constantDynamic) {
@@ -122,6 +137,9 @@ public interface Visitor {
     void visitConstantLong(ConstantLong obj);
 
     /**
+     * Visits a ConstantMethodHandle.
+     *
+     * @param obj the constant.
      * @since 6.0
      */
     void visitConstantMethodHandle(ConstantMethodHandle obj);
@@ -134,11 +152,17 @@ public interface Visitor {
     void visitConstantMethodref(ConstantMethodref obj);
 
     /**
+     * Visits a ConstantMethodType.
+     *
+     * @param obj the constant.
      * @since 6.0
      */
     void visitConstantMethodType(ConstantMethodType obj);
 
     /**
+     * Visits a ConstantModule.
+     *
+     * @param constantModule the constant.
      * @since 6.1
      */
     void visitConstantModule(ConstantModule constantModule);
@@ -151,6 +175,9 @@ public interface Visitor {
     void visitConstantNameAndType(ConstantNameAndType obj);
 
     /**
+     * Visits a ConstantPackage.
+     *
+     * @param constantPackage the constant.
      * @since 6.1
      */
     void visitConstantPackage(ConstantPackage constantPackage);
@@ -191,6 +218,9 @@ public interface Visitor {
     void visitDeprecated(Deprecated obj);
 
     /**
+     * Visits an EnclosingMethod attribute.
+     *
+     * @param obj the attribute.
      * @since 6.0
      */
     void visitEnclosingMethod(EnclosingMethod obj);
@@ -259,6 +289,9 @@ public interface Visitor {
     void visitLocalVariableTable(LocalVariableTable obj);
 
     /**
+     * Visits a LocalVariableTypeTable attribute.
+     *
+     * @param obj the attribute.
      * @since 6.0
      */
     void visitLocalVariableTypeTable(LocalVariableTypeTable obj);
@@ -271,6 +304,9 @@ public interface Visitor {
     void visitMethod(Method obj);
 
     /**
+     * Visits a MethodParameter.
+     *
+     * @param obj the method parameter.
      * @since 6.4.0
      */
     default void visitMethodParameter(final MethodParameter obj) {
@@ -278,11 +314,17 @@ public interface Visitor {
     }
 
     /**
+     * Visits a MethodParameters attribute.
+     *
+     * @param obj the attribute.
      * @since 6.0
      */
     void visitMethodParameters(MethodParameters obj);
 
     /**
+     * Visits a Module attribute.
+     *
+     * @param constantModule the module.
      * @since 6.4.0
      */
     default void visitModule(final Module constantModule) {
@@ -290,6 +332,9 @@ public interface Visitor {
     }
 
     /**
+     * Visits a ModuleExports entry.
+     *
+     * @param constantModule the module exports.
      * @since 6.4.0
      */
     default void visitModuleExports(final ModuleExports constantModule) {
@@ -297,6 +342,9 @@ public interface Visitor {
     }
 
     /**
+     * Visits a ModuleMainClass attribute.
+     *
+     * @param obj the attribute.
      * @since 6.4.0
      */
     default void visitModuleMainClass(final ModuleMainClass obj) {
@@ -304,6 +352,9 @@ public interface Visitor {
     }
 
     /**
+     * Visits a ModuleOpens entry.
+     *
+     * @param constantModule the module opens.
      * @since 6.4.0
      */
     default void visitModuleOpens(final ModuleOpens constantModule) {
@@ -311,6 +362,9 @@ public interface Visitor {
     }
 
     /**
+     * Visits a ModulePackages attribute.
+     *
+     * @param constantModule the module packages.
      * @since 6.4.0
      */
     default void visitModulePackages(final ModulePackages constantModule) {
@@ -318,6 +372,9 @@ public interface Visitor {
     }
 
     /**
+     * Visits a ModuleProvides entry.
+     *
+     * @param constantModule the module provides.
      * @since 6.4.0
      */
     default void visitModuleProvides(final ModuleProvides constantModule) {
@@ -325,6 +382,9 @@ public interface Visitor {
     }
 
     /**
+     * Visits a ModuleRequires entry.
+     *
+     * @param constantModule the module requires.
      * @since 6.4.0
      */
     default void visitModuleRequires(final ModuleRequires constantModule) {
@@ -332,6 +392,9 @@ public interface Visitor {
     }
 
     /**
+     * Visits a NestHost attribute.
+     *
+     * @param obj the attribute.
      * @since 6.4.0
      */
     default void visitNestHost(final NestHost obj) {
@@ -339,6 +402,9 @@ public interface Visitor {
     }
 
     /**
+     * Visits a NestMembers attribute.
+     *
+     * @param obj the attribute.
      * @since 6.4.0
      */
     default void visitNestMembers(final NestMembers obj) {
@@ -346,11 +412,17 @@ public interface Visitor {
     }
 
     /**
+     * Visits a ParameterAnnotations attribute.
+     *
+     * @param obj the attribute.
      * @since 6.0
      */
     void visitParameterAnnotation(ParameterAnnotations obj);
 
     /**
+     * Visits a ParameterAnnotationEntry.
+     *
+     * @param obj the annotation entry.
      * @since 6.0
      */
     void visitParameterAnnotationEntry(ParameterAnnotationEntry obj);
