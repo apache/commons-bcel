@@ -36,6 +36,11 @@ public class ICONST extends Instruction implements ConstantPushInstruction {
         this(0);
     }
 
+    /**
+     * Constructs an ICONST instruction.
+     *
+     * @param i the integer value.
+     */
     public ICONST(final int i) {
         super(org.apache.bcel.Const.ICONST_0, (short) 1);
         if (i < -1 || i > 5) {
