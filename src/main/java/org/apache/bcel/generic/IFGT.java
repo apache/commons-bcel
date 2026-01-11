@@ -33,6 +33,11 @@ public class IFGT extends IfInstruction {
     IFGT() {
     }
 
+    /**
+     * Constructs an IFGT instruction.
+     *
+     * @param target the target instruction.
+     */
     public IFGT(final InstructionHandle target) {
         super(org.apache.bcel.Const.IFGT, target);
     }
