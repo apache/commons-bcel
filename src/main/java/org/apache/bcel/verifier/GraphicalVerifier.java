@@ -32,7 +32,11 @@ public class GraphicalVerifier {
 
     private static final boolean packFrame = false;
 
-    /** Main method. */
+    /**
+     * Main method.
+     *
+     * @param args command line arguments.
+     */
     public static void main(final String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
