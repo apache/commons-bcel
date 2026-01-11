@@ -23,6 +23,9 @@ package org.apache.bcel.generic;
  */
 public class IMPDEP2 extends Instruction {
 
+    /**
+     * Constructs an IMPDEP2 instruction.
+     */
     public IMPDEP2() {
         super(org.apache.bcel.Const.IMPDEP2, (short) 1);
     }
