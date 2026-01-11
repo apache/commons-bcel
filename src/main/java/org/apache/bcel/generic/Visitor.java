@@ -24,74 +24,239 @@ package org.apache.bcel.generic;
  */
 public interface Visitor {
 
+    /**
+     * Visits an AALOAD instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitAALOAD(AALOAD obj);
 
+    /**
+     * Visits an AASTORE instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitAASTORE(AASTORE obj);
 
+    /**
+     * Visits an ACONST_NULL instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitACONST_NULL(ACONST_NULL obj);
 
+    /**
+     * Visits an AllocationInstruction.
+     *
+     * @param obj the instruction.
+     */
     void visitAllocationInstruction(AllocationInstruction obj);
 
+    /**
+     * Visits an ALOAD instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitALOAD(ALOAD obj);
 
+    /**
+     * Visits an ANEWARRAY instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitANEWARRAY(ANEWARRAY obj);
 
+    /**
+     * Visits an ARETURN instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitARETURN(ARETURN obj);
 
+    /**
+     * Visits an ArithmeticInstruction.
+     *
+     * @param obj the instruction.
+     */
     void visitArithmeticInstruction(ArithmeticInstruction obj);
 
+    /**
+     * Visits an ArrayInstruction.
+     *
+     * @param obj the instruction.
+     */
     void visitArrayInstruction(ArrayInstruction obj);
 
+    /**
+     * Visits an ARRAYLENGTH instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitARRAYLENGTH(ARRAYLENGTH obj);
 
+    /**
+     * Visits an ASTORE instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitASTORE(ASTORE obj);
 
+    /**
+     * Visits an ATHROW instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitATHROW(ATHROW obj);
 
+    /**
+     * Visits a BALOAD instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitBALOAD(BALOAD obj);
 
     void visitBASTORE(BASTORE obj);
 
+    /**
+     * Visits a BIPUSH instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitBIPUSH(BIPUSH obj);
 
+    /**
+     * Visits a BranchInstruction.
+     *
+     * @param obj the instruction.
+     */
     void visitBranchInstruction(BranchInstruction obj);
 
+    /**
+     * Visits a BREAKPOINT instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitBREAKPOINT(BREAKPOINT obj);
 
+    /**
+     * Visits a CALOAD instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitCALOAD(CALOAD obj);
 
+    /**
+     * Visits a CASTORE instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitCASTORE(CASTORE obj);
 
+    /**
+     * Visits a CHECKCAST instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitCHECKCAST(CHECKCAST obj);
 
+    /**
+     * Visits a ConstantPushInstruction.
+     *
+     * @param obj the instruction.
+     */
     void visitConstantPushInstruction(ConstantPushInstruction obj);
 
+    /**
+     * Visits a ConversionInstruction.
+     *
+     * @param obj the instruction.
+     */
     void visitConversionInstruction(ConversionInstruction obj);
 
+    /**
+     * Visits a CPInstruction.
+     *
+     * @param obj the instruction.
+     */
     void visitCPInstruction(CPInstruction obj);
 
+    /**
+     * Visits a D2F instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitD2F(D2F obj);
 
+    /**
+     * Visits a D2I instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitD2I(D2I obj);
 
+    /**
+     * Visits a D2L instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitD2L(D2L obj);
 
+    /**
+     * Visits a DADD instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitDADD(DADD obj);
 
+    /**
+     * Visits a DALOAD instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitDALOAD(DALOAD obj);
 
+    /**
+     * Visits a DASTORE instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitDASTORE(DASTORE obj);
 
+    /**
+     * Visits a DCMPG instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitDCMPG(DCMPG obj);
 
+    /**
+     * Visits a DCMPL instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitDCMPL(DCMPL obj);
 
+    /**
+     * Visits a DCONST instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitDCONST(DCONST obj);
 
     void visitDDIV(DDIV obj);
 
+    /**
+     * Visits a DLOAD instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitDLOAD(DLOAD obj);
 
+    /**
+     * Visits a DMUL instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitDMUL(DMUL obj);
 
     void visitDNEG(DNEG obj);
@@ -234,8 +399,18 @@ public interface Visitor {
 
     void visitIMUL(IMUL obj);
 
+    /**
+     * Visits an INEG instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitINEG(INEG obj);
 
+    /**
+     * Visits an INSTANCEOF instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitINSTANCEOF(INSTANCEOF obj);
 
     /**
