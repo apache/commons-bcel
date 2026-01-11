@@ -36,30 +36,44 @@ import org.apache.bcel.classfile.SimpleElementValue;
  * @since 6.0
  */
 public abstract class ElementValueGen {
+
+    /** Element value type: string. */
     public static final int STRING = 's';
 
+    /** Element value type: enum constant. */
     public static final int ENUM_CONSTANT = 'e';
 
+    /** Element value type: class. */
     public static final int CLASS = 'c';
 
+    /** Element value type: annotation. */
     public static final int ANNOTATION = '@';
 
+    /** Element value type: array. */
     public static final int ARRAY = '[';
 
+    /** Element value type: primitive int. */
     public static final int PRIMITIVE_INT = 'I';
 
+    /** Element value type: primitive byte. */
     public static final int PRIMITIVE_BYTE = 'B';
 
+    /** Element value type: primitive char. */
     public static final int PRIMITIVE_CHAR = 'C';
 
+    /** Element value type: primitive double. */
     public static final int PRIMITIVE_DOUBLE = 'D';
 
+    /** Element value type: primitive float. */
     public static final int PRIMITIVE_FLOAT = 'F';
 
+    /** Element value type: primitive long. */
     public static final int PRIMITIVE_LONG = 'J';
 
+    /** Element value type: primitive short. */
     public static final int PRIMITIVE_SHORT = 'S';
 
+    /** Element value type: primitive boolean. */
     public static final int PRIMITIVE_BOOLEAN = 'Z';
 
     /**
@@ -95,6 +109,14 @@ public abstract class ElementValueGen {
         }
     }
 
+    /**
+     * Reads an element value from a DataInput.
+     *
+     * @param dis the data input stream.
+     * @param cpGen the constant pool.
+     * @return the element value read.
+     * @throws IOException if an I/O error occurs.
+     */
     public static ElementValueGen readElementValue(final DataInput dis, final ConstantPoolGen cpGen) throws IOException {
         final int type = dis.readUnsignedByte();
         switch (type) {
@@ -149,6 +171,12 @@ public abstract class ElementValueGen {
     @Deprecated
     protected ConstantPoolGen cpGen;
 
+    /**
+     * Constructs an ElementValueGen.
+     *
+     * @param type the element value type.
+     * @param cpGen the constant pool.
+     */
     protected ElementValueGen(final int type, final ConstantPoolGen cpGen) {
         this.type = type;
         this.cpGen = cpGen;
@@ -162,6 +190,11 @@ public abstract class ElementValueGen {
      */
     public abstract void dump(DataOutputStream dos) throws IOException;
 
+    /**
+     * Gets the constant pool.
+     *
+     * @return the constant pool.
+     */
     protected ConstantPoolGen getConstantPool() {
         return cpGen;
     }
@@ -173,6 +206,11 @@ public abstract class ElementValueGen {
      */
     public abstract ElementValue getElementValue();
 
+    /**
+     * Gets the element value type.
+     *
+     * @return the element value type.
+     */
     public int getElementValueType() {
         return type;
     }
