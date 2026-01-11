@@ -516,6 +516,12 @@ public class MethodGen extends FieldGenOrMethodGen {
         observers.add(o);
     }
 
+    /**
+     * Adds a parameter annotation.
+     *
+     * @param parameterIndex the parameter index.
+     * @param annotation the annotation.
+     */
     public void addParameterAnnotation(final int parameterIndex, final AnnotationEntryGen annotation) {
         ensureExistingParameterAnnotationsUnpacked();
         if (!hasParameterAnnotations) {
@@ -741,15 +747,19 @@ public class MethodGen extends FieldGenOrMethodGen {
         return cExc;
     }
 
-    /*
-     * @return array of declared exception handlers
+    /**
+     * Gets array of declared exception handlers.
+     *
+     * @return array of declared exception handlers.
      */
     public CodeExceptionGen[] getExceptionHandlers() {
         return exceptionList.toArray(CodeExceptionGen.EMPTY_ARRAY);
     }
 
-    /*
-     * @return array of thrown exceptions
+    /**
+     * Gets array of thrown exceptions.
+     *
+     * @return array of thrown exceptions.
      */
     public String[] getExceptions() {
         return throwsList.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
@@ -765,12 +775,19 @@ public class MethodGen extends FieldGenOrMethodGen {
         return new ExceptionTable(cp.addUtf8("Exceptions"), 2 + 2 * size, ex, cp.getConstantPool());
     }
 
+    /**
+     * Gets the instruction list.
+     *
+     * @return the instruction list.
+     */
     public InstructionList getInstructionList() {
         return il;
     }
 
-    /*
-     * @return array of line numbers
+    /**
+     * Gets array of line numbers.
+     *
+     * @return array of line numbers.
      */
     public LineNumberGen[] getLineNumbers() {
         return lineNumberList.toArray(LineNumberGen.EMPTY_ARRAY);
@@ -789,11 +806,13 @@ public class MethodGen extends FieldGenOrMethodGen {
         return new LineNumberTable(cp.addUtf8("LineNumberTable"), 2 + ln.length * 4, ln, cp.getConstantPool());
     }
 
-    /*
+    /**
+     * Gets array of declared local variables sorted by index.
+     *
      * If the range of the variable has not been set yet, it will be set to be valid from the start to the end of the
      * instruction list.
      *
-     * @return array of declared local variables sorted by index
+     * @return array of declared local variables sorted by index.
      */
     public LocalVariableGen[] getLocalVariables() {
         final int size = variableList.size();
@@ -943,6 +962,11 @@ public class MethodGen extends FieldGenOrMethodGen {
         return m;
     }
 
+    /**
+     * Gets the return type.
+     *
+     * @return the return type.
+     */
     public Type getReturnType() {
         return getType();
     }
@@ -1145,10 +1169,20 @@ public class MethodGen extends FieldGenOrMethodGen {
         this.argTypes = argTypes != null ? argTypes : Type.NO_ARGS;
     }
 
+    /**
+     * Sets the class name.
+     *
+     * @param className the class name.
+     */
     public void setClassName(final String className) { // TODO could be package-protected?
         this.className = className;
     }
 
+    /**
+     * Sets the instruction list.
+     *
+     * @param il the instruction list.
+     */
     public void setInstructionList(final InstructionList il) { // TODO could be package-protected?
         this.il = il;
     }
@@ -1206,6 +1240,11 @@ public class MethodGen extends FieldGenOrMethodGen {
         maxStack = m;
     }
 
+    /**
+     * Sets the return type.
+     *
+     * @param returnType the return type.
+     */
     public void setReturnType(final Type returnType) {
         setType(returnType);
     }
