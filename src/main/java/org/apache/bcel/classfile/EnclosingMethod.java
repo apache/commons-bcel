@@ -74,15 +74,29 @@ public class EnclosingMethod extends Attribute {
         file.writeShort(methodIndex);
     }
 
+    /**
+     * Gets the enclosing class.
+     *
+     * @return the enclosing class.
+     */
     public final ConstantClass getEnclosingClass() {
         return super.getConstantPool().getConstant(classIndex, Const.CONSTANT_Class, ConstantClass.class);
     }
 
-    // Accessors
+    /**
+     * Gets the enclosing class index.
+     *
+     * @return the enclosing class index.
+     */
     public final int getEnclosingClassIndex() {
         return classIndex;
     }
 
+    /**
+     * Gets the enclosing method.
+     *
+     * @return the enclosing method.
+     */
     public final ConstantNameAndType getEnclosingMethod() {
         if (methodIndex == 0) {
             return null;
@@ -90,14 +104,29 @@ public class EnclosingMethod extends Attribute {
         return super.getConstantPool().getConstant(methodIndex, Const.CONSTANT_NameAndType, ConstantNameAndType.class);
     }
 
+    /**
+     * Gets the enclosing method index.
+     *
+     * @return the enclosing method index.
+     */
     public final int getEnclosingMethodIndex() {
         return methodIndex;
     }
 
+    /**
+     * Sets the enclosing class index.
+     *
+     * @param idx the index.
+     */
     public final void setEnclosingClassIndex(final int idx) {
         classIndex = idx;
     }
 
+    /**
+     * Sets the enclosing method index.
+     *
+     * @param idx the index.
+     */
     public final void setEnclosingMethodIndex(final int idx) {
         methodIndex = idx;
     }
