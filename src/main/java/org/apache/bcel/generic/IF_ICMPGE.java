@@ -33,6 +33,11 @@ public class IF_ICMPGE extends IfInstruction {
     IF_ICMPGE() {
     }
 
+    /**
+     * Constructs an IF_ICMPGE instruction.
+     *
+     * @param target the target instruction.
+     */
     public IF_ICMPGE(final InstructionHandle target) {
         super(org.apache.bcel.Const.IF_ICMPGE, target);
     }
