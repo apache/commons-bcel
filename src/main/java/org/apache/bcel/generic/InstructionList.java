@@ -193,6 +193,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
 
     /**
      * Add observer for this object.
+     *
+     * @param o the observer to add.
      */
     public void addObserver(final InstructionListObserver o) {
         if (observers == null) {
@@ -402,7 +404,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * @return complete, i.e., deep copy of this list
+     * Creates a complete deep copy of this list.
+     *
+     * @return complete, that is, deep copy of this list.
      */
     public InstructionList copy() {
         final Map<InstructionHandle, InstructionHandle> map = new HashMap<>();
@@ -451,7 +455,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Remove instruction from this list. The corresponding Instruction handles must not be reused!
      *
-     * @param i instruction to remove
+     * @param i instruction to remove.
+     * @throws TargetLostException if target is lost.
      */
     public void delete(final Instruction i) throws TargetLostException {
         final InstructionHandle ih;
@@ -465,8 +470,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * Remove instructions from instruction 'from' to instruction 'to' contained in this list. The user must ensure that
      * 'from' is an instruction before 'to', or risk havoc. The corresponding Instruction handles must not be reused!
      *
-     * @param from where to start deleting (inclusive)
-     * @param to where to end deleting (inclusive)
+     * @param from where to start deleting (inclusive).
+     * @param to where to end deleting (inclusive).
+     * @throws TargetLostException if target is lost.
      */
     public void delete(final Instruction from, final Instruction to) throws TargetLostException {
         final InstructionHandle fromIh;
