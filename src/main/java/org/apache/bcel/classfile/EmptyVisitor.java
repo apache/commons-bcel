@@ -25,6 +25,8 @@ package org.apache.bcel.classfile;
  * @see DescendingVisitor
  */
 public class EmptyVisitor implements Visitor {
+
+    /** Constructs an EmptyVisitor. */
     protected EmptyVisitor() {
     }
 
