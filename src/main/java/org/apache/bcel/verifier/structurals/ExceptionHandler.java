@@ -43,6 +43,8 @@ public class ExceptionHandler {
 
     /**
      * Returns the type of the exception that's handled. <strong>'null' means 'ANY'.</strong>
+     *
+     * @return the exception type.
      */
     public ObjectType getExceptionType() {
         return catchType;
@@ -50,6 +52,8 @@ public class ExceptionHandler {
 
     /**
      * Returns the InstructionHandle where the handler starts off.
+     *
+     * @return the handler start instruction.
      */
     public InstructionHandle getHandlerStart() {
         return handlerPc;
