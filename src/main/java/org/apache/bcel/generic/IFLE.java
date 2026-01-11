@@ -33,6 +33,11 @@ public class IFLE extends IfInstruction {
     IFLE() {
     }
 
+    /**
+     * Constructs an IFLE instruction.
+     *
+     * @param target the target instruction.
+     */
     public IFLE(final InstructionHandle target) {
         super(org.apache.bcel.Const.IFLE, target);
     }
