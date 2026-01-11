@@ -37,9 +37,18 @@ public interface InstructionConstants {
 
     /**
      * Deprecated, consider private and ignore.
+     *
+     * @deprecated Consider private.
      */
+    @Deprecated
     class Clinit {
-        // empty
+
+        /**
+         * Constructs a Clinit.
+         */
+        public Clinit() {
+            // empty
+        }
     }
 
     /*
