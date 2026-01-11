@@ -69,8 +69,10 @@ public class InstructionFinder {
     public interface CodeConstraint {
 
         /**
-         * @param match array of instructions matching the requested pattern
-         * @return true if the matched area is really useful
+         * Checks if the matched code area is really useful.
+         *
+         * @param match array of instructions matching the requested pattern.
+         * @return true if the matched area is really useful.
          */
         boolean checkCode(InstructionHandle[] match);
     }
@@ -240,7 +242,9 @@ public class InstructionFinder {
     // list to array
 
     /**
-     * @param il instruction list to search for given patterns
+     * Constructs an InstructionFinder.
+     *
+     * @param il instruction list to search for given patterns.
      */
     public InstructionFinder(final InstructionList il) {
         this.il = il;
@@ -248,7 +252,9 @@ public class InstructionFinder {
     }
 
     /**
-     * @return the inquired instruction list
+     * Gets the inquired instruction list.
+     *
+     * @return the inquired instruction list.
      */
     public final InstructionList getInstructionList() {
         return il;
