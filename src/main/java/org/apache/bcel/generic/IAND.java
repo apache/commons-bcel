@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class IAND extends ArithmeticInstruction {
 
+    /**
+     * Constructs an IAND instruction.
+     */
     public IAND() {
         super(org.apache.bcel.Const.IAND);
     }
