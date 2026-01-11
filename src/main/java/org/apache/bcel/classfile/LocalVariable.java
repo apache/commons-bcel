@@ -315,3 +315,4 @@ public final class LocalVariable implements Cloneable, Node, Constants {
         return label + "(startPc = " + startPc + ", length = " + length + ", index = " + index + ":" + signature + " " + name + ")";
     }
 }
+
