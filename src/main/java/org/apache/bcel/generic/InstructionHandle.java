@@ -73,6 +73,11 @@ public class InstructionHandle {
 
     private Map<Object, Object> attributes;
 
+    /**
+     * Constructs an InstructionHandle.
+     *
+     * @param i the instruction.
+     */
     protected InstructionHandle(final Instruction i) {
         setInstruction(i);
     }
@@ -207,6 +212,11 @@ public class InstructionHandle {
         return t;
     }
 
+    /**
+     * Checks if this handle has targeters.
+     *
+     * @return true if this handle has targeters, false otherwise.
+     */
     public boolean hasTargeters() {
         return targeters != null && !targeters.isEmpty();
     }
