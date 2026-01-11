@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class I2S extends ConversionInstruction {
 
+    /**
+     * Constructs an I2S instruction.
+     */
     public I2S() {
         super(org.apache.bcel.Const.I2S);
     }
