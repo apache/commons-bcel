@@ -83,14 +83,18 @@ public class IINC extends LocalVariableInstruction {
     }
 
     /**
-     * @return increment factor
+     * Gets the increment factor.
+     *
+     * @return increment factor.
      */
     public final int getIncrement() {
         return c;
     }
 
     /**
-     * @return int type
+     * Gets the int type.
+     *
+     * @return int type.
      */
     @Override
     public Type getType(final ConstantPoolGen cp) {
@@ -116,6 +120,8 @@ public class IINC extends LocalVariableInstruction {
 
     /**
      * Sets increment factor.
+     *
+     * @param c the increment factor.
      */
     public final void setIncrement(final int c) {
         this.c = c;
