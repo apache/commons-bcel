@@ -774,6 +774,9 @@ public interface Visitor {
     void visitINSTANCEOF(INSTANCEOF obj);
 
     /**
+     * Visits an INVOKEDYNAMIC instruction.
+     *
+     * @param obj the instruction.
      * @since 6.0
      */
     void visitINVOKEDYNAMIC(INVOKEDYNAMIC obj);
@@ -960,42 +963,137 @@ public interface Visitor {
      */
     void visitLCONST(LCONST obj);
 
+    /**
+     * Visits an LDC instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitLDC(LDC obj);
 
+    /**
+     * Visits an LDC2_W instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitLDC2_W(LDC2_W obj);
 
+    /**
+     * Visits an LDIV instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitLDIV(LDIV obj);
 
+    /**
+     * Visits an LLOAD instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitLLOAD(LLOAD obj);
 
+    /**
+     * Visits an LMUL instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitLMUL(LMUL obj);
 
+    /**
+     * Visits an LNEG instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitLNEG(LNEG obj);
 
+    /**
+     * Visits a LoadClass.
+     *
+     * @param obj the load class.
+     */
     void visitLoadClass(LoadClass obj);
 
+    /**
+     * Visits a LoadInstruction.
+     *
+     * @param obj the instruction.
+     */
     void visitLoadInstruction(LoadInstruction obj);
 
+    /**
+     * Visits a LocalVariableInstruction.
+     *
+     * @param obj the instruction.
+     */
     void visitLocalVariableInstruction(LocalVariableInstruction obj);
 
+    /**
+     * Visits a LOOKUPSWITCH instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitLOOKUPSWITCH(LOOKUPSWITCH obj);
 
+    /**
+     * Visits an LOR instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitLOR(LOR obj);
 
+    /**
+     * Visits an LREM instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitLREM(LREM obj);
 
+    /**
+     * Visits an LRETURN instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitLRETURN(LRETURN obj);
 
+    /**
+     * Visits an LSHL instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitLSHL(LSHL obj);
 
+    /**
+     * Visits an LSHR instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitLSHR(LSHR obj);
 
+    /**
+     * Visits an LSTORE instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitLSTORE(LSTORE obj);
 
+    /**
+     * Visits an LSUB instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitLSUB(LSUB obj);
 
+    /**
+     * Visits an LUSHR instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitLUSHR(LUSHR obj);
 
+    /**
+     * Visits an LXOR instruction.
+     *
+     * @param obj the instruction.
+     */
     void visitLXOR(LXOR obj);
 
     /**
