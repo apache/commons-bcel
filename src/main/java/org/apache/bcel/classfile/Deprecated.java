@@ -46,10 +46,12 @@ public final class Deprecated extends Attribute {
     }
 
     /**
-     * @param nameIndex Index in constant pool to CONSTANT_Utf8
-     * @param length Content length in bytes
-     * @param bytes Attribute contents
-     * @param constantPool Array of constants
+     * Constructs a Deprecated attribute.
+     *
+     * @param nameIndex Index in constant pool to CONSTANT_Utf8.
+     * @param length Content length in bytes.
+     * @param bytes Attribute contents.
+     * @param constantPool Array of constants.
      */
     public Deprecated(final int nameIndex, final int length, final byte[] bytes, final ConstantPool constantPool) {
         super(Const.ATTR_DEPRECATED, nameIndex, Args.require0(length, "Deprecated attribute length"), constantPool);
@@ -113,6 +115,8 @@ public final class Deprecated extends Attribute {
     }
 
     /**
+     * Gets the data bytes.
+     *
      * @return data bytes.
      */
     public byte[] getBytes() {
@@ -120,7 +124,9 @@ public final class Deprecated extends Attribute {
     }
 
     /**
-     * @param bytes the raw bytes that represents this byte array
+     * Sets the data bytes.
+     *
+     * @param bytes the raw bytes that represents this byte array.
      */
     public void setBytes(final byte[] bytes) {
         this.bytes = bytes;
