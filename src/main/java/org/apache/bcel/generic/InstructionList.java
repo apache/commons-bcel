@@ -387,10 +387,22 @@ public class InstructionList implements Iterable<InstructionHandle> {
         length = 0;
     }
 
+    /**
+     * Checks if the list contains the given instruction.
+     *
+     * @param i the instruction to check.
+     * @return true if the list contains the instruction.
+     */
     public boolean contains(final Instruction i) {
         return findInstruction1(i) != null;
     }
 
+    /**
+     * Checks if the list contains the given instruction handle.
+     *
+     * @param i the instruction handle to check.
+     * @return true if the list contains the instruction handle.
+     */
     public boolean contains(final InstructionHandle i) {
         if (i == null) {
             return false;
@@ -489,7 +501,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Remove instruction from this list. The corresponding Instruction handles must not be reused!
      *
-     * @param ih instruction (handle) to remove
+     * @param ih instruction (handle) to remove.
+     * @throws TargetLostException if target is lost.
      */
     public void delete(final InstructionHandle ih) throws TargetLostException {
         remove(ih.getPrev(), ih.getNext());
@@ -499,8 +512,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * Remove instructions from instruction 'from' to instruction 'to' contained in this list. The user must ensure that
      * 'from' is an instruction before 'to', or risk havoc. The corresponding Instruction handles must not be reused!
      *
-     * @param from where to start deleting (inclusive)
-     * @param to where to end deleting (inclusive)
+     * @param from where to start deleting (inclusive).
+     * @param to where to end deleting (inclusive).
+     * @throws TargetLostException if target is lost.
      */
     public void delete(final InstructionHandle from, final InstructionHandle to) throws TargetLostException {
         remove(from.getPrev(), to.getNext());
@@ -592,14 +606,18 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * @return end of list
+     * Gets the end of list.
+     *
+     * @return end of list.
      */
     public InstructionHandle getEnd() {
         return end;
     }
 
     /**
-     * @return array containing all instructions (handles)
+     * Gets array containing all instructions.
+     *
+     * @return array containing all instructions (handles).
      */
     public InstructionHandle[] getInstructionHandles() {
         final InstructionHandle[] ihs = new InstructionHandle[length];
@@ -622,6 +640,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
+     * Gets an array of instructions without target information for branch instructions.
+     *
      * @return an array of instructions without target information for branch instructions.
      */
     public Instruction[] getInstructions() {
@@ -637,14 +657,18 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * @return length of list (Number of instructions, not bytes)
+     * Gets the length of list.
+     *
+     * @return length of list (Number of instructions, not bytes).
      */
     public int getLength() {
         return length;
     }
 
     /**
-     * @return start of list
+     * Gets the start of list.
+     *
+     * @return start of list.
      */
     public InstructionHandle getStart() {
         return start;
@@ -1054,6 +1078,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
 
     /**
      * Remove observer for this object.
+     *
+     * @param o the observer to remove.
      */
     public void removeObserver(final InstructionListObserver o) {
         if (observers != null) {
@@ -1062,7 +1088,10 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * Replace all references to the old constant pool with references to the new constant pool
+     * Replace all references to the old constant pool with references to the new constant pool.
+     *
+     * @param oldCp the old constant pool.
+     * @param newCp the new constant pool.
      */
     public void replaceConstantPool(final ConstantPoolGen oldCp, final ConstantPoolGen newCp) {
         for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
@@ -1075,6 +1104,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
         }
     }
 
+    /**
+     * Sets positions with no sanity checks.
+     */
     public void setPositions() { // TODO could be package-protected? (some test code would need to be repackaged)
         setPositions(false);
     }
@@ -1164,7 +1196,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * @return length of list (Number of instructions, not bytes)
+     * Gets the length of list.
+     *
+     * @return length of list (Number of instructions, not bytes).
      */
     public int size() {
         return length;
@@ -1176,7 +1210,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * @param verbose toggle output format
+     * Gets string containing all instructions in this list.
+     *
+     * @param verbose toggle output format.
      * @return String containing all instructions in this list.
      */
     public String toString(final boolean verbose) {
