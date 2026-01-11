@@ -115,14 +115,29 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
         return l.index == index && l.start == start && l.end == end;
     }
 
+    /**
+     * Gets the end instruction handle.
+     *
+     * @return the end instruction handle.
+     */
     public InstructionHandle getEnd() {
         return end;
     }
 
+    /**
+     * Gets the index.
+     *
+     * @return the index.
+     */
     public int getIndex() {
         return index;
     }
 
+    /**
+     * Gets whether the variable lives to the end.
+     *
+     * @return true if the variable lives to the end.
+     */
     public boolean getLiveToEnd() {
         return liveToEnd;
     }
@@ -137,7 +152,8 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      * between a live range that ends BEFORE the last insturction of the method or a live range that ends AFTER the last
      * instruction of the method. Hence the liveToEnd flag to differentiate between these two cases.
      *
-     * @param cp constant pool
+     * @param cp constant pool.
+     * @return the local variable.
      */
     public LocalVariable getLocalVariable(final ConstantPoolGen cp) {
         int startPc = 0;
@@ -159,10 +175,20 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
         return name;
     }
 
+    /**
+     * Gets the original index.
+     *
+     * @return the original index.
+     */
     public int getOrigIndex() {
         return origIndex;
     }
 
+    /**
+     * Gets the start instruction handle.
+     *
+     * @return the start instruction handle.
+     */
     public InstructionHandle getStart() {
         return start;
     }
@@ -179,15 +205,30 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
         return name.hashCode() ^ type.hashCode();
     }
 
+    /**
+     * Sets the end instruction handle.
+     *
+     * @param end the end instruction handle.
+     */
     public void setEnd(final InstructionHandle end) { // TODO could be package-protected?
         BranchInstruction.notifyTarget(this.end, end, this);
         this.end = end;
     }
 
+    /**
+     * Sets the index.
+     *
+     * @param index the index.
+     */
     public void setIndex(final int index) {
         this.index = index;
     }
 
+    /**
+     * Sets whether the variable lives to the end.
+     *
+     * @param liveToEnd true if the variable lives to the end.
+     */
     public void setLiveToEnd(final boolean liveToEnd) {
         this.liveToEnd = liveToEnd;
     }
@@ -197,6 +238,11 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
         this.name = name;
     }
 
+    /**
+     * Sets the start instruction handle.
+     *
+     * @param start the start instruction handle.
+     */
     public void setStart(final InstructionHandle start) { // TODO could be package-protected?
         BranchInstruction.notifyTarget(this.start, start, this);
         this.start = start;
