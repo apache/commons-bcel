@@ -33,6 +33,11 @@ public class IFEQ extends IfInstruction {
     IFEQ() {
     }
 
+    /**
+     * Constructs an IFEQ instruction.
+     *
+     * @param target the target instruction.
+     */
     public IFEQ(final InstructionHandle target) {
         super(org.apache.bcel.Const.IFEQ, target);
     }
