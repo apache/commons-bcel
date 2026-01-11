@@ -23,11 +23,31 @@ package org.apache.bcel.generic;
  */
 public interface NamedAndTyped {
 
+    /**
+     * Gets the name.
+     *
+     * @return the name.
+     */
     String getName();
 
+    /**
+     * Gets the type.
+     *
+     * @return the type.
+     */
     Type getType();
 
+    /**
+     * Sets the name.
+     *
+     * @param name the name.
+     */
     void setName(String name);
 
+    /**
+     * Sets the type.
+     *
+     * @param type the type.
+     */
     void setType(Type type);
 }
