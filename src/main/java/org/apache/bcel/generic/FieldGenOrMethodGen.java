@@ -54,16 +54,27 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     // @since 6.0
     private final List<AnnotationEntryGen> annotationList = new ArrayList<>();
 
+    /**
+     * Constructs a FieldGenOrMethodGen.
+     */
     protected FieldGenOrMethodGen() {
     }
 
     /**
+     * Constructs a FieldGenOrMethodGen.
+     *
+     * @param accessFlags the access flags.
      * @since 6.0
      */
     protected FieldGenOrMethodGen(final int accessFlags) { // TODO could this be package protected?
         super(accessFlags);
     }
 
+    /**
+     * Adds all attributes from an array.
+     *
+     * @param attributes the attributes to add.
+     */
     protected void addAll(final Attribute[] attributes) {
         if (attributes != null) {
             Collections.addAll(attributeList, attributes);
@@ -71,6 +82,9 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     }
 
     /**
+     * Adds an annotation entry.
+     *
+     * @param ag the annotation entry.
      * @since 6.0
      */
     public void addAnnotationEntry(final AnnotationEntryGen ag) {
@@ -96,17 +110,29 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
         }
     }
 
+    /**
+     * Gets all annotation entries.
+     *
+     * @return all annotation entries.
+     */
     public AnnotationEntryGen[] getAnnotationEntries() {
         return annotationList.toArray(AnnotationEntryGen.EMPTY_ARRAY);
     }
 
     /**
+     * Gets all attributes of this method or field.
+     *
      * @return all attributes of this method.
      */
     public Attribute[] getAttributes() {
         return attributeList.toArray(Attribute.EMPTY_ARRAY);
     }
 
+    /**
+     * Gets the constant pool.
+     *
+     * @return the constant pool.
+     */
     public ConstantPoolGen getConstantPool() {
         return cp;
     }
@@ -120,6 +146,8 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     }
 
     /**
+     * Gets the signature of method or field.
+     *
      * @return signature of method/field.
      */
     public abstract String getSignature();
@@ -130,6 +158,8 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     }
 
     /**
+     * Removes all annotation entries.
+     *
      * @since 6.0
      */
     public void removeAnnotationEntries() {
@@ -137,6 +167,9 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     }
 
     /**
+     * Removes an annotation entry.
+     *
+     * @param ag the annotation entry to remove.
      * @since 6.0
      */
     public void removeAnnotationEntry(final AnnotationEntryGen ag) {
@@ -144,19 +177,26 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     }
 
     /**
-     * Remove an attribute.
+     * Removes an attribute.
+     *
+     * @param a the attribute to remove.
      */
     public void removeAttribute(final Attribute a) {
         attributeList.remove(a);
     }
 
     /**
-     * Remove all attributes.
+     * Removes all attributes.
      */
     public void removeAttributes() {
         attributeList.clear();
     }
 
+    /**
+     * Sets the constant pool.
+     *
+     * @param cp the constant pool.
+     */
     public void setConstantPool(final ConstantPoolGen cp) { // TODO could be package-protected?
         this.cp = cp;
     }
