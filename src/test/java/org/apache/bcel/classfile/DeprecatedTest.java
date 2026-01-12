@@ -25,6 +25,9 @@ import java.io.DataInput;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests {@link Deprecated}.
+ */
 public class DeprecatedTest {
 
     @Test
