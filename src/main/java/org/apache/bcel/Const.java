@@ -845,20 +845,22 @@ public final class Const {
     public static final int MAX_CP_ENTRIES = 65535;
 
     /**
-     * Maximum code size (plus one; the code size must be LESS than this): {@value}.
+     * Maximum code size plus one; the code size must be LESS than {@value}.
      * <p>
-     * One of the limitations of the Java Virtual Machine. Note vmspec2 page 152 ("Limitations") says:
-     * </p>
-     * <pre>"The amount of code per non-native, non-abstract method is limited to 65536 bytes by the sizes of the indices in the exception_table of the Code
-     * attribute (§4.7.3), in the LineNumberTable attribute (§4.7.8), and in the LocalVariableTable attribute (§4.7.9)." However this should be taken as an
-     * upper limit rather than the defined maximum. On page 134 (4.8.1 Static Constants) of the same spec, it says: "The value of the code_length item must be
-     * less than 65536."</pre>
-     * <p>
-     * The entry in the Limitations section has been removed from later versions of the specification; it is not present in the Java SE 8 edition.
+     * This limitation is from <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.3"> The Java Virtual Machine
+     * Specification, Java SE 8 Edition, 4.7.3 The Code Attribute.</a>:
      * </p>
      *
-     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.3-300-E"> The Java Virtual Machine Specification, Java SE 8
-     *      Edition, page 104, chapter 4.7.</a>
+     * <pre>
+     * code_length
+     *
+     *  The value of the code_length item gives the number of bytes in the code array for this method.
+     *
+     *  The value of code_length must be greater than zero (as the code array must not be empty) and less than 65536"
+     * </pre>
+     *
+     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.3"> The Java Virtual Machine Specification, Java SE 8
+     *      Edition, 4.7.3 The Code Attribute.</a>
      */
     public static final int MAX_CODE_SIZE = 65536; // bytes
 
