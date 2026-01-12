@@ -24,7 +24,7 @@ import java.io.IOException;
 import org.apache.bcel.util.ByteSequence;
 
 /**
- * TABLESWITCH - Switch within given range of values, i.e., low..high
+ * TABLESWITCH - Switch within given range of values, that is, low..high
  *
  * @see SWITCH
  */
@@ -51,7 +51,7 @@ public class TABLESWITCH extends Select {
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
      * @param v Visitor object
      */

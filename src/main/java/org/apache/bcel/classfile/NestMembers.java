@@ -149,7 +149,7 @@ public final class NestMembers extends Attribute {
     }
 
     /**
-     * @return String representation, i.e., a list of classes.
+     * @return String representation, that is, a list of classes.
      */
     @Override
     public String toString() {

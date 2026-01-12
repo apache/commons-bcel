@@ -37,7 +37,7 @@ import org.apache.bcel.classfile.Utility;
  * </p>
  *
  * <p>
- * This class loader recognizes special requests in a distinct format, i.e., when the name of the requested class
+ * This class loader recognizes special requests in a distinct format, that is, when the name of the requested class
  * contains with "$$BCEL$$" it calls the createClass() method with that name (everything bevor the $$BCEL$$ is
  * considered to be the package name. You can subclass the class loader and override that method. "Normal" classes class
  * can be modified by overriding the modifyClass() method which is called just before defineClass().

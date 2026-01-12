@@ -92,7 +92,7 @@ final class CodeHTML {
         final StringBuilder buf = new StringBuilder(256); // CHECKSTYLE IGNORE MagicNumber
         buf.append("<TT>").append(Const.getOpcodeName(opcode)).append("</TT></TD><TD>");
         /*
-         * Special case: Skip (0-3) padding bytes, i.e., the following bytes are 4-byte-aligned
+         * Special case: Skip (0-3) padding bytes, that is, the following bytes are 4-byte-aligned
          */
         if (opcode == Const.TABLESWITCH || opcode == Const.LOOKUPSWITCH) {
             final int remainder = bytes.getIndex() % 4;
@@ -281,7 +281,7 @@ final class CodeHTML {
                 name = Class2HTML.referenceClass(classIndex);
             }
             str = Class2HTML.toHTML(constantPool.constantToString(constantPool.getConstant(index, Const.CONSTANT_NameAndType)));
-            // Get signature, i.e., types
+            // Get signature, that is, types
             final ConstantNameAndType c2 = constantPool.getConstant(index, Const.CONSTANT_NameAndType, ConstantNameAndType.class);
             signature = constantPool.constantToString(c2.getSignatureIndex(), Const.CONSTANT_Utf8);
             final String[] args = Utility.methodSignatureArgumentTypes(signature, false);

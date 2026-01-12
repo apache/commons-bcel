@@ -112,7 +112,7 @@ class GeneratingAnnotatedClassesTest extends AbstractTest {
         // We now define some often used types:
         final ObjectType inStream = new ObjectType("java.io.InputStream");
         final ObjectType printStream = new ObjectType("java.io.PrintStream");
-        // Create variables in and name : We call the constructors, i.e.,
+        // Create variables in and name : We call the constructors, that is,
         // execute BufferedReader(InputStreamReader(System.in)) . The reference
         // to the BufferedReader object stays on top of the stack and is stored
         // in the newly allocated in variable.
@@ -188,7 +188,7 @@ class GeneratingAnnotatedClassesTest extends AbstractTest {
         // We now define some often used types:
         final ObjectType inStream = new ObjectType("java.io.InputStream");
         final ObjectType printStream = new ObjectType("java.io.PrintStream");
-        // Create variables in and name : We call the constructors, i.e.,
+        // Create variables in and name : We call the constructors, that is,
         // execute BufferedReader(InputStreamReader(System.in)) . The reference
         // to the BufferedReader object stays on top of the stack and is stored
         // in the newly allocated in variable.

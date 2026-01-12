@@ -43,7 +43,7 @@ final class ClassDumper {
     private int[] interfaces; // Names of implemented interfaces
     private ConstantPool constantPool; // collection of constants
     private Constant[] constantItems; // collection of constants
-    // private Field[] fields; // class fields, i.e., its variables
+    // private Field[] fields; // class fields, that is, its variables
     // private Method[] methods; // methods defined in the class
     private Attribute[] attributes; // attributes defined in the class
 
@@ -64,7 +64,7 @@ final class ClassDumper {
     }
 
     /**
-     * Parses the given Java class file and return an object that represents the contained data, i.e., constants, methods,
+     * Parses the given Java class file and return an object that represents the contained data, that is, constants, methods,
      * fields and commands. A <em>ClassFormatException</em> is raised, if the file is not a valid .class file. (This does
      * not include verification of the byte code as it is performed by the Java interpreter).
      *
@@ -81,11 +81,11 @@ final class ClassDumper {
             processConstantPool();
             // Get class information
             processClassInfo();
-            // Get interface information, i.e., implemented interfaces
+            // Get interface information, that is, implemented interfaces
             processInterfaces();
-            // process class fields, i.e., the variables of the class
+            // process class fields, that is, the variables of the class
             processFields();
-            // process class methods, i.e., the functions in the class
+            // process class methods, that is, the functions in the class
             processMethods();
             // process class attributes
             processAttributes();
@@ -241,7 +241,7 @@ final class ClassDumper {
     }
 
     /**
-     * Processes information about the fields of the class, i.e., its variables.
+     * Processes information about the fields of the class, that is, its variables.
      *
      * @throws IOException if an I/O error occurs.
      * @throws ClassFormatException

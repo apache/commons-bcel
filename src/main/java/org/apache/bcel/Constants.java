@@ -2368,7 +2368,7 @@ public interface Constants {
         ILLEGAL_TYPE, ILLEGAL_TYPE};
 
     /**
-     * Number of byte code operands for each opcode, i.e., number of bytes after the tag byte itself. Indexed by opcode, so
+     * Number of byte code operands for each opcode, that is, number of bytes after the tag byte itself. Indexed by opcode, so
      * NO_OF_OPERANDS[BIPUSH] = the number of operands for a bipush instruction.
      */
     short[] NO_OF_OPERANDS = Const.NO_OF_OPERANDS;

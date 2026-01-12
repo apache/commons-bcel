@@ -28,7 +28,7 @@ import org.apache.bcel.Const;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
- * This class represents a bootstrap method attribute, i.e., the bootstrap method ref, the number of bootstrap arguments
+ * This class represents a bootstrap method attribute, that is, the bootstrap method ref, the number of bootstrap arguments
  * and an array of the bootstrap arguments.
  *
  * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.23"> The class File Format :

@@ -634,7 +634,7 @@ public class InstructionFactory implements InstructionConstants {
      * @param className name of the accessed class
      * @param name name of the referenced field
      * @param type type of field
-     * @param kind how to access, i.e., GETFIELD, PUTFIELD, GETSTATIC, PUTSTATIC
+     * @param kind how to access, that is, GETFIELD, PUTFIELD, GETSTATIC, PUTSTATIC
      * @see Const
      */
     public FieldInstruction createFieldAccess(final String className, final String name, final Type type, final short kind) {

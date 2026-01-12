@@ -119,7 +119,7 @@ final class ConstantHTML {
             // Get method name and its class
             final String methodName = constantPool.constantToString(nameIndex, Const.CONSTANT_NameAndType);
             final String htmlMethodName = Class2HTML.toHTML(methodName);
-            // Partially compacted class name, i.e., / -> .
+            // Partially compacted class name, that is, / -> .
             final String methodClass = constantPool.constantToString(classIndex, Const.CONSTANT_Class);
             String shortMethodClass = Utility.compactClassName(methodClass); // I.e., remove java.lang.
             shortMethodClass = Utility.compactClassName(shortMethodClass, classPackage + ".", true); // Remove class package prefix

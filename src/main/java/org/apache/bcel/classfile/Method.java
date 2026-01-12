@@ -26,7 +26,7 @@ import org.apache.bcel.generic.Type;
 import org.apache.bcel.util.BCELComparator;
 
 /**
- * This class represents the method info structure, i.e., the representation for a method in the class. See JVM
+ * This class represents the method info structure, that is, the representation for a method in the class. See JVM
  * specification for details. A method has access flags, a name, a signature and a number of attributes.
  */
 public final class Method extends FieldOrMethod {

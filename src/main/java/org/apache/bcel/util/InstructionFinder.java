@@ -34,7 +34,7 @@ import org.apache.bcel.generic.InstructionList;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * InstructionFinder is a tool to search for given instructions patterns, i.e., match sequences of instructions in an
+ * InstructionFinder is a tool to search for given instructions patterns, that is, match sequences of instructions in an
  * instruction list via regular expressions. This can be used, for example, in order to implement a peep hole optimizer that
  * looks for code patterns and replaces them with faster equivalents.
  *

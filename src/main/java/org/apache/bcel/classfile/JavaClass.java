@@ -41,7 +41,7 @@ import org.apache.bcel.util.SyntheticRepository;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
- * Represents a Java class, i.e., the data structures, constant pool, fields, methods and commands contained in a Java
+ * Represents a Java class, that is, the data structures, constant pool, fields, methods and commands contained in a Java
  * .class file. See <a href="https://docs.oracle.com/javase/specs/">JVM specification</a> for details. The intent of
  * this class is to represent a parsed or otherwise existing class file. Those interested in programmatically generating
  * classes should see the <a href="../generic/ClassGen.html">ClassGen</a> class.
@@ -138,7 +138,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     private ConstantPool constantPool; // Constant pool
     private int[] interfaces; // implemented interfaces
     private String[] interfaceNames;
-    private Field[] fields; // Fields, i.e., variables of class
+    private Field[] fields; // Fields, that is, variables of class
     private Method[] methods; // methods defined in the class
     private Attribute[] attributes; // attributes defined in the class
 

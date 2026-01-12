@@ -439,7 +439,7 @@ public abstract class Instruction implements Cloneable {
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
      * @param v Visitor object
      */
@@ -515,9 +515,9 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * Gets the name of instruction, i.e., opcode name.
+     * Gets the name of instruction, that is, opcode name.
      *
-     * @return name of instruction, i.e., opcode name.
+     * @return name of instruction, that is, opcode name.
      */
     public String getName() {
         return Const.getOpcodeName(opcode);

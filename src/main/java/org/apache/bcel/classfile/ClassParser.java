@@ -52,7 +52,7 @@ public final class ClassParser {
     private int accessFlags; // Access rights of parsed class
     private int[] interfaces; // Names of implemented interfaces
     private ConstantPool constantPool; // collection of constants
-    private Field[] fields; // class fields, i.e., its variables
+    private Field[] fields; // class fields, that is, its variables
     private Method[] methods; // methods defined in the class
     private Attribute[] attributes; // attributes defined in the class
     private final boolean isZip; // Loaded from ZIP file
@@ -100,7 +100,7 @@ public final class ClassParser {
     }
 
     /**
-     * Parses the given Java class file and return an object that represents the contained data, i.e., constants, methods,
+     * Parses the given Java class file and return an object that represents the contained data, that is, constants, methods,
      * fields and commands. A <em>ClassFormatException</em> is raised, if the file is not a valid .class file. (This does
      * not include verification of the byte code as it is performed by the Java interpreter).
      *
@@ -135,12 +135,12 @@ public final class ClassParser {
             readConstantPool();
             // Get class information
             readClassInfo();
-            // Get interface information, i.e., implemented interfaces
+            // Get interface information, that is, implemented interfaces
             readInterfaces();
             // -- Read class fields and methods --
-            // Read class fields, i.e., the variables of the class
+            // Read class fields, that is, the variables of the class
             readFields();
-            // Read class methods, i.e., the functions in the class
+            // Read class methods, that is, the functions in the class
             readMethods();
             // Read class attributes
             readAttributes();
@@ -216,7 +216,7 @@ public final class ClassParser {
     }
 
     /**
-     * Reads information about the fields of the class, i.e., its variables.
+     * Reads information about the fields of the class, that is, its variables.
      *
      * @throws IOException if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file

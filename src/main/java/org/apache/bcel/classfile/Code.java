@@ -97,7 +97,7 @@ public final class Code extends Attribute {
         code = new byte[codeLength]; // Read byte code
         dataInput.readFully(code);
         /*
-         * Read exception table that contains all regions where an exception handler is active, i.e., a try { ... } catch () block.
+         * Read exception table that contains all regions where an exception handler is active, that is, a try { ... } catch () block.
          */
         final int exceptionTableLength = dataInput.readUnsignedShort();
         exceptionTable = new CodeException[exceptionTableLength];
@@ -149,7 +149,7 @@ public final class Code extends Attribute {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * That is, the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -193,7 +193,7 @@ public final class Code extends Attribute {
     /**
      * Dumps code attribute to file stream in binary format.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     @Override

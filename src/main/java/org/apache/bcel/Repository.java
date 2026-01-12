@@ -80,7 +80,7 @@ public abstract class Repository {
     }
 
     /**
-     * @return list of super classes of clazz in ascending order, i.e., Object is always the last element
+     * @return list of super classes of clazz in ascending order, that is, Object is always the last element
      * @throws ClassNotFoundException if any of the superclasses can't be found
      */
     public static JavaClass[] getSuperClasses(final JavaClass clazz) throws ClassNotFoundException {
@@ -88,7 +88,7 @@ public abstract class Repository {
     }
 
     /**
-     * @return list of super classes of clazz in ascending order, i.e., Object is always the last element.
+     * @return list of super classes of clazz in ascending order, that is, Object is always the last element.
      * @throws ClassNotFoundException if the named class or any of its superclasses can't be found
      */
     public static JavaClass[] getSuperClasses(final String className) throws ClassNotFoundException {

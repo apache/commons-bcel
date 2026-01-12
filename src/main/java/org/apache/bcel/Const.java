@@ -2908,7 +2908,7 @@ public final class Const {
             ILLEGAL_TYPE, ILLEGAL_TYPE, ILLEGAL_TYPE };
 
     /**
-     * Number of byte code operands for each opcode, i.e., number of bytes after the tag byte itself. Indexed by opcode, so NO_OF_OPERANDS[BIPUSH] = the number
+     * Number of byte code operands for each opcode, that is, number of bytes after the tag byte itself. Indexed by opcode, so NO_OF_OPERANDS[BIPUSH] = the number
      * of operands for a bipush instruction.
      */
     static final short[] NO_OF_OPERANDS = { 0/* nop */, 0/* aconst_null */, 0/* iconst_m1 */, 0/* iconst_0 */, 0/* iconst_1 */, 0/* iconst_2 */,

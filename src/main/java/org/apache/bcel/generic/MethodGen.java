@@ -410,7 +410,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Add an exception handler, i.e., specify region where a handler is active and an instruction where the actual handling
+     * Add an exception handler, that is, specify region where a handler is active and an instruction where the actual handling
      * is done.
      *
      * @param startPc Start of region (inclusive)
@@ -885,7 +885,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         final int nameIndex = cp.addUtf8(super.getName());
         final int signatureIndex = cp.addUtf8(signature);
         /*
-         * Also updates positions of instructions, i.e., their indices
+         * Also updates positions of instructions, that is, their indices
          */
         final byte[] byteCode = il != null ? il.getByteCode() : null;
         LineNumberTable lnt = null;
@@ -1083,7 +1083,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Remove all NOPs from the instruction list (if possible) and update every object referring to them, i.e., branch
+     * Remove all NOPs from the instruction list (if possible) and update every object referring to them, that is, branch
      * instructions, local variables and exception handlers.
      */
     public void removeNOPs() {

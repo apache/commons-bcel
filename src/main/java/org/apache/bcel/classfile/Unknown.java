@@ -26,7 +26,7 @@ import java.util.Arrays;
 import org.apache.bcel.Const;
 
 /**
- * This class represents a reference to an unknown (i.e., application-specific) attribute of a class. It is instantiated
+ * This class represents a reference to an unknown (that is, application-specific) attribute of a class. It is instantiated
  * from the {@link Attribute#readAttribute(java.io.DataInput, ConstantPool)} method. Applications that need to read in
  * application-specific attributes should create an {@link UnknownAttributeReader} implementation and attach it via
  * {@link Attribute#addAttributeReader(String, UnknownAttributeReader)}.
@@ -43,10 +43,10 @@ public final class Unknown extends Attribute {
     /**
      * Constructs a new instance for a non-standard attribute.
      *
-     * @param nameIndex Index in constant pool
-     * @param length Content length in bytes
-     * @param bytes Attribute contents
-     * @param constantPool Array of constants
+     * @param nameIndex Index in constant pool.
+     * @param length Content length in bytes.
+     * @param bytes Attribute contents.
+     * @param constantPool Array of constants.
      */
     public Unknown(final int nameIndex, final int length, final byte[] bytes, final ConstantPool constantPool) {
         super(Const.ATTR_UNKNOWN, nameIndex, length, constantPool);
@@ -57,10 +57,10 @@ public final class Unknown extends Attribute {
     /**
      * Constructs a new instance from an input stream.
      *
-     * @param nameIndex Index in constant pool
-     * @param length Content length in bytes
-     * @param input Input stream
-     * @param constantPool Array of constants
+     * @param nameIndex Index in constant pool.
+     * @param length Content length in bytes.
+     * @param input Input stream.
+     * @param constantPool Array of constants.
      * @throws IOException if an I/O error occurs.
      */
     Unknown(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
@@ -84,7 +84,7 @@ public final class Unknown extends Attribute {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -107,7 +107,7 @@ public final class Unknown extends Attribute {
     /**
      * Dumps unknown bytes to file stream.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     @Override
@@ -134,7 +134,7 @@ public final class Unknown extends Attribute {
     }
 
     /**
-     * @param bytes the bytes to set
+     * @param bytes the bytes to set.
      */
     public void setBytes(final byte[] bytes) {
         this.bytes = bytes;

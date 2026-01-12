@@ -26,7 +26,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.util.Args;
 
 /**
- * This class is derived from <em>Attribute</em> and represents a constant value, i.e., a default value for initializing
+ * This class is derived from <em>Attribute</em> and represents a constant value, that is, a default value for initializing
  * a class field. This class is instantiated by the <em>Attribute.readAttribute()</em> method.
  *
  * <pre>

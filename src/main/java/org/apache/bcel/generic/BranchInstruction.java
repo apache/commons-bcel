@@ -108,7 +108,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
         if (!isValidShort(index)) {
             throw new ClassGenException("Branch target offset too large for short: " + index);
         }
-        out.writeShort(index); // May be negative, i.e., point backwards
+        out.writeShort(index); // May be negative, that is, point backwards
     }
 
     /**

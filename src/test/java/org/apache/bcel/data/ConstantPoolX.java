@@ -49,7 +49,7 @@ import org.apache.bcel.classfile.Node;
 import org.apache.bcel.classfile.Utility;
 
 /**
- * This class represents the constant pool, i.e., a table of constants, of a parsed classfile. It may contain null
+ * This class represents the constant pool, that is, a table of constants, of a parsed classfile. It may contain null
  * references, due to the JVM specification that skips an entry after an 8-byte constant (double, long) entry. Those
  * interested in generating constant pools programatically should see <a href="../generic/ConstantPoolGen.html">
  * ConstantPoolGen</a>.
@@ -211,7 +211,7 @@ public abstract class ConstantPoolX implements Cloneable, Node {
      * Gets constant from constant pool and check whether it has the expected type.
      *
      * @param index Index in constant pool
-     * @param tag Tag of expected constant, i.e., its type
+     * @param tag Tag of expected constant, that is, its type
      * @return Constant value
      * @see Constant
      * @throws ClassFormatException

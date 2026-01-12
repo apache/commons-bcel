@@ -66,7 +66,7 @@ public final class CodeException implements Cloneable, Node, Constants {
     private int endPc;
 
     /**
-     * Starting address of exception handler, i.e., an offset from start of code.
+     * Starting address of exception handler, that is, an offset from start of code.
      */
     private int handlerPc;
 
@@ -99,7 +99,7 @@ public final class CodeException implements Cloneable, Node, Constants {
      *
      * @param startPc Range in the code the exception handler is active, startPc is inclusive while
      * @param endPc is exclusive
-     * @param handlerPc Starting address of exception handler, i.e., an offset from start of code.
+     * @param handlerPc Starting address of exception handler, that is, an offset from start of code.
      * @param catchType If zero the handler catches any exception, otherwise it points to the exception class which is to be
      *        caught.
      */

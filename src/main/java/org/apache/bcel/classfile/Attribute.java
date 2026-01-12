@@ -286,7 +286,7 @@ public abstract class Attribute implements Cloneable, Node {
     public abstract void accept(Visitor v);
 
     /**
-     * Use copy() if you want to have a deep copy(), i.e., with all references copied correctly.
+     * Use copy() if you want to have a deep copy(), that is, with all references copied correctly.
      *
      * @return shallow copy of this attribute
      */
@@ -359,9 +359,9 @@ public abstract class Attribute implements Cloneable, Node {
     }
 
     /**
-     * Gets the tag of attribute, i.e., its type.
+     * Gets the tag of attribute, that is, its type.
      *
-     * @return Tag of attribute, i.e., its type. Value may not be altered, thus there is no setTag() method.
+     * @return Tag of attribute, that is, its type. Value may not be altered, thus there is no setTag() method.
      */
     public final byte getTag() {
         return tag;

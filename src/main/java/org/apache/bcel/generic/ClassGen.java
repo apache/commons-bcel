@@ -226,7 +226,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     }
 
     /**
-     * Add an interface to this class, i.e., this class has to implement it.
+     * Add an interface to this class, that is, this class has to implement it.
      *
      * @param name interface to implement (fully qualified class name)
      */

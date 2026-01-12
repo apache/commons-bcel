@@ -172,7 +172,7 @@ public final class ExceptionTable extends Attribute {
     }
 
     /**
-     * @return String representation, i.e., a list of thrown exceptions.
+     * @return String representation, that is, a list of thrown exceptions.
      */
     @Override
     public String toString() {

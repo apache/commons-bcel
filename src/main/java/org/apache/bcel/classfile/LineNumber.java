@@ -25,7 +25,7 @@ import java.io.IOException;
 import org.apache.bcel.util.Args;
 
 /**
- * This class represents a (PC offset, line number) pair, i.e., a line number in the source that corresponds to a
+ * This class represents a (PC offset, line number) pair, that is, a line number in the source that corresponds to a
  * relative address in the byte code. This is used for debugging purposes.
  *
  * @see LineNumberTable

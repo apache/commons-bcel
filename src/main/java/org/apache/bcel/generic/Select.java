@@ -39,7 +39,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
-    protected int[] match; // matches, i.e., case 1: ... TODO could be package-protected?
+    protected int[] match; // matches, that is, case 1: ... TODO could be package-protected?
 
     /**
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter

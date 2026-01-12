@@ -27,7 +27,7 @@ import java.util.Iterator;
 import org.apache.bcel.Const;
 
 /**
- * This class represents the constant pool, i.e., a table of constants, of a parsed classfile. It may contain null references, due to the JVM specification that
+ * This class represents the constant pool, that is, a table of constants, of a parsed classfile. It may contain null references, due to the JVM specification that
  * skips an entry after an 8-byte constant (double, long) entry. Those interested in generating constant pools programmatically should see
  * <a href="../generic/ConstantPoolGen.html"> ConstantPoolGen</a>.
  *
@@ -269,7 +269,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      *
      * @param <T> the type of the constant.
      * @param index Index in constant pool
-     * @param tag   Tag of expected constant, i.e., its type
+     * @param tag   Tag of expected constant, that is, its type
      * @return Constant value
      * @see Constant
      * @throws ClassFormatException if constant type does not match tag
@@ -284,7 +284,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      *
      * @param <T> the type of the constant.
      * @param index Index in constant pool
-     * @param tag   Tag of expected constant, i.e., its type
+     * @param tag   Tag of expected constant, that is, its type
      * @param castTo the class to cast to.
      * @return Constant value
      * @see Constant

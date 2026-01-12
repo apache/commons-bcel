@@ -24,7 +24,7 @@ import java.lang.reflect.Modifier;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Java interpreter replacement, i.e., wrapper that uses its own ClassLoader to modify/generate classes as they're
+ * Java interpreter replacement, that is, wrapper that uses its own ClassLoader to modify/generate classes as they're
  * requested. You can take this as a template for your own applications.
  * <p>
  * Call this wrapper with:

@@ -30,7 +30,7 @@ import org.apache.bcel.classfile.Utility;
  * Instances of this class give users a handle to the instructions contained in an InstructionList. Instruction objects
  * may be used more than once within a list, this is useful because it saves memory and may be much faster.
  *
- * Within an InstructionList an InstructionHandle object is wrapped around all instructions, i.e., it implements a cell
+ * Within an InstructionList an InstructionHandle object is wrapped around all instructions, that is, it implements a cell
  * in a doubly-linked list. From the outside only the next and the previous instruction (handle) are accessible. One can
  * traverse the list via an Enumeration returned by InstructionList.elements().
  *

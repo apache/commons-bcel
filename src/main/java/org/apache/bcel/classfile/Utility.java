@@ -214,7 +214,7 @@ public abstract class Utility {
     }
 
     /**
-     * Convert (signed) byte to (unsigned) short value, i.e., all negative values become positive.
+     * Convert (signed) byte to (unsigned) short value, that is, all negative values become positive.
      */
     private static short byteToShort(final byte b) {
         return b < 0 ? (short) (256 + b) : (short) b;
@@ -297,7 +297,7 @@ public abstract class Utility {
         final int offset;
         final StringBuilder buf = new StringBuilder(Const.getOpcodeName(opcode));
         /*
-         * Special case: Skip (0-3) padding bytes, i.e., the following bytes are 4-byte-aligned
+         * Special case: Skip (0-3) padding bytes, that is, the following bytes are 4-byte-aligned
          */
         if (opcode == Const.TABLESWITCH || opcode == Const.LOOKUPSWITCH) {
             final int remainder = bytes.getIndex() % 4;
@@ -560,7 +560,7 @@ public abstract class Utility {
     }
 
     /**
-     * Shorten long class name <em>str</em>, i.e., chop off the <em>prefix</em>, if the class name starts with this string
+     * Shorten long class name <em>str</em>, that is, chop off the <em>prefix</em>, if the class name starts with this string
      * and the flag <em>chopit</em> is true. Slashes <em>/</em> are converted to dots <em>.</em>.
      *
      * @param str The long class name
@@ -669,7 +669,7 @@ public abstract class Utility {
     }
 
     /**
-     * Encode byte array it into Java identifier string, i.e., a string that only contains the following characters: (a, ...
+     * Encode byte array it into Java identifier string, that is, a string that only contains the following characters: (a, ...
      * z, A, ... Z, 0, ... 9, _, $). The encoding algorithm itself is not too clever: if the current byte's ASCII value
      * already is a valid Java identifier part, leave it as it is. Otherwise it writes the escape character($) followed by:
      *

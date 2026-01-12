@@ -263,7 +263,7 @@ public final class Module extends Attribute {
     }
 
     /**
-     * @return String representation, i.e., a list of packages.
+     * @return String representation, that is, a list of packages.
      */
     @Override
     public String toString() {

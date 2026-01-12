@@ -93,9 +93,9 @@ public final class ArrayType extends ReferenceType {
     }
 
     /**
-     * Gets the basic type of array, i.e., for int[][][] the basic type is int.
+     * Gets the basic type of array, that is, for int[][][] the basic type is int.
      *
-     * @return basic type of array, i.e., for int[][][] the basic type is int.
+     * @return basic type of array, that is, for int[][][] the basic type is int.
      */
     public Type getBasicType() {
         return basicType;
@@ -122,9 +122,9 @@ public final class ArrayType extends ReferenceType {
     }
 
     /**
-     * Gets the element type of array, i.e., for int[][][] the element type is int[][].
+     * Gets the element type of array, that is, for int[][][] the element type is int[][].
      *
-     * @return element type of array, i.e., for int[][][] the element type is int[][].
+     * @return element type of array, that is, for int[][][] the element type is int[][].
      */
     public Type getElementType() {
         if (dimensions == 1) {

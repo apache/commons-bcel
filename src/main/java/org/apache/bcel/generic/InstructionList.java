@@ -142,7 +142,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
         }
         bytePositions = Arrays.copyOf(pos, count); // Trim to proper size
         /*
-         * Pass 2: Look for BranchInstruction and update their targets, i.e., convert offsets to instruction handles.
+         * Pass 2: Look for BranchInstruction and update their targets, that is, convert offsets to instruction handles.
          */
         for (int i = 0; i < count; i++) {
             if (ihs[i] instanceof BranchHandle) {
@@ -174,7 +174,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * Initialize list with (nonnull) compound instruction. Consumes argument list, i.e., it becomes empty.
+     * Initialize list with (nonnull) compound instruction. Consumes argument list, that is, it becomes empty.
      *
      * @param c compound instruction (list)
      */
@@ -260,7 +260,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * Append another list after instruction i contained in this list. Consumes argument list, i.e., it becomes empty.
+     * Append another list after instruction i contained in this list. Consumes argument list, that is, it becomes empty.
      *
      * @param i where to append the instruction list
      * @param il Instruction list to append to this one
@@ -330,7 +330,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * Append another list after instruction (handle) ih contained in this list. Consumes argument list, i.e., it becomes
+     * Append another list after instruction (handle) ih contained in this list. Consumes argument list, that is, it becomes
      * empty.
      *
      * @param ih where to append the instruction list
@@ -360,7 +360,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * Append another list to this one. Consumes argument list, i.e., it becomes empty.
+     * Append another list to this one. Consumes argument list, that is, it becomes empty.
      *
      * @param il list to append to end of this list
      * @return instruction handle of the <strong>first</strong> appended instruction
@@ -425,7 +425,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
         final InstructionList il = new InstructionList();
         /*
          * Pass 1: Make copies of all instructions, append them to the new list and associate old instruction references with
-         * the new ones, i.e., a 1:1 mapping.
+         * the new ones, that is, a 1:1 mapping.
          */
         for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
             final Instruction i = ih.getInstruction();
@@ -731,11 +731,11 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * Insert another list before Instruction i contained in this list. Consumes argument list, i.e., it becomes empty.
+     * Insert another list before Instruction i contained in this list. Consumes argument list, that is, it becomes empty.
      *
      * @param i where to append the instruction list
      * @param il Instruction list to insert
-     * @return instruction handle pointing to the first inserted instruction, i.e., il.getStart()
+     * @return instruction handle pointing to the first inserted instruction, that is, il.getStart()
      */
     public InstructionHandle insert(final Instruction i, final InstructionList il) {
         final InstructionHandle ih;
@@ -801,7 +801,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * Insert another list before Instruction handle ih contained in this list. Consumes argument list, i.e., it becomes
+     * Insert another list before Instruction handle ih contained in this list. Consumes argument list, that is, it becomes
      * empty.
      *
      * @param ih where to append the instruction list
@@ -955,7 +955,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * Redirect all references from oldTarget to newTarget, i.e., update targets of branch instructions.
+     * Redirect all references from oldTarget to newTarget, that is, update targets of branch instructions.
      *
      * @param oldTarget the old target instruction handle
      * @param newTarget the new target instruction handle
@@ -1112,7 +1112,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * Give all instructions their position number (offset in byte stream), i.e., make the list ready to be dumped.
+     * Give all instructions their position number (offset in byte stream), that is, make the list ready to be dumped.
      *
      * @param check Perform sanity checks, for example if all targeted instructions really belong to this list
      */

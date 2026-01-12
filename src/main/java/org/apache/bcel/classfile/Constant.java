@@ -117,7 +117,7 @@ public abstract class Constant implements Cloneable, Node {
     }
 
     /*
-     * In fact this tag is redundant since we can distinguish different 'Constant' objects by their type, i.e., via
+     * In fact this tag is redundant since we can distinguish different 'Constant' objects by their type, that is, via
      * 'instanceof'. In some places we will use the tag for switch()es anyway.
      *
      * First, we want match the specification as closely as possible. Second we need the tag as an index to select the
