@@ -128,7 +128,7 @@ public class Args {
         }
         if (value < min) {
             throw new ClassFormatException(
-                    String.format("%s [Value out of range (%,d - %,d) for type u2: %,d]", message, min, Integer.MAX_VALUE, value & 0xFFFFFFFFL));
+                    String.format("%s [Value out of range (%,d - %,d) for type u4: %,d]", message, min, Integer.MAX_VALUE, value & 0xFFFFFFFFL));
         }
         return value;
     }
