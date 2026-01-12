@@ -39,9 +39,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for cyclic hierarchy vulnerabilities in {@link JavaClass}. These tests demonstrate CWE-674 (Uncontrolled Recursion) vulnerabilities: -
- * getAllInterfaces(): infinite queue growth with cyclic interfaces - getSuperClasses(): infinite loop with cyclic superclasses Without the fix, these tests
- * will fail. With the fix, they pass.
+ * Tests {@link JavaClass}.
+ * <p>
+ * Tests for cyclic hierarchy vulnerabilities in {@link JavaClass}. These tests demonstrate CWE-674 (Uncontrolled Recursion) vulnerabilities:
+ * <ul>
+ * <li>getAllInterfaces(): infinite queue growth with cyclic interfaces</li>
+ * <li>getSuperClasses(): infinite loop with cyclic superclasses Without the fix, these tests will fail. With the fix, they pass.</li>
+ * </ul>
  */
 class JavaClassCyclicTest {
 
