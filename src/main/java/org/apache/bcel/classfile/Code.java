@@ -129,6 +129,7 @@ public final class Code extends Attribute {
      * @param exceptionTable of handled exceptions.
      * @param attributes Attributes of code: LineNumber or LocalVariable.
      * @param constantPool Array of constants.
+     * @throws ClassFormatException if the code array is greater than {@link Const#MAX_CODE_SIZE}.
      */
     public Code(final int nameIndex, final int length, final int maxStack, final int maxLocals, final byte[] code, final CodeException[] exceptionTable,
         final Attribute[] attributes, final ConstantPool constantPool) {
@@ -136,6 +137,7 @@ public final class Code extends Attribute {
         this.maxStack = Args.requireU2(maxStack, "maxStack");
         this.maxLocals = Args.requireU2(maxLocals, "maxLocals");
         this.code = ArrayUtils.nullToEmpty(code);
+        Args.requireU4(this.code.length, 1, Const.MAX_CODE_SIZE, "Code length attribute");
         this.exceptionTable = ArrayUtils.nullToEmpty(exceptionTable, CodeException[].class);
         Args.requireU2(this.exceptionTable.length, "exceptionTable.length");
         this.attributes = attributes != null ? attributes : EMPTY_ARRAY;
