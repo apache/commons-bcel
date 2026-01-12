@@ -123,10 +123,27 @@ public class Args {
      * @return The value to test.
      */
     public static int requireU4(final int value, final int min, final String message) {
+        // Should really be 2^32-1, instead 2^21-1.
+        return requireU4(value, min, Integer.MAX_VALUE, message);
+    }
+
+    /**
+     * Requires a u4 value of at least {@code min} and not above {@code max}.
+     *
+     * @param value   The value to test.
+     * @param min     The minimum required u4 value.
+     * @param max     The maximum required u4 value.
+     * @param message The message prefix
+     * @return The value to test.
+     * @throws IllegalArgumentException if {@code min < 0} or {@code max > Integer.MAX_VALUE}.
+     * @throws ClassFormatException     if {@code value < min} or {@code value > max}.
+     * @since 6.12.0
+     */
+    public static int requireU4(final int value, final int min, final int max, final String message) {
         if (min < 0) {
             throw new IllegalArgumentException(String.format("%s programming error: min %,d < 0", message, min));
         }
-        if (value < min) {
+        if (value < min || value > max) {
             throw new ClassFormatException(
                     String.format("%s [Value out of range (%,d - %,d) for type u4: %,d]", message, min, Integer.MAX_VALUE, value & 0xFFFFFFFFL));
         }

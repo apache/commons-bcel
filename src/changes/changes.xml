@@ -67,6 +67,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Make the build reproducible on the Azul JDK.</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Exception message in Args.requireU4() refers to the wrong data type.</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Exception message in Args.requireU2() refers to the wrong upper range value.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Code.Code(int, int, DataInput, ConstantPool) now throws a ClassFormatException if the code array is greater than the JVM specification allows.</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_26.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_26.</action>

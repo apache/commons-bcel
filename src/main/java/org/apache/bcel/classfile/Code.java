@@ -80,37 +80,40 @@ public final class Code extends Attribute {
     }
 
     /**
-     * @param nameIndex Index pointing to the name <em>Code</em>
-     * @param length Content length in bytes
-     * @param file Input stream
-     * @param constantPool Array of constants
+     * Constructs a Code attribute object from a DataInput.
+     *
+     * @param nameIndex    Index pointing to the name <em>Code</em>.
+     * @param length       Content length in bytes.
+     * @param dataInput    Data input.
+     * @param constantPool Array of constants.
+     * @throws ClassFormatException if the code array read from {@code file} is greater than {@link Const#MAX_CODE_SIZE}.
      */
-    Code(final int nameIndex, final int length, final DataInput file, final ConstantPool constantPool) throws IOException {
+    Code(final int nameIndex, final int length, final DataInput dataInput, final ConstantPool constantPool) throws IOException {
         // Initialize with some default values which will be overwritten later
-        this(nameIndex, length, file.readUnsignedShort(), file.readUnsignedShort(), (byte[]) null, (CodeException[]) null, (Attribute[]) null, constantPool);
-        final int codeLength = Args.requireU4(file.readInt(), 1, "Code length attribute");
+        this(nameIndex, length, dataInput.readUnsignedShort(), dataInput.readUnsignedShort(), (byte[]) null, (CodeException[]) null, (Attribute[]) null,
+                constantPool);
+        final int codeLength = Args.requireU4(dataInput.readInt(), 1, Const.MAX_CODE_SIZE, "Code length attribute");
         code = new byte[codeLength]; // Read byte code
-        file.readFully(code);
+        dataInput.readFully(code);
         /*
-         * Read exception table that contains all regions where an exception handler is active, i.e., a try { ... } catch ()
-         * block.
+         * Read exception table that contains all regions where an exception handler is active, i.e., a try { ... } catch () block.
          */
-        final int exceptionTableLength = file.readUnsignedShort();
+        final int exceptionTableLength = dataInput.readUnsignedShort();
         exceptionTable = new CodeException[exceptionTableLength];
         for (int i = 0; i < exceptionTableLength; i++) {
-            exceptionTable[i] = new CodeException(file);
+            exceptionTable[i] = new CodeException(dataInput);
         }
         /*
          * Read all attributes, currently 'LineNumberTable' and 'LocalVariableTable'
          */
-        final int attributesCount = file.readUnsignedShort();
+        final int attributesCount = dataInput.readUnsignedShort();
         attributes = new Attribute[attributesCount];
         for (int i = 0; i < attributesCount; i++) {
-            attributes[i] = readAttribute(file, constantPool);
+            attributes[i] = readAttribute(dataInput, constantPool);
         }
         /*
-         * Adjust length, because of setAttributes in this(), s.b. length is incorrect, because it didn't take the internal
-         * attributes into account yet! Very subtle bug, fixed in 3.1.1.
+         * Adjust length, because of setAttributes in this(), s.b. length is incorrect, because it didn't take the internal attributes into account yet! Very
+         * subtle bug, fixed in 3.1.1.
          */
         super.setLength(length);
     }
@@ -141,7 +144,7 @@ public final class Code extends Attribute {
 
     /**
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
-     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
+     * That is, the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
      * @param v Visitor object
      */
