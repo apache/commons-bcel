@@ -16,59 +16,61 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 package org.apache.bcel.classfile;
 
 import java.io.DataInput;
-import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.util.Args;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
- * This class is derived from <em>Attribute</em> and declares this class as 'synthetic', that is, it needs special
- * handling. The JVM specification states "A class member that does not appear in the source code must be marked using a
- * Synthetic attribute." It may appear in the ClassFile attribute table, a field_info table or a method_info table. This
- * class is intended to be instantiated from the <em>Attribute.readAttribute()</em> method.
+ * This class is derived from <em>Attribute</em> and declares this class as 'synthetic', that is, it needs special handling. The JVM specification states "A
+ * class member that does not appear in the source code must be marked using a Synthetic attribute." It may appear in the ClassFile attribute table, a
+ * field_info table or a method_info table. This class is intended to be instantiated from the <em>Attribute.readAttribute()</em> method.
+ *
+ * <pre>
+ *
+ * Synthetic_attribute {
+ *     u2 attribute_name_index;
+ *     u4 attribute_length;
+ * }
+ * </pre>
  *
  * @see Attribute
+ * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.8">JVM Specification: The Synthetic Attribute</a>
  */
 public final class Synthetic extends Attribute {
 
-    private byte[] bytes;
-
     /**
-     * @param nameIndex Index in constant pool to CONSTANT_Utf8, which should represent the string "Synthetic".
-     * @param length Content length in bytes - should be zero.
-     * @param bytes Attribute contents
+     * @param nameIndex    Index in constant pool to CONSTANT_Utf8, which should represent the string "Synthetic".
+     * @param length       JVM Specification: "The value of the attribute_length item must be zero."
+     * @param bytes        Attribute contents.
      * @param constantPool The constant pool this attribute is associated with.
+     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.8">JVM Specification: The Synthetic Attribute</a>
      */
     public Synthetic(final int nameIndex, final int length, final byte[] bytes, final ConstantPool constantPool) {
         super(Const.ATTR_SYNTHETIC, nameIndex, Args.require0(length, "Synthetic attribute length"), constantPool);
-        this.bytes = bytes;
     }
 
     /**
      * Constructs object from input stream.
      *
-     * @param nameIndex Index in constant pool to CONSTANT_Utf8
-     * @param length Content length in bytes
-     * @param input Input stream
+     * @param nameIndex    Index in constant pool to CONSTANT_Utf8.
+     * @param length       JVM Specification: "The value of the attribute_length item must be zero."
+     * @param input        Input stream.
      * @param constantPool Array of constants
      * @throws IOException if an I/O error occurs.
+     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.8">JVM Specification: The Synthetic Attribute</a>
      */
     Synthetic(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
         this(nameIndex, length, (byte[]) null, constantPool);
-        if (length > 0) {
-            bytes = new byte[length];
-            input.readFully(bytes);
-            println("Synthetic attribute with length > 0");
-        }
     }
 
     /**
-     * Initialize from another object. Note that both objects use the same references (shallow copy). Use copy() for a
-     * physical copy.
+     * Initialize from another object. Note that both objects use the same references (shallow copy). Use copy() for a physical copy.
      *
      * @param c Source to copy.
      */
@@ -77,10 +79,10 @@ public final class Synthetic extends Attribute {
     }
 
     /**
-     * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
-     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
+     * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class. I.e., the hierarchy of methods, fields,
+     * attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -88,44 +90,29 @@ public final class Synthetic extends Attribute {
     }
 
     /**
-     * @return deep copy of this attribute
+     * @return deep copy of this attribute.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {
         final Synthetic c = (Synthetic) clone();
-        if (bytes != null) {
-            c.bytes = bytes.clone();
-        }
         c.setConstantPool(constantPool);
         return c;
-    }
-
-    /**
-     * Dumps source file attribute to file stream in binary format.
-     *
-     * @param file Output file stream
-     * @throws IOException if an I/O error occurs.
-     */
-    @Override
-    public void dump(final DataOutputStream file) throws IOException {
-        super.dump(file);
-        if (super.getLength() > 0) {
-            file.write(bytes, 0, super.getLength());
-        }
     }
 
     /**
      * @return data bytes.
      */
     public byte[] getBytes() {
-        return bytes;
+        return ArrayUtils.EMPTY_BYTE_ARRAY;
     }
 
     /**
      * @param bytes
      */
     public void setBytes(final byte[] bytes) {
-        this.bytes = bytes;
+        if (bytes != null) {
+            Args.require0(bytes.length, "Deprecated attribute length");
+        }
     }
 
     /**
@@ -133,10 +120,6 @@ public final class Synthetic extends Attribute {
      */
     @Override
     public String toString() {
-        final StringBuilder buf = new StringBuilder("Synthetic");
-        if (super.getLength() > 0) {
-            buf.append(" ").append(Utility.toHexString(bytes));
-        }
-        return buf.toString();
+        return "Synthetic";
     }
 }
