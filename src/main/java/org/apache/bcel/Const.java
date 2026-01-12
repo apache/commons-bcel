@@ -3104,7 +3104,11 @@ public final class Const {
     /** Attribute constant for Synthetic. */
     public static final byte ATTR_SYNTHETIC = 7;
 
-    /** Attribute constant for Deprecated. */
+    /**
+     * Attribute constant for Deprecated.
+     *
+     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.15">JVM Specification: The Deprecated Attribute</a>
+     */
     public static final byte ATTR_DEPRECATED = 8;
 
     /** Attribute constant for PMG. */
