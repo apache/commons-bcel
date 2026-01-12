@@ -72,33 +72,22 @@ final class ClassDumper {
      * @throws ClassFormatException
      */
     public void dump() throws IOException, ClassFormatException {
-        try {
-            // Check magic tag of class file
-            processID();
-            // Get compiler version
-            processVersion();
-            // process constant pool entries
-            processConstantPool();
-            // Get class information
-            processClassInfo();
-            // Get interface information, that is, implemented interfaces
-            processInterfaces();
-            // process class fields, that is, the variables of the class
-            processFields();
-            // process class methods, that is, the functions in the class
-            processMethods();
-            // process class attributes
-            processAttributes();
-        } finally {
-            // Processed everything of interest, so close the file
-            try {
-                if (file != null) {
-                    file.close();
-                }
-            } catch (final IOException ioe) {
-                // ignore close exceptions
-            }
-        }
+        // Check magic tag of class file
+        processID();
+        // Get compiler version
+        processVersion();
+        // process constant pool entries
+        processConstantPool();
+        // Get class information
+        processClassInfo();
+        // Get interface information, that is, implemented interfaces
+        processInterfaces();
+        // process class fields, that is, the variables of the class
+        processFields();
+        // process class methods, that is, the functions in the class
+        processMethods();
+        // process class attributes
+        processAttributes();
     }
 
     /**
@@ -343,18 +332,12 @@ final class ClassDumper {
 final class DumpClass {
 
     public static void main(final String[] args) throws IOException {
-
         if (args.length != 1) {
             throw new IllegalArgumentException("Require file name as only argument");
         }
-
         try (FileImageInputStream file = new FileImageInputStream(new File(args[0]))) {
-
-            final ClassDumper cd = new ClassDumper(file, args[0]);
-            cd.dump();
+            new ClassDumper(file, args[0]).dump();
         }
-
         System.out.printf("End of Class Dump%n");
-
     }
 }
