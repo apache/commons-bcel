@@ -30,6 +30,13 @@ import org.apache.commons.lang3.ArrayUtils;
  * This class is derived from <em>Attribute</em> and denotes that this is a deprecated method. It is instantiated from the <em>Attribute.readAttribute()</em>
  * method.
  *
+ * <pre>
+ * Deprecated_attribute {
+ *     u2 attribute_name_index;
+ *     u4 attribute_length;
+ * }
+ * </pre>
+ *
  * @see Attribute
  * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.15">JVM Specification: The Deprecated Attribute</a>
  */
