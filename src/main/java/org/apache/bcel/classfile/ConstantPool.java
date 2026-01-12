@@ -71,7 +71,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      *
      * @param constantPool Array of constants.
      */
-    public ConstantPool(final Constant[] constantPool) {
+    public ConstantPool(final Constant... constantPool) {
         setConstantPool(constantPool);
     }
 

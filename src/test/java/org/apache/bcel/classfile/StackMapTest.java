@@ -30,7 +30,7 @@ class StackMapTest {
 
     @Test
     void testSetStackMap() {
-        final StackMap stackMap = new StackMap(0, 0, StackMapEntry.EMPTY_ARRAY, new ConstantPool(new Constant[] { new ConstantLong(0) }));
+        final StackMap stackMap = new StackMap(0, 0, StackMapEntry.EMPTY_ARRAY, new ConstantPool(new ConstantLong(0)));
         // No NPE
         stackMap.setStackMap(null);
         assertArrayEquals(StackMapEntry.EMPTY_ARRAY, stackMap.getStackMap());
