@@ -86,7 +86,7 @@ public class Args {
             throw new IllegalArgumentException(String.format("%s programming error: min %,d < 0", message, min));
         }
         if (value < min || value > max) {
-            throw new ClassFormatException(String.format("%s [Value out of range (%,d - %,d) for type u2: %,d]", message, min, Const.MAX_SHORT, value));
+            throw new ClassFormatException(String.format("%s [Value out of range (%,d - %,d) for type u2: %,d]", message, min, max, value));
         }
         return value;
     }
