@@ -57,4 +57,12 @@ class ConstTest {
         assertEquals(70, Const.MAJOR_26);
         assertEquals(0, Const.MINOR_26);
     }
+
+    /**
+     * Tests that we do not break binary compatibility with BCEL-330.
+     */
+    @Test
+    void testReferenceToConstant() {
+        assertEquals(Const.AALOAD, Constants.AALOAD);
+    }
 }

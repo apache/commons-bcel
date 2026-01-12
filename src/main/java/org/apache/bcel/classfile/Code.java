@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 package org.apache.bcel.classfile;
 
 import java.io.DataInput;
@@ -92,7 +93,7 @@ public final class Code extends Attribute {
         // Initialize with some default values which will be overwritten later
         this(nameIndex, length, dataInput.readUnsignedShort(), dataInput.readUnsignedShort(), (byte[]) null, (CodeException[]) null, (Attribute[]) null,
                 constantPool);
-        final int codeLength = Args.requireU4(dataInput.readInt(), 1, Const.MAX_CODE_SIZE, "Code length attribute");
+        final int codeLength = Args.requireU4(dataInput.readInt(), 0, Const.MAX_CODE_SIZE, "Code length attribute");
         code = new byte[codeLength]; // Read byte code
         dataInput.readFully(code);
         /*
@@ -137,7 +138,7 @@ public final class Code extends Attribute {
         this.maxStack = Args.requireU2(maxStack, "maxStack");
         this.maxLocals = Args.requireU2(maxLocals, "maxLocals");
         this.code = ArrayUtils.nullToEmpty(code);
-        Args.requireU4(this.code.length, 1, Const.MAX_CODE_SIZE, "Code length attribute");
+        Args.requireU4(this.code.length, 0, Const.MAX_CODE_SIZE, "Code length attribute");
         this.exceptionTable = ArrayUtils.nullToEmpty(exceptionTable, CodeException[].class);
         Args.requireU2(this.exceptionTable.length, "exceptionTable.length");
         this.attributes = attributes != null ? attributes : EMPTY_ARRAY;
@@ -342,9 +343,11 @@ public final class Code extends Attribute {
      * Sets the byte code.
      *
      * @param code byte code.
+     * @throws ClassFormatException if the code array is greater than {@link Const#MAX_CODE_SIZE}.
      */
     public void setCode(final byte[] code) {
         this.code = ArrayUtils.nullToEmpty(code);
+        Args.requireU4(this.code.length, 0, Const.MAX_CODE_SIZE, "Code length attribute");
         super.setLength(calculateLength()); // Adjust length
     }
 

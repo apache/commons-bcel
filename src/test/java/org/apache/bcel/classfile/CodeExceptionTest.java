@@ -16,19 +16,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 package org.apache.bcel.classfile;
 
-import org.apache.bcel.Constants;
-import org.junit.jupiter.api.Test;
-
 class CodeExceptionTest {
-
-    /**
-     * Tests that we do not break binary compatibility with BCEL-330.
-     */
-    @Test
-    void testReferenceToConstant() {
-        @SuppressWarnings("unused")
-        final short referenceToConstant = Constants.AALOAD;
-    }
+    // TODO
 }
