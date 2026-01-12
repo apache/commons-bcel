@@ -437,7 +437,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
 
     private Field findFieldVisit(final String fieldName, final Type fieldType, final Set<JavaClass> visiting) throws ClassNotFoundException {
         if (!visiting.add(this)) {
-            throw new ClassCircularityError(getClassName());
+            throw new ClassFormatException(getClassName());
         }
         try {
             for (final Field field : fields) {
@@ -758,7 +758,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         visited.add(this);
         for (clazz = clazz.getSuperClass(); clazz != null; clazz = clazz.getSuperClass()) {
             if (!visited.add(clazz)) {
-                throw new ClassCircularityError(clazz.getClassName());
+                throw new ClassFormatException(clazz.getClassName());
             }
             allSuperClasses.add(clazz);
         }

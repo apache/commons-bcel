@@ -149,7 +149,7 @@ class JavaClassCyclicTest {
         } catch (final TimeoutException e) {
             fail("Timeout: infinite loop vulnerability detected");
         } catch (final ExecutionException e) {
-            if (e.getCause() instanceof ClassCircularityError) {
+            if (e.getCause() instanceof ClassFormatException) {
                 // Expected with fix - test passes
                 return;
             }

@@ -140,7 +140,7 @@ class JavaClassTest {
             repo.storeClass(interfaceB);
             repo.storeClass(testClass);
             Repository.setRepository(repo);
-            assertThrows(ClassCircularityError.class, () -> testClass.findField("nonExistentField", Type.INT));
+            assertThrows(ClassFormatException.class, () -> testClass.findField("nonExistentField", Type.INT));
         } finally {
             repo.removeClass(interfaceA);
             repo.removeClass(interfaceB);
@@ -153,7 +153,7 @@ class JavaClassTest {
         // Set up repository to load classes from the malicious_classes directory
         final String classPath = tempDir.toString() + System.getProperty("path.separator") + System.getProperty("java.class.path");
         Repository.setRepository(SyntheticRepository.getInstance(new ClassPath(classPath)));
-        assertThrows(ClassCircularityError.class, () -> Repository.lookupClass(CLASS_NAME).findField("nonExistentField", Type.INT));
+        assertThrows(ClassFormatException.class, () -> Repository.lookupClass(CLASS_NAME).findField("nonExistentField", Type.INT));
     }
 
     @Test
@@ -170,7 +170,7 @@ class JavaClassTest {
             repo.storeClass(interfaceB);
             repo.storeClass(testClass);
             Repository.setRepository(repo);
-            assertThrows(ClassCircularityError.class, () -> testClass.findField("nonExistentField", Type.INT));
+            assertThrows(ClassFormatException.class, () -> testClass.findField("nonExistentField", Type.INT));
         } finally {
             repo.removeClass(interfaceA);
             repo.removeClass(interfaceB);
