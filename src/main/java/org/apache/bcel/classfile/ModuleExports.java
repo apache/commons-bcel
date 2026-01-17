@@ -46,17 +46,14 @@ public final class ModuleExports implements Cloneable, Node {
     /**
      * Constructs object from file stream.
      *
-     * @param file Input stream
+     * @param dataInput Input stream
      * @throws IOException if an I/O Exception occurs in readUnsignedShort
      */
-    ModuleExports(final DataInput file) throws IOException {
-        exportsIndex = file.readUnsignedShort();
-        exportsFlags = file.readUnsignedShort();
-        exportsToCount = file.readUnsignedShort();
-        exportsToIndex = new int[exportsToCount];
-        for (int i = 0; i < exportsToCount; i++) {
-            exportsToIndex[i] = file.readUnsignedShort();
-        }
+    ModuleExports(final DataInput dataInput) throws IOException {
+        exportsIndex = dataInput.readUnsignedShort();
+        exportsFlags = dataInput.readUnsignedShort();
+        exportsToIndex = ClassParser.readU2U2Table(dataInput);
+        exportsToCount = exportsToIndex.length;
     }
 
     /**

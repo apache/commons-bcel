@@ -46,17 +46,14 @@ public final class ModuleOpens implements Cloneable, Node {
     /**
      * Constructs object from file stream.
      *
-     * @param file Input stream
+     * @param dataInput Input stream
      * @throws IOException if an I/O Exception occurs in readUnsignedShort
      */
-    ModuleOpens(final DataInput file) throws IOException {
-        opensIndex = file.readUnsignedShort();
-        opensFlags = file.readUnsignedShort();
-        opensToCount = file.readUnsignedShort();
-        opensToIndex = new int[opensToCount];
-        for (int i = 0; i < opensToCount; i++) {
-            opensToIndex[i] = file.readUnsignedShort();
-        }
+    ModuleOpens(final DataInput dataInput) throws IOException {
+        opensIndex = dataInput.readUnsignedShort();
+        opensFlags = dataInput.readUnsignedShort();
+        opensToIndex = ClassParser.readU2U2Table(dataInput);
+        opensToCount = opensToIndex.length;
     }
 
     /**

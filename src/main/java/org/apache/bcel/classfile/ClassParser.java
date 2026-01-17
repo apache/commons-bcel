@@ -19,6 +19,7 @@
 package org.apache.bcel.classfile;
 
 import java.io.BufferedInputStream;
+import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -41,6 +42,16 @@ import org.apache.commons.io.IOUtils;
 public final class ClassParser {
 
     private static final int BUFSIZE = 8192;
+
+    static int[] readU2U2Table(final DataInput dataInput) throws IOException {
+        final int count = dataInput.readUnsignedShort();
+        final int[] table = new int[count];
+        for (int i = 0; i < count; i++) {
+            table[i] = dataInput.readUnsignedShort();
+        }
+        return table;
+    }
+
     private DataInputStream dataInputStream;
     private final boolean fileOwned;
     private final String fileName;
@@ -55,6 +66,7 @@ public final class ClassParser {
     private Field[] fields; // class fields, that is, its variables
     private Method[] methods; // methods defined in the class
     private Attribute[] attributes; // attributes defined in the class
+
     private final boolean isZip; // Loaded from ZIP file
 
     /**
@@ -248,11 +260,7 @@ public final class ClassParser {
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     private void readInterfaces() throws IOException, ClassFormatException {
-        final int interfacesCount = dataInputStream.readUnsignedShort();
-        interfaces = new int[interfacesCount];
-        for (int i = 0; i < interfacesCount; i++) {
-            interfaces[i] = dataInputStream.readUnsignedShort();
-        }
+        interfaces = readU2U2Table(dataInputStream);
     }
 
     /**

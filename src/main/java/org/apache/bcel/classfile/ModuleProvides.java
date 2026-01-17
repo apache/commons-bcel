@@ -49,16 +49,13 @@ public final class ModuleProvides implements Cloneable, Node {
     /**
      * Constructs object from file stream.
      *
-     * @param file Input stream
+     * @param dataInput Input stream
      * @throws IOException if an I/O Exception occurs in readUnsignedShort
      */
-    ModuleProvides(final DataInput file) throws IOException {
-        providesIndex = file.readUnsignedShort();
-        providesWithCount = file.readUnsignedShort();
-        providesWithIndex = new int[providesWithCount];
-        for (int i = 0; i < providesWithCount; i++) {
-            providesWithIndex[i] = file.readUnsignedShort();
-        }
+    ModuleProvides(final DataInput dataInput) throws IOException {
+        providesIndex = dataInput.readUnsignedShort();
+        providesWithIndex = ClassParser.readU2U2Table(dataInput);
+        providesWithCount = providesWithIndex.length;
     }
 
     /**

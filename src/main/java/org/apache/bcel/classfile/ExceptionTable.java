@@ -70,11 +70,7 @@ public final class ExceptionTable extends Attribute {
      */
     ExceptionTable(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
         this(nameIndex, length, (int[]) null, constantPool);
-        final int exceptionCount = input.readUnsignedShort();
-        exceptionIndexTable = new int[exceptionCount];
-        for (int i = 0; i < exceptionCount; i++) {
-            exceptionIndexTable[i] = input.readUnsignedShort();
-        }
+        exceptionIndexTable = ClassParser.readU2U2Table(input);
     }
 
     /**

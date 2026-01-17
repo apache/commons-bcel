@@ -43,17 +43,13 @@ public final class ModulePackages extends Attribute {
      *
      * @param nameIndex Index in constant pool
      * @param length Content length in bytes
-     * @param input Input stream
+     * @param dataInput Input stream
      * @param constantPool Array of constants
      * @throws IOException if an I/O error occurs.
      */
-    ModulePackages(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+    ModulePackages(final int nameIndex, final int length, final DataInput dataInput, final ConstantPool constantPool) throws IOException {
         this(nameIndex, length, (int[]) null, constantPool);
-        final int packageCount = input.readUnsignedShort();
-        packageIndexTable = new int[packageCount];
-        for (int i = 0; i < packageCount; i++) {
-            packageIndexTable[i] = input.readUnsignedShort();
-        }
+        packageIndexTable = ClassParser.readU2U2Table(dataInput);
     }
 
     /**

@@ -66,45 +66,42 @@ public final class Module extends Attribute {
      *
      * @param nameIndex Index in constant pool
      * @param length Content length in bytes
-     * @param input Input stream
+     * @param dataInput Input stream
      * @param constantPool Array of constants
      * @throws IOException if an I/O error occurs.
      */
-    Module(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+    Module(final int nameIndex, final int length, final DataInput dataInput, final ConstantPool constantPool) throws IOException {
         super(Const.ATTR_MODULE, nameIndex, length, constantPool);
 
-        moduleNameIndex = input.readUnsignedShort();
-        moduleFlags = input.readUnsignedShort();
-        moduleVersionIndex = input.readUnsignedShort();
+        moduleNameIndex = dataInput.readUnsignedShort();
+        moduleFlags = dataInput.readUnsignedShort();
+        moduleVersionIndex = dataInput.readUnsignedShort();
 
-        final int requiresCount = input.readUnsignedShort();
+        final int requiresCount = dataInput.readUnsignedShort();
         requiresTable = new ModuleRequires[requiresCount];
         for (int i = 0; i < requiresCount; i++) {
-            requiresTable[i] = new ModuleRequires(input);
+            requiresTable[i] = new ModuleRequires(dataInput);
         }
 
-        final int exportsCount = input.readUnsignedShort();
+        final int exportsCount = dataInput.readUnsignedShort();
         exportsTable = new ModuleExports[exportsCount];
         for (int i = 0; i < exportsCount; i++) {
-            exportsTable[i] = new ModuleExports(input);
+            exportsTable[i] = new ModuleExports(dataInput);
         }
 
-        final int opensCount = input.readUnsignedShort();
+        final int opensCount = dataInput.readUnsignedShort();
         opensTable = new ModuleOpens[opensCount];
         for (int i = 0; i < opensCount; i++) {
-            opensTable[i] = new ModuleOpens(input);
+            opensTable[i] = new ModuleOpens(dataInput);
         }
 
-        usesCount = input.readUnsignedShort();
-        usesIndex = new int[usesCount];
-        for (int i = 0; i < usesCount; i++) {
-            usesIndex[i] = input.readUnsignedShort();
-        }
+        usesIndex = ClassParser.readU2U2Table(dataInput);
+        usesCount = usesIndex.length;
 
-        final int providesCount = input.readUnsignedShort();
+        final int providesCount = dataInput.readUnsignedShort();
         providesTable = new ModuleProvides[providesCount];
         for (int i = 0; i < providesCount; i++) {
-            providesTable[i] = new ModuleProvides(input);
+            providesTable[i] = new ModuleProvides(dataInput);
         }
     }
 
