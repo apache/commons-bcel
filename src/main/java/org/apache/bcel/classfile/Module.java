@@ -64,10 +64,10 @@ public final class Module extends Attribute {
     /**
      * Constructs object from input stream.
      *
-     * @param nameIndex Index in constant pool
-     * @param length Content length in bytes
-     * @param dataInput Input stream
-     * @param constantPool Array of constants
+     * @param nameIndex Index in constant pool.
+     * @param length Content length in bytes.
+     * @param dataInput Input stream.
+     * @param constantPool Array of constants.
      * @throws IOException if an I/O error occurs.
      */
     Module(final int nameIndex, final int length, final DataInput dataInput, final ConstantPool constantPool) throws IOException {
@@ -109,7 +109,7 @@ public final class Module extends Attribute {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -117,7 +117,7 @@ public final class Module extends Attribute {
     }
 
     /**
-     * @return deep copy of this attribute
+     * @return deep copy of this attribute.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {
@@ -142,7 +142,7 @@ public final class Module extends Attribute {
     /**
      * Dumps Module attribute to file stream in binary format.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     @Override
@@ -180,7 +180,7 @@ public final class Module extends Attribute {
     }
 
     /**
-     * @return table of exported interfaces
+     * @return table of exported interfaces.
      * @see ModuleExports
      */
     public ModuleExports[] getExportsTable() {
@@ -190,7 +190,7 @@ public final class Module extends Attribute {
     /**
      * Gets flags for this module.
      *
-     * @return module flags
+     * @return module flags.
      * @since 6.10.0
      */
     public int getModuleFlags() {
@@ -200,8 +200,8 @@ public final class Module extends Attribute {
     /**
      * Gets module name.
      *
-     * @param cp Array of constants
-     * @return module name
+     * @param cp Array of constants.
+     * @return module name.
      * @since 6.10.0
      */
     public String getModuleName(final ConstantPool cp) {
@@ -209,7 +209,7 @@ public final class Module extends Attribute {
     }
 
     /**
-     * @return table of provided interfaces
+     * @return table of provided interfaces.
      * @see ModuleOpens
      */
     public ModuleOpens[] getOpensTable() {
@@ -217,7 +217,7 @@ public final class Module extends Attribute {
     }
 
     /**
-     * @return table of provided interfaces
+     * @return table of provided interfaces.
      * @see ModuleProvides
      */
     public ModuleProvides[] getProvidesTable() {
@@ -225,7 +225,7 @@ public final class Module extends Attribute {
     }
 
     /**
-     * @return table of required modules
+     * @return table of required modules.
      * @see ModuleRequires
      */
     public ModuleRequires[] getRequiresTable() {
@@ -235,9 +235,9 @@ public final class Module extends Attribute {
     /**
      * Gets the array of class names for this module's uses.
      *
-     * @param constantPool Array of constants usually obtained from the ClassFile object
-     * @param compactClassName false for original constant pool value, true to replace '/' with '.'
-     * @return array of used class names
+     * @param constantPool Array of constants usually obtained from the ClassFile object.
+     * @param compactClassName false for original constant pool value, true to replace '/' with '.'.
+     * @return array of used class names.
      * @since 6.10.0
      */
     public String[] getUsedClassNames(final ConstantPool constantPool, final boolean compactClassName) {
@@ -251,8 +251,8 @@ public final class Module extends Attribute {
     /**
      * Gets version for this module.
      *
-     * @param cp Array of constants
-     * @return version from constant pool, "0" if version index is 0
+     * @param cp Array of constants.
+     * @return version from constant pool, "0" if version index is 0.
      * @since 6.10.0
      */
     public String getVersion(final ConstantPool cp) {

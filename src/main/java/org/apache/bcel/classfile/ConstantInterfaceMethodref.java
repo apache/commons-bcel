@@ -40,7 +40,7 @@ public final class ConstantInterfaceMethodref extends ConstantCP {
     /**
      * Initialize instance from input data.
      *
-     * @param input input stream
+     * @param input input stream.
      * @throws IOException if an I/O error occurs.
      */
     ConstantInterfaceMethodref(final DataInput input) throws IOException {

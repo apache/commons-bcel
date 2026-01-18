@@ -317,7 +317,7 @@ public class EmptyVisitor implements Visitor {
     /**
      * Visits a {@link StackMapType} object.
      *
-     * @param obj object to visit
+     * @param obj object to visit.
      * @since 6.8.0
      */
     @Override

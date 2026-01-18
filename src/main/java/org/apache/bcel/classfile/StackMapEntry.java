@@ -60,7 +60,7 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * Constructs object from input stream.
      *
-     * @param dataInput Input stream
+     * @param dataInput Input stream.
      * @throws IOException if an I/O error occurs.
      */
     StackMapEntry(final DataInput dataInput, final ConstantPool constantPool) throws IOException {
@@ -104,13 +104,13 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * DO NOT USE
      *
-     * @param byteCodeOffset
-     * @param numberOfLocals NOT USED
-     * @param typesOfLocals array of {@link StackMapType}s of locals
-     * @param numberOfStackItems NOT USED
-     * @param typesOfStackItems array ot {@link StackMapType}s of stack items
-     * @param constantPool the constant pool
-     * @deprecated Since 6.0, use {@link #StackMapEntry(int, int, StackMapType[], StackMapType[], ConstantPool)} instead
+     * @param byteCodeOffset.
+     * @param numberOfLocals NOT USED.
+     * @param typesOfLocals array of {@link StackMapType}s of locals.
+     * @param numberOfStackItems NOT USED.
+     * @param typesOfStackItems array ot {@link StackMapType}s of stack items.
+     * @param constantPool the constant pool.
+     * @deprecated Since 6.0, use {@link #StackMapEntry(int, int, StackMapType[], StackMapType[], ConstantPool)} instead.
      */
     @java.lang.Deprecated
     public StackMapEntry(final int byteCodeOffset, final int numberOfLocals, final StackMapType[] typesOfLocals, final int numberOfStackItems,
@@ -130,11 +130,11 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * Create an instance
      *
-     * @param tag the frameType to use
-     * @param byteCodeOffset
-     * @param typesOfLocals array of {@link StackMapType}s of locals
-     * @param typesOfStackItems array ot {@link StackMapType}s of stack items
-     * @param constantPool the constant pool
+     * @param tag the frameType to use.
+     * @param byteCodeOffset.
+     * @param typesOfLocals array of {@link StackMapType}s of locals.
+     * @param typesOfStackItems array ot {@link StackMapType}s of stack items.
+     * @param constantPool the constant pool.
      */
     public StackMapEntry(final int tag, final int byteCodeOffset, final StackMapType[] typesOfLocals, final StackMapType[] typesOfStackItems,
         final ConstantPool constantPool) {
@@ -149,7 +149,7 @@ public final class StackMapEntry implements Node, Cloneable {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -157,7 +157,7 @@ public final class StackMapEntry implements Node, Cloneable {
     }
 
     /**
-     * @return deep copy of this object
+     * @return deep copy of this object.
      */
     public StackMapEntry copy() {
         final StackMapEntry e;
@@ -177,7 +177,7 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * Dumps stack map entry
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     public void dump(final DataOutputStream file) throws IOException {
@@ -226,7 +226,7 @@ public final class StackMapEntry implements Node, Cloneable {
     }
 
     /**
-     * Calculate stack map entry size
+     * Calculate stack map entry size.
      */
     int getMapEntrySize() {
         if (frameType >= Const.SAME_FRAME && frameType <= Const.SAME_FRAME_MAX) {
@@ -405,7 +405,7 @@ public final class StackMapEntry implements Node, Cloneable {
      * Update the distance (as an offset delta) from this StackMap entry to the next. Note that this might cause the
      * frame type to change. Note also that delta may be negative.
      *
-     * @param delta offset delta
+     * @param delta offset delta.
      */
     public void updateByteCodeOffset(final int delta) {
         setByteCodeOffset(byteCodeOffset + delta);

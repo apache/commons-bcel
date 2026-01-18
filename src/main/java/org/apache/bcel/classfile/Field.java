@@ -107,7 +107,7 @@ public final class Field extends FieldOrMethod {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -152,7 +152,7 @@ public final class Field extends FieldOrMethod {
     /**
      * See https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.2.2
      *
-     * @return type of field
+     * @return type of field.
      */
     public Type getType() {
         return Type.getType(getSignature());

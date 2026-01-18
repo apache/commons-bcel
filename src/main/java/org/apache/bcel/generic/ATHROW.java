@@ -40,7 +40,7 @@ public class ATHROW extends Instruction implements UnconditionalBranch, Exceptio
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
      * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -51,7 +51,7 @@ public class ATHROW extends Instruction implements UnconditionalBranch, Exceptio
     }
 
     /**
-     * @return exceptions this instruction may cause
+     * @return exceptions this instruction may cause.
      */
     @Override
     public Class<?>[] getExceptions() {

@@ -69,7 +69,7 @@ final class MethodHTML {
     /**
      * Print field of class.
      *
-     * @param field field to print
+     * @param field field to print.
      */
     private void writeField(final Field field) {
         final String type = Utility.signatureToString(field.getSignature());

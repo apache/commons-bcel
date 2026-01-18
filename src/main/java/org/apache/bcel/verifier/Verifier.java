@@ -151,8 +151,8 @@ public class Verifier {
     /**
      * Returns the VerificationResult for the given pass.
      *
-     * @param methodNo The method to verify
-     * @return the VerificationResult
+     * @param methodNo The method to verify.
+     * @return the VerificationResult.
      */
     public VerificationResult doPass3a(final int methodNo) {
         return p3avs.computeIfAbsent(Integer.toString(methodNo), k -> new Pass3aVerifier(this, methodNo)).verify();
@@ -161,8 +161,8 @@ public class Verifier {
     /**
      * Returns the VerificationResult for the given pass.
      *
-     * @param methodNo The method to verify
-     * @return the VerificationResult
+     * @param methodNo The method to verify.
+     * @return the VerificationResult.
      */
     public VerificationResult doPass3b(final int methodNo) {
         return p3bvs.computeIfAbsent(Integer.toString(methodNo), k -> new Pass3bVerifier(this, methodNo)).verify();

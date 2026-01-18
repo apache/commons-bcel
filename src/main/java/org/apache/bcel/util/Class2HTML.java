@@ -184,8 +184,8 @@ public class Class2HTML implements Constants {
     /**
      * Writes contents of the given JavaClass into HTML files.
      *
-     * @param javaClass The class to write
-     * @param dir The directory to put the files in
+     * @param javaClass The class to write.
+     * @param dir The directory to put the files in.
      * @throws IOException Thrown when an I/O exception of some sort has occurred.
      */
     public Class2HTML(final JavaClass javaClass, final String dir) throws IOException {

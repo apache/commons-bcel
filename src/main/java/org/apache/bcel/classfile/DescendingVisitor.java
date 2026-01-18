@@ -563,7 +563,7 @@ public class DescendingVisitor implements Visitor {
     /**
      * Visits a {@link StackMapType} object.
      *
-     * @param var object to visit
+     * @param var object to visit.
      * @since 6.8.0
      */
     @Override

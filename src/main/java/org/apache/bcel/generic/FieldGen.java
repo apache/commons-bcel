@@ -102,10 +102,10 @@ public class FieldGen extends FieldGenOrMethodGen {
      * Declare a field. If it is static (isStatic() == true) and has a basic type like int or String it may have an initial
      * value associated with it as defined by setInitValue().
      *
-     * @param accessFlags access qualifiers
-     * @param type field type
-     * @param name field name
-     * @param cp constant pool
+     * @param accessFlags access qualifiers.
+     * @param type field type.
+     * @param name field name.
+     * @param cp constant pool.
      */
     public FieldGen(final int accessFlags, final Type type, final String name, final ConstantPoolGen cp) {
         super(accessFlags);
@@ -365,7 +365,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     /**
      * Return string representation close to declaration format, for example: 'public static final short MAX = 100'.
      *
-     * @return String representation of field
+     * @return String representation of field.
      */
     @Override
     public final String toString() {

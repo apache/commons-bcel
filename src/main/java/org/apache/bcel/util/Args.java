@@ -34,7 +34,7 @@ public class Args {
      *
      * @param value    The value to test.
      * @param required The required value.
-     * @param message  The message prefix
+     * @param message  The message prefix.
      * @return The value to test.
      */
     public static int require(final int value, final int required, final String message) {
@@ -48,7 +48,7 @@ public class Args {
      * Requires a 0 value.
      *
      * @param value   The value to test.
-     * @param message The message prefix
+     * @param message The message prefix.
      * @return The value to test.
      */
     public static int require0(final int value, final String message) {
@@ -59,7 +59,7 @@ public class Args {
      * Requires a u1 value.
      *
      * @param value   The value to test.
-     * @param message The message prefix
+     * @param message The message prefix.
      * @return The value to test.
      */
     public static int requireU1(final int value, final String message) {
@@ -75,7 +75,7 @@ public class Args {
      * @param value   The value to test.
      * @param min     The minimum required u2 value.
      * @param max     The maximum required u2 value.
-     * @param message The message prefix
+     * @param message The message prefix.
      * @return The value to test.
      */
     public static int requireU2(final int value, final int min, final int max, final String message) {
@@ -96,7 +96,7 @@ public class Args {
      *
      * @param value   The value to test.
      * @param min     The minimum required value.
-     * @param message The message prefix
+     * @param message The message prefix.
      * @return The value to test.
      */
     public static int requireU2(final int value, final int min, final String message) {
@@ -107,7 +107,7 @@ public class Args {
      * Requires a u2 value.
      *
      * @param value   The value to test.
-     * @param message The message prefix
+     * @param message The message prefix.
      * @return The value to test.
      */
     public static int requireU2(final int value, final String message) {
@@ -119,7 +119,7 @@ public class Args {
      *
      * @param value   The value to test.
      * @param min     The minimum required value.
-     * @param message The message prefix
+     * @param message The message prefix.
      * @return The value to test.
      */
     public static int requireU4(final int value, final int min, final String message) {
@@ -133,7 +133,7 @@ public class Args {
      * @param value   The value to test.
      * @param min     The minimum required u4 value.
      * @param max     The maximum required u4 value.
-     * @param message The message prefix
+     * @param message The message prefix.
      * @return The value to test.
      * @throws IllegalArgumentException if {@code min < 0} or {@code max > Integer.MAX_VALUE}.
      * @throws ClassFormatException     if {@code value < min} or {@code value > max}.
@@ -154,7 +154,7 @@ public class Args {
      * Requires a u4 value.
      *
      * @param value   The value to test.
-     * @param message The message prefix
+     * @param message The message prefix.
      * @return The value to test.
      */
     public static int requireU4(final int value, final String message) {

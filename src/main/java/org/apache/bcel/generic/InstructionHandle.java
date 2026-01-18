@@ -85,7 +85,7 @@ public class InstructionHandle {
     /**
      * Convenience method, simply calls accept() on the contained instruction.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     public void accept(final Visitor v) {
         instruction.accept(v);
@@ -94,8 +94,8 @@ public class InstructionHandle {
     /**
      * Add an attribute to an instruction handle.
      *
-     * @param key the key object to store/retrieve the attribute
-     * @param attr the attribute to associate with this handle
+     * @param key the key object to store/retrieve the attribute.
+     * @param attr the attribute to associate with this handle.
      */
     public void addAttribute(final Object key, final Object attr) {
         if (attributes == null) {

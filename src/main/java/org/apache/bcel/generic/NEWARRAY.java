@@ -56,7 +56,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
      * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -69,7 +69,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
     /**
      * Dumps instruction as byte code to stream out.
      *
-     * @param out Output stream
+     * @param out Output stream.
      */
     @Override
     public void dump(final DataOutputStream out) throws IOException {
@@ -83,14 +83,14 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
     }
 
     /**
-     * @return type of constructed array
+     * @return type of constructed array.
      */
     public final Type getType() {
         return new ArrayType(BasicType.getType(type), 1);
     }
 
     /**
-     * @return numeric code for basic element type
+     * @return numeric code for basic element type.
      */
     public final byte getTypecode() {
         return type;
@@ -106,7 +106,7 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
     }
 
     /**
-     * @return mnemonic for instruction
+     * @return mnemonic for instruction.
      */
     @Override
     public String toString(final boolean verbose) {

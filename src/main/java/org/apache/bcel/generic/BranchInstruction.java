@@ -70,8 +70,8 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     /**
      * Common super constructor
      *
-     * @param opcode Instruction opcode
-     * @param target instruction to branch to
+     * @param opcode Instruction opcode.
+     * @param target instruction to branch to.
      */
     protected BranchInstruction(final short opcode, final InstructionHandle target) {
         super(opcode, (short) 3);
@@ -79,7 +79,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     }
 
     /**
-     * @return true, if ih is target of this instruction
+     * @return true, if ih is target of this instruction.
      */
     @Override
     public boolean containsTarget(final InstructionHandle ih) {
@@ -99,7 +99,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     /**
      * Dumps instruction as byte code to stream out.
      *
-     * @param out Output stream
+     * @param out Output stream.
      */
     @Override
     public void dump(final DataOutputStream out) throws IOException {
@@ -214,8 +214,8 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * &lt;position in byte code&gt; &lt;name of opcode&gt; "["&lt;opcode number&gt;"]" "("&lt;length of instruction&gt;")"
      * "&lt;"&lt;target instruction&gt;"&gt;" "@"&lt;branch target offset&gt;
      *
-     * @param verbose long/short format switch
-     * @return mnemonic for instruction
+     * @param verbose long/short format switch.
+     * @return mnemonic for instruction.
      */
     @Override
     public String toString(final boolean verbose) {
@@ -248,9 +248,9 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * length instructions 'setPositions' performs multiple passes over the instruction list to calculate the correct (byte)
      * positions and offsets by calling this function.
      *
-     * @param offset additional offset caused by preceding (variable length) instructions
-     * @param maxOffset the maximum offset that may be caused by these instructions
-     * @return additional offset caused by possible change of this instruction's length
+     * @param offset additional offset caused by preceding (variable length) instructions.
+     * @param maxOffset the maximum offset that may be caused by these instructions.
+     * @return additional offset caused by possible change of this instruction's length.
      */
     protected int updatePosition(final int offset, final int maxOffset) {
         position += offset;
@@ -258,8 +258,8 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     }
 
     /**
-     * @param oldIh old target
-     * @param newIh new target
+     * @param oldIh old target.
+     * @param newIh new target.
      */
     @Override
     public void updateTarget(final InstructionHandle oldIh, final InstructionHandle newIh) {

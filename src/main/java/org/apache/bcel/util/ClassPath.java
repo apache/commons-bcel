@@ -476,7 +476,7 @@ public class ClassPath implements Closeable {
      * Checks for class path components in the following properties: "java.class.path", "sun.boot.class.path",
      * "java.ext.dirs"
      *
-     * @return class path as used by default by BCEL
+     * @return class path as used by default by BCEL.
      */
     // @since 6.0 no longer final
     public static String getClassPath() {
@@ -701,7 +701,7 @@ public class ClassPath implements Closeable {
      * </p>
      *
      * @param name fully qualified class name, for example {@link String}.
-     * @return input stream for class
+     * @return input stream for class.
      * @throws IOException if an I/O error occurs.
      */
     public InputStream getInputStream(final String name) throws IOException {
@@ -714,9 +714,9 @@ public class ClassPath implements Closeable {
      * The caller is responsible for closing the InputStream.
      * </p>
      *
-     * @param name   fully qualified file name, for example java/lang/String
-     * @param suffix file name ends with suff, for example .java
-     * @return input stream for file on class path
+     * @param name   fully qualified file name, for example java/lang/String.
+     * @param suffix file name ends with suff, for example .java.
+     * @return input stream for file on class path.
      * @throws IOException if an I/O error occurs.
      */
     public InputStream getInputStream(final String name, final String suffix) throws IOException {
@@ -821,7 +821,7 @@ public class ClassPath implements Closeable {
     }
 
     /**
-     * @return used class path string
+     * @return used class path string.
      */
     @Override
     public String toString() {

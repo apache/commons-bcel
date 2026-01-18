@@ -41,7 +41,7 @@ public abstract class ArithmeticInstruction extends Instruction implements Typed
     }
 
     /**
-     * @return type associated with the instruction
+     * @return type associated with the instruction.
      */
     @Override
     public Type getType(final ConstantPoolGen cp) {

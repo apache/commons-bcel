@@ -37,7 +37,7 @@ public class FLOAD extends LoadInstruction {
     /**
      * Load float from local variable
      *
-     * @param n index of local variable
+     * @param n index of local variable.
      */
     public FLOAD(final int n) {
         super(org.apache.bcel.Const.FLOAD, org.apache.bcel.Const.FLOAD_0, n);
@@ -47,7 +47,7 @@ public class FLOAD extends LoadInstruction {
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
      * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {

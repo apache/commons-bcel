@@ -40,7 +40,7 @@ public final class ConstantFieldref extends ConstantCP {
     /**
      * Initialize instance from input data.
      *
-     * @param input input stream
+     * @param input input stream.
      * @throws IOException if an I/O error occurs.
      */
     ConstantFieldref(final DataInput input) throws IOException {

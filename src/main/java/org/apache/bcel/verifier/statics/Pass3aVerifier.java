@@ -138,8 +138,8 @@ public final class Pass3aVerifier extends PassVerifier {
         /**
          * Looks for the method referenced by the given invoke instruction in the given class.
          *
-         * @param jc the class that defines the referenced method
-         * @param invoke the instruction that references the method
+         * @param jc the class that defines the referenced method.
+         * @param invoke the instruction that references the method.
          * @return the referenced method or null if not found.
          */
         private Method getMethod(final JavaClass jc, final InvokeInstruction invoke) {
@@ -159,8 +159,8 @@ public final class Pass3aVerifier extends PassVerifier {
          * Looks for the method referenced by the given invoke instruction in the given class or its super classes and super
          * interfaces.
          *
-         * @param jc the class that defines the referenced method
-         * @param invoke the instruction that references the method
+         * @param jc the class that defines the referenced method.
+         * @param invoke the instruction that references the method.
          * @return the referenced method or null if not found.
          */
         private Method getMethodRecursive(final JavaClass jc, final InvokeInstruction invoke) throws ClassNotFoundException {

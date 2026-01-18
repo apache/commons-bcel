@@ -81,9 +81,9 @@ public final class Method extends FieldOrMethod {
     /**
      * Constructs object from file stream.
      *
-     * @param file Input stream
+     * @param file Input stream.
      * @throws IOException if an I/O error occurs.
-     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
+     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file.
      */
     Method(final DataInput file, final ConstantPool constantPool) throws IOException, ClassFormatException {
         super(file, constantPool);
@@ -116,7 +116,7 @@ public final class Method extends FieldOrMethod {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -127,7 +127,7 @@ public final class Method extends FieldOrMethod {
      * Creates a deep copy of this method.
      *
      * @param constantPool the constant pool.
-     * @return deep copy of this method
+     * @return deep copy of this method.
      */
     public Method copy(final ConstantPool constantPool) {
         return (Method) copy_(constantPool);
@@ -147,7 +147,7 @@ public final class Method extends FieldOrMethod {
     /**
      * Gets array of method argument types.
      *
-     * @return array of method argument types
+     * @return array of method argument types.
      */
     public Type[] getArgumentTypes() {
         return Type.getArgumentTypes(getSignature());
@@ -156,7 +156,7 @@ public final class Method extends FieldOrMethod {
     /**
      * Gets Code attribute of method, if any.
      *
-     * @return Code attribute of method, if any
+     * @return Code attribute of method, if any.
      */
     public Code getCode() {
         for (final Attribute attribute : super.getAttributes()) {
@@ -170,8 +170,7 @@ public final class Method extends FieldOrMethod {
     /**
      * Gets ExceptionTable attribute of method, if any.
      *
-     * @return ExceptionTable attribute of method, if any, that is, list all exceptions the method may throw not exception
-     *         handlers!
+     * @return ExceptionTable attribute of method, if any, that is, list all exceptions the method may throw not exception handlers.
      */
     public ExceptionTable getExceptionTable() {
         for (final Attribute attribute : super.getAttributes()) {
@@ -238,7 +237,7 @@ public final class Method extends FieldOrMethod {
     /**
      * Gets return type of method.
      *
-     * @return return type of method
+     * @return return type of method.
      */
     public Type getReturnType() {
         return Type.getReturnType(getSignature());

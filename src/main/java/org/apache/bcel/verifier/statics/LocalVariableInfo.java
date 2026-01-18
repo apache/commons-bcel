@@ -56,10 +56,10 @@ public class LocalVariableInfo {
     /**
      * Adds some information about this local variable (slot).
      *
-     * @param name variable name
+     * @param name variable name.
      * @param startPc Range in which the variable is valid.
      * @param length length of ...
-     * @param type variable type
+     * @param type variable type.
      * @throws LocalVariableInfoInconsistentException if the new information conflicts with already gathered information.
      */
     public void add(final String name, final int startPc, final int length, final Type type) throws LocalVariableInfoInconsistentException {

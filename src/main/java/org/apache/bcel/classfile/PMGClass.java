@@ -37,10 +37,10 @@ public final class PMGClass extends Attribute {
     /**
      * Constructs object from input stream.
      *
-     * @param nameIndex Index in constant pool to CONSTANT_Utf8
-     * @param length Content length in bytes
-     * @param input Input stream
-     * @param constantPool Array of constants
+     * @param nameIndex Index in constant pool to CONSTANT_Utf8.
+     * @param length Content length in bytes.
+     * @param input Input stream.
+     * @param constantPool Array of constants.
      * @throws IOException if an I/O error occurs.
      */
     PMGClass(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
@@ -48,11 +48,11 @@ public final class PMGClass extends Attribute {
     }
 
     /**
-     * @param nameIndex Index in constant pool to CONSTANT_Utf8
-     * @param length Content length in bytes
-     * @param pmgIndex index in constant pool for source file name
-     * @param pmgClassIndex Index in constant pool to CONSTANT_Utf8
-     * @param constantPool Array of constants
+     * @param nameIndex Index in constant pool to CONSTANT_Utf8.
+     * @param length Content length in bytes.
+     * @param pmgIndex index in constant pool for source file name.
+     * @param pmgClassIndex Index in constant pool to CONSTANT_Utf8.
+     * @param constantPool Array of constants.
      */
     public PMGClass(final int nameIndex, final int length, final int pmgIndex, final int pmgClassIndex, final ConstantPool constantPool) {
         super(Const.ATTR_PMG, nameIndex, length, constantPool);
@@ -74,7 +74,7 @@ public final class PMGClass extends Attribute {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -82,7 +82,7 @@ public final class PMGClass extends Attribute {
     }
 
     /**
-     * @return deep copy of this attribute
+     * @return deep copy of this attribute.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {
@@ -92,7 +92,7 @@ public final class PMGClass extends Attribute {
     /**
      * Dumps source file attribute to file stream in binary format.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     @Override
@@ -131,21 +131,21 @@ public final class PMGClass extends Attribute {
     }
 
     /**
-     * @param pmgClassIndex
+     * @param pmgClassIndex.
      */
     public void setPMGClassIndex(final int pmgClassIndex) {
         this.pmgClassIndex = pmgClassIndex;
     }
 
     /**
-     * @param pmgIndex
+     * @param pmgIndex.
      */
     public void setPMGIndex(final int pmgIndex) {
         this.pmgIndex = pmgIndex;
     }
 
     /**
-     * @return String representation
+     * @return String representation.
      */
     @Override
     public String toString() {

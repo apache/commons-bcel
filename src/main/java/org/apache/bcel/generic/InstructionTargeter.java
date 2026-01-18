@@ -41,8 +41,8 @@ public interface InstructionTargeter {
     /**
      * Replaces the target of this targeter from this old handle to the new handle.
      *
-     * @param oldIh the old handle
-     * @param newIh the new handle
+     * @param oldIh the old handle.
+     * @param newIh the new handle.
      * @throws ClassGenException if oldIh is not targeted by this object
      */
     void updateTarget(InstructionHandle oldIh, InstructionHandle newIh) throws ClassGenException;

@@ -156,9 +156,9 @@ public final class ExceptionConst {
     /**
      * Creates a copy of the specified Exception Class array combined with any additional Exception classes.
      *
-     * @param type the basic array type
-     * @param extraClasses additional classes, if any
-     * @return the merged array
+     * @param type the basic array type.
+     * @param extraClasses additional classes, if any.
+     * @return the merged array.
      */
     public static Class<?>[] createExceptions(final EXCS type, final Class<?>... extraClasses) {
         switch (type) {

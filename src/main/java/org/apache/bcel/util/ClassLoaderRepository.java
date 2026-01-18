@@ -65,7 +65,7 @@ public class ClassLoaderRepository implements Repository {
     }
 
     /*
-     * @return null
+     * @return null.
      */
     @Override
     public ClassPath getClassPath() {

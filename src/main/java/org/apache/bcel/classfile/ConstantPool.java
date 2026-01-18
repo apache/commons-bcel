@@ -78,8 +78,8 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
     /**
      * Reads constants from given input stream.
      *
-     * @param input Input stream
-     * @throws IOException if problem in readUnsignedShort or readConstant
+     * @param input Input stream.
+     * @throws IOException if problem in readUnsignedShort or readConstant.
      */
     public ConstantPool(final DataInput input) throws IOException {
         byte tag;
@@ -108,7 +108,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class. I.e., the hierarchy of methods, fields,
      * attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -118,9 +118,9 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
     /**
      * Resolves constant to a string representation.
      *
-     * @param c Constant to be printed
-     * @return String representation
-     * @throws IllegalArgumentException if c is unknown constant type
+     * @param c Constant to be printed.
+     * @return String representation.
+     * @throws IllegalArgumentException if c is unknown constant type.
      */
     public String constantToString(Constant c) throws IllegalArgumentException {
         final String str;
@@ -200,9 +200,9 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
     /**
      * Retrieves constant at 'index' from constant pool and resolve it to a string representation.
      *
-     * @param index of constant in constant pool
-     * @param tag   expected type
-     * @return String representation
+     * @param index of constant in constant pool.
+     * @param tag   expected type.
+     * @return String representation.
      */
     public String constantToString(final int index, final byte tag) {
         return constantToString(getConstant(index, tag));
@@ -232,7 +232,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
     /**
      * Dumps constant pool to file stream in binary format.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if problem in writeShort or dump
      */
     public void dump(final DataOutputStream file) throws IOException {
@@ -254,10 +254,10 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * Gets constant from constant pool.
      *
      * @param <T> the type of the constant.
-     * @param index Index in constant pool
-     * @return Constant value
+     * @param index Index in constant pool.
+     * @return Constant value.
      * @see Constant
-     * @throws ClassFormatException if index is invalid
+     * @throws ClassFormatException if index is invalid.
      */
     @SuppressWarnings("unchecked")
     public <T extends Constant> T getConstant(final int index) throws ClassFormatException {
@@ -268,11 +268,11 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * Gets constant from constant pool and check whether it has the expected type.
      *
      * @param <T> the type of the constant.
-     * @param index Index in constant pool
-     * @param tag   Tag of expected constant, that is, its type
-     * @return Constant value
+     * @param index Index in constant pool.
+     * @param tag   Tag of expected constant, that is, its type.
+     * @return Constant value.
      * @see Constant
-     * @throws ClassFormatException if constant type does not match tag
+     * @throws ClassFormatException if constant type does not match tag.
      */
     @SuppressWarnings("unchecked")
     public <T extends Constant> T getConstant(final int index, final byte tag) throws ClassFormatException {
@@ -283,12 +283,12 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * Gets constant from constant pool and check whether it has the expected type.
      *
      * @param <T> the type of the constant.
-     * @param index Index in constant pool
-     * @param tag   Tag of expected constant, that is, its type
+     * @param index Index in constant pool.
+     * @param tag   Tag of expected constant, that is, its type.
      * @param castTo the class to cast to.
-     * @return Constant value
+     * @return Constant value.
      * @see Constant
-     * @throws ClassFormatException if constant type does not match tag
+     * @throws ClassFormatException if constant type does not match tag.
      * @since 6.6.0
      */
     public <T extends Constant> T getConstant(final int index, final byte tag, final Class<T> castTo) throws ClassFormatException {
@@ -302,12 +302,12 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
     /**
      * Gets constant from constant pool.
      *
-     * @param <T> A {@link Constant} subclass
-     * @param index Index in constant pool
+     * @param <T> A {@link Constant} subclass.
+     * @param index Index in constant pool.
      * @param castTo The {@link Constant} subclass to cast to.
-     * @return Constant value
+     * @return Constant value.
+     * @throws ClassFormatException if index is invalid.
      * @see Constant
-     * @throws ClassFormatException if index is invalid
      * @since 6.6.0
      */
     public <T extends Constant> T getConstant(final int index, final Class<T> castTo) throws ClassFormatException {
@@ -336,10 +336,10 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
     /**
      * Gets constant from constant pool and check whether it has the expected type.
      *
-     * @param index Index in constant pool
-     * @return ConstantInteger value
+     * @param index Index in constant pool.
+     * @return ConstantInteger value.
+     * @throws ClassFormatException if constant type does not match tag.
      * @see ConstantInteger
-     * @throws ClassFormatException if constant type does not match tag
      */
     public ConstantInteger getConstantInteger(final int index) {
         return getConstant(index, Const.CONSTANT_Integer, ConstantInteger.class);
@@ -359,12 +359,12 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * Gets string from constant pool and bypass the indirection of 'ConstantClass' and 'ConstantString' objects. I.e. these classes have an index field that
      * points to another entry of the constant pool of type 'ConstantUtf8' which contains the real data.
      *
-     * @param index Index in constant pool
-     * @param tag   Tag of expected constant, either ConstantClass or ConstantString
-     * @return Contents of string reference
+     * @param index Index in constant pool.
+     * @param tag   Tag of expected constant, either ConstantClass or ConstantString.
+     * @return Contents of string reference.
+     * @throws IllegalArgumentException if tag is invalid.
      * @see ConstantClass
      * @see ConstantString
-     * @throws IllegalArgumentException if tag is invalid
      */
     public String getConstantString(final int index, final byte tag) throws IllegalArgumentException {
         final int i;
@@ -398,10 +398,10 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
     /**
      * Gets constant from constant pool and check whether it has the expected type.
      *
-     * @param index Index in constant pool
-     * @return ConstantUtf8 value
+     * @param index Index in constant pool.
+     * @return ConstantUtf8 value.
+     * @throws ClassFormatException if constant type does not match tag.
      * @see ConstantUtf8
-     * @throws ClassFormatException if constant type does not match tag
      */
     public ConstantUtf8 getConstantUtf8(final int index) throws ClassFormatException {
         return getConstant(index, Const.CONSTANT_Utf8, ConstantUtf8.class);

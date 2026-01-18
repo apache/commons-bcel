@@ -50,7 +50,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
      * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -60,7 +60,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
     /**
      * Dumps instruction as byte code to stream out.
      *
-     * @param out Output stream
+     * @param out Output stream.
      */
     @Override
     public void dump(final DataOutputStream out) throws IOException {
@@ -76,7 +76,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
     }
 
     /**
-     * @return index of local variable containg the return address
+     * @return index of local variable containg the return address.
      */
     @Override
     public final int getIndex() {
@@ -84,7 +84,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
     }
 
     /**
-     * @return return address type
+     * @return return address type.
      */
     @Override
     public Type getType(final ConstantPoolGen cp) {
@@ -128,7 +128,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
     }
 
     /**
-     * @return mnemonic for instruction
+     * @return mnemonic for instruction.
      */
     @Override
     public String toString(final boolean verbose) {

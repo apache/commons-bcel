@@ -39,11 +39,11 @@ public abstract class ParameterAnnotations extends Attribute implements Iterable
     /**
      * Constructs a new instance.
      *
-     * @param parameterAnnotationType the subclass type of the parameter annotation
-     * @param nameIndex Index pointing to the name <em>Code</em>
-     * @param length Content length in bytes
-     * @param input Input stream
-     * @param constantPool Array of constants
+     * @param parameterAnnotationType the subclass type of the parameter annotation.
+     * @param nameIndex Index pointing to the name <em>Code</em>.
+     * @param length Content length in bytes.
+     * @param input Input stream.
+     * @param constantPool Array of constants.
      */
     ParameterAnnotations(final byte parameterAnnotationType, final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool)
         throws IOException {
@@ -58,11 +58,11 @@ public abstract class ParameterAnnotations extends Attribute implements Iterable
     /**
      * Constructs a new instance.
      *
-     * @param parameterAnnotationType the subclass type of the parameter annotation
-     * @param nameIndex Index pointing to the name <em>Code</em>
-     * @param length Content length in bytes
-     * @param parameterAnnotationTable the actual parameter annotations
-     * @param constantPool Array of constants
+     * @param parameterAnnotationType the subclass type of the parameter annotation.
+     * @param nameIndex Index pointing to the name <em>Code</em>.
+     * @param length Content length in bytes.
+     * @param parameterAnnotationTable the actual parameter annotations.
+     * @param constantPool Array of constants.
      */
     public ParameterAnnotations(final byte parameterAnnotationType, final int nameIndex, final int length,
         final ParameterAnnotationEntry[] parameterAnnotationTable, final ConstantPool constantPool) {
@@ -74,7 +74,7 @@ public abstract class ParameterAnnotations extends Attribute implements Iterable
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -82,7 +82,7 @@ public abstract class ParameterAnnotations extends Attribute implements Iterable
     }
 
     /**
-     * @return deep copy of this attribute
+     * @return deep copy of this attribute.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {
@@ -101,14 +101,14 @@ public abstract class ParameterAnnotations extends Attribute implements Iterable
     }
 
     /**
-     * returns the array of parameter annotation entries in this parameter annotation
+     * returns the array of parameter annotation entries in this parameter annotation.
      */
     public ParameterAnnotationEntry[] getParameterAnnotationEntries() {
         return parameterAnnotationTable;
     }
 
     /**
-     * @return the parameter annotation entry table
+     * @return the parameter annotation entry table.
      */
     public final ParameterAnnotationEntry[] getParameterAnnotationTable() {
         return parameterAnnotationTable;
@@ -120,7 +120,7 @@ public abstract class ParameterAnnotations extends Attribute implements Iterable
     }
 
     /**
-     * @param parameterAnnotationTable the entries to set in this parameter annotation
+     * @param parameterAnnotationTable the entries to set in this parameter annotation.
      */
     public final void setParameterAnnotationTable(final ParameterAnnotationEntry[] parameterAnnotationTable) {
         this.parameterAnnotationTable = parameterAnnotationTable != null ? parameterAnnotationTable : EMPTY_ARRAY;

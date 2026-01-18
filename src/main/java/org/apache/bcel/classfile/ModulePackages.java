@@ -41,10 +41,10 @@ public final class ModulePackages extends Attribute {
     /**
      * Constructs object from input stream.
      *
-     * @param nameIndex Index in constant pool
-     * @param length Content length in bytes
-     * @param dataInput Input stream
-     * @param constantPool Array of constants
+     * @param nameIndex Index in constant pool.
+     * @param length Content length in bytes.
+     * @param dataInput Input stream.
+     * @param constantPool Array of constants.
      * @throws IOException if an I/O error occurs.
      */
     ModulePackages(final int nameIndex, final int length, final DataInput dataInput, final ConstantPool constantPool) throws IOException {
@@ -53,10 +53,10 @@ public final class ModulePackages extends Attribute {
     }
 
     /**
-     * @param nameIndex Index in constant pool
-     * @param length Content length in bytes
-     * @param packageIndexTable Table of indices in constant pool
-     * @param constantPool Array of constants
+     * @param nameIndex Index in constant pool.
+     * @param length Content length in bytes.
+     * @param packageIndexTable Table of indices in constant pool.
+     * @param constantPool Array of constants.
      */
     public ModulePackages(final int nameIndex, final int length, final int[] packageIndexTable, final ConstantPool constantPool) {
         super(Const.ATTR_MODULE_PACKAGES, nameIndex, length, constantPool);
@@ -78,7 +78,7 @@ public final class ModulePackages extends Attribute {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -86,7 +86,7 @@ public final class ModulePackages extends Attribute {
     }
 
     /**
-     * @return deep copy of this attribute
+     * @return deep copy of this attribute.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {
@@ -101,7 +101,7 @@ public final class ModulePackages extends Attribute {
     /**
      * Dumps ModulePackages attribute to file stream in binary format.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     @Override
@@ -128,7 +128,7 @@ public final class ModulePackages extends Attribute {
     }
 
     /**
-     * @return string array of package names
+     * @return string array of package names.
      */
     public String[] getPackageNames() {
         final String[] names = new String[packageIndexTable.length];

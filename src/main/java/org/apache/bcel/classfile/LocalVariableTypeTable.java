@@ -93,7 +93,7 @@ public class LocalVariableTypeTable extends Attribute implements Iterable<LocalV
     }
 
     /**
-     * @return deep copy of this attribute
+     * @return deep copy of this attribute.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {

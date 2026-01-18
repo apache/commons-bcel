@@ -116,7 +116,7 @@ public final class ClassParser {
      * fields and commands. A <em>ClassFormatException</em> is raised, if the file is not a valid .class file. (This does
      * not include verification of the byte code as it is performed by the Java interpreter).
      *
-     * @return Class object representing the parsed class file
+     * @return Class object representing the parsed class file.
      * @throws IOException if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file.
      */

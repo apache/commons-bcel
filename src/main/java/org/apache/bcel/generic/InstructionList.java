@@ -52,11 +52,11 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Find the target instruction (handle) that corresponds to the given target position (byte code offset).
      *
-     * @param ihs array of instruction handles, for example il.getInstructionHandles()
-     * @param pos array of positions corresponding to ihs, for example il.getInstructionPositions()
-     * @param count length of arrays
-     * @param target target position to search for
-     * @return target position's instruction handle if available
+     * @param ihs array of instruction handles, for example il.getInstructionHandles().
+     * @param pos array of positions corresponding to ihs, for example il.getInstructionPositions().
+     * @param count length of arrays.
+     * @param target target position to search for.
+     * @return target position's instruction handle if available.
      */
     public static InstructionHandle findHandle(final InstructionHandle[] ihs, final int[] pos, final int count, final int target) {
         if (ihs != null && pos != null) {
@@ -98,7 +98,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Create instruction list containing one instruction.
      *
-     * @param i initial instruction
+     * @param i initial instruction.
      */
     public InstructionList(final BranchInstruction i) {
         append(i);
@@ -107,7 +107,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Initialize instruction list from byte array.
      *
-     * @param code byte array containing the instructions
+     * @param code byte array containing the instructions.
      */
     public InstructionList(final byte[] code) {
         int count = 0; // Contains actual length
@@ -176,7 +176,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Initialize list with (nonnull) compound instruction. Consumes argument list, that is, it becomes empty.
      *
-     * @param c compound instruction (list)
+     * @param c compound instruction (list).
      */
     public InstructionList(final CompoundInstruction c) {
         append(c.getInstructionList());
@@ -185,7 +185,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Create instruction list containing one instruction.
      *
-     * @param i initial instruction
+     * @param i initial instruction.
      */
     public InstructionList(final Instruction i) {
         append(i);
@@ -206,8 +206,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Append a branch instruction to the end of this list.
      *
-     * @param i branch instruction to append
-     * @return branch instruction handle of the appended instruction
+     * @param i branch instruction to append.
+     * @return branch instruction handle of the appended instruction.
      */
     public BranchHandle append(final BranchInstruction i) {
         final BranchHandle ih = BranchHandle.getBranchHandle(i);
@@ -218,8 +218,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Append a compound instruction.
      *
-     * @param c The composite instruction (containing an InstructionList)
-     * @return instruction handle of the first appended instruction
+     * @param c The composite instruction (containing an InstructionList).
+     * @return instruction handle of the first appended instruction.
      */
     public InstructionHandle append(final CompoundInstruction c) {
         return append(c.getInstructionList());
@@ -228,8 +228,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Append an instruction to the end of this list.
      *
-     * @param i instruction to append
-     * @return instruction handle of the appended instruction
+     * @param i instruction to append.
+     * @return instruction handle of the appended instruction.
      */
     public InstructionHandle append(final Instruction i) {
         final InstructionHandle ih = InstructionHandle.getInstructionHandle(i);
@@ -240,9 +240,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Append a compound instruction, after instruction i.
      *
-     * @param i Instruction in list
-     * @param c The composite instruction (containing an InstructionList)
-     * @return instruction handle of the first appended instruction
+     * @param i Instruction in list.
+     * @param c The composite instruction (containing an InstructionList).
+     * @return instruction handle of the first appended instruction.
      */
     public InstructionHandle append(final Instruction i, final CompoundInstruction c) {
         return append(i, c.getInstructionList());
@@ -251,9 +251,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Append a single instruction j after another instruction i, which must be in this list of course!
      *
-     * @param i Instruction in list
-     * @param j Instruction to append after i in list
-     * @return instruction handle of the first appended instruction
+     * @param i Instruction in list.
+     * @param j Instruction to append after i in list.
+     * @return instruction handle of the first appended instruction.
      */
     public InstructionHandle append(final Instruction i, final Instruction j) {
         return append(i, new InstructionList(j));
@@ -262,9 +262,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Append another list after instruction i contained in this list. Consumes argument list, that is, it becomes empty.
      *
-     * @param i where to append the instruction list
-     * @param il Instruction list to append to this one
-     * @return instruction handle pointing to the <strong>first</strong> appended instruction
+     * @param i where to append the instruction list.
+     * @param il Instruction list to append to this one.
+     * @return instruction handle pointing to the <strong>first</strong> appended instruction.
      */
     public InstructionHandle append(final Instruction i, final InstructionList il) {
         final InstructionHandle ih;
@@ -277,7 +277,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Append an instruction to the end of this list.
      *
-     * @param ih instruction to append
+     * @param ih instruction to append.
      */
     private void append(final InstructionHandle ih) {
         if (isEmpty()) {
@@ -295,9 +295,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Append an instruction after instruction (handle) ih contained in this list.
      *
-     * @param ih where to append the instruction list
-     * @param i Instruction to append
-     * @return instruction handle pointing to the <strong>first</strong> appended instruction
+     * @param ih where to append the instruction list.
+     * @param i Instruction to append.
+     * @return instruction handle pointing to the <strong>first</strong> appended instruction.
      */
     public BranchHandle append(final InstructionHandle ih, final BranchInstruction i) {
         final BranchHandle bh = BranchHandle.getBranchHandle(i);
@@ -310,9 +310,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Append a compound instruction.
      *
-     * @param ih where to append the instruction list
-     * @param c The composite instruction (containing an InstructionList)
-     * @return instruction handle of the first appended instruction
+     * @param ih where to append the instruction list.
+     * @param c The composite instruction (containing an InstructionList).
+     * @return instruction handle of the first appended instruction.
      */
     public InstructionHandle append(final InstructionHandle ih, final CompoundInstruction c) {
         return append(ih, c.getInstructionList());
@@ -321,9 +321,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Append an instruction after instruction (handle) ih contained in this list.
      *
-     * @param ih where to append the instruction list
-     * @param i Instruction to append
-     * @return instruction handle pointing to the <strong>first</strong> appended instruction
+     * @param ih where to append the instruction list.
+     * @param i Instruction to append.
+     * @return instruction handle pointing to the <strong>first</strong> appended instruction.
      */
     public InstructionHandle append(final InstructionHandle ih, final Instruction i) {
         return append(ih, new InstructionList(i));
@@ -333,9 +333,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * Append another list after instruction (handle) ih contained in this list. Consumes argument list, that is, it becomes
      * empty.
      *
-     * @param ih where to append the instruction list
-     * @param il Instruction list to append to this one
-     * @return instruction handle pointing to the <strong>first</strong> appended instruction
+     * @param ih where to append the instruction list.
+     * @param il Instruction list to append to this one.
+     * @return instruction handle pointing to the <strong>first</strong> appended instruction.
      */
     public InstructionHandle append(final InstructionHandle ih, final InstructionList il) {
         if (il == null) {
@@ -362,8 +362,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Append another list to this one. Consumes argument list, that is, it becomes empty.
      *
-     * @param il list to append to end of this list
-     * @return instruction handle of the <strong>first</strong> appended instruction
+     * @param il list to append to end of this list.
+     * @return instruction handle of the <strong>first</strong> appended instruction.
      */
     public InstructionHandle append(final InstructionList il) {
         if (il == null) {
@@ -537,8 +537,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * Gets instruction handle for instruction at byte code position pos. This only works properly, if the list is freshly
      * initialized from a byte array or setPositions() has been called before this method.
      *
-     * @param pos byte code position to search for
-     * @return target position's instruction handle if available
+     * @param pos byte code position to search for.
+     * @return target position's instruction handle if available.
      */
     public InstructionHandle findHandle(final int pos) {
         final int[] positions = bytePositions;
@@ -555,8 +555,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Search for given Instruction reference, start at beginning of list.
      *
-     * @param i instruction to search for
-     * @return instruction found on success, null otherwise
+     * @param i instruction to search for.
+     * @return instruction found on success, null otherwise.
      */
     private InstructionHandle findInstruction1(final Instruction i) {
         for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
@@ -570,8 +570,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Search for given Instruction reference, start at end of list
      *
-     * @param i instruction to search for
-     * @return instruction found on success, null otherwise
+     * @param i instruction to search for.
+     * @return instruction found on success, null otherwise.
      */
     private InstructionHandle findInstruction2(final Instruction i) {
         for (InstructionHandle ih = end; ih != null; ih = ih.getPrev()) {
@@ -585,7 +585,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * When everything is finished, use this method to convert the instruction list into an array of bytes.
      *
-     * @return the byte code ready to be dumped
+     * @return the byte code ready to be dumped.
      */
     public byte[] getByteCode() {
         // Update position indices of instructions
@@ -633,7 +633,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * Gets positions (offsets) of all instructions in the list. This relies on that the list has been freshly created from
      * an byte code array, or that setPositions() has been called. Otherwise this may be inaccurate.
      *
-     * @return array containing all instruction's offset in byte code
+     * @return array containing all instruction's offset in byte code.
      */
     public int[] getInstructionPositions() {
         return bytePositions;
@@ -677,8 +677,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Insert a branch instruction at start of this list.
      *
-     * @param i branch instruction to insert
-     * @return branch instruction handle of the appended instruction
+     * @param i branch instruction to insert.
+     * @return branch instruction handle of the appended instruction.
      */
     public BranchHandle insert(final BranchInstruction i) {
         final BranchHandle ih = BranchHandle.getBranchHandle(i);
@@ -689,8 +689,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Insert a compound instruction.
      *
-     * @param c The composite instruction (containing an InstructionList)
-     * @return instruction handle of the first inserted instruction
+     * @param c The composite instruction (containing an InstructionList).
+     * @return instruction handle of the first inserted instruction.
      */
     public InstructionHandle insert(final CompoundInstruction c) {
         return insert(c.getInstructionList());
@@ -699,8 +699,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Insert an instruction at start of this list.
      *
-     * @param i instruction to insert
-     * @return instruction handle of the inserted instruction
+     * @param i instruction to insert.
+     * @return instruction handle of the inserted instruction.
      */
     public InstructionHandle insert(final Instruction i) {
         final InstructionHandle ih = InstructionHandle.getInstructionHandle(i);
@@ -711,9 +711,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Insert a compound instruction before instruction i.
      *
-     * @param i Instruction in list
-     * @param c The composite instruction (containing an InstructionList)
-     * @return instruction handle of the first inserted instruction
+     * @param i Instruction in list.
+     * @param c The composite instruction (containing an InstructionList).
+     * @return instruction handle of the first inserted instruction.
      */
     public InstructionHandle insert(final Instruction i, final CompoundInstruction c) {
         return insert(i, c.getInstructionList());
@@ -722,9 +722,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Insert a single instruction j before another instruction i, which must be in this list of course!
      *
-     * @param i Instruction in list
-     * @param j Instruction to insert before i in list
-     * @return instruction handle of the first inserted instruction
+     * @param i Instruction in list.
+     * @param j Instruction to insert before i in list.
+     * @return instruction handle of the first inserted instruction.
      */
     public InstructionHandle insert(final Instruction i, final Instruction j) {
         return insert(i, new InstructionList(j));
@@ -733,9 +733,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Insert another list before Instruction i contained in this list. Consumes argument list, that is, it becomes empty.
      *
-     * @param i where to append the instruction list
-     * @param il Instruction list to insert
-     * @return instruction handle pointing to the first inserted instruction, that is, il.getStart()
+     * @param i where to append the instruction list.
+     * @param il Instruction list to insert.
+     * @return instruction handle pointing to the first inserted instruction, that is, il.getStart().
      */
     public InstructionHandle insert(final Instruction i, final InstructionList il) {
         final InstructionHandle ih;
@@ -748,7 +748,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Insert an instruction at start of this list.
      *
-     * @param ih instruction to insert
+     * @param ih instruction to insert.
      */
     private void insert(final InstructionHandle ih) {
         if (isEmpty()) {
@@ -766,9 +766,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Insert an instruction before instruction (handle) ih contained in this list.
      *
-     * @param ih where to insert to the instruction list
-     * @param i Instruction to insert
-     * @return instruction handle of the first inserted instruction
+     * @param ih where to insert to the instruction list.
+     * @param i Instruction to insert.
+     * @return instruction handle of the first inserted instruction.
      */
     public BranchHandle insert(final InstructionHandle ih, final BranchInstruction i) {
         final BranchHandle bh = BranchHandle.getBranchHandle(i);
@@ -781,9 +781,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Insert a compound instruction.
      *
-     * @param ih where to insert the instruction list
-     * @param c The composite instruction (containing an InstructionList)
-     * @return instruction handle of the first inserted instruction
+     * @param ih where to insert the instruction list.
+     * @param c The composite instruction (containing an InstructionList).
+     * @return instruction handle of the first inserted instruction.
      */
     public InstructionHandle insert(final InstructionHandle ih, final CompoundInstruction c) {
         return insert(ih, c.getInstructionList());
@@ -792,9 +792,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Insert an instruction before instruction (handle) ih contained in this list.
      *
-     * @param ih where to insert to the instruction list
-     * @param i Instruction to insert
-     * @return instruction handle of the first inserted instruction
+     * @param ih where to insert to the instruction list.
+     * @param i Instruction to insert.
+     * @return instruction handle of the first inserted instruction.
      */
     public InstructionHandle insert(final InstructionHandle ih, final Instruction i) {
         return insert(ih, new InstructionList(i));
@@ -804,9 +804,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * Insert another list before Instruction handle ih contained in this list. Consumes argument list, that is, it becomes
      * empty.
      *
-     * @param ih where to append the instruction list
-     * @param il Instruction list to insert
-     * @return instruction handle of the first inserted instruction
+     * @param ih where to append the instruction list.
+     * @param il Instruction list to insert.
+     * @return instruction handle of the first inserted instruction.
      */
     public InstructionHandle insert(final InstructionHandle ih, final InstructionList il) {
         if (il == null) {
@@ -833,8 +833,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Insert another list.
      *
-     * @param il list to insert before start of this list
-     * @return instruction handle of the first inserted instruction
+     * @param il list to insert before start of this list.
+     * @return instruction handle of the first inserted instruction.
      */
     public InstructionHandle insert(final InstructionList il) {
         if (isEmpty()) {
@@ -852,7 +852,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     } // && end == null
 
     /**
-     * @return iterator that lists all instructions (handles)
+     * @return iterator that lists all instructions (handles).
      */
     @Override
     public Iterator<InstructionHandle> iterator() {
@@ -885,8 +885,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Move a single instruction (handle) to a new location.
      *
-     * @param ih moved instruction
-     * @param target new location of moved instruction
+     * @param ih moved instruction.
+     * @param target new location of moved instruction.
      */
     public void move(final InstructionHandle ih, final InstructionHandle target) {
         move(ih, ih, target);
@@ -900,9 +900,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * Any instruction targeters pointing to handles within the block, keep their targets.
      * </p>
      *
-     * @param start of moved block
-     * @param end of moved block
-     * @param target of moved block
+     * @param start of moved block.
+     * @param end of moved block.
+     * @param target of moved block.
      */
     public void move(final InstructionHandle start, final InstructionHandle end, final InstructionHandle target) {
         // Step 1: Check constraints
@@ -957,8 +957,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Redirect all references from oldTarget to newTarget, that is, update targets of branch instructions.
      *
-     * @param oldTarget the old target instruction handle
-     * @param newTarget the new target instruction handle
+     * @param oldTarget the old target instruction handle.
+     * @param newTarget the new target instruction handle.
      */
     public void redirectBranches(final InstructionHandle oldTarget, final InstructionHandle newTarget) {
         for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
@@ -984,9 +984,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Redirect all references of exception handlers from oldTarget to newTarget.
      *
-     * @param exceptions array of exception handlers
-     * @param oldTarget the old target instruction handle
-     * @param newTarget the new target instruction handle
+     * @param exceptions array of exception handlers.
+     * @param oldTarget the old target instruction handle.
+     * @param newTarget the new target instruction handle.
      * @see MethodGen
      */
     public void redirectExceptionHandlers(final CodeExceptionGen[] exceptions, final InstructionHandle oldTarget, final InstructionHandle newTarget) {
@@ -1006,9 +1006,9 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Redirect all references of local variables from oldTarget to newTarget.
      *
-     * @param lg array of local variables
-     * @param oldTarget the old target instruction handle
-     * @param newTarget the new target instruction handle
+     * @param lg array of local variables.
+     * @param oldTarget the old target instruction handle.
+     * @param newTarget the new target instruction handle.
      * @see MethodGen
      */
     public void redirectLocalVariables(final LocalVariableGen[] lg, final InstructionHandle oldTarget, final InstructionHandle newTarget) {
@@ -1026,8 +1026,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * Remove from instruction 'prev' to instruction 'next' both contained in this list. Throws TargetLostException when one
      * of the removed instruction handles is still being targeted.
      *
-     * @param prev where to start deleting (predecessor, exclusive)
-     * @param next where to end deleting (successor, exclusive)
+     * @param prev where to start deleting (predecessor, exclusive).
+     * @param next where to end deleting (successor, exclusive).
      */
     private void remove(final InstructionHandle prev, InstructionHandle next) throws TargetLostException {
         final InstructionHandle first;
@@ -1114,7 +1114,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Give all instructions their position number (offset in byte stream), that is, make the list ready to be dumped.
      *
-     * @param check Perform sanity checks, for example if all targeted instructions really belong to this list
+     * @param check Perform sanity checks, for example if all targeted instructions really belong to this list.
      */
     public void setPositions(final boolean check) { // called by code in other packages
         int maxAdditionalBytes = 0;

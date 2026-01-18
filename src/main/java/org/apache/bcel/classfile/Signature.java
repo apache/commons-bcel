@@ -159,10 +159,10 @@ public final class Signature extends Attribute {
     /**
      * Constructs object from file stream.
      *
-     * @param nameIndex Index in constant pool to CONSTANT_Utf8
-     * @param length Content length in bytes
-     * @param input Input stream
-     * @param constantPool Array of constants
+     * @param nameIndex Index in constant pool to CONSTANT_Utf8.
+     * @param length Content length in bytes.
+     * @param input Input stream.
+     * @param constantPool Array of constants.
      * @throws IOException if an I/O error occurs.
      */
     Signature(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
@@ -170,10 +170,10 @@ public final class Signature extends Attribute {
     }
 
     /**
-     * @param nameIndex Index in constant pool to CONSTANT_Utf8
-     * @param length Content length in bytes
-     * @param signatureIndex Index in constant pool to CONSTANT_Utf8
-     * @param constantPool Array of constants
+     * @param nameIndex Index in constant pool to CONSTANT_Utf8.
+     * @param length Content length in bytes.
+     * @param signatureIndex Index in constant pool to CONSTANT_Utf8.
+     * @param constantPool Array of constants.
      */
     public Signature(final int nameIndex, final int length, final int signatureIndex, final ConstantPool constantPool) {
         super(Const.ATTR_SIGNATURE, nameIndex, Args.require(length, 2, "Signature length attribute"), constantPool);
@@ -196,7 +196,7 @@ public final class Signature extends Attribute {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -205,7 +205,7 @@ public final class Signature extends Attribute {
     }
 
     /**
-     * @return deep copy of this attribute
+     * @return deep copy of this attribute.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {
@@ -215,7 +215,7 @@ public final class Signature extends Attribute {
     /**
      * Dumps source file attribute to file stream in binary format.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     @Override
@@ -239,14 +239,14 @@ public final class Signature extends Attribute {
     }
 
     /**
-     * @param signatureIndex the index info the constant pool of this signature
+     * @param signatureIndex the index info the constant pool of this signature.
      */
     public void setSignatureIndex(final int signatureIndex) {
         this.signatureIndex = signatureIndex;
     }
 
     /**
-     * @return String representation
+     * @return String representation.
      */
     @Override
     public String toString() {

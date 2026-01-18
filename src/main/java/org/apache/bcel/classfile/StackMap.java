@@ -52,10 +52,10 @@ public final class StackMap extends Attribute {
     /**
      * Constructs object from input stream.
      *
-     * @param nameIndex Index of name
-     * @param length Content length in bytes
-     * @param dataInput Input stream
-     * @param constantPool Array of constants
+     * @param nameIndex Index of name.
+     * @param length Content length in bytes.
+     * @param dataInput Input stream.
+     * @param constantPool Array of constants.
      * @throws IOException if an I/O error occurs.
      */
     StackMap(final int nameIndex, final int length, final DataInput dataInput, final ConstantPool constantPool) throws IOException {
@@ -68,10 +68,10 @@ public final class StackMap extends Attribute {
     }
 
     /*
-     * @param nameIndex Index of name
-     * @param length Content length in bytes
-     * @param map Table of stack map entries
-     * @param constantPool Array of constants
+     * @param nameIndex Index of name.
+     * @param length Content length in bytes.
+     * @param map Table of stack map entries.
+     * @param constantPool Array of constants.
      */
     public StackMap(final int nameIndex, final int length, final StackMapEntry[] table, final ConstantPool constantPool) {
         super(Const.ATTR_STACK_MAP, nameIndex, length, constantPool);
@@ -83,7 +83,7 @@ public final class StackMap extends Attribute {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -91,7 +91,7 @@ public final class StackMap extends Attribute {
     }
 
     /**
-     * @return deep copy of this attribute
+     * @return deep copy of this attribute.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {
@@ -105,7 +105,7 @@ public final class StackMap extends Attribute {
     /**
      * Dumps stack map table attribute to file stream in binary format.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     @Override
@@ -122,14 +122,14 @@ public final class StackMap extends Attribute {
     }
 
     /**
-     * @return Array of stack map entries
+     * @return Array of stack map entries.
      */
     public StackMapEntry[] getStackMap() {
         return table;
     }
 
     /**
-     * @param table Array of stack map entries
+     * @param table Array of stack map entries.
      */
     public void setStackMap(final StackMapEntry[] table) {
         this.table = table != null ? table : StackMapEntry.EMPTY_ARRAY;

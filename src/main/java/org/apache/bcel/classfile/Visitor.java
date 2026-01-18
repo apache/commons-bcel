@@ -430,7 +430,7 @@ public interface Visitor {
     /**
      * Visits a {@link Record} object.
      *
-     * @param obj Record to visit
+     * @param obj Record to visit.
      * @since 6.9.0
      */
     default void visitRecord(final Record obj) {
@@ -440,7 +440,7 @@ public interface Visitor {
     /**
      * Visits a {@link RecordComponentInfo} object.
      *
-     * @param record component to visit
+     * @param record component to visit.
      * @since 6.9.0
      */
     default void visitRecordComponent(final RecordComponentInfo record) {
@@ -478,7 +478,7 @@ public interface Visitor {
     /**
      * Visits a {@link StackMapType} object.
      *
-     * @param obj object to visit
+     * @param obj object to visit.
      * @since 6.8.0
      */
     default void visitStackMapType(final StackMapType obj) {

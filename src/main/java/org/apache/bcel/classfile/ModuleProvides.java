@@ -49,8 +49,8 @@ public final class ModuleProvides implements Cloneable, Node {
     /**
      * Constructs object from file stream.
      *
-     * @param dataInput Input stream
-     * @throws IOException if an I/O Exception occurs in readUnsignedShort
+     * @param dataInput Input stream.
+     * @throws IOException if an I/O Exception occurs in readUnsignedShort.
      */
     ModuleProvides(final DataInput dataInput) throws IOException {
         providesIndex = dataInput.readUnsignedShort();
@@ -62,7 +62,7 @@ public final class ModuleProvides implements Cloneable, Node {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -70,7 +70,7 @@ public final class ModuleProvides implements Cloneable, Node {
     }
 
     /**
-     * @return deep copy of this object
+     * @return deep copy of this object.
      */
     public ModuleProvides copy() {
         try {
@@ -84,8 +84,8 @@ public final class ModuleProvides implements Cloneable, Node {
     /**
      * Dumps table entry to file stream in binary format.
      *
-     * @param file Output file stream
-     * @throws IOException if an I/O Exception occurs in writeShort
+     * @param file Output file stream.
+     * @throws IOException if an I/O Exception occurs in writeShort.
      */
     public void dump(final DataOutputStream file) throws IOException {
         file.writeShort(providesIndex);
@@ -98,9 +98,9 @@ public final class ModuleProvides implements Cloneable, Node {
     /**
      * Gets the array of implementation class names for this ModuleProvides.
      *
-     * @param constantPool Array of constants usually obtained from the ClassFile object
-     * @param compactClassName false for original constant pool value, true to replace '/' with '.'
-     * @return array of implementation class names
+     * @param constantPool Array of constants usually obtained from the ClassFile object.
+     * @param compactClassName false for original constant pool value, true to replace '/' with '.'.
+     * @return array of implementation class names.
      * @since 6.10.0
      */
     public String[] getImplementationClassNames(final ConstantPool constantPool, final boolean compactClassName) {
@@ -114,8 +114,8 @@ public final class ModuleProvides implements Cloneable, Node {
     /**
      * Gets the interface name for this ModuleProvides.
      *
-     * @param constantPool Array of constants usually obtained from the ClassFile object
-     * @return interface name
+     * @param constantPool Array of constants usually obtained from the ClassFile object.
+     * @return interface name.
      * @since 6.10.0
      */
     public String getInterfaceName(final ConstantPool constantPool) {
@@ -123,7 +123,7 @@ public final class ModuleProvides implements Cloneable, Node {
     }
 
     /**
-     * @return String representation
+     * @return String representation.
      */
     @Override
     public String toString() {
@@ -131,7 +131,7 @@ public final class ModuleProvides implements Cloneable, Node {
     }
 
     /**
-     * @return Resolved string representation
+     * @return Resolved string representation.
      */
     public String toString(final ConstantPool constantPool) {
         final StringBuilder buf = new StringBuilder();

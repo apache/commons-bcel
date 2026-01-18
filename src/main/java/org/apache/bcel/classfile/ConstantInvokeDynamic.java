@@ -45,7 +45,7 @@ public final class ConstantInvokeDynamic extends ConstantCP {
     /**
      * Initialize instance from file data.
      *
-     * @param file Input stream
+     * @param file Input stream.
      * @throws IOException if an I/O error occurs.
      */
     ConstantInvokeDynamic(final DataInput file) throws IOException {
@@ -86,7 +86,7 @@ public final class ConstantInvokeDynamic extends ConstantCP {
     }
 
     /**
-     * @return String representation
+     * @return String representation.
      */
     @Override
     public String toString() {

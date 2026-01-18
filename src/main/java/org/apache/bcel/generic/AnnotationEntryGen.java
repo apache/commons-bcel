@@ -51,8 +51,8 @@ public class AnnotationEntryGen {
     /**
      * Converts a list of AnnotationGen objects into a set of attributes that can be attached to the class file.
      *
-     * @param cp The constant pool gen where we can create the necessary name refs
-     * @param annotationEntryGens An array of AnnotationGen objects
+     * @param cp The constant pool gen where we can create the necessary name refs.
+     * @param annotationEntryGens An array of AnnotationGen objects.
      */
     static Attribute[] getAnnotationAttributes(final ConstantPoolGen cp, final AnnotationEntryGen[] annotationEntryGens) {
         if (ArrayUtils.isEmpty(annotationEntryGens)) {

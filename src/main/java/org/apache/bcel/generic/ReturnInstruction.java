@@ -67,7 +67,7 @@ public abstract class ReturnInstruction extends Instruction implements Exception
     }
 
     /**
-     * @return type associated with the instruction
+     * @return type associated with the instruction.
      */
     @Override
     public Type getType(final ConstantPoolGen cp) {

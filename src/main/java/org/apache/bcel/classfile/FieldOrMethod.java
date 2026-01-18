@@ -30,19 +30,19 @@ import java.util.Arrays;
 public abstract class FieldOrMethod extends AccessFlags implements Cloneable, Node {
 
     /**
-     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter.
      */
     @java.lang.Deprecated
     protected int name_index; // Points to field name in constant pool
 
     /**
-     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter.
      */
     @java.lang.Deprecated
     protected int signature_index; // Points to encoded signature
 
     /**
-     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter.
      */
     @java.lang.Deprecated
     protected Attribute[] attributes; // Collection of attributes
@@ -57,7 +57,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     private AnnotationEntry[] annotationEntries; // annotations defined on the field or method
 
     /**
-     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter.
      */
     @java.lang.Deprecated
     protected ConstantPool constant_pool;

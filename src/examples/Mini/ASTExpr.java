@@ -293,7 +293,7 @@ public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniPars
     /**
      * Second and third pass
      *
-     * @return type of expression
+     * @return type of expression.
      * @param expected type.
      */
     public int eval(final int expected) {

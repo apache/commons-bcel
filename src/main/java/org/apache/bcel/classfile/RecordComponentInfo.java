@@ -42,8 +42,8 @@ public class RecordComponentInfo implements Node {
     /**
      * Constructs a new instance from an input stream.
      *
-     * @param input        Input stream
-     * @param constantPool Array of constants
+     * @param input        Input stream.
+     * @param constantPool Array of constants.
      * @throws IOException if an I/O error occurs.
      */
     public RecordComponentInfo(final DataInput input, final ConstantPool constantPool) throws IOException {
@@ -65,7 +65,7 @@ public class RecordComponentInfo implements Node {
     /**
      * Dumps contents into a file stream in binary format.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     public void dump(final DataOutputStream file) throws IOException {

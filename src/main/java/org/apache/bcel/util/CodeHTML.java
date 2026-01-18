@@ -72,8 +72,8 @@ final class CodeHTML {
     /**
      * Disassemble a stream of byte codes and return the string representation.
      *
-     * @param stream data input stream
-     * @return String representation of byte code
+     * @param stream data input stream.
+     * @return String representation of byte code.
      */
     private String codeToHTML(final ByteSequence bytes, final int methodNumber) throws IOException {
         final short opcode = (short) bytes.readUnsignedByte();

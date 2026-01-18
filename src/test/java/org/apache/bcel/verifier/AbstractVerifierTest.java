@@ -40,8 +40,8 @@ public abstract class AbstractVerifierTest {
      * Asserts that the verification of the given class is OK. If it isn't it throws an AssertionFailedError with the given
      * message.
      *
-     * @param className simple class name of the class to verify
-     * @param message message displayed if assertion fails
+     * @param className simple class name of the class to verify.
+     * @param message message displayed if assertion fails.
      */
     public void assertVerifyOK(final String className, final String message) throws ClassNotFoundException {
         final String testClassName = TEST_PACKAGE + className;
@@ -52,8 +52,8 @@ public abstract class AbstractVerifierTest {
      * Asserts that the verification of the given class is rejected. If it isn't it throws an AssertionFailedError with the
      * given message.
      *
-     * @param className simple class name of the class to verify
-     * @param message message displayed if assertion fails
+     * @param className simple class name of the class to verify.
+     * @param message message displayed if assertion fails.
      */
     public void assertVerifyRejected(final String className, final String message) throws ClassNotFoundException {
         final String testClassname = TEST_PACKAGE + className;
@@ -63,8 +63,8 @@ public abstract class AbstractVerifierTest {
     /**
      * Executes all the verification on the given class.
      *
-     * @param className name of the class to verify
-     * @return false if the verification fails, true otherwise
+     * @param className name of the class to verify.
+     * @return false if the verification fails, true otherwise.
      */
     public boolean doAllPasses(final String className) throws ClassNotFoundException {
         final JavaClass jc = Repository.lookupClass(className);

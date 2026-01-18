@@ -36,7 +36,7 @@ public class DCMPG extends Instruction implements TypedInstruction, StackProduce
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
      * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -47,7 +47,7 @@ public class DCMPG extends Instruction implements TypedInstruction, StackProduce
     }
 
     /**
-     * @return Type.DOUBLE
+     * @return Type.DOUBLE.
      */
     @Override
     public Type getType(final ConstantPoolGen cp) {

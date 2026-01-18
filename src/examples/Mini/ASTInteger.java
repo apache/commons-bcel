@@ -85,7 +85,7 @@ public class ASTInteger extends ASTExpr {
     }
 
     /**
-     * @return identifier and line/column number of appearance
+     * @return identifier and line/column number of appearance.
      */
     @Override
     public String toString() {

@@ -59,8 +59,8 @@ public abstract class Constant implements Cloneable, Node {
     /**
      * Reads one constant from the given input, the type depends on a tag byte.
      *
-     * @param dataInput Input stream
-     * @return Constant object
+     * @param dataInput Input stream.
+     * @return Constant object.
      * @throws IOException if an I/O error occurs reading from the given {@code dataInput}.
      * @throws ClassFormatException if the next byte is not recognized
      * @since 6.0 made public

@@ -40,8 +40,8 @@ public final class StackMapType implements Node, Cloneable {
     private ConstantPool constantPool;
 
     /**
-     * @param type type tag as defined in the Constants interface
-     * @param index index to constant pool, or byte code offset
+     * @param type type tag as defined in the Constants interface.
+     * @param index index to constant pool, or byte code offset.
      */
     public StackMapType(final byte type, final int index, final ConstantPool constantPool) {
         this.type = checkType(type);
@@ -52,7 +52,7 @@ public final class StackMapType implements Node, Cloneable {
     /**
      * Constructs object from file stream.
      *
-     * @param file Input stream
+     * @param file Input stream.
      * @throws IOException if an I/O error occurs.
      */
     StackMapType(final DataInput file, final ConstantPool constantPool) throws IOException {
@@ -67,7 +67,7 @@ public final class StackMapType implements Node, Cloneable {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      * @since 6.8.0
      */
     @Override
@@ -83,7 +83,7 @@ public final class StackMapType implements Node, Cloneable {
     }
 
     /**
-     * @return deep copy of this object
+     * @return deep copy of this object.
      */
     public StackMapType copy() {
         try {
@@ -97,7 +97,7 @@ public final class StackMapType implements Node, Cloneable {
     /**
      * Dumps type entries to file.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     public void dump(final DataOutputStream file) throws IOException {
@@ -137,7 +137,7 @@ public final class StackMapType implements Node, Cloneable {
     }
 
     /**
-     * @return true, if type is either ITEM_Object or ITEM_NewObject
+     * @return true, if type is either ITEM_Object or ITEM_NewObject.
      */
     public boolean hasIndex() {
         return type == Const.ITEM_Object || type == Const.ITEM_NewObject;
@@ -172,7 +172,7 @@ public final class StackMapType implements Node, Cloneable {
     }
 
     /**
-     * @return String representation
+     * @return String representation.
      */
     @Override
     public String toString() {

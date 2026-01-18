@@ -45,7 +45,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     /**
      * Initialize instance from file data.
      *
-     * @param file Input stream
+     * @param file Input stream.
      * @throws IOException if an I/O error occurs.
      */
     ConstantDouble(final DataInput file) throws IOException {
@@ -76,7 +76,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     /**
      * Dumps constant double to file stream in binary format.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     @Override

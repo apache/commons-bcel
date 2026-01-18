@@ -39,10 +39,10 @@ public final class ModuleMainClass extends Attribute {
     /**
      * Constructs object from input stream.
      *
-     * @param nameIndex Index in constant pool
-     * @param length Content length in bytes
-     * @param input Input stream
-     * @param constantPool Array of constants
+     * @param nameIndex Index in constant pool.
+     * @param length Content length in bytes.
+     * @param input Input stream.
+     * @param constantPool Array of constants.
      * @throws IOException if an I/O error occurs.
      */
     ModuleMainClass(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
@@ -51,10 +51,10 @@ public final class ModuleMainClass extends Attribute {
     }
 
     /**
-     * @param nameIndex Index in constant pool
-     * @param length Content length in bytes
-     * @param mainClassIndex Host class index
-     * @param constantPool Array of constants
+     * @param nameIndex Index in constant pool.
+     * @param length Content length in bytes.
+     * @param mainClassIndex Host class index.
+     * @param constantPool Array of constants.
      */
     public ModuleMainClass(final int nameIndex, final int length, final int mainClassIndex, final ConstantPool constantPool) {
         super(Const.ATTR_NEST_MEMBERS, nameIndex, length, constantPool);
@@ -75,7 +75,7 @@ public final class ModuleMainClass extends Attribute {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class. I.e.,
      * the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -83,7 +83,7 @@ public final class ModuleMainClass extends Attribute {
     }
 
     /**
-     * @return deep copy of this attribute
+     * @return deep copy of this attribute.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {
@@ -95,7 +95,7 @@ public final class ModuleMainClass extends Attribute {
     /**
      * Dumps ModuleMainClass attribute to file stream in binary format.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     @Override
@@ -112,14 +112,14 @@ public final class ModuleMainClass extends Attribute {
     }
 
     /**
-     * @param mainClassIndex the host class index
+     * @param mainClassIndex the host class index.
      */
     public void setHostClassIndex(final int mainClassIndex) {
         this.mainClassIndex = mainClassIndex;
     }
 
     /**
-     * @return String representation
+     * @return String representation.
      */
     @Override
     public String toString() {

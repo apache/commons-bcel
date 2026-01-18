@@ -46,7 +46,7 @@ public final class Synthetic extends Attribute {
 
     /**
      * @param nameIndex    Index in constant pool to CONSTANT_Utf8, which should represent the string "Synthetic".
-     * @param length       JVM Specification: "The value of the attribute_length item must be zero."
+     * @param length       JVM Specification: "The value of the attribute_length item must be zero.".
      * @param bytes        Attribute contents.
      * @param constantPool The constant pool this attribute is associated with.
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.8">JVM Specification: The Synthetic Attribute</a>
@@ -59,9 +59,9 @@ public final class Synthetic extends Attribute {
      * Constructs object from input stream.
      *
      * @param nameIndex    Index in constant pool to CONSTANT_Utf8.
-     * @param length       JVM Specification: "The value of the attribute_length item must be zero."
+     * @param length       JVM Specification: "The value of the attribute_length item must be zero.".
      * @param input        Input stream.
-     * @param constantPool Array of constants
+     * @param constantPool Array of constants.
      * @throws IOException if an I/O error occurs.
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.8">JVM Specification: The Synthetic Attribute</a>
      */
@@ -107,7 +107,7 @@ public final class Synthetic extends Attribute {
     }
 
     /**
-     * @param bytes
+     * @param bytes.
      */
     public void setBytes(final byte[] bytes) {
         if (bytes != null) {

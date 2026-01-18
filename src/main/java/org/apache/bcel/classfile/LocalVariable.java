@@ -66,7 +66,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * Constructs object from file stream.
      *
-     * @param file Input stream
+     * @param file Input stream.
      * @throws IOException if an I/O error occurs.
      */
     LocalVariable(final DataInput file, final ConstantPool constantPool) throws IOException {
@@ -124,7 +124,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -148,7 +148,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * Dumps local variable to file stream in binary format.
      *
-     * @param dataOutputStream Output file stream
+     * @param dataOutputStream Output file stream.
      * @throws IOException if an I/O error occurs.
      * @see java.io.FilterOutputStream#out
      */

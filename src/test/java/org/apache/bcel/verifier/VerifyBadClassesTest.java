@@ -64,8 +64,8 @@ class VerifyBadClassesTest {
      * Runs the given command synchronously in the given directory. If the command completes normally, returns a
      * {@link Status} object capturing the command, exit status, and output from the process.
      *
-     * @param command the command to be run in the process
-     * @return a String capturing the error output of executing the command
+     * @param command the command to be run in the process.
+     * @return a String capturing the error output of executing the command.
      * @throws ExecuteException if executor fails
      * @throws IOException if executor fails
      */

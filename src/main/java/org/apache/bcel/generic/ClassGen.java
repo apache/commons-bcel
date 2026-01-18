@@ -103,7 +103,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Constructs a new instance from an existing class.
      *
-     * @param clazz JavaClass object (for example read from file)
+     * @param clazz JavaClass object (for example read from file).
      */
     public ClassGen(final JavaClass clazz) {
         super(clazz.getAccessFlags());
@@ -143,11 +143,11 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Convenience constructor to set up some important values initially.
      *
-     * @param className fully qualified class name
-     * @param superClassName fully qualified superclass name
-     * @param fileName source file name
-     * @param accessFlags access qualifiers
-     * @param interfaces implemented interfaces
+     * @param className fully qualified class name.
+     * @param superClassName fully qualified superclass name.
+     * @param fileName source file name.
+     * @param accessFlags access qualifiers.
+     * @param interfaces implemented interfaces.
      */
     public ClassGen(final String className, final String superClassName, final String fileName, final int accessFlags, final String[] interfaces) {
         this(className, superClassName, fileName, accessFlags, interfaces, new ConstantPoolGen());
@@ -156,12 +156,12 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Convenience constructor to set up some important values initially.
      *
-     * @param className fully qualified class name
-     * @param superClassName fully qualified superclass name
-     * @param fileName source file name
-     * @param accessFlags access qualifiers
-     * @param interfaces implemented interfaces
-     * @param cp constant pool to use
+     * @param className fully qualified class name.
+     * @param superClassName fully qualified superclass name.
+     * @param fileName source file name.
+     * @param accessFlags access qualifiers.
+     * @param interfaces implemented interfaces.
+     * @param cp constant pool to use.
      */
     public ClassGen(final String className, final String superClassName, final String fileName, final int accessFlags, final String[] interfaces,
         final ConstantPoolGen cp) {
@@ -204,7 +204,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
      *
      * Add an empty constructor to this class that does nothing but calling super().
      *
-     * @param accessFlags rights for constructor
+     * @param accessFlags rights for constructor.
      */
     public void addEmptyConstructor(final int accessFlags) {
         final InstructionList il = new InstructionList();
@@ -219,7 +219,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Add a field to this class.
      *
-     * @param f field to add
+     * @param f field to add.
      */
     public void addField(final Field f) {
         fieldList.add(f);
@@ -228,7 +228,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Add an interface to this class, that is, this class has to implement it.
      *
-     * @param name interface to implement (fully qualified class name)
+     * @param name interface to implement (fully qualified class name).
      */
     public void addInterface(final String name) {
         interfaceList.add(name);
@@ -237,7 +237,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Add a method to this class.
      *
-     * @param m method to add
+     * @param m method to add.
      */
     public void addMethod(final Method m) {
         methodList.add(m);

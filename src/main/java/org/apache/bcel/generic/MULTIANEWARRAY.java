@@ -55,7 +55,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
      * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -70,7 +70,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
     /**
      * Also works for instructions whose stack effect depends on the constant pool entry they reference.
      *
-     * @return Number of words consumed from stack by this instruction
+     * @return Number of words consumed from stack by this instruction.
      */
     @Override
     public int consumeStack(final ConstantPoolGen cpg) {
@@ -80,7 +80,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
     /**
      * Dumps instruction as byte code to stream out.
      *
-     * @param out Output stream
+     * @param out Output stream.
      */
     @Override
     public void dump(final DataOutputStream out) throws IOException {
@@ -90,7 +90,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
     }
 
     /**
-     * @return number of dimensions to be created
+     * @return number of dimensions to be created.
      */
     public final short getDimensions() {
         return dimensions;
@@ -122,7 +122,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
     }
 
     /**
-     * @return mnemonic for instruction
+     * @return mnemonic for instruction.
      */
     @Override
     public String toString(final boolean verbose) {
@@ -130,7 +130,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
     }
 
     /**
-     * @return mnemonic for instruction with symbolic references resolved
+     * @return mnemonic for instruction with symbolic references resolved.
      */
     @Override
     public String toString(final ConstantPool cp) {

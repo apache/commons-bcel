@@ -26,8 +26,8 @@ public interface LoadClass {
     /**
      * Returns the {@link ObjectType} of the referenced class or interface that may be loaded and resolved.
      *
-     * @param cpg A ConstantPoolGen
-     * @return object type that may be loaded or null if a primitive is referenced
+     * @param cpg A ConstantPoolGen.
+     * @return object type that may be loaded or null if a primitive is referenced.
      */
     ObjectType getLoadClassType(ConstantPoolGen cpg);
 
@@ -37,7 +37,7 @@ public interface LoadClass {
      * is defined. If no class is forced to be loaded, {@code null} is returned. An example for this is an {@link NEWARRAY} instruction that creates an
      * {@code int[][]}.
      *
-     * @param cpg A ConstantPoolGen
+     * @param cpg A ConstantPoolGen.
      * @return the type associated with this instruction.
      * @see #getLoadClassType(ConstantPoolGen)
      */

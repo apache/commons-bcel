@@ -194,10 +194,10 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Create an invokedynamic instruction.
      *
-     * @param bootstrap_index index into the bootstrap_methods array
-     * @param name name of the called method
-     * @param ret_type return type of method
-     * @param argTypes argument types of method
+     * @param bootstrap_index index into the bootstrap_methods array.
+     * @param name name of the called method.
+     * @param ret_type return type of method.
+     * @param argTypes argument types of method.
      * @see Const
      */
 
@@ -631,10 +631,10 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Create a field instruction.
      *
-     * @param className name of the accessed class
-     * @param name name of the referenced field
-     * @param type type of field
-     * @param kind how to access, that is, GETFIELD, PUTFIELD, GETSTATIC, PUTSTATIC
+     * @param className name of the accessed class.
+     * @param name name of the referenced field.
+     * @param type type of field.
+     * @param kind how to access, that is, GETFIELD, PUTFIELD, GETSTATIC, PUTSTATIC.
      * @see Const
      */
     public FieldInstruction createFieldAccess(final String className, final String name, final Type type, final short kind) {
@@ -698,11 +698,11 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Create an invoke instruction. (Except for invokedynamic.)
      *
-     * @param className name of the called class
-     * @param name name of the called method
-     * @param retType return type of method
-     * @param argTypes argument types of method
-     * @param kind how to invoke, that is, INVOKEINTERFACE, INVOKESTATIC, INVOKEVIRTUAL, or INVOKESPECIAL
+     * @param className name of the called class.
+     * @param name name of the called method.
+     * @param retType return type of method.
+     * @param argTypes argument types of method.
+     * @param kind how to invoke, that is, INVOKEINTERFACE, INVOKESTATIC, INVOKEVIRTUAL, or INVOKESPECIAL.
      * @return the invoke instruction.
      * @see Const
      */
@@ -713,12 +713,12 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Create an invoke instruction. (Except for invokedynamic.)
      *
-     * @param className name of the called class
-     * @param name name of the called method
-     * @param retType return type of method
-     * @param argTypes argument types of method
-     * @param kind how to invoke: INVOKEINTERFACE, INVOKESTATIC, INVOKEVIRTUAL, or INVOKESPECIAL
-     * @param useInterface force use of InterfaceMethodref
+     * @param className name of the called class.
+     * @param name name of the called method.
+     * @param retType return type of method.
+     * @param argTypes argument types of method.
+     * @param kind how to invoke: INVOKEINTERFACE, INVOKESTATIC, INVOKEVIRTUAL, or INVOKESPECIAL.
+     * @param useInterface force use of InterfaceMethodref.
      * @return A new InvokeInstruction.
      * @since 6.5.0
      */

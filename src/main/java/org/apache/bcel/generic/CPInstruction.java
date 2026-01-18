@@ -62,7 +62,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
     /**
      * Dumps instruction as byte code to stream out.
      *
-     * @param out Output stream
+     * @param out Output stream.
      */
     @Override
     public void dump(final DataOutputStream out) throws IOException {
@@ -94,8 +94,8 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
     /**
      * Reads needed data (that is, index) from file.
      *
-     * @param bytes input stream
-     * @param wide wide prefix?
+     * @param bytes input stream.
+     * @param wide wide prefix?.
      */
     @Override
     protected void initFromFile(final ByteSequence bytes, final boolean wide) throws IOException {
@@ -122,8 +122,8 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
      * &lt;name of opcode&gt; "["&lt;opcode number&gt;"]" "("&lt;length of instruction&gt;")" "&lt;"&lt; constant pool
      * index&gt;"&gt;"
      *
-     * @param verbose long/short format switch
-     * @return mnemonic for instruction
+     * @param verbose long/short format switch.
+     * @return mnemonic for instruction.
      */
     @Override
     public String toString(final boolean verbose) {
@@ -131,7 +131,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
     }
 
     /**
-     * @return mnemonic for instruction with symbolic references resolved
+     * @return mnemonic for instruction with symbolic references resolved.
      */
     @Override
     public String toString(final ConstantPool cp) {

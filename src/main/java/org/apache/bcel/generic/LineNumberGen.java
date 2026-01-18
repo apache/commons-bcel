@@ -39,7 +39,7 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
     /**
      * Create a line number.
      *
-     * @param ih instruction handle to reference
+     * @param ih instruction handle to reference.
      */
     public LineNumberGen(final InstructionHandle ih, final int srcLine) {
         setInstruction(ih);
@@ -56,7 +56,7 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
     }
 
     /**
-     * @return true, if ih is target of this line number
+     * @return true, if ih is target of this line number.
      */
     @Override
     public boolean containsTarget(final InstructionHandle ih) {
@@ -92,8 +92,8 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
     }
 
     /**
-     * @param oldIh old target
-     * @param newIh new target
+     * @param oldIh old target.
+     * @param newIh new target.
      */
     @Override
     public void updateTarget(final InstructionHandle oldIh, final InstructionHandle newIh) {

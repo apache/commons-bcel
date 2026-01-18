@@ -70,7 +70,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     /**
      * Dumps instruction as byte code to stream out.
      *
-     * @param out Output stream
+     * @param out Output stream.
      */
     @Override
     public void dump(final DataOutputStream out) throws IOException {
@@ -109,7 +109,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      * bit incorrect, because ALOAD and ASTORE may work on every ReferenceType (including Type.NULL) and ASTORE may even
      * work on a ReturnaddressType.
      *
-     * @return type associated with the instruction
+     * @return type associated with the instruction.
      */
     @Override
     public Type getType(final ConstantPoolGen cp) {
@@ -203,8 +203,8 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      * &lt;name of opcode&gt; "["&lt;opcode number&gt;"]" "("&lt;length of instruction&gt;")" "&lt;"&lt; local variable
      * index&gt;"&gt;"
      *
-     * @param verbose long/short format switch
-     * @return mnemonic for instruction
+     * @param verbose long/short format switch.
+     * @return mnemonic for instruction.
      */
     @Override
     public String toString(final boolean verbose) {

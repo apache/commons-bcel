@@ -162,17 +162,17 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Constructor gets all contents as arguments.
      *
-     * @param classNameIndex Class name
-     * @param superclassNameIndex Superclass name
-     * @param fileName File name
-     * @param major Major compiler version
-     * @param minor Minor compiler version
-     * @param accessFlags Access rights defined by bit flags
-     * @param constantPool Array of constants
-     * @param interfaces Implemented interfaces
-     * @param fields Class fields
-     * @param methods Class methods
-     * @param attributes Class attributes
+     * @param classNameIndex Class name.
+     * @param superclassNameIndex Superclass name.
+     * @param fileName File name.
+     * @param major Major compiler version.
+     * @param minor Minor compiler version.
+     * @param accessFlags Access rights defined by bit flags.
+     * @param constantPool Array of constants.
+     * @param interfaces Implemented interfaces.
+     * @param fields Class fields.
+     * @param methods Class methods.
+     * @param attributes Class attributes.
      */
     public JavaClass(final int classNameIndex, final int superclassNameIndex, final String fileName, final int major, final int minor, final int accessFlags,
         final ConstantPool constantPool, final int[] interfaces, final Field[] fields, final Method[] methods, final Attribute[] attributes) {
@@ -182,19 +182,18 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Constructor gets all contents as arguments.
      *
-     * @param classNameIndex Index into constant pool referencing a ConstantClass that represents this class.
-     * @param superclassNameIndex Index into constant pool referencing a ConstantClass that represents this class's
-     *        superclass.
-     * @param fileName File name
-     * @param major Major compiler version
-     * @param minor Minor compiler version
-     * @param accessFlags Access rights defined by bit flags
-     * @param constantPool Array of constants
-     * @param interfaces Implemented interfaces
-     * @param fields Class fields
-     * @param methods Class methods
-     * @param attributes Class attributes
-     * @param source Read from file or generated in memory?
+     * @param classNameIndex      Index into constant pool referencing a ConstantClass that represents this class.
+     * @param superclassNameIndex Index into constant pool referencing a ConstantClass that represents this class's superclass.
+     * @param fileName            File name.
+     * @param major               Major compiler version.
+     * @param minor               Minor compiler version.
+     * @param accessFlags         Access rights defined by bit flags.
+     * @param constantPool        Array of constants.
+     * @param interfaces          Implemented interfaces.
+     * @param fields              Class fields.
+     * @param methods             Class methods.
+     * @param attributes          Class attributes.
+     * @param source              Read from file or generated in memory.
      */
     public JavaClass(final int classNameIndex, final int superclassNameIndex, final String fileName, final int major, final int minor, final int accessFlags,
         final ConstantPool constantPool, int[] interfaces, Field[] fields, Method[] methods, Attribute[] attributes, final byte source) {
@@ -257,7 +256,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -338,7 +337,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Dumps Java class to output stream in binary format.
      *
-     * @param file Output stream
+     * @param file Output stream.
      * @throws IOException if an I/O error occurs.
      */
     public void dump(final DataOutputStream file) throws IOException {
@@ -375,7 +374,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Dumps class to a file.
      *
-     * @param file Output file
+     * @param file Output file.
      * @throws IOException if an I/O error occurs.
      */
     public void dump(final File file) throws IOException {
@@ -394,7 +393,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Dumps Java class to output stream in binary format.
      *
-     * @param file Output stream
+     * @param file Output stream.
      * @throws IOException if an I/O error occurs.
      */
     public void dump(final OutputStream file) throws IOException {
@@ -404,7 +403,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Dumps class to a file named fileName.
      *
-     * @param fileName Output file name
+     * @param fileName Output file name.
      * @throws IOException if an I/O error occurs.
      */
     public void dump(final String fileName) throws IOException {

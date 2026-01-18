@@ -50,7 +50,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     /**
      * Also works for instructions whose stack effect depends on the constant pool entry they reference.
      *
-     * @return Number of words consumed from stack by this instruction
+     * @return Number of words consumed from stack by this instruction.
      */
     @Override
     public int consumeStack(final ConstantPoolGen cpg) {
@@ -79,7 +79,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     /**
      * This overrides the deprecated version as we know here that the referenced class may legally be an array.
      *
-     * @return name of the referenced class/interface
+     * @return name of the referenced class/interface.
      * @throws IllegalArgumentException if the referenced class is an array (this should not happen)
      */
     @Override
@@ -124,7 +124,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     /**
      * Also works for instructions whose stack effect depends on the constant pool entry they reference.
      *
-     * @return Number of words produced onto stack by this instruction
+     * @return Number of words produced onto stack by this instruction.
      */
     @Override
     public int produceStack(final ConstantPoolGen cpg) {
@@ -133,7 +133,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     }
 
     /**
-     * @return mnemonic for instruction with symbolic references resolved
+     * @return mnemonic for instruction with symbolic references resolved.
      */
     @Override
     public String toString(final ConstantPool cp) {

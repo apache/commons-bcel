@@ -176,8 +176,8 @@ public abstract class Utility {
     /**
      * Convert bit field of flags into string such as 'static final'.
      *
-     * @param accessFlags Access flags
-     * @return String representation of flags
+     * @param accessFlags Access flags.
+     * @return String representation of flags.
      */
     public static String accessToString(final int accessFlags) {
         return accessToString(accessFlags, false);
@@ -190,9 +190,9 @@ public abstract class Utility {
      * This is because SUN used the same value for the flags 'ACC_SUPER' and 'ACC_SYNCHRONIZED'.
      * </p>
      *
-     * @param accessFlags Access flags
-     * @param forClass access flags are for class qualifiers ?
-     * @return String representation of flags
+     * @param accessFlags Access flags.
+     * @param forClass access flags are for class qualifiers ?.
+     * @return String representation of flags.
      */
     public static String accessToString(final int accessFlags, final boolean forClass) {
         final StringBuilder buf = new StringBuilder();
@@ -221,15 +221,15 @@ public abstract class Utility {
     }
 
     /**
-     * @param accessFlags the class flags
-     * @return "class" or "interface", depending on the ACC_INTERFACE flag
+     * @param accessFlags the class flags.
+     * @return "class" or "interface", depending on the ACC_INTERFACE flag.
      */
     public static String classOrInterface(final int accessFlags) {
         return (accessFlags & Const.ACC_INTERFACE) != 0 ? "interface" : "class";
     }
 
     /**
-     * @return 'flag' with bit 'i' set to 0
+     * @return 'flag' with bit 'i' set to 0.
      */
     public static int clearBit(final int flag, final int i) {
         final int bit = pow2(i);
@@ -244,12 +244,12 @@ public abstract class Utility {
      * Disassemble a byte array of JVM byte codes starting from code line 'index' and return the disassembled string
      * representation. Decode only 'num' opcodes (including their operands), use -1 if you want to decompile everything.
      *
-     * @param code byte code array
-     * @param constantPool Array of constants
-     * @param index offset in 'code' array <EM>(number of opcodes, not bytes!)</EM>
-     * @param length number of opcodes to decompile, -1 for all
-     * @param verbose be verbose, for example print constant pool index
-     * @return String representation of byte codes
+     * @param code byte code array.
+     * @param constantPool Array of constants.
+     * @param index offset in 'code' array <EM>(number of opcodes, not bytes!)</EM>.
+     * @param length number of opcodes to decompile, -1 for all.
+     * @param verbose be verbose, for example print constant pool index.
+     * @return String representation of byte codes.
      */
     public static String codeToString(final byte[] code, final ConstantPool constantPool, final int index, final int length, final boolean verbose) {
         final StringBuilder buf = new StringBuilder(code.length * 20); // Should be sufficient // CHECKSTYLE IGNORE MagicNumber
@@ -276,10 +276,10 @@ public abstract class Utility {
     /**
      * Disassemble a stream of byte codes and return the string representation.
      *
-     * @param bytes stream of bytes
-     * @param constantPool Array of constants
-     * @param verbose be verbose, for example print constant pool index
-     * @return String representation of byte code
+     * @param bytes stream of bytes.
+     * @param constantPool Array of constants.
+     * @param verbose be verbose, for example print constant pool index.
+     * @return String representation of byte code.
      * @throws IOException if a failure from reading from the bytes argument occurs
      */
     public static String codeToString(final ByteSequence bytes, final ConstantPool constantPool, final boolean verbose) throws IOException {
@@ -540,8 +540,8 @@ public abstract class Utility {
     /**
      * Shorten long class names, <em>java/lang/String</em> becomes <em>String</em>.
      *
-     * @param str The long class name
-     * @return Compacted class name
+     * @param str The long class name.
+     * @return Compacted class name.
      */
     public static String compactClassName(final String str) {
         return compactClassName(str, true);
@@ -551,9 +551,9 @@ public abstract class Utility {
      * Shorten long class names, <em>java/lang/String</em> becomes <em>java.lang.String</em>, for example. If <em>chopit</em> is
      * <em>true</em> the prefix <em>java.lang</em> is also removed.
      *
-     * @param str The long class name
-     * @param chopit flag that determines whether chopping is executed or not
-     * @return Compacted class name
+     * @param str The long class name.
+     * @param chopit flag that determines whether chopping is executed or not.
+     * @return Compacted class name.
      */
     public static String compactClassName(final String str, final boolean chopit) {
         return compactClassName(str, "java.lang.", chopit);
@@ -563,10 +563,10 @@ public abstract class Utility {
      * Shorten long class name <em>str</em>, that is, chop off the <em>prefix</em>, if the class name starts with this string
      * and the flag <em>chopit</em> is true. Slashes <em>/</em> are converted to dots <em>.</em>.
      *
-     * @param str The long class name
-     * @param prefix The prefix the get rid off
-     * @param chopit flag that determines whether chopping is executed or not
-     * @return Compacted class name
+     * @param str The long class name.
+     * @param prefix The prefix the get rid off.
+     * @param chopit flag that determines whether chopping is executed or not.
+     * @return Compacted class name.
      */
     public static String compactClassName(String str, final String prefix, final boolean chopit) {
         final int len = prefix.length();
@@ -642,8 +642,8 @@ public abstract class Utility {
     /**
      * Decode a string back to a byte array.
      *
-     * @param s the string to convert
-     * @param uncompress use gzip to uncompress the stream of bytes
+     * @param s the string to convert.
+     * @param uncompress use gzip to uncompress the stream of bytes.
      * @throws IOException if there's a gzip exception
      */
     public static byte[] decode(final String s, final boolean uncompress) throws IOException {
@@ -682,8 +682,8 @@ public abstract class Utility {
      * This operation inflates the original byte array by roughly 40-50%
      * </p>
      *
-     * @param bytes the byte array to convert
-     * @param compress use gzip to minimize string
+     * @param bytes the byte array to convert.
+     * @param compress use gzip to minimize string.
      * @throws IOException if there's a gzip exception
      */
     public static String encode(byte[] bytes, final boolean compress) throws IOException {
@@ -707,11 +707,11 @@ public abstract class Utility {
     /**
      * Fillup char with up to length characters with char 'fill' and justify it left or right.
      *
-     * @param str string to format
-     * @param length length of desired string
-     * @param leftJustify format left or right
-     * @param fill fill character
-     * @return formatted string
+     * @param str string to format.
+     * @param length length of desired string.
+     * @param leftJustify format left or right.
+     * @param fill fill character.
+     * @return formatted string.
      */
     public static String fillup(final String str, final int length, final boolean leftJustify, final char fill) {
         final int len = length - str.length();
@@ -725,11 +725,11 @@ public abstract class Utility {
     /**
      * Return a string for an integer justified left or right and filled up with 'fill' characters if necessary.
      *
-     * @param i integer to format
-     * @param length length of desired string
-     * @param leftJustify format left or right
-     * @param fill fill character
-     * @return formatted int
+     * @param i integer to format.
+     * @param length length of desired string.
+     * @param leftJustify format left or right.
+     * @param fill fill character.
+     * @return formatted int.
      */
     public static String format(final int i, final int length, final boolean leftJustify, final char fill) {
         return fillup(Integer.toString(i), length, leftJustify, fill);
@@ -763,8 +763,8 @@ public abstract class Utility {
      * Parse Java type such as "char", or "java.lang.String[]" and return the signature in byte code format, for example "C" or
      * "[Ljava/lang/String;" respectively.
      *
-     * @param type Java type
-     * @return byte code signature
+     * @param type Java type.
+     * @return byte code signature.
      */
     public static String getSignature(String type) {
         final StringBuilder buf = new StringBuilder();
@@ -819,15 +819,15 @@ public abstract class Utility {
     }
 
     /**
-     * @param ch the character to test if it's part of an identifier
-     * @return true, if character is one of (a, ... z, A, ... Z, 0, ... 9, _)
+     * @param ch the character to test if it's part of an identifier.
+     * @return true, if character is one of (a, ... z, A, ... Z, 0, ... 9, _).
      */
     public static boolean isJavaIdentifierPart(final char ch) {
         return ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z' || ch >= '0' && ch <= '9' || ch == '_';
     }
 
     /**
-     * @return true, if bit 'i' in 'flag' is set
+     * @return true, if bit 'i' in 'flag' is set.
      */
     public static boolean isSet(final int flag, final int i) {
         return (flag & pow2(i)) != 0;
@@ -836,8 +836,8 @@ public abstract class Utility {
     /**
      * Converts argument list portion of method signature to string with all class names compacted.
      *
-     * @param signature Method signature
-     * @return String Array of argument types
+     * @param signature Method signature.
+     * @return String Array of argument types.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     public static String[] methodSignatureArgumentTypes(final String signature) throws ClassFormatException {
@@ -847,9 +847,9 @@ public abstract class Utility {
     /**
      * Converts argument list portion of method signature to string.
      *
-     * @param signature Method signature
-     * @param chopit flag that determines whether chopping is executed or not
-     * @return String Array of argument types
+     * @param signature Method signature.
+     * @param chopit flag that determines whether chopping is executed or not.
+     * @return String Array of argument types.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     public static String[] methodSignatureArgumentTypes(final String signature, final boolean chopit) throws ClassFormatException {
@@ -875,8 +875,8 @@ public abstract class Utility {
     /**
      * Converts return type portion of method signature to string with all class names compacted.
      *
-     * @param signature Method signature
-     * @return String representation of method return type
+     * @param signature Method signature.
+     * @return String representation of method return type.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     public static String methodSignatureReturnType(final String signature) throws ClassFormatException {
@@ -886,9 +886,9 @@ public abstract class Utility {
     /**
      * Converts return type portion of method signature to string.
      *
-     * @param signature Method signature
-     * @param chopit flag that determines whether chopping is executed or not
-     * @return String representation of method return type
+     * @param signature Method signature.
+     * @param chopit flag that determines whether chopping is executed or not.
+     * @return String representation of method return type.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     public static String methodSignatureReturnType(final String signature, final boolean chopit) throws ClassFormatException {
@@ -907,10 +907,10 @@ public abstract class Utility {
     /**
      * Converts method signature to string with all class names compacted.
      *
-     * @param signature to convert
-     * @param name of method
-     * @param access flags of method
-     * @return Human readable signature
+     * @param signature to convert.
+     * @param name of method.
+     * @param access flags of method.
+     * @return Human readable signature.
      */
     public static String methodSignatureToString(final String signature, final String name, final String access) {
         return methodSignatureToString(signature, name, access, true);
@@ -919,11 +919,11 @@ public abstract class Utility {
     /**
      * Converts method signature to string.
      *
-     * @param signature to convert
-     * @param name of method
-     * @param access flags of method
-     * @param chopit flag that determines whether chopping is executed or not
-     * @return Human readable signature
+     * @param signature to convert.
+     * @param name of method.
+     * @param access flags of method.
+     * @param chopit flag that determines whether chopping is executed or not.
+     * @return Human readable signature.
      */
     public static String methodSignatureToString(final String signature, final String name, final String access, final boolean chopit) {
         return methodSignatureToString(signature, name, access, chopit, null);
@@ -933,12 +933,12 @@ public abstract class Utility {
      * This method converts a method signature string into a Java type declaration like 'void main(String[])' and throws a
      * 'ClassFormatException' when the parsed type is invalid.
      *
-     * @param signature Method signature
-     * @param name Method name
-     * @param access Method access rights
-     * @param chopit flag that determines whether chopping is executed or not
-     * @param vars the LocalVariableTable for the method
-     * @return Java type declaration
+     * @param signature Method signature.
+     * @param name Method name.
+     * @param access Method access rights.
+     * @param chopit flag that determines whether chopping is executed or not.
+     * @param vars the LocalVariableTable for the method.
+     * @return Java type declaration.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     public static String methodSignatureToString(final String signature, final String name, final String access, final boolean chopit,
@@ -991,9 +991,9 @@ public abstract class Utility {
     /**
      * Converts string containing the method return and argument types to a byte code method signature.
      *
-     * @param ret Return type of method
-     * @param argv Types of method arguments
-     * @return Byte code representation of method signature
+     * @param ret Return type of method.
+     * @param argv Types of method arguments.
+     * @return Byte code representation of method signature.
      * @throws ClassFormatException if the signature is for Void
      */
     public static String methodTypeToSignature(final String ret, final String[] argv) throws ClassFormatException {
@@ -1016,8 +1016,8 @@ public abstract class Utility {
     /**
      * Converts '.'s to '/'s.
      *
-     * @param name Source
-     * @return converted value
+     * @param name Source.
+     * @return converted value.
      * @since 6.7.0
      */
     public static String packageToPath(final String name) {
@@ -1082,10 +1082,10 @@ public abstract class Utility {
     /**
      * Replace all occurrences of <em>old</em> in <em>str</em> with <em>new</em>.
      *
-     * @param str String to permute
-     * @param old String to be replaced
-     * @param new_ Replacement string
-     * @return new String object
+     * @param str String to permute.
+     * @param old String to be replaced.
+     * @param new_ Replacement string.
+     * @return new String object.
      */
     public static String replace(String str, final String old, final String new_) {
         int index;
@@ -1126,7 +1126,7 @@ public abstract class Utility {
     }
 
     /**
-     * @return 'flag' with bit 'i' set to 1
+     * @return 'flag' with bit 'i' set to 1.
      */
     public static int setBit(final int flag, final int i) {
         return flag | pow2(i);
@@ -1136,8 +1136,8 @@ public abstract class Utility {
      * Converts a signature to a string with all class names compacted. Class, Method and Type signatures are supported.
      * Enum and Interface signatures are not supported.
      *
-     * @param signature signature to convert
-     * @return String containg human readable signature
+     * @param signature signature to convert.
+     * @return String containg human readable signature.
      */
     public static String signatureToString(final String signature) {
         return signatureToString(signature, true);
@@ -1147,9 +1147,9 @@ public abstract class Utility {
      * Converts a signature to a string. Class, Method and Type signatures are supported. Enum and Interface signatures are
      * not supported.
      *
-     * @param signature signature to convert
-     * @param chopit flag that determines whether chopping is executed or not
-     * @return String containg human readable signature
+     * @param signature signature to convert.
+     * @param chopit flag that determines whether chopping is executed or not.
+     * @return String containg human readable signature.
      */
     public static String signatureToString(final String signature, final boolean chopit) {
         String type = "";
@@ -1198,7 +1198,7 @@ public abstract class Utility {
     /**
      * Convert bytes into hexadecimal string
      *
-     * @param bytes an array of bytes to convert to hexadecimal
+     * @param bytes an array of bytes to convert to hexadecimal.
      * @return bytes as hexadecimal string, for example 00 fa 12 ...
      */
     public static String toHexString(final byte[] bytes) {
@@ -1220,8 +1220,8 @@ public abstract class Utility {
     /**
      * Return type of method signature as a byte value as defined in <em>Constants</em>
      *
-     * @param signature in format described above
-     * @return type of method signature
+     * @param signature in format described above.
+     * @return type of method signature.
      * @see Const
      * @throws ClassFormatException if signature is not a method signature
      */
@@ -1240,8 +1240,8 @@ public abstract class Utility {
     /**
      * Return type of signature as a byte value as defined in <em>Constants</em>
      *
-     * @param signature in format described above
-     * @return type of signature
+     * @param signature in format described above.
+     * @return type of signature.
      * @see Const
      * @throws ClassFormatException if signature isn't a known type
      */
@@ -1286,9 +1286,9 @@ public abstract class Utility {
     /**
      * Converts a type parameter list signature to a string.
      *
-     * @param signature signature to convert
-     * @param chopit flag that determines whether chopping is executed or not
-     * @return String containg human readable signature
+     * @param signature signature to convert.
+     * @param chopit flag that determines whether chopping is executed or not.
+     * @return String containg human readable signature.
      */
     private static String typeParamTypesToString(final String signature, final boolean chopit) {
         // The first character is guranteed to be '<'
@@ -1310,9 +1310,9 @@ public abstract class Utility {
     /**
      * Converts a type parameter signature to a string.
      *
-     * @param signature signature to convert
-     * @param chopit flag that determines whether chopping is executed or not
-     * @return String containg human readable signature
+     * @param signature signature to convert.
+     * @param chopit flag that determines whether chopping is executed or not.
+     * @return String containg human readable signature.
      */
     private static String typeParamTypeToString(final String signature, final boolean chopit) {
         int index = signature.indexOf(':');
@@ -1342,10 +1342,10 @@ public abstract class Utility {
     /**
      * Converts a list of type signatures to a string.
      *
-     * @param signature signature to convert
-     * @param chopit flag that determines whether chopping is executed or not
-     * @param term character indicating the end of the list
-     * @return String containg human readable signature
+     * @param signature signature to convert.
+     * @param chopit flag that determines whether chopping is executed or not.
+     * @param term character indicating the end of the list.
+     * @return String containg human readable signature.
      */
     private static String typeSignaturesToString(final String signature, final boolean chopit, final char term) {
         // The first character will be an 'open' that matches the 'close' contained in term.
@@ -1371,9 +1371,9 @@ public abstract class Utility {
      * This method converts a type signature string into a Java type declaration such as 'String[]' and throws a
      * 'ClassFormatException' when the parsed type is invalid.
      *
-     * @param signature type signature
-     * @param chopit flag that determines whether chopping is executed or not
-     * @return string containing human readable type signature
+     * @param signature type signature.
+     * @param chopit flag that determines whether chopping is executed or not.
+     * @return string containing human readable type signature.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      * @since 6.4.0
      */

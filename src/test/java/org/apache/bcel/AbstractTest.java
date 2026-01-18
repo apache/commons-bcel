@@ -79,8 +79,8 @@ public abstract class AbstractTest {
     }
 
     /**
-     * @param name
-     * @return Path to file under the TESTDATA directory
+     * @param name.
+     * @return Path to file under the TESTDATA directory.
      */
     protected File createTestdataFile(final String name) {
         return new File(TESTDATA, name);
@@ -89,7 +89,7 @@ public abstract class AbstractTest {
     /**
      * Deletes a file under the TESTDATA directory
      *
-     * @param name
+     * @param name.
      * @return See {@link File#delete()}.
      */
     protected boolean delete(final String name) {
@@ -99,9 +99,9 @@ public abstract class AbstractTest {
     /**
      * Deletes a directory and file under the TESTDATA directory
      *
-     * @param dir
-     * @param name
-     * @return true if the file was deleted
+     * @param dir.
+     * @param name.
+     * @return true if the file was deleted.
      */
     protected boolean delete(final String dir, final String name) {
         // The parameter is relative to the TESTDATA dir

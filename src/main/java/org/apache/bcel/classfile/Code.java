@@ -157,8 +157,7 @@ public final class Code extends Attribute {
     }
 
     /**
-     * @return the full size of this code attribute, minus its first 6 bytes, including the size of all its contained
-     *         attributes
+     * @return the full size of this code attribute, minus its first 6 bytes, including the size of all its contained attributes.
      */
     private int calculateLength() {
         int len = 0;

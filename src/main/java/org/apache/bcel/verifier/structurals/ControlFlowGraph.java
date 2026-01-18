@@ -364,7 +364,7 @@ public class ControlFlowGraph {
     /**
      * A Control Flow Graph; with additional JustIce checks
      *
-     * @param methodGen the method generator instance
+     * @param methodGen the method generator instance.
      */
     public ControlFlowGraph(final MethodGen methodGen) {
         this(methodGen, true);
@@ -373,8 +373,8 @@ public class ControlFlowGraph {
     /**
      * A Control Flow Graph.
      *
-     * @param methodGen the method generator instance
-     * @param enableJustIceCheck if true, additional JustIce checks are performed
+     * @param methodGen the method generator instance.
+     * @param enableJustIceCheck if true, additional JustIce checks are performed.
      * @since 6.0
      */
     public ControlFlowGraph(final MethodGen methodGen, final boolean enableJustIceCheck) {

@@ -38,7 +38,7 @@ public abstract class Repository {
     /**
      * Adds clazz to repository if there isn't an equally named class already in there.
      *
-     * @return old entry in repository
+     * @return old entry in repository.
      */
     public static JavaClass addClass(final JavaClass clazz) {
         final JavaClass old = repository.findClass(clazz.getClassName());
@@ -73,14 +73,14 @@ public abstract class Repository {
     }
 
     /**
-     * @return currently used repository instance
+     * @return currently used repository instance.
      */
     public static org.apache.bcel.util.Repository getRepository() {
         return repository;
     }
 
     /**
-     * @return list of super classes of clazz in ascending order, that is, Object is always the last element
+     * @return list of super classes of clazz in ascending order, that is, Object is always the last element.
      * @throws ClassNotFoundException if any of the superclasses can't be found
      */
     public static JavaClass[] getSuperClasses(final JavaClass clazz) throws ClassNotFoundException {
@@ -96,7 +96,7 @@ public abstract class Repository {
     }
 
     /**
-     * @return true, if clazz is an implementation of interface inter
+     * @return true, if clazz is an implementation of interface inter.
      * @throws ClassNotFoundException if any superclasses or superinterfaces of clazz can't be found
      */
     public static boolean implementationOf(final JavaClass clazz, final JavaClass inter) throws ClassNotFoundException {
@@ -104,7 +104,7 @@ public abstract class Repository {
     }
 
     /**
-     * @return true, if clazz is an implementation of interface inter
+     * @return true, if clazz is an implementation of interface inter.
      * @throws ClassNotFoundException if inter or any superclasses or superinterfaces of clazz can't be found
      */
     public static boolean implementationOf(final JavaClass clazz, final String inter) throws ClassNotFoundException {
@@ -112,7 +112,7 @@ public abstract class Repository {
     }
 
     /**
-     * @return true, if clazz is an implementation of interface inter
+     * @return true, if clazz is an implementation of interface inter.
      * @throws ClassNotFoundException if clazz or any superclasses or superinterfaces of clazz can't be found
      */
     public static boolean implementationOf(final String clazz, final JavaClass inter) throws ClassNotFoundException {
@@ -120,7 +120,7 @@ public abstract class Repository {
     }
 
     /**
-     * @return true, if clazz is an implementation of interface inter
+     * @return true, if clazz is an implementation of interface inter.
      * @throws ClassNotFoundException if clazz, inter, or any superclasses or superinterfaces of clazz can't be found
      */
     public static boolean implementationOf(final String clazz, final String inter) throws ClassNotFoundException {
@@ -130,7 +130,7 @@ public abstract class Repository {
     /**
      * Equivalent to runtime "instanceof" operator.
      *
-     * @return true, if clazz is an instance of superclass
+     * @return true, if clazz is an instance of superclass.
      * @throws ClassNotFoundException if any superclasses or superinterfaces of clazz can't be found
      */
     public static boolean instanceOf(final JavaClass clazz, final JavaClass superclass) throws ClassNotFoundException {
@@ -138,7 +138,7 @@ public abstract class Repository {
     }
 
     /**
-     * @return true, if clazz is an instance of superclass
+     * @return true, if clazz is an instance of superclass.
      * @throws ClassNotFoundException if superclass can't be found
      */
     public static boolean instanceOf(final JavaClass clazz, final String superclass) throws ClassNotFoundException {
@@ -146,7 +146,7 @@ public abstract class Repository {
     }
 
     /**
-     * @return true, if clazz is an instance of superclass
+     * @return true, if clazz is an instance of superclass.
      * @throws ClassNotFoundException if clazz can't be found
      */
     public static boolean instanceOf(final String clazz, final JavaClass superclass) throws ClassNotFoundException {
@@ -154,7 +154,7 @@ public abstract class Repository {
     }
 
     /**
-     * @return true, if clazz is an instance of superclass
+     * @return true, if clazz is an instance of superclass.
      * @throws ClassNotFoundException if either clazz or superclass can't be found
      */
     public static boolean instanceOf(final String clazz, final String superclass) throws ClassNotFoundException {
@@ -165,7 +165,7 @@ public abstract class Repository {
      * Tries to find class source using the internal repository instance.
      *
      * @see Class
-     * @return JavaClass object for given runtime class
+     * @return JavaClass object for given runtime class.
      * @throws ClassNotFoundException if the class could not be found or parsed correctly
      */
     public static JavaClass lookupClass(final Class<?> clazz) throws ClassNotFoundException {
@@ -175,7 +175,7 @@ public abstract class Repository {
     /**
      * Lookups class somewhere found on your CLASSPATH, or whereever the repository instance looks for it.
      *
-     * @return class object for given fully qualified class name
+     * @return class object for given fully qualified class name.
      * @throws ClassNotFoundException if the class could not be found or parsed correctly
      */
     public static JavaClass lookupClass(final String className) throws ClassNotFoundException {

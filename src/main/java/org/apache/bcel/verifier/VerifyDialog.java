@@ -187,7 +187,7 @@ public class VerifyDialog extends JDialog {
     /**
      * Use this constructor if you want a possibility to verify other class files than {@link Object}.
      *
-     * @param fullyQualifiedClassName "java.lang.String"
+     * @param fullyQualifiedClassName "java.lang.String".
      */
     public VerifyDialog(String fullyQualifiedClassName) {
         final int dotclasspos = fullyQualifiedClassName.lastIndexOf(JavaClass.EXTENSION);

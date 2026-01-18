@@ -72,7 +72,7 @@ public abstract class FieldInstruction extends FieldOrMethod {
     }
 
     /**
-     * @return return type of referenced field
+     * @return return type of referenced field.
      */
     @Override
     public Type getType(final ConstantPoolGen cpg) {
@@ -80,7 +80,7 @@ public abstract class FieldInstruction extends FieldOrMethod {
     }
 
     /**
-     * @return mnemonic for instruction with symbolic references resolved
+     * @return mnemonic for instruction with symbolic references resolved.
      */
     @Override
     public String toString(final ConstantPool cp) {

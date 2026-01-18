@@ -252,14 +252,14 @@ public class MethodGen extends FieldGenOrMethodGen {
      * For example one may not add a local variable and later remove the instructions it refers to without causing havoc. It
      * is safe however if you remove that local variable, too.
      *
-     * @param accessFlags access qualifiers
-     * @param returnType method type
-     * @param argTypes argument types
-     * @param argNames argument names (if this is null, default names will be provided for them)
-     * @param methodName name of method
-     * @param className class name containing this method (may be null, if you don't care)
-     * @param il instruction list associated with this method, may be null only for abstract or native methods
-     * @param cp constant pool
+     * @param accessFlags access qualifiers.
+     * @param returnType method type.
+     * @param argTypes argument types.
+     * @param argNames argument names (if this is null, default names will be provided for them).
+     * @param methodName name of method.
+     * @param className class name containing this method (may be null, if you don't care).
+     * @param il instruction list associated with this method, may be null only for abstract or native methods.
+     * @param cp constant pool.
      */
     public MethodGen(final int accessFlags, final Type returnType, final Type[] argTypes, String[] argNames, final String methodName, final String className,
         final InstructionList il, final ConstantPoolGen cp) {
@@ -313,9 +313,9 @@ public class MethodGen extends FieldGenOrMethodGen {
     /**
      * Instantiate from existing method.
      *
-     * @param method method
-     * @param className class name containing this method
-     * @param cp constant pool
+     * @param method method.
+     * @param className class name containing this method.
+     * @param cp constant pool.
      */
     public MethodGen(final Method method, final String className, final ConstantPoolGen cp) {
         this(method.getAccessFlags(), Type.getReturnType(method.getSignature()), Type.getArgumentTypes(method.getSignature()),
@@ -394,7 +394,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * attributes, where the former two will be generated automatically and the latter is used for the MIDP only. Other
      * attributes will be ignored by the JVM but do no harm.
      *
-     * @param a attribute to be added
+     * @param a attribute to be added.
      */
     public void addCodeAttribute(final Attribute a) {
         codeAttrsList.add(a);
@@ -403,7 +403,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     /**
      * Add an exception possibly thrown by this method.
      *
-     * @param className (fully qualified) name of exception
+     * @param className (fully qualified) name of exception.
      */
     public void addException(final String className) {
         throwsList.add(className);
@@ -413,11 +413,11 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Add an exception handler, that is, specify region where a handler is active and an instruction where the actual handling
      * is done.
      *
-     * @param startPc Start of region (inclusive)
-     * @param endPc End of region (inclusive)
-     * @param handlerPc Where handling is done
-     * @param catchType class type of handled exception or null if any exception is handled
-     * @return new exception handler object
+     * @param startPc Start of region (inclusive).
+     * @param endPc End of region (inclusive).
+     * @param handlerPc Where handling is done.
+     * @param catchType class type of handled exception or null if any exception is handled.
+     * @return new exception handler object.
      */
     public CodeExceptionGen addExceptionHandler(final InstructionHandle startPc, final InstructionHandle endPc, final InstructionHandle handlerPc,
         final ObjectType catchType) {
@@ -446,11 +446,11 @@ public class MethodGen extends FieldGenOrMethodGen {
     /**
      * Adds a local variable to this method and assigns an index automatically.
      *
-     * @param name variable name
-     * @param type variable type
-     * @param start from where the variable is valid, if this is null, it is valid from the start
-     * @param end until where the variable is valid, if this is null, it is valid to the end
-     * @return new local variable object
+     * @param name variable name.
+     * @param type variable type.
+     * @param start from where the variable is valid, if this is null, it is valid from the start.
+     * @param end until where the variable is valid, if this is null, it is valid to the end.
+     * @return new local variable object.
      * @see LocalVariable
      */
     public LocalVariableGen addLocalVariable(final String name, final Type type, final InstructionHandle start, final InstructionHandle end) {
@@ -460,12 +460,12 @@ public class MethodGen extends FieldGenOrMethodGen {
     /**
      * Adds a local variable to this method.
      *
-     * @param name variable name
-     * @param type variable type
-     * @param slot the index of the local variable, if type is long or double, the next available index is slot+2
-     * @param start from where the variable is valid
-     * @param end until where the variable is valid
-     * @return new local variable object
+     * @param name variable name.
+     * @param type variable type.
+     * @param slot the index of the local variable, if type is long or double, the next available index is slot+2.
+     * @param start from where the variable is valid.
+     * @param end until where the variable is valid.
+     * @return new local variable object.
      * @see LocalVariable
      */
     public LocalVariableGen addLocalVariable(final String name, final Type type, final int slot, final InstructionHandle start, final InstructionHandle end) {
@@ -475,13 +475,13 @@ public class MethodGen extends FieldGenOrMethodGen {
     /**
      * Adds a local variable to this method.
      *
-     * @param name variable name
-     * @param type variable type
-     * @param slot the index of the local variable, if type is long or double, the next available index is slot+2
-     * @param start from where the variable is valid
-     * @param end until where the variable is valid
-     * @param origIndex the index of the local variable prior to any modifications
-     * @return new local variable object
+     * @param name variable name.
+     * @param type variable type.
+     * @param slot the index of the local variable, if type is long or double, the next available index is slot+2.
+     * @param start from where the variable is valid.
+     * @param end until where the variable is valid.
+     * @param origIndex the index of the local variable prior to any modifications.
+     * @return new local variable object.
      * @see LocalVariable
      */
     public LocalVariableGen addLocalVariable(final String name, final Type type, final int slot, final InstructionHandle start, final InstructionHandle end,
@@ -738,7 +738,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * @return code exceptions for 'Code' attribute
+     * @return code exceptions for 'Code' attribute.
      */
     private CodeException[] getCodeExceptions() {
         final int size = exceptionList.size();
@@ -877,7 +877,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Gets method object. Never forget to call setMaxStack() or setMaxStack(max), respectively, before calling this method
      * (the same applies for max locals).
      *
-     * @return method object
+     * @return method object.
      */
     public Method getMethod() {
         final String signature = getSignature();

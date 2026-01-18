@@ -83,8 +83,8 @@ public abstract class Attribute implements Cloneable, Node {
      * Add an Attribute reader capable of parsing (user-defined) attributes named "name". You should not add readers for the
      * standard attributes such as "LineNumberTable", because those are handled internally.
      *
-     * @param name the name of the attribute as stored in the class file
-     * @param unknownAttributeReader the reader object
+     * @param name the name of the attribute as stored in the class file.
+     * @param unknownAttributeReader the reader object.
      */
     public static void addAttributeReader(final String name, final UnknownAttributeReader unknownAttributeReader) {
         READERS.put(name, unknownAttributeReader);
@@ -107,9 +107,9 @@ public abstract class Attribute implements Cloneable, Node {
      *
      * @see Field
      * @see Method
-     * @param dataInput Input stream
-     * @param constantPool Array of constants
-     * @return Attribute
+     * @param dataInput Input stream.
+     * @param constantPool Array of constants.
+     * @return Attribute.
      * @throws IOException if an I/O error occurs.
      * @since 6.0
      */
@@ -211,9 +211,9 @@ public abstract class Attribute implements Cloneable, Node {
      *
      * @see Field
      * @see Method
-     * @param dataInputStream Input stream
-     * @param constantPool Array of constants
-     * @return Attribute
+     * @param dataInputStream Input stream.
+     * @param constantPool Array of constants.
+     * @return Attribute.
      * @throws IOException if an I/O error occurs.
      */
     public static Attribute readAttribute(final DataInputStream dataInputStream, final ConstantPool constantPool) throws IOException {
@@ -242,7 +242,7 @@ public abstract class Attribute implements Cloneable, Node {
     protected int length; // Content length of attribute field TODO make private (has getter & setter).
 
     /**
-     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter.
      */
     @java.lang.Deprecated
     protected byte tag; // Tag to distinguish subclasses TODO make private & final; supposed to be immutable.

@@ -34,7 +34,7 @@ public abstract class JsrInstruction extends BranchInstruction implements Uncond
     }
 
     /**
-     * @return return address type
+     * @return return address type.
      */
     @Override
     public Type getType(final ConstantPoolGen cp) {

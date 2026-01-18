@@ -79,8 +79,8 @@ public abstract class Type {
     /**
      * Convert arguments of a method (signature) to an array of Type objects.
      *
-     * @param signature signature string such as (Ljava/lang/String;)V
-     * @return array of argument types
+     * @param signature signature string such as (Ljava/lang/String;)V.
+     * @return array of argument types.
      */
     public static Type[] getArgumentTypes(final String signature) {
         final List<Type> vec = new ArrayList<>();
@@ -127,8 +127,8 @@ public abstract class Type {
     /**
      * Convert type to Java method signature, for example int[] f(java.lang.String x) becomes (Ljava/lang/String;)[I
      *
-     * @param returnType what the method returns
-     * @param argTypes what are the argument types
+     * @param returnType what the method returns.
+     * @param argTypes what are the argument types.
      * @return method signature for given type(s).
      */
     public static String getMethodSignature(final Type returnType, final Type[] argTypes) {
@@ -146,8 +146,8 @@ public abstract class Type {
     /**
      * Convert return value of a method (signature) to a Type object.
      *
-     * @param signature signature string such as (Ljava/lang/String;)V
-     * @return return type
+     * @param signature signature string such as (Ljava/lang/String;)V.
+     * @return return type.
      */
     public static Type getReturnType(final String signature) {
         try {
@@ -178,8 +178,8 @@ public abstract class Type {
     /**
      * Convert runtime {@link Class} to BCEL Type object.
      *
-     * @param cls Java class
-     * @return corresponding Type object
+     * @param cls Java class.
+     * @return corresponding Type object.
      */
     public static Type getType(final Class<?> cls) {
         Objects.requireNonNull(cls, "cls");
@@ -225,8 +225,8 @@ public abstract class Type {
     /**
      * Convert signature to a Type object.
      *
-     * @param signature signature string such as Ljava/lang/String;
-     * @return type object
+     * @param signature signature string such as Ljava/lang/String;.
+     * @return type object.
      */
     public static Type getType(final String signature) throws StringIndexOutOfBoundsException {
         final byte type = Utility.typeOfSignature(signature);
@@ -257,8 +257,8 @@ public abstract class Type {
     /**
      * Convert runtime {@code java.lang.Class[]} to BCEL Type objects.
      *
-     * @param classes an array of runtime class objects
-     * @return array of corresponding Type objects
+     * @param classes an array of runtime class objects.
+     * @return array of corresponding Type objects.
      */
     public static Type[] getTypes(final Class<?>[] classes) {
         final Type[] ret = new Type[classes.length];
@@ -335,7 +335,7 @@ public abstract class Type {
     }
 
     /**
-     * @return whether the Types are equal
+     * @return whether the Types are equal.
      */
     @Override
     public boolean equals(final Object o) {
@@ -415,7 +415,7 @@ public abstract class Type {
     }
 
     /**
-     * @return Type string, for example 'int[]'
+     * @return Type string, for example 'int[]'.
      */
     @Override
     public String toString() {

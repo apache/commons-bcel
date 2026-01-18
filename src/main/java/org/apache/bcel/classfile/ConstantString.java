@@ -45,7 +45,7 @@ public final class ConstantString extends Constant implements ConstantObject {
     /**
      * Initialize instance from file data.
      *
-     * @param file Input stream
+     * @param file Input stream.
      * @throws IOException if an I/O error occurs.
      */
     ConstantString(final DataInput file) throws IOException {
@@ -66,7 +66,7 @@ public final class ConstantString extends Constant implements ConstantObject {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -76,7 +76,7 @@ public final class ConstantString extends Constant implements ConstantObject {
     /**
      * Dumps constant field reference to file stream in binary format.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     @Override

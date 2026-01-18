@@ -39,12 +39,12 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
     /**
      * Constructs an instance.
      *
-     * @param annotationType   the subclass type of the annotation
-     * @param nameIndex        Index pointing to the name <em>Code</em>
-     * @param length           Content length in bytes
-     * @param annotationTable  the actual annotations
-     * @param constantPool     Array of constants
-     * @param isRuntimeVisible whether this Annotation visible at runtime
+     * @param annotationType   the subclass type of the annotation.
+     * @param nameIndex        Index pointing to the name <em>Code</em>.
+     * @param length           Content length in bytes.
+     * @param annotationTable  the actual annotations.
+     * @param constantPool     Array of constants.
+     * @param isRuntimeVisible whether this Annotation visible at runtime.
      */
     public Annotations(final byte annotationType, final int nameIndex, final int length, final AnnotationEntry[] annotationTable,
             final ConstantPool constantPool, final boolean isRuntimeVisible) {
@@ -56,12 +56,12 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
     /**
      * Constructs an instance.
      *
-     * @param annotationType   the subclass type of the annotation
-     * @param nameIndex        Index pointing to the name <em>Code</em>
-     * @param length           Content length in bytes
-     * @param input            Input stream
-     * @param constantPool     Array of constants
-     * @param isRuntimeVisible whether this Annotation visible at runtime
+     * @param annotationType   the subclass type of the annotation.
+     * @param nameIndex        Index pointing to the name <em>Code</em>.
+     * @param length           Content length in bytes.
+     * @param input            Input stream.
+     * @param constantPool     Array of constants.
+     * @param isRuntimeVisible whether this Annotation visible at runtime.
      * @throws IOException if an I/O error occurs.
      */
     Annotations(final byte annotationType, final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool,

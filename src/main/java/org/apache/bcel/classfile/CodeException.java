@@ -87,7 +87,7 @@ public final class CodeException implements Cloneable, Node, Constants {
     /**
      * Constructs a new instance from a DataInput.
      *
-     * @param file Input stream
+     * @param file Input stream.
      * @throws IOException if an I/O error occurs.
      */
     CodeException(final DataInput file) throws IOException {
@@ -97,8 +97,8 @@ public final class CodeException implements Cloneable, Node, Constants {
     /**
      * Constructs a new instance.
      *
-     * @param startPc Range in the code the exception handler is active, startPc is inclusive while
-     * @param endPc is exclusive
+     * @param startPc Range in the code the exception handler is active, startPc is inclusive while.
+     * @param endPc is exclusive.
      * @param handlerPc Starting address of exception handler, that is, an offset from start of code.
      * @param catchType If zero the handler catches any exception, otherwise it points to the exception class which is to be
      *        caught.
@@ -114,7 +114,7 @@ public final class CodeException implements Cloneable, Node, Constants {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -138,7 +138,7 @@ public final class CodeException implements Cloneable, Node, Constants {
     /**
      * Dumps code exception to file stream in binary format.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     public void dump(final DataOutputStream file) throws IOException {

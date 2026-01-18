@@ -117,9 +117,9 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     /**
      * Return a string with the flag settings
      *
-     * @param flags the flags field to interpret
-     * @param location the item type
-     * @return the formatted string
+     * @param flags the flags field to interpret.
+     * @param location the item type.
+     * @return the formatted string.
      * @since 6.0 made public
      */
     public static String printFlags(final int flags, final FLAGS location) {
@@ -379,7 +379,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     /**
      * Visits a {@link StackMapType} object.
      *
-     * @param stackMapType object to visit
+     * @param stackMapType object to visit.
      * @since 6.7.1
      */
     @Override

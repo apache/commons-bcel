@@ -415,7 +415,7 @@ public class Subroutines {
      * Constructs a new instance.
      *
      * @param mg A MethodGen object representing method to create the Subroutine objects of.
-     * @param enableJustIceCheck whether to enable additional JustIce checks
+     * @param enableJustIceCheck whether to enable additional JustIce checks.
      * @since 6.0
      */
     public Subroutines(final MethodGen mg, final boolean enableJustIceCheck) {

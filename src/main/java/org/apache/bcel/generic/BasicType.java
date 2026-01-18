@@ -61,7 +61,7 @@ public final class BasicType extends Type {
     /**
      * Constructor for basic types such as int, long, 'void'
      *
-     * @param type one of T_INT, T_BOOLEAN, ..., T_VOID
+     * @param type one of T_INT, T_BOOLEAN, ..., T_VOID.
      * @see Const
      */
     BasicType(final byte type) {
@@ -72,7 +72,7 @@ public final class BasicType extends Type {
     }
 
     /**
-     * @return true if both type objects refer to the same type
+     * @return true if both type objects refer to the same type.
      */
     @Override
     public boolean equals(final Object type) {

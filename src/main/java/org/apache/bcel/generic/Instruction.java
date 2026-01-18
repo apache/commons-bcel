@@ -37,7 +37,7 @@ public abstract class Instruction implements Cloneable {
     /**
      * Gets Comparator object used in the equals() method to determine equality of instructions.
      *
-     * @return currently used comparator for equals()
+     * @return currently used comparator for equals().
      * @deprecated (6.0) use the built in comparator, or wrap this class in another object that implements these methods
      */
     @Deprecated
@@ -48,8 +48,8 @@ public abstract class Instruction implements Cloneable {
     /**
      * Tests if the value can fit in a byte (signed)
      *
-     * @param value the value to check
-     * @return true if the value is in range
+     * @param value the value to check.
+     * @return true if the value is in range.
      * @since 6.0
      */
     public static boolean isValidByte(final int value) {
@@ -59,8 +59,8 @@ public abstract class Instruction implements Cloneable {
     /**
      * Tests if the value can fit in a short (signed)
      *
-     * @param value the value to check
-     * @return true if the value is in range
+     * @param value the value to check.
+     * @return true if the value is in range.
      * @since 6.0
      */
     public static boolean isValidShort(final int value) {
@@ -73,8 +73,8 @@ public abstract class Instruction implements Cloneable {
      * If the Instruction is defined in {@link InstructionConst}, then the singleton instance is returned.
      * </p>
      *
-     * @param bytes input stream bytes
-     * @return instruction object being read
+     * @param bytes input stream bytes.
+     * @return instruction object being read.
      * @throws IOException Thrown when an I/O exception of some sort has occurred.
      * @see InstructionConst#getInstruction(int)
      */
@@ -441,7 +441,7 @@ public abstract class Instruction implements Cloneable {
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
      * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     public abstract void accept(Visitor v);
 
@@ -462,7 +462,7 @@ public abstract class Instruction implements Cloneable {
      * types are). This also applies for 'Select' instructions with their multiple branch targets.
      *
      * @see BranchInstruction
-     * @return (shallow) copy of an instruction
+     * @return (shallow) copy of an instruction.
      */
     public Instruction copy() {
         Instruction i = null;
@@ -488,7 +488,7 @@ public abstract class Instruction implements Cloneable {
     /**
      * Dumps instruction as byte code to stream out.
      *
-     * @param out Output stream
+     * @param out Output stream.
      * @throws IOException Thrown when an I/O exception of some sort has occurred.
      */
     public void dump(final DataOutputStream out) throws IOException {
@@ -498,7 +498,7 @@ public abstract class Instruction implements Cloneable {
     /**
      * Tests for equality, delegated to comparator
      *
-     * @return true if that is an Instruction and has the same opcode
+     * @return true if that is an Instruction and has the same opcode.
      */
     @Override
     public boolean equals(final Object that) {
@@ -535,7 +535,7 @@ public abstract class Instruction implements Cloneable {
     /**
      * Gets the hashCode of this object.
      *
-     * @return the hashCode
+     * @return the hashCode.
      * @since 6.0
      */
     @Override
@@ -546,8 +546,8 @@ public abstract class Instruction implements Cloneable {
     /**
      * Reads needed data (for example index) from file.
      *
-     * @param bytes byte sequence to read from
-     * @param wide "wide" instruction flag
+     * @param bytes byte sequence to read from.
+     * @param wide "wide" instruction flag.
      * @throws IOException may be thrown if the implementation needs to read data from the file
      */
     @SuppressWarnings("unused") // thrown by subclasses
@@ -583,7 +583,7 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * @return mnemonic for instruction in verbose format
+     * @return mnemonic for instruction in verbose format.
      */
     @Override
     public String toString() {
@@ -595,8 +595,8 @@ public abstract class Instruction implements Cloneable {
      *
      * &lt;name of opcode&gt; "["&lt;opcode number&gt;"]" "("&lt;length of instruction&gt;")"
      *
-     * @param verbose long/short format switch
-     * @return mnemonic for instruction
+     * @param verbose long/short format switch.
+     * @return mnemonic for instruction.
      */
     public String toString(final boolean verbose) {
         if (verbose) {

@@ -44,10 +44,10 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
      * Add an exception handler, that is, specify region where a handler is active and an instruction where the actual handling
      * is done.
      *
-     * @param startPc Start of handled region (inclusive)
-     * @param endPc End of handled region (inclusive)
-     * @param handlerPc Where handling is done
-     * @param catchType which exception is handled, null for ANY
+     * @param startPc Start of handled region (inclusive).
+     * @param endPc End of handled region (inclusive).
+     * @param handlerPc Where handling is done.
+     * @param catchType which exception is handled, null for ANY.
      */
     public CodeExceptionGen(final InstructionHandle startPc, final InstructionHandle endPc, final InstructionHandle handlerPc, final ObjectType catchType) {
         setStartPC(startPc);
@@ -66,7 +66,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     }
 
     /**
-     * @return true, if ih is target of this handler
+     * @return true, if ih is target of this handler.
      */
     @Override
     public boolean containsTarget(final InstructionHandle ih) {
@@ -168,8 +168,8 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     }
 
     /**
-     * @param oldIh old target, either start or end
-     * @param newIh new target
+     * @param oldIh old target, either start or end.
+     * @param newIh new target.
      */
     @Override
     public void updateTarget(final InstructionHandle oldIh, final InstructionHandle newIh) {

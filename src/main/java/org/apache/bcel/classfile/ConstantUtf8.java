@@ -199,7 +199,7 @@ public final class ConstantUtf8 extends Constant {
     /**
      * Initializes instance from file data.
      *
-     * @param dataInput Input stream
+     * @param dataInput Input stream.
      * @throws IOException if an I/O error occurs.
      */
     ConstantUtf8(final DataInput dataInput) throws IOException {
@@ -223,7 +223,7 @@ public final class ConstantUtf8 extends Constant {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -233,7 +233,7 @@ public final class ConstantUtf8 extends Constant {
     /**
      * Dumps String in Utf8 format to file stream.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     @Override
@@ -252,7 +252,7 @@ public final class ConstantUtf8 extends Constant {
     }
 
     /**
-     * @param bytes the raw bytes of this UTF-8
+     * @param bytes the raw bytes of this UTF-8.
      * @deprecated (since 6.0)
      */
     @java.lang.Deprecated
@@ -261,7 +261,7 @@ public final class ConstantUtf8 extends Constant {
     }
 
     /**
-     * @return String representation
+     * @return String representation.
      */
     @Override
     public String toString() {

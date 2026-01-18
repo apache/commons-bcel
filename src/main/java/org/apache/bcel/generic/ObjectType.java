@@ -44,7 +44,7 @@ public class ObjectType extends ReferenceType {
     /**
      * Constructs a new instance.
      *
-     * @param className fully qualified class name, for example {@link String}
+     * @param className fully qualified class name, for example {@link String}.
      */
     public ObjectType(final String className) {
         super(Const.T_REFERENCE, "L" + Utility.packageToPath(className) + ";");
@@ -74,7 +74,7 @@ public class ObjectType extends ReferenceType {
     }
 
     /**
-     * @return name of referenced class
+     * @return name of referenced class.
      */
     @Override
     public String getClassName() {
@@ -108,7 +108,7 @@ public class ObjectType extends ReferenceType {
     /**
      * Return true if this type references a class, false if it references an interface.
      *
-     * @return true if the type references a class, false if it references an interface
+     * @return true if the type references a class, false if it references an interface.
      * @throws ClassNotFoundException if the class or interface referenced by this type can't be found
      */
     public boolean referencesClassExact() throws ClassNotFoundException {
@@ -135,7 +135,7 @@ public class ObjectType extends ReferenceType {
     /**
      * Return true if this type references an interface, false if it references a class.
      *
-     * @return true if the type references an interface, false if it references a class
+     * @return true if the type references an interface, false if it references a class.
      * @throws ClassNotFoundException if the class or interface referenced by this type can't be found
      */
     public boolean referencesInterfaceExact() throws ClassNotFoundException {

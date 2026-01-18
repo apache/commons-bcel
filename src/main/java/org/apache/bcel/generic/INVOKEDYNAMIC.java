@@ -52,7 +52,7 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
      * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -70,7 +70,7 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
     /**
      * Dumps instruction as byte code to stream out.
      *
-     * @param out Output stream
+     * @param out Output stream.
      */
     @Override
     public void dump(final DataOutputStream out) throws IOException {
@@ -103,8 +103,8 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
      * Since InvokeDynamic doesn't refer to a reference type, just return {@link Object}, as that is the only type we can
      * say for sure the reference will be.
      *
-     * @param cpg the ConstantPoolGen used to create the instruction
-     * @return an ObjectType for {@link Object}
+     * @param cpg the ConstantPoolGen used to create the instruction.
+     * @return an ObjectType for {@link Object}.
      * @since 6.1
      */
     @Override

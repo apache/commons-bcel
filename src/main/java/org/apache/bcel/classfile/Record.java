@@ -54,10 +54,10 @@ public final class Record extends Attribute {
     /**
      * Constructs object from input stream.
      *
-     * @param nameIndex    Index in constant pool
-     * @param length       Content length in bytes
-     * @param input        Input stream
-     * @param constantPool Array of constants
+     * @param nameIndex    Index in constant pool.
+     * @param length       Content length in bytes.
+     * @param input        Input stream.
+     * @param constantPool Array of constants.
      * @throws IOException if an I/O error occurs.
      */
     Record(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool)
@@ -68,10 +68,10 @@ public final class Record extends Attribute {
     /**
      * Constructs a new instance using components.
      *
-     * @param nameIndex    Index in constant pool
-     * @param length       Content length in bytes
-     * @param classes      Array of Record Component Info elements
-     * @param constantPool Array of constants
+     * @param nameIndex    Index in constant pool.
+     * @param length       Content length in bytes.
+     * @param classes      Array of Record Component Info elements.
+     * @param constantPool Array of constants.
      */
     public Record(final int nameIndex, final int length, final RecordComponentInfo[] classes,
             final ConstantPool constantPool) {
@@ -85,7 +85,7 @@ public final class Record extends Attribute {
      * defined by the contents of a Java class. For example, the hierarchy of methods,
      * fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {

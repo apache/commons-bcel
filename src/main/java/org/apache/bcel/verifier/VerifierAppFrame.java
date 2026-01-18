@@ -121,7 +121,7 @@ public class VerifierAppFrame extends JFrame {
     }
 
     /**
-     * @return the classNamesJList
+     * @return the classNamesJList.
      */
     JList<String> getClassNamesJList() {
         return classNamesJList;

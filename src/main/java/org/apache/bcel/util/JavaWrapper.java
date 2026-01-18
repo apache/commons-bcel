@@ -87,8 +87,8 @@ public class JavaWrapper {
     /**
      * Runs the main method of the given class with the arguments passed in argv
      *
-     * @param className the fully qualified class name
-     * @param argv the arguments just as you would pass them directly
+     * @param className the fully qualified class name.
+     * @param argv the arguments just as you would pass them directly.
      * @throws ClassNotFoundException if {@code className} can't be found.
      */
     public void runMain(final String className, final String[] argv) throws ClassNotFoundException {

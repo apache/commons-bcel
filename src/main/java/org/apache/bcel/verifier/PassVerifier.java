@@ -60,7 +60,7 @@ public abstract class PassVerifier {
     /**
      * Verifies, not cached.
      *
-     * @return The VerificationResult
+     * @return The VerificationResult.
      */
     public abstract VerificationResult do_verify();
 

@@ -56,8 +56,8 @@ public abstract class ConstantCP extends Constant {
     /**
      * Initialize instance from file data.
      *
-     * @param tag Constant type tag
-     * @param file Input stream
+     * @param tag Constant type tag.
+     * @param file Input stream.
      * @throws IOException if an I/O error occurs.
      */
     ConstantCP(final byte tag, final DataInput file) throws IOException {

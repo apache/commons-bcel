@@ -42,11 +42,11 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      * Generate a local variable that with index 'index'. Note that double and long variables need two indexs. Index indices
      * have to be provided by the user.
      *
-     * @param index index of local variable
-     * @param name its name
-     * @param type its type
-     * @param start from where the instruction is valid (null means from the start)
-     * @param end until where the instruction is valid (null means to the end)
+     * @param index index of local variable.
+     * @param name its name.
+     * @param type its type.
+     * @param start from where the instruction is valid (null means from the start).
+     * @param end until where the instruction is valid (null means to the end).
      */
     public LocalVariableGen(final int index, final String name, final Type type, final InstructionHandle start, final InstructionHandle end) {
         if (index < 0 || index > Const.MAX_SHORT) {
@@ -65,12 +65,12 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      * Generates a local variable that with index 'index'. Note that double and long variables need two indexs. Index
      * indices have to be provided by the user.
      *
-     * @param index index of local variable
-     * @param name its name
-     * @param type its type
-     * @param start from where the instruction is valid (null means from the start)
-     * @param end until where the instruction is valid (null means to the end)
-     * @param origIndex index of local variable prior to any changes to index
+     * @param index index of local variable.
+     * @param name its name.
+     * @param type its type.
+     * @param start from where the instruction is valid (null means from the start).
+     * @param end until where the instruction is valid (null means to the end).
+     * @param origIndex index of local variable prior to any changes to index.
      */
     public LocalVariableGen(final int index, final String name, final Type type, final InstructionHandle start, final InstructionHandle end,
         final int origIndex) {
@@ -88,7 +88,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     }
 
     /**
-     * @return true, if ih is target of this variable
+     * @return true, if ih is target of this variable.
      */
     @Override
     public boolean containsTarget(final InstructionHandle ih) {
@@ -259,8 +259,8 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     }
 
     /**
-     * @param oldIh old target, either start or end
-     * @param newIh new target
+     * @param oldIh old target, either start or end.
+     * @param newIh new target.
      */
     @Override
     public void updateTarget(final InstructionHandle oldIh, final InstructionHandle newIh) {

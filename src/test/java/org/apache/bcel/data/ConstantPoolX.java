@@ -92,8 +92,8 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     /**
      * Resolves constant to a string representation.
      *
-     * @param c Constant to be printed
-     * @return String representation
+     * @param c Constant to be printed.
+     * @return String representation.
      */
     public String constantToString(Constant c) throws ClassFormatException {
         final String str;
@@ -169,9 +169,9 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     /**
      * Retrieves constant at 'index' from constant pool and resolve it to a string representation.
      *
-     * @param index of constant in constant pool
-     * @param tag expected type
-     * @return String representation
+     * @param index of constant in constant pool.
+     * @param tag expected type.
+     * @return String representation.
      */
     public String constantToString(final int index, final byte tag) throws ClassFormatException {
         final Constant c = getConstant(index, tag);
@@ -181,7 +181,7 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     /**
      * Dumps constant pool to file stream in binary format.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     public void dump(final DataOutputStream file) throws IOException {
@@ -196,8 +196,8 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     /**
      * Gets constant from constant pool.
      *
-     * @param index Index in constant pool
-     * @return Constant value
+     * @param index Index in constant pool.
+     * @return Constant value.
      * @see Constant
      */
     public Constant getConstant(final int index) {
@@ -210,9 +210,9 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     /**
      * Gets constant from constant pool and check whether it has the expected type.
      *
-     * @param index Index in constant pool
-     * @param tag Tag of expected constant, that is, its type
-     * @return Constant value
+     * @param index Index in constant pool.
+     * @param tag Tag of expected constant, that is, its type.
+     * @return Constant value.
      * @see Constant
      * @throws ClassFormatException
      */
@@ -240,9 +240,9 @@ public abstract class ConstantPoolX implements Cloneable, Node {
      * classes have an index field that points to another entry of the constant pool of type 'ConstantUtf8' which contains
      * the real data.
      *
-     * @param index Index in constant pool
-     * @param tag Tag of expected constant, either ConstantClass or ConstantString
-     * @return Contents of string reference
+     * @param index Index in constant pool.
+     * @param tag Tag of expected constant, either ConstantClass or ConstantString.
+     * @return Contents of string reference.
      * @see ConstantClass
      * @see ConstantString
      * @throws ClassFormatException
@@ -284,14 +284,14 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     }
 
     /**
-     * @param constant Constant to set
+     * @param constant Constant to set.
      */
     public void setConstant(final int index, final Constant constant) {
         constantPool[index] = constant;
     }
 
     /**
-     * @param constantPool
+     * @param constantPool.
      */
     public void setConstantPool(final Constant[] constantPool) {
         this.constantPool = constantPool;
