@@ -131,14 +131,14 @@ public final class PMGClass extends Attribute {
     }
 
     /**
-     * @param pmgClassIndex.
+     * @param pmgClassIndex The class index.
      */
     public void setPMGClassIndex(final int pmgClassIndex) {
         this.pmgClassIndex = pmgClassIndex;
     }
 
     /**
-     * @param pmgIndex.
+     * @param pmgIndex The index.
      */
     public void setPMGIndex(final int pmgIndex) {
         this.pmgIndex = pmgIndex;

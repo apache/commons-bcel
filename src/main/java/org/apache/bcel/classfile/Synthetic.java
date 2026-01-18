@@ -100,6 +100,8 @@ public final class Synthetic extends Attribute {
     }
 
     /**
+     * Gets data bytes.
+     *
      * @return data bytes.
      */
     public byte[] getBytes() {
@@ -107,7 +109,9 @@ public final class Synthetic extends Attribute {
     }
 
     /**
-     * @param bytes.
+     * Sets data bytes.
+     *
+     * @param bytes data bytes.
      */
     public void setBytes(final byte[] bytes) {
         if (bytes != null) {

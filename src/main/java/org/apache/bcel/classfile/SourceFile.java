@@ -119,7 +119,7 @@ public final class SourceFile extends Attribute {
     }
 
     /**
-     * @param sourceFileIndex.
+     * @param sourceFileIndex The source file index to set.
      */
     public void setSourceFileIndex(final int sourceFileIndex) {
         this.sourceFileIndex = sourceFileIndex;

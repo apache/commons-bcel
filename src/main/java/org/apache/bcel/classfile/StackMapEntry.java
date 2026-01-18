@@ -104,7 +104,7 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * DO NOT USE
      *
-     * @param byteCodeOffset.
+     * @param byteCodeOffset byte code offset.
      * @param numberOfLocals NOT USED.
      * @param typesOfLocals array of {@link StackMapType}s of locals.
      * @param numberOfStackItems NOT USED.
@@ -131,7 +131,7 @@ public final class StackMapEntry implements Node, Cloneable {
      * Create an instance
      *
      * @param tag the frameType to use.
-     * @param byteCodeOffset.
+     * @param byteCodeOffset byte code offset.
      * @param typesOfLocals array of {@link StackMapType}s of locals.
      * @param typesOfStackItems array ot {@link StackMapType}s of stack items.
      * @param constantPool the constant pool.
