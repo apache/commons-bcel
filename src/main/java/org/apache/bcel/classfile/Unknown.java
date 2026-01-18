@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 package org.apache.bcel.classfile;
 
 import java.io.DataInput;
@@ -24,6 +25,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.apache.bcel.Const;
+import org.apache.commons.lang3.SystemProperties;
 
 /**
  * This class represents a reference to an unknown (that is, application-specific) attribute of a class. It is instantiated
@@ -35,6 +37,13 @@ import org.apache.bcel.Const;
  * @see UnknownAttributeReader
  */
 public final class Unknown extends Attribute {
+
+    /**
+     * Arbitrary to limit the maximum length of unknown attributes to avoid OOM errors.
+     */
+    static final int MAX_LEN = 1_000_000;
+
+    private static final String MAX_LEN_PROP = "BCEL.Attribute.Unknown.max_attribute_length";
 
     private byte[] bytes;
 
@@ -55,17 +64,26 @@ public final class Unknown extends Attribute {
     }
 
     /**
-     * Constructs a new instance from an input stream.
+     * Constructs a new instance from a DataInput.
+     * <p>
+     * The size of an <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7">Attribute</a> unknown to the JVM specification is
+     * limited to 1 MB and is overridden with the system property {@code BCEL.Attribute.Unknown.max_attribute_length}.
+     * </p>
      *
-     * @param nameIndex Index in constant pool.
-     * @param length Content length in bytes.
-     * @param input Input stream.
+     * @param nameIndex    Index in constant pool.
+     * @param length       Content length in bytes.
+     * @param input        Input stream.
      * @param constantPool Array of constants.
      * @throws IOException if an I/O error occurs.
+     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7">Attribute</a>
      */
     Unknown(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
         this(nameIndex, length, (byte[]) null, constantPool);
         if (length > 0) {
+            if (length > SystemProperties.getInt(MAX_LEN_PROP, () -> MAX_LEN)) {
+                throw new IOException(
+                        String.format("Unknown attribute length %,d > %,d; use the %s system property to increase the limit.", length, MAX_LEN, MAX_LEN_PROP));
+            }
             bytes = new byte[length];
             input.readFully(bytes);
         }

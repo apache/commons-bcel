@@ -75,8 +75,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Code.setCode(byte[]) now throws a ClassFormatException if the code array is greater than the JVM specification allows.</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">ClassDumper.dump() should not call the input stream it didn't open; fixes IOException when calling DumpClass.main(ClassDumper.java:351).</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.classfile.ConstantPool.ConstantPool(Constant[]) now uses varagrs: ConstantPool(Constant...).</action>
-      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.classfile.Deprecated now requires its the attribute_length item be zero. See https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.15.</action>
-      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.classfile.Synthetic now requires its the attribute_length item be zero. See https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.8.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.classfile.Deprecated now requires its the attribute_length item be zero; see https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.15.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.classfile.Synthetic now requires its the attribute_length item be zero; see https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.8.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory, Stanislav Fort">The size of an Attribute unknown to the JVM specification is limited to 1 MB and is overridden with the system property BCEL.Attribute.Unknown.max_attribute_length; see https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_26.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_26.</action>
