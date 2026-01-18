@@ -154,8 +154,8 @@ public class ASTFunAppl extends ASTExpr {
     /**
      * Second pass Overrides AstExpr.eval()
      *
-     * @return type of expression
-     * @param expected type
+     * @return type of expression.
+     * @param expected type.
      */
     @Override
     public int eval(final int expected) {

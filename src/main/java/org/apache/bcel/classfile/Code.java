@@ -243,7 +243,9 @@ public final class Code extends Attribute {
     }
 
     /**
-     * @return the internal length of this code attribute (minus the first 6 bytes) and excluding all its attributes
+     * Gets the internal length of this code attribute (minus the first 6 bytes) and excluding all its attributes.
+     *
+     * @return the internal length of this code attribute (minus the first 6 bytes) and excluding all its attributes.
      */
     private int getInternalLength() {
         return 2 /* maxStack */ + 2 /* maxLocals */ + 4 /* code length */

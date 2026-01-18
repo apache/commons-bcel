@@ -50,8 +50,8 @@ final class ClassDumper {
     /**
      * Parses class from the given stream.
      *
-     * @param file Input stream
-     * @param fileName File name
+     * @param file Input stream.
+     * @param fileName File name.
      */
     public ClassDumper(final FileImageInputStream file, final String fileName) {
         this.fileName = fileName;

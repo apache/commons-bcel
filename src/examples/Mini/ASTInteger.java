@@ -67,7 +67,7 @@ public class ASTInteger extends ASTExpr {
     /**
      * Second pass Overrides AstExpr.eval()
      *
-     * @return type of expression
+     * @return type of expression.
      */
     @Override
     public int eval(final int expected) {

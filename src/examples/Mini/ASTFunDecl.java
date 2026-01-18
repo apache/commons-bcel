@@ -358,9 +358,9 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants {
     }
 
     /**
-     * Second pass
+     * Second pass.
      *
-     * @return type of expression
+     * @return type of expression.
      */
     public int eval(final int pass) {
         final int expected = name.getType(); // Maybe other function has already called us

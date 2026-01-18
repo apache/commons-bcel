@@ -125,7 +125,7 @@ public abstract class Constant implements Cloneable, Node {
      */
 
     /**
-     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter.
      */
     @java.lang.Deprecated
     protected byte tag; // TODO should be private & final
@@ -138,7 +138,7 @@ public abstract class Constant implements Cloneable, Node {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public abstract void accept(Visitor v);

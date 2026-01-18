@@ -140,10 +140,10 @@ public class ASTLetExpr extends ASTExpr {
     }
 
     /**
-     * Second pass Overrides AstExpr.eval()
+     * Second pass Overrides AstExpr.eval().
      *
-     * @return type of expression
-     * @param expected type
+     * @return type of expression.
+     * @param expected type.
      */
     @Override
     public int eval(final int expected) {
@@ -160,7 +160,7 @@ public class ASTLetExpr extends ASTExpr {
     }
 
     /**
-     * Overrides ASTExpr.traverse()
+     * Overrides ASTExpr.traverse().
      */
     @Override
     public ASTExpr traverse(final Environment env) {

@@ -79,7 +79,7 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
      * defined by the contents of a Java class. I.e., the hierarchy of methods,
      * fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {

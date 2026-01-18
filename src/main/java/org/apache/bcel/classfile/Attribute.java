@@ -70,9 +70,9 @@ public abstract class Attribute implements Cloneable, Node {
      * Add an Attribute reader capable of parsing (user-defined) attributes named "name". You should not add readers for the
      * standard attributes such as "LineNumberTable", because those are handled internally.
      *
-     * @param name the name of the attribute as stored in the class file
-     * @param attributeReader the reader object
-     * @deprecated (6.0) Use {@link #addAttributeReader(String, UnknownAttributeReader)} instead
+     * @param name the name of the attribute as stored in the class file.
+     * @param attributeReader the reader object.
+     * @deprecated (6.0) Use {@link #addAttributeReader(String, UnknownAttributeReader)} instead.
      */
     @java.lang.Deprecated
     public static void addAttributeReader(final String name, final AttributeReader attributeReader) {
@@ -223,35 +223,35 @@ public abstract class Attribute implements Cloneable, Node {
     /**
      * Remove attribute reader
      *
-     * @param name the name of the attribute as stored in the class file
+     * @param name the name of the attribute as stored in the class file.
      */
     public static void removeAttributeReader(final String name) {
         READERS.remove(name);
     }
 
     /**
-     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter.
      */
     @java.lang.Deprecated
     protected int name_index; // Points to attribute name in constant pool TODO make private (has getter & setter)
 
     /**
-     * @deprecated (since 6.0) (since 6.0) will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) (since 6.0) will be made private; do not access directly, use getter/setter.
      */
     @java.lang.Deprecated
-    protected int length; // Content length of attribute field TODO make private (has getter & setter)
+    protected int length; // Content length of attribute field TODO make private (has getter & setter).
 
     /**
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @java.lang.Deprecated
-    protected byte tag; // Tag to distinguish subclasses TODO make private & final; supposed to be immutable
+    protected byte tag; // Tag to distinguish subclasses TODO make private & final; supposed to be immutable.
 
     /**
-     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
+     * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter.
      */
     @java.lang.Deprecated
-    protected ConstantPool constant_pool; // TODO make private (has getter & setter)
+    protected ConstantPool constant_pool; // TODO make private (has getter & setter).
 
     /**
      * Constructs an instance.
@@ -280,7 +280,7 @@ public abstract class Attribute implements Cloneable, Node {
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
      * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public abstract void accept(Visitor v);
@@ -288,7 +288,7 @@ public abstract class Attribute implements Cloneable, Node {
     /**
      * Use copy() if you want to have a deep copy(), that is, with all references copied correctly.
      *
-     * @return shallow copy of this attribute
+     * @return shallow copy of this attribute.
      */
     @Override
     public Object clone() {
@@ -312,7 +312,7 @@ public abstract class Attribute implements Cloneable, Node {
     /**
      * Dumps attribute to file stream in binary format.
      *
-     * @param file Output file stream
+     * @param file Output file stream.
      * @throws IOException if an I/O error occurs.
      */
     public void dump(final DataOutputStream file) throws IOException {

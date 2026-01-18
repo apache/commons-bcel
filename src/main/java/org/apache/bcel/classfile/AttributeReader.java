@@ -23,7 +23,7 @@ package org.apache.bcel.classfile;
  * Attribute.addAttributeReader method. These factory objects should implement this interface.
  *
  * @see Attribute
- * @deprecated Use UnknownAttributeReader instead
+ * @deprecated Use UnknownAttributeReader instead.
  */
 @java.lang.Deprecated
 public interface AttributeReader {
