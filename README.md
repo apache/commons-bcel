@@ -45,11 +45,11 @@ Apache Commons BCEL
 
 [![Java CI](https://github.com/apache/commons-bcel/actions/workflows/maven.yml/badge.svg)](https://github.com/apache/commons-bcel/actions/workflows/maven.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/org.apache.bcel/bcel?label=Maven%20Central)](https://search.maven.org/artifact/org.apache.bcel/bcel)
-[![Javadocs](https://javadoc.io/badge/org.apache.bcel/bcel/6.11.0.svg)](https://javadoc.io/doc/org.apache.bcel/bcel/6.11.0)
+[![Javadocs](https://javadoc.io/badge/org.apache.bcel/bcel/6.12.0.svg)](https://javadoc.io/doc/org.apache.bcel/bcel/6.12.0)
 [![CodeQL](https://github.com/apache/commons-bcel/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/apache/commons-bcel/actions/workflows/codeql-analysis.yml)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/apache/commons-bcel/badge)](https://api.securityscorecards.dev/projects/github.com/apache/commons-bcel)
 
-Apache Commons Bytecode Engineering Library
+The Commons Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files.
 
 Documentation
 -------------
@@ -68,7 +68,7 @@ Alternatively, you can pull it from the central Maven repositories:
 <dependency>
   <groupId>org.apache.bcel</groupId>
   <artifactId>bcel</artifactId>
-  <version>6.11.0</version>
+  <version>6.12.0</version>
 </dependency>
 ```
 
@@ -111,7 +111,6 @@ Additional Resources
 + [Apache Commons Homepage](https://commons.apache.org/)
 + [Apache Issue Tracker (JIRA)](https://issues.apache.org/jira/browse/BCEL)
 + [Apache Commons Slack Channel](https://the-asf.slack.com/archives/C60NVB8AD)
-+ [Apache Commons Twitter Account](https://twitter.com/ApacheCommons)
 
 Apache Commons Components
 -------------------------

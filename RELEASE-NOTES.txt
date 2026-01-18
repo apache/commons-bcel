@@ -1,3 +1,78 @@
+Apache Commons BCEL Version 6.12.0
+RELEASE NOTES
+
+
+Introduction
+------------
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.12.0.
+
+The Commons Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files.
+
+This is a feature and maintenance release. Java 8 or later is required.
+
+New Features
+------------
+*           Add Const.MAJOR_26. Thanks to Gary Gregory.
+*           Add Const.MINOR_26. Thanks to Gary Gregory.
+
+Fixed Bugs
+----------
+*           Fix infinite loop in example.TransitiveHull #476. Thanks to fmantz, Gary Gregory.
+*           Fix Apache RAT plugin console warnings. Thanks to Gary Gregory.
+*           Fix malformed Javadoc comments. Thanks to Gary Gregory.
+*           Make the build reproducible on the Azul JDK. Thanks to Gary Gregory.
+*           Fix infinite loop in JavaClass.findField() on invalid input. Thanks to Gary Gregory, Pavel Kohout.
+*           Fix infinite loop in JavaClass.getAllInterfaces() on invalid input. Thanks to Gary Gregory, Pavel Kohout.
+*           Fix infinite loop in JavaClass.getSuperClasses() on invalid input. Thanks to Gary Gregory, Pavel Kohout.
+*           Exception message in Args.requireU4() refers to the wrong data type. Thanks to Gary Gregory.
+*           Exception message in Args.requireU2() refers to the wrong upper range value. Thanks to Gary Gregory.
+*           Code.Code(int, int, DataInput, ConstantPool) now throws a ClassFormatException if the code array is greater than the JVM specification allows. Thanks to Gary Gregory, Stanislav Fort.
+*           Code.Code(int, int, int, int, byte[], CodeException[], Attribute[], ConstantPool) now throws a ClassFormatException if the code array is greater than the JVM specification allows. Thanks to Gary Gregory, Stanislav Fort.
+*           Code.setCode(byte[]) now throws a ClassFormatException if the code array is greater than the JVM specification allows. Thanks to Gary Gregory.
+*           ClassDumper.dump() should not call the input stream it didn't open; fixes IOException when calling DumpClass.main(ClassDumper.java:351). Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.ConstantPool.ConstantPool(Constant[]) now uses varagrs: ConstantPool(Constant...). Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.Deprecated now requires its the attribute_length item be zero; see https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.15. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.Synthetic now requires its the attribute_length item be zero; see https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.8. Thanks to Gary Gregory.
+*           The size of an Attribute unknown to the JVM specification is limited to 1 MB and is overridden with the system property BCEL.Attribute.Unknown.max_attribute_length; see https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7. Thanks to Gary Gregory, Stanislav Fort.
+
+Changes
+-------
+*           Bump org.apache.commons:commons-parent from 89 to 95 #482. Thanks to Gary Gregory.
+*           [test] Bump org.jetbrains.kotlin:kotlin-stdlib from 2.2.20 to 2.3.0 #481. Thanks to Gary Gregory.
+*           Bump commons-io:commons-io from 2.20.0 to 2.21.0. Thanks to Gary Gregory.
+*           Bump commons-lang3 from 3.19.0 to 3.20.0. Thanks to Gary Gregory.
+*           [test] Bump org.apache.commons:commons-exec from 1.5.0 to 1.6.0. Thanks to Gary Gregory.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-bcel/changes.html
+
+For complete information on Apache Commons BCEL, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons BCEL website:
+
+https://commons.apache.org/proper/commons-bcel
+
+Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+Open source works best when you give feedback:
+
+    https://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
 Apache Commons BCEL Version 6.11.0
 RELEASE NOTES
 
