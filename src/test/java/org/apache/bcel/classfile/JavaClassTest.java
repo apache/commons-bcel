@@ -26,7 +26,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
@@ -37,6 +39,7 @@ import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.Type;
 import org.apache.bcel.util.ClassPath;
 import org.apache.bcel.util.SyntheticRepository;
+import org.apache.commons.lang3.SystemProperties;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -48,8 +51,11 @@ import org.junit.jupiter.params.provider.MethodSource;
  */
 class JavaClassTest {
 
-    private static final String CLASS_NAME = "TargetClass";
+    private static final String INTERFACE_NAME_A = "InterfaceA";
 
+    private static final String INTERFACE_NAME_B = "InterfaceB";
+
+    private static final String CLASS_NAME = "TargetClass";
 // Doesn't compile due to cyclic inheritance
 //  private interface InterfaceA extends InterfaceB {
 //  }
@@ -60,14 +66,20 @@ class JavaClassTest {
     @TempDir
     static Path tempDir;
 
+    static Path tempClassFile;
+
+    static Path tempIntefaceAFile;
+
+    static Path tempIntefaceBFile;
+
     @BeforeAll
     static void beforeAll() throws Exception {
         // Create InterfaceA that extends InterfaceB (will create cycle)
-        writeInterfaceA();
+        tempIntefaceAFile = writeInterfaceA();
         // Create InterfaceB that extends InterfaceA (completes the cycle)
-        writeInterfaceB();
+        tempIntefaceBFile = writeInterfaceB();
         // Create a class that implements InterfaceA
-        writeTargetClass();
+        tempClassFile = writeTargetClass();
         // Cycle: InterfaceA -> InterfaceB -> InterfaceA -> ...
     }
 
@@ -90,23 +102,27 @@ class JavaClassTest {
         return baos.toByteArray();
     }
 
-    private static void writeInterfaceA() throws Exception {
+    private static Path writeInterfaceA() throws Exception {
         // Create InterfaceA that extends InterfaceB
-        final ClassGen cg = new ClassGen("InterfaceA", "java.lang.Object", "InterfaceA.java", Const.ACC_PUBLIC | Const.ACC_INTERFACE | Const.ACC_ABSTRACT,
-                new String[] { "InterfaceB" });
-        cg.getJavaClass().dump(tempDir.resolve("InterfaceA.class").toString());
+        final ClassGen classGen = new ClassGen(INTERFACE_NAME_A, "java.lang.Object", INTERFACE_NAME_A + ".java",
+                Const.ACC_PUBLIC | Const.ACC_INTERFACE | Const.ACC_ABSTRACT, new String[] { INTERFACE_NAME_B });
+        final Path path = tempDir.resolve(INTERFACE_NAME_A + ".class");
+        classGen.getJavaClass().dump(path.toString());
+        return path;
     }
 
-    private static void writeInterfaceB() throws Exception {
+    private static Path writeInterfaceB() throws Exception {
         // Create InterfaceB that extends InterfaceA
-        final ClassGen cg = new ClassGen("InterfaceB", "java.lang.Object", "InterfaceB.java", Const.ACC_PUBLIC | Const.ACC_INTERFACE | Const.ACC_ABSTRACT,
-                new String[] { "InterfaceA" });
-        cg.getJavaClass().dump(tempDir.resolve("InterfaceB.class").toString());
+        final ClassGen classGen = new ClassGen(INTERFACE_NAME_B, "java.lang.Object", INTERFACE_NAME_B + ".java",
+                Const.ACC_PUBLIC | Const.ACC_INTERFACE | Const.ACC_ABSTRACT, new String[] { INTERFACE_NAME_A });
+        final Path path = tempDir.resolve(INTERFACE_NAME_B + ".class");
+        classGen.getJavaClass().dump(path.toString());
+        return path;
     }
 
-    private static void writeTargetClass() throws Exception {
+    private static Path writeTargetClass() throws Exception {
         // Create a class that implements InterfaceA
-        final ClassGen cg = new ClassGen(CLASS_NAME, "java.lang.Object", "VulnerableClass.java", Const.ACC_PUBLIC, new String[] { "InterfaceA" });
+        final ClassGen cg = new ClassGen(CLASS_NAME, "java.lang.Object", CLASS_NAME + ".java", Const.ACC_PUBLIC, new String[] { INTERFACE_NAME_A });
         // Add default constructor
         final InstructionList il = new InstructionList();
         final MethodGen constructor = new MethodGen(Const.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {}, "<init>", CLASS_NAME, il, cg.getConstantPool());
@@ -119,7 +135,9 @@ class JavaClassTest {
         cg.addMethod(constructor.getMethod());
         il.dispose();
         // Create the class file
-        cg.getJavaClass().dump(tempDir.resolve(CLASS_NAME + ".class").toString());
+        final Path path = tempDir.resolve(CLASS_NAME + ".class");
+        cg.getJavaClass().dump(path.toString());
+        return path;
     }
 
     private Field findFieldDoesNotExist(final Class<?> clazz) throws ClassNotFoundException {
@@ -149,11 +167,26 @@ class JavaClassTest {
     }
 
     @Test
-    void testFindFieldCustomInterface1() throws ClassNotFoundException {
+    void testFindFieldCustomInterface1() throws IOException, ClassNotFoundException {
         // Set up repository to load classes from the malicious_classes directory
-        final String classPath = tempDir.toString() + System.getProperty("path.separator") + System.getProperty("java.class.path");
+        final String classPath = tempDir.toString() + SystemProperties.getPathSeparator() + SystemProperties.getJavaClassPath();
         Repository.setRepository(SyntheticRepository.getInstance(new ClassPath(classPath)));
         assertThrows(ClassFormatException.class, () -> Repository.lookupClass(CLASS_NAME).findField("nonExistentField", Type.INT));
+        // sanity check
+        final Path targetDir = Paths.get("target/test-classes");
+        final Path targetClassFile = targetDir.resolve(CLASS_NAME + ".class");
+        final Path targetInterfaceA = targetDir.resolve(INTERFACE_NAME_A + ".class");
+        final Path targetInterfaceB = targetDir.resolve(INTERFACE_NAME_B + ".class");
+        try {
+            Files.copy(tempClassFile, targetClassFile);
+            Files.copy(tempIntefaceAFile, targetInterfaceA);
+            Files.copy(tempIntefaceBFile, targetInterfaceB);
+            assertThrows(ClassCircularityError.class, () -> Class.forName(CLASS_NAME));
+        } finally {
+            Files.delete(targetClassFile);
+            Files.delete(targetInterfaceA);
+            Files.delete(targetInterfaceB);
+        }
     }
 
     @Test
@@ -195,5 +228,4 @@ class JavaClassTest {
     void testGetSuperClassesAll(final Class<?> clazz) throws ClassNotFoundException {
         assertNotNull(Repository.lookupClass(clazz.getName()).getSuperClasses());
     }
-
 }
