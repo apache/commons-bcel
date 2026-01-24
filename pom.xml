@@ -45,7 +45,7 @@
     <commons.componentid>bcel</commons.componentid>
     <commons.module.name>org.apache.bcel</commons.module.name>
     <commons.release.version>6.12.1</commons.release.version>
-    <commons.release.next>6.12.1</commons.release.next>
+    <commons.release.next>6.12.2</commons.release.next>
     <commons.release.isDistModule>true</commons.release.isDistModule>
     <commons.rc.version>RC1</commons.rc.version>
     <commons.bc.version>6.12.0</commons.bc.version>
