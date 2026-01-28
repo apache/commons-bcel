@@ -96,6 +96,7 @@ class VerifyBadClassesTest {
             exitValue = resultHandler.getExitValue();
         } catch (final InterruptedException e) {
             // Ignore exception, but watchdog.killedProcess() records that the process timed out.
+            Thread.currentThread().interrupt();
         }
         final boolean timedOut = executor.isFailure(exitValue) && watchdog.killedProcess();
         if (timedOut) {
