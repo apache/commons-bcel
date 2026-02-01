@@ -119,10 +119,10 @@ class RecordTest extends AbstractTest {
         assertEquals(0, firstComponent.getAttributes().length);
         assertEquals(recordAttribute.getConstantPool(), firstComponent.getConstantPool());
         assertEquals("RecordComponentInfo(aNumber,I,0):", firstComponent.toString());
-        RuntimeVisibleAnnotations ann = secondComponent.getAttribute(Const.ATTR_RUNTIME_VISIBLE_ANNOTATIONS);
+        final RuntimeVisibleAnnotations ann = secondComponent.getAttribute(Const.ATTR_RUNTIME_VISIBLE_ANNOTATIONS);
         assertEquals("RuntimeVisibleAnnotations:\n"
                 + "  @Ljavax/annotation/Nonnull;", ann.toString());
         assertNull(secondComponent.getAttribute(Const.ATTR_RUNTIME_INVISIBLE_ANNOTATIONS));
     }
-    
+
 }
