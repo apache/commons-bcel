@@ -3168,8 +3168,8 @@ public final class Const {
     /** Attribute constant for Record. */
     public static final byte ATTR_RECORD = 27;
 
-    /** Attribute constant for PermittedSubclasses. 
-     *  @since 6.13.0 
+    /** Attribute constant for PermittedSubclasses.
+     *  @since 6.13.0
      */
     public static final byte ATTR_PERMITTED_SUBCLASSES = 28;
 

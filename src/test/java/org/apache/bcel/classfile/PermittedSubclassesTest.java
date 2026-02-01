@@ -19,9 +19,9 @@
 
 package org.apache.bcel.classfile;
 
-import org.apache.bcel.AbstractTest;
-import org.apache.bcel.verifier.statics.StringRepresentation;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,9 +30,9 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.apache.bcel.AbstractTest;
+import org.apache.bcel.verifier.statics.StringRepresentation;
+import org.junit.jupiter.api.Test;
 
 class PermittedSubclassesTest extends AbstractTest {
 
