@@ -179,8 +179,12 @@ public final class ConstantPoolModuleAccessTest {
                         expected.add("jdk.internal.logger.DefaultLoggerFinder");
                         expected.add("sun.text.spi.JavaTimeDateTimePatternProvider");
                         expected.add("sun.util.locale.provider.LocaleDataMetaInfo");
-                        expected.add("sun.util.resources.LocaleData$CommonResourceBundleProvider");
-                        expected.add("sun.util.resources.LocaleData$SupplementaryResourceBundleProvider");
+                        if (javaClass.getMajor() <= Const.MAJOR_25) {
+                            expected.add("sun.util.resources.LocaleData$CommonResourceBundleProvider");
+                            expected.add("sun.util.resources.LocaleData$SupplementaryResourceBundleProvider");
+                        } else {
+                            expected.add("sun.util.resources.LocaleData$LocaleDataResourceBundleProvider");
+                        }
                         expected.add("sun.util.spi.CalendarProvider");
                         assertEquals(expected, Arrays.asList(usedClassNames));
                     } else if (urlPath.contains("/jdk.management.agent/module-info.class") && javaClass.getMajor() < Const.MAJOR_21) {
@@ -261,8 +265,12 @@ public final class ConstantPoolModuleAccessTest {
                         assertEquals(expected, Arrays.asList(usedClassNames));
                     } else if (urlPath.contains("/jdk.jpackage/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
-                        expected.add("jdk.jpackage.internal.Bundler");
-                        expected.add("jdk.jpackage.internal.Bundlers");
+                        if (javaClass.getMajor() <= Const.MAJOR_25) {
+                            expected.add("jdk.jpackage.internal.Bundler");
+                            expected.add("jdk.jpackage.internal.Bundlers");
+                        } else {
+                            expected.add("jdk.jpackage.internal.cli.CliBundlingEnvironment");
+                        }
                         assertEquals(expected, Arrays.asList(usedClassNames));
                     } else if (urlPath.contains("/jdk.naming.ldap/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
