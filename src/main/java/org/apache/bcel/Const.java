@@ -3168,13 +3168,21 @@ public final class Const {
     /** Attribute constant for Record. */
     public static final byte ATTR_RECORD = 27;
 
+    /**
+     * Attribute constant for PermittedSubclasses.
+     *
+     * @since 6.13.0
+     */
+    public static final byte ATTR_PERMITTED_SUBCLASSES = 28;
+
     /** Count of known attributes. */
-    public static final short KNOWN_ATTRIBUTES = 28; // count of attributes
+    public static final short KNOWN_ATTRIBUTES = 29; // count of attributes
 
     private static final String[] ATTRIBUTE_NAMES = { "SourceFile", "ConstantValue", "Code", "Exceptions", "LineNumberTable", "LocalVariableTable",
             "InnerClasses", "Synthetic", "Deprecated", "PMGClass", "Signature", "StackMap", "RuntimeVisibleAnnotations", "RuntimeInvisibleAnnotations",
             "RuntimeVisibleParameterAnnotations", "RuntimeInvisibleParameterAnnotations", "AnnotationDefault", "LocalVariableTypeTable", "EnclosingMethod",
-            "StackMapTable", "BootstrapMethods", "MethodParameters", "Module", "ModulePackages", "ModuleMainClass", "NestHost", "NestMembers", "Record" };
+            "StackMapTable", "BootstrapMethods", "MethodParameters", "Module", "ModulePackages", "ModuleMainClass", "NestHost", "NestMembers", "Record",
+            "PermittedSubclasses" };
 
     /**
      * Constants used in the StackMap attribute.

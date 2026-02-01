@@ -412,6 +412,16 @@ public interface Visitor {
     }
 
     /**
+     * Visits a PermittedSubclasses attribute.
+     *
+     * @param obj the attribute.
+     * @since 6.13.0
+     */
+    default void visitPermittedSubclasses(final PermittedSubclasses obj) {
+        // empty
+    }
+
+    /**
      * Visits a ParameterAnnotations attribute.
      *
      * @param obj the attribute.
