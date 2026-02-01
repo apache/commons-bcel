@@ -387,6 +387,8 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     }
 
     /**
+     * Visits PermittedSubclasses attribute.
+     *
      * @since 6.13.0
      */
     @Override
