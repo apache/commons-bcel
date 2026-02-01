@@ -284,11 +284,6 @@ public class EmptyVisitor implements Visitor {
     public void visitNestMembers(final NestMembers obj) {
     }
 
-    /** @since 6.13.0 */
-    @Override
-    public void visitPermittedSubclasses(final PermittedSubclasses obj) {
-    }
-
     /**
      * @since 6.0
      */
@@ -301,6 +296,11 @@ public class EmptyVisitor implements Visitor {
      */
     @Override
     public void visitParameterAnnotationEntry(final ParameterAnnotationEntry parameterAnnotationEntry) {
+    }
+
+    /** @since 6.13.0 */
+    @Override
+    public void visitPermittedSubclasses(final PermittedSubclasses obj) {
     }
 
     @Override

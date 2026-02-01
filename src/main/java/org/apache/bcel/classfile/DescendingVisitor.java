@@ -496,14 +496,6 @@ public class DescendingVisitor implements Visitor {
         stack.pop();
     }
 
-    /** @since 6.13.0 */
-    @Override
-    public void visitPermittedSubclasses(final PermittedSubclasses obj) {
-        stack.push(obj);
-        obj.accept(visitor);
-        stack.pop();
-    }
-
     /**
      * @since 6.0
      */
@@ -517,6 +509,14 @@ public class DescendingVisitor implements Visitor {
     /** @since 6.0 */
     @Override
     public void visitParameterAnnotationEntry(final ParameterAnnotationEntry obj) {
+        stack.push(obj);
+        obj.accept(visitor);
+        stack.pop();
+    }
+
+    /** @since 6.13.0 */
+    @Override
+    public void visitPermittedSubclasses(final PermittedSubclasses obj) {
         stack.push(obj);
         obj.accept(visitor);
         stack.pop();
