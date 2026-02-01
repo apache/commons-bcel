@@ -92,6 +92,17 @@ class RecordTest extends AbstractTest {
         assertFalse(simpleClazz.isRecord(), "Expected SimpleClass class to say it was not a record - but it didn't !");
     }
 
+    @Test
+    void testRecordComponentGetAttribute() throws ClassFormatException, IOException {
+        final JavaClass clazz = new ClassParser("src/test/resources/record/SimpleRecord.class").parse();
+        final Record recordAttribute = (Record) findAttribute("Record", clazz)[0];
+        final RecordComponentInfo secondComponent = recordAttribute.getComponents()[1];
+        final RuntimeVisibleAnnotations ann = secondComponent.getAttribute(Const.ATTR_RUNTIME_VISIBLE_ANNOTATIONS);
+        assertEquals("RuntimeVisibleAnnotations:\n"
+                + "  @Ljavax/annotation/Nonnull;", ann.toString());
+        assertNull(secondComponent.getAttribute(Const.ATTR_RUNTIME_INVISIBLE_ANNOTATIONS));
+    }
+
     /**
      * A simple record with two simple fields, an integer and a String field, should
      * show its content in its string representation.
@@ -118,16 +129,5 @@ class RecordTest extends AbstractTest {
         assertEquals(0, firstComponent.getAttributes().length);
         assertEquals(recordAttribute.getConstantPool(), firstComponent.getConstantPool());
         assertEquals("RecordComponentInfo(aNumber,I,0):", firstComponent.toString());
-    }
-
-    @Test
-    void testRecordComponentGetAttribute() throws ClassFormatException, IOException {
-        final JavaClass clazz = new ClassParser("src/test/resources/record/SimpleRecord.class").parse();
-        final Record recordAttribute = (Record) findAttribute("Record", clazz)[0];
-        final RecordComponentInfo secondComponent = recordAttribute.getComponents()[1];
-        final RuntimeVisibleAnnotations ann = secondComponent.getAttribute(Const.ATTR_RUNTIME_VISIBLE_ANNOTATIONS);
-        assertEquals("RuntimeVisibleAnnotations:\n"
-                + "  @Ljavax/annotation/Nonnull;", ann.toString());
-        assertNull(secondComponent.getAttribute(Const.ATTR_RUNTIME_INVISIBLE_ANNOTATIONS));
     }
 }

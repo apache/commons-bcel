@@ -63,6 +63,7 @@ The <action> type attribute can be add,update,fix,remove.
       <!-- FIX -->
       <action                  type="update" dev="ggregory" due-to="nbauma109">Fix constant pool module access test on Java 26 and above #492.</action>
       <action                  type="update" dev="ggregory" due-to="nbauma109, Gary Gregory">Add support for permitted subclasses #493.</action>
+      <action                  type="update" dev="ggregory" due-to="nbauma109, Gary Gregory">Add RecordComponentInfo.getAttribute(byte tag)#494.</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 95 to 96.</action>
