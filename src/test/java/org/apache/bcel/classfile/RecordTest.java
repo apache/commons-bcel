@@ -21,12 +21,14 @@ package org.apache.bcel.classfile;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.apache.bcel.AbstractTest;
+import org.apache.bcel.Const;
 import org.apache.bcel.util.SyntheticRepository;
 import org.apache.bcel.visitors.CountingVisitor;
 import org.junit.jupiter.api.Test;
@@ -111,11 +113,16 @@ class RecordTest extends AbstractTest {
                 + "  RuntimeVisibleAnnotations:\n"
                 + "  @Ljavax/annotation/Nonnull;", recordAttribute.toString());
         final RecordComponentInfo firstComponent = recordAttribute.getComponents()[0];
+        final RecordComponentInfo secondComponent = recordAttribute.getComponents()[1];
         assertEquals(5, firstComponent.getIndex());
         assertEquals(6, firstComponent.getDescriptorIndex());
         assertEquals(0, firstComponent.getAttributes().length);
         assertEquals(recordAttribute.getConstantPool(), firstComponent.getConstantPool());
         assertEquals("RecordComponentInfo(aNumber,I,0):", firstComponent.toString());
+        RuntimeVisibleAnnotations ann = secondComponent.getAttribute(Const.ATTR_RUNTIME_VISIBLE_ANNOTATIONS);
+        assertEquals("RuntimeVisibleAnnotations:\n"
+                + "  @Ljavax/annotation/Nonnull;", ann.toString());
+        assertNull(secondComponent.getAttribute(Const.ATTR_RUNTIME_INVISIBLE_ANNOTATIONS));
     }
-
+    
 }
