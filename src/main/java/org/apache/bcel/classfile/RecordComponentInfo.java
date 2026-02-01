@@ -78,7 +78,7 @@ public class RecordComponentInfo implements Node {
     }
 
     /**
-     * Gets attribute for given tag.
+     * Gets the attribute for the given tag if present, or null if absent.
      *
      * @param <T> the attribute type.
      * @param tag the attribute tag.
