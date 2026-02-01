@@ -58,6 +58,7 @@ import org.apache.bcel.classfile.LocalVariableTypeTable;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.classfile.MethodParameters;
 import org.apache.bcel.classfile.NestMembers;
+import org.apache.bcel.classfile.PermittedSubclasses;
 import org.apache.bcel.classfile.Node;
 import org.apache.bcel.classfile.ParameterAnnotationEntry;
 import org.apache.bcel.classfile.ParameterAnnotations;
@@ -382,6 +383,14 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
      */
     @Override
     public void visitNestMembers(final NestMembers obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.13.0
+     */
+    @Override
+    public void visitPermittedSubclasses(final PermittedSubclasses obj) {
         tostring = toString(obj);
     }
 
