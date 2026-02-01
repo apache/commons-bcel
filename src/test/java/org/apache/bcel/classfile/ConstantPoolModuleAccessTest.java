@@ -261,8 +261,12 @@ public final class ConstantPoolModuleAccessTest {
                         assertEquals(expected, Arrays.asList(usedClassNames));
                     } else if (urlPath.contains("/jdk.jpackage/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
-                        expected.add("jdk.jpackage.internal.Bundler");
-                        expected.add("jdk.jpackage.internal.Bundlers");
+                        if (javaClass.getMajor() <= Const.MAJOR_25) {
+                            expected.add("jdk.jpackage.internal.Bundler");
+                            expected.add("jdk.jpackage.internal.Bundlers");
+                        } else {
+                            expected.add("jdk.jpackage.internal.cli.CliBundlingEnvironment");
+                        }
                         assertEquals(expected, Arrays.asList(usedClassNames));
                     } else if (urlPath.contains("/jdk.naming.ldap/module-info.class")) {
                         final List<String> expected = new ArrayList<>();
