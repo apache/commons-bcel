@@ -113,16 +113,21 @@ class RecordTest extends AbstractTest {
                 + "  RuntimeVisibleAnnotations:\n"
                 + "  @Ljavax/annotation/Nonnull;", recordAttribute.toString());
         final RecordComponentInfo firstComponent = recordAttribute.getComponents()[0];
-        final RecordComponentInfo secondComponent = recordAttribute.getComponents()[1];
         assertEquals(5, firstComponent.getIndex());
         assertEquals(6, firstComponent.getDescriptorIndex());
         assertEquals(0, firstComponent.getAttributes().length);
         assertEquals(recordAttribute.getConstantPool(), firstComponent.getConstantPool());
         assertEquals("RecordComponentInfo(aNumber,I,0):", firstComponent.toString());
+    }
+
+    @Test
+    void testRecordComponentGetAttribute() throws ClassFormatException, IOException {
+        final JavaClass clazz = new ClassParser("src/test/resources/record/SimpleRecord.class").parse();
+        final Record recordAttribute = (Record) findAttribute("Record", clazz)[0];
+        final RecordComponentInfo secondComponent = recordAttribute.getComponents()[1];
         final RuntimeVisibleAnnotations ann = secondComponent.getAttribute(Const.ATTR_RUNTIME_VISIBLE_ANNOTATIONS);
         assertEquals("RuntimeVisibleAnnotations:\n"
                 + "  @Ljavax/annotation/Nonnull;", ann.toString());
         assertNull(secondComponent.getAttribute(Const.ATTR_RUNTIME_INVISIBLE_ANNOTATIONS));
     }
-
 }
