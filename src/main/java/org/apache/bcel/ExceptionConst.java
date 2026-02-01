@@ -49,10 +49,6 @@ public final class ExceptionConst {
         EXCS_ARRAY_EXCEPTION,
     }
 
-    /** Private constructor - utility class. */
-    public ExceptionConst() {
-    }
-
     /**
      * The mother of all exceptions
      */
@@ -68,12 +64,12 @@ public final class ExceptionConst {
      */
     public static final Class<LinkageError> LINKING_EXCEPTION = LinkageError.class;
 
+    /** Exception class: ClassCircularityError. */
+    public static final Class<ClassCircularityError> CLASS_CIRCULARITY_ERROR = ClassCircularityError.class;
+
     /**
      * Linking Exceptions.
      */
-
-    /** Exception class: ClassCircularityError. */
-    public static final Class<ClassCircularityError> CLASS_CIRCULARITY_ERROR = ClassCircularityError.class;
 
     /** Exception class: ClassFormatError. */
     public static final Class<ClassFormatError> CLASS_FORMAT_ERROR = ClassFormatError.class;
@@ -110,12 +106,12 @@ public final class ExceptionConst {
     /* UnsupportedClassVersionError is new in JDK 1.2 */
 //    public static final Class UnsupportedClassVersionError = UnsupportedClassVersionError.class;
 
+    /** Exception class: NullPointerException. */
+    public static final Class<NullPointerException> NULL_POINTER_EXCEPTION = NullPointerException.class;
+
     /**
      * Run-Time Exceptions.
      */
-
-    /** Exception class: NullPointerException. */
-    public static final Class<NullPointerException> NULL_POINTER_EXCEPTION = NullPointerException.class;
 
     /** Exception class: ArrayIndexOutOfBoundsException. */
     public static final Class<ArrayIndexOutOfBoundsException> ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION = ArrayIndexOutOfBoundsException.class;
@@ -180,6 +176,10 @@ public final class ExceptionConst {
     // helper method to merge exception class arrays
     private static Class<?>[] mergeExceptions(final Class<?>[] input, final Class<?>... extraClasses) {
         return ArrayUtils.addAll(input, extraClasses);
+    }
+
+    /** Private constructor - utility class. */
+    public ExceptionConst() {
     }
 
 }

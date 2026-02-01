@@ -103,6 +103,27 @@ class JavaClassCyclicTest {
         }
     }
 
+    void test(final Callable<JavaClass[]> callable) throws Exception {
+        final ExecutorService executor = Executors.newSingleThreadExecutor();
+        try {
+            final Future<JavaClass[]> future = executor.submit(callable);
+            // Without fix: will timeout (infinite loop)
+            // With fix: throws ClassCircularityError immediately
+            future.get(3, TimeUnit.SECONDS);
+            fail("Should have thrown ClassCircularityError for cyclic hierarchy");
+        } catch (final TimeoutException e) {
+            fail("Timeout: infinite loop vulnerability detected");
+        } catch (final ExecutionException e) {
+            if (e.getCause() instanceof ClassFormatException) {
+                // Expected with fix - test passes
+                return;
+            }
+            throw e;
+        } finally {
+            executor.shutdownNow();
+        }
+    }
+
     /**
      * Tests that getAllInterfaces() handles cyclic interface hierarchies gracefully. BUG: Without fix, getAllInterfaces() has no visited-node check before
      * enqueueing, causing infinite queue growth and eventual heap exhaustion (OutOfMemoryError). FIXED: With the fix, already-visited nodes are skipped,
@@ -140,26 +161,5 @@ class JavaClassCyclicTest {
     @Test
     void testGetSuperClassesCyclic() throws Exception {
         test(cyclicClassA::getSuperClasses);
-    }
-
-    void test(final Callable<JavaClass[]> callable) throws Exception {
-        final ExecutorService executor = Executors.newSingleThreadExecutor();
-        try {
-            final Future<JavaClass[]> future = executor.submit(callable);
-            // Without fix: will timeout (infinite loop)
-            // With fix: throws ClassCircularityError immediately
-            future.get(3, TimeUnit.SECONDS);
-            fail("Should have thrown ClassCircularityError for cyclic hierarchy");
-        } catch (final TimeoutException e) {
-            fail("Timeout: infinite loop vulnerability detected");
-        } catch (final ExecutionException e) {
-            if (e.getCause() instanceof ClassFormatException) {
-                // Expected with fix - test passes
-                return;
-            }
-            throw e;
-        } finally {
-            executor.shutdownNow();
-        }
     }
 }
