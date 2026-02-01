@@ -55,6 +55,8 @@ public final class PermittedSubclasses extends Attribute {
     }
 
     /**
+     * Constructs object from table of class indices in constant pool.
+     *
      * @param nameIndex Index in constant pool.
      * @param length Content length in bytes.
      * @param classes Table of indices in constant pool.
@@ -88,6 +90,8 @@ public final class PermittedSubclasses extends Attribute {
     }
 
     /**
+     * Creates a deep clone of this object given constant pool.
+     *
      * @return deep copy of this attribute.
      */
     @Override
@@ -116,6 +120,8 @@ public final class PermittedSubclasses extends Attribute {
     }
 
     /**
+     * Gets the class indices in constant pool.
+     *
      * @return array of indices into constant pool of class names.
      */
     public int[] getClasses() {
@@ -123,6 +129,8 @@ public final class PermittedSubclasses extends Attribute {
     }
 
     /**
+     * Gets permitted class names.
+     *
      * @return string array of class names.
      */
     public String[] getClassNames() {
@@ -132,6 +140,8 @@ public final class PermittedSubclasses extends Attribute {
     }
 
     /**
+     * Gets the number of classes.
+     *
      * @return Length of classes table.
      */
     public int getNumberClasses() {
@@ -139,6 +149,8 @@ public final class PermittedSubclasses extends Attribute {
     }
 
     /**
+     * Sets class indices.
+     *
      * @param classes the list of class indexes Also redefines number_of_classes according to table length.
      */
     public void setClasses(final int[] classes) {
@@ -146,6 +158,8 @@ public final class PermittedSubclasses extends Attribute {
     }
 
     /**
+     * String representation of PermittedSubclasses (for debugging purposes).
+     *
      * @return String representation, that is, a list of permitted subclasses.
      */
     @Override
