@@ -30,6 +30,8 @@ public abstract class NativeVerifier {
 
     /**
      * Works only on the first argument.
+     *
+     * @param args command line arguments.
      */
     public static void main(final String[] args) {
         if (args.length != 1) {

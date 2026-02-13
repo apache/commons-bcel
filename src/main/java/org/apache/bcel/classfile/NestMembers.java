@@ -54,6 +54,8 @@ public final class NestMembers extends Attribute {
     }
 
     /**
+     * Constructs a new NestMembers.
+     *
      * @param nameIndex Index in constant pool.
      * @param length Content length in bytes.
      * @param classes Table of indices in constant pool.
@@ -115,6 +117,8 @@ public final class NestMembers extends Attribute {
     }
 
     /**
+     * Gets the classes.
+     *
      * @return array of indices into constant pool of class names.
      */
     public int[] getClasses() {
@@ -122,6 +126,8 @@ public final class NestMembers extends Attribute {
     }
 
     /**
+     * Gets the class names.
+     *
      * @return string array of class names.
      */
     public String[] getClassNames() {
@@ -131,6 +137,8 @@ public final class NestMembers extends Attribute {
     }
 
     /**
+     * Gets the number of classes.
+     *
      * @return Length of classes table.
      */
     public int getNumberClasses() {
@@ -138,6 +146,8 @@ public final class NestMembers extends Attribute {
     }
 
     /**
+     * Sets the classes.
+     *
      * @param classes the list of class indexes Also redefines number_of_classes according to table length.
      */
     public void setClasses(final int[] classes) {

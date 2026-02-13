@@ -43,10 +43,20 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
     NEWARRAY() {
     }
 
+    /**
+     * Constructs a NEWARRAY instruction.
+     *
+     * @param type element type of array.
+     */
     public NEWARRAY(final BasicType type) {
         this(type.getType());
     }
 
+    /**
+     * Constructs a NEWARRAY instruction.
+     *
+     * @param type element type code.
+     */
     public NEWARRAY(final byte type) {
         super(org.apache.bcel.Const.NEWARRAY, (short) 2);
         this.type = type;
@@ -83,6 +93,8 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
     }
 
     /**
+     * Gets the type of the constructed array.
+     *
      * @return type of constructed array.
      */
     public final Type getType() {
@@ -90,6 +102,8 @@ public class NEWARRAY extends Instruction implements AllocationInstruction, Exce
     }
 
     /**
+     * Gets the type code.
+     *
      * @return numeric code for basic element type.
      */
     public final byte getTypecode() {

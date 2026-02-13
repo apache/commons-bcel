@@ -41,6 +41,11 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
     RET() {
     }
 
+    /**
+     * Constructs a RET instruction.
+     *
+     * @param index index of local variable containing the return address.
+     */
     public RET(final int index) {
         super(org.apache.bcel.Const.RET, (short) 2);
         setIndex(index); // May set wide as side effect

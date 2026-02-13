@@ -42,6 +42,11 @@ public class PUTFIELD extends FieldInstruction implements PopInstruction, Except
     PUTFIELD() {
     }
 
+    /**
+     * Constructs a PUTFIELD instruction.
+     *
+     * @param index index into constant pool.
+     */
     public PUTFIELD(final int index) {
         super(Const.PUTFIELD, index);
     }

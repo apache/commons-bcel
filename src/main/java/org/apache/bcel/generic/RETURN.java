@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class RETURN extends ReturnInstruction {
 
+    /**
+     * Constructs a RETURN instruction.
+     */
     public RETURN() {
         super(org.apache.bcel.Const.RETURN);
     }

@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class SALOAD extends ArrayInstruction implements StackProducer {
 
+    /**
+     * Constructs a SALOAD instruction.
+     */
     public SALOAD() {
         super(org.apache.bcel.Const.SALOAD);
     }

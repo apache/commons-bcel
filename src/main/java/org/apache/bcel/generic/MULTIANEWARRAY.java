@@ -42,6 +42,12 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
     MULTIANEWARRAY() {
     }
 
+    /**
+     * Constructs a MULTIANEWARRAY instruction.
+     *
+     * @param index index into constant pool.
+     * @param dimensions number of dimensions.
+     */
     public MULTIANEWARRAY(final int index, final short dimensions) {
         super(org.apache.bcel.Const.MULTIANEWARRAY, index);
         if (dimensions < 1) {
@@ -90,6 +96,8 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
     }
 
     /**
+     * Gets the number of dimensions.
+     *
      * @return number of dimensions to be created.
      */
     public final short getDimensions() {

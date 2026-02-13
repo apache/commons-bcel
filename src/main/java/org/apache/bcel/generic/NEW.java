@@ -35,6 +35,11 @@ public class NEW extends CPInstruction implements LoadClass, AllocationInstructi
     NEW() {
     }
 
+    /**
+     * Constructs a NEW instruction.
+     *
+     * @param index index into constant pool.
+     */
     public NEW(final int index) {
         super(org.apache.bcel.Const.NEW, index);
     }

@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class POP extends StackInstruction implements PopInstruction {
 
+    /**
+     * Constructs a POP instruction.
+     */
     public POP() {
         super(org.apache.bcel.Const.POP);
     }

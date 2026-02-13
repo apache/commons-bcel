@@ -42,6 +42,11 @@ public class PUTSTATIC extends FieldInstruction implements ExceptionThrower, Pop
     PUTSTATIC() {
     }
 
+    /**
+     * Constructs a PUTSTATIC instruction.
+     *
+     * @param index index into constant pool.
+     */
     public PUTSTATIC(final int index) {
         super(Const.PUTSTATIC, index);
     }

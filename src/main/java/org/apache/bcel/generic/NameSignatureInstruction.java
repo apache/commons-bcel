@@ -31,14 +31,26 @@ import org.apache.bcel.classfile.ConstantUtf8;
  */
 public abstract class NameSignatureInstruction extends CPInstruction {
 
+    /**
+     * Constructs a NameSignatureInstruction.
+     */
     public NameSignatureInstruction() {
     }
 
+    /**
+     * Constructs a NameSignatureInstruction.
+     *
+     * @param opcode the opcode.
+     * @param index index into constant pool.
+     */
     public NameSignatureInstruction(final short opcode, final int index) {
         super(opcode, index);
     }
 
     /**
+     * Gets the name of the referenced method or field.
+     *
+     * @param cpg constant pool generator.
      * @return name of referenced method/field.
      */
     public String getName(final ConstantPoolGen cpg) {
@@ -47,6 +59,12 @@ public abstract class NameSignatureInstruction extends CPInstruction {
         return ((ConstantUtf8) cp.getConstant(cnat.getNameIndex())).getBytes();
     }
 
+    /**
+     * Gets the name and type constant.
+     *
+     * @param cpg constant pool generator.
+     * @return the name and type constant.
+     */
     public ConstantNameAndType getNameAndType(final ConstantPoolGen cpg) {
         final ConstantPool cp = cpg.getConstantPool();
         final ConstantCP cmr = (ConstantCP) cp.getConstant(super.getIndex());
@@ -54,6 +72,9 @@ public abstract class NameSignatureInstruction extends CPInstruction {
     }
 
     /**
+     * Gets the signature of the referenced method or field.
+     *
+     * @param cpg constant pool generator.
      * @return signature of referenced method/field.
      */
     public String getSignature(final ConstantPoolGen cpg) {

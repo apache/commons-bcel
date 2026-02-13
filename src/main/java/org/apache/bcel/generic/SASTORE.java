@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class SASTORE extends ArrayInstruction implements StackConsumer {
 
+    /**
+     * Constructs a SASTORE instruction.
+     */
     public SASTORE() {
         super(org.apache.bcel.Const.SASTORE);
     }

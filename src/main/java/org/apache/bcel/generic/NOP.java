@@ -23,6 +23,9 @@ package org.apache.bcel.generic;
  */
 public class NOP extends Instruction {
 
+    /**
+     * Constructs a NOP instruction.
+     */
     public NOP() {
         super(org.apache.bcel.Const.NOP, (short) 1);
     }
