@@ -33,6 +33,11 @@ public class LDC2_W extends CPInstruction implements PushInstruction {
     LDC2_W() {
     }
 
+    /**
+     * Constructs an LDC2_W instruction.
+     *
+     * @param index index into constant pool.
+     */
     public LDC2_W(final int index) {
         super(org.apache.bcel.Const.LDC2_W, index);
     }
@@ -64,6 +69,12 @@ public class LDC2_W extends CPInstruction implements PushInstruction {
         }
     }
 
+    /**
+     * Gets the constant value from the constant pool.
+     *
+     * @param cpg constant pool generator.
+     * @return the constant value as a Number.
+     */
     public Number getValue(final ConstantPoolGen cpg) {
         final org.apache.bcel.classfile.Constant c = cpg.getConstantPool().getConstant(super.getIndex());
         switch (c.getTag()) {

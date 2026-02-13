@@ -51,6 +51,8 @@ public final class ModuleMainClass extends Attribute {
     }
 
     /**
+     * Constructs a new ModuleMainClass.
+     *
      * @param nameIndex Index in constant pool.
      * @param length Content length in bytes.
      * @param mainClassIndex Host class index.
@@ -105,6 +107,8 @@ public final class ModuleMainClass extends Attribute {
     }
 
     /**
+     * Gets the host class index.
+     *
      * @return index into constant pool of host class name.
      */
     public int getHostClassIndex() {
@@ -112,6 +116,8 @@ public final class ModuleMainClass extends Attribute {
     }
 
     /**
+     * Sets the host class index.
+     *
      * @param mainClassIndex the host class index.
      */
     public void setHostClassIndex(final int mainClassIndex) {

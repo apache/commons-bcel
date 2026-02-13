@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class LOR extends ArithmeticInstruction {
 
+    /**
+     * Constructs an LOR instruction.
+     */
     public LOR() {
         super(org.apache.bcel.Const.LOR);
     }

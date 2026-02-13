@@ -77,12 +77,25 @@ public class LocalVariableTypeTable extends Attribute implements Iterable<LocalV
         }
     }
 
+    /**
+     * Constructs a new LocalVariableTypeTable.
+     *
+     * @param nameIndex index into constant pool.
+     * @param length content length in bytes.
+     * @param localVariableTypeTable the local variable type table.
+     * @param constantPool the constant pool.
+     */
     public LocalVariableTypeTable(final int nameIndex, final int length, final LocalVariable[] localVariableTypeTable, final ConstantPool constantPool) {
         super(Const.ATTR_LOCAL_VARIABLE_TYPE_TABLE, nameIndex, length, constantPool);
         this.localVariableTypeTable = localVariableTypeTable != null ? localVariableTypeTable : LocalVariable.EMPTY_ARRAY;
         Args.requireU2(this.localVariableTypeTable.length, "localVariableTypeTable.length");
     }
 
+    /**
+     * Constructs a copy.
+     *
+     * @param c the instance to copy.
+     */
     public LocalVariableTypeTable(final LocalVariableTypeTable c) {
         this(c.getNameIndex(), c.getLength(), c.getLocalVariableTypeTable(), c.getConstantPool());
     }
@@ -113,6 +126,12 @@ public class LocalVariableTypeTable extends Attribute implements Iterable<LocalV
         }
     }
 
+    /**
+     * Gets the local variable for the given index.
+     *
+     * @param index the index.
+     * @return the local variable or null if not found.
+     */
     public final LocalVariable getLocalVariable(final int index) {
         for (final LocalVariable variable : localVariableTypeTable) {
             if (variable.getIndex() == index) {
@@ -122,10 +141,20 @@ public class LocalVariableTypeTable extends Attribute implements Iterable<LocalV
         return null;
     }
 
+    /**
+     * Gets the local variable type table.
+     *
+     * @return the local variable type table.
+     */
     public final LocalVariable[] getLocalVariableTypeTable() {
         return localVariableTypeTable;
     }
 
+    /**
+     * Gets the table length.
+     *
+     * @return the table length.
+     */
     public final int getTableLength() {
         return localVariableTypeTable == null ? 0 : localVariableTypeTable.length;
     }
@@ -135,6 +164,11 @@ public class LocalVariableTypeTable extends Attribute implements Iterable<LocalV
         return Stream.of(localVariableTypeTable).iterator();
     }
 
+    /**
+     * Sets the local variable table.
+     *
+     * @param localVariableTable the local variable table to set.
+     */
     public final void setLocalVariableTable(final LocalVariable[] localVariableTable) {
         this.localVariableTypeTable = localVariableTable != null ? localVariableTable : EMPTY_ARRAY;
     }

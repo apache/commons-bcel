@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class LNEG extends ArithmeticInstruction {
 
+    /**
+     * Constructs an LNEG instruction.
+     */
     public LNEG() {
         super(org.apache.bcel.Const.LNEG);
     }

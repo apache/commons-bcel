@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class LUSHR extends ArithmeticInstruction {
 
+    /**
+     * Constructs an LUSHR instruction.
+     */
     public LUSHR() {
         super(org.apache.bcel.Const.LUSHR);
     }

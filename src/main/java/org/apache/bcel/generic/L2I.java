@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class L2I extends ConversionInstruction {
 
+    /**
+     * Constructs an L2I instruction.
+     */
     public L2I() {
         super(org.apache.bcel.Const.L2I);
     }

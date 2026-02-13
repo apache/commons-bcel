@@ -29,6 +29,9 @@ package org.apache.bcel.generic;
  */
 public class LADD extends ArithmeticInstruction {
 
+    /**
+     * Constructs an LADD instruction.
+     */
     public LADD() {
         super(org.apache.bcel.Const.LADD);
     }

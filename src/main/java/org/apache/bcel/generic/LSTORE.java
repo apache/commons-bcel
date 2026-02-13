@@ -34,6 +34,11 @@ public class LSTORE extends StoreInstruction {
         super(org.apache.bcel.Const.LSTORE, org.apache.bcel.Const.LSTORE_0);
     }
 
+    /**
+     * Store long into local variable.
+     *
+     * @param n index of local variable.
+     */
     public LSTORE(final int n) {
         super(org.apache.bcel.Const.LSTORE, org.apache.bcel.Const.LSTORE_0, n);
     }

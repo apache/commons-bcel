@@ -631,10 +631,11 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Create a field instruction.
      *
-     * @param className name of the accessed class.
+     * @param className class name containing the field.
      * @param name name of the referenced field.
      * @param type type of field.
      * @param kind how to access, that is, GETFIELD, PUTFIELD, GETSTATIC, PUTSTATIC.
+     * @return a field instruction.
      * @see Const
      */
     public FieldInstruction createFieldAccess(final String className, final String name, final Type type, final short kind) {

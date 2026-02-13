@@ -31,6 +31,9 @@ import org.apache.bcel.ExceptionConst;
  */
 public class LDIV extends ArithmeticInstruction implements ExceptionThrower {
 
+    /**
+     * Constructs an LDIV instruction.
+     */
     public LDIV() {
         super(org.apache.bcel.Const.LDIV);
     }

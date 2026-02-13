@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class IUSHR extends ArithmeticInstruction {
 
+    /**
+     * Constructs an IUSHR instruction.
+     */
     public IUSHR() {
         super(org.apache.bcel.Const.IUSHR);
     }

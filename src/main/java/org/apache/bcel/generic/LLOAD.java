@@ -34,6 +34,11 @@ public class LLOAD extends LoadInstruction {
         super(org.apache.bcel.Const.LLOAD, org.apache.bcel.Const.LLOAD_0);
     }
 
+    /**
+     * Load long from local variable.
+     *
+     * @param n index of local variable.
+     */
     public LLOAD(final int n) {
         super(org.apache.bcel.Const.LLOAD, org.apache.bcel.Const.LLOAD_0, n);
     }

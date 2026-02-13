@@ -78,6 +78,8 @@ public final class LineNumberTable extends Attribute implements Iterable<LineNum
      * <p>
      * Note that both objects use the same references (shallow copy). Use copy() for a physical copy.
      * </p>
+     *
+     * @param c the instance to copy.
      */
     public LineNumberTable(final LineNumberTable c) {
         this(c.getNameIndex(), c.getLength(), c.getLineNumberTable(), c.getConstantPool());
@@ -124,6 +126,8 @@ public final class LineNumberTable extends Attribute implements Iterable<LineNum
     }
 
     /**
+     * Gets the line number table.
+     *
      * @return Array of (pc offset, line number) pairs.
      */
     public LineNumber[] getLineNumberTable() {
@@ -176,6 +180,11 @@ public final class LineNumberTable extends Attribute implements Iterable<LineNum
         return lineNumberTable[minIndex].getLineNumber();
     }
 
+    /**
+     * Gets the length of the line number table.
+     *
+     * @return the length of the line number table.
+     */
     public int getTableLength() {
         return lineNumberTable.length;
     }
@@ -186,6 +195,8 @@ public final class LineNumberTable extends Attribute implements Iterable<LineNum
     }
 
     /**
+     * Sets the line number table.
+     *
      * @param lineNumberTable the line number entries for this table.
      */
     public void setLineNumberTable(final LineNumber[] lineNumberTable) {

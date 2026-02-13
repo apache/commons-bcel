@@ -51,6 +51,8 @@ public final class LineNumber implements Cloneable, Node {
     }
 
     /**
+     * Constructs a LineNumber.
+     *
      * @param startPc Program Counter (PC) corresponds to.
      * @param lineNumber line number in source file.
      */
@@ -80,6 +82,8 @@ public final class LineNumber implements Cloneable, Node {
     }
 
     /**
+     * Creates a deep copy of this object.
+     *
      * @return deep copy of this object.
      */
     public LineNumber copy() {
@@ -103,6 +107,8 @@ public final class LineNumber implements Cloneable, Node {
     }
 
     /**
+     * Gets the line number.
+     *
      * @return Corresponding source line.
      */
     public int getLineNumber() {
@@ -110,6 +116,8 @@ public final class LineNumber implements Cloneable, Node {
     }
 
     /**
+     * Gets the program counter.
+     *
      * @return PC in code.
      */
     public int getStartPC() {
@@ -117,6 +125,8 @@ public final class LineNumber implements Cloneable, Node {
     }
 
     /**
+     * Sets the line number.
+     *
      * @param lineNumber the source line number.
      */
     public void setLineNumber(final int lineNumber) {
@@ -124,6 +134,8 @@ public final class LineNumber implements Cloneable, Node {
     }
 
     /**
+     * Sets the program counter.
+     *
      * @param startPc the pc for this line number.
      */
     public void setStartPC(final int startPc) {

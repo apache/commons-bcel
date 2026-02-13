@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class LXOR extends ArithmeticInstruction {
 
+    /**
+     * Constructs an LXOR instruction.
+     */
     public LXOR() {
         super(org.apache.bcel.Const.LXOR);
     }

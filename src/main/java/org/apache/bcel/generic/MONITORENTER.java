@@ -29,6 +29,9 @@ import org.apache.bcel.ExceptionConst;
  */
 public class MONITORENTER extends Instruction implements ExceptionThrower, StackConsumer {
 
+    /**
+     * Constructs a MONITORENTER instruction.
+     */
     public MONITORENTER() {
         super(org.apache.bcel.Const.MONITORENTER, (short) 1);
     }

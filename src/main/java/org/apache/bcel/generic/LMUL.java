@@ -29,6 +29,9 @@ package org.apache.bcel.generic;
  */
 public class LMUL extends ArithmeticInstruction {
 
+    /**
+     * Constructs an LMUL instruction.
+     */
     public LMUL() {
         super(org.apache.bcel.Const.LMUL);
     }

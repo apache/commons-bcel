@@ -42,6 +42,11 @@ public class INVOKEVIRTUAL extends InvokeInstruction {
     INVOKEVIRTUAL() {
     }
 
+    /**
+     * Constructs an INVOKEVIRTUAL instruction.
+     *
+     * @param index index into constant pool.
+     */
     public INVOKEVIRTUAL(final int index) {
         super(Const.INVOKEVIRTUAL, index);
     }

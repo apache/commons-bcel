@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class L2D extends ConversionInstruction {
 
+    /**
+     * Constructs an L2D instruction.
+     */
     public L2D() {
         super(org.apache.bcel.Const.L2D);
     }

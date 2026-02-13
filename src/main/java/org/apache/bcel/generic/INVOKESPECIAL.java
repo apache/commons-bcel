@@ -43,6 +43,11 @@ public class INVOKESPECIAL extends InvokeInstruction {
     INVOKESPECIAL() {
     }
 
+    /**
+     * Constructs an INVOKESPECIAL instruction.
+     *
+     * @param index index into constant pool.
+     */
     public INVOKESPECIAL(final int index) {
         super(Const.INVOKESPECIAL, index);
     }

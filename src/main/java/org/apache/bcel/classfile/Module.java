@@ -180,6 +180,8 @@ public final class Module extends Attribute {
     }
 
     /**
+     * Gets the table of exported interfaces.
+     *
      * @return table of exported interfaces.
      * @see ModuleExports
      */
@@ -209,6 +211,8 @@ public final class Module extends Attribute {
     }
 
     /**
+     * Gets the table of open interfaces.
+     *
      * @return table of provided interfaces.
      * @see ModuleOpens
      */
@@ -217,6 +221,8 @@ public final class Module extends Attribute {
     }
 
     /**
+     * Gets the table of provided interfaces.
+     *
      * @return table of provided interfaces.
      * @see ModuleProvides
      */
@@ -225,6 +231,8 @@ public final class Module extends Attribute {
     }
 
     /**
+     * Gets the table of required modules.
+     *
      * @return table of required modules.
      * @see ModuleRequires
      */

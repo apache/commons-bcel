@@ -44,6 +44,11 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
     INVOKEDYNAMIC() {
     }
 
+    /**
+     * Constructs an INVOKEDYNAMIC instruction.
+     *
+     * @param index index into constant pool.
+     */
     public INVOKEDYNAMIC(final int index) {
         super(Const.INVOKEDYNAMIC, index);
     }

@@ -39,6 +39,11 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
     LDC() {
     }
 
+    /**
+     * Constructs an LDC instruction.
+     *
+     * @param index index into constant pool.
+     */
     public LDC(final int index) {
         super(org.apache.bcel.Const.LDC_W, index);
         setSize();
@@ -98,6 +103,12 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
         }
     }
 
+    /**
+     * Gets the constant value from the constant pool.
+     *
+     * @param cpg constant pool generator.
+     * @return the constant value.
+     */
     public Object getValue(final ConstantPoolGen cpg) {
         org.apache.bcel.classfile.Constant c = cpg.getConstantPool().getConstant(super.getIndex());
         switch (c.getTag()) {
@@ -139,7 +150,9 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
         setSize();
     }
 
-    // Adjust to proper size
+    /**
+     * Adjusts to proper size.
+     */
     protected final void setSize() {
         if (super.getIndex() <= org.apache.bcel.Const.MAX_BYTE) { // Fits in one byte?
             super.setOpcode(org.apache.bcel.Const.LDC);

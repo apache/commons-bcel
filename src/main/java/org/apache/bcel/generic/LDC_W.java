@@ -37,6 +37,11 @@ public class LDC_W extends LDC {
     LDC_W() {
     }
 
+    /**
+     * Constructs an LDC_W instruction.
+     *
+     * @param index index into constant pool.
+     */
     public LDC_W(final int index) {
         super(index);
     }

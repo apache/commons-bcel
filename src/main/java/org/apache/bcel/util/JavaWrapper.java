@@ -59,6 +59,9 @@ public class JavaWrapper {
 
     /**
      * Default main method used as wrapper, expects the fully qualified class name of the real class as the first argument.
+     *
+     * @param argv command line arguments where first argument is the class name.
+     * @throws Exception if an error occurs during execution.
      */
     public static void main(final String[] argv) throws Exception {
         /*
@@ -76,10 +79,18 @@ public class JavaWrapper {
 
     private final java.lang.ClassLoader loader;
 
+    /**
+     * Constructs a JavaWrapper with the default class loader.
+     */
     public JavaWrapper() {
         this(getClassLoader());
     }
 
+    /**
+     * Constructs a JavaWrapper with the specified class loader.
+     *
+     * @param loader the class loader to use.
+     */
     public JavaWrapper(final java.lang.ClassLoader loader) {
         this.loader = loader;
     }

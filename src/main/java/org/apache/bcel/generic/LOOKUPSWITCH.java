@@ -36,6 +36,13 @@ public class LOOKUPSWITCH extends Select {
     LOOKUPSWITCH() {
     }
 
+    /**
+     * Constructs a LOOKUPSWITCH instruction.
+     *
+     * @param match array of match values.
+     * @param targets array of branch targets.
+     * @param defaultTarget default branch target.
+     */
     public LOOKUPSWITCH(final int[] match, final InstructionHandle[] targets, final InstructionHandle defaultTarget) {
         super(org.apache.bcel.Const.LOOKUPSWITCH, match, targets, defaultTarget);
         /* alignment remainder assumed 0 here, until dump time. */

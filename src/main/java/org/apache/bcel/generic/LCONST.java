@@ -36,6 +36,11 @@ public class LCONST extends Instruction implements ConstantPushInstruction {
         this(0);
     }
 
+    /**
+     * Constructs an LCONST instruction.
+     *
+     * @param l long constant value.
+     */
     public LCONST(final long l) {
         super(org.apache.bcel.Const.LCONST_0, (short) 1);
         if (l == 0) {

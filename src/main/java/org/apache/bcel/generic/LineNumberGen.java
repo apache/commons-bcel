@@ -40,6 +40,7 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
      * Create a line number.
      *
      * @param ih instruction handle to reference.
+     * @param srcLine source line number.
      */
     public LineNumberGen(final InstructionHandle ih, final int srcLine) {
         setInstruction(ih);
@@ -63,6 +64,11 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
         return this.ih == ih;
     }
 
+    /**
+     * Gets the instruction handle.
+     *
+     * @return the instruction handle.
+     */
     public InstructionHandle getInstruction() {
         return ih;
     }
@@ -72,21 +78,38 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
      *
      * This relies on that the instruction list has already been dumped to byte code or that the 'setPositions' methods
      * has been called for the instruction list.
+     *
+     * @return the line number attribute.
      */
     public LineNumber getLineNumber() {
         return new LineNumber(ih.getPosition(), srcLine);
     }
 
+    /**
+     * Gets the source line number.
+     *
+     * @return the source line number.
+     */
     public int getSourceLine() {
         return srcLine;
     }
 
+    /**
+     * Sets the instruction handle.
+     *
+     * @param instructionHandle the instruction handle to set.
+     */
     public void setInstruction(final InstructionHandle instructionHandle) { // TODO could be package-protected?
         Objects.requireNonNull(instructionHandle, "instructionHandle");
         BranchInstruction.notifyTarget(this.ih, instructionHandle, this);
         this.ih = instructionHandle;
     }
 
+    /**
+     * Sets the source line number.
+     *
+     * @param srcLine the source line number to set.
+     */
     public void setSourceLine(final int srcLine) { // TODO could be package-protected?
         this.srcLine = srcLine;
     }

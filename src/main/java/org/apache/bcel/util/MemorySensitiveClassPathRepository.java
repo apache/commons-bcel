@@ -36,6 +36,11 @@ public class MemorySensitiveClassPathRepository extends AbstractClassPathReposit
 
     private final Map<String, SoftReference<JavaClass>> loadedClasses = new HashMap<>(); // CLASSNAME X JAVACLASS
 
+    /**
+     * Constructs a new MemorySensitiveClassPathRepository.
+     *
+     * @param path the class path.
+     */
     public MemorySensitiveClassPathRepository(final ClassPath path) {
         super(path);
     }

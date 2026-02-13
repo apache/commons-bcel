@@ -62,6 +62,8 @@ public final class ModuleRequires implements Cloneable, Node {
     }
 
     /**
+     * Creates a deep copy of this object.
+     *
      * @return deep copy of this object.
      */
     public ModuleRequires copy() {
@@ -126,6 +128,9 @@ public final class ModuleRequires implements Cloneable, Node {
     }
 
     /**
+     * Gets the resolved string representation.
+     *
+     * @param constantPool the constant pool.
      * @return Resolved string representation.
      */
     public String toString(final ConstantPool constantPool) {

@@ -32,6 +32,11 @@ public class JSR extends JsrInstruction implements VariableLengthInstruction {
     JSR() {
     }
 
+    /**
+     * Constructs a JSR instruction.
+     *
+     * @param target branch target.
+     */
     public JSR(final InstructionHandle target) {
         super(org.apache.bcel.Const.JSR, target);
     }

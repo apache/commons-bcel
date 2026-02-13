@@ -29,6 +29,9 @@ import org.apache.bcel.ExceptionConst;
  */
 public class LREM extends ArithmeticInstruction implements ExceptionThrower {
 
+    /**
+     * Constructs an LREM instruction.
+     */
     public LREM() {
         super(org.apache.bcel.Const.LREM);
     }

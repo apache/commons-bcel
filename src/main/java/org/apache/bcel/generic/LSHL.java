@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class LSHL extends ArithmeticInstruction {
 
+    /**
+     * Constructs an LSHL instruction.
+     */
     public LSHL() {
         super(org.apache.bcel.Const.LSHL);
     }

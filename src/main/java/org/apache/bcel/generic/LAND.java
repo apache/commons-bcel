@@ -29,6 +29,9 @@ package org.apache.bcel.generic;
  */
 public class LAND extends ArithmeticInstruction {
 
+    /**
+     * Constructs an LAND instruction.
+     */
     public LAND() {
         super(org.apache.bcel.Const.LAND);
     }

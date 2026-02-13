@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class L2F extends ConversionInstruction {
 
+    /**
+     * Constructs an L2F instruction.
+     */
     public L2F() {
         super(org.apache.bcel.Const.L2F);
     }

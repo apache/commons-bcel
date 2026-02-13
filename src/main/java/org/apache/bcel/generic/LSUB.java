@@ -29,6 +29,9 @@ package org.apache.bcel.generic;
  */
 public class LSUB extends ArithmeticInstruction {
 
+    /**
+     * Constructs an LSUB instruction.
+     */
     public LSUB() {
         super(org.apache.bcel.Const.LSUB);
     }

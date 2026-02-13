@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class LRETURN extends ReturnInstruction {
 
+    /**
+     * Constructs an LRETURN instruction.
+     */
     public LRETURN() {
         super(org.apache.bcel.Const.LRETURN);
     }

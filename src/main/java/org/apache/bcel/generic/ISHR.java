@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class ISHR extends ArithmeticInstruction {
 
+    /**
+     * Constructs an ISHR instruction.
+     */
     public ISHR() {
         super(org.apache.bcel.Const.ISHR);
     }

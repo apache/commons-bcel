@@ -160,6 +160,8 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
+     * Gets the match target offsets.
+     *
      * @return array of match target offsets.
      */
     public int[] getIndices() {
@@ -191,6 +193,8 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
+     * Gets the match indices.
+     *
      * @return array of match indices.
      */
     public int[] getMatchs() {
@@ -215,6 +219,8 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
+     * Gets the match targets.
+     *
      * @return array of match targets.
      */
     public InstructionHandle[] getTargets() {
@@ -286,7 +292,10 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
-     * Sets branch target for 'i'th case
+     * Sets branch target for 'i'th case.
+     *
+     * @param i the case index.
+     * @param target the branch target.
      */
     public void setTarget(final int i, final InstructionHandle target) { // TODO could be package-protected?
         notifyTarget(targets[i], target, this);

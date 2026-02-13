@@ -68,6 +68,8 @@ public final class ModuleExports implements Cloneable, Node {
     }
 
     /**
+     * Creates a deep copy of this object.
+     *
      * @return deep copy of this object.
      */
     public ModuleExports copy() {
@@ -139,6 +141,9 @@ public final class ModuleExports implements Cloneable, Node {
     }
 
     /**
+     * Gets the resolved string representation.
+     *
+     * @param constantPool the constant pool.
      * @return Resolved string representation.
      */
     public String toString(final ConstantPool constantPool) {

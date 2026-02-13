@@ -42,6 +42,11 @@ public class INVOKESTATIC extends InvokeInstruction {
     INVOKESTATIC() {
     }
 
+    /**
+     * Constructs an INVOKESTATIC instruction.
+     *
+     * @param index index into constant pool.
+     */
     public INVOKESTATIC(final int index) {
         super(Const.INVOKESTATIC, index);
     }

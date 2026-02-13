@@ -36,6 +36,12 @@ public class LocalVariableInfo {
     private final Hashtable<String, String> names = new Hashtable<>();
 
     /**
+     * Constructs a new LocalVariableInfo.
+     */
+    public LocalVariableInfo() {
+    }
+
+    /**
      * Adds information about name and type for a given offset.
      *
      * @throws LocalVariableInfoInconsistentException if the new information conflicts with already gathered information.

@@ -60,6 +60,8 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
     }
 
     /**
+     * Constructs a new LocalVariableTable.
+     *
      * @param nameIndex Index in constant pool to 'LocalVariableTable'.
      * @param length Content length in bytes.
      * @param localVariableTable Table of local variables.
@@ -120,6 +122,8 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
     }
 
     /**
+     * Gets the local variable for the given index.
+     *
      * @param index the variable slot.
      * @return the first LocalVariable that matches the slot or null if not found.
      * @deprecated Since 5.2 because multiple variables can share the same slot, use getLocalVariable(int index, int pc) instead.
@@ -135,6 +139,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
     }
 
     /**
+     * Gets the local variable for the given index and program counter.
      *
      * @param index the variable slot.
      * @param pc the current pc that this variable is alive.
@@ -154,12 +159,19 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
     }
 
     /**
+     * Gets the local variable table.
+     *
      * @return Array of local variables of method.
      */
     public final LocalVariable[] getLocalVariableTable() {
         return localVariableTable;
     }
 
+    /**
+     * Gets the table length.
+     *
+     * @return the table length.
+     */
     public final int getTableLength() {
         return localVariableTable.length;
     }
@@ -169,6 +181,11 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
         return Stream.of(localVariableTable).iterator();
     }
 
+    /**
+     * Sets the local variable table.
+     *
+     * @param localVariableTable the local variable table to set.
+     */
     public final void setLocalVariableTable(final LocalVariable[] localVariableTable) {
         this.localVariableTable = localVariableTable != null ? localVariableTable : EMPTY_ARRAY;
     }

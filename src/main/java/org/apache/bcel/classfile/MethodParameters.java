@@ -82,6 +82,11 @@ public class MethodParameters extends Attribute implements Iterable<MethodParame
         }
     }
 
+    /**
+     * Gets the method parameters.
+     *
+     * @return the method parameters.
+     */
     public MethodParameter[] getParameters() {
         return parameters;
     }
@@ -91,6 +96,11 @@ public class MethodParameters extends Attribute implements Iterable<MethodParame
         return Stream.of(parameters).iterator();
     }
 
+    /**
+     * Sets the method parameters.
+     *
+     * @param parameters the method parameters to set.
+     */
     public void setParameters(final MethodParameter[] parameters) {
         this.parameters = parameters != null ? parameters : EMPTY_ARRAY;
     }

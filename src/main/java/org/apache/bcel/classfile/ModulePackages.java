@@ -53,6 +53,8 @@ public final class ModulePackages extends Attribute {
     }
 
     /**
+     * Constructs a new ModulePackages.
+     *
      * @param nameIndex Index in constant pool.
      * @param length Content length in bytes.
      * @param packageIndexTable Table of indices in constant pool.
@@ -114,6 +116,8 @@ public final class ModulePackages extends Attribute {
     }
 
     /**
+     * Gets the number of packages.
+     *
      * @return Length of package table.
      */
     public int getNumberOfPackages() {
@@ -121,6 +125,8 @@ public final class ModulePackages extends Attribute {
     }
 
     /**
+     * Gets the package index table.
+     *
      * @return array of indices into constant pool of package names.
      */
     public int[] getPackageIndexTable() {
@@ -128,6 +134,8 @@ public final class ModulePackages extends Attribute {
     }
 
     /**
+     * Gets the package names.
+     *
      * @return string array of package names.
      */
     public String[] getPackageNames() {
@@ -137,6 +145,8 @@ public final class ModulePackages extends Attribute {
     }
 
     /**
+     * Sets the package index table.
+     *
      * @param packageIndexTable the list of package indexes Also redefines number_of_packages according to table length.
      */
     public void setPackageIndexTable(final int[] packageIndexTable) {

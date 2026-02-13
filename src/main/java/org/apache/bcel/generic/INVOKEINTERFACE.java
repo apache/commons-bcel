@@ -46,6 +46,12 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
     INVOKEINTERFACE() {
     }
 
+    /**
+     * Constructs an INVOKEINTERFACE instruction.
+     *
+     * @param index index into constant pool.
+     * @param nargs number of arguments.
+     */
     public INVOKEINTERFACE(final int index, final int nargs) {
         super(Const.INVOKEINTERFACE, index);
         super.setLength(5);
@@ -94,6 +100,8 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
 
     /**
      * The <strong>count</strong> argument according to the Java Language Specification, Second Edition.
+     *
+     * @return the count argument.
      */
     public int getCount() {
         return nargs;

@@ -34,6 +34,11 @@ public class JSR_W extends JsrInstruction {
     JSR_W() {
     }
 
+    /**
+     * Constructs a JSR_W instruction.
+     *
+     * @param target branch target.
+     */
     public JSR_W(final InstructionHandle target) {
         super(org.apache.bcel.Const.JSR_W, target);
         super.setLength(5);
