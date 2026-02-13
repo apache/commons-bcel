@@ -108,9 +108,13 @@ public class EnumElementValueGen extends ElementValueGen {
      * @return the enum type string.
      */
     public String getEnumTypeString() {
-        // ...existing code...
+        // Constant cc = getConstantPool().getConstant(typeIdx);
+        // ConstantClass cu8 =
+        // (ConstantClass) getConstantPool().getConstant(typeIdx);
+        // return
+        // ((ConstantUtf8) getConstantPool().getConstant(cu8.getNameIndex())).getBytes();
         return ((ConstantUtf8) getConstantPool().getConstant(typeIdx)).getBytes();
-        // ...existing code...
+        // return Utility.signatureToString(cu8.getBytes());
     }
 
     /**
@@ -120,7 +124,10 @@ public class EnumElementValueGen extends ElementValueGen {
      */
     public String getEnumValueString() {
         return ((ConstantUtf8) getConstantPool().getConstant(valueIdx)).getBytes();
-        // ...existing code...
+        // ConstantString cu8 =
+        // (ConstantString) getConstantPool().getConstant(valueIdx);
+        // return
+        // ((ConstantUtf8) getConstantPool().getConstant(cu8.getStringIndex())).getBytes();
     }
 
     /**
