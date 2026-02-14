@@ -44,6 +44,8 @@ public class VerifierFactory {
 
     /**
      * Adds the VerifierFactoryObserver o to the list of observers.
+     *
+     * @param o the observer to add.
      */
     public static void attach(final VerifierFactoryObserver o) {
         OBSVERVERS.add(o);
@@ -61,6 +63,8 @@ public class VerifierFactory {
 
     /**
      * Removes the VerifierFactoryObserver o from the list of observers.
+     *
+     * @param o the observer to remove.
      */
     public static void detach(final VerifierFactoryObserver o) {
         OBSVERVERS.remove(o);
@@ -70,6 +74,7 @@ public class VerifierFactory {
      * Returns the (only) verifier responsible for the class with the given name. Possibly a new Verifier object is
      * transparently created.
      *
+     * @param fullyQualifiedClassName the fully qualified class name.
      * @return the (only) verifier responsible for the class with the given name.
      */
     public static Verifier getVerifier(final String fullyQualifiedClassName) {
@@ -83,6 +88,8 @@ public class VerifierFactory {
     /**
      * Returns all Verifier instances created so far. This is useful when a Verifier recursively lets the VerifierFactory
      * create other Verifier instances and if you want to verify the transitive hull of referenced class files.
+     *
+     * @return array of all Verifier instances.
      */
     public static Verifier[] getVerifiers() {
         return MAP.values().toArray(Verifier.EMPTY_ARRAY);
