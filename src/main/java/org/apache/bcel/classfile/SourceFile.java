@@ -50,6 +50,8 @@ public final class SourceFile extends Attribute {
     }
 
     /**
+     * Constructs a SourceFile.
+     *
      * @param nameIndex Index in constant pool to CONSTANT_Utf8, which should represent the string "SourceFile".
      * @param length Content length in bytes, the value should be 2.
      * @param constantPool The constant pool that this attribute is associated with.
@@ -105,6 +107,8 @@ public final class SourceFile extends Attribute {
     }
 
     /**
+     * Gets the source file index.
+     *
      * @return Index in constant pool of source file name.
      */
     public int getSourceFileIndex() {
@@ -112,6 +116,8 @@ public final class SourceFile extends Attribute {
     }
 
     /**
+     * Gets the source file name.
+     *
      * @return Source file name.
      */
     public String getSourceFileName() {
@@ -119,6 +125,8 @@ public final class SourceFile extends Attribute {
     }
 
     /**
+     * Sets the source file index.
+     *
      * @param sourceFileIndex The source file index to set.
      */
     public void setSourceFileIndex(final int sourceFileIndex) {
