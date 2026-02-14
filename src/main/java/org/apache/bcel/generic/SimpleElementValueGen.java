@@ -40,6 +40,13 @@ public class SimpleElementValueGen extends ElementValueGen {
     // For 'class' this points to the class entry in the cpGen
     private final int idx;
 
+    /**
+     * Constructs a SimpleElementValueGen for a boolean value.
+     *
+     * @param type the element value type.
+     * @param cpGen the constant pool generator.
+     * @param value the boolean value.
+     */
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final boolean value) {
         super(type, cpGen);
         if (value) {
@@ -49,41 +56,97 @@ public class SimpleElementValueGen extends ElementValueGen {
         }
     }
 
+    /**
+     * Constructs a SimpleElementValueGen for a byte value.
+     *
+     * @param type the element value type.
+     * @param cpGen the constant pool generator.
+     * @param value the byte value.
+     */
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final byte value) {
         super(type, cpGen);
         idx = getConstantPool().addInteger(value);
     }
 
+    /**
+     * Constructs a SimpleElementValueGen for a char value.
+     *
+     * @param type the element value type.
+     * @param cpGen the constant pool generator.
+     * @param value the char value.
+     */
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final char value) {
         super(type, cpGen);
         idx = getConstantPool().addInteger(value);
     }
 
+    /**
+     * Constructs a SimpleElementValueGen for a double value.
+     *
+     * @param type the element value type.
+     * @param cpGen the constant pool generator.
+     * @param value the double value.
+     */
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final double value) {
         super(type, cpGen);
         idx = getConstantPool().addDouble(value);
     }
 
+    /**
+     * Constructs a SimpleElementValueGen for a float value.
+     *
+     * @param type the element value type.
+     * @param cpGen the constant pool generator.
+     * @param value the float value.
+     */
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final float value) {
         super(type, cpGen);
         idx = getConstantPool().addFloat(value);
     }
 
+    /**
+     * Constructs a SimpleElementValueGen for an int value.
+     *
+     * @param type the element value type.
+     * @param cpGen the constant pool generator.
+     * @param value the int value.
+     */
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final int value) {
         super(type, cpGen);
         idx = getConstantPool().addInteger(value);
     }
 
+    /**
+     * Constructs a SimpleElementValueGen for a long value.
+     *
+     * @param type the element value type.
+     * @param cpGen the constant pool generator.
+     * @param value the long value.
+     */
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final long value) {
         super(type, cpGen);
         idx = getConstantPool().addLong(value);
     }
 
+    /**
+     * Constructs a SimpleElementValueGen for a short value.
+     *
+     * @param type the element value type.
+     * @param cpGen the constant pool generator.
+     * @param value the short value.
+     */
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final short value) {
         super(type, cpGen);
         idx = getConstantPool().addInteger(value);
     }
 
+    /**
+     * Constructs a SimpleElementValueGen for a String value.
+     *
+     * @param type the element value type.
+     * @param cpGen the constant pool generator.
+     * @param value the string value.
+     */
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final String value) {
         super(type, cpGen);
         idx = getConstantPool().addUtf8(value);
@@ -95,6 +158,10 @@ public class SimpleElementValueGen extends ElementValueGen {
     /**
      * Protected ctor used for deserialization, doesn't *put* an entry in the constant pool, assumes the one at the supplied
      * index is correct.
+     *
+     * @param type the element value type.
+     * @param idx the constant pool index.
+     * @param cpGen the constant pool generator.
      */
     protected SimpleElementValueGen(final int type, final int idx, final ConstantPoolGen cpGen) {
         super(type, cpGen);
@@ -104,6 +171,10 @@ public class SimpleElementValueGen extends ElementValueGen {
     /**
      * The boolean controls whether we copy info from the 'old' constant pool to the 'new'. You need to use this ctor if the
      * annotation is being copied from one file to another.
+     *
+     * @param value the simple element value to copy.
+     * @param cpool the constant pool generator.
+     * @param copyPoolEntries whether to copy pool entries.
      */
     public SimpleElementValueGen(final SimpleElementValue value, final ConstantPoolGen cpool, final boolean copyPoolEntries) {
         super(value.getElementValueType(), cpool);
@@ -171,17 +242,29 @@ public class SimpleElementValueGen extends ElementValueGen {
     }
 
     /**
-     * Return immutable variant
+     * Gets the immutable variant.
+     *
+     * @return the immutable variant.
      */
     @Override
     public ElementValue getElementValue() {
         return new SimpleElementValue(super.getElementValueType(), idx, getConstantPool().getConstantPool());
     }
 
+    /**
+     * Gets the constant pool index.
+     *
+     * @return the index.
+     */
     public int getIndex() {
         return idx;
     }
 
+    /**
+     * Gets the int value.
+     *
+     * @return the int value.
+     */
     public int getValueInt() {
         if (super.getElementValueType() != PRIMITIVE_INT) {
             throw new IllegalStateException("Don't call getValueString() on a non STRING ElementValue");
@@ -190,6 +273,11 @@ public class SimpleElementValueGen extends ElementValueGen {
         return c.getBytes();
     }
 
+    /**
+     * Gets the string value.
+     *
+     * @return the string value.
+     */
     public String getValueString() {
         if (super.getElementValueType() != STRING) {
             throw new IllegalStateException("Don't call getValueString() on a non STRING ElementValue");
