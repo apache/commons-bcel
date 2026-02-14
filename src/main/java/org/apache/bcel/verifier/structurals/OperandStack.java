@@ -40,6 +40,8 @@ public class OperandStack implements Cloneable {
 
     /**
      * Creates an empty stack with a maximum of maxStack slots.
+     *
+     * @param maxStack the maximum stack size.
      */
     public OperandStack(final int maxStack) {
         this.maxStack = maxStack;
@@ -47,6 +49,9 @@ public class OperandStack implements Cloneable {
 
     /**
      * Creates an otherwise empty stack with a maximum of maxStack slots and the ObjectType 'obj' at the top.
+     *
+     * @param maxStack the maximum stack size.
+     * @param obj the object type to place at the top.
      */
     public OperandStack(final int maxStack, final ObjectType obj) {
         this.maxStack = maxStack;
@@ -88,6 +93,7 @@ public class OperandStack implements Cloneable {
     /**
      * Returns a (typed!) clone of this.
      *
+     * @return a clone of this operand stack.
      * @see #clone()
      */
     public OperandStack getClone() {
@@ -95,6 +101,8 @@ public class OperandStack implements Cloneable {
     }
 
     /**
+     * Gets the hash code.
+     *
      * @return a hash code value for the object.
      */
     @Override
@@ -104,6 +112,8 @@ public class OperandStack implements Cloneable {
 
     /**
      * Replaces all occurrences of u in this OperandStack instance with an "initialized" ObjectType.
+     *
+     * @param u the uninitialized object type.
      */
     public void initializeObject(final UninitializedObjectType u) {
         for (int i = 0; i < stack.size(); i++) {
@@ -115,6 +125,8 @@ public class OperandStack implements Cloneable {
 
     /**
      * Returns true IFF this OperandStack is empty.
+     *
+     * @return true if empty, false otherwise.
      */
     public boolean isEmpty() {
         return stack.isEmpty();
@@ -122,6 +134,8 @@ public class OperandStack implements Cloneable {
 
     /**
      * Returns the number of stack slots this stack can hold.
+     *
+     * @return the maximum stack size.
      */
     public int maxStack() {
         return this.maxStack;
@@ -130,6 +144,8 @@ public class OperandStack implements Cloneable {
     /**
      * Merges another stack state into this instance's stack state. See the Java Virtual Machine Specification, Second
      * Edition, page 146: 4.9.2 for details.
+     *
+     * @param s the stack to merge.
      */
     public void merge(final OperandStack s) {
         try {
@@ -169,6 +185,8 @@ public class OperandStack implements Cloneable {
 
     /**
      * Returns the element on top of the stack. The element is not popped off the stack!
+     *
+     * @return the top element.
      */
     public Type peek() {
         return peek(0);
@@ -177,6 +195,9 @@ public class OperandStack implements Cloneable {
     /**
      * Returns the element that's i elements below the top element; that means, iff i==0 the top element is returned. The
      * element is not popped off the stack!
+     *
+     * @param i the depth.
+     * @return the element at the specified depth.
      */
     public Type peek(final int i) {
         return stack.get(size() - i - 1);
@@ -184,6 +205,8 @@ public class OperandStack implements Cloneable {
 
     /**
      * Returns the element on top of the stack. The element is popped off the stack.
+     *
+     * @return the popped element.
      */
     public Type pop() {
         return stack.remove(size() - 1);
@@ -192,6 +215,7 @@ public class OperandStack implements Cloneable {
     /**
      * Pops i elements off the stack. Always returns null.
      *
+     * @param count the number of elements to pop.
      * @return Always returns null.
      */
     public Type pop(final int count) {
@@ -203,6 +227,8 @@ public class OperandStack implements Cloneable {
 
     /**
      * Pushes a Type object onto the stack.
+     *
+     * @param type the type to push.
      */
     public void push(final Type type) {
         if (type == null) {
@@ -219,6 +245,8 @@ public class OperandStack implements Cloneable {
 
     /**
      * Returns the size of this OperandStack; that means, how many Type objects there are.
+     *
+     * @return the stack size.
      */
     public int size() {
         return stack.size();
@@ -227,6 +255,7 @@ public class OperandStack implements Cloneable {
     /**
      * Returns the number of stack slots used.
      *
+     * @return the number of slots used.
      * @see #maxStack()
      */
     public int slotsUsed() {
@@ -243,6 +272,8 @@ public class OperandStack implements Cloneable {
 
     /**
      * Returns a String representation of this OperandStack instance.
+     *
+     * @return string representation.
      */
     @Override
     public String toString() {
