@@ -27,6 +27,9 @@ package org.apache.bcel.generic;
  */
 public class SWAP extends StackInstruction implements StackConsumer, StackProducer {
 
+    /**
+     * Constructs a SWAP instruction.
+     */
     public SWAP() {
         super(org.apache.bcel.Const.SWAP);
     }
