@@ -32,6 +32,8 @@ public interface VerifierFactoryObserver {
     /**
      * VerifierFactoryObserver instances are notified invoking this method. The String argument is the fully qualified class
      * name of a class a new Verifier instance created by the VerifierFactory operates on.
+     *
+     * @param s the fully qualified class name.
      */
     void update(String s);
 }
