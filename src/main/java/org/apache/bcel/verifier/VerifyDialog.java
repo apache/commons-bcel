@@ -144,42 +144,82 @@ public class VerifyDialog extends JDialog {
         initialize();
     }
 
-    /** Machine-generated. */
+    /**
+     * Constructs a new instance.
+     *
+     * @param owner the parent Dialog.
+     */
     public VerifyDialog(final Dialog owner) {
         super(owner);
     }
 
-    /** Machine-generated. */
+    /**
+     * Constructs a new instance.
+     *
+     * @param owner the parent Dialog.
+     * @param modal whether the dialog is modal.
+     */
     public VerifyDialog(final Dialog owner, final boolean modal) {
         super(owner, modal);
     }
 
-    /** Machine-generated. */
+    /**
+     * Constructs a new instance.
+     *
+     * @param owner the parent Dialog.
+     * @param title the dialog title.
+     */
     public VerifyDialog(final Dialog owner, final String title) {
         super(owner, title);
     }
 
-    /** Machine-generated. */
+    /**
+     * Constructs a new instance.
+     *
+     * @param owner the parent Dialog.
+     * @param title the dialog title.
+     * @param modal whether the dialog is modal.
+     */
     public VerifyDialog(final Dialog owner, final String title, final boolean modal) {
         super(owner, title, modal);
     }
 
-    /** Machine-generated. */
+    /**
+     * Constructs a new instance.
+     *
+     * @param owner the parent Frame.
+     */
     public VerifyDialog(final Frame owner) {
         super(owner);
     }
 
-    /** Machine-generated. */
+    /**
+     * Constructs a new instance.
+     *
+     * @param owner the parent Frame.
+     * @param modal whether the dialog is modal.
+     */
     public VerifyDialog(final Frame owner, final boolean modal) {
         super(owner, modal);
     }
 
-    /** Machine-generated. */
+    /**
+     * Constructs a new instance.
+     *
+     * @param owner the parent Frame.
+     * @param title the dialog title.
+     */
     public VerifyDialog(final Frame owner, final String title) {
         super(owner, title);
     }
 
-    /** Machine-generated. */
+    /**
+     * Constructs a new instance.
+     *
+     * @param owner the parent Frame.
+     * @param title the dialog title.
+     * @param modal whether the dialog is modal.
+     */
     public VerifyDialog(final Frame owner, final String title, final boolean modal) {
         super(owner, title, modal);
     }
@@ -259,7 +299,11 @@ public class VerifyDialog extends JDialog {
         }
     }
 
-    /** Machine-generated. */
+    /**
+     * Called when an action is performed.
+     *
+     * @param actionEvent the action event.
+     */
     public void flushButton_ActionPerformed(final ActionEvent actionEvent) {
         VerifierFactory.getVerifier(className).flush();
         Repository.removeClass(className); // Make sure it will be reloaded.
@@ -486,7 +530,11 @@ public class VerifyDialog extends JDialog {
         // user code end
     }
 
-    /** Machine-generated. */
+    /**
+     * Called when an action is performed.
+     *
+     * @param actionEvent the action event.
+     */
     public void pass1Button_ActionPerformed(final ActionEvent actionEvent) {
         final Verifier v = VerifierFactory.getVerifier(className);
         final VerificationResult vr = v.doPass1();
@@ -500,7 +548,11 @@ public class VerifyDialog extends JDialog {
         }
     }
 
-    /** Machine-generated. */
+    /**
+     * Called when an action is performed.
+     *
+     * @param actionEvent the action event.
+     */
     public void pass2Button_ActionPerformed(final ActionEvent actionEvent) {
         pass1Button_ActionPerformed(actionEvent);
         final Verifier v = VerifierFactory.getVerifier(className);
@@ -519,7 +571,11 @@ public class VerifyDialog extends JDialog {
         }
     }
 
-    /** Machine-generated. */
+    /**
+     * Called when an action is performed.
+     *
+     * @param actionEvent the action event.
+     */
     public void pass4Button_ActionPerformed(final ActionEvent actionEvent) {
         pass2Button_ActionPerformed(actionEvent);
         Color color = Color.green;
