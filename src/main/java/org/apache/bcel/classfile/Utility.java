@@ -49,6 +49,15 @@ import org.apache.commons.lang3.StringUtils;
 public abstract class Utility {
 
     /**
+     * Constructs a Utility.
+     *
+     * @deprecated Will be private in the next major release.
+     */
+    public Utility() {
+        // Default constructor for subclasses
+    }
+
+    /**
      * Decode characters into bytes. Used by <a href="Utility.html#decode(java.lang.String, boolean)">decode()</a>
      */
     private static final class JavaReader extends FilterReader {
@@ -221,6 +230,8 @@ public abstract class Utility {
     }
 
     /**
+     * Gets the class or interface type name.
+     *
      * @param accessFlags the class flags.
      * @return "class" or "interface", depending on the ACC_INTERFACE flag.
      */
@@ -229,6 +240,10 @@ public abstract class Utility {
     }
 
     /**
+     * Clears a bit in a flag.
+     *
+     * @param flag the flag value.
+     * @param i the bit position.
      * @return 'flag' with bit 'i' set to 0.
      */
     public static int clearBit(final int flag, final int i) {
@@ -236,6 +251,15 @@ public abstract class Utility {
         return (flag & bit) == 0 ? flag : flag ^ bit;
     }
 
+    /**
+     * Disassembles byte code.
+     *
+     * @param code byte code array.
+     * @param constantPool the constant pool.
+     * @param index offset in code array.
+     * @param length number of opcodes to decompile.
+     * @return disassembled string representation.
+     */
     public static String codeToString(final byte[] code, final ConstantPool constantPool, final int index, final int length) {
         return codeToString(code, constantPool, index, length, true);
     }
@@ -269,6 +293,14 @@ public abstract class Utility {
         return buf.toString();
     }
 
+    /**
+     * Disassembles byte code.
+     *
+     * @param bytes stream of bytes.
+     * @param constantPool the constant pool.
+     * @return disassembled string representation.
+     * @throws IOException if a failure from reading from the bytes argument occurs.
+     */
     public static String codeToString(final ByteSequence bytes, final ConstantPool constantPool) throws IOException {
         return codeToString(bytes, constantPool, true);
     }
@@ -580,6 +612,9 @@ public abstract class Utility {
 
     /**
      * Escape all occurrences of newline chars '\n', quotes \", etc.
+     *
+     * @param label the string to convert.
+     * @return the converted string.
      */
     public static String convertString(final String label) {
         final char[] ch = label.toCharArray();
@@ -644,7 +679,8 @@ public abstract class Utility {
      *
      * @param s the string to convert.
      * @param uncompress use gzip to uncompress the stream of bytes.
-     * @throws IOException if there's a gzip exception
+     * @return the decoded byte array.
+     * @throws IOException if there's a gzip exception.
      */
     public static byte[] decode(final String s, final boolean uncompress) throws IOException {
         byte[] bytes;
@@ -684,7 +720,8 @@ public abstract class Utility {
      *
      * @param bytes the byte array to convert.
      * @param compress use gzip to minimize string.
-     * @throws IOException if there's a gzip exception
+     * @return the encoded string.
+     * @throws IOException if there's a gzip exception.
      */
     public static String encode(byte[] bytes, final boolean compress) throws IOException {
         if (compress) {
@@ -819,6 +856,8 @@ public abstract class Utility {
     }
 
     /**
+     * Tests if a character is part of a Java identifier.
+     *
      * @param ch the character to test if it's part of an identifier.
      * @return true, if character is one of (a, ... z, A, ... Z, 0, ... 9, _).
      */
@@ -827,6 +866,10 @@ public abstract class Utility {
     }
 
     /**
+     * Tests if a bit is set.
+     *
+     * @param flag the flag value.
+     * @param i the bit position.
      * @return true, if bit 'i' in 'flag' is set.
      */
     public static boolean isSet(final int flag, final int i) {
@@ -1039,14 +1082,35 @@ public abstract class Utility {
         return 1 << n;
     }
 
+    /**
+     * Prints an array to a string.
+     *
+     * @param obj the array to print.
+     * @return the string representation.
+     */
     public static String printArray(final Object[] obj) {
         return printArray(obj, true);
     }
 
+    /**
+     * Prints an array to a string.
+     *
+     * @param obj the array to print.
+     * @param braces whether to include braces.
+     * @return the string representation.
+     */
     public static String printArray(final Object[] obj, final boolean braces) {
         return printArray(obj, braces, false);
     }
 
+    /**
+     * Prints an array to a string.
+     *
+     * @param obj the array to print.
+     * @param braces whether to include braces.
+     * @param quote whether to quote elements.
+     * @return the string representation.
+     */
     public static String printArray(final Object[] obj, final boolean braces, final boolean quote) {
         if (obj == null) {
             return null;
@@ -1071,10 +1135,22 @@ public abstract class Utility {
         return buf.toString();
     }
 
+    /**
+     * Prints an array to a stream.
+     *
+     * @param out the output stream.
+     * @param obj the array to print.
+     */
     public static void printArray(final PrintStream out, final Object[] obj) {
         out.println(printArray(obj, true));
     }
 
+    /**
+     * Prints an array to a writer.
+     *
+     * @param out the output writer.
+     * @param obj the array to print.
+     */
     public static void printArray(final PrintWriter out, final Object[] obj) {
         out.println(printArray(obj, true));
     }
@@ -1126,6 +1202,10 @@ public abstract class Utility {
     }
 
     /**
+     * Sets a bit in a flag.
+     *
+     * @param flag the flag value.
+     * @param i the bit position.
      * @return 'flag' with bit 'i' set to 1.
      */
     public static int setBit(final int flag, final int i) {
