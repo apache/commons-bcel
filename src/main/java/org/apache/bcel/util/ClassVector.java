@@ -68,6 +68,9 @@ public class ClassVector implements Serializable {
         return vec.get(index);
     }
 
+    /**
+     * Initializes the vector when deserializing without data.
+     */
     @SuppressWarnings("unused") // SE_TRANSIENT_FIELD_NOT_RESTORED
     private void readObjectNoData() {
         vec = new ArrayList<>();
