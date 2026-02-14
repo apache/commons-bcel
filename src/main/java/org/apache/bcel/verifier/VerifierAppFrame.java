@@ -54,42 +54,80 @@ import org.apache.commons.lang3.ArrayUtils;
 public class VerifierAppFrame extends JFrame {
 
     private static final long serialVersionUID = -542458133073307640L;
+
+    /** Machine-generated GUI component. */
     private JPanel contentPane;
+    /** Machine-generated GUI component. */
     private final JSplitPane jSplitPane1 = new JSplitPane();
+    /** Machine-generated GUI component. */
     private final JPanel jPanel1 = new JPanel();
+    /** Machine-generated GUI component. */
     private final JPanel jPanel2 = new JPanel();
+    /** Machine-generated GUI component. */
     private final JSplitPane jSplitPane2 = new JSplitPane();
+    /** Machine-generated GUI component. */
     private final JPanel jPanel3 = new JPanel();
+    /** Machine-generated GUI component. */
     private final JList<String> classNamesJList = new JList<>();
+    /** Machine-generated GUI component. */
     private final GridLayout gridLayout1 = new GridLayout();
+    /** Machine-generated GUI component. */
     private final JPanel messagesPanel = new JPanel();
+    /** Machine-generated GUI component. */
     private final GridLayout gridLayout2 = new GridLayout();
+    /** Machine-generated GUI component. */
     private final JMenuBar jMenuBar1 = new JMenuBar();
+    /** Machine-generated GUI component. */
     private final JMenu jMenu1 = new JMenu();
+    /** Machine-generated GUI component. */
     private final JScrollPane jScrollPane1 = new JScrollPane();
+    /** Machine-generated GUI component. */
     private final JScrollPane messagesScrollPane = new JScrollPane();
+    /** Machine-generated GUI component. */
     private final JScrollPane jScrollPane3 = new JScrollPane();
+    /** Machine-generated GUI component. */
     private final GridLayout gridLayout4 = new GridLayout();
+    /** Machine-generated GUI component. */
     private final JScrollPane jScrollPane4 = new JScrollPane();
+    /** Machine-generated GUI component. */
     private final CardLayout cardLayout1 = new CardLayout();
+    /** The current class being verified. */
     private String currentClass;
+    /** Machine-generated GUI component. */
     private final GridLayout gridLayout3 = new GridLayout();
+    /** Machine-generated GUI component. */
     private final JTextPane pass1TextPane = new JTextPane();
+    /** Machine-generated GUI component. */
     private final JTextPane pass2TextPane = new JTextPane();
+    /** Machine-generated GUI component. */
     private final JTextPane messagesTextPane = new JTextPane();
+    /** Machine-generated GUI component. */
     private final JMenuItem newFileMenuItem = new JMenuItem();
+    /** Machine-generated GUI component. */
     private final JSplitPane jSplitPane3 = new JSplitPane();
+    /** Machine-generated GUI component. */
     private final JSplitPane jSplitPane4 = new JSplitPane();
+    /** Machine-generated GUI component. */
     private final JScrollPane jScrollPane2 = new JScrollPane();
+    /** Machine-generated GUI component. */
     private final JScrollPane jScrollPane5 = new JScrollPane();
+    /** Machine-generated GUI component. */
     private final JScrollPane jScrollPane6 = new JScrollPane();
+    /** Machine-generated GUI component. */
     private final JScrollPane jScrollPane7 = new JScrollPane();
+    /** Machine-generated GUI component. */
     private final JList<String> pass3aJList = new JList<>();
+    /** Machine-generated GUI component. */
     private final JList<String> pass3bJList = new JList<>();
+    /** Machine-generated GUI component. */
     private final JTextPane pass3aTextPane = new JTextPane();
+    /** Machine-generated GUI component. */
     private final JTextPane pass3bTextPane = new JTextPane();
+    /** Machine-generated GUI component. */
     private final JMenu jMenu2 = new JMenu();
+    /** Machine-generated GUI component. */
     private final JMenuItem whatisMenuItem = new JMenuItem();
+    /** Machine-generated GUI component. */
     private final JMenuItem aboutMenuItem = new JMenuItem();
 
     /** Constructs a new instance. */
