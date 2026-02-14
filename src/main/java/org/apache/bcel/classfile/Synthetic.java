@@ -45,6 +45,8 @@ import org.apache.commons.lang3.ArrayUtils;
 public final class Synthetic extends Attribute {
 
     /**
+     * Constructs a Synthetic attribute.
+     *
      * @param nameIndex    Index in constant pool to CONSTANT_Utf8, which should represent the string "Synthetic".
      * @param length       JVM Specification: "The value of the attribute_length item must be zero.".
      * @param bytes        Attribute contents.
