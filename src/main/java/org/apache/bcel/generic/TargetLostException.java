@@ -48,8 +48,16 @@ package org.apache.bcel.generic;
 public final class TargetLostException extends Exception {
 
     private static final long serialVersionUID = -6857272667645328384L;
+
+    /** The target instruction handles that were lost. */
     private final InstructionHandle[] targets;
 
+    /**
+     * Constructs a TargetLostException.
+     *
+     * @param targets the instruction handles.
+     * @param message the exception message.
+     */
     TargetLostException(final InstructionHandle[] targets, final String message) {
         super(message);
         this.targets = targets;
