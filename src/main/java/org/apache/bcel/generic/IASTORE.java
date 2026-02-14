@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * IASTORE - Store into int array
  *
- * <PRE>
+ * <pre>
  * Stack: ..., arrayref, index, value -&gt; ...
- * </PRE>
+ * </pre>
  */
 public class IASTORE extends ArrayInstruction implements StackConsumer {
 

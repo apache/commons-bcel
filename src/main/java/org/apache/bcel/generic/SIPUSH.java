@@ -26,9 +26,9 @@ import org.apache.bcel.util.ByteSequence;
 /**
  * SIPUSH - Push short
  *
- * <PRE>
+ * <pre>
  * Stack: ... -&gt; ..., value
- * </PRE>
+ * </pre>
  */
 public class SIPUSH extends Instruction implements ConstantPushInstruction {
 

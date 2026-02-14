@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * LXOR - Bitwise XOR long
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1, value2 -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class LXOR extends ArithmeticInstruction {
 

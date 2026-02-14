@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * LSTORE - Store long into local variable
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value.word1, value.word2 -&gt; ...
- * </PRE>
+ * </pre>
  */
 public class LSTORE extends StoreInstruction {
 

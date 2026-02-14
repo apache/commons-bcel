@@ -24,15 +24,15 @@ import org.apache.bcel.ExceptionConst;
 /**
  * GETFIELD - Fetch field from object
  *
- * <PRE>
+ * <pre>
  * Stack: ..., objectref -&gt; ..., value
- * </PRE>
+ * </pre>
  *
  * OR
  *
- * <PRE>
+ * <pre>
  * Stack: ..., objectref -&gt; ..., value.word1, value.word2
- * </PRE>
+ * </pre>
  */
 public class GETFIELD extends FieldInstruction implements ExceptionThrower, StackConsumer, StackProducer {
 

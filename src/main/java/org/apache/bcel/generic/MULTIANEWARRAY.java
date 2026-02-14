@@ -28,9 +28,9 @@ import org.apache.bcel.util.ByteSequence;
 /**
  * MULTIANEWARRAY - Create new mutidimensional array of references
  *
- * <PRE>
+ * <pre>
  * Stack: ..., count1, [count2, ...] -&gt; ..., arrayref
- * </PRE>
+ * </pre>
  */
 public class MULTIANEWARRAY extends CPInstruction implements LoadClass, AllocationInstruction, ExceptionThrower {
 

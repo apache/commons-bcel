@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * FALOAD - Load float from array
  *
- * <PRE>
+ * <pre>
  * Stack: ..., arrayref, index -&gt; ..., value
- * </PRE>
+ * </pre>
  */
 public class FALOAD extends ArrayInstruction implements StackProducer {
 

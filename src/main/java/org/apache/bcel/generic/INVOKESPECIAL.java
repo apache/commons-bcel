@@ -28,9 +28,9 @@ import org.apache.bcel.ExceptionConst;
  * INVOKESPECIAL - Invoke instance method; special handling for superclass, private and instance initialization method
  * invocations
  *
- * <PRE>
+ * <pre>
  * Stack: ..., objectref, [arg1, [arg2 ...]] -&gt; ...
- * </PRE>
+ * </pre>
  *
  * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.invokespecial"> The
  *      invokespecial instruction in The Java Virtual Machine Specification</a>

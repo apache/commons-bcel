@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * I2D - Convert int to double
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value -&gt; ..., result.word1, result.word2
- * </PRE>
+ * </pre>
  */
 public class I2D extends ConversionInstruction {
 

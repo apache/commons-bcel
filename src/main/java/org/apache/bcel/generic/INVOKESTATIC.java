@@ -27,9 +27,9 @@ import org.apache.bcel.ExceptionConst;
 /**
  * INVOKESTATIC - Invoke a class (static) method
  *
- * <PRE>
+ * <pre>
  * Stack: ..., [arg1, [arg2 ...]] -&gt; ...
- * </PRE>
+ * </pre>
  *
  * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5.invokestatic"> The invokestatic
  *      instruction in The Java Virtual Machine Specification</a>

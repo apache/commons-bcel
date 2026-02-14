@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * I2C - Convert int to char
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class I2C extends ConversionInstruction {
 

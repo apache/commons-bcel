@@ -23,9 +23,9 @@ import org.apache.bcel.ExceptionConst;
 /**
  * LREM - Remainder of long
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1, value2 -&gt; result
- * </PRE>
+ * </pre>
  */
 public class LREM extends ArithmeticInstruction implements ExceptionThrower {
 

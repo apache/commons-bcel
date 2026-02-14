@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * POP2 - Pop two top operand stack words
  *
- * <PRE>
+ * <pre>
  * Stack: ..., word2, word1 -&gt; ...
- * </PRE>
+ * </pre>
  */
 public class POP2 extends StackInstruction implements PopInstruction {
 

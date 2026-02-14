@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * IADD - Add ints
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1, value2 -&gt; result
- * </PRE>
+ * </pre>
  */
 public class IADD extends ArithmeticInstruction {
 

@@ -27,9 +27,9 @@ import org.apache.bcel.util.ByteSequence;
 /**
  * LDC - Push item from constant pool.
  *
- * <PRE>
+ * <pre>
  * Stack: ... -&gt; ..., item
- * </PRE>
+ * </pre>
  */
 public class LDC extends CPInstruction implements PushInstruction, ExceptionThrower {
 

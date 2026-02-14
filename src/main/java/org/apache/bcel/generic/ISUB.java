@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * ISUB - Substract ints
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1, value2 -&gt; result
- * </PRE>
+ * </pre>
  */
 public class ISUB extends ArithmeticInstruction {
 

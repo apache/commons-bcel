@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * I2F - Convert int to float
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class I2F extends ConversionInstruction {
 

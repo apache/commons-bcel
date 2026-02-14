@@ -23,9 +23,9 @@ import org.apache.bcel.ExceptionConst;
 /**
  * IDIV - Divide ints
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1, value2 -&gt; result
- * </PRE>
+ * </pre>
  */
 public class IDIV extends ArithmeticInstruction implements ExceptionThrower {
 

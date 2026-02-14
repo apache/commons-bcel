@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * I2L - Convert int to long
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value -&gt; ..., result.word1, result.word2
- * </PRE>
+ * </pre>
  */
 public class I2L extends ConversionInstruction {
 

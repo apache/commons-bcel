@@ -26,9 +26,9 @@ import org.apache.bcel.util.ByteSequence;
 /**
  * BIPUSH - Push byte on stack
  *
- * <PRE>
+ * <pre>
  * Stack: ... -&gt; ..., value
- * </PRE>
+ * </pre>
  */
 public class BIPUSH extends Instruction implements ConstantPushInstruction {
 

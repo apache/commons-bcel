@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * ICONST - Push value between -1, ..., 5, other values cause an exception
  *
- * <PRE>
+ * <pre>
  * Stack: ... -&gt; ...,
- * </PRE>
+ * </pre>
  */
 public class ICONST extends Instruction implements ConstantPushInstruction {
 

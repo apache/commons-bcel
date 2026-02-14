@@ -23,9 +23,9 @@ import org.apache.bcel.ExceptionConst;
 /**
  * CHECKCAST - Check whether object is of given type
  *
- * <PRE>
+ * <pre>
  * Stack: ..., objectref -&gt; ..., objectref
- * </PRE>
+ * </pre>
  */
 public class CHECKCAST extends CPInstruction implements LoadClass, ExceptionThrower, StackProducer, StackConsumer {
 

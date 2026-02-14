@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * L2F - Convert long to float
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value.word1, value.word2 -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class L2F extends ConversionInstruction {
 

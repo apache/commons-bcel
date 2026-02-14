@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * FDIV - Divide floats
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1, value2 -&gt; result
- * </PRE>
+ * </pre>
  */
 public class FDIV extends ArithmeticInstruction {
 

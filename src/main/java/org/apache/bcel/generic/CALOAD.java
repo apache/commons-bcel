@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * CALOAD - Load char from array
  *
- * <PRE>
+ * <pre>
  * Stack: ..., arrayref, index -&gt; ..., value
- * </PRE>
+ * </pre>
  */
 public class CALOAD extends ArrayInstruction implements StackProducer {
 

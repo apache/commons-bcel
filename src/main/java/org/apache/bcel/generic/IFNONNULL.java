@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * IFNONNULL - Branch if reference is not null
  *
- * <PRE>
+ * <pre>
  * Stack: ..., reference -&gt; ...
- * </PRE>
+ * </pre>
  */
 public class IFNONNULL extends IfInstruction {
 

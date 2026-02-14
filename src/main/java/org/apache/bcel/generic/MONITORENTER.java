@@ -23,9 +23,9 @@ import org.apache.bcel.ExceptionConst;
 /**
  * MONITORENTER - Enter monitor for object
  *
- * <PRE>
+ * <pre>
  * Stack: ..., objectref -&gt; ...
- * </PRE>
+ * </pre>
  */
 public class MONITORENTER extends Instruction implements ExceptionThrower, StackConsumer {
 

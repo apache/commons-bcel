@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * ARETURN - Return reference from method
  *
- * <PRE>
+ * <pre>
  * Stack: ..., objectref -&gt; &lt;empty&gt;
- * </PRE>
+ * </pre>
  */
 public class ARETURN extends ReturnInstruction {
 

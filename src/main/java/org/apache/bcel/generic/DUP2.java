@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * DUP2 - Duplicate two top operand stack words
  *
- * <PRE>
+ * <pre>
  * Stack: ..., word2, word1 -&gt; ..., word2, word1, word2, word1
- * </PRE>
+ * </pre>
  */
 public class DUP2 extends StackInstruction implements PushInstruction {
 

@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * AALOAD - Load reference from array
  *
- * <PRE>
+ * <pre>
  * Stack: ..., arrayref, index -&gt; value
- * </PRE>
+ * </pre>
  */
 public class AALOAD extends ArrayInstruction implements StackProducer {
 

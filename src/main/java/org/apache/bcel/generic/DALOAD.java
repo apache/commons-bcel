@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * DALOAD - Load double from array
  *
- * <PRE>
+ * <pre>
  * Stack: ..., arrayref, index -&gt; ..., result.word1, result.word2
- * </PRE>
+ * </pre>
  */
 public class DALOAD extends ArrayInstruction implements StackProducer {
 

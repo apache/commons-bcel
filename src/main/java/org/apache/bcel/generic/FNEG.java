@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * FNEG - Negate float
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class FNEG extends ArithmeticInstruction {
 

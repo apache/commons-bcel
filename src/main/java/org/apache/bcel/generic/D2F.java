@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * D2F - Convert double to float
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value.word1, value.word2 -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class D2F extends ConversionInstruction {
 

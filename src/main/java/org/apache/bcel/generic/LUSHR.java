@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * LUSHR - Logical shift right long
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1, value2 -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class LUSHR extends ArithmeticInstruction {
 

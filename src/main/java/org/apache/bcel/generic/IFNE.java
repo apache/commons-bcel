@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * IFNE - Branch if int comparison with zero succeeds
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value -&gt; ...
- * </PRE>
+ * </pre>
  */
 public class IFNE extends IfInstruction {
 

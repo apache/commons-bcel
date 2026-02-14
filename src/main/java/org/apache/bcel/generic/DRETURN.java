@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * DRETURN - Return double from method
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value.word1, value.word2 -&gt; &lt;empty&gt;
- * </PRE>
+ * </pre>
  */
 public class DRETURN extends ReturnInstruction {
 

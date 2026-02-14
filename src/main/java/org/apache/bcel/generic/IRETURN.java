@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * IRETURN - Return int from method
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value -&gt; &lt;empty&gt;
- * </PRE>
+ * </pre>
  */
 public class IRETURN extends ReturnInstruction {
 

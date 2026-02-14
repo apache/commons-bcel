@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * IXOR - Bitwise XOR int
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1, value2 -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class IXOR extends ArithmeticInstruction {
 

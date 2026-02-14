@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * SWAP - Swa top operand stack word
  *
- * <PRE>
+ * <pre>
  * Stack: ..., word2, word1 -&gt; ..., word1, word2
- * </PRE>
+ * </pre>
  */
 public class SWAP extends StackInstruction implements StackConsumer, StackProducer {
 

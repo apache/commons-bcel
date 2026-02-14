@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * DCONST - Push 0.0 or 1.0, other values cause an exception
  *
- * <PRE>
+ * <pre>
  * Stack: ... -&gt; ...,
- * </PRE>
+ * </pre>
  */
 public class DCONST extends Instruction implements ConstantPushInstruction {
 

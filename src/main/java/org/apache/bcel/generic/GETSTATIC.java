@@ -24,15 +24,15 @@ import org.apache.bcel.ExceptionConst;
 /**
  * GETSTATIC - Fetch static field from class
  *
- * <PRE>
+ * <pre>
  * Stack: ..., -&gt; ..., value
- * </PRE>
+ * </pre>
  *
  * OR
  *
- * <PRE>
+ * <pre>
  * Stack: ..., -&gt; ..., value.word1, value.word2
- * </PRE>
+ * </pre>
  */
 public class GETSTATIC extends FieldInstruction implements PushInstruction, ExceptionThrower {
 

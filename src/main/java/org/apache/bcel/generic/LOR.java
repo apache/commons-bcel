@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * LOR - Bitwise OR long
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1, value2 -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class LOR extends ArithmeticInstruction {
 

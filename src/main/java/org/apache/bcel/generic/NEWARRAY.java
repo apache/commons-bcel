@@ -27,9 +27,9 @@ import org.apache.bcel.util.ByteSequence;
 /**
  * NEWARRAY - Create new array of basic type (int, short, ...)
  *
- * <PRE>
+ * <pre>
  * Stack: ..., count -&gt; ..., arrayref
- * </PRE>
+ * </pre>
  *
  * type must be one of T_INT, T_SHORT, ...
  */

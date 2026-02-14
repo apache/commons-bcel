@@ -24,15 +24,15 @@ import org.apache.bcel.ExceptionConst;
 /**
  * PUTSTATIC - Put static field in class
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value -&gt; ...
- * </PRE>
+ * </pre>
  *
  * OR
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value.word1, value.word2 -&gt; ...
- * </PRE>
+ * </pre>
  */
 public class PUTSTATIC extends FieldInstruction implements ExceptionThrower, PopInstruction {
 

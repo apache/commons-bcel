@@ -23,9 +23,9 @@ import org.apache.bcel.ExceptionConst;
 /**
  * NEW - Create new object
  *
- * <PRE>
+ * <pre>
  * Stack: ... -&gt; ..., objectref
- * </PRE>
+ * </pre>
  */
 public class NEW extends CPInstruction implements LoadClass, AllocationInstruction, ExceptionThrower, StackProducer {
 

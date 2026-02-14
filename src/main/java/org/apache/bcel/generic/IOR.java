@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * IOR - Bitwise OR int
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1, value2 -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class IOR extends ArithmeticInstruction {
 

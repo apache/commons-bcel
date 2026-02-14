@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * ISHR - Arithmetic shift right int
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1, value2 -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class ISHR extends ArithmeticInstruction {
 

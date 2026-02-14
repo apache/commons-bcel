@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * RETURN - Return from void method
  *
- * <PRE>
+ * <pre>
  * Stack: ... -&gt; &lt;empty&gt;
- * </PRE>
+ * </pre>
  */
 public class RETURN extends ReturnInstruction {
 

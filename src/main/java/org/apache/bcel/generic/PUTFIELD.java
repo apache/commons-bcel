@@ -24,15 +24,15 @@ import org.apache.bcel.ExceptionConst;
 /**
  * PUTFIELD - Put field in object
  *
- * <PRE>
+ * <pre>
  * Stack: ..., objectref, value -&gt; ...
- * </PRE>
+ * </pre>
  *
  * OR
  *
- * <PRE>
+ * <pre>
  * Stack: ..., objectref, value.word1, value.word2 -&gt; ...
- * </PRE>
+ * </pre>
  */
 public class PUTFIELD extends FieldInstruction implements PopInstruction, ExceptionThrower {
 

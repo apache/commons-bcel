@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * I2B - Convert int to byte
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class I2B extends ConversionInstruction {
 

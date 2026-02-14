@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * IF_ICMPLT - Branch if int comparison succeeds
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1, value2 -&gt; ...
- * </PRE>
+ * </pre>
  */
 public class IF_ICMPLT extends IfInstruction {
 

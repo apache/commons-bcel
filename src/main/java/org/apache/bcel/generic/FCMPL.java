@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * FCMPL - Compare floats: value1 &lt; value2
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1, value2 -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class FCMPL extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 

@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * FREM - Remainder of floats
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1, value2 -&gt; result
- * </PRE>
+ * </pre>
  */
 public class FREM extends ArithmeticInstruction {
 

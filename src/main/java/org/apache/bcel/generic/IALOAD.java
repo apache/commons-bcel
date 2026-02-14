@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * IALOAD - Load int from array
  *
- * <PRE>
+ * <pre>
  * Stack: ..., arrayref, index -&gt; ..., value
- * </PRE>
+ * </pre>
  */
 public class IALOAD extends ArrayInstruction implements StackProducer {
 

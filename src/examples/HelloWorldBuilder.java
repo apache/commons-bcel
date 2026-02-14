@@ -39,7 +39,7 @@ import org.apache.bcel.generic.Type;
 /**
  * Create HelloWorld class:
  *
- * <PRE>
+ * <pre>
  * import java.io.*;
  *
  * public class HelloWorld {
@@ -58,7 +58,7 @@ import org.apache.bcel.generic.Type;
  *         System.out.println("Hello, " + name);
  *     }
  * }
- * </PRE>
+ * </pre>
  */
 public class HelloWorldBuilder {
     public static void main(final String[] argv) {

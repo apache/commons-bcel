@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * FCONST - Push 0.0, 1.0 or 2.0, other values cause an exception
  *
- * <PRE>
+ * <pre>
  * Stack: ... -&gt; ...,
- * </PRE>
+ * </pre>
  */
 public class FCONST extends Instruction implements ConstantPushInstruction {
 

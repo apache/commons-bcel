@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * LRETURN - Return long from method
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value.word1, value.word2 -&gt; &lt;empty&gt;
- * </PRE>
+ * </pre>
  */
 public class LRETURN extends ReturnInstruction {
 

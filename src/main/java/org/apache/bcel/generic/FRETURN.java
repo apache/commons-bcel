@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * FRETURN - Return float from method
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value -&gt; &lt;empty&gt;
- * </PRE>
+ * </pre>
  */
 public class FRETURN extends ReturnInstruction {
 

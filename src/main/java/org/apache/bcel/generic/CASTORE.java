@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * CASTORE - Store into char array
  *
- * <PRE>
+ * <pre>
  * Stack: ..., arrayref, index, value -&gt; ...
- * </PRE>
+ * </pre>
  */
 public class CASTORE extends ArrayInstruction implements StackConsumer {
 

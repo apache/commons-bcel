@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * FASTORE - Store into float array
  *
- * <PRE>
+ * <pre>
  * Stack: ..., arrayref, index, value -&gt; ...
- * </PRE>
+ * </pre>
  */
 public class FASTORE extends ArrayInstruction implements StackConsumer {
 

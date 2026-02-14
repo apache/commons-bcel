@@ -23,9 +23,9 @@ import org.apache.bcel.ExceptionConst;
 /**
  * INSTANCEOF - Determine if object is of given type
  *
- * <PRE>
+ * <pre>
  * Stack: ..., objectref -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class INSTANCEOF extends CPInstruction implements LoadClass, ExceptionThrower, StackProducer, StackConsumer {
 

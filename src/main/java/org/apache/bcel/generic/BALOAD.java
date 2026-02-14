@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * BALOAD - Load byte or boolean from array
  *
- * <PRE>
+ * <pre>
  * Stack: ..., arrayref, index -&gt; ..., value
- * </PRE>
+ * </pre>
  */
 public class BALOAD extends ArrayInstruction implements StackProducer {
 

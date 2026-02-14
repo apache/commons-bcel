@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * D2L - Convert double to long
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value.word1, value.word2 -&gt; ..., result.word1, result.word2
- * </PRE>
+ * </pre>
  */
 public class D2L extends ConversionInstruction {
 

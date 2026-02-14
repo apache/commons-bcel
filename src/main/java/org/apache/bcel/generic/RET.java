@@ -26,9 +26,9 @@ import org.apache.bcel.util.ByteSequence;
 /**
  * RET - Return from subroutine
  *
- * <PRE>
+ * <pre>
  * Stack: ... -&gt; ...
- * </PRE>
+ * </pre>
  */
 public class RET extends Instruction implements IndexedInstruction, TypedInstruction {
 

@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * LCONST - Push 0 or 1, other values cause an exception
  *
- * <PRE>
+ * <pre>
  * Stack: ... -&gt; ...,
- * </PRE>
+ * </pre>
  */
 public class LCONST extends Instruction implements ConstantPushInstruction {
 

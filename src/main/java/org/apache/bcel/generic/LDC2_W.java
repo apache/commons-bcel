@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * LDC2_W - Push long or double from constant pool
  *
- * <PRE>
+ * <pre>
  * Stack: ... -&gt; ..., item.word1, item.word2
- * </PRE>
+ * </pre>
  */
 public class LDC2_W extends CPInstruction implements PushInstruction {
 

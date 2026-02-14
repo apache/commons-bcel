@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * ILOAD - Load int from local variable onto stack
  *
- * <PRE>
+ * <pre>
  * Stack: ... -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class ILOAD extends LoadInstruction {
 
