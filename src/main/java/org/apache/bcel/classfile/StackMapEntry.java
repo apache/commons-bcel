@@ -157,6 +157,8 @@ public final class StackMapEntry implements Node, Cloneable {
     }
 
     /**
+     * Creates a deep copy of this object.
+     *
      * @return deep copy of this object.
      */
     public StackMapEntry copy() {
@@ -210,17 +212,29 @@ public final class StackMapEntry implements Node, Cloneable {
         }
     }
 
+    /**
+     * Gets the byte code offset.
+     *
+     * @return the byte code offset.
+     */
     public int getByteCodeOffset() {
         return byteCodeOffset;
     }
 
     /**
+     * Gets the constant pool.
+     *
      * @return Constant pool used by this object.
      */
     public ConstantPool getConstantPool() {
         return constantPool;
     }
 
+    /**
+     * Gets the frame type.
+     *
+     * @return the frame type.
+     */
     public int getFrameType() {
         return frameType;
     }
@@ -261,18 +275,38 @@ public final class StackMapEntry implements Node, Cloneable {
         return len;
     }
 
+    /**
+     * Gets the number of locals.
+     *
+     * @return the number of locals.
+     */
     public int getNumberOfLocals() {
         return typesOfLocals.length;
     }
 
+    /**
+     * Gets the number of stack items.
+     *
+     * @return the number of stack items.
+     */
     public int getNumberOfStackItems() {
         return typesOfStackItems.length;
     }
 
+    /**
+     * Gets the types of locals.
+     *
+     * @return the types of locals.
+     */
     public StackMapType[] getTypesOfLocals() {
         return typesOfLocals;
     }
 
+    /**
+     * Gets the types of stack items.
+     *
+     * @return the types of stack items.
+     */
     public StackMapType[] getTypesOfStackItems() {
         return typesOfStackItems;
     }
@@ -287,6 +321,11 @@ public final class StackMapEntry implements Node, Cloneable {
         // @formatter:on
     }
 
+    /**
+     * Sets the byte code offset.
+     *
+     * @param newOffset the new offset.
+     */
     public void setByteCodeOffset(final int newOffset) {
         if (newOffset < 0 || newOffset > 32767) {
             throw new IllegalArgumentException("Invalid StackMap offset: " + newOffset);
@@ -311,12 +350,19 @@ public final class StackMapEntry implements Node, Cloneable {
     }
 
     /**
+     * Sets the constant pool.
+     *
      * @param constantPool Constant pool to be used for this object.
      */
     public void setConstantPool(final ConstantPool constantPool) {
         this.constantPool = constantPool;
     }
 
+    /**
+     * Sets the frame type.
+     *
+     * @param ft the frame type.
+     */
     public void setFrameType(final int ft) {
         if (ft >= Const.SAME_FRAME && ft <= Const.SAME_FRAME_MAX) {
             byteCodeOffset = ft - Const.SAME_FRAME;
@@ -329,7 +375,9 @@ public final class StackMapEntry implements Node, Cloneable {
     }
 
     /**
+     * Sets the number of locals (deprecated).
      *
+     * @param n the number of locals.
      * @deprecated Since 6.0
      */
     @java.lang.Deprecated
@@ -337,17 +385,29 @@ public final class StackMapEntry implements Node, Cloneable {
     }
 
     /**
+     * Sets the number of stack items (deprecated).
      *
+     * @param n the number of stack items.
      * @deprecated Since 6.0
      */
     @java.lang.Deprecated
     public void setNumberOfStackItems(final int n) { // TODO unused
     }
 
+    /**
+     * Sets the types of locals.
+     *
+     * @param types the types of locals.
+     */
     public void setTypesOfLocals(final StackMapType[] types) {
         typesOfLocals = types != null ? types : StackMapType.EMPTY_ARRAY;
     }
 
+    /**
+     * Sets the types of stack items.
+     *
+     * @param types the types of stack items.
+     */
     public void setTypesOfStackItems(final StackMapType[] types) {
         typesOfStackItems = types != null ? types : StackMapType.EMPTY_ARRAY;
     }
@@ -402,7 +462,7 @@ public final class StackMapEntry implements Node, Cloneable {
     }
 
     /**
-     * Update the distance (as an offset delta) from this StackMap entry to the next. Note that this might cause the
+     * Updates the distance (as an offset delta) from this StackMap entry to the next. Note that this might cause the
      * frame type to change. Note also that delta may be negative.
      *
      * @param delta offset delta.
