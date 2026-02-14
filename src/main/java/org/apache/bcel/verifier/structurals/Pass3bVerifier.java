@@ -149,6 +149,8 @@ public final class Pass3bVerifier extends PassVerifier {
     /**
      * This class should only be instantiated by a Verifier.
      *
+     * @param myOwner the verifier that owns this Pass3bVerifier.
+     * @param methodNo the method number.
      * @see org.apache.bcel.verifier.Verifier
      */
     public Pass3bVerifier(final Verifier myOwner, final int methodNo) {
@@ -405,7 +407,11 @@ public final class Pass3bVerifier extends PassVerifier {
         return VerificationResult.VR_OK;
     }
 
-    /** Returns the method number as supplied when instantiating. */
+    /**
+     * Returns the method number as supplied when instantiating.
+     *
+     * @return the method number.
+     */
     public int getMethodNo() {
         return methodNo;
     }
