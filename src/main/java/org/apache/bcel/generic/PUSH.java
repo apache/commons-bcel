@@ -45,6 +45,8 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
     }
 
    /**
+     * Constructs a PUSH for a boolean value.
+     *
      * @param cp Constant pool.
      * @param value to push.
      */
@@ -54,6 +56,8 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
     }
 
     /**
+     * Constructs a PUSH for a Boolean value.
+     *
      * @param cp Constant pool.
      * @param value to push.
      */
@@ -73,6 +77,8 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
     }
 
     /**
+     * Constructs a PUSH for a double value.
+     *
      * @param cp Constant pool.
      * @param value to push.
      */
@@ -87,6 +93,8 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
     }
 
     /**
+     * Constructs a PUSH for a float value.
+     *
      * @param cp Constant pool.
      * @param value to push.
      */
@@ -121,6 +129,8 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
     }
 
     /**
+     * Constructs a PUSH for a long value.
+     *
      * @param cp Constant pool.
      * @param value to push.
      */
@@ -135,6 +145,8 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
     }
 
     /**
+     * Constructs a PUSH for a Number value.
+     *
      * @param cp Constant pool.
      * @param value to push.
      */
@@ -153,6 +165,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
     }
 
     /**
+     * Constructs a PUSH for an ObjectType value.
      *
      * @param cp The constant pool.
      * @param value to push.
@@ -167,6 +180,8 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
     }
 
     /**
+     * Constructs a PUSH for a String value.
+     *
      * @param cp Constant pool.
      * @param value to push.
      */
@@ -178,6 +193,11 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
         }
     }
 
+    /**
+     * Gets the instruction.
+     *
+     * @return the instruction.
+     */
     public Instruction getInstruction() {
         return instruction;
     }
