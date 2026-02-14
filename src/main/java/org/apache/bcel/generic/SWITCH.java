@@ -75,6 +75,13 @@ public final class SWITCH implements CompoundInstruction {
 
     private final Select instruction;
 
+    /**
+     * Constructs a SWITCH with default maxGap of 1.
+     *
+     * @param match array of match values.
+     * @param targets the instructions to be branched to for each case.
+     * @param target the default target.
+     */
     public SWITCH(final int[] match, final InstructionHandle[] targets, final InstructionHandle target) {
         this(match, targets, target, 1);
     }
@@ -125,6 +132,11 @@ public final class SWITCH implements CompoundInstruction {
         }
     }
 
+    /**
+     * Gets the instruction.
+     *
+     * @return the instruction.
+     */
     public Instruction getInstruction() {
         return instruction;
     }
