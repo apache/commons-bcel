@@ -37,6 +37,9 @@ public class VerifierFactoryListModel implements VerifierFactoryObserver, ListMo
     private final List<ListDataListener> listeners = new ArrayList<>();
     private final Set<String> cache = new TreeSet<>();
 
+    /**
+     * Constructs a VerifierFactoryListModel.
+     */
     public VerifierFactoryListModel() {
         VerifierFactory.attach(this);
         update(null); // fill cache.
