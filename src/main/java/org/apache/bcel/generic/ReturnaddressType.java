@@ -27,6 +27,7 @@ import org.apache.bcel.Const;
  */
 public class ReturnaddressType extends Type {
 
+    /** Predefined constant for a returnaddress with no target. */
     public static final ReturnaddressType NO_TARGET = new ReturnaddressType();
     private InstructionHandle returnTarget;
 
@@ -39,6 +40,8 @@ public class ReturnaddressType extends Type {
 
     /**
      * Creates a ReturnaddressType object with a target.
+     *
+     * @param returnTarget the target instruction.
      */
     public ReturnaddressType(final InstructionHandle returnTarget) {
         super(Const.T_ADDRESS, "<return address targeting " + returnTarget + ">");
@@ -47,6 +50,9 @@ public class ReturnaddressType extends Type {
 
     /**
      * Returns if the two Returnaddresses refer to the same target.
+     *
+     * @param rat the object to compare.
+     * @return true if equal.
      */
     @Override
     public boolean equals(final Object rat) {
@@ -61,6 +67,8 @@ public class ReturnaddressType extends Type {
     }
 
     /**
+     * Gets the target of this ReturnaddressType.
+     *
      * @return the target of this ReturnaddressType.
      */
     public InstructionHandle getTarget() {
