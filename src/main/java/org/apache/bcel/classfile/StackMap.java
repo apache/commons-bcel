@@ -67,10 +67,12 @@ public final class StackMap extends Attribute {
         }
     }
 
-    /*
+    /**
+     * Constructs a StackMap.
+     *
      * @param nameIndex Index of name.
      * @param length Content length in bytes.
-     * @param map Table of stack map entries.
+     * @param table Table of stack map entries.
      * @param constantPool Array of constants.
      */
     public StackMap(final int nameIndex, final int length, final StackMapEntry[] table, final ConstantPool constantPool) {
@@ -117,11 +119,18 @@ public final class StackMap extends Attribute {
         }
     }
 
+    /**
+     * Gets the map length.
+     *
+     * @return the map length.
+     */
     public int getMapLength() {
         return table.length;
     }
 
     /**
+     * Gets the stack map.
+     *
      * @return Array of stack map entries.
      */
     public StackMapEntry[] getStackMap() {
@@ -129,6 +138,8 @@ public final class StackMap extends Attribute {
     }
 
     /**
+     * Sets the stack map.
+     *
      * @param table Array of stack map entries.
      */
     public void setStackMap(final StackMapEntry[] table) {
