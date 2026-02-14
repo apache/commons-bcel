@@ -55,6 +55,8 @@ public class Verifier {
      * used. You should supply command-line arguments which are fully qualified namea of the classes to verify. These class
      * files must be somewhere in your CLASSPATH (refer to Sun's documentation for questions about this) or you must have
      * put the classes into the BCEL Repository yourself (via 'addClass(JavaClass)').
+     *
+     * @param args command line arguments (fully qualified class names).
      */
     public static void main(final String[] args) {
         System.out.println(BANNER);
@@ -132,7 +134,11 @@ public class Verifier {
         className = fullyQualifiedClassName;
     }
 
-    /** Returns the VerificationResult for the given pass. */
+    /**
+     * Returns the VerificationResult for the given pass.
+     *
+     * @return the VerificationResult for pass 1.
+     */
     public VerificationResult doPass1() {
         if (p1v == null) {
             p1v = new Pass1Verifier(this);
@@ -140,7 +146,11 @@ public class Verifier {
         return p1v.verify();
     }
 
-    /** Returns the VerificationResult for the given pass. */
+    /**
+     * Returns the VerificationResult for the given pass.
+     *
+     * @return the VerificationResult for pass 2.
+     */
     public VerificationResult doPass2() {
         if (p2v == null) {
             p2v = new Pass2Verifier(this);
@@ -184,6 +194,7 @@ public class Verifier {
      * created recursively by another Verifier and you got a reference to this Verifier by the getVerifiers() method of the
      * VerifierFactory.
      *
+     * @return the class name.
      * @see VerifierFactory
      */
     public final String getClassName() {
@@ -194,6 +205,7 @@ public class Verifier {
      * This returns all the (warning) messages collected during verification. A prefix shows from which verifying pass a
      * message originates.
      *
+     * @return the array of messages.
      * @throws ClassNotFoundException if this class can't be found.
      */
     public String[] getMessages() throws ClassNotFoundException {
