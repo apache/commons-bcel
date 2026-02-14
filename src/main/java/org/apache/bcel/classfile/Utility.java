@@ -270,7 +270,7 @@ public abstract class Utility {
      *
      * @param code byte code array.
      * @param constantPool Array of constants.
-     * @param index offset in 'code' array <EM>(number of opcodes, not bytes!)</EM>.
+     * @param index offset in 'code' array <em>(number of opcodes, not bytes!)</em>.
      * @param length number of opcodes to decompile, -1 for all.
      * @param verbose be verbose, for example print constant pool index.
      * @return String representation of byte codes.
