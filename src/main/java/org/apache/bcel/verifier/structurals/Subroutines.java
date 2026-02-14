@@ -551,6 +551,8 @@ public class Subroutines {
      * Returns the Subroutine object associated with the given leader (that is, the first instruction of the subroutine).
      * You must not use this to get the top-level instructions modeled as a Subroutine object.
      *
+     * @param leader the leader instruction handle.
+     * @return the Subroutine object.
      * @see #getTopLevel()
      */
     public Subroutine getSubroutine(final InstructionHandle leader) {
@@ -572,6 +574,7 @@ public class Subroutines {
      * object. It is a special Subroutine object where <B>you must not invoke getEnteringJsrInstructions() or
      * getLeavingRET()</B>.
      *
+     * @return the top-level Subroutine.
      * @see Subroutine#getEnteringJsrInstructions()
      * @see Subroutine#getLeavingRET()
      */
@@ -611,6 +614,8 @@ public class Subroutines {
      * using getSubroutine(InstructionHandle). Returns 'null' if the given InstructionHandle lies in so-called 'dead code',
      * for example code that can never be executed.
      *
+     * @param any the instruction handle.
+     * @return the Subroutine object or null.
      * @see #getSubroutine(InstructionHandle)
      * @see #getTopLevel()
      */
