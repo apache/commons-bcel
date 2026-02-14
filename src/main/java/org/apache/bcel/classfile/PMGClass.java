@@ -48,6 +48,8 @@ public final class PMGClass extends Attribute {
     }
 
     /**
+     * Constructs a PMGClass.
+     *
      * @param nameIndex Index in constant pool to CONSTANT_Utf8.
      * @param length Content length in bytes.
      * @param pmgIndex index in constant pool for source file name.
@@ -103,6 +105,8 @@ public final class PMGClass extends Attribute {
     }
 
     /**
+     * Gets the PMG class index.
+     *
      * @return Index in constant pool of source file name.
      */
     public int getPMGClassIndex() {
@@ -110,6 +114,8 @@ public final class PMGClass extends Attribute {
     }
 
     /**
+     * Gets the PMG class name.
+     *
      * @return PMG class name.
      */
     public String getPMGClassName() {
@@ -117,6 +123,8 @@ public final class PMGClass extends Attribute {
     }
 
     /**
+     * Gets the PMG index.
+     *
      * @return Index in constant pool of source file name.
      */
     public int getPMGIndex() {
@@ -124,6 +132,8 @@ public final class PMGClass extends Attribute {
     }
 
     /**
+     * Gets the PMG name.
+     *
      * @return PMG name.
      */
     public String getPMGName() {
@@ -131,6 +141,8 @@ public final class PMGClass extends Attribute {
     }
 
     /**
+     * Sets the PMG class index.
+     *
      * @param pmgClassIndex The class index.
      */
     public void setPMGClassIndex(final int pmgClassIndex) {
@@ -138,6 +150,8 @@ public final class PMGClass extends Attribute {
     }
 
     /**
+     * Sets the PMG index.
+     *
      * @param pmgIndex The index.
      */
     public void setPMGIndex(final int pmgIndex) {
