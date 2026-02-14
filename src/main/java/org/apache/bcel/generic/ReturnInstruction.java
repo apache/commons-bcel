@@ -46,6 +46,11 @@ public abstract class ReturnInstruction extends Instruction implements Exception
         return new Class[] {ExceptionConst.ILLEGAL_MONITOR_STATE};
     }
 
+    /**
+     * Gets the type of the returned value.
+     *
+     * @return the type.
+     */
     public Type getType() {
         final short opcode = super.getOpcode();
         switch (opcode) {
