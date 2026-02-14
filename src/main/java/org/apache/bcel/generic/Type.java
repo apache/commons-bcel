@@ -41,27 +41,54 @@ public abstract class Type {
      */
     public static final BasicType VOID = new BasicType(Const.T_VOID);
 
+    /** Predefined constant for boolean type. */
     public static final BasicType BOOLEAN = new BasicType(Const.T_BOOLEAN);
+
+    /** Predefined constant for int type. */
     public static final BasicType INT = new BasicType(Const.T_INT);
+
+    /** Predefined constant for short type. */
     public static final BasicType SHORT = new BasicType(Const.T_SHORT);
+
+    /** Predefined constant for byte type. */
     public static final BasicType BYTE = new BasicType(Const.T_BYTE);
+
+    /** Predefined constant for long type. */
     public static final BasicType LONG = new BasicType(Const.T_LONG);
+
+    /** Predefined constant for double type. */
     public static final BasicType DOUBLE = new BasicType(Const.T_DOUBLE);
+
+    /** Predefined constant for float type. */
     public static final BasicType FLOAT = new BasicType(Const.T_FLOAT);
+
+    /** Predefined constant for char type. */
     public static final BasicType CHAR = new BasicType(Const.T_CHAR);
+
+    /** Predefined constant for Object type. */
     public static final ObjectType OBJECT = new ObjectType("java.lang.Object");
+
+    /** Predefined constant for Class type. */
     public static final ObjectType CLASS = new ObjectType("java.lang.Class");
+
+    /** Predefined constant for String type. */
     public static final ObjectType STRING = new ObjectType("java.lang.String");
+
+    /** Predefined constant for StringBuffer type. */
     public static final ObjectType STRINGBUFFER = new ObjectType("java.lang.StringBuffer");
+
+    /** Predefined constant for Throwable type. */
     public static final ObjectType THROWABLE = new ObjectType("java.lang.Throwable");
 
     /**
      * Empty array.
      */
     public static final Type[] NO_ARGS = {};
+    /** Predefined constant for null type. */
     public static final ReferenceType NULL = new ReferenceType() {
     };
 
+    /** Predefined constant for unknown type. */
     public static final Type UNKNOWN = new Type(Const.T_UNKNOWN, "<unknown object>") {
     };
 
@@ -164,6 +191,12 @@ public abstract class Type {
         return size(getTypeSize(signature.substring(index)));
     }
 
+    /**
+     * Gets the signature for a method.
+     *
+     * @param meth the method.
+     * @return the method signature.
+     */
     public static String getSignature(final java.lang.reflect.Method meth) {
         final StringBuilder sb = new StringBuilder("(");
         final Class<?>[] params = meth.getParameterTypes(); // avoid clone
@@ -329,6 +362,12 @@ public abstract class Type {
     @Deprecated
     protected String signature; // signature for the type TODO should be private
 
+    /**
+     * Constructs a Type.
+     *
+     * @param type the type constant.
+     * @param signature the type signature.
+     */
     protected Type(final byte type, final String signature) {
         this.type = type;
         this.signature = signature;
