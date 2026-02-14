@@ -47,6 +47,13 @@ public abstract class PassVerifier {
     private VerificationResult verificationResult;
 
     /**
+     * Constructs a PassVerifier.
+     */
+    public PassVerifier() {
+        // Default constructor for subclasses
+    }
+
+    /**
      * This method adds a (warning) message to the message pool of this PassVerifier. This method is normally only
      * internally used by BCEL's class file verifier "JustIce" and should not be used from the outside.
      *
@@ -78,6 +85,7 @@ public abstract class PassVerifier {
     /**
      * Returns the (warning) messages that this PassVerifier accumulated during its do_verify()ing work.
      *
+     * @return the list of messages.
      * @see #addMessage(String)
      * @see #do_verify()
      */
