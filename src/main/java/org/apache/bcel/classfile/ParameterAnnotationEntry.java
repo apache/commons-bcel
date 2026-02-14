@@ -34,6 +34,12 @@ public class ParameterAnnotationEntry implements Node {
 
     static final ParameterAnnotationEntry[] EMPTY_ARRAY = {};
 
+    /**
+     * Creates parameter annotation entries from attributes.
+     *
+     * @param attributes the attributes.
+     * @return the parameter annotation entries.
+     */
     public static ParameterAnnotationEntry[] createParameterAnnotationEntries(final Attribute[] attributes) {
         if (attributes == null) {
             return EMPTY_ARRAY;
@@ -58,6 +64,7 @@ public class ParameterAnnotationEntry implements Node {
      * Constructs object from input stream.
      *
      * @param input Input stream.
+     * @param constantPool the constant pool.
      * @throws IOException if an I/O error occurs.
      */
     ParameterAnnotationEntry(final DataInput input, final ConstantPool constantPool) throws IOException {
@@ -80,6 +87,12 @@ public class ParameterAnnotationEntry implements Node {
         v.visitParameterAnnotationEntry(this);
     }
 
+    /**
+     * Dumps parameter annotation entry to file stream.
+     *
+     * @param dos Output file stream.
+     * @throws IOException if an I/O error occurs.
+     */
     public void dump(final DataOutputStream dos) throws IOException {
         dos.writeShort(annotationTable.length);
         for (final AnnotationEntry entry : annotationTable) {
@@ -88,7 +101,9 @@ public class ParameterAnnotationEntry implements Node {
     }
 
     /**
-     * returns the array of annotation entries in this annotation
+     * Gets the annotation entries.
+     *
+     * @return the array of annotation entries in this annotation.
      */
     public AnnotationEntry[] getAnnotationEntries() {
         return annotationTable;
