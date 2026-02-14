@@ -137,6 +137,8 @@ public final class Unknown extends Attribute {
     }
 
     /**
+     * Gets the data bytes.
+     *
      * @return data bytes.
      */
     public byte[] getBytes() {
@@ -152,6 +154,8 @@ public final class Unknown extends Attribute {
     }
 
     /**
+     * Sets the data bytes.
+     *
      * @param bytes the bytes to set.
      */
     public void setBytes(final byte[] bytes) {
