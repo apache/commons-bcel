@@ -36,10 +36,21 @@ public class SyntheticRepository extends MemorySensitiveClassPathRepository {
 
     private static final Map<ClassPath, SyntheticRepository> MAP = new ConcurrentHashMap<>(); // CLASSPATH X REPOSITORY
 
+    /**
+     * Gets the singleton instance for the system class path.
+     *
+     * @return the singleton instance.
+     */
     public static SyntheticRepository getInstance() {
         return getInstance(ClassPath.SYSTEM_CLASS_PATH);
     }
 
+    /**
+     * Gets the singleton instance for the given class path.
+     *
+     * @param classPath the class path.
+     * @return the singleton instance.
+     */
     public static SyntheticRepository getInstance(final ClassPath classPath) {
         return MAP.computeIfAbsent(classPath, SyntheticRepository::new);
     }
