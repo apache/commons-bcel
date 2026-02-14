@@ -28,12 +28,18 @@ import org.apache.bcel.classfile.JavaClass;
 public abstract class ReferenceType extends Type {
 
     /**
-     * Class is non-abstract but not instantiable from the outside
+     * Class is non-abstract but not instantiable from the outside.
      */
     ReferenceType() {
         super(Const.T_OBJECT, "<null object>");
     }
 
+    /**
+     * Constructs a ReferenceType.
+     *
+     * @param t the type.
+     * @param s the signature.
+     */
     protected ReferenceType(final byte t, final String s) {
         super(t, s);
     }
