@@ -50,6 +50,7 @@ public final class Pass1Verifier extends PassVerifier {
     /**
      * Should only be instantiated by a Verifier.
      *
+     * @param verifier the verifier.
      * @see Verifier
      */
     public Pass1Verifier(final Verifier verifier) {
