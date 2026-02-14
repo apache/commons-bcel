@@ -59,12 +59,24 @@ public final class Signature extends Attribute {
         return ch == 'T' || ch == 'L';
     }
 
-    // @since 6.0 is no longer final
+    /**
+     * Tests if a string is an actual parameter list.
+     *
+     * @param s the string to test.
+     * @return true if the string is an actual parameter list.
+     * @since 6.0 is no longer final
+     */
     public static boolean isActualParameterList(final String s) {
         return s.startsWith("L") && s.endsWith(">;");
     }
 
-    // @since 6.0 is no longer final
+    /**
+     * Tests if a string is a formal parameter list.
+     *
+     * @param s the string to test.
+     * @return true if the string is a formal parameter list.
+     * @since 6.0 is no longer final
+     */
     public static boolean isFormalParameterList(final String s) {
         return s.startsWith("<") && s.indexOf(':') > 0;
     }
@@ -147,6 +159,12 @@ public final class Signature extends Attribute {
         }
     }
 
+    /**
+     * Translates a signature string.
+     *
+     * @param s the signature string.
+     * @return the translated signature.
+     */
     public static String translate(final String s) {
         // System.out.println("Sig:" + s);
         final StringBuilder buf = new StringBuilder();
@@ -170,6 +188,8 @@ public final class Signature extends Attribute {
     }
 
     /**
+     * Constructs a Signature.
+     *
      * @param nameIndex Index in constant pool to CONSTANT_Utf8.
      * @param length Content length in bytes.
      * @param signatureIndex Index in constant pool to CONSTANT_Utf8.
@@ -225,6 +245,8 @@ public final class Signature extends Attribute {
     }
 
     /**
+     * Gets the GJ signature.
+     *
      * @return GJ signature.
      */
     public String getSignature() {
@@ -232,6 +254,8 @@ public final class Signature extends Attribute {
     }
 
     /**
+     * Gets the signature index.
+     *
      * @return Index in constant pool of source file name.
      */
     public int getSignatureIndex() {
@@ -239,6 +263,8 @@ public final class Signature extends Attribute {
     }
 
     /**
+     * Sets the signature index.
+     *
      * @param signatureIndex the index info the constant pool of this signature.
      */
     public void setSignatureIndex(final int signatureIndex) {
