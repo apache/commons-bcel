@@ -895,7 +895,12 @@ public final class Pass3aVerifier extends PassVerifier {
      */
     private Code code;
 
-    /** Should only be instantiated by a Verifier. */
+    /**
+     * Should only be instantiated by a Verifier.
+     *
+     * @param verifier the verifier.
+     * @param methodNo the method number.
+     */
     public Pass3aVerifier(final Verifier verifier, final int methodNo) {
         this.verifier = verifier;
         this.methodNo = methodNo;
@@ -1069,7 +1074,11 @@ public final class Pass3aVerifier extends PassVerifier {
         }
     }
 
-    /** Returns the method number as supplied when instantiating. */
+    /**
+     * Returns the method number as supplied when instantiating.
+     *
+     * @return the method number.
+     */
     public int getMethodNo() {
         return methodNo;
     }
@@ -1196,6 +1205,9 @@ public final class Pass3aVerifier extends PassVerifier {
      *
      * Returns the String representation of the Object obj; this is obj.toString() if it does not throw any
      * RuntimeException, or else it is a string derived only from obj's class name.
+     *
+     * @param obj the object to convert to string.
+     * @return the string representation.
      */
     protected String tostring(final Object obj) {
         String ret;
