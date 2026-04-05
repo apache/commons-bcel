@@ -19,6 +19,8 @@
 
 package org.apache.bcel.verifier;
 
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+
 import java.io.IOException;
 
 import org.apache.bcel.verifier.tests.TestArrayAccess02Creator;
@@ -29,7 +31,6 @@ import org.apache.bcel.verifier.tests.TestArrayAccess04IntCreator;
 import org.apache.bcel.verifier.tests.TestArrayAccess04LongCreator;
 import org.apache.bcel.verifier.tests.TestArrayAccess04ShortCreator;
 import org.apache.bcel.verifier.tests.TestArrayAccess04UnknownCreator;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class VerifierArrayAccessTest extends AbstractVerifierTest {
@@ -49,7 +50,7 @@ class VerifierArrayAccessTest extends AbstractVerifierTest {
         new TestArrayAccess04ShortCreator().create();
         assertVerifyRejected("TestArrayAccess04Short", "Verification of an arraystore instruction of a short on an array of references must fail.");
         final TestArrayAccess04UnknownCreator testArrayAccess04UnknownCreator = new TestArrayAccess04UnknownCreator();
-        Assertions.assertThrowsExactly(IllegalArgumentException.class, testArrayAccess04UnknownCreator::create, "Invalid type <unknown object>");
+        assertThrowsExactly(IllegalArgumentException.class, testArrayAccess04UnknownCreator::create, "Invalid type <unknown object>");
     }
 
     @Test

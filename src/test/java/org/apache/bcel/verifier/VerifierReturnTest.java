@@ -19,6 +19,8 @@
 
 package org.apache.bcel.verifier;
 
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+
 import java.io.IOException;
 
 import org.apache.bcel.verifier.tests.TestReturn01Creator;
@@ -30,7 +32,6 @@ import org.apache.bcel.verifier.tests.TestReturn03IntCreator;
 import org.apache.bcel.verifier.tests.TestReturn03LongCreator;
 import org.apache.bcel.verifier.tests.TestReturn03ObjectCreator;
 import org.apache.bcel.verifier.tests.TestReturn03UnknownCreator;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class VerifierReturnTest extends AbstractVerifierTest {
@@ -54,7 +55,7 @@ class VerifierReturnTest extends AbstractVerifierTest {
         new TestReturn03ObjectCreator().create();
         assertVerifyRejected("TestReturn03Object", "Verification of a int method that returns null Object must fail.");
         final TestReturn03UnknownCreator testReturn03UnknownCreator = new TestReturn03UnknownCreator();
-        Assertions.assertThrowsExactly(IllegalArgumentException.class, testReturn03UnknownCreator::create, "Invalid type <unknown object>");
+        assertThrowsExactly(IllegalArgumentException.class, testReturn03UnknownCreator::create, "Invalid type <unknown object>");
     }
 
     @Test
