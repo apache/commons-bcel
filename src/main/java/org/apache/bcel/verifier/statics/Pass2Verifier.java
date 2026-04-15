@@ -581,13 +581,13 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 }
             } else { // isInterface!
                 if (!obj.isPublic()) {
-                    throw new ClassConstraintException("Interface field '" + tostring(obj) + "' must have the ACC_PUBLIC modifier set but hasn't!");
+                    throw new ClassConstraintException("Interface field '" + tostring(obj) + "' must have the ACC_PUBLIC modifier set but hasn't.");
                 }
                 if (!obj.isStatic()) {
-                    throw new ClassConstraintException("Interface field '" + tostring(obj) + "' must have the ACC_STATIC modifier set but hasn't!");
+                    throw new ClassConstraintException("Interface field '" + tostring(obj) + "' must have the ACC_STATIC modifier set but hasn't.");
                 }
                 if (!obj.isFinal()) {
-                    throw new ClassConstraintException("Interface field '" + tostring(obj) + "' must have the ACC_FINAL modifier set but hasn't!");
+                    throw new ClassConstraintException("Interface field '" + tostring(obj) + "' must have the ACC_FINAL modifier set but hasn't.");
                 }
             }
 
@@ -617,7 +617,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             final String nameanddesc = name + sig;
             if (fieldNamesAndDesc.contains(nameanddesc)) {
-                throw new ClassConstraintException("No two fields (like '" + tostring(obj) + "') are allowed have same names and descriptors!");
+                throw new ClassConstraintException("No two fields (like '" + tostring(obj) + "') are allowed have same names and descriptors.");
             }
             if (fieldNames.contains(name)) {
                 addMessage("More than one field of name '" + name + "' detected (but with different type descriptors). This is very unusual.");
@@ -897,10 +897,10 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
                 } else {
                     if (!obj.isPublic()) {
-                        throw new ClassConstraintException("Interface method '" + tostring(obj) + "' must have the ACC_PUBLIC modifier set but hasn't!");
+                        throw new ClassConstraintException("Interface method '" + tostring(obj) + "' must have the ACC_PUBLIC modifier set but hasn't.");
                     }
                     if (!obj.isAbstract()) {
-                        throw new ClassConstraintException("Interface method '" + tostring(obj) + "' must have the ACC_ABSTRACT modifier set but hasn't!");
+                        throw new ClassConstraintException("Interface method '" + tostring(obj) + "' must have the ACC_ABSTRACT modifier set but hasn't.");
                     }
                     if (obj.isPrivate() || obj.isProtected() || obj.isStatic() || obj.isFinal() || obj.isSynchronized() || obj.isNative() || obj.isStrictfp()) {
                         throw new ClassConstraintException("Interface method '" + tostring(obj) + "' must not have"
@@ -918,7 +918,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             final String nameanddesc = name + sig;
             if (methodNamesAndDesc.contains(nameanddesc)) {
-                throw new ClassConstraintException("No two methods (like '" + tostring(obj) + "') are allowed have same names and desciptors!");
+                throw new ClassConstraintException("No two methods (like '" + tostring(obj) + "') are allowed have same names and desciptors.");
             }
             methodNamesAndDesc.add(nameanddesc);
 
@@ -1015,7 +1015,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         @Override
         public void visitConstantFieldref(final ConstantFieldref obj) {
             if (obj.getTag() != Const.CONSTANT_Fieldref) {
-                throw new ClassConstraintException("ConstantFieldref '" + tostring(obj) + "' has wrong tag!");
+                throw new ClassConstraintException("ConstantFieldref '" + tostring(obj) + "' has wrong tag.");
             }
             final int nameAndTypeIndex = obj.getNameAndTypeIndex();
             final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(nameAndTypeIndex);
@@ -1043,7 +1043,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         @Override
         public void visitConstantInterfaceMethodref(final ConstantInterfaceMethodref obj) {
             if (obj.getTag() != Const.CONSTANT_InterfaceMethodref) {
-                throw new ClassConstraintException("ConstantInterfaceMethodref '" + tostring(obj) + "' has wrong tag!");
+                throw new ClassConstraintException("ConstantInterfaceMethodref '" + tostring(obj) + "' has wrong tag.");
             }
             final int nameAndTypeIndex = obj.getNameAndTypeIndex();
             final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(nameAndTypeIndex);
@@ -1076,7 +1076,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         @Override
         public void visitConstantMethodref(final ConstantMethodref obj) {
             if (obj.getTag() != Const.CONSTANT_Methodref) {
-                throw new ClassConstraintException("ConstantMethodref '" + tostring(obj) + "' has wrong tag!");
+                throw new ClassConstraintException("ConstantMethodref '" + tostring(obj) + "' has wrong tag.");
             }
             final int nameAndTypeIndex = obj.getNameAndTypeIndex();
             final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(nameAndTypeIndex);

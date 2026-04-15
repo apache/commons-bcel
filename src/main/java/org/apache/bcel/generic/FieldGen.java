@@ -164,7 +164,7 @@ public class FieldGen extends FieldGenOrMethodGen {
             throw new ClassGenException("You haven't defined the type of the field yet");
         }
         if (!isFinal()) {
-            throw new ClassGenException("Only final fields may have an initial value!");
+            throw new ClassGenException("Only final fields may have an initial value.");
         }
         if (!superType.equals(atype)) {
             throw new ClassGenException("Types are not compatible: " + superType + " vs. " + atype);

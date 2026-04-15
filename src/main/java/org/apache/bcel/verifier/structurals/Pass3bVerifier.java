@@ -206,7 +206,7 @@ public final class Pass3bVerifier extends PassVerifier {
                 int skipJsr = 0;
                 for (int ss = oldchain.size() - 1; ss >= 0; ss--) {
                     if (skipJsr < 0) {
-                        throw new AssertionViolatedException("More RET than JSR in execution chain?!");
+                        throw new AssertionViolatedException("More RET than JSR in execution chain?.");
                     }
 //System.err.println("+"+oldchain.get(ss));
                     if (oldchain.get(ss).getInstruction().getInstruction() instanceof JsrInstruction) {

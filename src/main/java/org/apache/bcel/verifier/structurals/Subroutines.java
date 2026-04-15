@@ -110,7 +110,7 @@ public class Subroutines {
                 throw new AssertionViolatedException("Expecting JsrInstruction InstructionHandle.");
             }
             if (localVariable == UNSET) {
-                throw new AssertionViolatedException("Set the localVariable first!");
+                throw new AssertionViolatedException("Set the localVariable first.");
             }
             // Something is wrong when an ASTORE is targeted that does not operate on the same local variable than the rest of the
             // JsrInstruction-targets and the RET.

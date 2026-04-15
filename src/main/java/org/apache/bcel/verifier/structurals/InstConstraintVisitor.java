@@ -459,7 +459,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
     public void visitCPInstruction(final CPInstruction o) {
         final int idx = o.getIndex();
         if (idx < 0 || idx >= cpg.getSize()) {
-            throw new AssertionViolatedException("Huh?! Constant pool index of instruction '" + o + "' illegal? Pass 3a should have checked this!");
+            throw new AssertionViolatedException("Huh?! Constant pool index of instruction '" + o + "' illegal? Pass 3a should have checked this.");
         }
     }
 
@@ -2360,7 +2360,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
 
         final Type t = o.getType(cpg);
         if (!(t instanceof ReferenceType)) {
-            throw new AssertionViolatedException("NEW.getType() returning a non-reference type?!");
+            throw new AssertionViolatedException("NEW.getType() returning a non-reference type?.");
         }
         if (!(t instanceof ObjectType)) {
             constraintViolated(o, "Expecting a class type (ObjectType) to work on. Found: '" + t + "'.");
@@ -2484,7 +2484,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
             constraintViolated(o, "Expecting a ReturnaddressType in local variable " + o.getIndex() + ".");
         }
         if (locals().get(o.getIndex()) == ReturnaddressType.NO_TARGET) {
-            throw new AssertionViolatedException("RET expecting a target!");
+            throw new AssertionViolatedException("RET expecting a target.");
         }
         // Other constraints such as non-allowed overlapping subroutines are enforced
         // while building the Subroutines data structure.

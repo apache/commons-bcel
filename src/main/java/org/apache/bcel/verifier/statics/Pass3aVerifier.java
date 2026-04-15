@@ -1021,7 +1021,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 final JavaClass jc = Repository.lookupClass(verifier.getClassName());
                 final Method[] methods = jc.getMethods();
                 if (methodNo >= methods.length) {
-                    throw new InvalidMethodException("METHOD DOES NOT EXIST!");
+                    throw new InvalidMethodException("METHOD DOES NOT EXIST.");
                 }
                 final Method method = methods[methodNo];
                 code = method.getCode();
@@ -1120,13 +1120,13 @@ public final class Pass3aVerifier extends PassVerifier {
         while (ih != null) {
             final Instruction i = ih.getInstruction();
             if (i instanceof IMPDEP1) {
-                throw new StaticCodeInstructionConstraintException("IMPDEP1 must not be in the code, it is an illegal instruction for _internal_ JVM use!");
+                throw new StaticCodeInstructionConstraintException("IMPDEP1 must not be in the code, it is an illegal instruction for _internal_ JVM use.");
             }
             if (i instanceof IMPDEP2) {
-                throw new StaticCodeInstructionConstraintException("IMPDEP2 must not be in the code, it is an illegal instruction for _internal_ JVM use!");
+                throw new StaticCodeInstructionConstraintException("IMPDEP2 must not be in the code, it is an illegal instruction for _internal_ JVM use.");
             }
             if (i instanceof BREAKPOINT) {
-                throw new StaticCodeInstructionConstraintException("BREAKPOINT must not be in the code, it is an illegal instruction for _internal_ JVM use!");
+                throw new StaticCodeInstructionConstraintException("BREAKPOINT must not be in the code, it is an illegal instruction for _internal_ JVM use.");
             }
             ih = ih.getNext();
         }

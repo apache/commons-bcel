@@ -561,7 +561,7 @@ public abstract class Utility {
                         buf.append(bytes.readInt());
                         break;
                     default: // Never reached
-                        throw new IllegalStateException("Unreachable default case reached!");
+                        throw new IllegalStateException("Unreachable default case reached.");
                     }
                 }
             }

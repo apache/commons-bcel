@@ -104,7 +104,7 @@ public class ControlFlowGraph {
                 final Subroutine s = subroutines.subroutineOf(getInstruction());
                 if (s == null) { // return empty;
                     // RET in dead code. "empty" would be the correct answer, but we know something about the surrounding project...
-                    throw new AssertionViolatedException("Asking for successors of a RET in dead code?!");
+                    throw new AssertionViolatedException("Asking for successors of a RET in dead code?.");
                 }
 
 //TODO: remove. Only JustIce must not use it, but foreign users of the ControlFlowGraph
@@ -398,7 +398,7 @@ public class ControlFlowGraph {
     public InstructionContext contextOf(final InstructionHandle inst) {
         final InstructionContext ic = instructionContexts.get(inst);
         if (ic == null) {
-            throw new AssertionViolatedException("InstructionContext requested for an InstructionHandle that's not known!");
+            throw new AssertionViolatedException("InstructionContext requested for an InstructionHandle that's not known.");
         }
         return ic;
     }
