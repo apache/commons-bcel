@@ -231,10 +231,10 @@ final class CodeHTML {
             index = c1.getNameAndTypeIndex();
             final String fieldName = constantPool.constantToString(index, Const.CONSTANT_NameAndType);
             if (name.equals(className)) { // Local field
-                buf.append("<A HREF=\"").append(className).append("_methods.html#field").append(fieldName).append("\" TARGET=Methods>").append(fieldName)
-                    .append("</A>\n");
+                buf.append("<A HREF=\"").append(className).append("_methods.html#field").append(fieldName).append("\" TARGET=Methods>")
+                    .append(Class2HTML.toHTML(fieldName)).append("</A>\n");
             } else {
-                buf.append(constantHtml.referenceConstant(classIndex)).append(".").append(fieldName);
+                buf.append(constantHtml.referenceConstant(classIndex)).append(".").append(Class2HTML.toHTML(fieldName));
             }
             break;
         /*
