@@ -159,7 +159,7 @@ final class AttributeHTML implements Closeable {
                 signature = Utility.signatureToString(signature, false);
                 final int start = var.getStartPC();
                 final int end = start + var.getLength();
-                printWriter.println("<LI>" + Class2HTML.referenceType(signature) + "&nbsp;<B>" + var.getName() + "</B> in slot %" + var.getIndex()
+                printWriter.println("<LI>" + Class2HTML.referenceType(signature) + "&nbsp;<B>" + Class2HTML.toHTML(var.getName()) + "</B> in slot %" + var.getIndex()
                         + "<BR>Valid from lines <A HREF=\"" + className + "_code.html#code" + methodNumber + "@" + start + "\" TARGET=Code>" + start
                         + "</A> to <A HREF=\"" + className + "_code.html#code" + methodNumber + "@" + end + "\" TARGET=Code>" + end + "</A></LI>");
             });
@@ -173,7 +173,7 @@ final class AttributeHTML implements Closeable {
                 final String access;
                 index = clazz.getInnerNameIndex();
                 if (index > 0) {
-                    name = constantPool.getConstantUtf8(index).getBytes();
+                    name = Class2HTML.toHTML(constantPool.getConstantUtf8(index).getBytes());
                 } else {
                     name = "&lt;anonymous&gt;";
                 }

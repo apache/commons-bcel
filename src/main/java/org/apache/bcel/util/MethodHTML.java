@@ -78,7 +78,7 @@ final class MethodHTML {
         final Attribute[] attributes;
         access = Utility.replace(access, " ", "&nbsp;");
         printWriter.print("<TR><TD><FONT COLOR=\"#FF0000\">" + access + "</FONT></TD>\n<TD>" + Class2HTML.referenceType(type) + "</TD><TD><A NAME=\"field"
-            + name + "\">" + name + "</A></TD>");
+            + name + "\">" + Class2HTML.toHTML(name) + "</A></TD>");
         attributes = field.getAttributes();
         // Write them to the Attributes.html file with anchor "<name>[<i>]"
         for (int i = 0; i < attributes.length; i++) {

@@ -135,7 +135,7 @@ public class Class2HTML implements Constants {
         String str = constantPool.getConstantString(index, Const.CONSTANT_Class);
         str = Utility.compactClassName(str);
         str = Utility.compactClassName(str, classPackage + ".", true);
-        return "<A HREF=\"" + className + "_cp.html#cp" + index + "\" TARGET=ConstantPool>" + str + "</A>";
+        return "<A HREF=\"" + className + "_cp.html#cp" + index + "\" TARGET=ConstantPool>" + toHTML(str) + "</A>";
     }
 
     static String referenceType(final String type) {
@@ -150,7 +150,7 @@ public class Class2HTML implements Constants {
         if (basicTypes.contains(baseType)) {
             return "<FONT COLOR=\"#00FF00\">" + type + "</FONT>";
         }
-        return "<A HREF=\"" + baseType + ".html\" TARGET=_top>" + shortType + "</A>";
+        return "<A HREF=\"" + baseType + ".html\" TARGET=_top>" + toHTML(shortType) + "</A>";
     }
 
     static String toHTML(final String str) {
@@ -221,7 +221,7 @@ public class Class2HTML implements Constants {
         try (PrintWriter file = new PrintWriter(dir + className + ".html", charset.name())) {
             // @formatter:off
             file.println("<HTML>\n"
-                + "<HEAD><TITLE>Documentation for " + className + "</TITLE></HEAD>\n"
+                + "<HEAD><TITLE>Documentation for " + toHTML(className) + "</TITLE></HEAD>\n"
                 + "<FRAMESET BORDER=1 cols=\"30%,*\">\n"
                 + "<FRAMESET BORDER=1 rows=\"80%,*\">\n"
                 + "<FRAME NAME=\"ConstantPool\" SRC=\"" + className + "_cp.html" + "\"\n"
