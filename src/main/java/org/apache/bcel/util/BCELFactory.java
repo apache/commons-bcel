@@ -112,7 +112,7 @@ final class BCELFactory extends EmptyVisitor {
             embed += "L";
         } else if (value instanceof ObjectType) {
             final ObjectType ot = (ObjectType) value;
-            embed = "new ObjectType(\"" + ot.getClassName() + "\")";
+            embed = "new ObjectType(\"" + Utility.convertString(ot.getClassName()) + "\")";
         } else if (value instanceof ArrayType) {
             final ArrayType at = (ArrayType) value;
             embed = "new ArrayType(" + BCELifier.printType(at.getBasicType()) + ", " + at.getDimensions() + ")";
@@ -184,7 +184,7 @@ final class BCELFactory extends EmptyVisitor {
         int dim = 1;
         switch (opcode) {
         case Const.NEW:
-            printWriter.println("il.append(_factory.createNew(\"" + ((ObjectType) type).getClassName() + "\"));");
+            printWriter.println("il.append(_factory.createNew(\"" + Utility.convertString(((ObjectType) type).getClassName()) + "\"));");
             break;
         case Const.MULTIANEWARRAY:
             dim = ((MULTIANEWARRAY) i).getDimensions();
@@ -271,7 +271,8 @@ final class BCELFactory extends EmptyVisitor {
         final String className = i.getClassName(constantPoolGen);
         final String fieldName = i.getFieldName(constantPoolGen);
         final Type type = i.getFieldType(constantPoolGen);
-        printWriter.println("il.append(_factory.createFieldAccess(\"" + className + "\", \"" + fieldName + "\", " + BCELifier.printType(type) + ", "
+        printWriter.println("il.append(_factory.createFieldAccess(\"" + Utility.convertString(className) + "\", \"" + Utility.convertString(fieldName) + "\", "
+                + BCELifier.printType(type) + ", "
                 + CONSTANT_PREFIX + StringUtils.toRootUpperCase(Const.getOpcodeName(opcode)) + "));");
     }
 
@@ -297,8 +298,9 @@ final class BCELFactory extends EmptyVisitor {
         final String methodName = i.getMethodName(constantPoolGen);
         final Type type = i.getReturnType(constantPoolGen);
         final Type[] argTypes = i.getArgumentTypes(constantPoolGen);
-        printWriter.println("il.append(_factory.createInvoke(\"" + className + "\", \"" + methodName + "\", " + BCELifier.printType(type) + ", "
-            + BCELifier.printArgumentTypes(argTypes) + ", " + CONSTANT_PREFIX + StringUtils.toRootUpperCase(Const.getOpcodeName(opcode)) + "));");
+        printWriter.println("il.append(_factory.createInvoke(\"" + Utility.convertString(className) + "\", \"" + Utility.convertString(methodName) + "\", "
+            + BCELifier.printType(type) + ", " + BCELifier.printArgumentTypes(argTypes) + ", " + CONSTANT_PREFIX
+            + StringUtils.toRootUpperCase(Const.getOpcodeName(opcode)) + "));");
     }
 
     @Override
