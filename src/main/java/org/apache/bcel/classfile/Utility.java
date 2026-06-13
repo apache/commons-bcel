@@ -150,9 +150,9 @@ public abstract class Utility {
     /*
      * The 'WIDE' instruction is used in the byte code to allow 16-bit wide indices for local variables. This opcode
      * precedes an 'ILOAD', for example. The opcode immediately following takes an extra byte which is combined with the following
-     * byte to form a 16-bit value.
+     * byte to form a 16-bit value. Read across consecutive codeToString() calls, so kept per-thread like CONSUMER_CHARS.
      */
-    private static boolean wide;
+    private static final ThreadLocal<Boolean> WIDE = ThreadLocal.withInitial(() -> Boolean.FALSE);
 
     // A-Z, g-z, _, $
     private static final int FREE_CHARS = 48;
@@ -428,9 +428,9 @@ public abstract class Utility {
         case Const.LLOAD:
         case Const.LSTORE:
         case Const.RET:
-            if (wide) {
+            if (WIDE.get().booleanValue()) {
                 vindex = bytes.readUnsignedShort();
-                wide = false; // Clear flag
+                WIDE.set(Boolean.FALSE); // Clear flag
             } else {
                 vindex = bytes.readUnsignedByte();
             }
@@ -441,7 +441,7 @@ public abstract class Utility {
          * called again with the following opcode.
          */
         case Const.WIDE:
-            wide = true;
+            WIDE.set(Boolean.TRUE);
             buf.append("\t(wide)");
             break;
         /*
@@ -536,10 +536,10 @@ public abstract class Utility {
          * Increment local variable.
          */
         case Const.IINC:
-            if (wide) {
+            if (WIDE.get().booleanValue()) {
                 vindex = bytes.readUnsignedShort();
                 constant = bytes.readShort();
-                wide = false;
+                WIDE.set(Boolean.FALSE);
             } else {
                 vindex = bytes.readUnsignedByte();
                 constant = bytes.readByte();
