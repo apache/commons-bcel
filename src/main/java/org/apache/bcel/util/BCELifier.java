@@ -96,6 +96,17 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         bcelifier.start();
     }
 
+    private static String[] escape(final String[] names) {
+        if (names == null) {
+            return null;
+        }
+        final String[] escaped = new String[names.length];
+        for (int i = 0; i < names.length; i++) {
+            escaped[i] = names[i] == null ? null : Utility.convertString(names[i]);
+        }
+        return escaped;
+    }
+
     static String printArgumentTypes(final Type[] argTypes) {
         if (argTypes.length == 0) {
             return "Type.NO_ARGS";
@@ -210,7 +221,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         final String className = clazz.getClassName();
         printWriter.println("  public static void main(String[] args) throws Exception {");
         printWriter.println("    " + className + "Creator creator = new " + className + "Creator();");
-        printWriter.println("    creator.create(new FileOutputStream(\"" + className + ".class\"));");
+        printWriter.println("    creator.create(new FileOutputStream(\"" + Utility.convertString(className) + ".class\"));");
         printWriter.println("  }");
     }
 
@@ -225,8 +236,8 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     @Override
     public void visitField(final Field field) {
         printWriter.println();
-        printWriter.println(
-            "    field = new FieldGen(" + printFlags(field.getAccessFlags()) + ", " + printType(field.getSignature()) + ", \"" + field.getName() + "\", _cp);");
+        printWriter.println("    field = new FieldGen(" + printFlags(field.getAccessFlags()) + ", " + printType(field.getSignature()) + ", \""
+            + Utility.convertString(field.getName()) + "\", _cp);");
         final ConstantValue cv = field.getConstantValue();
         if (cv != null) {
             printWriter.print("    field.setInitValue(");
@@ -259,7 +270,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         String className = clazz.getClassName();
         final String superName = clazz.getSuperclassName();
         final String packageName = clazz.getPackageName();
-        final String inter = Utility.printArray(clazz.getInterfaceNames(), false, true);
+        final String inter = Utility.printArray(escape(clazz.getInterfaceNames()), false, true);
         if (StringUtils.isNotEmpty(packageName)) {
             className = className.substring(packageName.length() + 1);
             printWriter.println("package " + packageName + ";");
@@ -276,8 +287,9 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         printWriter.println("  private ClassGen           _cg;");
         printWriter.println();
         printWriter.println("  public " + className + "Creator() {");
-        printWriter.println("    _cg = new ClassGen(\"" + (packageName.isEmpty() ? className : packageName + "." + className) + "\", \"" + superName
-            + "\", \"" + clazz.getSourceFileName() + "\", " + printFlags(clazz.getAccessFlags(), FLAGS.CLASS) + ", " + "new String[] { " + inter + " });");
+        printWriter.println("    _cg = new ClassGen(\"" + Utility.convertString(packageName.isEmpty() ? className : packageName + "." + className) + "\", \""
+            + Utility.convertString(superName) + "\", \"" + Utility.convertString(clazz.getSourceFileName()) + "\", "
+            + printFlags(clazz.getAccessFlags(), FLAGS.CLASS) + ", " + "new String[] { " + inter + " });");
         printWriter.println("    _cg.setMajor(" + clazz.getMajor() + ");");
         printWriter.println("    _cg.setMinor(" + clazz.getMinor() + ");");
         printWriter.println();
@@ -312,14 +324,14 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         final MethodGen mg = new MethodGen(method, clazz.getClassName(), constantPoolGen);
         printWriter.println("    InstructionList il = new InstructionList();");
         printWriter.println("    MethodGen method = new MethodGen(" + printFlags(method.getAccessFlags(), FLAGS.METHOD) + ", " + printType(mg.getReturnType())
-            + ", " + printArgumentTypes(mg.getArgumentTypes()) + ", new String[] { " + Utility.printArray(mg.getArgumentNames(), false, true) + " }, \""
-            + method.getName() + "\", \"" + clazz.getClassName() + "\", il, _cp);");
+            + ", " + printArgumentTypes(mg.getArgumentTypes()) + ", new String[] { " + Utility.printArray(escape(mg.getArgumentNames()), false, true) + " }, \""
+            + Utility.convertString(method.getName()) + "\", \"" + Utility.convertString(clazz.getClassName()) + "\", il, _cp);");
         final ExceptionTable exceptionTable = method.getExceptionTable();
         if (exceptionTable != null) {
             final String[] exceptionNames = exceptionTable.getExceptionNames();
             for (final String exceptionName : exceptionNames) {
                 printWriter.print("    method.addException(\"");
-                printWriter.print(exceptionName);
+                printWriter.print(Utility.convertString(exceptionName));
                 printWriter.println("\");");
             }
         }
@@ -344,7 +356,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         super.visitStackMap(stackMap);
         printWriter.print("    method.addCodeAttribute(");
         printWriter.print("new StackMap(_cp.addUtf8(\"");
-        printWriter.print(stackMap.getName());
+        printWriter.print(Utility.convertString(stackMap.getName()));
         printWriter.print("\"), ");
         printWriter.print(stackMap.getLength());
         printWriter.print(", ");
@@ -390,7 +402,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         printWriter.print(", ");
         if (stackMapType.hasIndex()) {
             printWriter.print("_cp.addClass(\"");
-            printWriter.print(stackMapType.getClassName());
+            printWriter.print(Utility.convertString(stackMapType.getClassName()));
             printWriter.print("\")");
         } else {
             printWriter.print("-1");

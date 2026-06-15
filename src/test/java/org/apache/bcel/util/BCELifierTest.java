@@ -308,8 +308,46 @@ class BCELifierTest extends AbstractTest {
         new BCELifier(cg.getJavaClass(), os).start();
         final String source = new String(os.toByteArray(), StandardCharsets.UTF_8);
 
-        assertTrue(source.contains(Utility.convertString(evilName)), source);
+        assertTrue(source.contains("_factory.createInvoke(\"java.lang.Object\", \"" + Utility.convertString(evilName) + "\", "), source);
         assertFalse(source.contains('"' + evilName + '"'), source);
+    }
+
+    @Test
+    void testMethodNameEscapedInOutput() throws Exception {
+        // A hostile constant pool can hold any UTF-8 as a method name.
+        final String evilName = "evil\"); System.exit(1); String x = (\"";
+        final ClassGen cg = new ClassGen("Example", "java.lang.Object", "Example.java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
+        final ConstantPoolGen cp = cg.getConstantPool();
+        final InstructionList il = new InstructionList();
+        il.append(InstructionConst.RETURN);
+        final MethodGen mg = new MethodGen(Const.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {}, evilName, "Example", il, cp);
+        mg.setMaxStack();
+        mg.setMaxLocals();
+        cg.addMethod(mg.getMethod());
+
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        new BCELifier(cg.getJavaClass(), os).start();
+        final String source = new String(os.toByteArray(), StandardCharsets.UTF_8);
+
+        assertTrue(source.contains("\"" + Utility.convertString(evilName) + "\", \"Example\", il, _cp);"), source);
+        assertFalse(source.contains('"' + evilName + '"'), source);
+    }
+
+    @Test
+    void testClassNamesEscapedInOutput() throws Exception {
+        // Superclass and source file names are constant-pool derived and can hold any UTF-8.
+        final String evilSuper = "java.lang.Object\"); System.exit(1); _cg = new ClassGen(\"x";
+        final String evilSource = "Example.java\"); System.exit(2); String s = (\"";
+        final ClassGen cg = new ClassGen("Example", evilSuper, evilSource, Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
+
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        new BCELifier(cg.getJavaClass(), os).start();
+        final String source = new String(os.toByteArray(), StandardCharsets.UTF_8);
+
+        assertTrue(source.contains(Utility.convertString(evilSuper)), source);
+        assertTrue(source.contains(Utility.convertString(evilSource)), source);
+        assertFalse(source.contains('"' + evilSuper + '"'), source);
+        assertFalse(source.contains('"' + evilSource + '"'), source);
     }
 
     @Test
