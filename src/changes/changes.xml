@@ -66,6 +66,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Deprecate org.apache.bcel.verifier.exc.Utility.getStackTrace(Throwable).</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix all Javadoc warnings and enforce checks by default.</action>
       <action                  type="fix" dev="ggregory" due-to="Dexter.k">Escape constant pool names in generated HTML (#500).</action>
+      <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Escape referenced names in BCELFactory Java output (#501).</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add support for permitted subclasses #493.</action>
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add RecordComponentInfo.getAttribute(byte tag)#494.</action>
