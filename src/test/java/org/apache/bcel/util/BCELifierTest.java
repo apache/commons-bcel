@@ -19,6 +19,7 @@
 package org.apache.bcel.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -34,10 +35,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.bcel.AbstractTest;
+import org.apache.bcel.Const;
 import org.apache.bcel.HelloWorldCreator;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.generic.BinaryOpCreator;
+import org.apache.bcel.generic.ClassGen;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.InstructionConst;
+import org.apache.bcel.generic.InstructionFactory;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.Type;
 import org.apache.commons.lang3.SystemProperties;
 import org.apache.commons.lang3.SystemUtils;
 import org.junit.jupiter.api.Test;
@@ -277,6 +286,68 @@ class BCELifierTest extends AbstractTest {
         testJavapCompare(className);
         final File workDir = new File("target");
         assertEquals("Hello World" + EOL, exec(workDir, getAppJava(), "-cp", CLASSPATH, className, "Hello"));
+    }
+
+    @Test
+    void testCreateInvokeEscapesConstantPoolName() throws Exception {
+        // A hostile constant pool can hold any UTF-8 as a referenced method name.
+        final String evilName = "evil\"); System.exit(1); il.append(\"";
+        final ClassGen cg = new ClassGen("Example", "java.lang.Object", "Example.java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
+        final ConstantPoolGen cp = cg.getConstantPool();
+        final InstructionFactory factory = new InstructionFactory(cg, cp);
+        final InstructionList il = new InstructionList();
+        il.append(InstructionConst.ALOAD_0);
+        il.append(factory.createInvoke("java.lang.Object", evilName, Type.VOID, Type.NO_ARGS, Const.INVOKEVIRTUAL));
+        il.append(InstructionConst.RETURN);
+        final MethodGen mg = new MethodGen(Const.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {}, "m", "Example", il, cp);
+        mg.setMaxStack();
+        mg.setMaxLocals();
+        cg.addMethod(mg.getMethod());
+
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        new BCELifier(cg.getJavaClass(), os).start();
+        final String source = new String(os.toByteArray(), StandardCharsets.UTF_8);
+
+        assertTrue(source.contains("_factory.createInvoke(\"java.lang.Object\", \"" + Utility.convertString(evilName) + "\", "), source);
+        assertFalse(source.contains('"' + evilName + '"'), source);
+    }
+
+    @Test
+    void testMethodNameEscapedInOutput() throws Exception {
+        // A hostile constant pool can hold any UTF-8 as a method name.
+        final String evilName = "evil\"); System.exit(1); String x = (\"";
+        final ClassGen cg = new ClassGen("Example", "java.lang.Object", "Example.java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
+        final ConstantPoolGen cp = cg.getConstantPool();
+        final InstructionList il = new InstructionList();
+        il.append(InstructionConst.RETURN);
+        final MethodGen mg = new MethodGen(Const.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {}, evilName, "Example", il, cp);
+        mg.setMaxStack();
+        mg.setMaxLocals();
+        cg.addMethod(mg.getMethod());
+
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        new BCELifier(cg.getJavaClass(), os).start();
+        final String source = new String(os.toByteArray(), StandardCharsets.UTF_8);
+
+        assertTrue(source.contains("\"" + Utility.convertString(evilName) + "\", \"Example\", il, _cp);"), source);
+        assertFalse(source.contains('"' + evilName + '"'), source);
+    }
+
+    @Test
+    void testClassNamesEscapedInOutput() throws Exception {
+        // Superclass and source file names are constant-pool derived and can hold any UTF-8.
+        final String evilSuper = "java.lang.Object\"); System.exit(1); _cg = new ClassGen(\"x";
+        final String evilSource = "Example.java\"); System.exit(2); String s = (\"";
+        final ClassGen cg = new ClassGen("Example", evilSuper, evilSource, Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
+
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        new BCELifier(cg.getJavaClass(), os).start();
+        final String source = new String(os.toByteArray(), StandardCharsets.UTF_8);
+
+        assertTrue(source.contains(Utility.convertString(evilSuper)), source);
+        assertTrue(source.contains(Utility.convertString(evilSource)), source);
+        assertFalse(source.contains('"' + evilSuper + '"'), source);
+        assertFalse(source.contains('"' + evilSource + '"'), source);
     }
 
     @Test
