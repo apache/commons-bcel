@@ -176,6 +176,23 @@ class BCELifierTest extends AbstractTest {
         }
     }
 
+    @Test
+    void testClassNamesEscapedInOutput() throws Exception {
+        // Superclass and source file names are constant-pool derived and can hold any UTF-8.
+        final String evilSuper = "java.lang.Object\"); System.exit(1); _cg = new ClassGen(\"x";
+        final String evilSource = "Example.java\"); System.exit(2); String s = (\"";
+        final ClassGen cg = new ClassGen("Example", evilSuper, evilSource, Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
+
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        new BCELifier(cg.getJavaClass(), os).start();
+        final String source = new String(os.toByteArray(), StandardCharsets.UTF_8);
+
+        assertTrue(source.contains(Utility.convertString(evilSuper)), source);
+        assertTrue(source.contains(Utility.convertString(evilSource)), source);
+        assertFalse(source.contains('"' + evilSuper + '"'), source);
+        assertFalse(source.contains('"' + evilSource + '"'), source);
+    }
+
     private void testClassOnPath(final String javaClassFileName) throws Exception {
         final File workDir = new File("target", getClass().getSimpleName());
         Files.createDirectories(workDir.getParentFile().toPath());
@@ -215,6 +232,30 @@ class BCELifierTest extends AbstractTest {
         final String javapOutput = exec(workDir, getAppJavaP(), "-p", "-c", inFile.getName());
         // Finally compares the output of the roundtrip
         assertEquals(canonHashRef(javapOutInital), canonHashRef(javapOutput));
+    }
+
+    @Test
+    void testCreateInvokeEscapesConstantPoolName() throws Exception {
+        // A hostile constant pool can hold any UTF-8 as a referenced method name.
+        final String evilName = "evil\"); System.exit(1); il.append(\"";
+        final ClassGen cg = new ClassGen("Example", "java.lang.Object", "Example.java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
+        final ConstantPoolGen cp = cg.getConstantPool();
+        final InstructionFactory factory = new InstructionFactory(cg, cp);
+        final InstructionList il = new InstructionList();
+        il.append(InstructionConst.ALOAD_0);
+        il.append(factory.createInvoke("java.lang.Object", evilName, Type.VOID, Type.NO_ARGS, Const.INVOKEVIRTUAL));
+        il.append(InstructionConst.RETURN);
+        final MethodGen mg = new MethodGen(Const.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {}, "m", "Example", il, cp);
+        mg.setMaxStack();
+        mg.setMaxLocals();
+        cg.addMethod(mg.getMethod());
+
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        new BCELifier(cg.getJavaClass(), os).start();
+        final String source = new String(os.toByteArray(), StandardCharsets.UTF_8);
+
+        assertTrue(source.contains("_factory.createInvoke(\"java.lang.Object\", \"" + Utility.convertString(evilName) + "\", "), source);
+        assertFalse(source.contains('"' + evilName + '"'), source);
     }
 
     @Test
@@ -280,38 +321,6 @@ class BCELifierTest extends AbstractTest {
         }
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = { "StackMapExample", "StackMapExample2" })
-    void testStackMap(final String className) throws Exception {
-        testJavapCompare(className);
-        final File workDir = new File("target");
-        assertEquals("Hello World" + EOL, exec(workDir, getAppJava(), "-cp", CLASSPATH, className, "Hello"));
-    }
-
-    @Test
-    void testCreateInvokeEscapesConstantPoolName() throws Exception {
-        // A hostile constant pool can hold any UTF-8 as a referenced method name.
-        final String evilName = "evil\"); System.exit(1); il.append(\"";
-        final ClassGen cg = new ClassGen("Example", "java.lang.Object", "Example.java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
-        final ConstantPoolGen cp = cg.getConstantPool();
-        final InstructionFactory factory = new InstructionFactory(cg, cp);
-        final InstructionList il = new InstructionList();
-        il.append(InstructionConst.ALOAD_0);
-        il.append(factory.createInvoke("java.lang.Object", evilName, Type.VOID, Type.NO_ARGS, Const.INVOKEVIRTUAL));
-        il.append(InstructionConst.RETURN);
-        final MethodGen mg = new MethodGen(Const.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {}, "m", "Example", il, cp);
-        mg.setMaxStack();
-        mg.setMaxLocals();
-        cg.addMethod(mg.getMethod());
-
-        final ByteArrayOutputStream os = new ByteArrayOutputStream();
-        new BCELifier(cg.getJavaClass(), os).start();
-        final String source = new String(os.toByteArray(), StandardCharsets.UTF_8);
-
-        assertTrue(source.contains("_factory.createInvoke(\"java.lang.Object\", \"" + Utility.convertString(evilName) + "\", "), source);
-        assertFalse(source.contains('"' + evilName + '"'), source);
-    }
-
     @Test
     void testMethodNameEscapedInOutput() throws Exception {
         // A hostile constant pool can hold any UTF-8 as a method name.
@@ -333,21 +342,12 @@ class BCELifierTest extends AbstractTest {
         assertFalse(source.contains('"' + evilName + '"'), source);
     }
 
-    @Test
-    void testClassNamesEscapedInOutput() throws Exception {
-        // Superclass and source file names are constant-pool derived and can hold any UTF-8.
-        final String evilSuper = "java.lang.Object\"); System.exit(1); _cg = new ClassGen(\"x";
-        final String evilSource = "Example.java\"); System.exit(2); String s = (\"";
-        final ClassGen cg = new ClassGen("Example", evilSuper, evilSource, Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
-
-        final ByteArrayOutputStream os = new ByteArrayOutputStream();
-        new BCELifier(cg.getJavaClass(), os).start();
-        final String source = new String(os.toByteArray(), StandardCharsets.UTF_8);
-
-        assertTrue(source.contains(Utility.convertString(evilSuper)), source);
-        assertTrue(source.contains(Utility.convertString(evilSource)), source);
-        assertFalse(source.contains('"' + evilSuper + '"'), source);
-        assertFalse(source.contains('"' + evilSource + '"'), source);
+    @ParameterizedTest
+    @ValueSource(strings = { "StackMapExample", "StackMapExample2" })
+    void testStackMap(final String className) throws Exception {
+        testJavapCompare(className);
+        final File workDir = new File("target");
+        assertEquals("Hello World" + EOL, exec(workDir, getAppJava(), "-cp", CLASSPATH, className, "Hello"));
     }
 
     @Test

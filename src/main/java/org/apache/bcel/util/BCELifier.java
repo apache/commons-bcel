@@ -71,6 +71,17 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     private static final String BASE_PACKAGE = Const.class.getPackage().getName();
     private static final String CONSTANT_PREFIX = Const.class.getSimpleName() + ".";
 
+    private static String[] escape(final String[] names) {
+        if (names == null) {
+            return null;
+        }
+        final String[] escaped = new String[names.length];
+        for (int i = 0; i < names.length; i++) {
+            escaped[i] = names[i] == null ? null : Utility.convertString(names[i]);
+        }
+        return escaped;
+    }
+
     // Needs to be accessible from unit test code
     static JavaClass getJavaClass(final String name) throws ClassNotFoundException, IOException {
         JavaClass javaClass;
@@ -94,17 +105,6 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         }
         final BCELifier bcelifier = new BCELifier(getJavaClass(argv[0]), System.out);
         bcelifier.start();
-    }
-
-    private static String[] escape(final String[] names) {
-        if (names == null) {
-            return null;
-        }
-        final String[] escaped = new String[names.length];
-        for (int i = 0; i < names.length; i++) {
-            escaped[i] = names[i] == null ? null : Utility.convertString(names[i]);
-        }
-        return escaped;
     }
 
     static String printArgumentTypes(final Type[] argTypes) {

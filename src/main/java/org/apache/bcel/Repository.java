@@ -36,12 +36,6 @@ public abstract class Repository {
     private static org.apache.bcel.util.Repository repository = SyntheticRepository.getInstance();
 
     /**
-     * Constructs a new Repository.
-     */
-    public Repository() {
-    }
-
-    /**
      * Adds clazz to repository if there isn't an equally named class already in there.
      *
      * @param clazz the class to add.
@@ -275,5 +269,11 @@ public abstract class Repository {
      */
     public static void setRepository(final org.apache.bcel.util.Repository rep) {
         repository = rep;
+    }
+
+    /**
+     * Constructs a new Repository.
+     */
+    public Repository() {
     }
 }
