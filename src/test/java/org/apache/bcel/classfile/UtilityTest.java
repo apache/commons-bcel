@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReference;
@@ -189,7 +190,7 @@ class UtilityTest {
             try {
                 Utility.codeToString(new ByteSequence(new byte[] {(byte) Const.WIDE}), new ConstantPool(), false);
             } catch (final Exception e) {
-                throw new AssertionError(e);
+                fail("WIDE disassembly failed", e);
             }
         });
         setter.start();
@@ -200,7 +201,7 @@ class UtilityTest {
                 // iload with a single index byte; the trailing 0x02 must stay unread.
                 reader.set(Utility.codeToString(new ByteSequence(new byte[] {(byte) Const.ILOAD, 1, 2}), new ConstantPool(), false));
             } catch (final Exception e) {
-                throw new AssertionError(e);
+                fail("iload disassembly failed", e);
             }
         });
         thread.start();
