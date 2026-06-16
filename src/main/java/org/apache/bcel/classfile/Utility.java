@@ -49,15 +49,6 @@ import org.apache.commons.lang3.StringUtils;
 public abstract class Utility {
 
     /**
-     * Constructs a Utility.
-     *
-     * @deprecated Will be private in the next major release.
-     */
-    public Utility() {
-        // Default constructor for subclasses
-    }
-
-    /**
      * Decode characters into bytes. Used by <a href="Utility.html#decode(java.lang.String, boolean)">decode()</a>
      */
     private static final class JavaReader extends FilterReader {
@@ -773,30 +764,6 @@ public abstract class Utility {
     }
 
     /**
-     * WARNING:
-     *
-     * There is some nomenclature confusion through much of the BCEL code base with respect to the terms Descriptor and
-     * Signature. For the offical definitions see:
-     *
-     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.3"> Descriptors in The Java
-     *      Virtual Machine Specification</a>
-     *
-     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.9.1"> Signatures in The Java
-     *      Virtual Machine Specification</a>
-     *
-     *      In brief, a descriptor is a string representing the type of a field or method. Signatures are similar, but more
-     *      complex. Signatures are used to encode declarations written in the Java programming language that use types
-     *      outside the type system of the Java Virtual Machine. They are used to describe the type of any class, interface,
-     *      constructor, method or field whose declaration uses type variables or parameterized types.
-     *
-     *      To parse a descriptor, call typeSignatureToString. To parse a signature, call signatureToString.
-     *
-     *      Note that if the signature string is a single, non-generic item, the call to signatureToString reduces to a call
-     *      to typeSignatureToString. Also note, that if you only wish to parse the first item in a longer signature string,
-     *      you should call typeSignatureToString directly.
-     */
-
-    /**
      * Parse Java type such as "char", or "java.lang.String[]" and return the signature in byte code format, for example "C" or
      * "[Ljava/lang/String;" respectively.
      *
@@ -854,6 +821,30 @@ public abstract class Utility {
         }
         return buf.toString();
     }
+
+    /**
+     * WARNING:
+     *
+     * There is some nomenclature confusion through much of the BCEL code base with respect to the terms Descriptor and
+     * Signature. For the offical definitions see:
+     *
+     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.3"> Descriptors in The Java
+     *      Virtual Machine Specification</a>
+     *
+     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.9.1"> Signatures in The Java
+     *      Virtual Machine Specification</a>
+     *
+     *      In brief, a descriptor is a string representing the type of a field or method. Signatures are similar, but more
+     *      complex. Signatures are used to encode declarations written in the Java programming language that use types
+     *      outside the type system of the Java Virtual Machine. They are used to describe the type of any class, interface,
+     *      constructor, method or field whose declaration uses type variables or parameterized types.
+     *
+     *      To parse a descriptor, call typeSignatureToString. To parse a signature, call signatureToString.
+     *
+     *      Note that if the signature string is a single, non-generic item, the call to signatureToString reduces to a call
+     *      to typeSignatureToString. Also note, that if you only wish to parse the first item in a longer signature string,
+     *      you should call typeSignatureToString directly.
+     */
 
     /**
      * Tests if a character is part of a Java identifier.
@@ -1624,6 +1615,15 @@ public abstract class Utility {
 
     private static void wrap(final ThreadLocal<Integer> tl, final int value) {
         tl.set(Integer.valueOf(value));
+    }
+
+    /**
+     * Constructs a Utility.
+     *
+     * @deprecated Will be private in the next major release.
+     */
+    public Utility() {
+        // Default constructor for subclasses
     }
 
 }
