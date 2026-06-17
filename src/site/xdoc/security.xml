@@ -32,6 +32,19 @@
         incomplete, please report them privately to the Apache Security Team. Thank you.
       </p>
     </section>
+    <section name="Security Model">
+      <p>The <a href="https://commons.apache.org/security.html#Security_Model">Apache Commons security model</a> specifies
+        that it is unsafe to pass possibly malicious input to Commons libraries
+        unless otherwise specified.
+        For Commons BCEL, processing untrusted class data is supported to the extent that
+        this should never allow the supplier of the data to trigger arbitrary code execution,
+        filesystem or network access. It may still trigger other crashes, such as for example <code>StackOverflowError</code> or <code>OutOfMemoryError</code>:
+	if your code uses BCEL to process untrusted input
+	then it is up to you to compensate for that as necessary.
+	Loading or executing the generated classes is unsafe and may cause unexpected behaviour,
+	including execute arbitrary code execution.
+      </p>
+    </section>
     <section name="Security Vulnerabilities">
       <subsection name="CVE-2022-42920">
         <ul>
