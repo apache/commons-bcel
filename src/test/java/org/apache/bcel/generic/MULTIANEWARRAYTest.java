@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 package org.apache.bcel.generic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,16 +25,20 @@ import org.apache.bcel.Const;
 import org.apache.bcel.util.ByteSequence;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests {@link MULTIANEWARRAY}.
+ *
+ * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.10.1.9.multianewarray">JVM MULTIANEWARRAY specification</a>
+ */
 class MULTIANEWARRAYTest {
 
     /**
-     * The {@code dimensions} operand of {@code multianewarray} is an unsigned byte (1-255), so a value above 127 must not be
-     * read as a negative number.
+     * The {@code dimensions} operand of {@code multianewarray} is an unsigned byte (1-255), so a value above 127 must not be read as a negative number.
      */
     @Test
     void testInitFromFileReadsDimensionsUnsigned() throws Exception {
         // multianewarray, index 0x0005, dimensions 0xC8 (200)
-        final byte[] code = {(byte) Const.MULTIANEWARRAY, 0x00, 0x05, (byte) 0xC8};
+        final byte[] code = { (byte) Const.MULTIANEWARRAY, 0x00, 0x05, (byte) 0xC8 };
         try (ByteSequence bytes = new ByteSequence(code)) {
             final MULTIANEWARRAY instruction = (MULTIANEWARRAY) Instruction.readInstruction(bytes);
             assertEquals(200, instruction.getDimensions());

@@ -91,6 +91,33 @@ class UtilityTest {
     }
 
     @Test
+    void testCodeToStringWideIsThreadLocal() throws Exception {
+        // A WIDE opcode disassembled on one thread must not change how the next
+        // local-variable instruction is decoded on another thread.
+        final Thread setter = new Thread(() -> {
+            try {
+                Utility.codeToString(new ByteSequence(new byte[] {(byte) Const.WIDE}), new ConstantPool(), false);
+            } catch (final Exception e) {
+                fail("WIDE disassembly failed", e);
+            }
+        });
+        setter.start();
+        setter.join();
+        final AtomicReference<String> reader = new AtomicReference<>();
+        final Thread thread = new Thread(() -> {
+            try {
+                // iload with a single index byte; the trailing 0x02 must stay unread.
+                reader.set(Utility.codeToString(new ByteSequence(new byte[] {(byte) Const.ILOAD, 1, 2}), new ConstantPool(), false));
+            } catch (final Exception e) {
+                fail("iload disassembly failed", e);
+            }
+        });
+        thread.start();
+        thread.join();
+        assertEquals("iload\t\t%1", reader.get());
+    }
+
+    @Test
     void testConvertString() {
         assertEquals("\\n", Utility.convertString("\n"));
         assertEquals("\\r", Utility.convertString("\r"));
@@ -180,32 +207,5 @@ class UtilityTest {
                 "class signature");
         assertEquals("<K extends Object, V extends Object> extends Object",
                 Utility.signatureToString("<K:Ljava/lang/Object;V:Ljava/lang/Object;>Ljava/lang/Object;"), "class signature");
-    }
-
-    @Test
-    void testCodeToStringWideIsThreadLocal() throws Exception {
-        // A WIDE opcode disassembled on one thread must not change how the next
-        // local-variable instruction is decoded on another thread.
-        final Thread setter = new Thread(() -> {
-            try {
-                Utility.codeToString(new ByteSequence(new byte[] {(byte) Const.WIDE}), new ConstantPool(), false);
-            } catch (final Exception e) {
-                fail("WIDE disassembly failed", e);
-            }
-        });
-        setter.start();
-        setter.join();
-        final AtomicReference<String> reader = new AtomicReference<>();
-        final Thread thread = new Thread(() -> {
-            try {
-                // iload with a single index byte; the trailing 0x02 must stay unread.
-                reader.set(Utility.codeToString(new ByteSequence(new byte[] {(byte) Const.ILOAD, 1, 2}), new ConstantPool(), false));
-            } catch (final Exception e) {
-                fail("iload disassembly failed", e);
-            }
-        });
-        thread.start();
-        thread.join();
-        assertEquals("iload\t\t%1", reader.get());
     }
 }
