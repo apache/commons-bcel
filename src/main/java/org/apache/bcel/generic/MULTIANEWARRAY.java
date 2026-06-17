@@ -125,7 +125,7 @@ public class MULTIANEWARRAY extends CPInstruction implements LoadClass, Allocati
     @Override
     protected void initFromFile(final ByteSequence bytes, final boolean wide) throws IOException {
         super.initFromFile(bytes, wide);
-        dimensions = bytes.readByte();
+        dimensions = (short) bytes.readUnsignedByte();
         super.setLength(4);
     }
 
