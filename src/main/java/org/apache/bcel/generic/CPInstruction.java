@@ -21,6 +21,7 @@ package org.apache.bcel.generic;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.apache.bcel.Const;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantPool;
@@ -84,7 +85,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
     @Override
     public Type getType(final ConstantPoolGen cpg) {
         final ConstantPool cp = cpg.getConstantPool();
-        String name = cp.getConstantString(index, org.apache.bcel.Const.CONSTANT_Class);
+        String name = cp.getConstantString(index, Const.CONSTANT_Class);
         if (!name.startsWith("[")) {
             name = "L" + name + ";";
         }
@@ -110,8 +111,8 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
      */
     @Override
     public void setIndex(final int index) { // TODO could be package-protected?
-        if (index < 0) {
-            throw new ClassGenException("Negative index value: " + index);
+        if (index < 0 || index > Const.MAX_SHORT) {
+            throw new ClassGenException("Illegal value: " + index);
         }
         this.index = index;
     }
@@ -140,6 +141,6 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
         if (c instanceof ConstantClass) {
             str = Utility.packageToPath(str);
         }
-        return org.apache.bcel.Const.getOpcodeName(super.getOpcode()) + " " + str;
+        return Const.getOpcodeName(super.getOpcode()) + " " + str;
     }
 }

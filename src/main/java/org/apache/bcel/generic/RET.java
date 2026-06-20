@@ -116,8 +116,8 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
      */
     @Override
     public final void setIndex(final int n) {
-        if (n < 0) {
-            throw new ClassGenException("Negative index value: " + n);
+        if (n < 0 || n > org.apache.bcel.Const.MAX_SHORT) {
+            throw new ClassGenException("Illegal value: " + n);
         }
         index = n;
         setWide();
