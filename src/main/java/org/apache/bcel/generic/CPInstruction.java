@@ -111,7 +111,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
      */
     @Override
     public void setIndex(final int index) { // TODO could be package-protected?
-        if (index < 0 || index > org.apache.bcel.Const.MAX_SHORT) {
+        if (index < 0 || index > Const.MAX_SHORT) {
             throw new ClassGenException("Illegal value: " + index);
         }
         this.index = index;
