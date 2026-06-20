@@ -135,8 +135,8 @@ public class IINC extends LocalVariableInstruction {
      */
     @Override
     public final void setIndex(final int n) {
-        if (n < 0) {
-            throw new ClassGenException("Negative index value: " + n);
+        if (n < 0 || n > Const.MAX_SHORT) {
+            throw new ClassGenException("Illegal value: " + n);
         }
         super.setIndexOnly(n);
         setWide();
