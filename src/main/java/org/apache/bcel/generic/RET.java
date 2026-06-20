@@ -36,7 +36,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
     private int index; // index to local variable containg the return address
 
     /**
-     * Empty constructor needed for Instruction.readInstruction. Not to be used otherwise.
+     * Default constructor needed for Instruction.readInstruction. Not to be used otherwise.
      */
     RET() {
     }
@@ -113,13 +113,16 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
 
     /**
      * Sets index of local variable containg the return address
+     *
+     * @param index index of local variable containg the return address.
+     * @throws ClassGenException if index is out of bounds.
      */
     @Override
-    public final void setIndex(final int n) {
-        if (n < 0 || n > org.apache.bcel.Const.MAX_SHORT) {
-            throw new ClassGenException("Illegal value: " + n);
+    public final void setIndex(final int index) {
+        if (index < 0 || index > org.apache.bcel.Const.MAX_SHORT) {
+            throw new ClassGenException("Illegal value: " + index);
         }
-        index = n;
+        this.index = index;
         setWide();
     }
 

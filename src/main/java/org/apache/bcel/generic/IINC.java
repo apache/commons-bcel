@@ -132,13 +132,16 @@ public class IINC extends LocalVariableInstruction {
 
     /**
      * Sets index of local variable.
+     *
+     * @param index index of local variable.
+     * @throws ClassGenException if index is out of bounds.
      */
     @Override
-    public final void setIndex(final int n) {
-        if (n < 0 || n > Const.MAX_SHORT) {
-            throw new ClassGenException("Illegal value: " + n);
+    public final void setIndex(final int index) {
+        if (index < 0 || index > Const.MAX_SHORT) {
+            throw new ClassGenException("Illegal index: " + index);
         }
-        super.setIndexOnly(n);
+        super.setIndexOnly(index);
         setWide();
     }
 

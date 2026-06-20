@@ -108,11 +108,12 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
      * Sets the index to constant pool.
      *
      * @param index in constant pool.
+     * @throws ClassGenException if index is out of bounds.
      */
     @Override
     public void setIndex(final int index) { // TODO could be package-protected?
         if (index < 0 || index > Const.MAX_SHORT) {
-            throw new ClassGenException("Illegal value: " + index);
+            throw new ClassGenException("Illegal index: " + index);
         }
         this.index = index;
     }

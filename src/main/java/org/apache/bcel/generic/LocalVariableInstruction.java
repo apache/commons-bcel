@@ -165,17 +165,19 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     /**
      * Sets the local variable index. also updates opcode and length TODO Why?
      *
+     * @param index local variable index (unsigned short).
+     * @throws ClassGenException if index is out of bounds.
      * @see #setIndexOnly(int)
      */
     @Override
-    public void setIndex(final int n) { // TODO could be package-protected?
-        if (n < 0 || n > Const.MAX_SHORT) {
-            throw new ClassGenException("Illegal value: " + n);
+    public void setIndex(final int index) { // TODO could be package-protected?
+        if (index < 0 || index > Const.MAX_SHORT) {
+            throw new ClassGenException("Illegal value: " + index);
         }
-        this.n = n;
+        this.n = index;
         // Cannot be < 0 as this is checked above
-        if (n <= 3) { // Use more compact instruction xLOAD_n
-            super.setOpcode((short) (cTag + n));
+        if (index <= 3) { // Use more compact instruction xLOAD_n
+            super.setOpcode((short) (cTag + index));
             super.setLength(1);
         } else {
             super.setOpcode(canonTag);
