@@ -141,6 +141,6 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
         if (c instanceof ConstantClass) {
             str = Utility.packageToPath(str);
         }
-        return org.apache.bcel.Const.getOpcodeName(super.getOpcode()) + " " + str;
+        return Const.getOpcodeName(super.getOpcode()) + " " + str;
     }
 }
