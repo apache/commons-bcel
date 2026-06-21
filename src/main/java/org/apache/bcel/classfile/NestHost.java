@@ -59,7 +59,7 @@ public final class NestHost extends Attribute {
      * @param constantPool Array of constants.
      */
     public NestHost(final int nameIndex, final int length, final int hostClassIndex, final ConstantPool constantPool) {
-        super(Const.ATTR_NEST_MEMBERS, nameIndex, length, constantPool);
+        super(Const.ATTR_NEST_HOST, nameIndex, length, constantPool);
         this.hostClassIndex = Args.requireU2(hostClassIndex, "hostClassIndex");
     }
 
