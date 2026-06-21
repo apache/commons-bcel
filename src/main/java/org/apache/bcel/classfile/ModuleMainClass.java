@@ -59,7 +59,7 @@ public final class ModuleMainClass extends Attribute {
      * @param constantPool Array of constants.
      */
     public ModuleMainClass(final int nameIndex, final int length, final int mainClassIndex, final ConstantPool constantPool) {
-        super(Const.ATTR_NEST_MEMBERS, nameIndex, length, constantPool);
+        super(Const.ATTR_MODULE_MAIN_CLASS, nameIndex, length, constantPool);
         this.mainClassIndex = Args.requireU2(mainClassIndex, "mainClassIndex");
     }
 
