@@ -72,6 +72,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Arnout Engelen">Site docs: clarify security model (#503).</action>
       <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Read ConstantDynamic indices as unsigned shorts (#505).</action>
       <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Validate index upper bound in CPInstruction, IINC and RET setIndex (#506).</action>
+      <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Use correct attribute tag in NestHost and ModuleMainClass (#507).</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add support for permitted subclasses #493.</action>
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add RecordComponentInfo.getAttribute(byte tag)#494.</action>
