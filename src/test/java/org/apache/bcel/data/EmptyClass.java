@@ -19,6 +19,9 @@
 
 package org.apache.bcel.data;
 
+/**
+ * Empty class used for testing in BCEL.
+ */
 public class EmptyClass {
 }
 
