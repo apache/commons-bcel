@@ -117,7 +117,11 @@ public abstract class ElementValue {
      * @throws IOException if an I/O error occurs.
      * @since 6.7.0
      */
-    public static ElementValue readElementValue(final DataInput input, final ConstantPool cpool, int arrayNesting)
+    public static ElementValue readElementValue(final DataInput input, final ConstantPool cpool, final int arrayNesting) throws IOException {
+        return readElementValue(input, cpool, false, arrayNesting);
+    }
+
+    static ElementValue readElementValue(final DataInput input, final ConstantPool cpool, final boolean isRuntimeVisible, int arrayNesting)
             throws IOException {
         final byte tag = input.readByte();
         switch (tag) {
@@ -139,8 +143,7 @@ public abstract class ElementValue {
             return new ClassElementValue(CLASS, input.readUnsignedShort(), cpool);
 
         case ANNOTATION:
-            // TODO isRuntimeVisible
-            return new AnnotationElementValue(ANNOTATION, AnnotationEntry.read(input, cpool, false), cpool);
+            return new AnnotationElementValue(ANNOTATION, AnnotationEntry.read(input, cpool, isRuntimeVisible), cpool);
 
         case ARRAY:
             arrayNesting++;
@@ -151,7 +154,7 @@ public abstract class ElementValue {
             final int numArrayVals = input.readUnsignedShort();
             final ElementValue[] evalues = new ElementValue[numArrayVals];
             for (int j = 0; j < numArrayVals; j++) {
-                evalues[j] = readElementValue(input, cpool, arrayNesting);
+                evalues[j] = readElementValue(input, cpool, isRuntimeVisible, arrayNesting);
             }
             return new ArrayElementValue(ARRAY, evalues, cpool);
 

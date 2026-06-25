@@ -65,7 +65,7 @@ public class AnnotationEntry implements Node {
         final int numElementValuePairs = input.readUnsignedShort();
         for (int i = 0; i < numElementValuePairs; i++) {
             annotationEntry.elementValuePairs
-                .add(new ElementValuePair(input.readUnsignedShort(), ElementValue.readElementValue(input, constantPool), constantPool));
+                .add(new ElementValuePair(input.readUnsignedShort(), ElementValue.readElementValue(input, constantPool, isRuntimeVisible, 0), constantPool));
         }
         return annotationEntry;
     }

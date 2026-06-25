@@ -65,14 +65,14 @@ public class ParameterAnnotationEntry implements Node {
      *
      * @param input Input stream.
      * @param constantPool the constant pool.
+     * @param isRuntimeVisible whether the contained annotations are runtime visible.
      * @throws IOException if an I/O error occurs.
      */
-    ParameterAnnotationEntry(final DataInput input, final ConstantPool constantPool) throws IOException {
+    ParameterAnnotationEntry(final DataInput input, final ConstantPool constantPool, final boolean isRuntimeVisible) throws IOException {
         final int annotationTableLength = input.readUnsignedShort();
         annotationTable = new AnnotationEntry[annotationTableLength];
         for (int i = 0; i < annotationTableLength; i++) {
-            // TODO isRuntimeVisible
-            annotationTable[i] = AnnotationEntry.read(input, constantPool, false);
+            annotationTable[i] = AnnotationEntry.read(input, constantPool, isRuntimeVisible);
         }
     }
 

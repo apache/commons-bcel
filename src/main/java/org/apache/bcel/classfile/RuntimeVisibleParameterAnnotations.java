@@ -41,6 +41,6 @@ public class RuntimeVisibleParameterAnnotations extends ParameterAnnotations {
      */
     public RuntimeVisibleParameterAnnotations(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool)
         throws IOException {
-        super(Const.ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS, nameIndex, length, input, constantPool);
+        super(Const.ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS, nameIndex, length, input, constantPool, true);
     }
 }
