@@ -92,8 +92,7 @@ public class LOOKUPSWITCH extends Select {
         setMatchLength(matchLength);
         final short fixedLength = (short) (9 + matchLength * 8);
         setFixedLength(fixedLength);
-        final short length = (short) (matchLength + super.getPadding());
-        super.setLength(length);
+        super.setLength((short) (fixedLength + super.getPadding()));
         super.setMatches(new int[matchLength]);
         super.setIndices(new int[matchLength]);
         super.setTargets(new InstructionHandle[matchLength]);
