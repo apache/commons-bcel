@@ -44,14 +44,15 @@ public abstract class ParameterAnnotations extends Attribute implements Iterable
      * @param length Content length in bytes.
      * @param input Input stream.
      * @param constantPool Array of constants.
+     * @param isRuntimeVisible whether these parameter annotations are runtime visible.
      */
-    ParameterAnnotations(final byte parameterAnnotationType, final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool)
-        throws IOException {
+    ParameterAnnotations(final byte parameterAnnotationType, final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool,
+        final boolean isRuntimeVisible) throws IOException {
         this(parameterAnnotationType, nameIndex, length, (ParameterAnnotationEntry[]) null, constantPool);
         final int numParameters = input.readUnsignedByte();
         parameterAnnotationTable = new ParameterAnnotationEntry[numParameters];
         for (int i = 0; i < numParameters; i++) {
-            parameterAnnotationTable[i] = new ParameterAnnotationEntry(input, constantPool);
+            parameterAnnotationTable[i] = new ParameterAnnotationEntry(input, constantPool, isRuntimeVisible);
         }
     }
 
