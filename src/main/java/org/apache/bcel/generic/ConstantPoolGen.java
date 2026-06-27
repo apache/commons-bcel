@@ -59,8 +59,6 @@ public class ConstantPoolGen {
 
     private static final String FIELDREF_DELIM = "&";
 
-    private static final String NAT_DELIM = "%"; // Name and Type
-
     /**
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
@@ -103,8 +101,6 @@ public class ConstantPoolGen {
      * @param cs array of given constants, new ones will be appended.
      */
     public ConstantPoolGen(final Constant[] cs) {
-        final StringBuilder sb = new StringBuilder(DEFAULT_BUFFER_SIZE);
-
         size = Math.min(Math.max(DEFAULT_BUFFER_SIZE, cs.length + 64), Const.MAX_CP_ENTRIES + 1);
         constants = Arrays.copyOf(cs, size);
 
@@ -132,13 +128,7 @@ public class ConstantPoolGen {
                 final ConstantNameAndType n = (ConstantNameAndType) c;
                 final ConstantUtf8 u8NameIdx = (ConstantUtf8) constants[n.getNameIndex()];
                 final ConstantUtf8 u8SigIdx = (ConstantUtf8) constants[n.getSignatureIndex()];
-
-                sb.append(u8NameIdx.getBytes());
-                sb.append(NAT_DELIM);
-                sb.append(u8SigIdx.getBytes());
-                final String key = sb.toString();
-                sb.delete(0, sb.length());
-
+                final String key = toKey(u8NameIdx.getBytes(), u8SigIdx.getBytes());
                 if (!natTable.containsKey(key)) {
                     natTable.put(key, Integer.valueOf(i));
                 }
@@ -169,22 +159,14 @@ public class ConstantPoolGen {
                 u8 = (ConstantUtf8) constants[n.getSignatureIndex()];
                 final String signature = u8.getBytes();
 
-                // Since name cannot begin with digit, we can use METHODREF_DELIM without fear of duplicates
+                // Distinguishes the three kinds of reference that share cpTable.
                 String delim = METHODREF_DELIM;
                 if (c instanceof ConstantInterfaceMethodref) {
                     delim = IMETHODREF_DELIM;
                 } else if (c instanceof ConstantFieldref) {
                     delim = FIELDREF_DELIM;
                 }
-
-                sb.append(className);
-                sb.append(delim);
-                sb.append(methodName);
-                sb.append(delim);
-                sb.append(signature);
-                final String key = sb.toString();
-                sb.delete(0, sb.length());
-
+                final String key = toKey(delim, className, methodName, signature);
                 if (!cpTable.containsKey(key)) {
                     cpTable.put(key, Integer.valueOf(i));
                 }
@@ -365,7 +347,7 @@ public class ConstantPoolGen {
         final int nameAndTypeIndex = addNameAndType(fieldName, signature);
         final int ret = index;
         constants[index++] = new ConstantFieldref(classIndex, nameAndTypeIndex);
-        return computeIfAbsent(cpTable, className + FIELDREF_DELIM + fieldName + FIELDREF_DELIM + signature, ret);
+        return computeIfAbsent(cpTable, toKey(FIELDREF_DELIM, className, fieldName, signature), ret);
     }
 
     /**
@@ -430,7 +412,7 @@ public class ConstantPoolGen {
         final int nameAndTypeIndex = addNameAndType(methodName, signature);
         final int ret = index;
         constants[index++] = new ConstantInterfaceMethodref(classIndex, nameAndTypeIndex);
-        return computeIfAbsent(cpTable, className + IMETHODREF_DELIM + methodName + IMETHODREF_DELIM + signature, ret);
+        return computeIfAbsent(cpTable, toKey(IMETHODREF_DELIM, className, methodName, signature), ret);
     }
 
     /**
@@ -479,7 +461,7 @@ public class ConstantPoolGen {
         final int classIndex = addClass(className);
         final int ret = index;
         constants[index++] = new ConstantMethodref(classIndex, nameAndTypeIndex);
-        return computeIfAbsent(cpTable, className + METHODREF_DELIM + methodName + METHODREF_DELIM + signature, ret);
+        return computeIfAbsent(cpTable, toKey(METHODREF_DELIM, className, methodName, signature), ret);
     }
 
     /**
@@ -499,7 +481,7 @@ public class ConstantPoolGen {
         final int signatureIndex = addUtf8(signature);
         ret = index;
         constants[index++] = new ConstantNameAndType(nameIndex, signatureIndex);
-        return computeIfAbsent(natTable, name + NAT_DELIM + signature, ret);
+        return computeIfAbsent(natTable, toKey(name, signature), ret);
     }
 
     /**
@@ -561,6 +543,23 @@ public class ConstantPoolGen {
 
     private int computeIfAbsent(final Map<String, Integer> map, final String key, final int value) {
         return map.computeIfAbsent(key, k -> Integer.valueOf(value));
+    }
+
+    /**
+     * Builds a lookup key that stays collision-free even when the parts contain the ASCII characters used as
+     * delimiters above. Class, member and signature names read from a class file may legally contain those characters
+     * (the JVMS only forbids {@code . ; [ /} and, for members, {@code < >}), so each part is prefixed with its length
+     * to keep distinct triples distinct.
+     *
+     * @param parts the key parts.
+     * @return a collision-free key.
+     */
+    private static String toKey(final String... parts) {
+        final StringBuilder buf = new StringBuilder();
+        for (final String part : parts) {
+            buf.append(part.length()).append(':').append(part);
+        }
+        return buf.toString();
     }
 
     /**
@@ -642,7 +641,7 @@ public class ConstantPoolGen {
      * @return index on success, -1 otherwise.
      */
     public int lookupFieldref(final String className, final String fieldName, final String signature) {
-        return getIndex(cpTable, className + FIELDREF_DELIM + fieldName + FIELDREF_DELIM + signature);
+        return getIndex(cpTable, toKey(FIELDREF_DELIM, className, fieldName, signature));
     }
 
     /**
@@ -701,7 +700,7 @@ public class ConstantPoolGen {
      * @return index on success, -1 otherwise.
      */
     public int lookupInterfaceMethodref(final String className, final String methodName, final String signature) {
-        return getIndex(cpTable, className + IMETHODREF_DELIM + methodName + IMETHODREF_DELIM + signature);
+        return getIndex(cpTable, toKey(IMETHODREF_DELIM, className, methodName, signature));
     }
 
     /**
@@ -741,7 +740,7 @@ public class ConstantPoolGen {
      * @return index on success, -1 otherwise.
      */
     public int lookupMethodref(final String className, final String methodName, final String signature) {
-        return getIndex(cpTable, className + METHODREF_DELIM + methodName + METHODREF_DELIM + signature);
+        return getIndex(cpTable, toKey(METHODREF_DELIM, className, methodName, signature));
     }
 
     /**
@@ -752,7 +751,7 @@ public class ConstantPoolGen {
      * @return index on success, -1 otherwise.
      */
     public int lookupNameAndType(final String name, final String signature) {
-        return getIndex(natTable, name + NAT_DELIM + signature);
+        return getIndex(natTable, toKey(name, signature));
     }
 
     /**
