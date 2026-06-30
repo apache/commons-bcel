@@ -178,7 +178,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     /**
      * Gets attribute for given tag.
      *
-     * @param <T> the attribute type.
+     * @param <T> The attribute type.
      * @param tag the attribute tag.
      * @return Attribute for given tag, null if not found.
      * Refer to {@link org.apache.bcel.Const#ATTR_UNKNOWN} constants named ATTR_* for possible values.
