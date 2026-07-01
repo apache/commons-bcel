@@ -195,7 +195,7 @@ final class CodeHTML {
         case Const.LSTORE:
         case Const.RET:
             if (wide) {
-                vindex = bytes.readShort();
+                vindex = bytes.readUnsignedShort();
                 wide = false; // Clear flag
             } else {
                 vindex = bytes.readUnsignedByte();
@@ -223,7 +223,7 @@ final class CodeHTML {
         case Const.GETSTATIC:
         case Const.PUTFIELD:
         case Const.PUTSTATIC:
-            index = bytes.readShort();
+            index = bytes.readUnsignedShort();
             final ConstantFieldref c1 = constantPool.getConstant(index, Const.CONSTANT_Fieldref, ConstantFieldref.class);
             classIndex = c1.getClassIndex();
             name = constantPool.getConstantString(classIndex, Const.CONSTANT_Class);
@@ -243,7 +243,7 @@ final class CodeHTML {
         case Const.CHECKCAST:
         case Const.INSTANCEOF:
         case Const.NEW:
-            index = bytes.readShort();
+            index = bytes.readUnsignedShort();
             buf.append(constantHtml.referenceConstant(index));
             break;
         /*
@@ -254,7 +254,7 @@ final class CodeHTML {
         case Const.INVOKEVIRTUAL:
         case Const.INVOKEINTERFACE:
         case Const.INVOKEDYNAMIC:
-            final int mIndex = bytes.readShort();
+            final int mIndex = bytes.readUnsignedShort();
             final String str;
             if (opcode == Const.INVOKEINTERFACE) { // Special treatment needed
                 bytes.readUnsignedByte(); // Redundant
@@ -303,7 +303,7 @@ final class CodeHTML {
          */
         case Const.LDC_W:
         case Const.LDC2_W:
-            index = bytes.readShort();
+            index = bytes.readUnsignedShort();
             buf.append("<A HREF=\"").append(className).append("_cp.html#cp").append(index).append("\" TARGET=\"ConstantPool\">")
                 .append(Class2HTML.toHTML(constantPool.constantToString(index, constantPool.getConstant(index).getTag()))).append("</a>");
             break;
@@ -316,15 +316,15 @@ final class CodeHTML {
          * Array of references.
          */
         case Const.ANEWARRAY:
-            index = bytes.readShort();
+            index = bytes.readUnsignedShort();
             buf.append(constantHtml.referenceConstant(index));
             break;
         /*
          * Multidimensional array of references.
          */
         case Const.MULTIANEWARRAY:
-            index = bytes.readShort();
-            final int dimensions = bytes.readByte();
+            index = bytes.readUnsignedShort();
+            final int dimensions = bytes.readUnsignedByte();
             buf.append(constantHtml.referenceConstant(index)).append(":").append(dimensions).append("-dimensional");
             break;
         /*
@@ -332,7 +332,7 @@ final class CodeHTML {
          */
         case Const.IINC:
             if (wide) {
-                vindex = bytes.readShort();
+                vindex = bytes.readUnsignedShort();
                 constant = bytes.readShort();
                 wide = false;
             } else {
