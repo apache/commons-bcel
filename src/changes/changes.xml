@@ -75,6 +75,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Use correct attribute tag in NestHost and ModuleMainClass (#507).</action>
       <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Propagate runtime-visible flag when parsing parameter annotations (#509).</action>
       <action                  type="fix" dev="ggregory" due-to="Digiscrypt Technologies, Gary Gregory">Use fixedLength for parsed LOOKUPSWITCH length (#499).</action>
+      <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Fix ConstantPoolGen dedup key collisions for names with delimiters (#510)</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add support for permitted subclasses #493.</action>
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add RecordComponentInfo.getAttribute(byte tag)#494.</action>
