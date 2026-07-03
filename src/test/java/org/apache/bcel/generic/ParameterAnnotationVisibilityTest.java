@@ -40,10 +40,6 @@ import org.junit.jupiter.api.Test;
  */
 class ParameterAnnotationVisibilityTest extends AbstractTest {
 
-    private JavaClass loadTestClass() throws ClassNotFoundException {
-        return getTestJavaClass(PACKAGE_BASE_NAME + ".data.AnnotatedWithCombinedAnnotation");
-    }
-
     private Method getConstructor(final JavaClass jc) {
         for (final Method method : jc.getMethods()) {
             if (Const.CONSTRUCTOR_NAME.equals(method.getName())) {
@@ -51,6 +47,10 @@ class ParameterAnnotationVisibilityTest extends AbstractTest {
             }
         }
         return null;
+    }
+
+    private JavaClass loadTestClass() throws ClassNotFoundException {
+        return getTestJavaClass(PACKAGE_BASE_NAME + ".data.AnnotatedWithCombinedAnnotation");
     }
 
     @Test
@@ -75,6 +75,20 @@ class ParameterAnnotationVisibilityTest extends AbstractTest {
     }
 
     @Test
+    void testParameterAnnotationVisibilitySurvivesMethodGen() throws ClassNotFoundException {
+        final JavaClass jc = loadTestClass();
+        final Method init = getConstructor(jc);
+        final ConstantPoolGen cp = new ConstantPoolGen(jc.getConstantPool());
+        final MethodGen mg = new MethodGen(init, jc.getClassName(), cp);
+        mg.getAnnotationsOnParameter(1); // unpack the existing parameter annotations before rebuilding
+        final Method out = mg.getMethod();
+        assertNotNull(out.getAttribute(Const.ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS),
+            "runtime-visible parameter annotation dropped on MethodGen round-trip");
+        assertNull(out.getAttribute(Const.ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS),
+            "runtime-visible parameter annotation downgraded to invisible on MethodGen round-trip");
+    }
+
+    @Test
     void testParsedParameterAnnotationIsRuntimeVisible() throws ClassNotFoundException {
         final JavaClass jc = loadTestClass();
         final Method init = getConstructor(jc);
@@ -87,19 +101,5 @@ class ParameterAnnotationVisibilityTest extends AbstractTest {
             }
         }
         assertTrue(found, "no parameter annotations found in test data");
-    }
-
-    @Test
-    void testParameterAnnotationVisibilitySurvivesMethodGen() throws ClassNotFoundException {
-        final JavaClass jc = loadTestClass();
-        final Method init = getConstructor(jc);
-        final ConstantPoolGen cp = new ConstantPoolGen(jc.getConstantPool());
-        final MethodGen mg = new MethodGen(init, jc.getClassName(), cp);
-        mg.getAnnotationsOnParameter(1); // unpack the existing parameter annotations before rebuilding
-        final Method out = mg.getMethod();
-        assertNotNull(out.getAttribute(Const.ATTR_RUNTIME_VISIBLE_PARAMETER_ANNOTATIONS),
-            "runtime-visible parameter annotation dropped on MethodGen round-trip");
-        assertNull(out.getAttribute(Const.ATTR_RUNTIME_INVISIBLE_PARAMETER_ANNOTATIONS),
-            "runtime-visible parameter annotation downgraded to invisible on MethodGen round-trip");
     }
 }

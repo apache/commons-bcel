@@ -107,20 +107,6 @@ public abstract class ElementValue {
         return readElementValue(input, cpool, 0);
     }
 
-    /**
-     * Reads an {@code element_value} as an {@code ElementValue}.
-     *
-     * @param input Raw data input.
-     * @param cpool Constant pool.
-     * @param arrayNesting level of current array nesting.
-     * @return a new ElementValue.
-     * @throws IOException if an I/O error occurs.
-     * @since 6.7.0
-     */
-    public static ElementValue readElementValue(final DataInput input, final ConstantPool cpool, final int arrayNesting) throws IOException {
-        return readElementValue(input, cpool, false, arrayNesting);
-    }
-
     static ElementValue readElementValue(final DataInput input, final ConstantPool cpool, final boolean isRuntimeVisible, int arrayNesting)
             throws IOException {
         final byte tag = input.readByte();
@@ -161,6 +147,20 @@ public abstract class ElementValue {
         default:
             throw new ClassFormatException("Unexpected element value tag in annotation: " + tag);
         }
+    }
+
+    /**
+     * Reads an {@code element_value} as an {@code ElementValue}.
+     *
+     * @param input Raw data input.
+     * @param cpool Constant pool.
+     * @param arrayNesting level of current array nesting.
+     * @return a new ElementValue.
+     * @throws IOException if an I/O error occurs.
+     * @since 6.7.0
+     */
+    public static ElementValue readElementValue(final DataInput input, final ConstantPool cpool, final int arrayNesting) throws IOException {
+        return readElementValue(input, cpool, false, arrayNesting);
     }
 
     /**

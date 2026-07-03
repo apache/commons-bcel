@@ -60,6 +60,23 @@ public class ConstantPoolGen {
     private static final String FIELDREF_DELIM = "&";
 
     /**
+     * Builds a lookup key that stays collision-free even when the parts contain the ASCII characters used as
+     * delimiters above. Class, member and signature names read from a class file may legally contain those characters
+     * (the JVMS only forbids {@code . ; [ /} and, for members, {@code < >}), so each part is prefixed with its length
+     * to keep distinct triples distinct.
+     *
+     * @param parts the key parts.
+     * @return a collision-free key.
+     */
+    private static String toKey(final String... parts) {
+        final StringBuilder buf = new StringBuilder();
+        for (final String part : parts) {
+            buf.append(part.length()).append(':').append(part);
+        }
+        return buf.toString();
+    }
+
+    /**
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
      */
     @Deprecated
@@ -543,23 +560,6 @@ public class ConstantPoolGen {
 
     private int computeIfAbsent(final Map<String, Integer> map, final String key, final int value) {
         return map.computeIfAbsent(key, k -> Integer.valueOf(value));
-    }
-
-    /**
-     * Builds a lookup key that stays collision-free even when the parts contain the ASCII characters used as
-     * delimiters above. Class, member and signature names read from a class file may legally contain those characters
-     * (the JVMS only forbids {@code . ; [ /} and, for members, {@code < >}), so each part is prefixed with its length
-     * to keep distinct triples distinct.
-     *
-     * @param parts the key parts.
-     * @return a collision-free key.
-     */
-    private static String toKey(final String... parts) {
-        final StringBuilder buf = new StringBuilder();
-        for (final String part : parts) {
-            buf.append(part.length()).append(':').append(part);
-        }
-        return buf.toString();
     }
 
     /**
