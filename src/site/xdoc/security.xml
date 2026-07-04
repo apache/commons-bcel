@@ -41,7 +41,7 @@
         filesystem or network access. It may still trigger other crashes, such as for example <code>StackOverflowError</code> or <code>OutOfMemoryError</code>:
 	if your code uses BCEL to process untrusted input
 	then it is up to you to compensate for that as necessary.
-	Loading or executing the generated classes is unsafe and may cause unexpected behaviour,
+	Loading or executing the generated classes is unsafe and may cause unexpected behavior,
 	including execute arbitrary code execution.
       </p>
     </section>
