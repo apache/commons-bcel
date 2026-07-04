@@ -51,7 +51,7 @@ public class BootstrapMethod implements Cloneable {
      * @param c Source to copy.
      */
     public BootstrapMethod(final BootstrapMethod c) {
-        this(c.getBootstrapMethodRef(), c.getBootstrapArguments());
+        this(c.getBootstrapMethodRef(), c.getBootstrapArguments().clone());
     }
 
     /**
@@ -91,7 +91,9 @@ public class BootstrapMethod implements Cloneable {
      */
     public BootstrapMethod copy() {
         try {
-            return (BootstrapMethod) clone();
+            final BootstrapMethod c = (BootstrapMethod) clone();
+            c.bootstrapArguments = bootstrapArguments.clone();
+            return c;
         } catch (final CloneNotSupportedException ignore) {
             // TODO should this throw?
         }
