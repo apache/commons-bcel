@@ -1302,7 +1302,7 @@ public class MethodGen extends FieldGenOrMethodGen {
             InstructionHandle start = il.findHandle(l.getStartPC());
             final InstructionHandle end = il.findHandle(l.getStartPC() + l.getLength());
             // Repair malformed handles
-            if (null == start) {
+            if (start == null) {
                 start = il.getStart();
             }
             // end == null => live to end of method
