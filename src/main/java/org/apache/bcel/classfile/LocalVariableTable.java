@@ -150,7 +150,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
             if (variable.getIndex() == index) {
                 final int startPc = variable.getStartPC();
                 final int endPc = startPc + variable.getLength();
-                if (pc >= startPc && pc <= endPc) {
+                if (pc >= startPc && pc < endPc) {
                     return variable;
                 }
             }
