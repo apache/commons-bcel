@@ -30,14 +30,15 @@ import org.junit.jupiter.api.Test;
 class LocalVariableTableTest {
 
     /**
-     * The live range of a local variable is the half-open interval {@code [start_pc, start_pc + length)} per JVMS 4.7.13, so a
-     * pc equal to {@code start_pc + length} is out of scope and must not match.
+     * The live range of a local variable is the half-open interval {@code [start_pc, start_pc + length)} per
+     * <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.13">JVMS 4.7.13</a>, so a pc equal to
+     * {@code start_pc + length} is out of scope and must not match.
      */
     @Test
     void testGetLocalVariableLiveRangeEndIsExclusive() {
-        final ConstantPool constantPool = new ConstantPool(new Constant[1]);
-        // Variable in slot 1, live at pcs 2, 3, 4 (start 2, length 3).
-        final LocalVariable variable = new LocalVariable(2, 3, 0, 0, 1, constantPool);
+        final ConstantPool constantPool = new ConstantPool(new Constant[] {null, new ConstantUtf8("i"), new ConstantUtf8("I")});
+        // Variable in slot 1, live at pcs 2, 3, 4 (start 2, length 3), with valid name and signature indices.
+        final LocalVariable variable = new LocalVariable(2, 3, 1, 2, 1, constantPool);
         final LocalVariableTable table = new LocalVariableTable(0, 0, new LocalVariable[] {variable}, constantPool);
         assertNull(table.getLocalVariable(1, 1), "pc before start");
         assertSame(variable, table.getLocalVariable(1, 2), "pc at start");
