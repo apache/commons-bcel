@@ -58,6 +58,12 @@ class ConstTest {
         assertEquals(0, Const.MINOR_26);
     }
 
+    @Test
+    void testJava27() throws Exception {
+        assertEquals(71, Const.MAJOR_27);
+        assertEquals(0, Const.MINOR_27);
+    }
+
     /**
      * Tests that we do not break binary compatibility with BCEL-330.
      */
