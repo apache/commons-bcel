@@ -112,7 +112,7 @@ public class ElementValuePairGen {
     /**
      * Gets the name index.
      *
-     * @return the name index.
+     * @return The name index.
      */
     public int getNameIndex() {
         return nameIdx;
@@ -121,7 +121,7 @@ public class ElementValuePairGen {
     /**
      * Gets the name string.
      *
-     * @return the name string.
+     * @return The name string.
      */
     public final String getNameString() {
         // ConstantString cu8 = (ConstantString) constantPoolGen.getConstant(nameIdx);
@@ -131,7 +131,7 @@ public class ElementValuePairGen {
     /**
      * Gets the value.
      *
-     * @return the element value.
+     * @return The element value.
      */
     public final ElementValueGen getValue() {
         return value;

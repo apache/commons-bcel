@@ -67,7 +67,7 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
     /**
      * Gets the instruction handle.
      *
-     * @return the instruction handle.
+     * @return The instruction handle.
      */
     public InstructionHandle getInstruction() {
         return ih;
@@ -79,7 +79,7 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
      * This relies on that the instruction list has already been dumped to byte code or that the 'setPositions' methods
      * has been called for the instruction list.
      *
-     * @return the line number attribute.
+     * @return The line number attribute.
      */
     public LineNumber getLineNumber() {
         return new LineNumber(ih.getPosition(), srcLine);
@@ -88,7 +88,7 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
     /**
      * Gets the source line number.
      *
-     * @return the source line number.
+     * @return The source line number.
      */
     public int getSourceLine() {
         return srcLine;

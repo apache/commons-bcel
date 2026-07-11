@@ -195,7 +195,7 @@ public abstract class Type {
      * Gets the signature for a method.
      *
      * @param meth the method.
-     * @return the method signature.
+     * @return The method signature.
      */
     public static String getSignature(final java.lang.reflect.Method meth) {
         final StringBuilder sb = new StringBuilder("(");
@@ -388,7 +388,7 @@ public abstract class Type {
     /**
      * Gets the class name.
      *
-     * @return the class name.
+     * @return The class name.
      */
     public String getClassName() {
         return toString();
@@ -443,7 +443,7 @@ public abstract class Type {
      * boolean, short and char variable are considered as int in the stack or local variable area. Returns {@link #INT}
      * for {@link #BOOLEAN}, {@link #SHORT} or {@link #CHAR}, otherwise returns the given type.
      *
-     * @return the normalized type.
+     * @return The normalized type.
      * @since 6.0
      */
     public Type normalizeForStackOrLocal() {

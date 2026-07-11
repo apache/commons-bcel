@@ -60,7 +60,7 @@ public final class ByteSequence extends DataInputStream {
     /**
      * Gets the current index.
      *
-     * @return the current index.
+     * @return The current index.
      */
     public int getIndex() {
         return byteStream.getPosition();

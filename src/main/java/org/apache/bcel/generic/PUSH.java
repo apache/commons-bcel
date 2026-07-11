@@ -196,7 +196,7 @@ public final class PUSH implements CompoundInstruction, VariableLengthInstructio
     /**
      * Gets the instruction.
      *
-     * @return the instruction.
+     * @return The instruction.
      */
     public Instruction getInstruction() {
         return instruction;

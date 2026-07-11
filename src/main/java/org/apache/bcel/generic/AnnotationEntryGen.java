@@ -207,7 +207,7 @@ public class AnnotationEntryGen {
      * @param dis the data input stream.
      * @param cpool the constant pool generator.
      * @param b whether the annotation is runtime visible.
-     * @return the annotation entry generator.
+     * @return The annotation entry generator.
      * @throws IOException if an I/O error occurs.
      */
     public static AnnotationEntryGen read(final DataInput dis, final ConstantPoolGen cpool, final boolean b) throws IOException {
@@ -316,7 +316,7 @@ public class AnnotationEntryGen {
     /**
      * Gets the type index.
      *
-     * @return the type index.
+     * @return The type index.
      */
     public int getTypeIndex() {
         return typeIndex;
@@ -325,7 +325,7 @@ public class AnnotationEntryGen {
     /**
      * Gets the type name.
      *
-     * @return the type name.
+     * @return The type name.
      */
     public final String getTypeName() {
         return getTypeSignature(); // BCELBUG: Should I use this instead?
@@ -335,7 +335,7 @@ public class AnnotationEntryGen {
     /**
      * Gets the type signature.
      *
-     * @return the type signature.
+     * @return The type signature.
      */
     public final String getTypeSignature() {
         // ConstantClass c = (ConstantClass) cpool.getConstant(typeIndex);

@@ -215,7 +215,7 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * Gets the byte code offset.
      *
-     * @return the byte code offset.
+     * @return The byte code offset.
      */
     public int getByteCodeOffset() {
         return byteCodeOffset;
@@ -233,7 +233,7 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * Gets the frame type.
      *
-     * @return the frame type.
+     * @return The frame type.
      */
     public int getFrameType() {
         return frameType;
@@ -278,7 +278,7 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * Gets the number of locals.
      *
-     * @return the number of locals.
+     * @return The number of locals.
      */
     public int getNumberOfLocals() {
         return typesOfLocals.length;
@@ -287,7 +287,7 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * Gets the number of stack items.
      *
-     * @return the number of stack items.
+     * @return The number of stack items.
      */
     public int getNumberOfStackItems() {
         return typesOfStackItems.length;
@@ -296,7 +296,7 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * Gets the types of locals.
      *
-     * @return the types of locals.
+     * @return The types of locals.
      */
     public StackMapType[] getTypesOfLocals() {
         return typesOfLocals;
@@ -305,7 +305,7 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * Gets the types of stack items.
      *
-     * @return the types of stack items.
+     * @return The types of stack items.
      */
     public StackMapType[] getTypesOfStackItems() {
         return typesOfStackItems;

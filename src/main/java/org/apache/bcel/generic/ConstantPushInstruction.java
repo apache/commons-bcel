@@ -30,7 +30,7 @@ public interface ConstantPushInstruction extends PushInstruction, TypedInstructi
     /**
      * Gets the value to push onto the stack.
      *
-     * @return the value to push onto the stack.
+     * @return The value to push onto the stack.
      */
     Number getValue();
 }

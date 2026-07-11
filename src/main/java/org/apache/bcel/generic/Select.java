@@ -152,7 +152,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
-     * @return the fixed_length.
+     * @return The fixed_length.
      * @since 6.0
      */
     final int getFixedLength() {
@@ -185,7 +185,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
-     * @return the match_length.
+     * @return The match_length.
      * @since 6.0
      */
     final int getMatchLength() {
@@ -203,7 +203,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
 
     /**
      *
-     * @return the padding.
+     * @return The padding.
      * @since 6.0
      */
     final int getPadding() {

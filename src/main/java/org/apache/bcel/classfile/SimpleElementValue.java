@@ -76,7 +76,7 @@ public class SimpleElementValue extends ElementValue {
     /**
      * Gets the boolean value.
      *
-     * @return the boolean value.
+     * @return The boolean value.
      */
     public boolean getValueBoolean() {
         if (super.getType() != PRIMITIVE_BOOLEAN) {
@@ -89,7 +89,7 @@ public class SimpleElementValue extends ElementValue {
     /**
      * Gets the byte value.
      *
-     * @return the byte value.
+     * @return The byte value.
      */
     public byte getValueByte() {
         if (super.getType() != PRIMITIVE_BYTE) {
@@ -101,7 +101,7 @@ public class SimpleElementValue extends ElementValue {
     /**
      * Gets the char value.
      *
-     * @return the char value.
+     * @return The char value.
      */
     public char getValueChar() {
         if (super.getType() != PRIMITIVE_CHAR) {
@@ -113,7 +113,7 @@ public class SimpleElementValue extends ElementValue {
     /**
      * Gets the double value.
      *
-     * @return the double value.
+     * @return The double value.
      */
     public double getValueDouble() {
         if (super.getType() != PRIMITIVE_DOUBLE) {
@@ -126,7 +126,7 @@ public class SimpleElementValue extends ElementValue {
     /**
      * Gets the float value.
      *
-     * @return the float value.
+     * @return The float value.
      */
     public float getValueFloat() {
         if (super.getType() != PRIMITIVE_FLOAT) {
@@ -139,7 +139,7 @@ public class SimpleElementValue extends ElementValue {
     /**
      * Gets the int value.
      *
-     * @return the int value.
+     * @return The int value.
      */
     public int getValueInt() {
         if (super.getType() != PRIMITIVE_INT) {
@@ -151,7 +151,7 @@ public class SimpleElementValue extends ElementValue {
     /**
      * Gets the long value.
      *
-     * @return the long value.
+     * @return The long value.
      */
     public long getValueLong() {
         if (super.getType() != PRIMITIVE_LONG) {
@@ -164,7 +164,7 @@ public class SimpleElementValue extends ElementValue {
     /**
      * Gets the short value.
      *
-     * @return the short value.
+     * @return The short value.
      */
     public short getValueShort() {
         if (super.getType() != PRIMITIVE_SHORT) {
@@ -177,7 +177,7 @@ public class SimpleElementValue extends ElementValue {
     /**
      * Gets the string value.
      *
-     * @return the string value.
+     * @return The string value.
      */
     public String getValueString() {
         if (super.getType() != STRING) {

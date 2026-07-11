@@ -80,7 +80,7 @@ public class AnnotationElementValueGen extends ElementValueGen {
     /**
      * Gets the annotation.
      *
-     * @return the annotation.
+     * @return The annotation.
      */
     public AnnotationEntryGen getAnnotation() {
         return a;

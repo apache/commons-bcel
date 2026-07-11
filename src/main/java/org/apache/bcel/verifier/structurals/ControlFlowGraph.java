@@ -393,7 +393,7 @@ public class ControlFlowGraph {
      * Returns the InstructionContext of a given instruction.
      *
      * @param inst the instruction handle.
-     * @return the InstructionContext of the given instruction.
+     * @return The InstructionContext of the given instruction.
      */
     public InstructionContext contextOf(final InstructionHandle inst) {
         final InstructionContext ic = instructionContexts.get(inst);
@@ -407,7 +407,7 @@ public class ControlFlowGraph {
      * Returns the InstructionContext[] of a given InstructionHandle[], in a naturally ordered manner.
      *
      * @param insts the instruction handles.
-     * @return the InstructionContext array of the given instruction handles.
+     * @return The InstructionContext array of the given instruction handles.
      */
     public InstructionContext[] contextsOf(final InstructionHandle[] insts) {
         final InstructionContext[] ret = new InstructionContext[insts.length];

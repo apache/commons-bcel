@@ -99,7 +99,7 @@ public final class ModuleExports implements Cloneable, Node {
     /**
      * Gets the flags for this ModuleExports.
      *
-     * @return the exportsFlags.
+     * @return The exportsFlags.
      * @since 6.10.0
      */
     public int getExportsFlags() {
@@ -110,7 +110,7 @@ public final class ModuleExports implements Cloneable, Node {
      * Gets the exported package name.
      *
      * @param constantPool the constant pool from the ClassFile.
-     * @return the exported package name.
+     * @return The exported package name.
      * @since 6.10.0
      */
     public String getPackageName(final ConstantPool constantPool) {

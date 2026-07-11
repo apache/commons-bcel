@@ -85,7 +85,7 @@ public class ClassElementValueGen extends ElementValueGen {
     /**
      * Gets the class string.
      *
-     * @return the class string.
+     * @return The class string.
      */
     public String getClassString() {
         final ConstantUtf8 cu8 = (ConstantUtf8) getConstantPool().getConstant(idx);
@@ -109,7 +109,7 @@ public class ClassElementValueGen extends ElementValueGen {
     /**
      * Gets the index.
      *
-     * @return the index.
+     * @return The index.
      */
     public int getIndex() {
         return idx;

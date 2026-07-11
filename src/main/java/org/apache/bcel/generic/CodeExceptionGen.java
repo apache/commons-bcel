@@ -76,7 +76,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     /**
      * Gets the type of the Exception to catch, 'null' for ANY.
      *
-     * @return the type of the Exception to catch, 'null' for ANY.
+     * @return The type of the Exception to catch, 'null' for ANY.
      */
     public ObjectType getCatchType() {
         return catchType;
@@ -89,7 +89,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
      * has been called for the instruction list.
      *
      * @param cp constant pool.
-     * @return the CodeException object.
+     * @return The CodeException object.
      */
     public CodeException getCodeException(final ConstantPoolGen cp) {
         return new CodeException(startPc.getPosition(), endPc.getPosition() + endPc.getInstruction().getLength(), handlerPc.getPosition(),

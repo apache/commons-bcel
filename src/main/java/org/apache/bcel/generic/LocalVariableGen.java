@@ -118,7 +118,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     /**
      * Gets the end instruction handle.
      *
-     * @return the end instruction handle.
+     * @return The end instruction handle.
      */
     public InstructionHandle getEnd() {
         return end;
@@ -127,7 +127,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     /**
      * Gets the index.
      *
-     * @return the index.
+     * @return The index.
      */
     public int getIndex() {
         return index;
@@ -153,7 +153,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
      * instruction of the method. Hence the liveToEnd flag to differentiate between these two cases.
      *
      * @param cp constant pool.
-     * @return the local variable.
+     * @return The local variable.
      */
     public LocalVariable getLocalVariable(final ConstantPoolGen cp) {
         int startPc = 0;
@@ -178,7 +178,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     /**
      * Gets the original index.
      *
-     * @return the original index.
+     * @return The original index.
      */
     public int getOrigIndex() {
         return origIndex;
@@ -187,7 +187,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     /**
      * Gets the start instruction handle.
      *
-     * @return the start instruction handle.
+     * @return The start instruction handle.
      */
     public InstructionHandle getStart() {
         return start;

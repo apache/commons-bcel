@@ -244,7 +244,7 @@ public class SimpleElementValueGen extends ElementValueGen {
     /**
      * Gets the immutable variant.
      *
-     * @return the immutable variant.
+     * @return The immutable variant.
      */
     @Override
     public ElementValue getElementValue() {
@@ -254,7 +254,7 @@ public class SimpleElementValueGen extends ElementValueGen {
     /**
      * Gets the constant pool index.
      *
-     * @return the index.
+     * @return The index.
      */
     public int getIndex() {
         return idx;
@@ -263,7 +263,7 @@ public class SimpleElementValueGen extends ElementValueGen {
     /**
      * Gets the int value.
      *
-     * @return the int value.
+     * @return The int value.
      */
     public int getValueInt() {
         if (super.getElementValueType() != PRIMITIVE_INT) {
@@ -276,7 +276,7 @@ public class SimpleElementValueGen extends ElementValueGen {
     /**
      * Gets the string value.
      *
-     * @return the string value.
+     * @return The string value.
      */
     public String getValueString() {
         if (super.getElementValueType() != STRING) {

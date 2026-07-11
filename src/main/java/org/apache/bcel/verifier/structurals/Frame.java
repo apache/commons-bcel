@@ -36,7 +36,7 @@ public class Frame {
     /**
      * Gets the static _this reference.
      *
-     * @return the _this.
+     * @return The _this.
      * @since 6.0
      */
     public static UninitializedObjectType getThis() {
@@ -122,7 +122,7 @@ public class Frame {
     /**
      * Gets the local variables.
      *
-     * @return the local variables.
+     * @return The local variables.
      */
     public LocalVariables getLocals() {
         return locals;
@@ -131,7 +131,7 @@ public class Frame {
     /**
      * Gets the operand stack.
      *
-     * @return the operand stack.
+     * @return The operand stack.
      */
     public OperandStack getStack() {
         return stack;

@@ -122,7 +122,7 @@ public final class StackMap extends Attribute {
     /**
      * Gets the map length.
      *
-     * @return the map length.
+     * @return The map length.
      */
     public int getMapLength() {
         return table.length;

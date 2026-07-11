@@ -29,7 +29,7 @@ public final class BasicType extends Type {
      * Gets the BasicType for the given type constant.
      *
      * @param type the type constant.
-     * @return the BasicType.
+     * @return The BasicType.
      * @since 6.0
      */
     // @since 6.0 no longer final

@@ -154,7 +154,7 @@ public final class ExceptionConst {
      *
      * @param type the basic array type.
      * @param extraClasses additional classes, if any.
-     * @return the merged array.
+     * @return The merged array.
      */
     public static Class<?>[] createExceptions(final EXCS type, final Class<?>... extraClasses) {
         switch (type) {

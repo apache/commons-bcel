@@ -1452,7 +1452,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * Leave that to JustIce.
      *
      * @param methodNr the method number.
-     * @return the LocalVariablesInfo object or null.
+     * @return The LocalVariablesInfo object or null.
      */
     public LocalVariablesInfo getLocalVariablesInfo(final int methodNr) {
         if (verify() != VerificationResult.VR_OK) {

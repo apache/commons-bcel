@@ -77,7 +77,7 @@ public class EnclosingMethod extends Attribute {
     /**
      * Gets the enclosing class.
      *
-     * @return the enclosing class.
+     * @return The enclosing class.
      */
     public final ConstantClass getEnclosingClass() {
         return super.getConstantPool().getConstant(classIndex, Const.CONSTANT_Class, ConstantClass.class);
@@ -86,7 +86,7 @@ public class EnclosingMethod extends Attribute {
     /**
      * Gets the enclosing class index.
      *
-     * @return the enclosing class index.
+     * @return The enclosing class index.
      */
     public final int getEnclosingClassIndex() {
         return classIndex;
@@ -95,7 +95,7 @@ public class EnclosingMethod extends Attribute {
     /**
      * Gets the enclosing method.
      *
-     * @return the enclosing method.
+     * @return The enclosing method.
      */
     public final ConstantNameAndType getEnclosingMethod() {
         if (methodIndex == 0) {
@@ -107,7 +107,7 @@ public class EnclosingMethod extends Attribute {
     /**
      * Gets the enclosing method index.
      *
-     * @return the enclosing method index.
+     * @return The enclosing method index.
      */
     public final int getEnclosingMethodIndex() {
         return methodIndex;

@@ -88,7 +88,7 @@ public class VerificationResult {
     /**
      * Returns a detailed message.
      *
-     * @return the detail message.
+     * @return The detail message.
      */
     public String getMessage() {
         return detailMessage;
@@ -97,7 +97,7 @@ public class VerificationResult {
     /**
      * Returns one of the {@link #VERIFIED_OK}, {@link #VERIFIED_NOTYET}, {@link #VERIFIED_REJECTED} constants.
      *
-     * @return the verification status.
+     * @return The verification status.
      */
     public int getStatus() {
         return numeric;

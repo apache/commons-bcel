@@ -38,7 +38,7 @@ public class ParameterAnnotationEntry implements Node {
      * Creates parameter annotation entries from attributes.
      *
      * @param attributes the attributes.
-     * @return the parameter annotation entries.
+     * @return The parameter annotation entries.
      */
     public static ParameterAnnotationEntry[] createParameterAnnotationEntries(final Attribute[] attributes) {
         if (attributes == null) {
@@ -103,7 +103,7 @@ public class ParameterAnnotationEntry implements Node {
     /**
      * Gets the annotation entries.
      *
-     * @return the array of annotation entries in this annotation.
+     * @return The array of annotation entries in this annotation.
      */
     public AnnotationEntry[] getAnnotationEntries() {
         return annotationTable;

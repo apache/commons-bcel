@@ -92,7 +92,7 @@ public final class AssertionViolatedException extends RuntimeException {
     /**
      * Returns the error message string of this AssertionViolatedException object.
      *
-     * @return the error message string of this AssertionViolatedException.
+     * @return The error message string of this AssertionViolatedException.
      */
     @Override
     public String getMessage() {

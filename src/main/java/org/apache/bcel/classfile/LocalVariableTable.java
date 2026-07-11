@@ -125,7 +125,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
      * Gets the local variable for the given index.
      *
      * @param index the variable slot.
-     * @return the first LocalVariable that matches the slot or null if not found.
+     * @return The first LocalVariable that matches the slot or null if not found.
      * @deprecated Since 5.2 because multiple variables can share the same slot, use getLocalVariable(int index, int pc) instead.
      */
     @java.lang.Deprecated
@@ -143,7 +143,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
      *
      * @param index the variable slot.
      * @param pc the current pc that this variable is alive.
-     * @return the LocalVariable that matches or null if not found.
+     * @return The LocalVariable that matches or null if not found.
      */
     public final LocalVariable getLocalVariable(final int index, final int pc) {
         for (final LocalVariable variable : localVariableTable) {
@@ -170,7 +170,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
     /**
      * Gets the table length.
      *
-     * @return the table length.
+     * @return The table length.
      */
     public final int getTableLength() {
         return localVariableTable.length;

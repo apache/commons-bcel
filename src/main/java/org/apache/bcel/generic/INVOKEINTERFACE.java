@@ -101,7 +101,7 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
     /**
      * The <strong>count</strong> argument according to the Java Language Specification, Second Edition.
      *
-     * @return the count argument.
+     * @return The count argument.
      */
     public int getCount() {
         return nargs;

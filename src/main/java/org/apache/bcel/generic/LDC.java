@@ -107,7 +107,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
      * Gets the constant value from the constant pool.
      *
      * @param cpg constant pool generator.
-     * @return the constant value.
+     * @return The constant value.
      */
     public Object getValue(final ConstantPoolGen cpg) {
         org.apache.bcel.classfile.Constant c = cpg.getConstantPool().getConstant(super.getIndex());

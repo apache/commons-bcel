@@ -26,7 +26,7 @@ public interface IndexedInstruction {
     /**
      * Gets the index.
      *
-     * @return the index.
+     * @return The index.
      */
     int getIndex();
 

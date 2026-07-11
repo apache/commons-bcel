@@ -94,7 +94,7 @@ public class MethodParameter implements Cloneable, Node {
     /**
      * Gets the access flags.
      *
-     * @return the access flags.
+     * @return The access flags.
      */
     public int getAccessFlags() {
         return accessFlags;
@@ -103,7 +103,7 @@ public class MethodParameter implements Cloneable, Node {
     /**
      * Gets the name index.
      *
-     * @return the name index.
+     * @return The name index.
      */
     public int getNameIndex() {
         return nameIndex;

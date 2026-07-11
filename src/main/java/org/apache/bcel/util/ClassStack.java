@@ -49,7 +49,7 @@ public class ClassStack {
     /**
      * Pops a JavaClass from the stack.
      *
-     * @return the JavaClass from the top of the stack.
+     * @return The JavaClass from the top of the stack.
      */
     public JavaClass pop() {
         return stack.pop();
@@ -67,7 +67,7 @@ public class ClassStack {
     /**
      * Gets the top JavaClass from the stack without removing it.
      *
-     * @return the JavaClass at the top of the stack.
+     * @return The JavaClass at the top of the stack.
      */
     public JavaClass top() {
         return stack.peek();

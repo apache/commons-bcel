@@ -123,7 +123,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     /**
      * Gets the position.
      *
-     * @return the position.
+     * @return The position.
      * @since 6.0
      */
     protected int getPosition() {
@@ -142,7 +142,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     /**
      * Gets the offset to this instruction's target.
      *
-     * @return the offset to this instruction's target.
+     * @return The offset to this instruction's target.
      */
     protected int getTargetOffset() {
         return getTargetOffset(target);
@@ -152,7 +152,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * Gets the offset to target relative to this instruction.
      *
      * @param target branch target.
-     * @return the offset to 'target' relative to this instruction.
+     * @return The offset to 'target' relative to this instruction.
      */
     protected int getTargetOffset(final InstructionHandle target) {
         if (target == null) {

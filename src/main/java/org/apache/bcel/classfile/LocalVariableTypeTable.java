@@ -130,7 +130,7 @@ public class LocalVariableTypeTable extends Attribute implements Iterable<LocalV
      * Gets the local variable for the given index.
      *
      * @param index the index.
-     * @return the local variable or null if not found.
+     * @return The local variable or null if not found.
      */
     public final LocalVariable getLocalVariable(final int index) {
         for (final LocalVariable variable : localVariableTypeTable) {
@@ -144,7 +144,7 @@ public class LocalVariableTypeTable extends Attribute implements Iterable<LocalV
     /**
      * Gets the local variable type table.
      *
-     * @return the local variable type table.
+     * @return The local variable type table.
      */
     public final LocalVariable[] getLocalVariableTypeTable() {
         return localVariableTypeTable;
@@ -153,7 +153,7 @@ public class LocalVariableTypeTable extends Attribute implements Iterable<LocalV
     /**
      * Gets the table length.
      *
-     * @return the table length.
+     * @return The table length.
      */
     public final int getTableLength() {
         return localVariableTypeTable == null ? 0 : localVariableTypeTable.length;

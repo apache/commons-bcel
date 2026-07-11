@@ -89,7 +89,7 @@ public final class ConstantMethodType extends Constant {
     /**
      * Gets the descriptor index.
      *
-     * @return the descriptor index.
+     * @return The descriptor index.
      */
     public int getDescriptorIndex() {
         return descriptorIndex;

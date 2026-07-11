@@ -605,7 +605,7 @@ public abstract class Utility {
      * Escape all occurrences of newline chars '\n', quotes \", etc.
      *
      * @param label the string to convert.
-     * @return the converted string.
+     * @return The converted string.
      */
     public static String convertString(final String label) {
         final char[] ch = label.toCharArray();
@@ -670,7 +670,7 @@ public abstract class Utility {
      *
      * @param s the string to convert.
      * @param uncompress use gzip to uncompress the stream of bytes.
-     * @return the decoded byte array.
+     * @return The decoded byte array.
      * @throws IOException if there's a gzip exception.
      */
     public static byte[] decode(final String s, final boolean uncompress) throws IOException {
@@ -711,7 +711,7 @@ public abstract class Utility {
      *
      * @param bytes the byte array to convert.
      * @param compress use gzip to minimize string.
-     * @return the encoded string.
+     * @return The encoded string.
      * @throws IOException if there's a gzip exception.
      */
     public static String encode(byte[] bytes, final boolean compress) throws IOException {
@@ -1077,7 +1077,7 @@ public abstract class Utility {
      * Prints an array to a string.
      *
      * @param obj the array to print.
-     * @return the string representation.
+     * @return The string representation.
      */
     public static String printArray(final Object[] obj) {
         return printArray(obj, true);
@@ -1088,7 +1088,7 @@ public abstract class Utility {
      *
      * @param obj the array to print.
      * @param braces whether to include braces.
-     * @return the string representation.
+     * @return The string representation.
      */
     public static String printArray(final Object[] obj, final boolean braces) {
         return printArray(obj, braces, false);
@@ -1100,7 +1100,7 @@ public abstract class Utility {
      * @param obj the array to print.
      * @param braces whether to include braces.
      * @param quote whether to quote elements.
-     * @return the string representation.
+     * @return The string representation.
      */
     public static String printArray(final Object[] obj, final boolean braces, final boolean quote) {
         if (obj == null) {
@@ -1180,7 +1180,7 @@ public abstract class Utility {
      * Map opcode names to opcode numbers. E.g., return Constants.ALOAD for "aload".
      *
      * @param name The opcode name.
-     * @return the value.
+     * @return The value.
      */
     public static short searchOpcode(final String name) {
         final String lcName = StringUtils.toRootLowerCase(name);

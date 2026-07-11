@@ -585,7 +585,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * When everything is finished, use this method to convert the instruction list into an array of bytes.
      *
-     * @return the byte code ready to be dumped.
+     * @return The byte code ready to be dumped.
      */
     public byte[] getByteCode() {
         // Update position indices of instructions

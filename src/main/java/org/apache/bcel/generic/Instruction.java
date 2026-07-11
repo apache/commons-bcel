@@ -535,7 +535,7 @@ public abstract class Instruction implements Cloneable {
     /**
      * Gets the hashCode of this object.
      *
-     * @return the hashCode.
+     * @return The hashCode.
      * @since 6.0
      */
     @Override

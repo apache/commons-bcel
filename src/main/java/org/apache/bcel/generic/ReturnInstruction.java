@@ -49,7 +49,7 @@ public abstract class ReturnInstruction extends Instruction implements Exception
     /**
      * Gets the type of the returned value.
      *
-     * @return the type.
+     * @return The type.
      */
     public Type getType() {
         final short opcode = super.getOpcode();

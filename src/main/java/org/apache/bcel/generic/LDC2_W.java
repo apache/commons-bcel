@@ -73,7 +73,7 @@ public class LDC2_W extends CPInstruction implements PushInstruction {
      * Gets the constant value from the constant pool.
      *
      * @param cpg constant pool generator.
-     * @return the constant value as a Number.
+     * @return The constant value as a Number.
      */
     public Number getValue(final ConstantPoolGen cpg) {
         final org.apache.bcel.classfile.Constant c = cpg.getConstantPool().getConstant(super.getIndex());

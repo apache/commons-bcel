@@ -183,7 +183,7 @@ public final class LineNumberTable extends Attribute implements Iterable<LineNum
     /**
      * Gets the length of the line number table.
      *
-     * @return the length of the line number table.
+     * @return The length of the line number table.
      */
     public int getTableLength() {
         return lineNumberTable.length;

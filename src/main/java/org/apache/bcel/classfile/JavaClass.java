@@ -624,7 +624,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Gets interfaces directly implemented by this JavaClass.
      *
-     * @return the interfaces.
+     * @return The interfaces.
      * @throws ClassNotFoundException if any of the class's interfaces can't be found.
      */
     public JavaClass[] getInterfaces() throws ClassNotFoundException {
@@ -691,7 +691,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * Gets the ClassRepository which holds its definition. By default this is the same as
      * SyntheticRepository.getInstance().
      *
-     * @return the repository.
+     * @return The repository.
      */
     public org.apache.bcel.util.Repository getRepository() {
         return repository;
@@ -734,7 +734,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Gets the superclass for this JavaClass object, or null if this is {@link Object}.
      *
-     * @return the superclass for this JavaClass object, or null if this is {@link Object}.
+     * @return The superclass for this JavaClass object, or null if this is {@link Object}.
      * @throws ClassNotFoundException if the superclass can't be found.
      */
     public JavaClass getSuperClass() throws ClassNotFoundException {

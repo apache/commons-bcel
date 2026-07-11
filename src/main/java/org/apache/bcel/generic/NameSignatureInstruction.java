@@ -63,7 +63,7 @@ public abstract class NameSignatureInstruction extends CPInstruction {
      * Gets the name and type constant.
      *
      * @param cpg constant pool generator.
-     * @return the name and type constant.
+     * @return The name and type constant.
      */
     public ConstantNameAndType getNameAndType(final ConstantPoolGen cpg) {
         final ConstantPool cp = cpg.getConstantPool();

@@ -103,7 +103,7 @@ abstract class AbstractClassPathRepository implements Repository {
      * the Repository's classpath is searched for the class (and it is added to the Repository if found).
      *
      * @param className the name of the class.
-     * @return the JavaClass object.
+     * @return The JavaClass object.
      * @throws ClassNotFoundException if the class is not in the Repository, and could not be found on the classpath
      */
     @Override

@@ -197,7 +197,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     /**
      * Gets field object after having set up all necessary values.
      *
-     * @return the field object.
+     * @return The field object.
      */
     public Field getField() {
         final String signature = getSignature();
@@ -215,7 +215,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     /**
      * Gets the initial value.
      *
-     * @return the initial value.
+     * @return The initial value.
      */
     public String getInitValue() {
         return Objects.toString(value, null);

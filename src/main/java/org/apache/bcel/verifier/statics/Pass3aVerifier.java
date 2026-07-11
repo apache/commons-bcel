@@ -140,7 +140,7 @@ public final class Pass3aVerifier extends PassVerifier {
          *
          * @param jc the class that defines the referenced method.
          * @param invoke the instruction that references the method.
-         * @return the referenced method or null if not found.
+         * @return The referenced method or null if not found.
          */
         private Method getMethod(final JavaClass jc, final InvokeInstruction invoke) {
             final Method[] ms = jc.getMethods();
@@ -161,7 +161,7 @@ public final class Pass3aVerifier extends PassVerifier {
          *
          * @param jc the class that defines the referenced method.
          * @param invoke the instruction that references the method.
-         * @return the referenced method or null if not found.
+         * @return The referenced method or null if not found.
          */
         private Method getMethodRecursive(final JavaClass jc, final InvokeInstruction invoke) throws ClassNotFoundException {
             Method m;
@@ -1077,7 +1077,7 @@ public final class Pass3aVerifier extends PassVerifier {
     /**
      * Returns the method number as supplied when instantiating.
      *
-     * @return the method number.
+     * @return The method number.
      */
     public int getMethodNo() {
         return methodNo;
@@ -1207,7 +1207,7 @@ public final class Pass3aVerifier extends PassVerifier {
      * RuntimeException, or else it is a string derived only from obj's class name.
      *
      * @param obj the object to convert to string.
-     * @return the string representation.
+     * @return The string representation.
      */
     protected String tostring(final Object obj) {
         String ret;

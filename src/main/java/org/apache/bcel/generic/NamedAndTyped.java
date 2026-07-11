@@ -26,14 +26,14 @@ public interface NamedAndTyped {
     /**
      * Gets the name.
      *
-     * @return the name.
+     * @return The name.
      */
     String getName();
 
     /**
      * Gets the type.
      *
-     * @return the type.
+     * @return The type.
      */
     Type getType();
 

@@ -95,7 +95,7 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
     /**
      * Gets the array of annotation entries in this annotation.
      *
-     * @return the array of annotation entries in this annotation.
+     * @return The array of annotation entries in this annotation.
      */
     public AnnotationEntry[] getAnnotationEntries() {
         return annotationTable;
@@ -104,7 +104,7 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
     /**
      * Gets the number of annotation entries in this annotation.
      *
-     * @return the number of annotation entries in this annotation.
+     * @return The number of annotation entries in this annotation.
      */
     public final int getNumAnnotations() {
         return annotationTable.length;

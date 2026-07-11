@@ -319,7 +319,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Gets the annotation entries.
      *
-     * @return the annotation entries.
+     * @return The annotation entries.
      */
     // J5TODO: Should we make calling unpackAnnotations() lazy and put it in here?
     public AnnotationEntryGen[] getAnnotationEntries() {
@@ -329,7 +329,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Gets the attributes.
      *
-     * @return the attributes.
+     * @return The attributes.
      */
     public Attribute[] getAttributes() {
         return attributeList.toArray(Attribute.EMPTY_ARRAY);
@@ -338,7 +338,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Gets the class name.
      *
-     * @return the class name.
+     * @return The class name.
      */
     public String getClassName() {
         return className;
@@ -347,7 +347,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Gets the class name index.
      *
-     * @return the class name index.
+     * @return The class name index.
      */
     public int getClassNameIndex() {
         return classNameIndex;
@@ -356,7 +356,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Gets the constant pool.
      *
-     * @return the constant pool.
+     * @return The constant pool.
      */
     public ConstantPoolGen getConstantPool() {
         return cp;
@@ -365,7 +365,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Gets the fields.
      *
-     * @return the fields.
+     * @return The fields.
      */
     public Field[] getFields() {
         return fieldList.toArray(Field.EMPTY_ARRAY);
@@ -374,7 +374,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Gets the file name.
      *
-     * @return the file name.
+     * @return The file name.
      */
     public String getFileName() {
         return fileName;
@@ -383,7 +383,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Gets the interface names.
      *
-     * @return the interface names.
+     * @return The interface names.
      */
     public String[] getInterfaceNames() {
         return interfaceList.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
@@ -392,7 +392,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Gets the interfaces.
      *
-     * @return the interfaces.
+     * @return The interfaces.
      */
     public int[] getInterfaces() {
         final int size = interfaceList.size();
@@ -404,7 +404,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Gets the (finally) built up Java class object.
      *
-     * @return the (finally) built up Java class object.
+     * @return The (finally) built up Java class object.
      */
     public JavaClass getJavaClass() {
         final int[] interfaces = getInterfaces();
@@ -439,7 +439,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
      * Gets the method at the given position.
      *
      * @param pos the position.
-     * @return the method at the given position.
+     * @return The method at the given position.
      */
     public Method getMethodAt(final int pos) {
         return methodList.get(pos);
@@ -448,7 +448,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Gets the methods.
      *
-     * @return the methods.
+     * @return The methods.
      */
     public Method[] getMethods() {
         return methodList.toArray(Method.EMPTY_ARRAY);
@@ -466,7 +466,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Gets the superclass name.
      *
-     * @return the superclass name.
+     * @return The superclass name.
      */
     public String getSuperclassName() {
         return superClassName;
@@ -475,7 +475,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Gets the superclass name index.
      *
-     * @return the superclass name index.
+     * @return The superclass name index.
      */
     public int getSuperclassNameIndex() {
         return superclassNameIndex;

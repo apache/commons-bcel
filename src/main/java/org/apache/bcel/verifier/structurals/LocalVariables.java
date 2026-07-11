@@ -77,7 +77,7 @@ public class LocalVariables implements Cloneable {
      * Returns the type of the local variable slot index.
      *
      * @param slotIndex Slot to look up.
-     * @return the type of the local variable slot index.
+     * @return The type of the local variable slot index.
      */
     public Type get(final int slotIndex) {
         return locals[slotIndex];
@@ -117,7 +117,7 @@ public class LocalVariables implements Cloneable {
     /**
      * Returns the number of local variable slots.
      *
-     * @return the number of local variable slots.
+     * @return The number of local variable slots.
      */
     public int maxLocals() {
         return locals.length;

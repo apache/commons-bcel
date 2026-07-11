@@ -31,7 +31,7 @@ public final class Utility {
      * This method returns the stack trace of a Throwable instance as a String.
      *
      * @param t the Throwable instance.
-     * @return the stack trace as a String.
+     * @return The stack trace as a String.
      * @deprecated Use {@link ExceptionUtils#getStackTrace(Throwable)}.
      */
     public static String getStackTrace(final Throwable t) {

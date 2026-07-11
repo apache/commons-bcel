@@ -135,7 +135,7 @@ public class OperandStack implements Cloneable {
     /**
      * Returns the number of stack slots this stack can hold.
      *
-     * @return the maximum stack size.
+     * @return The maximum stack size.
      */
     public int maxStack() {
         return this.maxStack;
@@ -186,7 +186,7 @@ public class OperandStack implements Cloneable {
     /**
      * Returns the element on top of the stack. The element is not popped off the stack!
      *
-     * @return the top element.
+     * @return The top element.
      */
     public Type peek() {
         return peek(0);
@@ -197,7 +197,7 @@ public class OperandStack implements Cloneable {
      * element is not popped off the stack!
      *
      * @param i the depth.
-     * @return the element at the specified depth.
+     * @return The element at the specified depth.
      */
     public Type peek(final int i) {
         return stack.get(size() - i - 1);
@@ -206,7 +206,7 @@ public class OperandStack implements Cloneable {
     /**
      * Returns the element on top of the stack. The element is popped off the stack.
      *
-     * @return the popped element.
+     * @return The popped element.
      */
     public Type pop() {
         return stack.remove(size() - 1);
@@ -246,7 +246,7 @@ public class OperandStack implements Cloneable {
     /**
      * Returns the size of this OperandStack; that means, how many Type objects there are.
      *
-     * @return the stack size.
+     * @return The stack size.
      */
     public int size() {
         return stack.size();
@@ -255,7 +255,7 @@ public class OperandStack implements Cloneable {
     /**
      * Returns the number of stack slots used.
      *
-     * @return the number of slots used.
+     * @return The number of slots used.
      * @see #maxStack()
      */
     public int slotsUsed() {

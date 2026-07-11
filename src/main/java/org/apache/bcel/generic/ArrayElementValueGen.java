@@ -115,7 +115,7 @@ public class ArrayElementValueGen extends ElementValueGen {
     /**
      * Gets the element values.
      *
-     * @return the element values.
+     * @return The element values.
      */
     public List<ElementValueGen> getElementValues() {
         return evalues;
@@ -124,7 +124,7 @@ public class ArrayElementValueGen extends ElementValueGen {
     /**
      * Gets the element values size.
      *
-     * @return the element values size.
+     * @return The element values size.
      */
     public int getElementValuesSize() {
         return evalues.size();

@@ -118,7 +118,7 @@ public class ClassLoader extends java.lang.ClassLoader {
      * </p>
      *
      * @param className compressed byte code with "$$BCEL$$" in it.
-     * @return the created JavaClass.
+     * @return The created JavaClass.
      */
     protected JavaClass createClass(final String className) {
         final int index = className.indexOf(BCEL_TOKEN);
@@ -188,7 +188,7 @@ public class ClassLoader extends java.lang.ClassLoader {
      * Override this method if you want to alter a class before it gets actually loaded. Does nothing by default.
      *
      * @param clazz the class to modify.
-     * @return the modified class.
+     * @return The modified class.
      */
     protected JavaClass modifyClass(final JavaClass clazz) {
         return clazz;

@@ -42,7 +42,7 @@ public class ClassQueue {
     /**
      * Removes and returns the first JavaClass from the queue.
      *
-     * @return the first JavaClass from the queue.
+     * @return The first JavaClass from the queue.
      */
     public JavaClass dequeue() {
         return vec.removeFirst();

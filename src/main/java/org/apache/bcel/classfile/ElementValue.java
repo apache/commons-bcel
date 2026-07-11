@@ -197,7 +197,7 @@ public abstract class ElementValue {
     /**
      * Gets the constant pool.
      *
-     * @return the constant pool.
+     * @return The constant pool.
      * @since 6.0
      */
     final ConstantPool getConstantPool() {
@@ -207,7 +207,7 @@ public abstract class ElementValue {
     /**
      * Gets the element value type.
      *
-     * @return the element value type.
+     * @return The element value type.
      */
     public int getElementValueType() {
         return type;
@@ -216,7 +216,7 @@ public abstract class ElementValue {
     /**
      * Gets the type.
      *
-     * @return the type.
+     * @return The type.
      * @since 6.0
      */
     final int getType() {

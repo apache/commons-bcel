@@ -80,7 +80,7 @@ public class LocalVariableInfo {
      * about the type of this local variable slot at the given bytecode offset.
      *
      * @param offset bytecode offset.
-     * @return the name of the local variable that uses this local variable slot at the given bytecode offset.
+     * @return The name of the local variable that uses this local variable slot at the given bytecode offset.
      */
     public String getName(final int offset) {
         return names.get(Integer.toString(offset));
@@ -92,7 +92,7 @@ public class LocalVariableInfo {
      * about the type of this local variable slot at the given bytecode offset.
      *
      * @param offset bytecode offset.
-     * @return the type of the local variable that uses this local variable slot at the given bytecode offset.
+     * @return The type of the local variable that uses this local variable slot at the given bytecode offset.
      */
     public Type getType(final int offset) {
         return types.get(Integer.toString(offset));

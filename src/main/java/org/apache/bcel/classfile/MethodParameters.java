@@ -85,7 +85,7 @@ public class MethodParameters extends Attribute implements Iterable<MethodParame
     /**
      * Gets the method parameters.
      *
-     * @return the method parameters.
+     * @return The method parameters.
      */
     public MethodParameter[] getParameters() {
         return parameters;

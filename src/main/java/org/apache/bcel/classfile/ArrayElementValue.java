@@ -57,7 +57,7 @@ public class ArrayElementValue extends ElementValue {
     /**
      * Gets the element values array.
      *
-     * @return the element values array.
+     * @return The element values array.
      */
     public ElementValue[] getElementValuesArray() {
         return elementValues;
@@ -66,7 +66,7 @@ public class ArrayElementValue extends ElementValue {
     /**
      * Gets the element values array size.
      *
-     * @return the element values array size.
+     * @return The element values array size.
      */
     public int getElementValuesArraySize() {
         return elementValues.length;

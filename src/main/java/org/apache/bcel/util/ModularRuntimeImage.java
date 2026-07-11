@@ -92,7 +92,7 @@ public class ModularRuntimeImage implements Closeable {
     /**
      * Gets the file system.
      *
-     * @return the file system.
+     * @return The file system.
      */
     public FileSystem getFileSystem() {
         return fileSystem;

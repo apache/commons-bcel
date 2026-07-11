@@ -92,7 +92,7 @@ public final class Pass3bVerifier extends PassVerifier {
          * Gets a specific ExecutionChain from the queue.
          *
          * @param i the index of the item to be fetched.
-         * @return the indicated ExecutionChain.
+         * @return The indicated ExecutionChain.
          */
         public ArrayList<InstructionContext> getEC(final int i) {
             return ecs.get(i);
@@ -102,7 +102,7 @@ public final class Pass3bVerifier extends PassVerifier {
          * Gets a specific InstructionContext from the queue.
          *
          * @param i the index of the item to be fetched.
-         * @return the indicated InstructionContext.
+         * @return The indicated InstructionContext.
          */
         public InstructionContext getIC(final int i) {
             return ics.get(i);
@@ -130,7 +130,7 @@ public final class Pass3bVerifier extends PassVerifier {
         /**
          * Gets the size of the InstructionContext queue.
          *
-         * @return the size of the InstructionQueue.
+         * @return The size of the InstructionQueue.
          */
         public int size() {
             return ics.size();
@@ -410,7 +410,7 @@ public final class Pass3bVerifier extends PassVerifier {
     /**
      * Returns the method number as supplied when instantiating.
      *
-     * @return the method number.
+     * @return The method number.
      */
     public int getMethodNo() {
         return methodNo;

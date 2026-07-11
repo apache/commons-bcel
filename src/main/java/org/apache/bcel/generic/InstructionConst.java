@@ -520,7 +520,7 @@ public final class InstructionConst {
      * Gets the Instruction.
      *
      * @param index the index, for example {@link Const#RETURN}.
-     * @return the entry from the private INSTRUCTIONS table.
+     * @return The entry from the private INSTRUCTIONS table.
      */
     public static Instruction getInstruction(final int index) {
         return INSTRUCTIONS[index];

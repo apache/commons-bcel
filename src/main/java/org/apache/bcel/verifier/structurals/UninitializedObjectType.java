@@ -58,7 +58,7 @@ public class UninitializedObjectType extends ReferenceType implements Constants 
      * Returns the ObjectType of the same class as the one of the uninitialized object represented by this
      * UninitializedObjectType instance.
      *
-     * @return the ObjectType.
+     * @return The ObjectType.
      */
     public ObjectType getInitialized() {
         return initialized;

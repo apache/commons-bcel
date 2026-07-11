@@ -53,7 +53,7 @@ public abstract class ReferenceType extends Type {
      * returned. See the JVM specification edition 2, "�4.9.2 The Bytecode Verifier".
      *
      * @param t the other type.
-     * @return the first common superclass.
+     * @return The first common superclass.
      * @throws ClassNotFoundException on failure to find superclasses of this type, or the type passed as a parameter.
      * @deprecated Use getFirstCommonSuperclass(ReferenceType t) which has slightly changed semantics.
      */
@@ -88,7 +88,7 @@ public abstract class ReferenceType extends Type {
      * Bytecode Verifier".
      *
      * @param t the other type.
-     * @return the first common superclass.
+     * @return The first common superclass.
      * @throws ClassNotFoundException on failure to find superclasses of this type, or the type passed as a parameter.
      */
     public ReferenceType getFirstCommonSuperclass(final ReferenceType t) throws ClassNotFoundException {

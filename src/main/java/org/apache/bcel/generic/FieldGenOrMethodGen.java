@@ -131,7 +131,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     /**
      * Gets the constant pool.
      *
-     * @return the constant pool.
+     * @return The constant pool.
      */
     public ConstantPoolGen getConstantPool() {
         return cp;

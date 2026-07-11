@@ -143,7 +143,7 @@ public class InstructionHandle {
      * Gets attribute of an instruction handle.
      *
      * @param key the key object to store/retrieve the attribute.
-     * @return the attribute value.
+     * @return The attribute value.
      */
     public Object getAttribute(final Object key) {
         return attributes != null ? attributes.get(key) : null;
@@ -164,7 +164,7 @@ public class InstructionHandle {
     /**
      * Gets the instruction.
      *
-     * @return the instruction.
+     * @return The instruction.
      */
     public final Instruction getInstruction() {
         return instruction;
@@ -173,7 +173,7 @@ public class InstructionHandle {
     /**
      * Gets the next instruction handle.
      *
-     * @return the next instruction handle.
+     * @return The next instruction handle.
      */
     public final InstructionHandle getNext() {
         return next;
@@ -182,7 +182,7 @@ public class InstructionHandle {
     /**
      * Gets the position.
      *
-     * @return the position, the byte code offset of the contained instruction. This is accurate only after
+     * @return The position, the byte code offset of the contained instruction. This is accurate only after
      *         InstructionList.setPositions() has been called.
      */
     public int getPosition() {
@@ -192,7 +192,7 @@ public class InstructionHandle {
     /**
      * Gets the previous instruction handle.
      *
-     * @return the previous instruction handle.
+     * @return The previous instruction handle.
      */
     public final InstructionHandle getPrev() {
         return prev;
@@ -274,7 +274,7 @@ public class InstructionHandle {
      * Sets the next instruction handle.
      *
      * @param next the next to set.
-     * @return the next instruction handle.
+     * @return The next instruction handle.
      * @since 6.0
      */
     final InstructionHandle setNext(final InstructionHandle next) {
@@ -295,7 +295,7 @@ public class InstructionHandle {
      * Sets the previous instruction handle.
      *
      * @param prev the prev to set.
-     * @return the previous instruction handle.
+     * @return The previous instruction handle.
      * @since 6.0
      */
     final InstructionHandle setPrev(final InstructionHandle prev) {
@@ -311,7 +311,7 @@ public class InstructionHandle {
      * cached instruction, whereas other BH methods may affect the cache and the replacement instruction.
      *
      * @param i the replacement instruction.
-     * @return the old instruction.
+     * @return The old instruction.
      */
     // See BCEL-273
     // TODO remove this method in any redesign of BCEL

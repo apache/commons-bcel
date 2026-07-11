@@ -3308,7 +3308,7 @@ public final class Const {
      * Gets the access name at the given index.
      *
      * @param index index into {@code ACCESS_NAMES}.
-     * @return the ACCESS_NAMES entry at the given index.
+     * @return The ACCESS_NAMES entry at the given index.
      * @since 6.0
      */
     public static String getAccessName(final int index) {
@@ -3319,7 +3319,7 @@ public final class Const {
      * Gets the attribute name at the given index.
      *
      * @param index index into {@code ACCESS_NAMES}.
-     * @return the attribute name.
+     * @return The attribute name.
      * @since 6.0
      */
     public static String getAttributeName(final int index) {
@@ -3330,7 +3330,7 @@ public final class Const {
      * The primitive class names corresponding to the T_XX constants, for example, CLASS_TYPE_NAMES[T_INT] = "java.lang.Integer".
      *
      * @param index index into {@code CLASS_TYPE_NAMES}.
-     * @return the class name.
+     * @return The class name.
      * @since 6.0
      */
     public static String getClassTypeName(final int index) {
@@ -3341,7 +3341,7 @@ public final class Const {
      * Gets the constant name at the given index.
      *
      * @param index index into {@code CONSTANT_NAMES}.
-     * @return the CONSTANT_NAMES entry at the given index.
+     * @return The CONSTANT_NAMES entry at the given index.
      * @since 6.0
      */
     public static String getConstantName(final int index) {
@@ -3363,7 +3363,7 @@ public final class Const {
     /**
      * Gets the interfaces implemented by arrays.
      *
-     * @return the interfaces implemented by arrays.
+     * @return The interfaces implemented by arrays.
      * @since 6.0
      */
     public static Iterable<String> getInterfacesImplementedByArrays() {
@@ -3374,7 +3374,7 @@ public final class Const {
      * Gets the item name at the given index.
      *
      * @param index index into {@code ITEM_NAMES}.
-     * @return the item name.
+     * @return The item name.
      * @since 6.0
      */
     public static String getItemName(final int index) {
@@ -3385,7 +3385,7 @@ public final class Const {
      * Gets the method handle name at the given index.
      *
      * @param index index into {@code METHODHANDLE_NAMES}.
-     * @return the method handle name.
+     * @return The method handle name.
      * @since 6.0
      */
     public static String getMethodHandleName(final int index) {
@@ -3407,7 +3407,7 @@ public final class Const {
      * Gets the opcode name at the given index.
      *
      * @param index the index.
-     * @return the opcode name.
+     * @return The opcode name.
      * @since 6.0
      */
     public static String getOpcodeName(final int index) {
@@ -3419,7 +3419,7 @@ public final class Const {
      *
      * @param opcode the opcode.
      * @param index  the index.
-     * @return the operand type.
+     * @return The operand type.
      * @since 6.0
      */
     public static short getOperandType(final int opcode, final int index) {
@@ -3430,7 +3430,7 @@ public final class Const {
      * Gets the operand type count.
      *
      * @param opcode the opcode.
-     * @return the operand type count.
+     * @return The operand type count.
      * @since 6.0
      */
     public static long getOperandTypeCount(final int opcode) {
@@ -3452,7 +3452,7 @@ public final class Const {
      * Gets the short type name at the given index.
      *
      * @param index the index.
-     * @return the short type name.
+     * @return The short type name.
      * @since 6.0
      */
     public static String getShortTypeName(final int index) {
@@ -3463,7 +3463,7 @@ public final class Const {
      * The primitive type names corresponding to the T_XX constants, for example, TYPE_NAMES[T_INT] = "int".
      *
      * @param index the index.
-     * @return the type name.
+     * @return The type name.
      * @since 6.0
      */
     public static String getTypeName(final int index) {

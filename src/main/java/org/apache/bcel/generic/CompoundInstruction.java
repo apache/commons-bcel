@@ -34,7 +34,7 @@ public interface CompoundInstruction {
     /**
      * Gets the instruction list.
      *
-     * @return the instruction list.
+     * @return The instruction list.
      */
     InstructionList getInstructionList();
 }

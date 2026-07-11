@@ -37,14 +37,14 @@ public interface Repository {
      * Finds the class with the name provided, if the class isn't there, return NULL.
      *
      * @param className the class name.
-     * @return the JavaClass instance, or null.
+     * @return The JavaClass instance, or null.
      */
     JavaClass findClass(String className);
 
     /**
      * Gets the ClassPath associated with this Repository.
      *
-     * @return the ClassPath.
+     * @return The ClassPath.
      */
     ClassPath getClassPath();
 
@@ -52,7 +52,7 @@ public interface Repository {
      * Finds the JavaClass instance for the given run-time class object.
      *
      * @param clazz the class.
-     * @return the JavaClass instance.
+     * @return The JavaClass instance.
      * @throws ClassNotFoundException if the class can't be found.
      */
     JavaClass loadClass(Class<?> clazz) throws ClassNotFoundException;
@@ -61,7 +61,7 @@ public interface Repository {
      * Finds the class with the name provided, if the class isn't there, make an attempt to load it.
      *
      * @param className the class name.
-     * @return the JavaClass instance.
+     * @return The JavaClass instance.
      * @throws ClassNotFoundException if the class can't be found.
      */
     JavaClass loadClass(String className) throws ClassNotFoundException;

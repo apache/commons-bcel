@@ -119,7 +119,7 @@ public final class StackMapType implements Node, Cloneable {
     /**
      * Gets the class name of this StackMapType from the constant pool at index position.
      *
-     * @return the fully qualified name of the class for this StackMapType.
+     * @return The fully qualified name of the class for this StackMapType.
      * @since 6.8.0
      */
     public String getClassName() {
@@ -148,7 +148,7 @@ public final class StackMapType implements Node, Cloneable {
     /**
      * Gets the type.
      *
-     * @return the type.
+     * @return The type.
      */
     public byte getType() {
         return type;

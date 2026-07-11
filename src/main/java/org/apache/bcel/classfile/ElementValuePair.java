@@ -63,7 +63,7 @@ public class ElementValuePair {
     /**
      * Gets the name index.
      *
-     * @return the name index.
+     * @return The name index.
      */
     public int getNameIndex() {
         return elementNameIndex;
@@ -72,7 +72,7 @@ public class ElementValuePair {
     /**
      * Gets the name string.
      *
-     * @return the name string.
+     * @return The name string.
      */
     public String getNameString() {
         return constantPool.getConstantUtf8(elementNameIndex).getBytes();
@@ -81,7 +81,7 @@ public class ElementValuePair {
     /**
      * Gets the value.
      *
-     * @return the element value.
+     * @return The element value.
      */
     public final ElementValue getValue() {
         return elementValue;

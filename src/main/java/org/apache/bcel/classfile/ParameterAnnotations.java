@@ -104,7 +104,7 @@ public abstract class ParameterAnnotations extends Attribute implements Iterable
     /**
      * Gets the parameter annotation entries.
      *
-     * @return the array of parameter annotation entries in this parameter annotation.
+     * @return The array of parameter annotation entries in this parameter annotation.
      */
     public ParameterAnnotationEntry[] getParameterAnnotationEntries() {
         return parameterAnnotationTable;
@@ -113,7 +113,7 @@ public abstract class ParameterAnnotations extends Attribute implements Iterable
     /**
      * Gets the parameter annotation table.
      *
-     * @return the parameter annotation entry table.
+     * @return The parameter annotation entry table.
      */
     public final ParameterAnnotationEntry[] getParameterAnnotationTable() {
         return parameterAnnotationTable;

@@ -685,7 +685,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Gets the argument name at the specified index.
      *
      * @param i the argument index.
-     * @return the argument name.
+     * @return The argument name.
      */
     public String getArgumentName(final int i) {
         return argNames[i];
@@ -704,7 +704,7 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Gets the argument type at the specified index.
      *
      * @param i the argument index.
-     * @return the argument type.
+     * @return The argument type.
      */
     public Type getArgumentType(final int i) {
         return argTypes[i];
@@ -778,7 +778,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     /**
      * Gets the instruction list.
      *
-     * @return the instruction list.
+     * @return The instruction list.
      */
     public InstructionList getInstructionList() {
         return il;
@@ -858,7 +858,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     /**
      * Gets the maximum number of local variables.
      *
-     * @return the maximum number of local variables.
+     * @return The maximum number of local variables.
      */
     public int getMaxLocals() {
         return maxLocals;
@@ -867,7 +867,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     /**
      * Gets the maximum stack size.
      *
-     * @return the maximum stack size.
+     * @return The maximum stack size.
      */
     public int getMaxStack() {
         return maxStack;
@@ -965,7 +965,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     /**
      * Gets the return type.
      *
-     * @return the return type.
+     * @return The return type.
      */
     public Type getReturnType() {
         return getType();

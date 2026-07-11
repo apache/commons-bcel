@@ -38,7 +38,7 @@ public interface LoadClass {
      * {@code int[][]}.
      *
      * @param cpg A ConstantPoolGen.
-     * @return the type associated with this instruction.
+     * @return The type associated with this instruction.
      * @see #getLoadClassType(ConstantPoolGen)
      */
     Type getType(ConstantPoolGen cpg);

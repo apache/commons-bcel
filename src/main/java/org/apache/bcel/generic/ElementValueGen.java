@@ -114,7 +114,7 @@ public abstract class ElementValueGen {
      *
      * @param dis the data input stream.
      * @param cpGen the constant pool.
-     * @return the element value read.
+     * @return The element value read.
      * @throws IOException if an I/O error occurs.
      */
     public static ElementValueGen readElementValue(final DataInput dis, final ConstantPoolGen cpGen) throws IOException {
@@ -193,7 +193,7 @@ public abstract class ElementValueGen {
     /**
      * Gets the constant pool.
      *
-     * @return the constant pool.
+     * @return The constant pool.
      */
     protected ConstantPoolGen getConstantPool() {
         return cpGen;
@@ -209,7 +209,7 @@ public abstract class ElementValueGen {
     /**
      * Gets the element value type.
      *
-     * @return the element value type.
+     * @return The element value type.
      */
     public int getElementValueType() {
         return type;

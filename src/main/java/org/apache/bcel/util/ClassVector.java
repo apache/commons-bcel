@@ -62,7 +62,7 @@ public class ClassVector implements Serializable {
      * Gets the JavaClass at the specified index.
      *
      * @param index the index.
-     * @return the JavaClass at the specified index.
+     * @return The JavaClass at the specified index.
      */
     public JavaClass elementAt(final int index) {
         return vec.get(index);

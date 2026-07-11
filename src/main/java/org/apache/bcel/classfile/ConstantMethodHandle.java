@@ -93,7 +93,7 @@ public final class ConstantMethodHandle extends Constant {
     /**
      * Gets the reference index.
      *
-     * @return the reference index.
+     * @return The reference index.
      */
     public int getReferenceIndex() {
         return referenceIndex;
@@ -102,7 +102,7 @@ public final class ConstantMethodHandle extends Constant {
     /**
      * Gets the reference kind.
      *
-     * @return the reference kind.
+     * @return The reference kind.
      */
     public int getReferenceKind() {
         return referenceKind;

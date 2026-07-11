@@ -135,7 +135,7 @@ public final class SWITCH implements CompoundInstruction {
     /**
      * Gets the instruction.
      *
-     * @return the instruction.
+     * @return The instruction.
      */
     public Instruction getInstruction() {
         return instruction;

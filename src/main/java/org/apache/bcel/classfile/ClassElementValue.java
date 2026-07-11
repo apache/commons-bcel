@@ -53,7 +53,7 @@ public class ClassElementValue extends ElementValue {
     /**
      * Gets the class string.
      *
-     * @return the class string.
+     * @return The class string.
      */
     public String getClassString() {
         return super.getConstantPool().getConstantUtf8(idx).getBytes();
@@ -62,7 +62,7 @@ public class ClassElementValue extends ElementValue {
     /**
      * Gets the index.
      *
-     * @return the index.
+     * @return The index.
      */
     public int getIndex() {
         return idx;

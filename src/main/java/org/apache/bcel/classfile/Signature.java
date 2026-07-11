@@ -163,7 +163,7 @@ public final class Signature extends Attribute {
      * Translates a signature string.
      *
      * @param s the signature string.
-     * @return the translated signature.
+     * @return The translated signature.
      */
     public static String translate(final String s) {
         // System.out.println("Sig:" + s);

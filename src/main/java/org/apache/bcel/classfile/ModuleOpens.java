@@ -99,7 +99,7 @@ public final class ModuleOpens implements Cloneable, Node {
     /**
      * Gets the flags for this ModuleOpens.
      *
-     * @return the opensFlags.
+     * @return The opensFlags.
      * @since 6.10.0
      */
     public int getOpensFlags() {
@@ -110,7 +110,7 @@ public final class ModuleOpens implements Cloneable, Node {
      * Gets the opened package name.
      *
      * @param constantPool the constant pool from the ClassFile.
-     * @return the opened package name.
+     * @return The opened package name.
      * @since 6.10.0
      */
     public String getPackageName(final ConstantPool constantPool) {

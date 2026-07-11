@@ -254,14 +254,14 @@ public class InstructionFinder {
     /**
      * Gets the inquired instruction list.
      *
-     * @return the inquired instruction list.
+     * @return The inquired instruction list.
      */
     public final InstructionList getInstructionList() {
         return il;
     }
 
     /**
-     * @return the matched piece of code as an array of instruction (handles).
+     * @return The matched piece of code as an array of instruction (handles).
      */
     private InstructionHandle[] getMatch(final int matchedFrom, final int matchLength) {
         return Arrays.copyOfRange(handles, matchedFrom, matchedFrom + matchLength);

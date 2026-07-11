@@ -61,7 +61,7 @@ public class ClassSet {
     /**
      * Gets the class names in the set.
      *
-     * @return the class names in the set.
+     * @return The class names in the set.
      */
     public String[] getClassNames() {
         return map.keySet().toArray(ArrayUtils.EMPTY_STRING_ARRAY);

@@ -49,14 +49,14 @@ public interface InstructionContext {
     /**
      * Returns the exception handlers that protect this instruction. They are special control flow successors.
      *
-     * @return the exception handlers.
+     * @return The exception handlers.
      */
     ExceptionHandler[] getExceptionHandlers();
 
     /**
      * Gets the incoming frame.
      *
-     * @return the incoming frame.
+     * @return The incoming frame.
      */
     Frame getInFrame();
 
@@ -72,7 +72,7 @@ public interface InstructionContext {
      * ArrayList) first.</B>
      *
      * @param executionPredecessors the execution predecessors.
-     * @return the outgoing frame.
+     * @return The outgoing frame.
      * @see #execute(Frame, ArrayList, InstConstraintVisitor, ExecutionVisitor)
      */
     Frame getOutFrame(ArrayList<InstructionContext> executionPredecessors);
@@ -80,7 +80,7 @@ public interface InstructionContext {
     /**
      * Returns the usual control flow successors.
      *
-     * @return the successors.
+     * @return The successors.
      * @see #getExceptionHandlers()
      */
     InstructionContext[] getSuccessors();
@@ -89,7 +89,7 @@ public interface InstructionContext {
      * The getTag and setTag methods may be used for temporary flagging, such as graph coloring. Nothing in the
      * InstructionContext object depends on the value of the tag. JustIce does not use it.
      *
-     * @return the tag value.
+     * @return The tag value.
      * @see #setTag(int tag)
      */
     int getTag();

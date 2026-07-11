@@ -75,7 +75,7 @@ public class VerifierFactory {
      * transparently created.
      *
      * @param fullyQualifiedClassName the fully qualified class name.
-     * @return the (only) verifier responsible for the class with the given name.
+     * @return The (only) verifier responsible for the class with the given name.
      */
     public static Verifier getVerifier(final String fullyQualifiedClassName) {
         return MAP.computeIfAbsent(fullyQualifiedClassName, k -> {

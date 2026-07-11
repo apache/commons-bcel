@@ -101,7 +101,7 @@ public final class ModuleRequires implements Cloneable, Node {
     /**
      * Gets the flags for this ModuleRequires.
      *
-     * @return the requiresFlags.
+     * @return The requiresFlags.
      * @since 6.10.0
      */
     public int getRequiresFlags() {

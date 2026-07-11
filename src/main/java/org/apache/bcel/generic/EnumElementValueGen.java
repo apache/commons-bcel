@@ -105,7 +105,7 @@ public class EnumElementValueGen extends ElementValueGen {
     /**
      * Gets the enum type string.
      *
-     * @return the enum type string.
+     * @return The enum type string.
      */
     public String getEnumTypeString() {
         // Constant cc = getConstantPool().getConstant(typeIdx);
@@ -120,7 +120,7 @@ public class EnumElementValueGen extends ElementValueGen {
     /**
      * Gets the enum value string.
      *
-     * @return the enum value string.
+     * @return The enum value string.
      */
     public String getEnumValueString() {
         return ((ConstantUtf8) getConstantPool().getConstant(valueIdx)).getBytes();
@@ -133,7 +133,7 @@ public class EnumElementValueGen extends ElementValueGen {
     /**
      * Gets the type index.
      *
-     * @return the type index.
+     * @return The type index.
      */
     public int getTypeIndex() {
         return typeIdx;
@@ -142,7 +142,7 @@ public class EnumElementValueGen extends ElementValueGen {
     /**
      * Gets the value index.
      *
-     * @return the value index.
+     * @return The value index.
      */
     public int getValueIndex() {
         return valueIdx;

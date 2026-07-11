@@ -83,7 +83,7 @@ public class AnnotationDefault extends Attribute {
     /**
      * Gets the default value.
      *
-     * @return the default value.
+     * @return The default value.
      */
     public final ElementValue getDefaultValue() {
         return defaultValue;

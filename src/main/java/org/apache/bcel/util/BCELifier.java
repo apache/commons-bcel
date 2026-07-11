@@ -130,7 +130,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
      *
      * @param flags the flags field to interpret.
      * @param location the item type.
-     * @return the formatted string.
+     * @return The formatted string.
      * @since 6.0 made public
      */
     public static String printFlags(final int flags, final FLAGS location) {

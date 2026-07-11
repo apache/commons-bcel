@@ -43,7 +43,7 @@ public class AnnotationEntry implements Node {
      * Creates annotation entries from attributes.
      *
      * @param attributes the attributes.
-     * @return the annotation entries.
+     * @return The annotation entries.
      */
     public static AnnotationEntry[] createAnnotationEntries(final Attribute[] attributes) {
         // Find attributes that contain annotation data
@@ -57,7 +57,7 @@ public class AnnotationEntry implements Node {
      * @param input the input stream.
      * @param constantPool the constant pool.
      * @param isRuntimeVisible whether the annotation is runtime visible.
-     * @return the entry.
+     * @return The entry.
      * @throws IOException if an I/O error occurs.
      */
     public static AnnotationEntry read(final DataInput input, final ConstantPool constantPool, final boolean isRuntimeVisible) throws IOException {
@@ -130,7 +130,7 @@ public class AnnotationEntry implements Node {
     /**
      * Gets the annotation type name.
      *
-     * @return the annotation type name.
+     * @return The annotation type name.
      */
     public String getAnnotationType() {
         return constantPool.getConstantUtf8(typeIndex).getBytes();
@@ -139,7 +139,7 @@ public class AnnotationEntry implements Node {
     /**
      * Gets the annotation type index.
      *
-     * @return the annotation type index.
+     * @return The annotation type index.
      */
     public int getAnnotationTypeIndex() {
         return typeIndex;
@@ -148,7 +148,7 @@ public class AnnotationEntry implements Node {
     /**
      * Gets the constant pool.
      *
-     * @return the constant pool.
+     * @return The constant pool.
      */
     public ConstantPool getConstantPool() {
         return constantPool;
@@ -157,7 +157,7 @@ public class AnnotationEntry implements Node {
     /**
      * Gets the element value pairs in this annotation entry.
      *
-     * @return the element value pairs in this annotation entry.
+     * @return The element value pairs in this annotation entry.
      */
     public ElementValuePair[] getElementValuePairs() {
         // TODO return List
@@ -167,7 +167,7 @@ public class AnnotationEntry implements Node {
     /**
      * Gets the number of element value pairs in this annotation entry.
      *
-     * @return the number of element value pairs in this annotation entry.
+     * @return The number of element value pairs in this annotation entry.
      */
     public final int getNumElementValuePairs() {
         return elementValuePairs.size();
@@ -176,7 +176,7 @@ public class AnnotationEntry implements Node {
     /**
      * Gets the type index.
      *
-     * @return the type index.
+     * @return The type index.
      */
     public int getTypeIndex() {
         return typeIndex;
