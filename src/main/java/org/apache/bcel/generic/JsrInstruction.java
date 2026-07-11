@@ -46,7 +46,7 @@ public abstract class JsrInstruction extends BranchInstruction implements Uncond
      * JsrInstruction object must not be shared between multiple InstructionHandle objects!</B> Formally, there must not be
      * InstructionHandle objects i, j where i != j and i.getInstruction() == this == j.getInstruction().
      *
-     * @return an InstructionHandle to the "next" instruction that will be executed when RETurned from a subroutine.
+     * @return An InstructionHandle to the "next" instruction that will be executed when RETurned from a subroutine.
      */
     public InstructionHandle physicalSuccessor() {
         InstructionHandle ih = super.getTarget();

@@ -66,7 +66,7 @@ public class ConstantPoolGen {
      * to keep distinct triples distinct.
      *
      * @param parts the key parts.
-     * @return a collision-free key.
+     * @return A collision-free key.
      */
     private static String toKey(final String... parts) {
         final StringBuilder buf = new StringBuilder();

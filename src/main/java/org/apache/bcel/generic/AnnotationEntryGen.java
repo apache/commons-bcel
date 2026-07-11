@@ -303,7 +303,7 @@ public class AnnotationEntryGen {
     /**
      * Retrieves an immutable version of this AnnotationGen.
      *
-     * @return an immutable version of this AnnotationGen.
+     * @return An immutable version of this AnnotationGen.
      */
     public AnnotationEntry getAnnotation() {
         final AnnotationEntry a = new AnnotationEntry(typeIndex, cpool.getConstantPool(), isRuntimeVisible);
@@ -368,7 +368,7 @@ public class AnnotationEntryGen {
     /**
      * Returns a short string representation of this annotation.
      *
-     * @return a short string representation of this annotation.
+     * @return A short string representation of this annotation.
      */
     public String toShortString() {
         final StringBuilder s = new StringBuilder();

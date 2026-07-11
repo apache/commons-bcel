@@ -90,7 +90,7 @@ public class ElementValuePair {
     /**
      * Gets a short string representation.
      *
-     * @return a short string representation.
+     * @return A short string representation.
      */
     public String toShortString() {
         final StringBuilder result = new StringBuilder();

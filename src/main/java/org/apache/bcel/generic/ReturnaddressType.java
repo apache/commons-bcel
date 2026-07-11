@@ -76,7 +76,7 @@ public class ReturnaddressType extends Type {
     }
 
     /**
-     * @return a hash code value for the object.
+     * @return A hash code value for the object.
      */
     @Override
     public int hashCode() {

@@ -32,7 +32,7 @@ public class ObjectType extends ReferenceType {
      * Constructs a new instance.
      *
      * @param className fully qualified class name, for example {@link String}.
-     * @return a new instance.
+     * @return A new instance.
      * @since 6.0
      */
     public static ObjectType getInstance(final String className) {
@@ -86,7 +86,7 @@ public class ObjectType extends ReferenceType {
     /**
      * Gets the hash code.
      *
-     * @return a hash code value for the object.
+     * @return A hash code value for the object.
      */
     @Override
     public int hashCode() {

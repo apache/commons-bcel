@@ -82,7 +82,7 @@ public abstract class ElementValueGen {
      * @param value the element value to copy.
      * @param cpool the constant pool generator.
      * @param copyPoolEntries whether to copy pool entries.
-     * @return a copy of the element value.
+     * @return A copy of the element value.
      */
     public static ElementValueGen copy(final ElementValue value, final ConstantPoolGen cpool, final boolean copyPoolEntries) {
         switch (value.getElementValueType()) {
@@ -202,7 +202,7 @@ public abstract class ElementValueGen {
     /**
      * Subtypes return an immutable variant of the ElementValueGen.
      *
-     * @return an immutable variant of the ElementValueGen.
+     * @return An immutable variant of the ElementValueGen.
      */
     public abstract ElementValue getElementValue();
 
@@ -218,7 +218,7 @@ public abstract class ElementValueGen {
     /**
      * Returns a string representation of the element value.
      *
-     * @return a string representation of the element value.
+     * @return A string representation of the element value.
      */
     public abstract String stringifyValue();
 }

@@ -126,7 +126,7 @@ public final class ConstantUtf8 extends Constant {
      * </p>
      *
      * @param value the value.
-     * @return a new or cached instance of the given value.
+     * @return A new or cached instance of the given value.
      * @since 6.0
      */
     public static synchronized ConstantUtf8 getCachedInstance(final String value) {
@@ -154,7 +154,7 @@ public final class ConstantUtf8 extends Constant {
      * </p>
      *
      * @param dataInput the value.
-     * @return a new or cached instance of the given value.
+     * @return A new or cached instance of the given value.
      * @throws IOException if an I/O error occurs.
      * @since 6.0
      */
@@ -169,7 +169,7 @@ public final class ConstantUtf8 extends Constant {
      * </p>
      *
      * @param value the value.
-     * @return a new or cached instance of the given value.
+     * @return A new or cached instance of the given value.
      * @since 6.0
      */
     public static ConstantUtf8 getInstance(final String value) {

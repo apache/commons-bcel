@@ -194,7 +194,7 @@ public class AnnotationEntry implements Node {
     /**
      * Gets a short string representation of this annotation.
      *
-     * @return a short string representation of this annotation.
+     * @return A short string representation of this annotation.
      */
     public String toShortString() {
         final StringBuilder result = new StringBuilder();

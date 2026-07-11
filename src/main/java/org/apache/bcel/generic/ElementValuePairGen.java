@@ -102,7 +102,7 @@ public class ElementValuePairGen {
     /**
      * Retrieves an immutable version of this ElementValuePairGen.
      *
-     * @return an immutable ElementValuePair.
+     * @return An immutable ElementValuePair.
      */
     public ElementValuePair getElementNameValuePair() {
         final ElementValue immutableValue = value.getElementValue();

@@ -65,7 +65,7 @@ public class UninitializedObjectType extends ReferenceType implements Constants 
     }
 
     /**
-     * @return a hash code value for the object.
+     * @return A hash code value for the object.
      */
     @Override
     public int hashCode() {

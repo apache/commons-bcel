@@ -635,7 +635,7 @@ public class InstructionFactory implements InstructionConstants {
      * @param name name of the referenced field.
      * @param type type of field.
      * @param kind how to access, that is, GETFIELD, PUTFIELD, GETSTATIC, PUTSTATIC.
-     * @return a field instruction.
+     * @return A field instruction.
      * @see Const
      */
     public FieldInstruction createFieldAccess(final String className, final String name, final Type type, final short kind) {
@@ -784,7 +784,7 @@ public class InstructionFactory implements InstructionConstants {
      *
      * @param t the array element type.
      * @param dim the array dimensions.
-     * @return an instruction that creates the corresponding array at runtime, for example is an AllocationInstruction.
+     * @return An instruction that creates the corresponding array at runtime, for example is an AllocationInstruction.
      */
     public Instruction createNewArray(final Type t, final short dim) {
         if (dim == 1) {

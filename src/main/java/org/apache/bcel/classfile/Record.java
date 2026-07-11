@@ -95,7 +95,7 @@ public final class Record extends Attribute {
     /**
      * Copies this instance and its components.
      *
-     * @return a deep copy of this instance and its components.
+     * @return A deep copy of this instance and its components.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {

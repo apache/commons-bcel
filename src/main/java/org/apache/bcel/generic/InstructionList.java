@@ -642,7 +642,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Gets an array of instructions without target information for branch instructions.
      *
-     * @return an array of instructions without target information for branch instructions.
+     * @return An array of instructions without target information for branch instructions.
      */
     public Instruction[] getInstructions() {
         final List<Instruction> instructions = new ArrayList<>();

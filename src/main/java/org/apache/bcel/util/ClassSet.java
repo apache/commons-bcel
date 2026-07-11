@@ -79,7 +79,7 @@ public class ClassSet {
     /**
      * Converts the set to an array.
      *
-     * @return an array of JavaClass objects.
+     * @return An array of JavaClass objects.
      */
     public JavaClass[] toArray() {
         return map.values().toArray(JavaClass.EMPTY_ARRAY);

@@ -89,7 +89,7 @@ public class AnnotationElementValueGen extends ElementValueGen {
     /**
      * Returns an immutable variant of this AnnotationElementValueGen.
      *
-     * @return an immutable variant of this AnnotationElementValueGen.
+     * @return An immutable variant of this AnnotationElementValueGen.
      */
     @Override
     public ElementValue getElementValue() {

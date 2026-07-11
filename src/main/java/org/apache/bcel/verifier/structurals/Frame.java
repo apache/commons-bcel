@@ -88,7 +88,7 @@ public class Frame {
     /**
      * Creates a clone of this frame.
      *
-     * @return a clone of this frame.
+     * @return A clone of this frame.
      */
     @Override
     protected Object clone() {
@@ -113,7 +113,7 @@ public class Frame {
     /**
      * Gets a clone of this frame.
      *
-     * @return a clone of this frame.
+     * @return A clone of this frame.
      */
     public Frame getClone() {
         return (Frame) clone();
@@ -138,7 +138,7 @@ public class Frame {
     }
 
     /**
-     * @return a hash code value for the object.
+     * @return A hash code value for the object.
      */
     @Override
     public int hashCode() {

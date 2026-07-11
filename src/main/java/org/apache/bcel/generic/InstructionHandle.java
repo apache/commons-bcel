@@ -324,7 +324,7 @@ public class InstructionHandle {
     /**
      * Gets a string representation of the contained instruction.
      *
-     * @return a string representation of the contained instruction.
+     * @return A string representation of the contained instruction.
      */
     @Override
     public String toString() {
@@ -335,7 +335,7 @@ public class InstructionHandle {
      * Gets a verbose string representation of the contained instruction.
      *
      * @param verbose whether to be verbose.
-     * @return a (verbose) string representation of the contained instruction.
+     * @return A (verbose) string representation of the contained instruction.
      */
     public String toString(final boolean verbose) {
         return Utility.format(i_position, 4, false, ' ') + ": " + instruction.toString(verbose);

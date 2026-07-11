@@ -109,7 +109,7 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
      * say for sure the reference will be.
      *
      * @param cpg the ConstantPoolGen used to create the instruction.
-     * @return an ObjectType for {@link Object}.
+     * @return An ObjectType for {@link Object}.
      * @since 6.1
      */
     @Override

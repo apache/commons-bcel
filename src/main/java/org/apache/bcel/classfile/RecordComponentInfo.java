@@ -135,7 +135,7 @@ public class RecordComponentInfo implements Node {
     /**
      * Converts this instance to a String suitable for debugging.
      *
-     * @return a String suitable for debugging.
+     * @return A String suitable for debugging.
      */
     @Override
     public String toString() {

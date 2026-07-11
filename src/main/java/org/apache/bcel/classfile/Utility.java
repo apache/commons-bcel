@@ -1062,7 +1062,7 @@ public abstract class Utility {
      * Converts a path to a package name.
      *
      * @param str the source path.
-     * @return a package name.
+     * @return A package name.
      * @since 6.6.0
      */
     public static String pathToPackage(final String str) {

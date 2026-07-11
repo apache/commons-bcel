@@ -134,7 +134,7 @@ public final class ArrayType extends ReferenceType {
     }
 
     /**
-     * @return a hash code value for the object.
+     * @return A hash code value for the object.
      */
     @Override
     public int hashCode() {

@@ -88,7 +88,7 @@ public class ClassVector implements Serializable {
     /**
      * Converts the vector to an array.
      *
-     * @return an array of JavaClass objects.
+     * @return An array of JavaClass objects.
      */
     public JavaClass[] toArray() {
         return vec.toArray(JavaClass.EMPTY_ARRAY);

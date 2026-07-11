@@ -93,7 +93,7 @@ public class OperandStack implements Cloneable {
     /**
      * Returns a (typed!) clone of this.
      *
-     * @return a clone of this operand stack.
+     * @return A clone of this operand stack.
      * @see #clone()
      */
     public OperandStack getClone() {
@@ -103,7 +103,7 @@ public class OperandStack implements Cloneable {
     /**
      * Gets the hash code.
      *
-     * @return a hash code value for the object.
+     * @return A hash code value for the object.
      */
     @Override
     public int hashCode() {

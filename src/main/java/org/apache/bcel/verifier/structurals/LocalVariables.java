@@ -86,14 +86,14 @@ public class LocalVariables implements Cloneable {
     /**
      * Returns a (correctly typed) clone of this object. This is equivalent to ((LocalVariables) this.clone()).
      *
-     * @return a (correctly typed) clone of this object.
+     * @return A (correctly typed) clone of this object.
      */
     public LocalVariables getClone() {
         return (LocalVariables) clone();
     }
 
     /**
-     * @return a hash code value for the object.
+     * @return A hash code value for the object.
      */
     @Override
     public int hashCode() {

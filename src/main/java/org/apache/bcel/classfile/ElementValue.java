@@ -100,7 +100,7 @@ public abstract class ElementValue {
      *
      * @param input Raw data input.
      * @param cpool Constant pool.
-     * @return a new ElementValue.
+     * @return A new ElementValue.
      * @throws IOException if an I/O error occurs.
      */
     public static ElementValue readElementValue(final DataInput input, final ConstantPool cpool) throws IOException {
@@ -155,7 +155,7 @@ public abstract class ElementValue {
      * @param input Raw data input.
      * @param cpool Constant pool.
      * @param arrayNesting level of current array nesting.
-     * @return a new ElementValue.
+     * @return A new ElementValue.
      * @throws IOException if an I/O error occurs.
      * @since 6.7.0
      */
@@ -226,14 +226,14 @@ public abstract class ElementValue {
     /**
      * Returns a string representation of the element value.
      *
-     * @return a string representation of the element value.
+     * @return A string representation of the element value.
      */
     public abstract String stringifyValue();
 
     /**
      * Returns a short string representation of the element value.
      *
-     * @return a short string representation of the element value.
+     * @return A short string representation of the element value.
      */
     public String toShortString() {
         return stringifyValue();
@@ -242,7 +242,7 @@ public abstract class ElementValue {
     /**
      * Returns a string representation of the element value.
      *
-     * @return a string representation of the element value.
+     * @return A string representation of the element value.
      */
     @Override
     public String toString() {

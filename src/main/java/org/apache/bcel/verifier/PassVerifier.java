@@ -100,7 +100,7 @@ public abstract class PassVerifier {
      * this result may be returned after every invocation of this method instead of running the verification pass anew;
      * likewise with the result of getMessages().
      *
-     * @return a VerificationResult.
+     * @return A VerificationResult.
      * @see #getMessages()
      * @see #addMessage(String)
      */
