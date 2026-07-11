@@ -551,7 +551,7 @@ public class Subroutines {
      * Returns the Subroutine object associated with the given leader (that is, the first instruction of the subroutine).
      * You must not use this to get the top-level instructions modeled as a Subroutine object.
      *
-     * @param leader the leader instruction handle.
+     * @param leader The leader instruction handle.
      * @return The Subroutine object.
      * @see #getTopLevel()
      */
@@ -614,7 +614,7 @@ public class Subroutines {
      * using getSubroutine(InstructionHandle). Returns 'null' if the given InstructionHandle lies in so-called 'dead code',
      * for example code that can never be executed.
      *
-     * @param any the instruction handle.
+     * @param any The instruction handle.
      * @return The Subroutine object or null.
      * @see #getSubroutine(InstructionHandle)
      * @see #getTopLevel()

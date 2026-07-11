@@ -172,7 +172,7 @@ public class BootstrapMethod implements Cloneable {
     /**
      * Gets a resolved string representation.
      *
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      * @return Resolved string representation.
      */
     public final String toString(final ConstantPool constantPool) {

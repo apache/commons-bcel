@@ -38,7 +38,7 @@ public class INSTANCEOF extends CPInstruction implements LoadClass, ExceptionThr
     /**
      * Constructs an INSTANCEOF instruction.
      *
-     * @param index the constant pool index.
+     * @param index The constant pool index.
      */
     public INSTANCEOF(final int index) {
         super(org.apache.bcel.Const.INSTANCEOF, index);

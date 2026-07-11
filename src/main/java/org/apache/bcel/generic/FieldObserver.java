@@ -27,7 +27,7 @@ public interface FieldObserver {
     /**
      * Notifies observer of a field change.
      *
-     * @param field the field that changed.
+     * @param field The field that changed.
      */
     void notify(FieldGen field);
 }

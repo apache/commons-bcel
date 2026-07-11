@@ -97,7 +97,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
     /**
      * Gets the Long object.
      *
-     * @param cp the constant pool (not used).
+     * @param cp The constant pool (not used).
      * @return Long object.
      */
     @Override
@@ -108,7 +108,7 @@ public final class ConstantLong extends Constant implements ConstantObject {
     /**
      * Sets the raw bytes that represent the long value.
      *
-     * @param bytes the raw bytes that represent the long value.
+     * @param bytes The raw bytes that represent the long value.
      */
     public void setBytes(final long bytes) {
         this.bytes = bytes;

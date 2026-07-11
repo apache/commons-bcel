@@ -3406,7 +3406,7 @@ public final class Const {
     /**
      * Gets the opcode name at the given index.
      *
-     * @param index the index.
+     * @param index The index.
      * @return The opcode name.
      * @since 6.0
      */
@@ -3417,8 +3417,8 @@ public final class Const {
     /**
      * Gets the operand type.
      *
-     * @param opcode the opcode.
-     * @param index  the index.
+     * @param opcode The opcode.
+     * @param index  The index.
      * @return The operand type.
      * @since 6.0
      */
@@ -3429,7 +3429,7 @@ public final class Const {
     /**
      * Gets the operand type count.
      *
-     * @param opcode the opcode.
+     * @param opcode The opcode.
      * @return The operand type count.
      * @since 6.0
      */
@@ -3440,7 +3440,7 @@ public final class Const {
     /**
      * Gets the number of words produced onto operand stack.
      *
-     * @param index the index.
+     * @param index The index.
      * @return Number of words produced onto operand stack.
      * @since 6.0
      */
@@ -3451,7 +3451,7 @@ public final class Const {
     /**
      * Gets the short type name at the given index.
      *
-     * @param index the index.
+     * @param index The index.
      * @return The short type name.
      * @since 6.0
      */
@@ -3462,7 +3462,7 @@ public final class Const {
     /**
      * The primitive type names corresponding to the T_XX constants, for example, TYPE_NAMES[T_INT] = "int".
      *
-     * @param index the index.
+     * @param index The index.
      * @return The type name.
      * @since 6.0
      */

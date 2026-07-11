@@ -97,7 +97,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     /**
      * Gets the Double object.
      *
-     * @param cp the constant pool (not used).
+     * @param cp The constant pool (not used).
      * @return Double object.
      */
     @Override
@@ -108,7 +108,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     /**
      * Sets the raw bytes that represent the double value.
      *
-     * @param bytes the raw bytes that represent the double value.
+     * @param bytes The raw bytes that represent the double value.
      */
     public void setBytes(final double bytes) {
         this.bytes = bytes;

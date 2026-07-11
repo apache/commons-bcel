@@ -37,7 +37,7 @@ public class ParameterAnnotationEntry implements Node {
     /**
      * Creates parameter annotation entries from attributes.
      *
-     * @param attributes the attributes.
+     * @param attributes The attributes.
      * @return The parameter annotation entries.
      */
     public static ParameterAnnotationEntry[] createParameterAnnotationEntries(final Attribute[] attributes) {
@@ -64,7 +64,7 @@ public class ParameterAnnotationEntry implements Node {
      * Constructs object from input stream.
      *
      * @param input Input stream.
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      * @param isRuntimeVisible whether the contained annotations are runtime visible.
      * @throws IOException if an I/O error occurs.
      */

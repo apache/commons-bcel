@@ -98,7 +98,7 @@ public final class ConstantMethodType extends Constant {
     /**
      * Sets the descriptor index.
      *
-     * @param descriptorIndex the descriptor index.
+     * @param descriptorIndex The descriptor index.
      */
     public void setDescriptorIndex(final int descriptorIndex) {
         this.descriptorIndex = descriptorIndex;

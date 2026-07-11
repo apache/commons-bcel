@@ -194,7 +194,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Add observer for this object.
      *
-     * @param o the observer to add.
+     * @param o The observer to add.
      */
     public void addObserver(final InstructionListObserver o) {
         if (observers == null) {
@@ -390,7 +390,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Checks if the list contains the given instruction.
      *
-     * @param i the instruction to check.
+     * @param i The instruction to check.
      * @return true if the list contains the instruction.
      */
     public boolean contains(final Instruction i) {
@@ -400,7 +400,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Checks if the list contains the given instruction handle.
      *
-     * @param i the instruction handle to check.
+     * @param i The instruction handle to check.
      * @return true if the list contains the instruction handle.
      */
     public boolean contains(final InstructionHandle i) {
@@ -959,8 +959,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Redirect all references from oldTarget to newTarget, that is, update targets of branch instructions.
      *
-     * @param oldTarget the old target instruction handle.
-     * @param newTarget the new target instruction handle.
+     * @param oldTarget The old target instruction handle.
+     * @param newTarget The new target instruction handle.
      */
     public void redirectBranches(final InstructionHandle oldTarget, final InstructionHandle newTarget) {
         for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {
@@ -987,8 +987,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * Redirect all references of exception handlers from oldTarget to newTarget.
      *
      * @param exceptions array of exception handlers.
-     * @param oldTarget the old target instruction handle.
-     * @param newTarget the new target instruction handle.
+     * @param oldTarget The old target instruction handle.
+     * @param newTarget The new target instruction handle.
      * @see MethodGen
      */
     public void redirectExceptionHandlers(final CodeExceptionGen[] exceptions, final InstructionHandle oldTarget, final InstructionHandle newTarget) {
@@ -1009,8 +1009,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * Redirect all references of local variables from oldTarget to newTarget.
      *
      * @param lg array of local variables.
-     * @param oldTarget the old target instruction handle.
-     * @param newTarget the new target instruction handle.
+     * @param oldTarget The old target instruction handle.
+     * @param newTarget The new target instruction handle.
      * @see MethodGen
      */
     public void redirectLocalVariables(final LocalVariableGen[] lg, final InstructionHandle oldTarget, final InstructionHandle newTarget) {
@@ -1081,7 +1081,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Remove observer for this object.
      *
-     * @param o the observer to remove.
+     * @param o The observer to remove.
      */
     public void removeObserver(final InstructionListObserver o) {
         if (observers != null) {
@@ -1092,8 +1092,8 @@ public class InstructionList implements Iterable<InstructionHandle> {
     /**
      * Replace all references to the old constant pool with references to the new constant pool.
      *
-     * @param oldCp the old constant pool.
-     * @param newCp the new constant pool.
+     * @param oldCp The old constant pool.
+     * @param newCp The new constant pool.
      */
     public void replaceConstantPool(final ConstantPoolGen oldCp, final ConstantPoolGen newCp) {
         for (InstructionHandle ih = start; ih != null; ih = ih.getNext()) {

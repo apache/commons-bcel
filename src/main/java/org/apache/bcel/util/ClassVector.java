@@ -52,7 +52,7 @@ public class ClassVector implements Serializable {
     /**
      * Adds a JavaClass to the vector.
      *
-     * @param clazz the JavaClass to add.
+     * @param clazz The JavaClass to add.
      */
     public void addElement(final JavaClass clazz) {
         vec.add(clazz);
@@ -61,7 +61,7 @@ public class ClassVector implements Serializable {
     /**
      * Gets the JavaClass at the specified index.
      *
-     * @param index the index.
+     * @param index The index.
      * @return The JavaClass at the specified index.
      */
     public JavaClass elementAt(final int index) {
@@ -79,7 +79,7 @@ public class ClassVector implements Serializable {
     /**
      * Removes the JavaClass at the specified index.
      *
-     * @param index the index.
+     * @param index The index.
      */
     public void removeElementAt(final int index) {
         vec.remove(index);

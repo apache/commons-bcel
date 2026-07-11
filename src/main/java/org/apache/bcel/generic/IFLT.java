@@ -36,7 +36,7 @@ public class IFLT extends IfInstruction {
     /**
      * Constructs an IFLT instruction.
      *
-     * @param target the target instruction.
+     * @param target The target instruction.
      */
     public IFLT(final InstructionHandle target) {
         super(org.apache.bcel.Const.IFLT, target);

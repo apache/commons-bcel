@@ -97,7 +97,7 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
     /**
      * Sets the instruction handle.
      *
-     * @param instructionHandle the instruction handle to set.
+     * @param instructionHandle The instruction handle to set.
      */
     public void setInstruction(final InstructionHandle instructionHandle) { // TODO could be package-protected?
         Objects.requireNonNull(instructionHandle, "instructionHandle");
@@ -108,7 +108,7 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
     /**
      * Sets the source line number.
      *
-     * @param srcLine the source line number to set.
+     * @param srcLine The source line number to set.
      */
     public void setSourceLine(final int srcLine) { // TODO could be package-protected?
         this.srcLine = srcLine;

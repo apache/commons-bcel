@@ -63,7 +63,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     /**
      * Constructs a FieldGenOrMethodGen.
      *
-     * @param accessFlags the access flags.
+     * @param accessFlags The access flags.
      * @since 6.0
      */
     protected FieldGenOrMethodGen(final int accessFlags) { // TODO could this be package protected?
@@ -73,7 +73,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     /**
      * Adds all attributes from an array.
      *
-     * @param attributes the attributes to add.
+     * @param attributes The attributes to add.
      */
     protected void addAll(final Attribute[] attributes) {
         if (attributes != null) {
@@ -84,7 +84,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     /**
      * Adds an annotation entry.
      *
-     * @param ag the annotation entry.
+     * @param ag The annotation entry.
      * @since 6.0
      */
     public void addAnnotationEntry(final AnnotationEntryGen ag) {
@@ -169,7 +169,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     /**
      * Removes an annotation entry.
      *
-     * @param ag the annotation entry to remove.
+     * @param ag The annotation entry to remove.
      * @since 6.0
      */
     public void removeAnnotationEntry(final AnnotationEntryGen ag) {
@@ -179,7 +179,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     /**
      * Removes an attribute.
      *
-     * @param a the attribute to remove.
+     * @param a The attribute to remove.
      */
     public void removeAttribute(final Attribute a) {
         attributeList.remove(a);
@@ -195,7 +195,7 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     /**
      * Sets the constant pool.
      *
-     * @param cp the constant pool.
+     * @param cp The constant pool.
      */
     public void setConstantPool(final ConstantPoolGen cp) { // TODO could be package-protected?
         this.cp = cp;

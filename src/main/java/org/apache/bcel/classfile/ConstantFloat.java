@@ -98,7 +98,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
     /**
      * Gets the Float object.
      *
-     * @param cp the constant pool (not used).
+     * @param cp The constant pool (not used).
      * @return Float object.
      */
     @Override
@@ -109,7 +109,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
     /**
      * Sets the raw bytes that represent the float value.
      *
-     * @param bytes the raw bytes that represent the float value.
+     * @param bytes The raw bytes that represent the float value.
      */
     public void setBytes(final float bytes) {
         this.bytes = bytes;

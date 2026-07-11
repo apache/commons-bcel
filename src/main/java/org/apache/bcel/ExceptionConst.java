@@ -152,7 +152,7 @@ public final class ExceptionConst {
     /**
      * Creates a copy of the specified Exception Class array combined with any additional Exception classes.
      *
-     * @param type the basic array type.
+     * @param type The basic array type.
      * @param extraClasses additional classes, if any.
      * @return The merged array.
      */

@@ -147,7 +147,7 @@ public class VerifyDialog extends JDialog {
     /**
      * Constructs a new instance.
      *
-     * @param owner the parent Dialog.
+     * @param owner The parent Dialog.
      */
     public VerifyDialog(final Dialog owner) {
         super(owner);
@@ -156,7 +156,7 @@ public class VerifyDialog extends JDialog {
     /**
      * Constructs a new instance.
      *
-     * @param owner the parent Dialog.
+     * @param owner The parent Dialog.
      * @param modal whether the dialog is modal.
      */
     public VerifyDialog(final Dialog owner, final boolean modal) {
@@ -166,8 +166,8 @@ public class VerifyDialog extends JDialog {
     /**
      * Constructs a new instance.
      *
-     * @param owner the parent Dialog.
-     * @param title the dialog title.
+     * @param owner The parent Dialog.
+     * @param title The dialog title.
      */
     public VerifyDialog(final Dialog owner, final String title) {
         super(owner, title);
@@ -176,8 +176,8 @@ public class VerifyDialog extends JDialog {
     /**
      * Constructs a new instance.
      *
-     * @param owner the parent Dialog.
-     * @param title the dialog title.
+     * @param owner The parent Dialog.
+     * @param title The dialog title.
      * @param modal whether the dialog is modal.
      */
     public VerifyDialog(final Dialog owner, final String title, final boolean modal) {
@@ -187,7 +187,7 @@ public class VerifyDialog extends JDialog {
     /**
      * Constructs a new instance.
      *
-     * @param owner the parent Frame.
+     * @param owner The parent Frame.
      */
     public VerifyDialog(final Frame owner) {
         super(owner);
@@ -196,7 +196,7 @@ public class VerifyDialog extends JDialog {
     /**
      * Constructs a new instance.
      *
-     * @param owner the parent Frame.
+     * @param owner The parent Frame.
      * @param modal whether the dialog is modal.
      */
     public VerifyDialog(final Frame owner, final boolean modal) {
@@ -206,8 +206,8 @@ public class VerifyDialog extends JDialog {
     /**
      * Constructs a new instance.
      *
-     * @param owner the parent Frame.
-     * @param title the dialog title.
+     * @param owner The parent Frame.
+     * @param title The dialog title.
      */
     public VerifyDialog(final Frame owner, final String title) {
         super(owner, title);
@@ -216,8 +216,8 @@ public class VerifyDialog extends JDialog {
     /**
      * Constructs a new instance.
      *
-     * @param owner the parent Frame.
-     * @param title the dialog title.
+     * @param owner The parent Frame.
+     * @param title The dialog title.
      * @param modal whether the dialog is modal.
      */
     public VerifyDialog(final Frame owner, final String title, final boolean modal) {
@@ -302,7 +302,7 @@ public class VerifyDialog extends JDialog {
     /**
      * Called when an action is performed.
      *
-     * @param actionEvent the action event.
+     * @param actionEvent The action event.
      */
     public void flushButton_ActionPerformed(final ActionEvent actionEvent) {
         VerifierFactory.getVerifier(className).flush();
@@ -533,7 +533,7 @@ public class VerifyDialog extends JDialog {
     /**
      * Called when an action is performed.
      *
-     * @param actionEvent the action event.
+     * @param actionEvent The action event.
      */
     public void pass1Button_ActionPerformed(final ActionEvent actionEvent) {
         final Verifier v = VerifierFactory.getVerifier(className);
@@ -551,7 +551,7 @@ public class VerifyDialog extends JDialog {
     /**
      * Called when an action is performed.
      *
-     * @param actionEvent the action event.
+     * @param actionEvent The action event.
      */
     public void pass2Button_ActionPerformed(final ActionEvent actionEvent) {
         pass1Button_ActionPerformed(actionEvent);
@@ -574,7 +574,7 @@ public class VerifyDialog extends JDialog {
     /**
      * Called when an action is performed.
      *
-     * @param actionEvent the action event.
+     * @param actionEvent The action event.
      */
     public void pass4Button_ActionPerformed(final ActionEvent actionEvent) {
         pass2Button_ActionPerformed(actionEvent);

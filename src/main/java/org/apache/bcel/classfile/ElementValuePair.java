@@ -39,9 +39,9 @@ public class ElementValuePair {
     /**
      * Constructs an ElementValuePair.
      *
-     * @param elementNameIndex the element name index.
-     * @param elementValue the element value.
-     * @param constantPool the constant pool.
+     * @param elementNameIndex The element name index.
+     * @param elementValue The element value.
+     * @param constantPool The constant pool.
      */
     public ElementValuePair(final int elementNameIndex, final ElementValue elementValue, final ConstantPool constantPool) {
         this.elementValue = elementValue;
@@ -52,7 +52,7 @@ public class ElementValuePair {
     /**
      * Dumps this element value pair to a DataOutputStream.
      *
-     * @param dos the output stream.
+     * @param dos The output stream.
      * @throws IOException if an I/O error occurs.
      */
     protected void dump(final DataOutputStream dos) throws IOException {

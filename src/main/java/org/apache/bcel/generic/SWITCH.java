@@ -79,8 +79,8 @@ public final class SWITCH implements CompoundInstruction {
      * Constructs a SWITCH with default maxGap of 1.
      *
      * @param match array of match values.
-     * @param targets the instructions to be branched to for each case.
-     * @param target the default target.
+     * @param targets The instructions to be branched to for each case.
+     * @param target The default target.
      */
     public SWITCH(final int[] match, final InstructionHandle[] targets, final InstructionHandle target) {
         this(match, targets, target, 1);
@@ -94,8 +94,8 @@ public final class SWITCH implements CompoundInstruction {
      * Note, that the key array always will be sorted, though we leave the original arrays unaltered.
      *
      * @param match array of match values (case 2: ... case 7: ..., etc.).
-     * @param targets the instructions to be branched to for each case.
-     * @param target the default target.
+     * @param targets The instructions to be branched to for each case.
+     * @param target The default target.
      * @param maxGap maximum gap that may between case branches.
      */
     public SWITCH(final int[] match, final InstructionHandle[] targets, final InstructionHandle target, final int maxGap) {

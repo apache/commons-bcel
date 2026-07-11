@@ -26,7 +26,7 @@ public interface TypedInstruction {
     /**
      * Gets the type associated with this instruction.
      *
-     * @param cpg the constant pool generator.
+     * @param cpg The constant pool generator.
      * @return The type associated with this instruction.
      */
     Type getType(ConstantPoolGen cpg);

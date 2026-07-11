@@ -45,7 +45,7 @@ public class VerifierFactory {
     /**
      * Adds the VerifierFactoryObserver o to the list of observers.
      *
-     * @param o the observer to add.
+     * @param o The observer to add.
      */
     public static void attach(final VerifierFactoryObserver o) {
         OBSVERVERS.add(o);
@@ -64,7 +64,7 @@ public class VerifierFactory {
     /**
      * Removes the VerifierFactoryObserver o from the list of observers.
      *
-     * @param o the observer to remove.
+     * @param o The observer to remove.
      */
     public static void detach(final VerifierFactoryObserver o) {
         OBSVERVERS.remove(o);
@@ -74,7 +74,7 @@ public class VerifierFactory {
      * Returns the (only) verifier responsible for the class with the given name. Possibly a new Verifier object is
      * transparently created.
      *
-     * @param fullyQualifiedClassName the fully qualified class name.
+     * @param fullyQualifiedClassName The fully qualified class name.
      * @return The (only) verifier responsible for the class with the given name.
      */
     public static Verifier getVerifier(final String fullyQualifiedClassName) {

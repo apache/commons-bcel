@@ -118,7 +118,7 @@ public final class ModuleMainClass extends Attribute {
     /**
      * Sets the host class index.
      *
-     * @param mainClassIndex the host class index.
+     * @param mainClassIndex The host class index.
      */
     public void setHostClassIndex(final int mainClassIndex) {
         this.mainClassIndex = mainClassIndex;

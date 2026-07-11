@@ -39,7 +39,7 @@ public class DCONST extends Instruction implements ConstantPushInstruction {
     /**
      * Constructs a DCONST instruction.
      *
-     * @param f the constant value (must be 0.0 or 1.0).
+     * @param f The constant value (must be 0.0 or 1.0).
      * @throws ClassGenException if f is not 0.0 or 1.0.
      */
     public DCONST(final double f) {

@@ -46,7 +46,7 @@ public class Frame {
     /**
      * Sets the static _this reference.
      *
-     * @param _this the _this to set.
+     * @param _this The _this to set.
      * @since 6.0
      */
     public static void setThis(final UninitializedObjectType _this) {
@@ -66,8 +66,8 @@ public class Frame {
     /**
      * Constructs a Frame.
      *
-     * @param maxLocals the maximum number of local variables.
-     * @param maxStack the maximum stack size.
+     * @param maxLocals The maximum number of local variables.
+     * @param maxStack The maximum stack size.
      */
     public Frame(final int maxLocals, final int maxStack) {
         locals = new LocalVariables(maxLocals);
@@ -77,8 +77,8 @@ public class Frame {
     /**
      * Constructs a Frame.
      *
-     * @param locals the local variables.
-     * @param stack the operand stack.
+     * @param locals The local variables.
+     * @param stack The operand stack.
      */
     public Frame(final LocalVariables locals, final OperandStack stack) {
         this.locals = locals;
@@ -98,7 +98,7 @@ public class Frame {
     /**
      * Checks if this frame equals another object.
      *
-     * @param o the object to compare.
+     * @param o The object to compare.
      * @return true if equal, false otherwise.
      */
     @Override

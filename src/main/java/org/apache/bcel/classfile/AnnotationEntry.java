@@ -42,7 +42,7 @@ public class AnnotationEntry implements Node {
     /**
      * Creates annotation entries from attributes.
      *
-     * @param attributes the attributes.
+     * @param attributes The attributes.
      * @return The annotation entries.
      */
     public static AnnotationEntry[] createAnnotationEntries(final Attribute[] attributes) {
@@ -54,8 +54,8 @@ public class AnnotationEntry implements Node {
     /**
      * Factory method to create an AnnotionEntry from a DataInput.
      *
-     * @param input the input stream.
-     * @param constantPool the constant pool.
+     * @param input The input stream.
+     * @param constantPool The constant pool.
      * @param isRuntimeVisible whether the annotation is runtime visible.
      * @return The entry.
      * @throws IOException if an I/O error occurs.
@@ -81,8 +81,8 @@ public class AnnotationEntry implements Node {
     /**
      * Constructs an AnnotationEntry.
      *
-     * @param typeIndex the type index.
-     * @param constantPool the constant pool.
+     * @param typeIndex The type index.
+     * @param constantPool The constant pool.
      * @param isRuntimeVisible whether the annotation is runtime visible.
      */
     public AnnotationEntry(final int typeIndex, final ConstantPool constantPool, final boolean isRuntimeVisible) {
@@ -106,7 +106,7 @@ public class AnnotationEntry implements Node {
     /**
      * Adds an element name value pair.
      *
-     * @param elementNameValuePair the element name value pair.
+     * @param elementNameValuePair The element name value pair.
      */
     public void addElementNameValuePair(final ElementValuePair elementNameValuePair) {
         elementValuePairs.add(elementNameValuePair);
@@ -115,7 +115,7 @@ public class AnnotationEntry implements Node {
     /**
      * Dumps this annotation entry to a DataOutputStream.
      *
-     * @param dos the output stream.
+     * @param dos The output stream.
      * @throws IOException if an I/O error occurs.
      */
     public void dump(final DataOutputStream dos) throws IOException {

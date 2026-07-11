@@ -142,7 +142,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     /**
      * Add observer for this object.
      *
-     * @param o the observer to add.
+     * @param o The observer to add.
      */
     public void addObserver(final FieldObserver o) {
         if (observers == null) {
@@ -174,7 +174,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     /**
      * Creates a deep copy of this field.
      *
-     * @param cp the constant pool.
+     * @param cp The constant pool.
      * @return deep copy of this field.
      */
     public FieldGen copy(final ConstantPoolGen cp) {
@@ -240,7 +240,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     /**
      * Remove observer for this object.
      *
-     * @param o the observer to remove.
+     * @param o The observer to remove.
      */
     public void removeObserver(final FieldObserver o) {
         if (observers != null) {
@@ -251,7 +251,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     /**
      * Sets the initial value.
      *
-     * @param b the boolean value.
+     * @param b The boolean value.
      */
     public void setInitValue(final boolean b) {
         checkType(Type.BOOLEAN);
@@ -263,7 +263,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     /**
      * Sets the initial value.
      *
-     * @param b the byte value.
+     * @param b The byte value.
      */
     public void setInitValue(final byte b) {
         checkType(Type.BYTE);
@@ -275,7 +275,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     /**
      * Sets the initial value.
      *
-     * @param c the char value.
+     * @param c The char value.
      */
     public void setInitValue(final char c) {
         checkType(Type.CHAR);
@@ -287,7 +287,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     /**
      * Sets the initial value.
      *
-     * @param d the double value.
+     * @param d The double value.
      */
     public void setInitValue(final double d) {
         checkType(Type.DOUBLE);
@@ -299,7 +299,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     /**
      * Sets the initial value.
      *
-     * @param f the float value.
+     * @param f The float value.
      */
     public void setInitValue(final float f) {
         checkType(Type.FLOAT);
@@ -311,7 +311,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     /**
      * Sets the initial value.
      *
-     * @param i the int value.
+     * @param i The int value.
      */
     public void setInitValue(final int i) {
         checkType(Type.INT);
@@ -323,7 +323,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     /**
      * Sets the initial value.
      *
-     * @param l the long value.
+     * @param l The long value.
      */
     public void setInitValue(final long l) {
         checkType(Type.LONG);
@@ -335,7 +335,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     /**
      * Sets the initial value.
      *
-     * @param s the short value.
+     * @param s The short value.
      */
     public void setInitValue(final short s) {
         checkType(Type.SHORT);
@@ -347,7 +347,7 @@ public class FieldGen extends FieldGenOrMethodGen {
     /**
      * Sets (optional) initial value of field, otherwise it will be set to null/0/false by the JVM automatically.
      *
-     * @param str the string value.
+     * @param str The string value.
      */
     public void setInitValue(final String str) {
         checkType(ObjectType.getInstance("java.lang.String"));

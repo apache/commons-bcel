@@ -40,14 +40,14 @@ public interface NamedAndTyped {
     /**
      * Sets the name.
      *
-     * @param name the name.
+     * @param name The name.
      */
     void setName(String name);
 
     /**
      * Sets the type.
      *
-     * @param type the type.
+     * @param type The type.
      */
     void setType(Type type);
 }

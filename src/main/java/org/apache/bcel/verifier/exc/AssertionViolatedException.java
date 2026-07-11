@@ -49,7 +49,7 @@ public final class AssertionViolatedException extends RuntimeException {
      * Constructs a new AssertionViolatedException with the specified error message preceded by &quot;INTERNAL ERROR:
      * &quot;.
      *
-     * @param message the error message.
+     * @param message The error message.
      */
     public AssertionViolatedException(String message) {
         super(message = "INTERNAL ERROR: " + message); // Thanks to Java, the constructor call here must be first.
@@ -59,8 +59,8 @@ public final class AssertionViolatedException extends RuntimeException {
     /**
      * Constructs a new AssertionViolationException with the specified error message and initial cause.
      *
-     * @param message the error message.
-     * @param initCause the initial cause.
+     * @param message The error message.
+     * @param initCause The initial cause.
      * @since 6.0
      */
     public AssertionViolatedException(String message, final Throwable initCause) {

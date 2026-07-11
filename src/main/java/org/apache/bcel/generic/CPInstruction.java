@@ -52,7 +52,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
     /**
      * Constructs a CPInstruction.
      *
-     * @param opcode the opcode.
+     * @param opcode The opcode.
      * @param index to constant pool.
      */
     protected CPInstruction(final short opcode, final int index) {

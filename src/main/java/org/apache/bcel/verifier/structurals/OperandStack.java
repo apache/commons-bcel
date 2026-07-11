@@ -41,7 +41,7 @@ public class OperandStack implements Cloneable {
     /**
      * Creates an empty stack with a maximum of maxStack slots.
      *
-     * @param maxStack the maximum stack size.
+     * @param maxStack The maximum stack size.
      */
     public OperandStack(final int maxStack) {
         this.maxStack = maxStack;
@@ -50,8 +50,8 @@ public class OperandStack implements Cloneable {
     /**
      * Creates an otherwise empty stack with a maximum of maxStack slots and the ObjectType 'obj' at the top.
      *
-     * @param maxStack the maximum stack size.
-     * @param obj the object type to place at the top.
+     * @param maxStack The maximum stack size.
+     * @param obj The object type to place at the top.
      */
     public OperandStack(final int maxStack, final ObjectType obj) {
         this.maxStack = maxStack;
@@ -113,7 +113,7 @@ public class OperandStack implements Cloneable {
     /**
      * Replaces all occurrences of u in this OperandStack instance with an "initialized" ObjectType.
      *
-     * @param u the uninitialized object type.
+     * @param u The uninitialized object type.
      */
     public void initializeObject(final UninitializedObjectType u) {
         for (int i = 0; i < stack.size(); i++) {
@@ -145,7 +145,7 @@ public class OperandStack implements Cloneable {
      * Merges another stack state into this instance's stack state. See the Java Virtual Machine Specification, Second
      * Edition, page 146: 4.9.2 for details.
      *
-     * @param s the stack to merge.
+     * @param s The stack to merge.
      */
     public void merge(final OperandStack s) {
         try {
@@ -196,7 +196,7 @@ public class OperandStack implements Cloneable {
      * Returns the element that's i elements below the top element; that means, iff i==0 the top element is returned. The
      * element is not popped off the stack!
      *
-     * @param i the depth.
+     * @param i The depth.
      * @return The element at the specified depth.
      */
     public Type peek(final int i) {
@@ -215,7 +215,7 @@ public class OperandStack implements Cloneable {
     /**
      * Pops i elements off the stack. Always returns null.
      *
-     * @param count the number of elements to pop.
+     * @param count The number of elements to pop.
      * @return Always returns null.
      */
     public Type pop(final int count) {
@@ -228,7 +228,7 @@ public class OperandStack implements Cloneable {
     /**
      * Pushes a Type object onto the stack.
      *
-     * @param type the type to push.
+     * @param type The type to push.
      */
     public void push(final Type type) {
         if (type == null) {

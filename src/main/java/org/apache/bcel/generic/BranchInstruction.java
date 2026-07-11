@@ -181,7 +181,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     /**
      * Sets the index.
      *
-     * @param index the index to set.
+     * @param index The index to set.
      * @since 6.0
      */
     protected void setIndex(final int index) {
@@ -191,7 +191,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
     /**
      * Sets the position.
      *
-     * @param position the position to set.
+     * @param position The position to set.
      * @since 6.0
      */
     protected void setPosition(final int position) {
@@ -249,7 +249,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      * positions and offsets by calling this function.
      *
      * @param offset additional offset caused by preceding (variable length) instructions.
-     * @param maxOffset the maximum offset that may be caused by these instructions.
+     * @param maxOffset The maximum offset that may be caused by these instructions.
      * @return additional offset caused by possible change of this instruction's length.
      */
     protected int updatePosition(final int offset, final int maxOffset) {

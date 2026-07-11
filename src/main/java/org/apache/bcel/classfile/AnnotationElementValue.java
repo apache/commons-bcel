@@ -33,9 +33,9 @@ public class AnnotationElementValue extends ElementValue {
     /**
      * Constructs an AnnotationElementValue.
      *
-     * @param type the type.
-     * @param annotationEntry the annotation entry.
-     * @param cpool the constant pool.
+     * @param type The type.
+     * @param annotationEntry The annotation entry.
+     * @param cpool The constant pool.
      */
     public AnnotationElementValue(final int type, final AnnotationEntry annotationEntry, final ConstantPool cpool) {
         super(type, cpool);

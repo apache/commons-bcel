@@ -79,8 +79,8 @@ public abstract class ElementValueGen {
     /**
      * Creates an (modifiable) ElementValueGen copy of an (immutable) ElementValue - constant pool is assumed correct.
      *
-     * @param value the element value to copy.
-     * @param cpool the constant pool generator.
+     * @param value The element value to copy.
+     * @param cpool The constant pool generator.
      * @param copyPoolEntries whether to copy pool entries.
      * @return A copy of the element value.
      */
@@ -112,8 +112,8 @@ public abstract class ElementValueGen {
     /**
      * Reads an element value from a DataInput.
      *
-     * @param dis the data input stream.
-     * @param cpGen the constant pool.
+     * @param dis The data input stream.
+     * @param cpGen The constant pool.
      * @return The element value read.
      * @throws IOException if an I/O error occurs.
      */
@@ -174,8 +174,8 @@ public abstract class ElementValueGen {
     /**
      * Constructs an ElementValueGen.
      *
-     * @param type the element value type.
-     * @param cpGen the constant pool.
+     * @param type The element value type.
+     * @param cpGen The constant pool.
      */
     protected ElementValueGen(final int type, final ConstantPoolGen cpGen) {
         this.type = type;
@@ -185,7 +185,7 @@ public abstract class ElementValueGen {
     /**
      * Dumps this element value to a DataOutputStream.
      *
-     * @param dos the output stream.
+     * @param dos The output stream.
      * @throws IOException if an I/O error occurs.
      */
     public abstract void dump(DataOutputStream dos) throws IOException;

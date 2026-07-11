@@ -178,8 +178,8 @@ public abstract class ElementValue {
     /**
      * Constructs an ElementValue.
      *
-     * @param type the element value type.
-     * @param cpool the constant pool.
+     * @param type The element value type.
+     * @param cpool The constant pool.
      */
     protected ElementValue(final int type, final ConstantPool cpool) {
         this.type = type;
@@ -189,7 +189,7 @@ public abstract class ElementValue {
     /**
      * Dumps this element value to a DataOutputStream.
      *
-     * @param dos the output stream.
+     * @param dos The output stream.
      * @throws IOException if an I/O error occurs.
      */
     public abstract void dump(DataOutputStream dos) throws IOException;

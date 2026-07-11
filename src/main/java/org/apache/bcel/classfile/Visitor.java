@@ -27,7 +27,7 @@ public interface Visitor {
     /**
      * Visits an Annotations attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      * @since 6.0
      */
     void visitAnnotation(Annotations obj);
@@ -35,7 +35,7 @@ public interface Visitor {
     /**
      * Visits an AnnotationDefault attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      * @since 6.0
      */
     void visitAnnotationDefault(AnnotationDefault obj);
@@ -43,7 +43,7 @@ public interface Visitor {
     /**
      * Visits an AnnotationEntry.
      *
-     * @param obj the annotation entry.
+     * @param obj The annotation entry.
      * @since 6.0
      */
     void visitAnnotationEntry(AnnotationEntry obj);
@@ -51,7 +51,7 @@ public interface Visitor {
     /**
      * Visits a BootstrapMethods attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      * @since 6.0
      */
     void visitBootstrapMethods(BootstrapMethods obj);
@@ -59,35 +59,35 @@ public interface Visitor {
     /**
      * Visits a Code attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      */
     void visitCode(Code obj);
 
     /**
      * Visits a CodeException.
      *
-     * @param obj the exception.
+     * @param obj The exception.
      */
     void visitCodeException(CodeException obj);
 
     /**
      * Visits a ConstantClass.
      *
-     * @param obj the constant.
+     * @param obj The constant.
      */
     void visitConstantClass(ConstantClass obj);
 
     /**
      * Visits a ConstantDouble.
      *
-     * @param obj the constant.
+     * @param obj The constant.
      */
     void visitConstantDouble(ConstantDouble obj);
 
     /**
      * Visits a ConstantDynamic.
      *
-     * @param constantDynamic the constant.
+     * @param constantDynamic The constant.
      * @since 6.3
      */
     default void visitConstantDynamic(final ConstantDynamic constantDynamic) {
@@ -97,49 +97,49 @@ public interface Visitor {
     /**
      * Visits a ConstantFieldref.
      *
-     * @param obj the constant.
+     * @param obj The constant.
      */
     void visitConstantFieldref(ConstantFieldref obj);
 
     /**
      * Visits a ConstantFloat.
      *
-     * @param obj the constant.
+     * @param obj The constant.
      */
     void visitConstantFloat(ConstantFloat obj);
 
     /**
      * Visits a ConstantInteger.
      *
-     * @param obj the constant.
+     * @param obj The constant.
      */
     void visitConstantInteger(ConstantInteger obj);
 
     /**
      * Visits a ConstantInterfaceMethodref.
      *
-     * @param obj the constant.
+     * @param obj The constant.
      */
     void visitConstantInterfaceMethodref(ConstantInterfaceMethodref obj);
 
     /**
      * Visits a ConstantInvokeDynamic.
      *
-     * @param obj the constant.
+     * @param obj The constant.
      */
     void visitConstantInvokeDynamic(ConstantInvokeDynamic obj);
 
     /**
      * Visits a ConstantLong.
      *
-     * @param obj the constant.
+     * @param obj The constant.
      */
     void visitConstantLong(ConstantLong obj);
 
     /**
      * Visits a ConstantMethodHandle.
      *
-     * @param obj the constant.
+     * @param obj The constant.
      * @since 6.0
      */
     void visitConstantMethodHandle(ConstantMethodHandle obj);
@@ -147,14 +147,14 @@ public interface Visitor {
     /**
      * Visits a ConstantMethodref.
      *
-     * @param obj the constant.
+     * @param obj The constant.
      */
     void visitConstantMethodref(ConstantMethodref obj);
 
     /**
      * Visits a ConstantMethodType.
      *
-     * @param obj the constant.
+     * @param obj The constant.
      * @since 6.0
      */
     void visitConstantMethodType(ConstantMethodType obj);
@@ -162,7 +162,7 @@ public interface Visitor {
     /**
      * Visits a ConstantModule.
      *
-     * @param constantModule the constant.
+     * @param constantModule The constant.
      * @since 6.1
      */
     void visitConstantModule(ConstantModule constantModule);
@@ -170,14 +170,14 @@ public interface Visitor {
     /**
      * Visits a ConstantNameAndType.
      *
-     * @param obj the constant.
+     * @param obj The constant.
      */
     void visitConstantNameAndType(ConstantNameAndType obj);
 
     /**
      * Visits a ConstantPackage.
      *
-     * @param constantPackage the constant.
+     * @param constantPackage The constant.
      * @since 6.1
      */
     void visitConstantPackage(ConstantPackage constantPackage);
@@ -185,42 +185,42 @@ public interface Visitor {
     /**
      * Visits a ConstantPool.
      *
-     * @param obj the constant pool.
+     * @param obj The constant pool.
      */
     void visitConstantPool(ConstantPool obj);
 
     /**
      * Visits a ConstantString.
      *
-     * @param obj the constant.
+     * @param obj The constant.
      */
     void visitConstantString(ConstantString obj);
 
     /**
      * Visits a ConstantUtf8.
      *
-     * @param obj the constant.
+     * @param obj The constant.
      */
     void visitConstantUtf8(ConstantUtf8 obj);
 
     /**
      * Visits a ConstantValue attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      */
     void visitConstantValue(ConstantValue obj);
 
     /**
      * Visits a Deprecated attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      */
     void visitDeprecated(Deprecated obj);
 
     /**
      * Visits an EnclosingMethod attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      * @since 6.0
      */
     void visitEnclosingMethod(EnclosingMethod obj);
@@ -228,70 +228,70 @@ public interface Visitor {
     /**
      * Visits an ExceptionTable attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      */
     void visitExceptionTable(ExceptionTable obj);
 
     /**
      * Visits a Field.
      *
-     * @param obj the field.
+     * @param obj The field.
      */
     void visitField(Field obj);
 
     /**
      * Visits an InnerClass.
      *
-     * @param obj the inner class.
+     * @param obj The inner class.
      */
     void visitInnerClass(InnerClass obj);
 
     /**
      * Visits an InnerClasses attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      */
     void visitInnerClasses(InnerClasses obj);
 
     /**
      * Visits a JavaClass.
      *
-     * @param obj the class.
+     * @param obj The class.
      */
     void visitJavaClass(JavaClass obj);
 
     /**
      * Visits a LineNumber.
      *
-     * @param obj the line number.
+     * @param obj The line number.
      */
     void visitLineNumber(LineNumber obj);
 
     /**
      * Visits a LineNumberTable attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      */
     void visitLineNumberTable(LineNumberTable obj);
 
     /**
      * Visits a LocalVariable.
      *
-     * @param obj the local variable.
+     * @param obj The local variable.
      */
     void visitLocalVariable(LocalVariable obj);
 
     /**
      * Visits a LocalVariableTable attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      */
     void visitLocalVariableTable(LocalVariableTable obj);
 
     /**
      * Visits a LocalVariableTypeTable attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      * @since 6.0
      */
     void visitLocalVariableTypeTable(LocalVariableTypeTable obj);
@@ -299,14 +299,14 @@ public interface Visitor {
     /**
      * Visits a Method.
      *
-     * @param obj the method.
+     * @param obj The method.
      */
     void visitMethod(Method obj);
 
     /**
      * Visits a MethodParameter.
      *
-     * @param obj the method parameter.
+     * @param obj The method parameter.
      * @since 6.4.0
      */
     default void visitMethodParameter(final MethodParameter obj) {
@@ -316,7 +316,7 @@ public interface Visitor {
     /**
      * Visits a MethodParameters attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      * @since 6.0
      */
     void visitMethodParameters(MethodParameters obj);
@@ -324,7 +324,7 @@ public interface Visitor {
     /**
      * Visits a Module attribute.
      *
-     * @param constantModule the module.
+     * @param constantModule The module.
      * @since 6.4.0
      */
     default void visitModule(final Module constantModule) {
@@ -334,7 +334,7 @@ public interface Visitor {
     /**
      * Visits a ModuleExports entry.
      *
-     * @param constantModule the module exports.
+     * @param constantModule The module exports.
      * @since 6.4.0
      */
     default void visitModuleExports(final ModuleExports constantModule) {
@@ -344,7 +344,7 @@ public interface Visitor {
     /**
      * Visits a ModuleMainClass attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      * @since 6.4.0
      */
     default void visitModuleMainClass(final ModuleMainClass obj) {
@@ -354,7 +354,7 @@ public interface Visitor {
     /**
      * Visits a ModuleOpens entry.
      *
-     * @param constantModule the module opens.
+     * @param constantModule The module opens.
      * @since 6.4.0
      */
     default void visitModuleOpens(final ModuleOpens constantModule) {
@@ -364,7 +364,7 @@ public interface Visitor {
     /**
      * Visits a ModulePackages attribute.
      *
-     * @param constantModule the module packages.
+     * @param constantModule The module packages.
      * @since 6.4.0
      */
     default void visitModulePackages(final ModulePackages constantModule) {
@@ -374,7 +374,7 @@ public interface Visitor {
     /**
      * Visits a ModuleProvides entry.
      *
-     * @param constantModule the module provides.
+     * @param constantModule The module provides.
      * @since 6.4.0
      */
     default void visitModuleProvides(final ModuleProvides constantModule) {
@@ -384,7 +384,7 @@ public interface Visitor {
     /**
      * Visits a ModuleRequires entry.
      *
-     * @param constantModule the module requires.
+     * @param constantModule The module requires.
      * @since 6.4.0
      */
     default void visitModuleRequires(final ModuleRequires constantModule) {
@@ -394,7 +394,7 @@ public interface Visitor {
     /**
      * Visits a NestHost attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      * @since 6.4.0
      */
     default void visitNestHost(final NestHost obj) {
@@ -404,7 +404,7 @@ public interface Visitor {
     /**
      * Visits a NestMembers attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      * @since 6.4.0
      */
     default void visitNestMembers(final NestMembers obj) {
@@ -414,7 +414,7 @@ public interface Visitor {
     /**
      * Visits a ParameterAnnotations attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      * @since 6.0
      */
     void visitParameterAnnotation(ParameterAnnotations obj);
@@ -422,7 +422,7 @@ public interface Visitor {
     /**
      * Visits a ParameterAnnotationEntry.
      *
-     * @param obj the annotation entry.
+     * @param obj The annotation entry.
      * @since 6.0
      */
     void visitParameterAnnotationEntry(ParameterAnnotationEntry obj);
@@ -430,7 +430,7 @@ public interface Visitor {
     /**
      * Visits a PermittedSubclasses attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      * @since 6.13.0
      */
     default void visitPermittedSubclasses(final PermittedSubclasses obj) {
@@ -460,28 +460,28 @@ public interface Visitor {
     /**
      * Visits a Signature attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      */
     void visitSignature(Signature obj);
 
     /**
      * Visits a SourceFile attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      */
     void visitSourceFile(SourceFile obj);
 
     /**
      * Visits a StackMap attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      */
     void visitStackMap(StackMap obj);
 
     /**
      * Visits a StackMapEntry.
      *
-     * @param obj the entry.
+     * @param obj The entry.
      */
     void visitStackMapEntry(StackMapEntry obj);
 
@@ -498,14 +498,14 @@ public interface Visitor {
     /**
      * Visits a Synthetic attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      */
     void visitSynthetic(Synthetic obj);
 
     /**
      * Visits an Unknown attribute.
      *
-     * @param obj the attribute.
+     * @param obj The attribute.
      */
     void visitUnknown(Unknown obj);
 

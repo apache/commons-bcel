@@ -93,7 +93,7 @@ public final class ConstantNameAndType extends Constant {
     /**
      * Gets the name.
      *
-     * @param cp the constant pool.
+     * @param cp The constant pool.
      * @return name.
      */
     public String getName(final ConstantPool cp) {
@@ -112,7 +112,7 @@ public final class ConstantNameAndType extends Constant {
     /**
      * Gets the signature.
      *
-     * @param cp the constant pool.
+     * @param cp The constant pool.
      * @return signature.
      */
     public String getSignature(final ConstantPool cp) {
@@ -131,7 +131,7 @@ public final class ConstantNameAndType extends Constant {
     /**
      * Sets the name index.
      *
-     * @param nameIndex the name index of this constant.
+     * @param nameIndex The name index of this constant.
      */
     public void setNameIndex(final int nameIndex) {
         this.nameIndex = nameIndex;
@@ -140,7 +140,7 @@ public final class ConstantNameAndType extends Constant {
     /**
      * Sets the signature index.
      *
-     * @param signatureIndex the signature index in the constant pool of this type.
+     * @param signatureIndex The signature index in the constant pool of this type.
      */
     public void setSignatureIndex(final int signatureIndex) {
         this.signatureIndex = signatureIndex;

@@ -36,7 +36,7 @@ public class IF_ICMPNE extends IfInstruction {
     /**
      * Constructs an IF_ICMPNE instruction.
      *
-     * @param target the target instruction.
+     * @param target The target instruction.
      */
     public IF_ICMPNE(final InstructionHandle target) {
         super(org.apache.bcel.Const.IF_ICMPNE, target);

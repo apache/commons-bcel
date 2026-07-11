@@ -39,7 +39,7 @@ public class MemorySensitiveClassPathRepository extends AbstractClassPathReposit
     /**
      * Constructs a new MemorySensitiveClassPathRepository.
      *
-     * @param path the class path.
+     * @param path The class path.
      */
     public MemorySensitiveClassPathRepository(final ClassPath path) {
         super(path);

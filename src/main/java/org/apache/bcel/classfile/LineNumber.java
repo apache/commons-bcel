@@ -64,7 +64,7 @@ public final class LineNumber implements Cloneable, Node {
     /**
      * Initialize from another object.
      *
-     * @param c the object to copy.
+     * @param c The object to copy.
      */
     public LineNumber(final LineNumber c) {
         this(c.getStartPC(), c.getLineNumber());
@@ -127,7 +127,7 @@ public final class LineNumber implements Cloneable, Node {
     /**
      * Sets the line number.
      *
-     * @param lineNumber the source line number.
+     * @param lineNumber The source line number.
      */
     public void setLineNumber(final int lineNumber) {
         this.lineNumber = (short) lineNumber;
@@ -136,7 +136,7 @@ public final class LineNumber implements Cloneable, Node {
     /**
      * Sets the program counter.
      *
-     * @param startPc the pc for this line number.
+     * @param startPc The pc for this line number.
      */
     public void setStartPC(final int startPc) {
         this.startPc = (short) startPc;

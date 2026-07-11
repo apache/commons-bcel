@@ -223,7 +223,7 @@ public abstract class Utility {
     /**
      * Gets the class or interface type name.
      *
-     * @param accessFlags the class flags.
+     * @param accessFlags The class flags.
      * @return "class" or "interface", depending on the ACC_INTERFACE flag.
      */
     public static String classOrInterface(final int accessFlags) {
@@ -233,8 +233,8 @@ public abstract class Utility {
     /**
      * Clears a bit in a flag.
      *
-     * @param flag the flag value.
-     * @param i the bit position.
+     * @param flag The flag value.
+     * @param i The bit position.
      * @return 'flag' with bit 'i' set to 0.
      */
     public static int clearBit(final int flag, final int i) {
@@ -246,7 +246,7 @@ public abstract class Utility {
      * Disassembles byte code.
      *
      * @param code byte code array.
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      * @param index offset in code array.
      * @param length number of opcodes to decompile.
      * @return disassembled string representation.
@@ -288,7 +288,7 @@ public abstract class Utility {
      * Disassembles byte code.
      *
      * @param bytes stream of bytes.
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      * @return disassembled string representation.
      * @throws IOException if a failure from reading from the bytes argument occurs.
      */
@@ -604,7 +604,7 @@ public abstract class Utility {
     /**
      * Escape all occurrences of newline chars '\n', quotes \", etc.
      *
-     * @param label the string to convert.
+     * @param label The string to convert.
      * @return The converted string.
      */
     public static String convertString(final String label) {
@@ -668,7 +668,7 @@ public abstract class Utility {
     /**
      * Decode a string back to a byte array.
      *
-     * @param s the string to convert.
+     * @param s The string to convert.
      * @param uncompress use gzip to uncompress the stream of bytes.
      * @return The decoded byte array.
      * @throws IOException if there's a gzip exception.
@@ -709,7 +709,7 @@ public abstract class Utility {
      * This operation inflates the original byte array by roughly 40-50%
      * </p>
      *
-     * @param bytes the byte array to convert.
+     * @param bytes The byte array to convert.
      * @param compress use gzip to minimize string.
      * @return The encoded string.
      * @throws IOException if there's a gzip exception.
@@ -849,7 +849,7 @@ public abstract class Utility {
     /**
      * Tests if a character is part of a Java identifier.
      *
-     * @param ch the character to test if it's part of an identifier.
+     * @param ch The character to test if it's part of an identifier.
      * @return true, if character is one of (a, ... z, A, ... Z, 0, ... 9, _).
      */
     public static boolean isJavaIdentifierPart(final char ch) {
@@ -859,8 +859,8 @@ public abstract class Utility {
     /**
      * Tests if a bit is set.
      *
-     * @param flag the flag value.
-     * @param i the bit position.
+     * @param flag The flag value.
+     * @param i The bit position.
      * @return true, if bit 'i' in 'flag' is set.
      */
     public static boolean isSet(final int flag, final int i) {
@@ -971,7 +971,7 @@ public abstract class Utility {
      * @param name Method name.
      * @param access Method access rights.
      * @param chopit flag that determines whether chopping is executed or not.
-     * @param vars the LocalVariableTable for the method.
+     * @param vars The LocalVariableTable for the method.
      * @return Java type declaration.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
@@ -1061,7 +1061,7 @@ public abstract class Utility {
     /**
      * Converts a path to a package name.
      *
-     * @param str the source path.
+     * @param str The source path.
      * @return A package name.
      * @since 6.6.0
      */
@@ -1076,7 +1076,7 @@ public abstract class Utility {
     /**
      * Prints an array to a string.
      *
-     * @param obj the array to print.
+     * @param obj The array to print.
      * @return The string representation.
      */
     public static String printArray(final Object[] obj) {
@@ -1086,7 +1086,7 @@ public abstract class Utility {
     /**
      * Prints an array to a string.
      *
-     * @param obj the array to print.
+     * @param obj The array to print.
      * @param braces whether to include braces.
      * @return The string representation.
      */
@@ -1097,7 +1097,7 @@ public abstract class Utility {
     /**
      * Prints an array to a string.
      *
-     * @param obj the array to print.
+     * @param obj The array to print.
      * @param braces whether to include braces.
      * @param quote whether to quote elements.
      * @return The string representation.
@@ -1129,8 +1129,8 @@ public abstract class Utility {
     /**
      * Prints an array to a stream.
      *
-     * @param out the output stream.
-     * @param obj the array to print.
+     * @param out The output stream.
+     * @param obj The array to print.
      */
     public static void printArray(final PrintStream out, final Object[] obj) {
         out.println(printArray(obj, true));
@@ -1139,8 +1139,8 @@ public abstract class Utility {
     /**
      * Prints an array to a writer.
      *
-     * @param out the output writer.
-     * @param obj the array to print.
+     * @param out The output writer.
+     * @param obj The array to print.
      */
     public static void printArray(final PrintWriter out, final Object[] obj) {
         out.println(printArray(obj, true));
@@ -1195,8 +1195,8 @@ public abstract class Utility {
     /**
      * Sets a bit in a flag.
      *
-     * @param flag the flag value.
-     * @param i the bit position.
+     * @param flag The flag value.
+     * @param i The bit position.
      * @return 'flag' with bit 'i' set to 1.
      */
     public static int setBit(final int flag, final int i) {
@@ -1269,7 +1269,7 @@ public abstract class Utility {
     /**
      * Convert bytes into hexadecimal string
      *
-     * @param bytes an array of bytes to convert to hexadecimal.
+     * @param bytes An array of bytes to convert to hexadecimal.
      * @return bytes as hexadecimal string, for example 00 fa 12 ...
      */
     public static String toHexString(final byte[] bytes) {

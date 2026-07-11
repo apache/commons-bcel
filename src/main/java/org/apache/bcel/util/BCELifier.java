@@ -128,8 +128,8 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     /**
      * Return a string with the flag settings
      *
-     * @param flags the flags field to interpret.
-     * @param location the item type.
+     * @param flags The flags field to interpret.
+     * @param location The item type.
      * @return The formatted string.
      * @since 6.0 made public
      */

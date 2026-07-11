@@ -42,7 +42,7 @@ public class ClassLoaderRepository implements Repository {
     /**
      * Constructs a ClassLoaderRepository.
      *
-     * @param loader the class loader.
+     * @param loader The class loader.
      */
     public ClassLoaderRepository(final java.lang.ClassLoader loader) {
         this.loader = loader;

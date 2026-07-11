@@ -93,7 +93,7 @@ public class BootstrapMethods extends Attribute implements Iterable<BootstrapMet
     /**
      * Creates a deep copy of this attribute.
      *
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      * @return deep copy of this attribute.
      */
     @Override
@@ -141,7 +141,7 @@ public class BootstrapMethods extends Attribute implements Iterable<BootstrapMet
     /**
      * Sets the bootstrap methods.
      *
-     * @param bootstrapMethods the array of bootstrap methods.
+     * @param bootstrapMethods The array of bootstrap methods.
      */
     public final void setBootstrapMethods(final BootstrapMethod[] bootstrapMethods) {
         this.bootstrapMethods = bootstrapMethods != null ? bootstrapMethods : BootstrapMethod.EMPTY_ARRAY;

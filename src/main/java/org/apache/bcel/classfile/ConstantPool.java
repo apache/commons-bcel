@@ -285,7 +285,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * @param <T> The type of the constant.
      * @param index Index in constant pool.
      * @param tag   Tag of expected constant, that is, its type.
-     * @param castTo the class to cast to.
+     * @param castTo The class to cast to.
      * @return Constant value.
      * @see Constant
      * @throws ClassFormatException if constant type does not match tag.
@@ -424,7 +424,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
     /**
      * Sets a constant at the specified index.
      *
-     * @param index the index in the constant pool.
+     * @param index The index in the constant pool.
      * @param constant Constant to set.
      */
     public void setConstant(final int index, final Constant constant) {
@@ -434,7 +434,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
     /**
      * Sets the constant pool.
      *
-     * @param constantPool the constant pool array.
+     * @param constantPool The constant pool array.
      */
     public void setConstantPool(final Constant[] constantPool) {
         this.constantPool = constantPool != null ? constantPool : Constant.EMPTY_ARRAY;

@@ -241,7 +241,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
-     * @param fixedLength the fixed_length to set.
+     * @param fixedLength The fixed_length to set.
      * @since 6.0
      */
     final void setFixedLength(final int fixedLength) {
@@ -283,7 +283,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
-     * @param matchLength the match_length to set.
+     * @param matchLength The match_length to set.
      * @since 6.0
      */
     final int setMatchLength(final int matchLength) {
@@ -294,8 +294,8 @@ public abstract class Select extends BranchInstruction implements VariableLength
     /**
      * Sets branch target for 'i'th case.
      *
-     * @param i the case index.
-     * @param target the branch target.
+     * @param i The case index.
+     * @param target The branch target.
      */
     public void setTarget(final int i, final InstructionHandle target) { // TODO could be package-protected?
         notifyTarget(targets[i], target, this);
@@ -344,7 +344,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      * positions and offsets by calling this function.
      *
      * @param offset additional offset caused by preceding (variable length) instructions.
-     * @param maxOffset the maximum offset that may be caused by these instructions.
+     * @param maxOffset The maximum offset that may be caused by these instructions.
      * @return additional offset caused by possible change of this instruction's length.
      */
     @Override

@@ -204,8 +204,8 @@ public class AnnotationEntryGen {
     /**
      * Reads an AnnotationEntryGen from a DataInput.
      *
-     * @param dis the data input stream.
-     * @param cpool the constant pool generator.
+     * @param dis The data input stream.
+     * @param cpool The constant pool generator.
      * @param b whether the annotation is runtime visible.
      * @return The annotation entry generator.
      * @throws IOException if an I/O error occurs.
@@ -236,8 +236,8 @@ public class AnnotationEntryGen {
      * to do a deep copy of the annotation and move the cpool entries across. We need to copy the type and the element name
      * value pairs and the visibility.
      *
-     * @param a the annotation entry.
-     * @param cpool the constant pool generator.
+     * @param a The annotation entry.
+     * @param cpool The constant pool generator.
      * @param copyPoolEntries whether to copy pool entries.
      */
     public AnnotationEntryGen(final AnnotationEntry a, final ConstantPoolGen cpool, final boolean copyPoolEntries) {
@@ -258,10 +258,10 @@ public class AnnotationEntryGen {
     /**
      * Constructs an AnnotationEntryGen.
      *
-     * @param type the object type.
-     * @param elements the element value pairs.
+     * @param type The object type.
+     * @param elements The element value pairs.
      * @param vis whether the annotation is visible.
-     * @param cpool the constant pool generator.
+     * @param cpool The constant pool generator.
      */
     public AnnotationEntryGen(final ObjectType type, final List<ElementValuePairGen> elements, final boolean vis, final ConstantPoolGen cpool) {
         this.cpool = cpool;
@@ -273,7 +273,7 @@ public class AnnotationEntryGen {
     /**
      * Adds an element name value pair.
      *
-     * @param evp the element value pair generator.
+     * @param evp The element value pair generator.
      */
     public void addElementNameValuePair(final ElementValuePairGen evp) {
         if (evs == null) {
@@ -289,7 +289,7 @@ public class AnnotationEntryGen {
     /**
      * Dumps this annotation entry to a DataOutputStream.
      *
-     * @param dos the data output stream.
+     * @param dos The data output stream.
      * @throws IOException if an I/O error occurs.
      */
     public void dump(final DataOutputStream dos) throws IOException {

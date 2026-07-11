@@ -41,8 +41,8 @@ public class ArrayElementValueGen extends ElementValueGen {
     /**
      * Constructs an ArrayElementValueGen.
      *
-     * @param value the array element value.
-     * @param cpool the constant pool generator.
+     * @param value The array element value.
+     * @param cpool The constant pool generator.
      * @param copyPoolEntries whether to copy pool entries.
      */
     public ArrayElementValueGen(final ArrayElementValue value, final ConstantPoolGen cpool, final boolean copyPoolEntries) {
@@ -57,7 +57,7 @@ public class ArrayElementValueGen extends ElementValueGen {
     /**
      * Constructs an ArrayElementValueGen.
      *
-     * @param cp the constant pool generator.
+     * @param cp The constant pool generator.
      */
     public ArrayElementValueGen(final ConstantPoolGen cp) {
         super(ARRAY, cp);
@@ -67,9 +67,9 @@ public class ArrayElementValueGen extends ElementValueGen {
     /**
      * Constructs an ArrayElementValueGen.
      *
-     * @param type the type.
-     * @param elementValues the element values.
-     * @param cpool the constant pool generator.
+     * @param type The type.
+     * @param elementValues The element values.
+     * @param cpool The constant pool generator.
      */
     public ArrayElementValueGen(final int type, final ElementValue[] elementValues, final ConstantPoolGen cpool) {
         super(type, cpool);
@@ -82,7 +82,7 @@ public class ArrayElementValueGen extends ElementValueGen {
     /**
      * Adds an element.
      *
-     * @param gen the element value generator.
+     * @param gen The element value generator.
      */
     public void addElement(final ElementValueGen gen) {
         evalues.add(gen);

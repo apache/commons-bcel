@@ -143,7 +143,7 @@ public final class InnerClasses extends Attribute implements Iterable<InnerClass
     /**
      * Sets the array of inner classes.
      *
-     * @param innerClasses the array of inner classes.
+     * @param innerClasses The array of inner classes.
      */
     public void setInnerClasses(final InnerClass[] innerClasses) {
         this.innerClasses = innerClasses != null ? innerClasses : EMPTY_ARRAY;

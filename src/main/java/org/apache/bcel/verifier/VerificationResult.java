@@ -62,8 +62,8 @@ public class VerificationResult {
     /**
      * The usual constructor.
      *
-     * @param status the verification status.
-     * @param message the detail message.
+     * @param status The verification status.
+     * @param message The detail message.
      */
     public VerificationResult(final int status, final String message) {
         numeric = status;
@@ -73,7 +73,7 @@ public class VerificationResult {
     /**
      * Returns if two VerificationResult instances are equal.
      *
-     * @param o the object to compare.
+     * @param o The object to compare.
      * @return true if equal.
      */
     @Override

@@ -62,7 +62,7 @@ public final class Signature extends Attribute {
     /**
      * Tests if a string is an actual parameter list.
      *
-     * @param s the string to test.
+     * @param s The string to test.
      * @return true if the string is an actual parameter list.
      * @since 6.0 is no longer final
      */
@@ -73,7 +73,7 @@ public final class Signature extends Attribute {
     /**
      * Tests if a string is a formal parameter list.
      *
-     * @param s the string to test.
+     * @param s The string to test.
      * @return true if the string is a formal parameter list.
      * @since 6.0 is no longer final
      */
@@ -162,7 +162,7 @@ public final class Signature extends Attribute {
     /**
      * Translates a signature string.
      *
-     * @param s the signature string.
+     * @param s The signature string.
      * @return The translated signature.
      */
     public static String translate(final String s) {
@@ -265,7 +265,7 @@ public final class Signature extends Attribute {
     /**
      * Sets the signature index.
      *
-     * @param signatureIndex the index info the constant pool of this signature.
+     * @param signatureIndex The index info the constant pool of this signature.
      */
     public void setSignatureIndex(final int signatureIndex) {
         this.signatureIndex = signatureIndex;

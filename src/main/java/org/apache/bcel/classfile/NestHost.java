@@ -118,7 +118,7 @@ public final class NestHost extends Attribute {
     /**
      * Sets the host class index.
      *
-     * @param hostClassIndex the host class index.
+     * @param hostClassIndex The host class index.
      */
     public void setHostClassIndex(final int hostClassIndex) {
         this.hostClassIndex = hostClassIndex;

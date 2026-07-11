@@ -93,7 +93,7 @@ public final class ConstantValue extends Attribute {
     /**
      * Creates a deep copy of this attribute.
      *
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      * @return deep copy of this attribute.
      */
     @Override
@@ -127,7 +127,7 @@ public final class ConstantValue extends Attribute {
     /**
      * Sets the constant value index.
      *
-     * @param constantValueIndex the index info the constant pool of this constant value.
+     * @param constantValueIndex The index info the constant pool of this constant value.
      */
     public void setConstantValueIndex(final int constantValueIndex) {
         this.constantValueIndex = constantValueIndex;

@@ -60,7 +60,7 @@ public class ClassQueue {
     /**
      * Adds a JavaClass to the end of the queue.
      *
-     * @param clazz the JavaClass to add.
+     * @param clazz The JavaClass to add.
      */
     public void enqueue(final JavaClass clazz) {
         vec.addLast(clazz);

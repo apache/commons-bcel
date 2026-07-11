@@ -33,9 +33,9 @@ public class ArrayElementValue extends ElementValue {
     /**
      * Constructs an ArrayElementValue.
      *
-     * @param type the type.
-     * @param elementValues the element values.
-     * @param cpool the constant pool.
+     * @param type The type.
+     * @param elementValues The element values.
+     * @param cpool The constant pool.
      */
     public ArrayElementValue(final int type, final ElementValue[] elementValues, final ConstantPool cpool) {
         super(type, cpool);

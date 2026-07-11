@@ -36,7 +36,7 @@ public class IFNONNULL extends IfInstruction {
     /**
      * Constructs an IFNONNULL instruction.
      *
-     * @param target the target instruction.
+     * @param target The target instruction.
      */
     public IFNONNULL(final InstructionHandle target) {
         super(org.apache.bcel.Const.IFNONNULL, target);

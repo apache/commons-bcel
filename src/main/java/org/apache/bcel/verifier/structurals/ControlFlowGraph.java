@@ -364,7 +364,7 @@ public class ControlFlowGraph {
     /**
      * A Control Flow Graph; with additional JustIce checks
      *
-     * @param methodGen the method generator instance.
+     * @param methodGen The method generator instance.
      */
     public ControlFlowGraph(final MethodGen methodGen) {
         this(methodGen, true);
@@ -373,7 +373,7 @@ public class ControlFlowGraph {
     /**
      * A Control Flow Graph.
      *
-     * @param methodGen the method generator instance.
+     * @param methodGen The method generator instance.
      * @param enableJustIceCheck if true, additional JustIce checks are performed.
      * @since 6.0
      */
@@ -392,7 +392,7 @@ public class ControlFlowGraph {
     /**
      * Returns the InstructionContext of a given instruction.
      *
-     * @param inst the instruction handle.
+     * @param inst The instruction handle.
      * @return The InstructionContext of the given instruction.
      */
     public InstructionContext contextOf(final InstructionHandle inst) {
@@ -406,7 +406,7 @@ public class ControlFlowGraph {
     /**
      * Returns the InstructionContext[] of a given InstructionHandle[], in a naturally ordered manner.
      *
-     * @param insts the instruction handles.
+     * @param insts The instruction handles.
      * @return The InstructionContext array of the given instruction handles.
      */
     public InstructionContext[] contextsOf(final InstructionHandle[] insts) {
@@ -430,7 +430,7 @@ public class ControlFlowGraph {
      * Returns true, if and only if the said instruction is not reachable; that means, if it is not part of this
      * ControlFlowGraph.
      *
-     * @param i the instruction handle.
+     * @param i The instruction handle.
      * @return true if the instruction is not reachable, false otherwise.
      */
     public boolean isDead(final InstructionHandle i) {

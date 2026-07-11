@@ -187,7 +187,7 @@ public final class CodeException implements Cloneable, Node, Constants {
     /**
      * Sets the type of exception that is caught.
      *
-     * @param catchType the type of exception that is caught.
+     * @param catchType The type of exception that is caught.
      */
     public void setCatchType(final int catchType) {
         this.catchType = catchType;

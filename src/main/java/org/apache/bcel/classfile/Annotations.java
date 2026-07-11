@@ -39,10 +39,10 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
     /**
      * Constructs an instance.
      *
-     * @param annotationType   the subclass type of the annotation.
+     * @param annotationType   The subclass type of the annotation.
      * @param nameIndex        Index pointing to the name <em>Code</em>.
      * @param length           Content length in bytes.
-     * @param annotationTable  the actual annotations.
+     * @param annotationTable  The actual annotations.
      * @param constantPool     Array of constants.
      * @param isRuntimeVisible whether this Annotation visible at runtime.
      */
@@ -56,7 +56,7 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
     /**
      * Constructs an instance.
      *
-     * @param annotationType   the subclass type of the annotation.
+     * @param annotationType   The subclass type of the annotation.
      * @param nameIndex        Index pointing to the name <em>Code</em>.
      * @param length           Content length in bytes.
      * @param input            Input stream.
@@ -127,7 +127,7 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
     /**
      * Sets the entries to set in this annotation.
      *
-     * @param annotationTable the entries to set in this annotation.
+     * @param annotationTable The entries to set in this annotation.
      */
     public final void setAnnotationTable(final AnnotationEntry[] annotationTable) {
         this.annotationTable = annotationTable != null ? annotationTable : AnnotationEntry.EMPTY_ARRAY;
@@ -154,7 +154,7 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
     /**
      * Writes the annotations to a DataOutputStream.
      *
-     * @param dos the data output stream.
+     * @param dos The data output stream.
      * @throws IOException if an I/O error occurs.
      */
     protected void writeAnnotations(final DataOutputStream dos) throws IOException {

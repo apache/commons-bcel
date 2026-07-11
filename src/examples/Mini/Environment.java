@@ -73,7 +73,7 @@ public class Environment implements Cloneable {
     /**
      * Inserts macro into table or overwrite old contents if it was already stored.
      *
-     * @param obj the entry to add.
+     * @param obj The entry to add.
      */
     public void put(final EnvEntry obj) {
         table.put(obj.getHashKey(), obj);

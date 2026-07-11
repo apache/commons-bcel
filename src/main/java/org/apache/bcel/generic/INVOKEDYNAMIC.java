@@ -108,7 +108,7 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
      * Since InvokeDynamic doesn't refer to a reference type, just return {@link Object}, as that is the only type we can
      * say for sure the reference will be.
      *
-     * @param cpg the ConstantPoolGen used to create the instruction.
+     * @param cpg The ConstantPoolGen used to create the instruction.
      * @return An ObjectType for {@link Object}.
      * @since 6.1
      */

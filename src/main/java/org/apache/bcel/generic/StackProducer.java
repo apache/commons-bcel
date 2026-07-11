@@ -26,7 +26,7 @@ public interface StackProducer {
     /**
      * Gets how many words are produced on stack.
      *
-     * @param cpg the constant pool generator.
+     * @param cpg The constant pool generator.
      * @return how many words are produced on stack.
      */
     int produceStack(ConstantPoolGen cpg);

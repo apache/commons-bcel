@@ -36,7 +36,7 @@ public class IF_ACMPEQ extends IfInstruction {
     /**
      * Constructs an IF_ACMPEQ instruction.
      *
-     * @param target the target instruction.
+     * @param target The target instruction.
      */
     public IF_ACMPEQ(final InstructionHandle target) {
         super(org.apache.bcel.Const.IF_ACMPEQ, target);

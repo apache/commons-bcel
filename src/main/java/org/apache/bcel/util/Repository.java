@@ -36,7 +36,7 @@ public interface Repository {
     /**
      * Finds the class with the name provided, if the class isn't there, return NULL.
      *
-     * @param className the class name.
+     * @param className The class name.
      * @return The JavaClass instance, or null.
      */
     JavaClass findClass(String className);
@@ -51,7 +51,7 @@ public interface Repository {
     /**
      * Finds the JavaClass instance for the given run-time class object.
      *
-     * @param clazz the class.
+     * @param clazz The class.
      * @return The JavaClass instance.
      * @throws ClassNotFoundException if the class can't be found.
      */
@@ -60,7 +60,7 @@ public interface Repository {
     /**
      * Finds the class with the name provided, if the class isn't there, make an attempt to load it.
      *
-     * @param className the class name.
+     * @param className The class name.
      * @return The JavaClass instance.
      * @throws ClassNotFoundException if the class can't be found.
      */
@@ -69,14 +69,14 @@ public interface Repository {
     /**
      * Removes class from repository.
      *
-     * @param clazz the class to remove.
+     * @param clazz The class to remove.
      */
     void removeClass(JavaClass clazz);
 
     /**
      * Stores the provided class under "clazz.getClassName()".
      *
-     * @param clazz the class to store.
+     * @param clazz The class to store.
      */
     void storeClass(JavaClass clazz);
 }

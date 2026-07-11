@@ -34,7 +34,7 @@ public class ClassGenException extends RuntimeException {
     /**
      * Constructs a new ClassGenException with the specified message.
      *
-     * @param s the error message.
+     * @param s The error message.
      */
     public ClassGenException(final String s) {
         super(s);
@@ -43,8 +43,8 @@ public class ClassGenException extends RuntimeException {
     /**
      * Constructs a new ClassGenException with the specified message and cause.
      *
-     * @param s the error message.
-     * @param initCause the cause.
+     * @param s The error message.
+     * @param initCause The cause.
      */
     public ClassGenException(final String s, final Throwable initCause) {
         super(s, initCause);

@@ -41,7 +41,7 @@ public abstract class StackInstruction extends Instruction {
     /**
      * Gets the type.
      *
-     * @param cp the constant pool.
+     * @param cp The constant pool.
      * @return Type.UNKNOWN.
      */
     public Type getType(final ConstantPoolGen cp) {

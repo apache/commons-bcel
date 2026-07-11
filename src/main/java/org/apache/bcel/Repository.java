@@ -38,7 +38,7 @@ public abstract class Repository {
     /**
      * Adds clazz to repository if there isn't an equally named class already in there.
      *
-     * @param clazz the class to add.
+     * @param clazz The class to add.
      * @return old entry in repository.
      */
     public static JavaClass addClass(final JavaClass clazz) {
@@ -57,7 +57,7 @@ public abstract class Repository {
     /**
      * Gets all interfaces implemented by the class.
      *
-     * @param clazz the class.
+     * @param clazz The class.
      * @return all interfaces implemented by class and its super classes and the interfaces that those interfaces extend,
      *         and so on. (Some people call this a transitive hull).
      * @throws ClassNotFoundException if any of the class's superclasses or superinterfaces can't be found.
@@ -69,7 +69,7 @@ public abstract class Repository {
     /**
      * Gets all interfaces implemented by the class.
      *
-     * @param className the class name.
+     * @param className The class name.
      * @return all interfaces implemented by class and its super classes and the interfaces that extend those interfaces,
      *         and so on.
      * @throws ClassNotFoundException if the named class can't be found, or if any of its superclasses or superinterfaces
@@ -91,7 +91,7 @@ public abstract class Repository {
     /**
      * Gets the list of super classes.
      *
-     * @param clazz the class.
+     * @param clazz The class.
      * @return list of super classes of clazz in ascending order, that is, Object is always the last element.
      * @throws ClassNotFoundException if any of the superclasses can't be found.
      */
@@ -102,7 +102,7 @@ public abstract class Repository {
     /**
      * Gets the list of super classes.
      *
-     * @param className the class name.
+     * @param className The class name.
      * @return list of super classes of clazz in ascending order, that is, Object is always the last element.
      * @throws ClassNotFoundException if the named class or any of its superclasses can't be found.
      */
@@ -113,8 +113,8 @@ public abstract class Repository {
     /**
      * Tests if clazz is an implementation of interface inter.
      *
-     * @param clazz the class to test.
-     * @param inter the interface.
+     * @param clazz The class to test.
+     * @param inter The interface.
      * @return true, if clazz is an implementation of interface inter.
      * @throws ClassNotFoundException if any superclasses or superinterfaces of clazz can't be found.
      */
@@ -125,8 +125,8 @@ public abstract class Repository {
     /**
      * Tests if clazz is an implementation of interface inter.
      *
-     * @param clazz the class to test.
-     * @param inter the interface name.
+     * @param clazz The class to test.
+     * @param inter The interface name.
      * @return true, if clazz is an implementation of interface inter.
      * @throws ClassNotFoundException if inter or any superclasses or superinterfaces of clazz can't be found.
      */
@@ -137,8 +137,8 @@ public abstract class Repository {
     /**
      * Tests if clazz is an implementation of interface inter.
      *
-     * @param clazz the class name to test.
-     * @param inter the interface.
+     * @param clazz The class name to test.
+     * @param inter The interface.
      * @return true, if clazz is an implementation of interface inter.
      * @throws ClassNotFoundException if clazz or any superclasses or superinterfaces of clazz can't be found.
      */
@@ -149,8 +149,8 @@ public abstract class Repository {
     /**
      * Tests if clazz is an implementation of interface inter.
      *
-     * @param clazz the class name to test.
-     * @param inter the interface name.
+     * @param clazz The class name to test.
+     * @param inter The interface name.
      * @return true, if clazz is an implementation of interface inter.
      * @throws ClassNotFoundException if clazz, inter, or any superclasses or superinterfaces of clazz can't be found.
      */
@@ -161,8 +161,8 @@ public abstract class Repository {
     /**
      * Equivalent to runtime "instanceof" operator.
      *
-     * @param clazz the class to test.
-     * @param superclass the superclass.
+     * @param clazz The class to test.
+     * @param superclass The superclass.
      * @return true, if clazz is an instance of superclass.
      * @throws ClassNotFoundException if any superclasses or superinterfaces of clazz can't be found.
      */
@@ -173,8 +173,8 @@ public abstract class Repository {
     /**
      * Tests if clazz is an instance of superclass.
      *
-     * @param clazz the class to test.
-     * @param superclass the superclass name.
+     * @param clazz The class to test.
+     * @param superclass The superclass name.
      * @return true, if clazz is an instance of superclass.
      * @throws ClassNotFoundException if superclass can't be found.
      */
@@ -185,8 +185,8 @@ public abstract class Repository {
     /**
      * Tests if clazz is an instance of superclass.
      *
-     * @param clazz the class name to test.
-     * @param superclass the superclass.
+     * @param clazz The class name to test.
+     * @param superclass The superclass.
      * @return true, if clazz is an instance of superclass.
      * @throws ClassNotFoundException if clazz can't be found.
      */
@@ -197,8 +197,8 @@ public abstract class Repository {
     /**
      * Tests if clazz is an instance of superclass.
      *
-     * @param clazz the class name to test.
-     * @param superclass the superclass name.
+     * @param clazz The class name to test.
+     * @param superclass The superclass name.
      * @return true, if clazz is an instance of superclass.
      * @throws ClassNotFoundException if either clazz or superclass can't be found.
      */
@@ -209,7 +209,7 @@ public abstract class Repository {
     /**
      * Tries to find class source using the internal repository instance.
      *
-     * @param clazz the class.
+     * @param clazz The class.
      * @see Class
      * @return JavaClass object for given runtime class.
      * @throws ClassNotFoundException if the class could not be found or parsed correctly.
@@ -221,7 +221,7 @@ public abstract class Repository {
     /**
      * Lookups class somewhere found on your CLASSPATH, or wherever the repository instance looks for it.
      *
-     * @param className the class name.
+     * @param className The class name.
      * @return class object for given fully qualified class name.
      * @throws ClassNotFoundException if the class could not be found or parsed correctly.
      */
@@ -232,7 +232,7 @@ public abstract class Repository {
     /**
      * Looks up the class file.
      *
-     * @param className the class name.
+     * @param className The class name.
      * @return class file object for given Java class by looking on the system class path; returns null if the class file
      *         can't be found.
      */
@@ -247,7 +247,7 @@ public abstract class Repository {
     /**
      * Removes given class from repository.
      *
-     * @param clazz the class to remove.
+     * @param clazz The class to remove.
      */
     public static void removeClass(final JavaClass clazz) {
         repository.removeClass(clazz);
@@ -256,7 +256,7 @@ public abstract class Repository {
     /**
      * Removes class with given (fully qualified) name from repository.
      *
-     * @param clazz the class name to remove.
+     * @param clazz The class name to remove.
      */
     public static void removeClass(final String clazz) {
         repository.removeClass(repository.findClass(clazz));
@@ -265,7 +265,7 @@ public abstract class Repository {
     /**
      * Sets repository instance to be used for class loading.
      *
-     * @param rep the repository instance.
+     * @param rep The repository instance.
      */
     public static void setRepository(final org.apache.bcel.util.Repository rep) {
         repository = rep;

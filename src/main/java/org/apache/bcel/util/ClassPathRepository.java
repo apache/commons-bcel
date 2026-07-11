@@ -37,7 +37,7 @@ public class ClassPathRepository extends AbstractClassPathRepository {
     /**
      * Constructs a ClassPathRepository.
      *
-     * @param classPath the class path.
+     * @param classPath The class path.
      */
     public ClassPathRepository(final ClassPath classPath) {
         super(classPath);

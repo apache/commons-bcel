@@ -76,7 +76,7 @@ public class InstructionHandle {
     /**
      * Constructs an InstructionHandle.
      *
-     * @param i the instruction.
+     * @param i The instruction.
      */
     protected InstructionHandle(final Instruction i) {
         setInstruction(i);
@@ -94,8 +94,8 @@ public class InstructionHandle {
     /**
      * Add an attribute to an instruction handle.
      *
-     * @param key the key object to store/retrieve the attribute.
-     * @param attr the attribute to associate with this handle.
+     * @param key The key object to store/retrieve the attribute.
+     * @param attr The attribute to associate with this handle.
      */
     public void addAttribute(final Object key, final Object attr) {
         if (attributes == null) {
@@ -117,7 +117,7 @@ public class InstructionHandle {
     /**
      * Denote this handle is being referenced by t.
      *
-     * @param t the instruction targeter.
+     * @param t The instruction targeter.
      */
     public void addTargeter(final InstructionTargeter t) {
         if (targeters == null) {
@@ -142,7 +142,7 @@ public class InstructionHandle {
     /**
      * Gets attribute of an instruction handle.
      *
-     * @param key the key object to store/retrieve the attribute.
+     * @param key The key object to store/retrieve the attribute.
      * @return The attribute value.
      */
     public Object getAttribute(final Object key) {
@@ -233,7 +233,7 @@ public class InstructionHandle {
     /**
      * Delete an attribute of an instruction handle.
      *
-     * @param key the key object to retrieve the attribute.
+     * @param key The key object to retrieve the attribute.
      */
     public void removeAttribute(final Object key) {
         if (attributes != null) {
@@ -244,7 +244,7 @@ public class InstructionHandle {
     /**
      * Denote this handle isn't referenced anymore by t.
      *
-     * @param t the instruction targeter.
+     * @param t The instruction targeter.
      */
     public void removeTargeter(final InstructionTargeter t) {
         if (targeters != null) {
@@ -255,7 +255,7 @@ public class InstructionHandle {
     /**
      * Replace current instruction contained in this handle. Old instruction is disposed using Instruction.dispose().
      *
-     * @param i the new instruction.
+     * @param i The new instruction.
      */
     public void setInstruction(final Instruction i) { // Overridden in BranchHandle TODO could be package-protected?
         if (i == null) {
@@ -273,7 +273,7 @@ public class InstructionHandle {
     /**
      * Sets the next instruction handle.
      *
-     * @param next the next to set.
+     * @param next The next to set.
      * @return The next instruction handle.
      * @since 6.0
      */
@@ -285,7 +285,7 @@ public class InstructionHandle {
     /**
      * Sets the position, the byte code offset of the contained instruction.
      *
-     * @param pos the position.
+     * @param pos The position.
      */
     void setPosition(final int pos) {
         i_position = pos;
@@ -294,7 +294,7 @@ public class InstructionHandle {
     /**
      * Sets the previous instruction handle.
      *
-     * @param prev the prev to set.
+     * @param prev The prev to set.
      * @return The previous instruction handle.
      * @since 6.0
      */
@@ -310,7 +310,7 @@ public class InstructionHandle {
      * Warning: if this is used on a BranchHandle then some methods such as getPosition() will still refer to the original
      * cached instruction, whereas other BH methods may affect the cache and the replacement instruction.
      *
-     * @param i the replacement instruction.
+     * @param i The replacement instruction.
      * @return The old instruction.
      */
     // See BCEL-273
@@ -347,7 +347,7 @@ public class InstructionHandle {
      * (byte) positions and offsets by calling this function.
      *
      * @param offset additional offset caused by preceding (variable length) instructions.
-     * @param maxOffset the maximum offset that may be caused by these instructions.
+     * @param maxOffset The maximum offset that may be caused by these instructions.
      * @return additional offset caused by possible change of this instruction's length.
      */
     protected int updatePosition(final int offset, final int maxOffset) {

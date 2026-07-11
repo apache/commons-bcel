@@ -27,7 +27,7 @@ public interface ClassObserver {
     /**
      * Notifies the observer that the ClassGen object has changed.
      *
-     * @param clazz the ClassGen object that changed.
+     * @param clazz The ClassGen object that changed.
      */
     void notify(ClassGen clazz);
 }

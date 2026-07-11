@@ -39,8 +39,8 @@ public class ClassElementValueGen extends ElementValueGen {
     /**
      * Constructs a ClassElementValueGen.
      *
-     * @param value the class element value.
-     * @param cpool the constant pool generator.
+     * @param value The class element value.
+     * @param cpool The constant pool generator.
      * @param copyPoolEntries whether to copy pool entries.
      */
     public ClassElementValueGen(final ClassElementValue value, final ConstantPoolGen cpool, final boolean copyPoolEntries) {
@@ -56,8 +56,8 @@ public class ClassElementValueGen extends ElementValueGen {
     /**
      * Constructs a ClassElementValueGen.
      *
-     * @param typeIdx the type index.
-     * @param cpool the constant pool generator.
+     * @param typeIdx The type index.
+     * @param cpool The constant pool generator.
      */
     protected ClassElementValueGen(final int typeIdx, final ConstantPoolGen cpool) {
         super(CLASS, cpool);
@@ -67,8 +67,8 @@ public class ClassElementValueGen extends ElementValueGen {
     /**
      * Constructs a ClassElementValueGen.
      *
-     * @param t the object type.
-     * @param cpool the constant pool generator.
+     * @param t The object type.
+     * @param cpool The constant pool generator.
      */
     public ClassElementValueGen(final ObjectType t, final ConstantPoolGen cpool) {
         super(CLASS, cpool);

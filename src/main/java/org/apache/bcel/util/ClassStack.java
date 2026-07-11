@@ -58,7 +58,7 @@ public class ClassStack {
     /**
      * Pushes a JavaClass onto the stack.
      *
-     * @param clazz the JavaClass to push.
+     * @param clazz The JavaClass to push.
      */
     public void push(final JavaClass clazz) {
         stack.push(clazz);

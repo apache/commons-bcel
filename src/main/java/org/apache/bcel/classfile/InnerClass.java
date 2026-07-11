@@ -194,7 +194,7 @@ public final class InnerClass implements Cloneable, Node {
     /**
      * Gets the resolved string representation.
      *
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      * @return Resolved string representation.
      */
     public String toString(final ConstantPool constantPool) {

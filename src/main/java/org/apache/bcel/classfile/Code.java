@@ -172,7 +172,7 @@ public final class Code extends Attribute {
     /**
      * Creates a deep copy of this attribute.
      *
-     * @param constantPool the constant pool to duplicate.
+     * @param constantPool The constant pool to duplicate.
      * @return deep copy of this attribute.
      */
     @Override
@@ -333,7 +333,7 @@ public final class Code extends Attribute {
     /**
      * Sets the attributes for this Code.
      *
-     * @param attributes the attributes to set for this Code.
+     * @param attributes The attributes to set for this Code.
      */
     public void setAttributes(final Attribute[] attributes) {
         this.attributes = attributes != null ? attributes : EMPTY_ARRAY;

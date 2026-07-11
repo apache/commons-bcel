@@ -39,8 +39,8 @@ public class EnumElementValueGen extends ElementValueGen {
     /**
      * Constructs an EnumElementValueGen from an EnumElementValue.
      *
-     * @param value the enum element value.
-     * @param cpool the constant pool.
+     * @param value The enum element value.
+     * @param cpool The constant pool.
      * @param copyPoolEntries whether to copy pool entries.
      */
     public EnumElementValueGen(final EnumElementValue value, final ConstantPoolGen cpool, final boolean copyPoolEntries) {
@@ -58,9 +58,9 @@ public class EnumElementValueGen extends ElementValueGen {
      * This constructor assumes the constant pool already contains the right type and value - as indicated by typeIdx and valueIdx.
      * This constructor is used for deserialization.
      *
-     * @param typeIdx the type index.
-     * @param valueIdx the value index.
-     * @param cpool the constant pool.
+     * @param typeIdx The type index.
+     * @param valueIdx The value index.
+     * @param cpool The constant pool.
      */
     protected EnumElementValueGen(final int typeIdx, final int valueIdx, final ConstantPoolGen cpool) {
         super(ENUM_CONSTANT, cpool);
@@ -74,9 +74,9 @@ public class EnumElementValueGen extends ElementValueGen {
     /**
      * Constructs an EnumElementValueGen.
      *
-     * @param t the object type.
-     * @param value the value.
-     * @param cpool the constant pool.
+     * @param t The object type.
+     * @param value The value.
+     * @param cpool The constant pool.
      */
     public EnumElementValueGen(final ObjectType t, final String value, final ConstantPoolGen cpool) {
         super(ENUM_CONSTANT, cpool);

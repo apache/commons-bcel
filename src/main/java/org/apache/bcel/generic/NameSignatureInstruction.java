@@ -40,7 +40,7 @@ public abstract class NameSignatureInstruction extends CPInstruction {
     /**
      * Constructs a NameSignatureInstruction.
      *
-     * @param opcode the opcode.
+     * @param opcode The opcode.
      * @param index index into constant pool.
      */
     public NameSignatureInstruction(final short opcode, final int index) {

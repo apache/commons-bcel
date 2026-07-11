@@ -41,7 +41,7 @@ public class ReturnaddressType extends Type {
     /**
      * Creates a ReturnaddressType object with a target.
      *
-     * @param returnTarget the target instruction.
+     * @param returnTarget The target instruction.
      */
     public ReturnaddressType(final InstructionHandle returnTarget) {
         super(Const.T_ADDRESS, "<return address targeting " + returnTarget + ">");
@@ -51,7 +51,7 @@ public class ReturnaddressType extends Type {
     /**
      * Returns if the two Returnaddresses refer to the same target.
      *
-     * @param rat the object to compare.
+     * @param rat The object to compare.
      * @return true if equal.
      */
     @Override

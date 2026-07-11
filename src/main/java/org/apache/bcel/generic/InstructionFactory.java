@@ -242,7 +242,7 @@ public class InstructionFactory implements InstructionConstants {
      * Create binary operation for simple basic types, such as int and float.
      *
      * @param op operation, such as "+", "*", "&lt;&lt;", etc.
-     * @param type the operand type.
+     * @param type The operand type.
      * @return The binary arithmetic instruction.
      */
     public static ArithmeticInstruction createBinaryOperation(final String op, final Type type) {
@@ -268,8 +268,8 @@ public class InstructionFactory implements InstructionConstants {
      * Create branch instruction by given opcode, except LOOKUPSWITCH and TABLESWITCH. For those you should use the SWITCH
      * compound instruction.
      *
-     * @param opcode the branch opcode.
-     * @param target the target instruction handle.
+     * @param opcode The branch opcode.
+     * @param target The target instruction handle.
      * @return The branch instruction.
      */
     public static BranchInstruction createBranchInstruction(final short opcode, final InstructionHandle target) {
@@ -352,7 +352,7 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Creates a load instruction for the given type.
      *
-     * @param type the variable type.
+     * @param type The variable type.
      * @param index index of local variable.
      * @return The load instruction.
      */
@@ -381,7 +381,7 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Create "null" value for reference types, 0 for basic types like int.
      *
-     * @param type the type.
+     * @param type The type.
      * @return The null or zero instruction.
      */
     public static Instruction createNull(final Type type) {
@@ -421,7 +421,7 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Create typed return.
      *
-     * @param type the return type.
+     * @param type The return type.
      * @return The return instruction.
      */
     public static ReturnInstruction createReturn(final Type type) {
@@ -451,7 +451,7 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Creates a store instruction.
      *
-     * @param type the variable type.
+     * @param type The variable type.
      * @param index index of local variable.
      * @return The store instruction.
      */
@@ -505,7 +505,7 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Initialize with ClassGen object.
      *
-     * @param cg the class generator.
+     * @param cg The class generator.
      */
     public InstructionFactory(final ClassGen cg) {
         this(cg, cg.getConstantPool());
@@ -514,8 +514,8 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Constructs an InstructionFactory.
      *
-     * @param cg the class generator.
-     * @param cp the constant pool generator.
+     * @param cg The class generator.
+     * @param cp The constant pool generator.
      */
     public InstructionFactory(final ClassGen cg, final ConstantPoolGen cp) {
         this.cg = cg;
@@ -525,7 +525,7 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Initialize just with ConstantPoolGen object.
      *
-     * @param cp the constant pool generator.
+     * @param cp The constant pool generator.
      */
     public InstructionFactory(final ConstantPoolGen cp) {
         this(null, cp);
@@ -534,7 +534,7 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Creates an append instruction for the given type.
      *
-     * @param type the type to append.
+     * @param type The type to append.
      * @return The append instruction.
      */
     public Instruction createAppend(final Type type) {
@@ -564,8 +564,8 @@ public class InstructionFactory implements InstructionConstants {
      * Create conversion operation for two stack operands, this may be an I2C, instruction, for example, if the operands are basic
      * types and CHECKCAST if they are reference types.
      *
-     * @param srcType the source type.
-     * @param destType the destination type.
+     * @param srcType The source type.
+     * @param destType The destination type.
      * @return The conversion instruction.
      */
     public Instruction createCast(final Type srcType, final Type destType) {
@@ -596,7 +596,7 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Creates a CHECKCAST instruction.
      *
-     * @param t the reference type.
+     * @param t The reference type.
      * @return The CHECKCAST instruction.
      */
     public CHECKCAST createCheckCast(final ReferenceType t) {
@@ -658,9 +658,9 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Creates a GETFIELD instruction.
      *
-     * @param className the class name.
-     * @param name the field name.
-     * @param t the field type.
+     * @param className The class name.
+     * @param name The field name.
+     * @param t The field type.
      * @return The GETFIELD instruction.
      */
     public GETFIELD createGetField(final String className, final String name, final Type t) {
@@ -670,9 +670,9 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Creates a GETSTATIC instruction.
      *
-     * @param className the class name.
-     * @param name the field name.
-     * @param t the field type.
+     * @param className The class name.
+     * @param name The field name.
+     * @param t The field type.
      * @return The GETSTATIC instruction.
      */
     public GETSTATIC createGetStatic(final String className, final String name, final Type t) {
@@ -682,7 +682,7 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Creates an INSTANCEOF instruction.
      *
-     * @param t the reference type.
+     * @param t The reference type.
      * @return The INSTANCEOF instruction.
      */
     public INSTANCEOF createInstanceOf(final ReferenceType t) {
@@ -762,7 +762,7 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Creates a NEW instruction.
      *
-     * @param t the object type.
+     * @param t The object type.
      * @return The NEW instruction.
      */
     public NEW createNew(final ObjectType t) {
@@ -772,7 +772,7 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Creates a NEW instruction.
      *
-     * @param s the class name.
+     * @param s The class name.
      * @return The NEW instruction.
      */
     public NEW createNew(final String s) {
@@ -782,8 +782,8 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Create new array of given size and type.
      *
-     * @param t the array element type.
-     * @param dim the array dimensions.
+     * @param t The array element type.
+     * @param dim The array dimensions.
      * @return An instruction that creates the corresponding array at runtime, for example is an AllocationInstruction.
      */
     public Instruction createNewArray(final Type t, final short dim) {
@@ -808,7 +808,7 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Create a call to the most popular System.out.println() method.
      *
-     * @param s the string to print.
+     * @param s The string to print.
      * @return The instruction list.
      */
     public InstructionList createPrintln(final String s) {
@@ -823,9 +823,9 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Creates a PUTFIELD instruction.
      *
-     * @param className the class name.
-     * @param name the field name.
-     * @param t the field type.
+     * @param className The class name.
+     * @param name The field name.
+     * @param t The field type.
      * @return The PUTFIELD instruction.
      */
     public PUTFIELD createPutField(final String className, final String name, final Type t) {
@@ -835,9 +835,9 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Creates a PUTSTATIC instruction.
      *
-     * @param className the class name.
-     * @param name the field name.
-     * @param t the field type.
+     * @param className The class name.
+     * @param name The field name.
+     * @param t The field type.
      * @return The PUTSTATIC instruction.
      */
     public PUTSTATIC createPutStatic(final String className, final String name, final Type t) {
@@ -865,7 +865,7 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Sets the class generator.
      *
-     * @param c the class generator.
+     * @param c The class generator.
      */
     public void setClassGen(final ClassGen c) {
         cg = c;
@@ -874,7 +874,7 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Sets the constant pool generator.
      *
-     * @param c the constant pool generator.
+     * @param c The constant pool generator.
      */
     public void setConstantPool(final ConstantPoolGen c) {
         cp = c;

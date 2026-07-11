@@ -36,7 +36,7 @@ public class IF_ICMPGT extends IfInstruction {
     /**
      * Constructs an IF_ICMPGT instruction.
      *
-     * @param target the target instruction.
+     * @param target The target instruction.
      */
     public IF_ICMPGT(final InstructionHandle target) {
         super(org.apache.bcel.Const.IF_ICMPGT, target);

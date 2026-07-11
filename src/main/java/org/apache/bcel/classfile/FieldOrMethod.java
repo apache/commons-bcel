@@ -72,7 +72,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * Constructs object from file stream.
      *
      * @param file Input stream.
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      * @throws IOException if an I/O error occurs.
      */
     protected FieldOrMethod(final DataInput file, final ConstantPool constantPool) throws IOException {
@@ -89,7 +89,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * Constructs object from file stream.
      *
      * @param file Input stream.
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      * @throws IOException if an I/O error occurs.
      * @deprecated (6.0) Use {@link #FieldOrMethod(java.io.DataInput, ConstantPool)} instead.
      */
@@ -129,7 +129,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     /**
      * Creates a deep copy of this field.
      *
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      * @return deep copy of this field.
      */
     protected FieldOrMethod copy_(final ConstantPool constantPool) {
@@ -179,7 +179,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * Gets attribute for given tag.
      *
      * @param <T> The attribute type.
-     * @param tag the attribute tag.
+     * @param tag The attribute tag.
      * @return Attribute for given tag, null if not found.
      * Refer to {@link org.apache.bcel.Const#ATTR_UNKNOWN} constants named ATTR_* for possible values.
      * @since 6.10.0

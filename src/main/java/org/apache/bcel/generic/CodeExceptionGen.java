@@ -126,7 +126,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     /**
      * Sets the type of the Exception to catch. Set 'null' for ANY.
      *
-     * @param catchType the type of the Exception to catch.
+     * @param catchType The type of the Exception to catch.
      */
     public void setCatchType(final ObjectType catchType) {
         this.catchType = catchType;

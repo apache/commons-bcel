@@ -43,9 +43,9 @@ public class SimpleElementValueGen extends ElementValueGen {
     /**
      * Constructs a SimpleElementValueGen for a boolean value.
      *
-     * @param type the element value type.
-     * @param cpGen the constant pool generator.
-     * @param value the boolean value.
+     * @param type The element value type.
+     * @param cpGen The constant pool generator.
+     * @param value The boolean value.
      */
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final boolean value) {
         super(type, cpGen);
@@ -59,9 +59,9 @@ public class SimpleElementValueGen extends ElementValueGen {
     /**
      * Constructs a SimpleElementValueGen for a byte value.
      *
-     * @param type the element value type.
-     * @param cpGen the constant pool generator.
-     * @param value the byte value.
+     * @param type The element value type.
+     * @param cpGen The constant pool generator.
+     * @param value The byte value.
      */
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final byte value) {
         super(type, cpGen);
@@ -71,9 +71,9 @@ public class SimpleElementValueGen extends ElementValueGen {
     /**
      * Constructs a SimpleElementValueGen for a char value.
      *
-     * @param type the element value type.
-     * @param cpGen the constant pool generator.
-     * @param value the char value.
+     * @param type The element value type.
+     * @param cpGen The constant pool generator.
+     * @param value The char value.
      */
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final char value) {
         super(type, cpGen);
@@ -83,9 +83,9 @@ public class SimpleElementValueGen extends ElementValueGen {
     /**
      * Constructs a SimpleElementValueGen for a double value.
      *
-     * @param type the element value type.
-     * @param cpGen the constant pool generator.
-     * @param value the double value.
+     * @param type The element value type.
+     * @param cpGen The constant pool generator.
+     * @param value The double value.
      */
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final double value) {
         super(type, cpGen);
@@ -95,9 +95,9 @@ public class SimpleElementValueGen extends ElementValueGen {
     /**
      * Constructs a SimpleElementValueGen for a float value.
      *
-     * @param type the element value type.
-     * @param cpGen the constant pool generator.
-     * @param value the float value.
+     * @param type The element value type.
+     * @param cpGen The constant pool generator.
+     * @param value The float value.
      */
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final float value) {
         super(type, cpGen);
@@ -107,9 +107,9 @@ public class SimpleElementValueGen extends ElementValueGen {
     /**
      * Constructs a SimpleElementValueGen for an int value.
      *
-     * @param type the element value type.
-     * @param cpGen the constant pool generator.
-     * @param value the int value.
+     * @param type The element value type.
+     * @param cpGen The constant pool generator.
+     * @param value The int value.
      */
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final int value) {
         super(type, cpGen);
@@ -119,9 +119,9 @@ public class SimpleElementValueGen extends ElementValueGen {
     /**
      * Constructs a SimpleElementValueGen for a long value.
      *
-     * @param type the element value type.
-     * @param cpGen the constant pool generator.
-     * @param value the long value.
+     * @param type The element value type.
+     * @param cpGen The constant pool generator.
+     * @param value The long value.
      */
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final long value) {
         super(type, cpGen);
@@ -131,9 +131,9 @@ public class SimpleElementValueGen extends ElementValueGen {
     /**
      * Constructs a SimpleElementValueGen for a short value.
      *
-     * @param type the element value type.
-     * @param cpGen the constant pool generator.
-     * @param value the short value.
+     * @param type The element value type.
+     * @param cpGen The constant pool generator.
+     * @param value The short value.
      */
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final short value) {
         super(type, cpGen);
@@ -143,9 +143,9 @@ public class SimpleElementValueGen extends ElementValueGen {
     /**
      * Constructs a SimpleElementValueGen for a String value.
      *
-     * @param type the element value type.
-     * @param cpGen the constant pool generator.
-     * @param value the string value.
+     * @param type The element value type.
+     * @param cpGen The constant pool generator.
+     * @param value The string value.
      */
     public SimpleElementValueGen(final int type, final ConstantPoolGen cpGen, final String value) {
         super(type, cpGen);
@@ -159,9 +159,9 @@ public class SimpleElementValueGen extends ElementValueGen {
      * Protected ctor used for deserialization, doesn't *put* an entry in the constant pool, assumes the one at the supplied
      * index is correct.
      *
-     * @param type the element value type.
-     * @param idx the constant pool index.
-     * @param cpGen the constant pool generator.
+     * @param type The element value type.
+     * @param idx The constant pool index.
+     * @param cpGen The constant pool generator.
      */
     protected SimpleElementValueGen(final int type, final int idx, final ConstantPoolGen cpGen) {
         super(type, cpGen);
@@ -172,8 +172,8 @@ public class SimpleElementValueGen extends ElementValueGen {
      * The boolean controls whether we copy info from the 'old' constant pool to the 'new'. You need to use this ctor if the
      * annotation is being copied from one file to another.
      *
-     * @param value the simple element value to copy.
-     * @param cpool the constant pool generator.
+     * @param value The simple element value to copy.
+     * @param cpool The constant pool generator.
      * @param copyPoolEntries whether to copy pool entries.
      */
     public SimpleElementValueGen(final SimpleElementValue value, final ConstantPoolGen cpool, final boolean copyPoolEntries) {

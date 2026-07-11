@@ -151,7 +151,7 @@ public final class PermittedSubclasses extends Attribute {
     /**
      * Sets class indices.
      *
-     * @param classes the list of class indexes Also redefines number_of_classes according to table length.
+     * @param classes The list of class indexes Also redefines number_of_classes according to table length.
      */
     public void setClasses(final int[] classes) {
         this.classes = ArrayUtils.nullToEmpty(classes);

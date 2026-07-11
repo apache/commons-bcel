@@ -88,7 +88,7 @@ public final class ConstantClass extends Constant implements ConstantObject {
     /**
      * Gets the dereferenced string.
      *
-     * @param cp the constant pool.
+     * @param cp The constant pool.
      * @return dereferenced string.
      */
     public String getBytes(final ConstantPool cp) {
@@ -98,7 +98,7 @@ public final class ConstantClass extends Constant implements ConstantObject {
     /**
      * Gets the String object.
      *
-     * @param cp the constant pool.
+     * @param cp The constant pool.
      * @return String object.
      */
     @Override
@@ -118,7 +118,7 @@ public final class ConstantClass extends Constant implements ConstantObject {
     /**
      * Sets the name index in the constant pool.
      *
-     * @param nameIndex the name index in the constant pool of this Constant Class.
+     * @param nameIndex The name index in the constant pool of this Constant Class.
      */
     public void setNameIndex(final int nameIndex) {
         this.nameIndex = nameIndex;

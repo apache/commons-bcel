@@ -36,7 +36,7 @@ public class IF_ICMPLT extends IfInstruction {
     /**
      * Constructs an IF_ICMPLT instruction.
      *
-     * @param target the target instruction.
+     * @param target The target instruction.
      */
     public IF_ICMPLT(final InstructionHandle target) {
         super(org.apache.bcel.Const.IF_ICMPLT, target);

@@ -27,7 +27,7 @@ public interface InstructionListObserver {
     /**
      * Notifies observer of changes.
      *
-     * @param list the instruction list.
+     * @param list The instruction list.
      */
     void notify(InstructionList list);
 }

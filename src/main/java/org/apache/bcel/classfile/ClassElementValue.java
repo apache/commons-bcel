@@ -35,9 +35,9 @@ public class ClassElementValue extends ElementValue {
     /**
      * Constructs a ClassElementValue.
      *
-     * @param type the type.
-     * @param idx the index.
-     * @param cpool the constant pool.
+     * @param type The type.
+     * @param idx The index.
+     * @param cpool The constant pool.
      */
     public ClassElementValue(final int type, final int idx, final ConstantPool cpool) {
         super(type, cpool);

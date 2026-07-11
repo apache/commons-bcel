@@ -123,7 +123,7 @@ public class IINC extends LocalVariableInstruction {
     /**
      * Sets increment factor.
      *
-     * @param c the increment factor.
+     * @param c The increment factor.
      */
     public final void setIncrement(final int c) {
         this.c = c;

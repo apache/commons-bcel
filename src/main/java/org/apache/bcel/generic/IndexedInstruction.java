@@ -33,7 +33,7 @@ public interface IndexedInstruction {
     /**
      * Sets the index.
      *
-     * @param index the index.
+     * @param index The index.
      */
     void setIndex(int index);
 }

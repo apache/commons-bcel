@@ -40,8 +40,8 @@ public class LruCacheClassPathRepository extends AbstractClassPathRepository {
     /**
      * Constructs a new LruCacheClassPathRepository.
      *
-     * @param path the class path.
-     * @param cacheSize the cache size.
+     * @param path The class path.
+     * @param cacheSize The cache size.
      */
     public LruCacheClassPathRepository(final ClassPath path, final int cacheSize) {
         super(path);

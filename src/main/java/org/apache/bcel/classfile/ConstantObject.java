@@ -28,7 +28,7 @@ public interface ConstantObject {
     /**
      * Gets the object representing the constant, for example, Long for ConstantLong.
      *
-     * @param constantPool the constant.
+     * @param constantPool The constant.
      * @return object representing the constant, for example, Long for ConstantLong.
      */
     Object getConstantValue(ConstantPool constantPool);

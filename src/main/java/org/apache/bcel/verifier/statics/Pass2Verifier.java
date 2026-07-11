@@ -1254,7 +1254,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
     /**
      * Should only be instantiated by a Verifier.
      *
-     * @param verifier the verifier.
+     * @param verifier The verifier.
      * @see Verifier
      */
     public Pass2Verifier(final Verifier verifier) {
@@ -1451,7 +1451,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * {@code Repository.lookupClass(myOwner.getClassname()).getMethods()[method_nr];}. You should not add own information.
      * Leave that to JustIce.
      *
-     * @param methodNr the method number.
+     * @param methodNr The method number.
      * @return The LocalVariablesInfo object or null.
      */
     public LocalVariablesInfo getLocalVariablesInfo(final int methodNr) {

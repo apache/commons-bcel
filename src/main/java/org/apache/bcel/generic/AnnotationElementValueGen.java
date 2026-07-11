@@ -36,8 +36,8 @@ public class AnnotationElementValueGen extends ElementValueGen {
     /**
      * Constructs an AnnotationElementValueGen.
      *
-     * @param value the annotation element value.
-     * @param cpool the constant pool generator.
+     * @param value The annotation element value.
+     * @param cpool The constant pool generator.
      * @param copyPoolEntries whether to copy pool entries.
      */
     public AnnotationElementValueGen(final AnnotationElementValue value, final ConstantPoolGen cpool, final boolean copyPoolEntries) {
@@ -48,8 +48,8 @@ public class AnnotationElementValueGen extends ElementValueGen {
     /**
      * Constructs an AnnotationElementValueGen.
      *
-     * @param a the annotation entry generator.
-     * @param cpool the constant pool generator.
+     * @param a The annotation entry generator.
+     * @param cpool The constant pool generator.
      */
     public AnnotationElementValueGen(final AnnotationEntryGen a, final ConstantPoolGen cpool) {
         super(ANNOTATION, cpool);
@@ -59,9 +59,9 @@ public class AnnotationElementValueGen extends ElementValueGen {
     /**
      * Constructs an AnnotationElementValueGen.
      *
-     * @param type the type.
-     * @param annotation the annotation.
-     * @param cpool the constant pool generator.
+     * @param type The type.
+     * @param annotation The annotation.
+     * @param cpool The constant pool generator.
      */
     public AnnotationElementValueGen(final int type, final AnnotationEntryGen annotation, final ConstantPoolGen cpool) {
         super(type, cpool);

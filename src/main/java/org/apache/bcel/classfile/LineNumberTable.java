@@ -79,7 +79,7 @@ public final class LineNumberTable extends Attribute implements Iterable<LineNum
      * Note that both objects use the same references (shallow copy). Use copy() for a physical copy.
      * </p>
      *
-     * @param c the instance to copy.
+     * @param c The instance to copy.
      */
     public LineNumberTable(final LineNumberTable c) {
         this(c.getNameIndex(), c.getLength(), c.getLineNumberTable(), c.getConstantPool());
@@ -197,7 +197,7 @@ public final class LineNumberTable extends Attribute implements Iterable<LineNum
     /**
      * Sets the line number table.
      *
-     * @param lineNumberTable the line number entries for this table.
+     * @param lineNumberTable The line number entries for this table.
      */
     public void setLineNumberTable(final LineNumber[] lineNumberTable) {
         this.lineNumberTable = lineNumberTable != null ? lineNumberTable : LineNumber.EMPTY_ARRAY;

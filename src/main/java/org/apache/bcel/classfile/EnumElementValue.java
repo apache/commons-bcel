@@ -35,10 +35,10 @@ public class EnumElementValue extends ElementValue {
     /**
      * Constructs an EnumElementValue.
      *
-     * @param type the element value type.
-     * @param typeIdx the type index.
-     * @param valueIdx the value index.
-     * @param cpool the constant pool.
+     * @param type The element value type.
+     * @param typeIdx The type index.
+     * @param valueIdx The value index.
+     * @param cpool The constant pool.
      */
     public EnumElementValue(final int type, final int typeIdx, final int valueIdx, final ConstantPool cpool) {
         super(type, cpool);

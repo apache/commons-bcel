@@ -147,7 +147,7 @@ public final class ModulePackages extends Attribute {
     /**
      * Sets the package index table.
      *
-     * @param packageIndexTable the list of package indexes Also redefines number_of_packages according to table length.
+     * @param packageIndexTable The list of package indexes Also redefines number_of_packages according to table length.
      */
     public void setPackageIndexTable(final int[] packageIndexTable) {
         this.packageIndexTable = ArrayUtils.nullToEmpty(packageIndexTable);

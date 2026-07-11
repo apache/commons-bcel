@@ -138,8 +138,8 @@ public final class Pass3aVerifier extends PassVerifier {
         /**
          * Looks for the method referenced by the given invoke instruction in the given class.
          *
-         * @param jc the class that defines the referenced method.
-         * @param invoke the instruction that references the method.
+         * @param jc The class that defines the referenced method.
+         * @param invoke The instruction that references the method.
          * @return The referenced method or null if not found.
          */
         private Method getMethod(final JavaClass jc, final InvokeInstruction invoke) {
@@ -159,8 +159,8 @@ public final class Pass3aVerifier extends PassVerifier {
          * Looks for the method referenced by the given invoke instruction in the given class or its super classes and super
          * interfaces.
          *
-         * @param jc the class that defines the referenced method.
-         * @param invoke the instruction that references the method.
+         * @param jc The class that defines the referenced method.
+         * @param invoke The instruction that references the method.
          * @return The referenced method or null if not found.
          */
         private Method getMethodRecursive(final JavaClass jc, final InvokeInstruction invoke) throws ClassNotFoundException {
@@ -898,8 +898,8 @@ public final class Pass3aVerifier extends PassVerifier {
     /**
      * Should only be instantiated by a Verifier.
      *
-     * @param verifier the verifier.
-     * @param methodNo the method number.
+     * @param verifier The verifier.
+     * @param methodNo The method number.
      */
     public Pass3aVerifier(final Verifier verifier, final int methodNo) {
         this.verifier = verifier;
@@ -1206,7 +1206,7 @@ public final class Pass3aVerifier extends PassVerifier {
      * Returns the String representation of the Object obj; this is obj.toString() if it does not throw any
      * RuntimeException, or else it is a string derived only from obj's class name.
      *
-     * @param obj the object to convert to string.
+     * @param obj The object to convert to string.
      * @return The string representation.
      */
     protected String tostring(final Object obj) {

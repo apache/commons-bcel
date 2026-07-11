@@ -253,7 +253,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * Sets the index in the local variable table of this variable.
      *
-     * @param index the index in the local variable table of this variable.
+     * @param index The index in the local variable table of this variable.
      */
     public void setIndex(final int index) { // TODO unused
         this.index = index;
@@ -262,7 +262,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * Sets the length of this local variable.
      *
-     * @param length the length of this local variable.
+     * @param length The length of this local variable.
      */
     public void setLength(final int length) {
         this.length = length;
@@ -271,7 +271,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * Sets the index into the constant pool for the name of this variable.
      *
-     * @param nameIndex the index into the constant pool for the name of this variable.
+     * @param nameIndex The index into the constant pool for the name of this variable.
      */
     public void setNameIndex(final int nameIndex) { // TODO unused
         this.nameIndex = nameIndex;
@@ -280,7 +280,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
     /**
      * Sets the index into the constant pool for the signature of this variable.
      *
-     * @param signatureIndex the index into the constant pool for the signature of this variable.
+     * @param signatureIndex The index into the constant pool for the signature of this variable.
      */
     public void setSignatureIndex(final int signatureIndex) { // TODO unused
         this.signatureIndex = signatureIndex;

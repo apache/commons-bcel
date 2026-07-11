@@ -109,7 +109,7 @@ public final class ModuleExports implements Cloneable, Node {
     /**
      * Gets the exported package name.
      *
-     * @param constantPool the constant pool from the ClassFile.
+     * @param constantPool The constant pool from the ClassFile.
      * @return The exported package name.
      * @since 6.10.0
      */
@@ -143,7 +143,7 @@ public final class ModuleExports implements Cloneable, Node {
     /**
      * Gets the resolved string representation.
      *
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      * @return Resolved string representation.
      */
     public String toString(final ConstantPool constantPool) {

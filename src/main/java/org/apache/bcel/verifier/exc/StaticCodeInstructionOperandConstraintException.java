@@ -31,7 +31,7 @@ public class StaticCodeInstructionOperandConstraintException extends StaticCodeC
     /**
      * Constructs a StaticCodeInstructionOperandConstraintException.
      *
-     * @param message the exception message.
+     * @param message The exception message.
      */
     public StaticCodeInstructionOperandConstraintException(final String message) {
         super(message);

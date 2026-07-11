@@ -194,7 +194,7 @@ public abstract class Type {
     /**
      * Gets the signature for a method.
      *
-     * @param meth the method.
+     * @param meth The method.
      * @return The method signature.
      */
     public static String getSignature(final java.lang.reflect.Method meth) {
@@ -290,7 +290,7 @@ public abstract class Type {
     /**
      * Convert runtime {@code java.lang.Class[]} to BCEL Type objects.
      *
-     * @param classes an array of runtime class objects.
+     * @param classes An array of runtime class objects.
      * @return array of corresponding Type objects.
      */
     public static Type[] getTypes(final Class<?>[] classes) {
@@ -365,8 +365,8 @@ public abstract class Type {
     /**
      * Constructs a Type.
      *
-     * @param type the type constant.
-     * @param signature the type signature.
+     * @param type The type constant.
+     * @param signature The type signature.
      */
     protected Type(final byte type, final String signature) {
         this.type = type;

@@ -125,7 +125,7 @@ public final class ConstantUtf8 extends Constant {
      * See {@link ConstantUtf8} class Javadoc for details.
      * </p>
      *
-     * @param value the value.
+     * @param value The value.
      * @return A new or cached instance of the given value.
      * @since 6.0
      */
@@ -153,7 +153,7 @@ public final class ConstantUtf8 extends Constant {
      * See {@link ConstantUtf8} class Javadoc for details.
      * </p>
      *
-     * @param dataInput the value.
+     * @param dataInput The value.
      * @return A new or cached instance of the given value.
      * @throws IOException if an I/O error occurs.
      * @since 6.0
@@ -168,7 +168,7 @@ public final class ConstantUtf8 extends Constant {
      * See {@link ConstantUtf8} class Javadoc for details.
      * </p>
      *
-     * @param value the value.
+     * @param value The value.
      * @return A new or cached instance of the given value.
      * @since 6.0
      */
@@ -190,7 +190,7 @@ public final class ConstantUtf8 extends Constant {
     /**
      * Initializes from another object.
      *
-     * @param constantUtf8 the value.
+     * @param constantUtf8 The value.
      */
     public ConstantUtf8(final ConstantUtf8 constantUtf8) {
         this(constantUtf8.getBytes());
@@ -252,7 +252,7 @@ public final class ConstantUtf8 extends Constant {
     }
 
     /**
-     * @param bytes the raw bytes of this UTF-8.
+     * @param bytes The raw bytes of this UTF-8.
      * @deprecated (since 6.0)
      */
     @java.lang.Deprecated

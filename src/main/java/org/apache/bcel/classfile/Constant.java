@@ -169,7 +169,7 @@ public abstract class Constant implements Cloneable, Node {
     /**
      * Dumps constant to file stream in binary format.
      *
-     * @param file the output stream.
+     * @param file The output stream.
      * @throws IOException if an I/O error occurs.
      */
     public abstract void dump(DataOutputStream file) throws IOException;

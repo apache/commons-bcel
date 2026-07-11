@@ -184,7 +184,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Adds an annotation entry to this class.
      *
-     * @param a the annotation entry to add.
+     * @param a The annotation entry to add.
      */
     public void addAnnotationEntry(final AnnotationEntryGen a) {
         annotationList.add(a);
@@ -246,7 +246,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Add observer for this object.
      *
-     * @param o the observer.
+     * @param o The observer.
      */
     public void addObserver(final ClassObserver o) {
         if (observers == null) {
@@ -267,7 +267,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Checks if this class contains the given field.
      *
-     * @param f the field to check.
+     * @param f The field to check.
      * @return true if this class contains the field.
      */
     public boolean containsField(final Field f) {
@@ -277,7 +277,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Gets the field object with given name, or null.
      *
-     * @param name the field name.
+     * @param name The field name.
      * @return field object with given name, or null.
      */
     public Field containsField(final String name) {
@@ -292,8 +292,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Gets the method object with given name and signature, or null.
      *
-     * @param name the method name.
-     * @param signature the method signature.
+     * @param name The method name.
+     * @param signature The method signature.
      * @return method object with given name and signature, or null.
      */
     public Method containsMethod(final String name, final String signature) {
@@ -438,7 +438,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Gets the method at the given position.
      *
-     * @param pos the position.
+     * @param pos The position.
      * @return The method at the given position.
      */
     public Method getMethodAt(final int pos) {
@@ -530,7 +530,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Remove observer for this object.
      *
-     * @param o the observer to remove.
+     * @param o The observer to remove.
      */
     public void removeObserver(final ClassObserver o) {
         if (observers != null) {
@@ -541,8 +541,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Replace given field with new one. If the old one does not exist add the new_ field to the class anyway.
      *
-     * @param old the old field.
-     * @param newField the new field.
+     * @param old The old field.
+     * @param newField The new field.
      */
     public void replaceField(final Field old, final Field newField) {
         if (newField == null) {
@@ -559,8 +559,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Replace given method with new one. If the old one does not exist add the newMethod method to the class anyway.
      *
-     * @param old the old method.
-     * @param newMethod the new method.
+     * @param old The old method.
+     * @param newMethod The new method.
      */
     public void replaceMethod(final Method old, final Method newMethod) {
         if (newMethod == null) {
@@ -577,7 +577,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Sets the class name.
      *
-     * @param name the class name.
+     * @param name The class name.
      */
     public void setClassName(final String name) {
         className = Utility.pathToPackage(name);
@@ -587,7 +587,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Sets the class name index.
      *
-     * @param classNameIndex the class name index.
+     * @param classNameIndex The class name index.
      */
     public void setClassNameIndex(final int classNameIndex) {
         this.classNameIndex = classNameIndex;
@@ -597,7 +597,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Sets the constant pool.
      *
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      */
     public void setConstantPool(final ConstantPoolGen constantPool) {
         cp = constantPool;
@@ -615,8 +615,8 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Sets the method at the given position.
      *
-     * @param method the method.
-     * @param pos the position.
+     * @param method The method.
+     * @param pos The position.
      */
     public void setMethodAt(final Method method, final int pos) {
         methodList.set(pos, method);
@@ -625,7 +625,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Sets the methods.
      *
-     * @param methods the methods.
+     * @param methods The methods.
      */
     public void setMethods(final Method[] methods) {
         methodList.clear();
@@ -646,7 +646,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Sets the superclass name.
      *
-     * @param name the superclass name.
+     * @param name The superclass name.
      */
     public void setSuperclassName(final String name) {
         superClassName = Utility.pathToPackage(name);
@@ -656,7 +656,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     /**
      * Sets the superclass name index.
      *
-     * @param superclassNameIndex the superclass name index.
+     * @param superclassNameIndex The superclass name index.
      */
     public void setSuperclassNameIndex(final int superclassNameIndex) {
         this.superclassNameIndex = superclassNameIndex;

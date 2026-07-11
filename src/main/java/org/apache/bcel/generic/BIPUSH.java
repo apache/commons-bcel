@@ -43,7 +43,7 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
     /**
      * Push byte on stack.
      *
-     * @param b the byte value to push.
+     * @param b The byte value to push.
      */
     public BIPUSH(final byte b) {
         super(org.apache.bcel.Const.BIPUSH, (short) 2);

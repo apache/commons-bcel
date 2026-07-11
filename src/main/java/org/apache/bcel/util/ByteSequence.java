@@ -50,7 +50,7 @@ public final class ByteSequence extends DataInputStream {
     /**
      * Constructs a ByteSequence.
      *
-     * @param bytes the byte array.
+     * @param bytes The byte array.
      */
     public ByteSequence(final byte[] bytes) {
         super(new ByteArrayStream(bytes));

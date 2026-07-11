@@ -50,7 +50,7 @@ public class AnnotationDefault extends Attribute {
      *
      * @param nameIndex Index pointing to the name <em>Code</em>.
      * @param length Content length in bytes.
-     * @param defaultValue the annotation's default value.
+     * @param defaultValue The annotation's default value.
      * @param constantPool Array of constants.
      */
     public AnnotationDefault(final int nameIndex, final int length, final ElementValue defaultValue, final ConstantPool constantPool) {
@@ -92,7 +92,7 @@ public class AnnotationDefault extends Attribute {
     /**
      * Sets the default value of this methodinfo's annotation.
      *
-     * @param defaultValue the default value of this methodinfo's annotation.
+     * @param defaultValue The default value of this methodinfo's annotation.
      */
     public final void setDefaultValue(final ElementValue defaultValue) {
         this.defaultValue = defaultValue;

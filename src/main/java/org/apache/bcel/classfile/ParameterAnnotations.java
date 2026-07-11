@@ -39,7 +39,7 @@ public abstract class ParameterAnnotations extends Attribute implements Iterable
     /**
      * Constructs a new instance.
      *
-     * @param parameterAnnotationType the subclass type of the parameter annotation.
+     * @param parameterAnnotationType The subclass type of the parameter annotation.
      * @param nameIndex Index pointing to the name <em>Code</em>.
      * @param length Content length in bytes.
      * @param input Input stream.
@@ -59,10 +59,10 @@ public abstract class ParameterAnnotations extends Attribute implements Iterable
     /**
      * Constructs a new instance.
      *
-     * @param parameterAnnotationType the subclass type of the parameter annotation.
+     * @param parameterAnnotationType The subclass type of the parameter annotation.
      * @param nameIndex Index pointing to the name <em>Code</em>.
      * @param length Content length in bytes.
-     * @param parameterAnnotationTable the actual parameter annotations.
+     * @param parameterAnnotationTable The actual parameter annotations.
      * @param constantPool Array of constants.
      */
     public ParameterAnnotations(final byte parameterAnnotationType, final int nameIndex, final int length,
@@ -127,7 +127,7 @@ public abstract class ParameterAnnotations extends Attribute implements Iterable
     /**
      * Sets the parameter annotation table.
      *
-     * @param parameterAnnotationTable the entries to set in this parameter annotation.
+     * @param parameterAnnotationTable The entries to set in this parameter annotation.
      */
     public final void setParameterAnnotationTable(final ParameterAnnotationEntry[] parameterAnnotationTable) {
         this.parameterAnnotationTable = parameterAnnotationTable != null ? parameterAnnotationTable : EMPTY_ARRAY;

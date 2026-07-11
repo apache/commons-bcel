@@ -89,7 +89,7 @@ public class JavaWrapper {
     /**
      * Constructs a JavaWrapper with the specified class loader.
      *
-     * @param loader the class loader to use.
+     * @param loader The class loader to use.
      */
     public JavaWrapper(final java.lang.ClassLoader loader) {
         this.loader = loader;
@@ -98,8 +98,8 @@ public class JavaWrapper {
     /**
      * Runs the main method of the given class with the arguments passed in argv
      *
-     * @param className the fully qualified class name.
-     * @param argv the arguments just as you would pass them directly.
+     * @param className The fully qualified class name.
+     * @param argv The arguments just as you would pass them directly.
      * @throws ClassNotFoundException if {@code className} can't be found.
      */
     public void runMain(final String className, final String[] argv) throws ClassNotFoundException {

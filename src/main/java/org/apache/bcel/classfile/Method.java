@@ -126,7 +126,7 @@ public final class Method extends FieldOrMethod {
     /**
      * Creates a deep copy of this method.
      *
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      * @return deep copy of this method.
      */
     public Method copy(final ConstantPool constantPool) {

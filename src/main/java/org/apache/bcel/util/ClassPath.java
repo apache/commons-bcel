@@ -547,8 +547,8 @@ public class ClassPath implements Closeable {
     /**
      * Constructs a ClassPath with a parent and class path string.
      *
-     * @param parent the parent ClassPath.
-     * @param classPathString the class path string.
+     * @param parent The parent ClassPath.
+     * @param classPathString The class path string.
      */
     @SuppressWarnings("resource")
     public ClassPath(final ClassPath parent, final String classPathString) {
@@ -583,7 +583,7 @@ public class ClassPath implements Closeable {
     /**
      * Search for classes in given path.
      *
-     * @param classPath the class path string.
+     * @param classPath The class path string.
      */
     public ClassPath(final String classPath) {
         this(null, classPath);

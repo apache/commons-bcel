@@ -208,7 +208,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     /**
      * Sets the end instruction handle.
      *
-     * @param end the end instruction handle.
+     * @param end The end instruction handle.
      */
     public void setEnd(final InstructionHandle end) { // TODO could be package-protected?
         BranchInstruction.notifyTarget(this.end, end, this);
@@ -218,7 +218,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     /**
      * Sets the index.
      *
-     * @param index the index.
+     * @param index The index.
      */
     public void setIndex(final int index) {
         this.index = index;
@@ -241,7 +241,7 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     /**
      * Sets the start instruction handle.
      *
-     * @param start the start instruction handle.
+     * @param start The start instruction handle.
      */
     public void setStart(final InstructionHandle start) { // TODO could be package-protected?
         BranchInstruction.notifyTarget(this.start, start, this);

@@ -67,7 +67,7 @@ public abstract class ConstantCP extends Constant {
     /**
      * Constructs a ConstantCP.
      *
-     * @param tag the constant type tag.
+     * @param tag The constant type tag.
      * @param classIndex Reference to the class containing the field.
      * @param nameAndTypeIndex and the field signature.
      */
@@ -102,7 +102,7 @@ public abstract class ConstantCP extends Constant {
     /**
      * Gets the class this field belongs to.
      *
-     * @param cp the constant pool.
+     * @param cp The constant pool.
      * @return Class this field belongs to.
      */
     public String getClass(final ConstantPool cp) {

@@ -111,7 +111,7 @@ public final class Deprecated extends Attribute {
     /**
      * Sets the data bytes.
      *
-     * @param bytes the raw bytes that represents this byte array.
+     * @param bytes The raw bytes that represents this byte array.
      */
     public void setBytes(final byte[] bytes) {
         if (bytes != null) {

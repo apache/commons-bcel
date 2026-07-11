@@ -156,7 +156,7 @@ public final class Unknown extends Attribute {
     /**
      * Sets the data bytes.
      *
-     * @param bytes the bytes to set.
+     * @param bytes The bytes to set.
      */
     public void setBytes(final byte[] bytes) {
         this.bytes = bytes;

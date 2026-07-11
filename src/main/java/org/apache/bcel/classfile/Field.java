@@ -74,7 +74,7 @@ public final class Field extends FieldOrMethod {
      * Constructs object from file stream.
      *
      * @param file Input stream.
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      */
     Field(final DataInput file, final ConstantPool constantPool) throws IOException, ClassFormatException {
         super(file, constantPool);
@@ -117,7 +117,7 @@ public final class Field extends FieldOrMethod {
     /**
      * Creates a deep copy of this field.
      *
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      * @return deep copy of this field.
      */
     public Field copy(final ConstantPool constantPool) {

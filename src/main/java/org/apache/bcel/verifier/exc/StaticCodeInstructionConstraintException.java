@@ -31,7 +31,7 @@ public class StaticCodeInstructionConstraintException extends StaticCodeConstrai
     /**
      * Constructs a StaticCodeInstructionConstraintException.
      *
-     * @param message the exception message.
+     * @param message The exception message.
      */
     public StaticCodeInstructionConstraintException(final String message) {
         super(message);

@@ -47,7 +47,7 @@ public final class StackMapType implements Node, Cloneable {
      *
      * @param type type tag as defined in the Constants interface.
      * @param index index to constant pool, or byte code offset.
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      */
     public StackMapType(final byte type, final int index, final ConstantPool constantPool) {
         this.type = checkType(type);
@@ -59,7 +59,7 @@ public final class StackMapType implements Node, Cloneable {
      * Constructs object from file stream.
      *
      * @param file Input stream.
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      * @throws IOException if an I/O error occurs.
      */
     StackMapType(final DataInput file, final ConstantPool constantPool) throws IOException {
@@ -188,7 +188,7 @@ public final class StackMapType implements Node, Cloneable {
     /**
      * Sets the index.
      *
-     * @param index the index.
+     * @param index The index.
      */
     public void setIndex(final int index) {
         this.index = index;
@@ -197,7 +197,7 @@ public final class StackMapType implements Node, Cloneable {
     /**
      * Sets the type.
      *
-     * @param type the type.
+     * @param type The type.
      */
     public void setType(final byte type) {
         this.type = checkType(type);

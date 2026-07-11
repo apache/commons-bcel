@@ -45,7 +45,7 @@ public class GETSTATIC extends FieldInstruction implements PushInstruction, Exce
     /**
      * Constructs a GETSTATIC instruction.
      *
-     * @param index the constant pool index.
+     * @param index The constant pool index.
      */
     public GETSTATIC(final int index) {
         super(Const.GETSTATIC, index);

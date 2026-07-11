@@ -48,7 +48,7 @@ public abstract class Instruction implements Cloneable {
     /**
      * Tests if the value can fit in a byte (signed)
      *
-     * @param value the value to check.
+     * @param value The value to check.
      * @return true if the value is in range.
      * @since 6.0
      */
@@ -59,7 +59,7 @@ public abstract class Instruction implements Cloneable {
     /**
      * Tests if the value can fit in a short (signed)
      *
-     * @param value the value to check.
+     * @param value The value to check.
      * @return true if the value is in range.
      * @since 6.0
      */
@@ -400,7 +400,7 @@ public abstract class Instruction implements Cloneable {
     /**
      * Sets comparator to be used for equals().
      *
-     * @param c the comparator.
+     * @param c The comparator.
      * @deprecated (6.0) use the built in comparator, or wrap this class in another object that implements these methods
      */
     @Deprecated
@@ -429,8 +429,8 @@ public abstract class Instruction implements Cloneable {
     /**
      * Constructs an Instruction.
      *
-     * @param opcode the opcode.
-     * @param length the instruction length.
+     * @param opcode The opcode.
+     * @param length The instruction length.
      */
     public Instruction(final short opcode, final short length) {
         this.length = length;
@@ -449,7 +449,7 @@ public abstract class Instruction implements Cloneable {
      * This method also gives right results for instructions whose effect on the stack depends on the constant pool entry
      * they reference.
      *
-     * @param cpg the constant pool generator.
+     * @param cpg The constant pool generator.
      * @return Number of words consumed from stack by this instruction, or Constants.UNPREDICTABLE, if this cannot be
      *         computed statically
      */
@@ -558,7 +558,7 @@ public abstract class Instruction implements Cloneable {
      * This method also gives right results for instructions whose effect on the stack depends on the constant pool entry
      * they reference.
      *
-     * @param cpg the constant pool generator.
+     * @param cpg The constant pool generator.
      * @return Number of words produced onto stack by this instruction, or Constants.UNPREDICTABLE, if this cannot be
      *         computed statically
      */
@@ -608,7 +608,7 @@ public abstract class Instruction implements Cloneable {
     /**
      * Gets the mnemonic for instruction with symbolic references resolved.
      *
-     * @param cp the constant pool.
+     * @param cp The constant pool.
      * @return mnemonic for instruction with symbolic references resolved.
      */
     public String toString(final ConstantPool cp) {

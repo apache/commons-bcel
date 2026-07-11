@@ -152,7 +152,7 @@ public class MethodParameter implements Cloneable, Node {
     /**
      * Sets the access flags.
      *
-     * @param accessFlags the access flags.
+     * @param accessFlags The access flags.
      */
     public void setAccessFlags(final int accessFlags) {
         this.accessFlags = accessFlags;
@@ -161,7 +161,7 @@ public class MethodParameter implements Cloneable, Node {
     /**
      * Sets the name index.
      *
-     * @param nameIndex the name index.
+     * @param nameIndex The name index.
      */
     public void setNameIndex(final int nameIndex) {
         this.nameIndex = nameIndex;

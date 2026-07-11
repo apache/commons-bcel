@@ -37,7 +37,7 @@ public class GOTO_W extends GotoInstruction {
     /**
      * Constructs a GOTO_W instruction.
      *
-     * @param target the target instruction.
+     * @param target The target instruction.
      */
     public GOTO_W(final InstructionHandle target) {
         super(org.apache.bcel.Const.GOTO_W, target);

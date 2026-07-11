@@ -111,7 +111,7 @@ public final class ConstantMethodHandle extends Constant {
     /**
      * Sets the reference index.
      *
-     * @param referenceIndex the reference index.
+     * @param referenceIndex The reference index.
      */
     public void setReferenceIndex(final int referenceIndex) {
         this.referenceIndex = referenceIndex;
@@ -120,7 +120,7 @@ public final class ConstantMethodHandle extends Constant {
     /**
      * Sets the reference kind.
      *
-     * @param referenceKind the reference kind.
+     * @param referenceKind The reference kind.
      */
     public void setReferenceKind(final int referenceKind) {
         this.referenceKind = referenceKind;

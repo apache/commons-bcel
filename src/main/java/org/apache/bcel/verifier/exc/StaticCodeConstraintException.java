@@ -30,7 +30,7 @@ public abstract class StaticCodeConstraintException extends CodeConstraintExcept
     /**
      * Constructs a StaticCodeConstraintException.
      *
-     * @param message the exception message.
+     * @param message The exception message.
      */
     public StaticCodeConstraintException(final String message) {
         super(message);

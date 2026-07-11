@@ -97,7 +97,7 @@ public final class ConstantInteger extends Constant implements ConstantObject {
     /**
      * Gets the Integer object.
      *
-     * @param cp the constant pool (not used).
+     * @param cp The constant pool (not used).
      * @return Integer object.
      */
     @Override
@@ -108,7 +108,7 @@ public final class ConstantInteger extends Constant implements ConstantObject {
     /**
      * Sets the raw bytes that represent the integer value.
      *
-     * @param bytes the raw bytes that represent the integer value.
+     * @param bytes The raw bytes that represent the integer value.
      */
     public void setBytes(final int bytes) {
         this.bytes = bytes;

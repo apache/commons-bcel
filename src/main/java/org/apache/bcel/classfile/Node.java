@@ -26,7 +26,7 @@ public interface Node {
     /**
      * Accepts a visitor.
      *
-     * @param visitor the visitor.
+     * @param visitor The visitor.
      */
     void accept(Visitor visitor);
 }

@@ -99,7 +99,7 @@ public class MethodParameters extends Attribute implements Iterable<MethodParame
     /**
      * Sets the method parameters.
      *
-     * @param parameters the method parameters to set.
+     * @param parameters The method parameters to set.
      */
     public void setParameters(final MethodParameter[] parameters) {
         this.parameters = parameters != null ? parameters : EMPTY_ARRAY;

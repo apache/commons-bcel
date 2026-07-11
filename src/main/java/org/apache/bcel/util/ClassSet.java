@@ -42,7 +42,7 @@ public class ClassSet {
     /**
      * Adds a JavaClass to the set.
      *
-     * @param clazz the JavaClass to add.
+     * @param clazz The JavaClass to add.
      * @return true if the class was added.
      */
     public boolean add(final JavaClass clazz) {
@@ -70,7 +70,7 @@ public class ClassSet {
     /**
      * Removes a JavaClass from the set.
      *
-     * @param clazz the JavaClass to remove.
+     * @param clazz The JavaClass to remove.
      */
     public void remove(final JavaClass clazz) {
         map.remove(clazz.getClassName());

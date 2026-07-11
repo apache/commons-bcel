@@ -70,8 +70,8 @@ public abstract class Attribute implements Cloneable, Node {
      * Add an Attribute reader capable of parsing (user-defined) attributes named "name". You should not add readers for the
      * standard attributes such as "LineNumberTable", because those are handled internally.
      *
-     * @param name the name of the attribute as stored in the class file.
-     * @param attributeReader the reader object.
+     * @param name The name of the attribute as stored in the class file.
+     * @param attributeReader The reader object.
      * @deprecated (6.0) Use {@link #addAttributeReader(String, UnknownAttributeReader)} instead.
      */
     @java.lang.Deprecated
@@ -83,8 +83,8 @@ public abstract class Attribute implements Cloneable, Node {
      * Add an Attribute reader capable of parsing (user-defined) attributes named "name". You should not add readers for the
      * standard attributes such as "LineNumberTable", because those are handled internally.
      *
-     * @param name the name of the attribute as stored in the class file.
-     * @param unknownAttributeReader the reader object.
+     * @param name The name of the attribute as stored in the class file.
+     * @param unknownAttributeReader The reader object.
      */
     public static void addAttributeReader(final String name, final UnknownAttributeReader unknownAttributeReader) {
         READERS.put(name, unknownAttributeReader);
@@ -93,7 +93,7 @@ public abstract class Attribute implements Cloneable, Node {
     /**
      * Prints a message to stderr if debug mode is enabled.
      *
-     * @param msg the message to print.
+     * @param msg The message to print.
      */
     protected static void println(final String msg) {
         if (debug) {
@@ -225,7 +225,7 @@ public abstract class Attribute implements Cloneable, Node {
     /**
      * Remove attribute reader
      *
-     * @param name the name of the attribute as stored in the class file.
+     * @param name The name of the attribute as stored in the class file.
      */
     public static void removeAttributeReader(final String name) {
         READERS.remove(name);

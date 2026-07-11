@@ -54,7 +54,7 @@ public class ObjectType extends ReferenceType {
     /**
      * Java Virtual Machine Specification edition 2, 5.4.4 Access Control.
      *
-     * @param accessor the accessing type.
+     * @param accessor The accessing type.
      * @return true if accessible.
      * @throws ClassNotFoundException if the class referenced by this type can't be found.
      */
@@ -152,7 +152,7 @@ public class ObjectType extends ReferenceType {
     /**
      * Return true if this type is a subclass of given ObjectType.
      *
-     * @param superclass the superclass to check against.
+     * @param superclass The superclass to check against.
      * @return true if this is a subclass.
      * @throws ClassNotFoundException if any of this class's superclasses can't be found.
      */

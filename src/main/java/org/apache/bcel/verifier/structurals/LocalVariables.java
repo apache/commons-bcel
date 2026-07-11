@@ -104,7 +104,7 @@ public class LocalVariables implements Cloneable {
      * Replaces all occurrences of {@code uninitializedObjectType} in this local variables set with an "initialized"
      * ObjectType.
      *
-     * @param uninitializedObjectType the object to match.
+     * @param uninitializedObjectType The object to match.
      */
     public void initializeObject(final UninitializedObjectType uninitializedObjectType) {
         for (int i = 0; i < locals.length; i++) {

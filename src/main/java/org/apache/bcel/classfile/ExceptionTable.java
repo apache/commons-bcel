@@ -160,7 +160,7 @@ public final class ExceptionTable extends Attribute {
     /**
      * Sets the exception index table.
      *
-     * @param exceptionIndexTable the list of exception indexes Also redefines number_of_exceptions according to table
+     * @param exceptionIndexTable The list of exception indexes Also redefines number_of_exceptions according to table
      *        length.
      */
     public void setExceptionIndexTable(final int[] exceptionIndexTable) {

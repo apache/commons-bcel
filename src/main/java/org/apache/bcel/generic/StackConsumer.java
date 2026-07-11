@@ -26,7 +26,7 @@ public interface StackConsumer {
     /**
      * Gets how many words are consumed from stack.
      *
-     * @param cpg the constant pool generator.
+     * @param cpg The constant pool generator.
      * @return how many words are consumed from stack.
      */
     int consumeStack(ConstantPoolGen cpg);

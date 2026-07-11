@@ -90,7 +90,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /**
      * Sets the ConstantPoolGen needed for symbolic execution.
      *
-     * @param cpg the constant pool generator.
+     * @param cpg The constant pool generator.
      */
     public void setConstantPoolGen(final ConstantPoolGen cpg) { // TODO could be package-protected?
         this.cpg = cpg;
@@ -100,7 +100,7 @@ public class ExecutionVisitor extends EmptyVisitor {
      * The only method granting access to the single instance of the ExecutionVisitor class. Before actively using this
      * instance, <strong>SET THE ConstantPoolGen FIRST</strong>.
      *
-     * @param f the frame.
+     * @param f The frame.
      * @see #setConstantPoolGen(ConstantPoolGen)
      */
     public void setFrame(final Frame f) { // TODO could be package-protected?
@@ -1066,7 +1066,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     /**
      * Symbolically executes the corresponding Java Virtual Machine instruction.
      *
-     * @param o the instruction.
+     * @param o The instruction.
      */
     public void visitLDC_W(final LDC_W o) {
         final Constant c = cpg.getConstant(o.getIndex());

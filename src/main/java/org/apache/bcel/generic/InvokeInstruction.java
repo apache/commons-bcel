@@ -40,7 +40,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     /**
      * Constructs an InvokeInstruction.
      *
-     * @param opcode the opcode.
+     * @param opcode The opcode.
      * @param index to constant pool.
      */
     protected InvokeInstruction(final short opcode, final int index) {
@@ -69,7 +69,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     /**
      * Gets the argument types of referenced method.
      *
-     * @param cpg the constant pool generator.
+     * @param cpg The constant pool generator.
      * @return argument types of referenced method.
      */
     public Type[] getArgumentTypes(final ConstantPoolGen cpg) {
@@ -93,7 +93,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     /**
      * Gets the name of referenced method.
      *
-     * @param cpg the constant pool generator.
+     * @param cpg The constant pool generator.
      * @return name of referenced method.
      */
     public String getMethodName(final ConstantPoolGen cpg) {
@@ -103,7 +103,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     /**
      * Gets the return type of referenced method.
      *
-     * @param cpg the constant pool generator.
+     * @param cpg The constant pool generator.
      * @return return type of referenced method.
      */
     public Type getReturnType(final ConstantPoolGen cpg) {
@@ -113,7 +113,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     /**
      * Gets the return type of referenced method.
      *
-     * @param cpg the constant pool generator.
+     * @param cpg The constant pool generator.
      * @return return type of referenced method.
      */
     @Override

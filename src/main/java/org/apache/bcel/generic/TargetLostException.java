@@ -55,8 +55,8 @@ public final class TargetLostException extends Exception {
     /**
      * Constructs a TargetLostException.
      *
-     * @param targets the instruction handles.
-     * @param message the exception message.
+     * @param targets The instruction handles.
+     * @param message The exception message.
      */
     TargetLostException(final InstructionHandle[] targets, final String message) {
         super(message);

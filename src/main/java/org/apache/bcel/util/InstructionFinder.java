@@ -284,7 +284,7 @@ public class InstructionFinder {
     /**
      * Start search beginning from the start of the given instruction list.
      *
-     * @param pattern the instruction pattern to search for, where case is ignored.
+     * @param pattern The instruction pattern to search for, where case is ignored.
      * @return iterator of matches where e.nextElement() returns an array of instruction handles describing the matched area.
      */
     public final Iterator<InstructionHandle[]> search(final String pattern) {
@@ -294,7 +294,7 @@ public class InstructionFinder {
     /**
      * Start search beginning from the start of the given instruction list. Check found matches with the constraint object.
      *
-     * @param pattern the instruction pattern to search for, case is ignored.
+     * @param pattern The instruction pattern to search for, case is ignored.
      * @param constraint constraints to be checked on matching code.
      * @return instruction handle or 'null' if the match failed.
      */
@@ -305,7 +305,7 @@ public class InstructionFinder {
     /**
      * Start search beginning from 'from'.
      *
-     * @param pattern the instruction pattern to search for, where case is ignored.
+     * @param pattern The instruction pattern to search for, where case is ignored.
      * @param from where to start the search in the instruction list.
      * @return iterator of matches where e.nextElement() returns an array of instruction handles describing the matched area.
      */
@@ -335,7 +335,7 @@ public class InstructionFinder {
      * to update the finder and call search() again, because the matches are cached.
      * </p>
      *
-     * @param pattern the instruction pattern to search for, where case is ignored.
+     * @param pattern The instruction pattern to search for, where case is ignored.
      * @param from where to start the search in the instruction list.
      * @param constraint optional CodeConstraint to check the found code pattern for user-defined constraints.
      * @return iterator of matches where e.nextElement() returns an array of instruction handles describing the matched area.

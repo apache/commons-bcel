@@ -34,9 +34,9 @@ public class SimpleElementValue extends ElementValue {
     /**
      * Constructs a SimpleElementValue.
      *
-     * @param type the element value type.
-     * @param index the index into the constant pool.
-     * @param cpool the constant pool.
+     * @param type The element value type.
+     * @param index The index into the constant pool.
+     * @param cpool The constant pool.
      */
     public SimpleElementValue(final int type, final int index, final ConstantPool cpool) {
         super(type, cpool);
@@ -189,7 +189,7 @@ public class SimpleElementValue extends ElementValue {
     /**
      * Sets the index into the constant pool.
      *
-     * @param index the index.
+     * @param index The index.
      */
     public void setIndex(final int index) {
         this.index = index;

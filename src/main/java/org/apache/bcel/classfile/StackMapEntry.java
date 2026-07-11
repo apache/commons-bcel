@@ -109,7 +109,7 @@ public final class StackMapEntry implements Node, Cloneable {
      * @param typesOfLocals array of {@link StackMapType}s of locals.
      * @param numberOfStackItems NOT USED.
      * @param typesOfStackItems array ot {@link StackMapType}s of stack items.
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      * @deprecated Since 6.0, use {@link #StackMapEntry(int, int, StackMapType[], StackMapType[], ConstantPool)} instead.
      */
     @java.lang.Deprecated
@@ -130,11 +130,11 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * Create an instance
      *
-     * @param tag the frameType to use.
+     * @param tag The frameType to use.
      * @param byteCodeOffset byte code offset.
      * @param typesOfLocals array of {@link StackMapType}s of locals.
      * @param typesOfStackItems array ot {@link StackMapType}s of stack items.
-     * @param constantPool the constant pool.
+     * @param constantPool The constant pool.
      */
     public StackMapEntry(final int tag, final int byteCodeOffset, final StackMapType[] typesOfLocals, final StackMapType[] typesOfStackItems,
         final ConstantPool constantPool) {
@@ -324,7 +324,7 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * Sets the byte code offset.
      *
-     * @param newOffset the new offset.
+     * @param newOffset The new offset.
      */
     public void setByteCodeOffset(final int newOffset) {
         if (newOffset < 0 || newOffset > 32767) {
@@ -361,7 +361,7 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * Sets the frame type.
      *
-     * @param ft the frame type.
+     * @param ft The frame type.
      */
     public void setFrameType(final int ft) {
         if (ft >= Const.SAME_FRAME && ft <= Const.SAME_FRAME_MAX) {
@@ -377,7 +377,7 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * Sets the number of locals (deprecated).
      *
-     * @param n the number of locals.
+     * @param n The number of locals.
      * @deprecated Since 6.0
      */
     @java.lang.Deprecated
@@ -387,7 +387,7 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * Sets the number of stack items (deprecated).
      *
-     * @param n the number of stack items.
+     * @param n The number of stack items.
      * @deprecated Since 6.0
      */
     @java.lang.Deprecated
@@ -397,7 +397,7 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * Sets the types of locals.
      *
-     * @param types the types of locals.
+     * @param types The types of locals.
      */
     public void setTypesOfLocals(final StackMapType[] types) {
         typesOfLocals = types != null ? types : StackMapType.EMPTY_ARRAY;
@@ -406,7 +406,7 @@ public final class StackMapEntry implements Node, Cloneable {
     /**
      * Sets the types of stack items.
      *
-     * @param types the types of stack items.
+     * @param types The types of stack items.
      */
     public void setTypesOfStackItems(final StackMapType[] types) {
         typesOfStackItems = types != null ? types : StackMapType.EMPTY_ARRAY;

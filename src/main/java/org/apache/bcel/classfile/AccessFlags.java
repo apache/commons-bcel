@@ -385,7 +385,7 @@ public abstract class AccessFlags {
     /**
      * Tests whether the bit is on.
      *
-     * @param test the bit to test.
+     * @param test The bit to test.
      * @return whether the bit is on.
      */
     private boolean test(final short test) {

@@ -29,7 +29,7 @@ public class InvalidMethodException extends RuntimeException {
     /**
      * Constructs an InvalidMethodException with the specified detail message.
      *
-     * @param message the detail message.
+     * @param message The detail message.
      */
     public InvalidMethodException(final String message) {
         super(message);

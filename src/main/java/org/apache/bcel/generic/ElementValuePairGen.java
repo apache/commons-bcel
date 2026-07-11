@@ -40,8 +40,8 @@ public class ElementValuePairGen {
     /**
      * Constructs an ElementValuePairGen from an ElementValuePair.
      *
-     * @param nvp the element value pair.
-     * @param cpool the constant pool.
+     * @param nvp The element value pair.
+     * @param cpool The constant pool.
      * @param copyPoolEntries whether to copy pool entries.
      */
     public ElementValuePairGen(final ElementValuePair nvp, final ConstantPoolGen cpool, final boolean copyPoolEntries) {
@@ -65,9 +65,9 @@ public class ElementValuePairGen {
     /**
      * Constructs an ElementValuePairGen.
      *
-     * @param idx the name index.
-     * @param value the element value.
-     * @param cpool the constant pool.
+     * @param idx The name index.
+     * @param value The element value.
+     * @param cpool The constant pool.
      */
     protected ElementValuePairGen(final int idx, final ElementValueGen value, final ConstantPoolGen cpool) {
         this.nameIdx = idx;
@@ -78,9 +78,9 @@ public class ElementValuePairGen {
     /**
      * Constructs an ElementValuePairGen.
      *
-     * @param name the name.
-     * @param value the element value.
-     * @param cpool the constant pool.
+     * @param name The name.
+     * @param value The element value.
+     * @param cpool The constant pool.
      */
     public ElementValuePairGen(final String name, final ElementValueGen value, final ConstantPoolGen cpool) {
         this.nameIdx = cpool.addUtf8(name);
@@ -91,7 +91,7 @@ public class ElementValuePairGen {
     /**
      * Dumps this element value pair to a DataOutputStream.
      *
-     * @param dos the output stream.
+     * @param dos The output stream.
      * @throws IOException if an I/O error occurs.
      */
     protected void dump(final DataOutputStream dos) throws IOException {

@@ -59,8 +59,8 @@ public interface InstructionComparator {
     /**
      * Compares two instructions for equality.
      *
-     * @param i1 the first instruction.
-     * @param i2 the second instruction.
+     * @param i1 The first instruction.
+     * @param i2 The second instruction.
      * @return true if the instructions are equal, false otherwise.
      */
     boolean equals(Instruction i1, Instruction i2);

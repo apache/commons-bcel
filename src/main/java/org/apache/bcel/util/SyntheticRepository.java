@@ -48,7 +48,7 @@ public class SyntheticRepository extends MemorySensitiveClassPathRepository {
     /**
      * Gets the singleton instance for the given class path.
      *
-     * @param classPath the class path.
+     * @param classPath The class path.
      * @return The singleton instance.
      */
     public static SyntheticRepository getInstance(final ClassPath classPath) {

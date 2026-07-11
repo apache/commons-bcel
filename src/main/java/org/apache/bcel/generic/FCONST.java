@@ -39,7 +39,7 @@ public class FCONST extends Instruction implements ConstantPushInstruction {
     /**
      * Constructs an FCONST instruction.
      *
-     * @param f the float value.
+     * @param f The float value.
      */
     public FCONST(final float f) {
         super(org.apache.bcel.Const.FCONST_0, (short) 1);

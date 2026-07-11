@@ -37,8 +37,8 @@ public abstract class ReferenceType extends Type {
     /**
      * Constructs a ReferenceType.
      *
-     * @param t the type.
-     * @param s the signature.
+     * @param t The type.
+     * @param s The signature.
      */
     protected ReferenceType(final byte t, final String s) {
         super(t, s);
@@ -52,7 +52,7 @@ public abstract class ReferenceType extends Type {
      * interface, then {@link #OBJECT} is returned. If not all of the two classes' superclasses cannot be found, "null" is
      * returned. See the JVM specification edition 2, "�4.9.2 The Bytecode Verifier".
      *
-     * @param t the other type.
+     * @param t The other type.
      * @return The first common superclass.
      * @throws ClassNotFoundException on failure to find superclasses of this type, or the type passed as a parameter.
      * @deprecated Use getFirstCommonSuperclass(ReferenceType t) which has slightly changed semantics.
@@ -87,7 +87,7 @@ public abstract class ReferenceType extends Type {
      * the two classes' superclasses cannot be found, "null" is returned. See the JVM specification edition 2, "�4.9.2 The
      * Bytecode Verifier".
      *
-     * @param t the other type.
+     * @param t The other type.
      * @return The first common superclass.
      * @throws ClassNotFoundException on failure to find superclasses of this type, or the type passed as a parameter.
      */
@@ -158,7 +158,7 @@ public abstract class ReferenceType extends Type {
      * Return true iff this is assignment compatible with another type t as defined in the JVM specification; see the
      * AASTORE definition there.
      *
-     * @param t the other type.
+     * @param t The other type.
      * @return true iff this is assignment compatible with another type t.
      * @throws ClassNotFoundException if any classes or interfaces required to determine assignment compatibility can't be
      *         found.
@@ -259,7 +259,7 @@ public abstract class ReferenceType extends Type {
      * {@link #NULL} is not defined (see the CHECKCAST definition in the JVM specification). However, because for example CHECKCAST
      * doesn't throw a ClassCastException when casting a null reference to any Object, true is returned in this case.
      *
-     * @param t the other type.
+     * @param t The other type.
      * @return true iff this type is castable to another type t.
      * @throws ClassNotFoundException if any classes or interfaces required to determine assignment compatibility can't be
      *         found.

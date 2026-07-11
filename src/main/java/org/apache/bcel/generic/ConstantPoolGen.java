@@ -65,7 +65,7 @@ public class ConstantPoolGen {
      * (the JVMS only forbids {@code . ; [ /} and, for members, {@code < >}), so each part is prefixed with its length
      * to keep distinct triples distinct.
      *
-     * @param parts the key parts.
+     * @param parts The key parts.
      * @return A collision-free key.
      */
     private static String toKey(final String... parts) {
@@ -216,7 +216,7 @@ public class ConstantPoolGen {
     /**
      * Constructs a new instance with the given constant pool.
      *
-     * @param cp the constant pool.
+     * @param cp The constant pool.
      */
     public ConstantPoolGen(final ConstantPool cp) {
         this(cp.getConstantPool());
@@ -404,7 +404,7 @@ public class ConstantPoolGen {
     /**
      * Adds a new InterfaceMethodref constant to the ConstantPool.
      *
-     * @param method the method to add.
+     * @param method The method to add.
      * @return index of entry.
      */
     public int addInterfaceMethodref(final MethodGen method) {
@@ -453,7 +453,7 @@ public class ConstantPoolGen {
     /**
      * Adds a new Methodref constant to the ConstantPool.
      *
-     * @param method the method to add.
+     * @param method The method to add.
      * @return index of entry.
      */
     public int addMethodref(final MethodGen method) {
@@ -684,7 +684,7 @@ public class ConstantPoolGen {
     /**
      * Looks up an InterfaceMethodref in the ConstantPool.
      *
-     * @param method the method to look for.
+     * @param method The method to look for.
      * @return index on success, -1 otherwise.
      */
     public int lookupInterfaceMethodref(final MethodGen method) {
@@ -724,7 +724,7 @@ public class ConstantPoolGen {
     /**
      * Looks up a Methodref in the ConstantPool.
      *
-     * @param method the method to look for.
+     * @param method The method to look for.
      * @return index on success, -1 otherwise.
      */
     public int lookupMethodref(final MethodGen method) {

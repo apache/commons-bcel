@@ -27,7 +27,7 @@ public interface MethodObserver {
     /**
      * Notifies this observer of a change to the method.
      *
-     * @param method the method that changed.
+     * @param method The method that changed.
      */
     void notify(MethodGen method);
 }

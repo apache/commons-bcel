@@ -80,8 +80,8 @@ public final class Pass3bVerifier extends PassVerifier {
         /**
          * Adds an (InstructionContext, ExecutionChain) pair to this queue.
          *
-         * @param ic the InstructionContext.
-         * @param executionChain the ExecutionChain.
+         * @param ic The InstructionContext.
+         * @param executionChain The ExecutionChain.
          */
         public void add(final InstructionContext ic, final ArrayList<InstructionContext> executionChain) {
             ics.add(ic);
@@ -91,7 +91,7 @@ public final class Pass3bVerifier extends PassVerifier {
         /**
          * Gets a specific ExecutionChain from the queue.
          *
-         * @param i the index of the item to be fetched.
+         * @param i The index of the item to be fetched.
          * @return The indicated ExecutionChain.
          */
         public ArrayList<InstructionContext> getEC(final int i) {
@@ -101,7 +101,7 @@ public final class Pass3bVerifier extends PassVerifier {
         /**
          * Gets a specific InstructionContext from the queue.
          *
-         * @param i the index of the item to be fetched.
+         * @param i The index of the item to be fetched.
          * @return The indicated InstructionContext.
          */
         public InstructionContext getIC(final int i) {
@@ -120,7 +120,7 @@ public final class Pass3bVerifier extends PassVerifier {
         /**
          * Removes a specific (InstructionContext, ExecutionChain) pair from their respective queues.
          *
-         * @param i the index of the items to be removed.
+         * @param i The index of the items to be removed.
          */
         public void remove(final int i) {
             ics.remove(i);
@@ -149,8 +149,8 @@ public final class Pass3bVerifier extends PassVerifier {
     /**
      * This class should only be instantiated by a Verifier.
      *
-     * @param myOwner the verifier that owns this Pass3bVerifier.
-     * @param methodNo the method number.
+     * @param myOwner The verifier that owns this Pass3bVerifier.
+     * @param methodNo The method number.
      * @see org.apache.bcel.verifier.Verifier
      */
     public Pass3bVerifier(final Verifier myOwner, final int methodNo) {
@@ -419,8 +419,8 @@ public final class Pass3bVerifier extends PassVerifier {
     /**
      * Throws an exception indicating the returned type is not compatible with the return type of the given method.
      *
-     * @param returnedType the type of the returned expression.
-     * @param m the method we are processing.
+     * @param returnedType The type of the returned expression.
+     * @param m The method we are processing.
      * @throws StructuralCodeConstraintException always
      * @since 6.0
      */

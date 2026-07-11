@@ -116,7 +116,7 @@ public class EnclosingMethod extends Attribute {
     /**
      * Sets the enclosing class index.
      *
-     * @param idx the index.
+     * @param idx The index.
      */
     public final void setEnclosingClassIndex(final int idx) {
         classIndex = idx;
@@ -125,7 +125,7 @@ public class EnclosingMethod extends Attribute {
     /**
      * Sets the enclosing method index.
      *
-     * @param idx the index.
+     * @param idx The index.
      */
     public final void setEnclosingMethodIndex(final int idx) {
         methodIndex = idx;
