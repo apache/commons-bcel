@@ -79,7 +79,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Read unsigned bytecode operands in CodeHTML disassembler (#511).</action>
       <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Deep-copy bootstrap arguments array in BootstrapMethod.copy() (#516).</action>
       <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Use exclusive live-range end in LocalVariableTable.getLocalVariable (#517).</action>
-      <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Build TABLESWITCH from sorted arrays in SWITCH (#518).</action>
+      <action                  type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Build TABLESWITCH from sorted arrays in SWITCH (#518).</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add support for permitted subclasses #493.</action>
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add RecordComponentInfo.getAttribute(byte tag)#494.</action>
