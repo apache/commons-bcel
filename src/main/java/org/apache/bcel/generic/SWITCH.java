@@ -111,18 +111,18 @@ public final class SWITCH implements CompoundInstruction {
                 final int[] mVec = new int[maxSize];
                 final InstructionHandle[] tVec = new InstructionHandle[maxSize];
                 int count = 1;
-                mVec[0] = match[0];
-                tVec[0] = targets[0];
+                mVec[0] = matchClone[0];
+                tVec[0] = targetsClone[0];
                 for (int i = 1; i < matchLength; i++) {
-                    final int prev = match[i - 1];
-                    final int gap = match[i] - prev;
+                    final int prev = matchClone[i - 1];
+                    final int gap = matchClone[i] - prev;
                     for (int j = 1; j < gap; j++) {
                         mVec[count] = prev + j;
                         tVec[count] = target;
                         count++;
                     }
-                    mVec[count] = match[i];
-                    tVec[count] = targets[i];
+                    mVec[count] = matchClone[i];
+                    tVec[count] = targetsClone[i];
                     count++;
                 }
                 instruction = new TABLESWITCH(Arrays.copyOf(mVec, count), Arrays.copyOf(tVec, count), target);
