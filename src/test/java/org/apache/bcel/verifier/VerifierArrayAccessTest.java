@@ -31,6 +31,7 @@ import org.apache.bcel.verifier.tests.TestArrayAccess04IntCreator;
 import org.apache.bcel.verifier.tests.TestArrayAccess04LongCreator;
 import org.apache.bcel.verifier.tests.TestArrayAccess04ShortCreator;
 import org.apache.bcel.verifier.tests.TestArrayAccess04UnknownCreator;
+import org.apache.bcel.verifier.tests.TestArrayAccess05Creator;
 import org.junit.jupiter.api.Test;
 
 class VerifierArrayAccessTest extends AbstractVerifierTest {
@@ -51,6 +52,8 @@ class VerifierArrayAccessTest extends AbstractVerifierTest {
         assertVerifyRejected("TestArrayAccess04Short", "Verification of an arraystore instruction of a short on an array of references must fail.");
         final TestArrayAccess04UnknownCreator testArrayAccess04UnknownCreator = new TestArrayAccess04UnknownCreator();
         assertThrowsExactly(IllegalArgumentException.class, testArrayAccess04UnknownCreator::create, "Invalid type <unknown object>");
+        new TestArrayAccess05Creator().create();
+        assertVerifyRejected("TestArrayAccess05", "Verification of iaload applied to a multidimensional int[][] must fail.");
     }
 
     @Test
