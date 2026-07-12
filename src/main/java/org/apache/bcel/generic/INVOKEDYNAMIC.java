@@ -51,6 +51,7 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
      */
     public INVOKEDYNAMIC(final int index) {
         super(Const.INVOKEDYNAMIC, index);
+        super.setLength(5);
     }
 
     /**
