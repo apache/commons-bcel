@@ -351,7 +351,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         final Type index = stack().peek(0);
         indexOfInt(o, index);
         if (arrayrefOfArrayType(o, arrayref)
-            && !(((ArrayType) arrayref).getElementType().equals(Type.BOOLEAN) || ((ArrayType) arrayref).getElementType().equals(Type.BYTE))) {
+            && !(((ArrayType) arrayref).isElementType(Type.BOOLEAN) || ((ArrayType) arrayref).isElementType(Type.BYTE))) {
             constraintViolated(o, "The 'arrayref' does not refer to an array with elements of a Type.BYTE or Type.BOOLEAN but to an array of '"
                 + ((ArrayType) arrayref).getElementType() + "'.");
         }
@@ -369,7 +369,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         indexOfInt(o, index);
         valueOfInt(o, value);
         if (arrayrefOfArrayType(o, arrayref)
-            && !(((ArrayType) arrayref).getElementType().equals(Type.BOOLEAN) || ((ArrayType) arrayref).getElementType().equals(Type.BYTE))) {
+            && !(((ArrayType) arrayref).isElementType(Type.BOOLEAN) || ((ArrayType) arrayref).isElementType(Type.BYTE))) {
             constraintViolated(o, "The 'arrayref' does not refer to an array with elements of a Type.BYTE or Type.BOOLEAN but to an array of '"
                 + ((ArrayType) arrayref).getElementType() + "'.");
         }
@@ -404,7 +404,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         final Type index = stack().peek(0);
 
         indexOfInt(o, index);
-        if (arrayrefOfArrayType(o, arrayref) && !((ArrayType) arrayref).getElementType().equals(Type.CHAR)) {
+        if (arrayrefOfArrayType(o, arrayref) && !((ArrayType) arrayref).isElementType(Type.CHAR)) {
             constraintViolated(o, "The 'arrayref' does not refer to an array with elements of type char but to an array of type "
                 + ((ArrayType) arrayref).getElementType() + ".");
         }
@@ -421,7 +421,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
 
         indexOfInt(o, index);
         valueOfInt(o, value);
-        if (arrayrefOfArrayType(o, arrayref) && !((ArrayType) arrayref).getElementType().equals(Type.CHAR)) {
+        if (arrayrefOfArrayType(o, arrayref) && !((ArrayType) arrayref).isElementType(Type.CHAR)) {
             constraintViolated(o, "The 'arrayref' does not refer to an array with elements of type char but to an array of type "
                 + ((ArrayType) arrayref).getElementType() + ".");
         }
@@ -521,8 +521,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         if (!(stack().peek(1) instanceof ArrayType)) {
             constraintViolated(o, "Stack next-to-top must be of type double[] but is '" + stack().peek(1) + "'.");
         }
-        final Type t = ((ArrayType) stack().peek(1)).getElementType();
-        if (t != Type.DOUBLE) {
+        if (!((ArrayType) stack().peek(1)).isElementType(Type.DOUBLE)) {
             constraintViolated(o, "Stack next-to-top must be of type double[] but is '" + stack().peek(1) + "'.");
         }
     }
@@ -542,8 +541,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         if (!(stack().peek(2) instanceof ArrayType)) {
             constraintViolated(o, "Stack next-to-next-to-top must be of type double[] but is '" + stack().peek(2) + "'.");
         }
-        final Type t = ((ArrayType) stack().peek(2)).getElementType();
-        if (t != Type.DOUBLE) {
+        if (!((ArrayType) stack().peek(2)).isElementType(Type.DOUBLE)) {
             constraintViolated(o, "Stack next-to-next-to-top must be of type double[] but is '" + stack().peek(2) + "'.");
         }
     }
@@ -828,8 +826,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         if (!(stack().peek(1) instanceof ArrayType)) {
             constraintViolated(o, "Stack next-to-top must be of type float[] but is '" + stack().peek(1) + "'.");
         }
-        final Type t = ((ArrayType) stack().peek(1)).getElementType();
-        if (t != Type.FLOAT) {
+        if (!((ArrayType) stack().peek(1)).isElementType(Type.FLOAT)) {
             constraintViolated(o, "Stack next-to-top must be of type float[] but is '" + stack().peek(1) + "'.");
         }
     }
@@ -849,8 +846,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         if (!(stack().peek(2) instanceof ArrayType)) {
             constraintViolated(o, "Stack next-to-next-to-top must be of type float[] but is '" + stack().peek(2) + "'.");
         }
-        final Type t = ((ArrayType) stack().peek(2)).getElementType();
-        if (t != Type.FLOAT) {
+        if (!((ArrayType) stack().peek(2)).isElementType(Type.FLOAT)) {
             constraintViolated(o, "Stack next-to-next-to-top must be of type float[] but is '" + stack().peek(2) + "'.");
         }
     }
@@ -1202,8 +1198,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         if (!(stack().peek(1) instanceof ArrayType)) {
             constraintViolated(o, "Stack next-to-top must be of type int[] but is '" + stack().peek(1) + "'.");
         }
-        final Type t = ((ArrayType) stack().peek(1)).getElementType();
-        if (t != Type.INT) {
+        if (!((ArrayType) stack().peek(1)).isElementType(Type.INT)) {
             constraintViolated(o, "Stack next-to-top must be of type int[] but is '" + stack().peek(1) + "'.");
         }
     }
@@ -1236,8 +1231,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         if (!(stack().peek(2) instanceof ArrayType)) {
             constraintViolated(o, "Stack next-to-next-to-top must be of type int[] but is '" + stack().peek(2) + "'.");
         }
-        final Type t = ((ArrayType) stack().peek(2)).getElementType();
-        if (t != Type.INT) {
+        if (!((ArrayType) stack().peek(2)).isElementType(Type.INT)) {
             constraintViolated(o, "Stack next-to-next-to-top must be of type int[] but is '" + stack().peek(2) + "'.");
         }
     }
@@ -1973,8 +1967,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         if (!(stack().peek(1) instanceof ArrayType)) {
             constraintViolated(o, "Stack next-to-top must be of type long[] but is '" + stack().peek(1) + "'.");
         }
-        final Type t = ((ArrayType) stack().peek(1)).getElementType();
-        if (t != Type.LONG) {
+        if (!((ArrayType) stack().peek(1)).isElementType(Type.LONG)) {
             constraintViolated(o, "Stack next-to-top must be of type long[] but is '" + stack().peek(1) + "'.");
         }
     }
@@ -2007,8 +2000,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         if (!(stack().peek(2) instanceof ArrayType)) {
             constraintViolated(o, "Stack next-to-next-to-top must be of type long[] but is '" + stack().peek(2) + "'.");
         }
-        final Type t = ((ArrayType) stack().peek(2)).getElementType();
-        if (t != Type.LONG) {
+        if (!((ArrayType) stack().peek(2)).isElementType(Type.LONG)) {
             constraintViolated(o, "Stack next-to-next-to-top must be of type long[] but is '" + stack().peek(2) + "'.");
         }
     }
@@ -2555,8 +2547,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         if (!(stack().peek(1) instanceof ArrayType)) {
             constraintViolated(o, "Stack next-to-top must be of type short[] but is '" + stack().peek(1) + "'.");
         }
-        final Type t = ((ArrayType) stack().peek(1)).getElementType();
-        if (t != Type.SHORT) {
+        if (!((ArrayType) stack().peek(1)).isElementType(Type.SHORT)) {
             constraintViolated(o, "Stack next-to-top must be of type short[] but is '" + stack().peek(1) + "'.");
         }
     }
@@ -2576,8 +2567,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
         if (!(stack().peek(2) instanceof ArrayType)) {
             constraintViolated(o, "Stack next-to-next-to-top must be of type short[] but is '" + stack().peek(2) + "'.");
         }
-        final Type t = ((ArrayType) stack().peek(2)).getElementType();
-        if (t != Type.SHORT) {
+        if (!((ArrayType) stack().peek(2)).isElementType(Type.SHORT)) {
             constraintViolated(o, "Stack next-to-next-to-top must be of type short[] but is '" + stack().peek(2) + "'.");
         }
     }

@@ -93,9 +93,9 @@ public final class ArrayType extends ReferenceType {
     }
 
     /**
-     * Gets the basic type of array, that is, for int[][][] the basic type is int.
+     * Gets the basic type of array, that is, for {@code int[][][]} the basic type is int.
      *
-     * @return basic type of array, that is, for int[][][] the basic type is int.
+     * @return basic type of array, that is, for {@code int[][][]} the basic type is int.
      */
     public Type getBasicType() {
         return basicType;
@@ -122,9 +122,9 @@ public final class ArrayType extends ReferenceType {
     }
 
     /**
-     * Gets the element type of array, that is, for int[][][] the element type is int[][].
+     * Gets the element type of array, that is, for {@code int[][][]} the element type is {@code int[][]}.
      *
-     * @return element type of array, that is, for int[][][] the element type is int[][].
+     * @return element type of array, that is, for {@code int[][][]} the element type is {@code int[][]}.
      */
     public Type getElementType() {
         if (dimensions == 1) {
@@ -139,5 +139,16 @@ public final class ArrayType extends ReferenceType {
     @Override
     public int hashCode() {
         return basicType.hashCode() ^ dimensions;
+    }
+
+    /**
+     * Tests whether the given type is the element type of this array type, that is, for {@code int[][][]} the element type is {@code int[][]}.
+     *
+     * @param type the type to test.
+     * @return true if the given type is the element type of this array type, that is, for {@code int[][][]} the element type is {@code int[][]}.
+     * @since 6.13.0
+     */
+    public boolean isElementType(final Type type) {
+        return getElementType().equals(type);
     }
 }

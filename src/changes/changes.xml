@@ -88,6 +88,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add RecordComponentInfo.getAttribute(byte tag)#494.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_27.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_27.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add and use ArrayType.isElementType(Type).</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 95 to 102.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory, Dependabot">Bump org.jetbrains.kotlin:kotlin-stdlib from 2.3.0 to 2.4.20 (#497, #519).</action>
