@@ -404,7 +404,10 @@ public class InstConstraintVisitor extends EmptyVisitor {
         final Type index = stack().peek(0);
 
         indexOfInt(o, index);
-        arrayrefOfArrayType(o, arrayref);
+        if (arrayrefOfArrayType(o, arrayref) && !((ArrayType) arrayref).getElementType().equals(Type.CHAR)) {
+            constraintViolated(o, "The 'arrayref' does not refer to an array with elements of type char but to an array of type "
+                + ((ArrayType) arrayref).getElementType() + ".");
+        }
     }
 
     /**
