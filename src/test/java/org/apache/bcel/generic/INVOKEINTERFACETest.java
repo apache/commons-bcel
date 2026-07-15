@@ -30,40 +30,33 @@ import org.apache.bcel.Const;
 import org.junit.jupiter.api.Test;
 
 /**
- * The {@code count} operand of {@code invokeinterface} and the {@code dimensions} operand of {@code multianewarray} are
- * both encoded as a u1, so the constructors must reject a value above {@link Const#MAX_BYTE}; otherwise {@code dump}
- * truncates it with {@code writeByte} and the emitted instruction carries a different count than requested. The lower
- * bound was already enforced; these cover the missing upper bound.
+ * Tests {@link INVOKEINTERFACE}.
+ *
+ * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-6.html#jvms-6.5.invokeinterface">JVM INVOKEINTERFACE specification</a>
  */
-class CountBoundsTest {
+class INVOKEINTERFACETest {
 
-    private static int dumpedByte(final Instruction i, final int offset) throws IOException {
+    private static int dumpedCountByte(final INVOKEINTERFACE instruction) throws IOException {
         final ByteArrayOutputStream bos = new ByteArrayOutputStream();
         try (DataOutputStream dos = new DataOutputStream(bos)) {
-            i.dump(dos);
+            instruction.dump(dos);
         }
-        return bos.toByteArray()[offset] & 0xFF;
+        // opcode, u2 index, u1 count, u1 zero
+        return bos.toByteArray()[3] & 0xFF;
     }
 
     @Test
-    void testInvokeInterfaceCountRoundTrips() throws IOException {
-        assertEquals(Const.MAX_BYTE, dumpedByte(new INVOKEINTERFACE(1, Const.MAX_BYTE), 3));
+    void testCountRoundTrips() throws IOException {
+        assertEquals(Const.MAX_BYTE, dumpedCountByte(new INVOKEINTERFACE(1, Const.MAX_BYTE)));
     }
 
+    /**
+     * The {@code count} operand of {@code invokeinterface} is an unsigned byte (1-255) and {@code dump} writes it with {@code writeByte}, so the constructor
+     * must reject values above {@link Const#MAX_BYTE} instead of truncating them.
+     */
     @Test
-    void testInvokeInterfaceRejectsCountAboveU1() {
+    void testRejectsCountAboveU1() {
         assertEquals(Const.MAX_BYTE, new INVOKEINTERFACE(1, Const.MAX_BYTE).getCount());
         assertThrows(ClassGenException.class, () -> new INVOKEINTERFACE(1, Const.MAX_BYTE + 1));
-    }
-
-    @Test
-    void testMultiANewArrayDimensionsRoundTrips() throws IOException {
-        assertEquals(Const.MAX_BYTE, dumpedByte(new MULTIANEWARRAY(1, (short) Const.MAX_BYTE), 3));
-    }
-
-    @Test
-    void testMultiANewArrayRejectsDimensionsAboveU1() {
-        assertEquals(Const.MAX_BYTE, new MULTIANEWARRAY(1, (short) Const.MAX_BYTE).getDimensions());
-        assertThrows(ClassGenException.class, () -> new MULTIANEWARRAY(1, (short) (Const.MAX_BYTE + 1)));
     }
 }

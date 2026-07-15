@@ -20,6 +20,11 @@
 package org.apache.bcel.generic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.util.ByteSequence;
@@ -32,6 +37,20 @@ import org.junit.jupiter.api.Test;
  */
 class MULTIANEWARRAYTest {
 
+    private static int dumpedDimensionsByte(final MULTIANEWARRAY instruction) throws IOException {
+        final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        try (DataOutputStream dos = new DataOutputStream(bos)) {
+            instruction.dump(dos);
+        }
+        // opcode, u2 index, u1 dimensions
+        return bos.toByteArray()[3] & 0xFF;
+    }
+
+    @Test
+    void testDimensionsRoundTrips() throws IOException {
+        assertEquals(Const.MAX_BYTE, dumpedDimensionsByte(new MULTIANEWARRAY(1, (short) Const.MAX_BYTE)));
+    }
+
     /**
      * The {@code dimensions} operand of {@code multianewarray} is an unsigned byte (1-255), so a value above 127 must not be read as a negative number.
      */
@@ -43,5 +62,15 @@ class MULTIANEWARRAYTest {
             final MULTIANEWARRAY instruction = (MULTIANEWARRAY) Instruction.readInstruction(bytes);
             assertEquals(200, instruction.getDimensions());
         }
+    }
+
+    /**
+     * The {@code dimensions} operand of {@code multianewarray} is an unsigned byte (1-255) and {@code dump} writes it with {@code writeByte}, so the
+     * constructor must reject values above {@link Const#MAX_BYTE} instead of truncating them.
+     */
+    @Test
+    void testRejectsDimensionsAboveU1() {
+        assertEquals(Const.MAX_BYTE, new MULTIANEWARRAY(1, (short) Const.MAX_BYTE).getDimensions());
+        assertThrows(ClassGenException.class, () -> new MULTIANEWARRAY(1, (short) (Const.MAX_BYTE + 1)));
     }
 }
