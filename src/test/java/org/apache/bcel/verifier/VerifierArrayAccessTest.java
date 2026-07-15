@@ -22,7 +22,11 @@ package org.apache.bcel.verifier;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 import java.io.IOException;
+import java.util.stream.Stream;
 
+import org.apache.bcel.generic.ArrayInstruction;
+import org.apache.bcel.generic.InstructionConst;
+import org.apache.bcel.generic.Type;
 import org.apache.bcel.verifier.tests.TestArrayAccess02Creator;
 import org.apache.bcel.verifier.tests.TestArrayAccess03Creator;
 import org.apache.bcel.verifier.tests.TestArrayAccess04DoubleCreator;
@@ -33,9 +37,48 @@ import org.apache.bcel.verifier.tests.TestArrayAccess04ShortCreator;
 import org.apache.bcel.verifier.tests.TestArrayAccess04UnknownCreator;
 import org.apache.bcel.verifier.tests.TestArrayAccess05Creator;
 import org.apache.bcel.verifier.tests.TestArrayAccess06Creator;
+import org.apache.bcel.verifier.tests.TestArrayAccess07Creator;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class VerifierArrayAccessTest extends AbstractVerifierTest {
+
+    /**
+     * Array load and store instructions applied to an array whose component type does not match the instruction.
+     * {@code caload} and {@code iaload} have their own tests, {@link org.apache.bcel.verifier.tests.TestArrayAccess06Creator} and
+     * {@link org.apache.bcel.verifier.tests.TestArrayAccess05Creator}.
+     */
+    static Stream<Arguments> invalidComponentTypeArrayAccess() {
+        return Stream.of(
+        // @formatter:off
+            Arguments.of(InstructionConst.AALOAD, Type.INT),
+            Arguments.of(InstructionConst.AASTORE, Type.INT),
+            Arguments.of(InstructionConst.BALOAD, Type.INT),
+            Arguments.of(InstructionConst.BASTORE, Type.INT),
+            Arguments.of(InstructionConst.CASTORE, Type.INT),
+            Arguments.of(InstructionConst.DALOAD, Type.INT),
+            Arguments.of(InstructionConst.DASTORE, Type.INT),
+            Arguments.of(InstructionConst.FALOAD, Type.INT),
+            Arguments.of(InstructionConst.FASTORE, Type.INT),
+            Arguments.of(InstructionConst.IASTORE, Type.CHAR),
+            Arguments.of(InstructionConst.LALOAD, Type.INT),
+            Arguments.of(InstructionConst.LASTORE, Type.INT),
+            Arguments.of(InstructionConst.SALOAD, Type.INT),
+            Arguments.of(InstructionConst.SASTORE, Type.INT));
+        // @formatter:on
+    }
+
+    @ParameterizedTest
+    @MethodSource("invalidComponentTypeArrayAccess")
+    void testInvalidComponentTypeArrayAccess(final ArrayInstruction arrayInstruction, final Type arrayElementType)
+        throws IOException, ClassNotFoundException {
+        final TestArrayAccess07Creator creator = new TestArrayAccess07Creator(arrayInstruction, arrayElementType);
+        creator.create();
+        assertVerifyRejected(creator.getSimpleClassName(),
+            "Verification of " + arrayInstruction.getName() + " applied to a " + arrayElementType + "[] must fail.");
+    }
 
     @Test
     void testInvalidArrayAccess() throws IOException, ClassNotFoundException {

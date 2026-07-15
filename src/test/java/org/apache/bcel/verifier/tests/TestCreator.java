@@ -49,7 +49,7 @@ public abstract class TestCreator {
         }
     }
 
-    private String getClassName() {
+    protected String getClassName() {
         final String name = getClass().getName();
         return name.substring(name.lastIndexOf('.') + 1).replace("Creator", JavaClass.EXTENSION);
     }
