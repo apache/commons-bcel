@@ -55,8 +55,8 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
     public INVOKEINTERFACE(final int index, final int nargs) {
         super(Const.INVOKEINTERFACE, index);
         super.setLength(5);
-        if (nargs < 1) {
-            throw new ClassGenException("Number of arguments must be > 0 " + nargs);
+        if (nargs < 1 || nargs > Const.MAX_BYTE) {
+            throw new ClassGenException("Number of arguments out of range (1 - " + Const.MAX_BYTE + "): " + nargs);
         }
         this.nargs = nargs;
     }
