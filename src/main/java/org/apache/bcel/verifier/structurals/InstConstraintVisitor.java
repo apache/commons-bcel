@@ -434,7 +434,6 @@ public class InstConstraintVisitor extends EmptyVisitor {
         final Type arrayref = stack().peek(2);
         final Type index = stack().peek(1);
         final Type value = stack().peek(0);
-
         indexOfInt(o, index);
         if (!(value instanceof ReferenceType)) {
             constraintViolated(o, "The 'value' is not of a ReferenceType but of type " + value + ".");
@@ -982,10 +981,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitFASTORE(final FASTORE o) {
-        final Type peek = stack().peek();
-        if (peek != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack top is not of type 'float', but of type '" + peek + "'.");
-        }
+        checkTypeFloatConstraint(o, 0);
         indexOfInt(o, stack().peek(1));
         checkArrayElementType(Type.FLOAT, o, stack().peek(2));
     }
