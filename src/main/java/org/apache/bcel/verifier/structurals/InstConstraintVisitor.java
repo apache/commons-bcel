@@ -18,6 +18,8 @@
  */
 package org.apache.bcel.verifier.structurals;
 
+import java.util.Objects;
+
 import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.Constant;
@@ -31,14 +33,186 @@ import org.apache.bcel.classfile.ConstantLong;
 import org.apache.bcel.classfile.ConstantString;
 import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.JavaClass;
+//CHECKSTYLE:OFF (there are lots of references!)
+import org.apache.bcel.generic.AALOAD;
+import org.apache.bcel.generic.AASTORE;
+import org.apache.bcel.generic.ACONST_NULL;
+import org.apache.bcel.generic.ALOAD;
+import org.apache.bcel.generic.ANEWARRAY;
+import org.apache.bcel.generic.ARETURN;
+import org.apache.bcel.generic.ARRAYLENGTH;
+import org.apache.bcel.generic.ASTORE;
+import org.apache.bcel.generic.ATHROW;
+import org.apache.bcel.generic.ArrayType;
+import org.apache.bcel.generic.BALOAD;
+import org.apache.bcel.generic.BASTORE;
+import org.apache.bcel.generic.BIPUSH;
+import org.apache.bcel.generic.BREAKPOINT;
+import org.apache.bcel.generic.CALOAD;
+import org.apache.bcel.generic.CASTORE;
+import org.apache.bcel.generic.CHECKCAST;
+import org.apache.bcel.generic.CPInstruction;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.D2F;
+import org.apache.bcel.generic.D2I;
+import org.apache.bcel.generic.D2L;
+import org.apache.bcel.generic.DADD;
+import org.apache.bcel.generic.DALOAD;
+import org.apache.bcel.generic.DASTORE;
+import org.apache.bcel.generic.DCMPG;
+import org.apache.bcel.generic.DCMPL;
+import org.apache.bcel.generic.DCONST;
+import org.apache.bcel.generic.DDIV;
+import org.apache.bcel.generic.DLOAD;
+import org.apache.bcel.generic.DMUL;
+import org.apache.bcel.generic.DNEG;
+import org.apache.bcel.generic.DREM;
+import org.apache.bcel.generic.DRETURN;
+import org.apache.bcel.generic.DSTORE;
+import org.apache.bcel.generic.DSUB;
+import org.apache.bcel.generic.DUP;
+import org.apache.bcel.generic.DUP2;
+import org.apache.bcel.generic.DUP2_X1;
+import org.apache.bcel.generic.DUP2_X2;
+import org.apache.bcel.generic.DUP_X1;
+import org.apache.bcel.generic.DUP_X2;
+import org.apache.bcel.generic.EmptyVisitor;
+import org.apache.bcel.generic.F2D;
+import org.apache.bcel.generic.F2I;
+import org.apache.bcel.generic.F2L;
+import org.apache.bcel.generic.FADD;
+import org.apache.bcel.generic.FALOAD;
+import org.apache.bcel.generic.FASTORE;
+import org.apache.bcel.generic.FCMPG;
+import org.apache.bcel.generic.FCMPL;
+import org.apache.bcel.generic.FCONST;
+import org.apache.bcel.generic.FDIV;
+import org.apache.bcel.generic.FLOAD;
+import org.apache.bcel.generic.FMUL;
+import org.apache.bcel.generic.FNEG;
+import org.apache.bcel.generic.FREM;
+import org.apache.bcel.generic.FRETURN;
+import org.apache.bcel.generic.FSTORE;
+import org.apache.bcel.generic.FSUB;
+import org.apache.bcel.generic.FieldInstruction;
+import org.apache.bcel.generic.GETFIELD;
+import org.apache.bcel.generic.GETSTATIC;
+import org.apache.bcel.generic.GOTO;
+import org.apache.bcel.generic.GOTO_W;
+import org.apache.bcel.generic.I2B;
+import org.apache.bcel.generic.I2C;
+import org.apache.bcel.generic.I2D;
+import org.apache.bcel.generic.I2F;
+import org.apache.bcel.generic.I2L;
+import org.apache.bcel.generic.I2S;
+import org.apache.bcel.generic.IADD;
+import org.apache.bcel.generic.IALOAD;
+import org.apache.bcel.generic.IAND;
+import org.apache.bcel.generic.IASTORE;
+import org.apache.bcel.generic.ICONST;
+import org.apache.bcel.generic.IDIV;
+import org.apache.bcel.generic.IFEQ;
+import org.apache.bcel.generic.IFGE;
+import org.apache.bcel.generic.IFGT;
+import org.apache.bcel.generic.IFLE;
+import org.apache.bcel.generic.IFLT;
+import org.apache.bcel.generic.IFNE;
+import org.apache.bcel.generic.IFNONNULL;
+import org.apache.bcel.generic.IFNULL;
+import org.apache.bcel.generic.IF_ACMPEQ;
+import org.apache.bcel.generic.IF_ACMPNE;
+import org.apache.bcel.generic.IF_ICMPEQ;
+import org.apache.bcel.generic.IF_ICMPGE;
+import org.apache.bcel.generic.IF_ICMPGT;
+import org.apache.bcel.generic.IF_ICMPLE;
+import org.apache.bcel.generic.IF_ICMPLT;
+import org.apache.bcel.generic.IF_ICMPNE;
+import org.apache.bcel.generic.IINC;
+import org.apache.bcel.generic.ILOAD;
+import org.apache.bcel.generic.IMPDEP1;
+import org.apache.bcel.generic.IMPDEP2;
+import org.apache.bcel.generic.IMUL;
+import org.apache.bcel.generic.INEG;
+import org.apache.bcel.generic.INSTANCEOF;
+import org.apache.bcel.generic.INVOKEDYNAMIC;
+import org.apache.bcel.generic.INVOKEINTERFACE;
+import org.apache.bcel.generic.INVOKESPECIAL;
+import org.apache.bcel.generic.INVOKESTATIC;
+import org.apache.bcel.generic.INVOKEVIRTUAL;
+import org.apache.bcel.generic.IOR;
+import org.apache.bcel.generic.IREM;
+import org.apache.bcel.generic.IRETURN;
+import org.apache.bcel.generic.ISHL;
+import org.apache.bcel.generic.ISHR;
+import org.apache.bcel.generic.ISTORE;
+import org.apache.bcel.generic.ISUB;
+import org.apache.bcel.generic.IUSHR;
+import org.apache.bcel.generic.IXOR;
+import org.apache.bcel.generic.Instruction;
+import org.apache.bcel.generic.InvokeInstruction;
+import org.apache.bcel.generic.JSR;
+import org.apache.bcel.generic.JSR_W;
+import org.apache.bcel.generic.L2D;
+import org.apache.bcel.generic.L2F;
+import org.apache.bcel.generic.L2I;
+import org.apache.bcel.generic.LADD;
+import org.apache.bcel.generic.LALOAD;
+import org.apache.bcel.generic.LAND;
+import org.apache.bcel.generic.LASTORE;
+import org.apache.bcel.generic.LCMP;
+import org.apache.bcel.generic.LCONST;
+import org.apache.bcel.generic.LDC;
+import org.apache.bcel.generic.LDC2_W;
+import org.apache.bcel.generic.LDC_W;
+import org.apache.bcel.generic.LDIV;
+import org.apache.bcel.generic.LLOAD;
+import org.apache.bcel.generic.LMUL;
+import org.apache.bcel.generic.LNEG;
+import org.apache.bcel.generic.LOOKUPSWITCH;
+import org.apache.bcel.generic.LOR;
+import org.apache.bcel.generic.LREM;
+import org.apache.bcel.generic.LRETURN;
+import org.apache.bcel.generic.LSHL;
+import org.apache.bcel.generic.LSHR;
+import org.apache.bcel.generic.LSTORE;
+import org.apache.bcel.generic.LSUB;
+import org.apache.bcel.generic.LUSHR;
+import org.apache.bcel.generic.LXOR;
+import org.apache.bcel.generic.LoadClass;
+import org.apache.bcel.generic.LoadInstruction;
+import org.apache.bcel.generic.LocalVariableInstruction;
+import org.apache.bcel.generic.MONITORENTER;
+import org.apache.bcel.generic.MONITOREXIT;
+import org.apache.bcel.generic.MULTIANEWARRAY;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.NEW;
+import org.apache.bcel.generic.NEWARRAY;
+import org.apache.bcel.generic.NOP;
+import org.apache.bcel.generic.ObjectType;
+import org.apache.bcel.generic.POP;
+import org.apache.bcel.generic.POP2;
+import org.apache.bcel.generic.PUTFIELD;
+import org.apache.bcel.generic.PUTSTATIC;
+import org.apache.bcel.generic.RET;
+import org.apache.bcel.generic.RETURN;
+import org.apache.bcel.generic.ReferenceType;
+import org.apache.bcel.generic.ReturnInstruction;
+import org.apache.bcel.generic.ReturnaddressType;
+import org.apache.bcel.generic.SALOAD;
+import org.apache.bcel.generic.SASTORE;
+import org.apache.bcel.generic.SIPUSH;
+import org.apache.bcel.generic.SWAP;
+import org.apache.bcel.generic.StackConsumer;
+import org.apache.bcel.generic.StackInstruction;
+import org.apache.bcel.generic.StackProducer;
+import org.apache.bcel.generic.StoreInstruction;
+import org.apache.bcel.generic.TABLESWITCH;
+import org.apache.bcel.generic.Type;
 import org.apache.bcel.verifier.VerificationResult;
 import org.apache.bcel.verifier.Verifier;
 import org.apache.bcel.verifier.VerifierFactory;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
 import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
-
-//CHECKSTYLE:OFF (there are lots of references!)
-import org.apache.bcel.generic.*;
 //CHECKSTYLE:ON
 
 /**
@@ -92,6 +266,29 @@ public class InstConstraintVisitor extends EmptyVisitor {
             constraintViolated(o, "The 'arrayref' does not refer to an array but is of type " + arrayref + ".");
         }
         return arrayref instanceof ArrayType;
+    }
+
+    private void checkTypeConstraint(final Type expected, final Instruction o, final int depth) {
+        final Type peek = stack().peek(depth);
+        if (!Objects.equals(expected, peek)) {
+            constraintViolated(o, "The value at the stack " + depth + " from the top is not of type '" + expected + "', but of type '" + peek + "'.");
+        }
+    }
+
+    private void checkTypeFloatConstraint(final Instruction o, final int depth) {
+        checkTypeConstraint(Type.FLOAT, o, depth);
+    }
+
+    private void checkTypeDoubleConstraint(final Instruction o, final int depth) {
+        checkTypeConstraint(Type.DOUBLE, o, depth);
+    }
+
+    private void checkTypeIntConstraint(final Instruction o, final int depth) {
+        checkTypeConstraint(Type.INT, o, depth);
+    }
+
+    private void checkTypeLongConstraint(final Instruction o, final int depth) {
+        checkTypeConstraint(Type.LONG, o, depth);
     }
 
     /**
@@ -188,17 +385,17 @@ public class InstConstraintVisitor extends EmptyVisitor {
         return frame.getStack();
     }
 
+    /*
+     * "generic"visitXXXX methods where XXXX is an interface therefore, we don't know the order of visiting; but we know these methods are called before the
+     * visitYYYY methods below
+     */
+
     /** Assures value is of type INT. */
     private void valueOfInt(final Instruction o, final Type value) {
         if (!value.equals(Type.INT)) {
             constraintViolated(o, "The 'value' is not of type int but of type " + value + ".");
         }
     }
-
-    /*
-     * "generic"visitXXXX methods where XXXX is an interface therefore, we don't know the order of visiting; but we know these methods are called before the
-     * visitYYYY methods below
-     */
 
     /**
      * Ensures the specific preconditions of the said instruction.
@@ -265,8 +462,9 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitANEWARRAY(final ANEWARRAY o) {
-        if (!stack().peek().equals(Type.INT)) {
-            constraintViolated(o, "The 'count' at the stack top is not of type '" + Type.INT + "' but of type '" + stack().peek() + "'.");
+        final Type peek = stack().peek();
+        if (!peek.equals(Type.INT)) {
+            constraintViolated(o, "The 'count' at the stack top is not of type '" + Type.INT + "' but of type '" + peek + "'.");
             // The runtime constant pool item at that index must be a symbolic reference to a class,
             // array, or interface type. See Pass 3a.
         }
@@ -277,11 +475,11 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitARETURN(final ARETURN o) {
-        if (!(stack().peek() instanceof ReferenceType)) {
-            constraintViolated(o, "The 'objectref' at the stack top is not of a ReferenceType but of type '" + stack().peek() + "'.");
+        final Type peek = stack().peek();
+        if (!(peek instanceof ReferenceType)) {
+            constraintViolated(o, "The 'objectref' at the stack top is not of a ReferenceType but of type '" + peek + "'.");
         }
-        final ReferenceType objectref = (ReferenceType) stack().peek();
-        referenceTypeIsInitialized(o, objectref);
+        referenceTypeIsInitialized(o, (ReferenceType) peek);
 
         // The check below should already done via visitReturnInstruction(ReturnInstruction), see there.
         // It cannot be done using Staerk-et-al's "set of object types" instead of a
@@ -297,8 +495,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitARRAYLENGTH(final ARRAYLENGTH o) {
-        final Type arrayref = stack().peek(0);
-        arrayrefOfArrayType(o, arrayref);
+        arrayrefOfArrayType(o, stack().peek(0));
     }
 
     /**
@@ -306,8 +503,9 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitASTORE(final ASTORE o) {
-        if (!(stack().peek() instanceof ReferenceType || stack().peek() instanceof ReturnaddressType)) {
-            constraintViolated(o, "The 'objectref' is not of a ReferenceType or of ReturnaddressType but of " + stack().peek() + ".");
+        final Type peek = stack().peek();
+        if (!(peek instanceof ReferenceType || peek instanceof ReturnaddressType)) {
+            constraintViolated(o, "The 'objectref' is not of a ReferenceType or of ReturnaddressType but of " + peek + ".");
         }
         // if (stack().peek() instanceof ReferenceType) {
         // referenceTypeIsInitialized(o, (ReferenceType) (stack().peek()) );
@@ -322,19 +520,20 @@ public class InstConstraintVisitor extends EmptyVisitor {
         try {
             // It's stated that 'objectref' must be of a ReferenceType --- but since Throwable is
             // not derived from an ArrayType, it follows that 'objectref' must be of an ObjectType or Type.NULL.
-            if (!(stack().peek() instanceof ObjectType || stack().peek().equals(Type.NULL))) {
-                constraintViolated(o, "The 'objectref' is not of an (initialized) ObjectType but of type " + stack().peek() + ".");
+            final Type peek = stack().peek();
+            if (!(peek instanceof ObjectType || peek.equals(Type.NULL))) {
+                constraintViolated(o, "The 'objectref' is not of an (initialized) ObjectType but of type " + peek + ".");
             }
 
             // NULL is a subclass of every class, so to speak.
-            if (stack().peek().equals(Type.NULL)) {
+            if (peek.equals(Type.NULL)) {
                 return;
             }
 
-            final ObjectType exc = (ObjectType) stack().peek();
+            final ObjectType exc = (ObjectType) peek;
             final ObjectType throwable = (ObjectType) Type.getType("Ljava/lang/Throwable;");
             if (!exc.subclassOf(throwable) && !exc.equals(throwable)) {
-                constraintViolated(o, "The 'objectref' is not of class Throwable or of a subclass of Throwable, but of '" + stack().peek() + "'.");
+                constraintViolated(o, "The 'objectref' is not of class Throwable or of a subclass of Throwable, but of '" + peek + "'.");
             }
         } catch (final ClassNotFoundException e) {
             // FIXME: maybe not the best way to handle this
@@ -357,6 +556,10 @@ public class InstConstraintVisitor extends EmptyVisitor {
         }
     }
 
+    /*
+    /* "special"visitXXXX methods for one type of instruction each.
+     */
+
     /**
      * Ensures the specific preconditions of the said instruction.
      */
@@ -374,10 +577,6 @@ public class InstConstraintVisitor extends EmptyVisitor {
                 + ((ArrayType) arrayref).getElementType() + "'.");
         }
     }
-
-    /*
-    /* "special"visitXXXX methods for one type of instruction each.
-     */
 
     /**
      * Ensures the specific preconditions of the said instruction.
@@ -427,6 +626,12 @@ public class InstConstraintVisitor extends EmptyVisitor {
         }
     }
 
+    /*
+     * "generic" visitYYYY methods where YYYY is a superclass.
+     * therefore, we know the order of visiting; we know
+     * these methods are called after the visitXXXX methods above.
+     */
+
     /**
      * Ensures the specific preconditions of the said instruction.
      */
@@ -449,12 +654,6 @@ public class InstConstraintVisitor extends EmptyVisitor {
         }
     }
 
-    /*
-     * "generic" visitYYYY methods where YYYY is a superclass.
-     * therefore, we know the order of visiting; we know
-     * these methods are called after the visitXXXX methods above.
-     */
-
     /**
      * Ensures the general preconditions of a CPInstruction instance.
      */
@@ -471,9 +670,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitD2F(final D2F o) {
-        if (stack().peek() != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack top is not of type 'double', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeDoubleConstraint(o, 0);
     }
 
     /**
@@ -481,9 +678,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitD2I(final D2I o) {
-        if (stack().peek() != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack top is not of type 'double', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeDoubleConstraint(o, 0);
     }
 
     /**
@@ -491,9 +686,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitD2L(final D2L o) {
-        if (stack().peek() != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack top is not of type 'double', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeDoubleConstraint(o, 0);
     }
 
     /**
@@ -501,12 +694,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitDADD(final DADD o) {
-        if (stack().peek() != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack top is not of type 'double', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'double', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeDoubleConstraint(o, 0);
+        checkTypeDoubleConstraint(o, 1);
     }
 
     /**
@@ -515,14 +704,15 @@ public class InstConstraintVisitor extends EmptyVisitor {
     @Override
     public void visitDALOAD(final DALOAD o) {
         indexOfInt(o, stack().peek());
-        if (stack().peek(1) == Type.NULL) {
+        final Type peek1 = stack().peek(1);
+        if (peek1 == Type.NULL) {
             return;
         }
-        if (!(stack().peek(1) instanceof ArrayType)) {
-            constraintViolated(o, "Stack next-to-top must be of type double[] but is '" + stack().peek(1) + "'.");
+        if (!(peek1 instanceof ArrayType)) {
+            constraintViolated(o, "Stack next-to-top must be of type double[] but is '" + peek1 + "'.");
         }
-        if (!((ArrayType) stack().peek(1)).isElementType(Type.DOUBLE)) {
-            constraintViolated(o, "Stack next-to-top must be of type double[] but is '" + stack().peek(1) + "'.");
+        if (!((ArrayType) peek1).isElementType(Type.DOUBLE)) {
+            constraintViolated(o, "Stack next-to-top must be of type double[] but is '" + peek1 + "'.");
         }
     }
 
@@ -531,18 +721,17 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitDASTORE(final DASTORE o) {
-        if (stack().peek() != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack top is not of type 'double', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeDoubleConstraint(o, 0);
         indexOfInt(o, stack().peek(1));
-        if (stack().peek(2) == Type.NULL) {
+        final Type peek2 = stack().peek(2);
+        if (peek2 == Type.NULL) {
             return;
         }
-        if (!(stack().peek(2) instanceof ArrayType)) {
-            constraintViolated(o, "Stack next-to-next-to-top must be of type double[] but is '" + stack().peek(2) + "'.");
+        if (!(peek2 instanceof ArrayType)) {
+            constraintViolated(o, "Stack next-to-next-to-top must be of type double[] but is '" + peek2 + "'.");
         }
-        if (!((ArrayType) stack().peek(2)).isElementType(Type.DOUBLE)) {
-            constraintViolated(o, "Stack next-to-next-to-top must be of type double[] but is '" + stack().peek(2) + "'.");
+        if (!((ArrayType) peek2).isElementType(Type.DOUBLE)) {
+            constraintViolated(o, "Stack next-to-next-to-top must be of type double[] but is '" + peek2 + "'.");
         }
     }
 
@@ -551,12 +740,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitDCMPG(final DCMPG o) {
-        if (stack().peek() != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack top is not of type 'double', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'double', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeDoubleConstraint(o, 0);
+        checkTypeDoubleConstraint(o, 1);
     }
 
     /**
@@ -564,12 +749,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitDCMPL(final DCMPL o) {
-        if (stack().peek() != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack top is not of type 'double', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'double', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeDoubleConstraint(o, 0);
+        checkTypeDoubleConstraint(o, 1);
     }
 
     /**
@@ -585,12 +766,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitDDIV(final DDIV o) {
-        if (stack().peek() != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack top is not of type 'double', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'double', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeDoubleConstraint(o, 0);
+        checkTypeDoubleConstraint(o, 1);
     }
 
     /**
@@ -608,12 +785,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitDMUL(final DMUL o) {
-        if (stack().peek() != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack top is not of type 'double', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'double', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeDoubleConstraint(o, 0);
+        checkTypeDoubleConstraint(o, 1);
     }
 
     /**
@@ -621,9 +794,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitDNEG(final DNEG o) {
-        if (stack().peek() != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack top is not of type 'double', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeDoubleConstraint(o, 0);
     }
 
     /**
@@ -631,12 +802,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitDREM(final DREM o) {
-        if (stack().peek() != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack top is not of type 'double', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'double', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeDoubleConstraint(o, 0);
+        checkTypeDoubleConstraint(o, 1);
     }
 
     /**
@@ -644,9 +811,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitDRETURN(final DRETURN o) {
-        if (stack().peek() != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack top is not of type 'double', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeDoubleConstraint(o, 0);
     }
 
     /**
@@ -664,12 +829,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitDSUB(final DSUB o) {
-        if (stack().peek() != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack top is not of type 'double', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.DOUBLE) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'double', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeDoubleConstraint(o, 0);
+        checkTypeDoubleConstraint(o, 1);
     }
 
     /**
@@ -677,9 +838,10 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitDUP(final DUP o) {
-        if (stack().peek().getSize() != 1) {
+        final Type peek = stack().peek();
+        if (peek.getSize() != 1) {
             constraintViolated(o,
-                "Won't DUP type on stack top '" + stack().peek() + "' because it must occupy exactly one slot, not '" + stack().peek().getSize() + "'.");
+                "Won't DUP type on stack top '" + peek + "' because it must occupy exactly one slot, not '" + peek.getSize() + "'.");
         }
     }
 
@@ -688,12 +850,14 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitDUP_X1(final DUP_X1 o) {
-        if (stack().peek().getSize() != 1) {
-            constraintViolated(o, "Type on stack top '" + stack().peek() + "' should occupy exactly one slot, not '" + stack().peek().getSize() + "'.");
+        final Type peek = stack().peek();
+        if (peek.getSize() != 1) {
+            constraintViolated(o, "Type on stack top '" + peek + "' should occupy exactly one slot, not '" + peek.getSize() + "'.");
         }
-        if (stack().peek(1).getSize() != 1) {
+        final Type peek1 = stack().peek(1);
+        if (peek1.getSize() != 1) {
             constraintViolated(o,
-                "Type on stack next-to-top '" + stack().peek(1) + "' should occupy exactly one slot, not '" + stack().peek(1).getSize() + "'.");
+                "Type on stack next-to-top '" + peek1 + "' should occupy exactly one slot, not '" + peek1.getSize() + "'.");
         }
     }
 
@@ -702,16 +866,19 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitDUP_X2(final DUP_X2 o) {
-        if (stack().peek().getSize() != 1) {
-            constraintViolated(o, "Stack top type must be of size 1, but is '" + stack().peek() + "' of size '" + stack().peek().getSize() + "'.");
+        final Type peek = stack().peek();
+        if (peek.getSize() != 1) {
+            constraintViolated(o, "Stack top type must be of size 1, but is '" + peek + "' of size '" + peek.getSize() + "'.");
         }
-        if (stack().peek(1).getSize() == 2) {
+        final Type peek1 = stack().peek(1);
+        if (peek1.getSize() == 2) {
             return; // Form 2, okay.
         }
         // stack().peek(1).getSize == 1.
-        if (stack().peek(2).getSize() != 1) {
+        final Type peek2 = stack().peek(2);
+        if (peek2.getSize() != 1) {
             constraintViolated(o, "If stack top's size is 1 and stack next-to-top's size is 1, stack next-to-next-to-top's size must also be 1, but is: '"
-                + stack().peek(2) + "' of size '" + stack().peek(2).getSize() + "'.");
+                + peek2 + "' of size '" + peek2.getSize() + "'.");
         }
     }
 
@@ -720,13 +887,15 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitDUP2(final DUP2 o) {
-        if (stack().peek().getSize() == 2) {
+        final Type peek = stack().peek();
+        if (peek.getSize() == 2) {
             return; // Form 2, okay.
         }
         // stack().peek().getSize() == 1.
-        if (stack().peek(1).getSize() != 1) {
-            constraintViolated(o, "If stack top's size is 1, then stack next-to-top's size must also be 1. But it is '" + stack().peek(1) + "' of size '"
-                + stack().peek(1).getSize() + "'.");
+        final Type peek1 = stack().peek(1);
+        if (peek1.getSize() != 1) {
+            constraintViolated(o, "If stack top's size is 1, then stack next-to-top's size must also be 1. But it is '" + peek1 + "' of size '"
+                + peek1.getSize() + "'.");
         }
     }
 
@@ -735,19 +904,22 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitDUP2_X1(final DUP2_X1 o) {
-        if (stack().peek().getSize() == 2) {
-            if (stack().peek(1).getSize() != 1) {
-                constraintViolated(o, "If stack top's size is 2, then stack next-to-top's size must be 1. But it is '" + stack().peek(1) + "' of size '"
-                    + stack().peek(1).getSize() + "'.");
+        final Type peek = stack().peek();
+        final Type peek1 = stack().peek(1);
+        if (peek.getSize() == 2) {
+            if (peek1.getSize() != 1) {
+                constraintViolated(o, "If stack top's size is 2, then stack next-to-top's size must be 1. But it is '" + peek1 + "' of size '"
+                    + peek1.getSize() + "'.");
             }
         } else { // stack top is of size 1
-            if (stack().peek(1).getSize() != 1) {
-                constraintViolated(o, "If stack top's size is 1, then stack next-to-top's size must also be 1. But it is '" + stack().peek(1) + "' of size '"
-                    + stack().peek(1).getSize() + "'.");
+            if (peek1.getSize() != 1) {
+                constraintViolated(o, "If stack top's size is 1, then stack next-to-top's size must also be 1. But it is '" + peek1 + "' of size '"
+                    + peek1.getSize() + "'.");
             }
-            if (stack().peek(2).getSize() != 1) {
-                constraintViolated(o, "If stack top's size is 1, then stack next-to-next-to-top's size must also be 1. But it is '" + stack().peek(2)
-                    + "' of size '" + stack().peek(2).getSize() + "'.");
+            final Type peek2 = stack().peek(2);
+            if (peek2.getSize() != 1) {
+                constraintViolated(o, "If stack top's size is 1, then stack next-to-next-to-top's size must also be 1. But it is '" + peek2
+                    + "' of size '" + peek2.getSize() + "'.");
             }
         }
     }
@@ -757,15 +929,17 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitDUP2_X2(final DUP2_X2 o) {
-
-        if (stack().peek(0).getSize() == 2) {
+        final Type peek = stack().peek(0);
+        final Type peek1 = stack().peek(1);
+        final Type peek2 = stack().peek(2);
+        if (peek.getSize() == 2) {
             // stack top size is 2, next-to-top's size is 1
-            if (stack().peek(1).getSize() == 2 || stack().peek(2).getSize() == 1) {
+            if (peek1.getSize() == 2 || peek2.getSize() == 1) {
                 return; // Form 2
             }
             constraintViolated(o, "If stack top's size is 2 and stack-next-to-top's size is 1,"
-                + " then stack next-to-next-to-top's size must also be 1. But it is '" + stack().peek(2) + "' of size '" + stack().peek(2).getSize() + "'.");
-        } else if (stack().peek(1).getSize() == 1 && (stack().peek(2).getSize() == 2 || stack().peek(3).getSize() == 1)) {
+                + " then stack next-to-next-to-top's size must also be 1. But it is '" + peek2 + "' of size '" + peek2.getSize() + "'.");
+        } else if (peek1.getSize() == 1 && (peek2.getSize() == 2 || stack().peek(3).getSize() == 1)) {
             return; // Form 1
         }
         constraintViolated(o, "The operand sizes on the stack do not match any of the four forms of usage of this instruction.");
@@ -776,9 +950,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitF2D(final F2D o) {
-        if (stack().peek() != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack top is not of type 'float', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeFloatConstraint(o, 0);
     }
 
     /**
@@ -786,9 +958,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitF2I(final F2I o) {
-        if (stack().peek() != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack top is not of type 'float', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeFloatConstraint(o, 0);
     }
 
     /**
@@ -796,9 +966,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitF2L(final F2L o) {
-        if (stack().peek() != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack top is not of type 'float', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeFloatConstraint(o, 0);
     }
 
     /**
@@ -806,12 +974,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitFADD(final FADD o) {
-        if (stack().peek() != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack top is not of type 'float', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'float', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeFloatConstraint(o, 0);
+        checkTypeFloatConstraint(o, 1);
     }
 
     /**
@@ -820,14 +984,15 @@ public class InstConstraintVisitor extends EmptyVisitor {
     @Override
     public void visitFALOAD(final FALOAD o) {
         indexOfInt(o, stack().peek());
-        if (stack().peek(1) == Type.NULL) {
+        final Type peek1 = stack().peek(1);
+        if (peek1 == Type.NULL) {
             return;
         }
-        if (!(stack().peek(1) instanceof ArrayType)) {
-            constraintViolated(o, "Stack next-to-top must be of type float[] but is '" + stack().peek(1) + "'.");
+        if (!(peek1 instanceof ArrayType)) {
+            constraintViolated(o, "Stack next-to-top must be of type float[] but is '" + peek1 + "'.");
         }
-        if (!((ArrayType) stack().peek(1)).isElementType(Type.FLOAT)) {
-            constraintViolated(o, "Stack next-to-top must be of type float[] but is '" + stack().peek(1) + "'.");
+        if (!((ArrayType) peek1).isElementType(Type.FLOAT)) {
+            constraintViolated(o, "Stack next-to-top must be of type float[] but is '" + peek1 + "'.");
         }
     }
 
@@ -836,18 +1001,20 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitFASTORE(final FASTORE o) {
-        if (stack().peek() != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack top is not of type 'float', but of type '" + stack().peek() + "'.");
+        final Type peek = stack().peek();
+        if (peek != Type.FLOAT) {
+            constraintViolated(o, "The value at the stack top is not of type 'float', but of type '" + peek + "'.");
         }
         indexOfInt(o, stack().peek(1));
-        if (stack().peek(2) == Type.NULL) {
+        final Type peek2 = stack().peek(2);
+        if (peek2 == Type.NULL) {
             return;
         }
-        if (!(stack().peek(2) instanceof ArrayType)) {
-            constraintViolated(o, "Stack next-to-next-to-top must be of type float[] but is '" + stack().peek(2) + "'.");
+        if (!(peek2 instanceof ArrayType)) {
+            constraintViolated(o, "Stack next-to-next-to-top must be of type float[] but is '" + peek2 + "'.");
         }
-        if (!((ArrayType) stack().peek(2)).isElementType(Type.FLOAT)) {
-            constraintViolated(o, "Stack next-to-next-to-top must be of type float[] but is '" + stack().peek(2) + "'.");
+        if (!((ArrayType) peek2).isElementType(Type.FLOAT)) {
+            constraintViolated(o, "Stack next-to-next-to-top must be of type float[] but is '" + peek2 + "'.");
         }
     }
 
@@ -856,12 +1023,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitFCMPG(final FCMPG o) {
-        if (stack().peek() != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack top is not of type 'float', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'float', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeFloatConstraint(o, 0);
+        checkTypeFloatConstraint(o, 1);
     }
 
     /**
@@ -869,12 +1032,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitFCMPL(final FCMPL o) {
-        if (stack().peek() != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack top is not of type 'float', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'float', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeFloatConstraint(o, 0);
+        checkTypeFloatConstraint(o, 1);
     }
 
     /**
@@ -890,12 +1049,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitFDIV(final FDIV o) {
-        if (stack().peek() != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack top is not of type 'float', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'float', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeFloatConstraint(o, 0);
+        checkTypeFloatConstraint(o, 1);
     }
 
     /**
@@ -970,12 +1125,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitFMUL(final FMUL o) {
-        if (stack().peek() != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack top is not of type 'float', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'float', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeFloatConstraint(o, 0);
+        checkTypeFloatConstraint(o, 1);
     }
 
     /**
@@ -983,9 +1134,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitFNEG(final FNEG o) {
-        if (stack().peek() != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack top is not of type 'float', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeFloatConstraint(o, 0);
     }
 
     /**
@@ -993,12 +1142,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitFREM(final FREM o) {
-        if (stack().peek() != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack top is not of type 'float', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'float', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeFloatConstraint(o, 0);
+        checkTypeFloatConstraint(o, 1);
     }
 
     /**
@@ -1006,9 +1151,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitFRETURN(final FRETURN o) {
-        if (stack().peek() != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack top is not of type 'float', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeFloatConstraint(o, 0);
     }
 
     /**
@@ -1026,12 +1169,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitFSUB(final FSUB o) {
-        if (stack().peek() != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack top is not of type 'float', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.FLOAT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'float', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeFloatConstraint(o, 0);
+        checkTypeFloatConstraint(o, 1);
     }
 
     /**
@@ -1118,9 +1257,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitI2B(final I2B o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
     }
 
     /**
@@ -1128,9 +1265,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitI2C(final I2C o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
     }
 
     /**
@@ -1138,9 +1273,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitI2D(final I2D o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
     }
 
     /**
@@ -1148,9 +1281,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitI2F(final I2F o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
     }
 
     /**
@@ -1158,9 +1289,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitI2L(final I2L o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
     }
 
     /**
@@ -1168,9 +1297,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitI2S(final I2S o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
     }
 
     /**
@@ -1178,12 +1305,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIADD(final IADD o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.INT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'int', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeIntConstraint(o, 1);
     }
 
     /**
@@ -1208,12 +1331,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIAND(final IAND o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.INT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'int', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeIntConstraint(o, 1);
     }
 
     /**
@@ -1221,9 +1340,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIASTORE(final IASTORE o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
         indexOfInt(o, stack().peek(1));
         if (stack().peek(2) == Type.NULL) {
             return;
@@ -1249,12 +1366,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIDIV(final IDIV o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.INT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'int', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeIntConstraint(o, 1);
     }
 
     /**
@@ -1294,12 +1407,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIF_ICMPEQ(final IF_ICMPEQ o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.INT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'int', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeIntConstraint(o, 1);
     }
 
     /**
@@ -1307,12 +1416,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIF_ICMPGE(final IF_ICMPGE o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.INT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'int', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeIntConstraint(o, 1);
     }
 
     /**
@@ -1320,12 +1425,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIF_ICMPGT(final IF_ICMPGT o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.INT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'int', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeIntConstraint(o, 1);
     }
 
     /**
@@ -1333,12 +1434,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIF_ICMPLE(final IF_ICMPLE o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.INT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'int', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeIntConstraint(o, 1);
     }
 
     /**
@@ -1346,12 +1443,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIF_ICMPLT(final IF_ICMPLT o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.INT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'int', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeIntConstraint(o, 1);
     }
 
     /**
@@ -1359,12 +1452,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIF_ICMPNE(final IF_ICMPNE o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.INT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'int', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeIntConstraint(o, 1);
     }
 
     /**
@@ -1372,9 +1461,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIFEQ(final IFEQ o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
     }
 
     /**
@@ -1382,9 +1469,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIFGE(final IFGE o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
     }
 
     /**
@@ -1392,9 +1477,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIFGT(final IFGT o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
     }
 
     /**
@@ -1402,9 +1485,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIFLE(final IFLE o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
     }
 
     /**
@@ -1412,9 +1493,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIFLT(final IFLT o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
     }
 
     /**
@@ -1422,9 +1501,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIFNE(final IFNE o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
     }
 
     /**
@@ -1491,12 +1568,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIMUL(final IMUL o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.INT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'int', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeIntConstraint(o, 1);
     }
 
     /**
@@ -1504,9 +1577,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitINEG(final INEG o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
     }
 
     /**
@@ -1790,12 +1861,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIOR(final IOR o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.INT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'int', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeIntConstraint(o, 1);
     }
 
     /**
@@ -1803,12 +1870,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIREM(final IREM o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.INT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'int', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeIntConstraint(o, 1);
     }
 
     /**
@@ -1816,9 +1879,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIRETURN(final IRETURN o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
     }
 
     /**
@@ -1826,12 +1887,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitISHL(final ISHL o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.INT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'int', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeIntConstraint(o, 1);
     }
 
     /**
@@ -1839,12 +1896,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitISHR(final ISHR o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.INT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'int', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeIntConstraint(o, 1);
     }
 
     /**
@@ -1862,12 +1915,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitISUB(final ISUB o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.INT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'int', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeIntConstraint(o, 1);
     }
 
     /**
@@ -1875,12 +1924,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIUSHR(final IUSHR o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.INT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'int', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeIntConstraint(o, 1);
     }
 
     /**
@@ -1888,12 +1933,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIXOR(final IXOR o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.INT) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'int', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeIntConstraint(o, 1);
     }
 
     /**
@@ -1917,9 +1958,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitL2D(final L2D o) {
-        if (stack().peek() != Type.LONG) {
-            constraintViolated(o, "The value at the stack top is not of type 'long', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeLongConstraint(o, 0);
     }
 
     /**
@@ -1927,9 +1966,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitL2F(final L2F o) {
-        if (stack().peek() != Type.LONG) {
-            constraintViolated(o, "The value at the stack top is not of type 'long', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeLongConstraint(o, 0);
     }
 
     /**
@@ -1937,9 +1974,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitL2I(final L2I o) {
-        if (stack().peek() != Type.LONG) {
-            constraintViolated(o, "The value at the stack top is not of type 'long', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeLongConstraint(o, 0);
     }
 
     /**
@@ -1947,12 +1982,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitLADD(final LADD o) {
-        if (stack().peek() != Type.LONG) {
-            constraintViolated(o, "The value at the stack top is not of type 'long', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.LONG) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'long', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeLongConstraint(o, 0);
+        checkTypeLongConstraint(o, 1);
     }
 
     /**
@@ -1977,12 +2008,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitLAND(final LAND o) {
-        if (stack().peek() != Type.LONG) {
-            constraintViolated(o, "The value at the stack top is not of type 'long', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.LONG) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'long', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeLongConstraint(o, 0);
+        checkTypeLongConstraint(o, 1);
     }
 
     /**
@@ -1990,9 +2017,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitLASTORE(final LASTORE o) {
-        if (stack().peek() != Type.LONG) {
-            constraintViolated(o, "The value at the stack top is not of type 'long', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeLongConstraint(o, 0);
         indexOfInt(o, stack().peek(1));
         if (stack().peek(2) == Type.NULL) {
             return;
@@ -2010,12 +2035,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitLCMP(final LCMP o) {
-        if (stack().peek() != Type.LONG) {
-            constraintViolated(o, "The value at the stack top is not of type 'long', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.LONG) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'long', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeLongConstraint(o, 0);
+        checkTypeLongConstraint(o, 1);
     }
 
     /**
@@ -2078,12 +2099,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitLDIV(final LDIV o) {
-        if (stack().peek() != Type.LONG) {
-            constraintViolated(o, "The value at the stack top is not of type 'long', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.LONG) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'long', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeLongConstraint(o, 0);
+        checkTypeLongConstraint(o, 1);
     }
 
     /**
@@ -2101,12 +2118,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitLMUL(final LMUL o) {
-        if (stack().peek() != Type.LONG) {
-            constraintViolated(o, "The value at the stack top is not of type 'long', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.LONG) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'long', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeLongConstraint(o, 0);
+        checkTypeLongConstraint(o, 1);
     }
 
     /**
@@ -2114,9 +2127,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitLNEG(final LNEG o) {
-        if (stack().peek() != Type.LONG) {
-            constraintViolated(o, "The value at the stack top is not of type 'long', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeLongConstraint(o, 0);
     }
 
     /**
@@ -2190,9 +2201,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitLOOKUPSWITCH(final LOOKUPSWITCH o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
         // See also pass 3a.
     }
 
@@ -2201,12 +2210,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitLOR(final LOR o) {
-        if (stack().peek() != Type.LONG) {
-            constraintViolated(o, "The value at the stack top is not of type 'long', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.LONG) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'long', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeLongConstraint(o, 0);
+        checkTypeLongConstraint(o, 1);
     }
 
     /**
@@ -2214,12 +2219,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitLREM(final LREM o) {
-        if (stack().peek() != Type.LONG) {
-            constraintViolated(o, "The value at the stack top is not of type 'long', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.LONG) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'long', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeLongConstraint(o, 0);
+        checkTypeLongConstraint(o, 1);
     }
 
     /**
@@ -2227,9 +2228,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitLRETURN(final LRETURN o) {
-        if (stack().peek() != Type.LONG) {
-            constraintViolated(o, "The value at the stack top is not of type 'long', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeLongConstraint(o, 0);
     }
 
     /**
@@ -2237,12 +2236,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitLSHL(final LSHL o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.LONG) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'long', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeLongConstraint(o, 1);
     }
 
     /**
@@ -2250,12 +2245,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitLSHR(final LSHR o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.LONG) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'long', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeLongConstraint(o, 1);
     }
 
     /**
@@ -2273,12 +2264,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitLSUB(final LSUB o) {
-        if (stack().peek() != Type.LONG) {
-            constraintViolated(o, "The value at the stack top is not of type 'long', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.LONG) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'long', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeLongConstraint(o, 0);
+        checkTypeLongConstraint(o, 1);
     }
 
     /**
@@ -2286,12 +2273,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitLUSHR(final LUSHR o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.LONG) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'long', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
+        checkTypeLongConstraint(o, 1);
     }
 
     /**
@@ -2299,12 +2282,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitLXOR(final LXOR o) {
-        if (stack().peek() != Type.LONG) {
-            constraintViolated(o, "The value at the stack top is not of type 'long', but of type '" + stack().peek() + "'.");
-        }
-        if (stack().peek(1) != Type.LONG) {
-            constraintViolated(o, "The value at the stack next-to-top is not of type 'long', but of type '" + stack().peek(1) + "'.");
-        }
+        checkTypeLongConstraint(o, 0);
+        checkTypeLongConstraint(o, 1);
     }
 
     /**
@@ -2377,9 +2356,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitNEWARRAY(final NEWARRAY o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
     }
 
     /**
@@ -2557,9 +2534,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitSASTORE(final SASTORE o) {
-        if (stack().peek() != Type.INT) {
-            constraintViolated(o, "The value at the stack top is not of type 'int', but of type '" + stack().peek() + "'.");
-        }
+        checkTypeIntConstraint(o, 0);
         indexOfInt(o, stack().peek(1));
         if (stack().peek(2) == Type.NULL) {
             return;

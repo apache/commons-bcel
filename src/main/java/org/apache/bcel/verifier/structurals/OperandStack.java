@@ -196,11 +196,11 @@ public class OperandStack implements Cloneable {
      * Returns the element that's i elements below the top element; that means, iff i==0 the top element is returned. The
      * element is not popped off the stack!
      *
-     * @param i The depth.
+     * @param depth The depth.
      * @return The element at the specified depth.
      */
-    public Type peek(final int i) {
-        return stack.get(size() - i - 1);
+    public Type peek(final int depth) {
+        return stack.get(size() - depth - 1);
     }
 
     /**
