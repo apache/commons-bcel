@@ -145,7 +145,8 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     protected void initFromFile(final ByteSequence bytes, final boolean wide) throws IOException {
         if (wide) {
             n = bytes.readUnsignedShort();
-            super.setLength(4);
+            // dump() emits the wide prefix only when the index needs it, so match that width here.
+            super.setLength(wide() ? 4 : 2);
         } else {
             final short opcode = super.getOpcode();
             if (opcode >= Const.ILOAD && opcode <= Const.ALOAD || opcode >= Const.ISTORE && opcode <= Const.ASTORE) {
