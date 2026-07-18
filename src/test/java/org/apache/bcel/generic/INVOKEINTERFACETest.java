@@ -22,8 +22,6 @@ package org.apache.bcel.generic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
@@ -37,12 +35,8 @@ import org.junit.jupiter.api.Test;
 class INVOKEINTERFACETest {
 
     private static int dumpedCountByte(final INVOKEINTERFACE instruction) throws IOException {
-        final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        try (DataOutputStream dos = new DataOutputStream(bos)) {
-            instruction.dump(dos);
-        }
         // opcode, u2 index, u1 count, u1 zero
-        return bos.toByteArray()[3] & 0xFF;
+        return instruction.dumpToByteArray()[3] & 0xFF;
     }
 
     @Test

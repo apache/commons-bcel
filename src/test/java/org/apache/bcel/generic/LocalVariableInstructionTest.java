@@ -21,12 +21,9 @@ package org.apache.bcel.generic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
-import org.apache.bcel.util.ByteSequence;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -34,30 +31,16 @@ import org.junit.jupiter.api.Test;
  */
 class LocalVariableInstructionTest {
 
-    private static int dumpedLength(final Instruction instruction) throws IOException {
-        final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        try (DataOutputStream dos = new DataOutputStream(bos)) {
-            instruction.dump(dos);
-        }
-        return bos.toByteArray().length;
-    }
-
-    private static Instruction readInstruction(final byte[] code) throws IOException {
-        try (ByteSequence bytes = new ByteSequence(code)) {
-            return Instruction.readInstruction(bytes);
-        }
-    }
-
     /**
      * A {@code wide} prefix whose index does not fit in a byte must keep the four-byte encoding.
      */
     @Test
     void testWideLoadWithLargeIndexStaysWide() throws IOException {
         // wide, iload, index 0x012C (300)
-        final Instruction instruction = readInstruction(new byte[] {(byte) Const.WIDE, (byte) Const.ILOAD, 0x01, 0x2C});
+        final Instruction instruction = Instruction.readInstruction(new byte[] {(byte) Const.WIDE, (byte) Const.ILOAD, 0x01, 0x2C});
         assertEquals(300, ((ILOAD) instruction).getIndex());
         assertEquals(4, instruction.getLength());
-        assertEquals(instruction.getLength(), dumpedLength(instruction));
+        assertEquals(instruction.getLength(), instruction.dumpToByteArray().length);
     }
 
     /**
@@ -67,9 +50,9 @@ class LocalVariableInstructionTest {
     @Test
     void testWideLoadWithSmallIndexLengthMatchesDump() throws IOException {
         // wide, iload, index 0x0005
-        final Instruction instruction = readInstruction(new byte[] {(byte) Const.WIDE, (byte) Const.ILOAD, 0x00, 0x05});
+        final Instruction instruction = Instruction.readInstruction(new byte[] {(byte) Const.WIDE, (byte) Const.ILOAD, 0x00, 0x05});
         assertEquals(5, ((ILOAD) instruction).getIndex());
-        assertEquals(dumpedLength(instruction), instruction.getLength());
+        assertEquals(instruction.dumpToByteArray().length, instruction.getLength());
     }
 
     /**
@@ -78,8 +61,8 @@ class LocalVariableInstructionTest {
     @Test
     void testWideStoreWithSmallIndexLengthMatchesDump() throws IOException {
         // wide, istore, index 0x0007
-        final Instruction instruction = readInstruction(new byte[] {(byte) Const.WIDE, (byte) Const.ISTORE, 0x00, 0x07});
+        final Instruction instruction = Instruction.readInstruction(new byte[] {(byte) Const.WIDE, (byte) Const.ISTORE, 0x00, 0x07});
         assertEquals(7, ((ISTORE) instruction).getIndex());
-        assertEquals(dumpedLength(instruction), instruction.getLength());
+        assertEquals(instruction.dumpToByteArray().length, instruction.getLength());
     }
 }

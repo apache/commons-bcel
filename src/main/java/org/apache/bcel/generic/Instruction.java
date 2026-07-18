@@ -18,6 +18,7 @@
  */
 package org.apache.bcel.generic;
 
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -65,6 +66,19 @@ public abstract class Instruction implements Cloneable {
      */
     public static boolean isValidShort(final int value) {
         return value >= Short.MIN_VALUE && value <= Short.MAX_VALUE;
+    }
+
+    /**
+     * Reads an instruction from (byte code) input stream and return the appropriate object.
+     *
+     * @param code byte array containing the instruction to read.
+     * @return instruction object being read.
+     * @throws IOException Thrown when an I/O exception of some sort has occurred.
+     */
+    static Instruction readInstruction(final byte[] code) throws IOException {
+        try (ByteSequence bytes = new ByteSequence(code)) {
+            return readInstruction(bytes);
+        }
     }
 
     /**
@@ -493,6 +507,20 @@ public abstract class Instruction implements Cloneable {
      */
     public void dump(final DataOutputStream out) throws IOException {
         out.writeByte(opcode); // Common for all instructions
+    }
+
+    /**
+     * Dumps this instruction to a byte array.
+     *
+     * @return the byte array containing the dumped instruction
+     * @throws IOException if an I/O error occurs.
+     */
+    byte[] dumpToByteArray() throws IOException {
+        final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        try (DataOutputStream dos = new DataOutputStream(bos)) {
+            dump(dos);
+        }
+        return bos.toByteArray();
     }
 
     /**
