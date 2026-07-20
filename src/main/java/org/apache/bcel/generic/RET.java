@@ -21,6 +21,7 @@ package org.apache.bcel.generic;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.apache.bcel.Const;
 import org.apache.bcel.util.ByteSequence;
 
 /**
@@ -70,7 +71,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
     @Override
     public void dump(final DataOutputStream out) throws IOException {
         if (wide) {
-            out.writeByte(org.apache.bcel.Const.WIDE);
+            out.writeByte(Const.WIDE);
         }
         out.writeByte(super.getOpcode());
         if (wide) {
@@ -119,7 +120,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
      */
     @Override
     public final void setIndex(final int index) {
-        if (index < 0 || index > org.apache.bcel.Const.MAX_SHORT) {
+        if (index < 0 || index > Const.MAX_SHORT) {
             throw new ClassGenException("Illegal value: " + index);
         }
         this.index = index;
@@ -127,7 +128,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
     }
 
     private void setWide() {
-        wide = index > org.apache.bcel.Const.MAX_BYTE;
+        wide = index > Const.MAX_BYTE;
         if (wide) {
             super.setLength(4); // Including the wide byte
         } else {
