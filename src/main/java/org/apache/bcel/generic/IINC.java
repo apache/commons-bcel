@@ -138,7 +138,7 @@ public class IINC extends LocalVariableInstruction {
      */
     @Override
     public final void setIndex(final int index) {
-        if (index < 0 || index > Const.MAX_SHORT) {
+        if (!isNonNegativeUShort(index)) {
             throw new ClassGenException("Illegal index: " + index);
         }
         super.setIndexOnly(index);

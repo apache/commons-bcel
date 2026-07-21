@@ -112,7 +112,7 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
      */
     @Override
     public void setIndex(final int index) { // TODO could be package-protected?
-        if (index < 0 || index > Const.MAX_SHORT) {
+        if (!isNonNegativeUShort(index)) {
             throw new ClassGenException("Illegal index: " + index);
         }
         this.index = index;

@@ -172,7 +172,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      */
     @Override
     public void setIndex(final int index) { // TODO could be package-protected?
-        if (index < 0 || index > Const.MAX_SHORT) {
+        if (!isNonNegativeUShort(index)) {
             throw new ClassGenException("Illegal value: " + index);
         }
         this.n = index;

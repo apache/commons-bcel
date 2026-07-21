@@ -48,7 +48,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
      * @param index index of local variable containing the return address.
      */
     public RET(final int index) {
-        super(org.apache.bcel.Const.RET, (short) 2);
+        super(Const.RET, (short) 2);
         setIndex(index); // May set wide as side effect
     }
 
@@ -120,7 +120,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
      */
     @Override
     public final void setIndex(final int index) {
-        if (index < 0 || index > Const.MAX_SHORT) {
+        if (!isNonNegativeUShort(index)) {
             throw new ClassGenException("Illegal value: " + index);
         }
         this.index = index;

@@ -47,7 +47,17 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * Tests if the value can fit in a byte (signed)
+     * Tests if the value can fit in a non-negative short.
+     *
+     * @param value The value to check.
+     * @return true if the value is in range.
+     */
+    static boolean isNonNegativeUShort(final int value) {
+        return value >= 0 && value <= Const.MAX_SHORT;
+    }
+
+    /**
+     * Tests if the value can fit in a byte (signed).
      *
      * @param value The value to check.
      * @return true if the value is in range.
@@ -58,7 +68,7 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * Tests if the value can fit in a short (signed)
+     * Tests if the value can fit in a short (signed).
      *
      * @param value The value to check.
      * @return true if the value is in range.
@@ -105,7 +115,6 @@ public abstract class Instruction implements Cloneable {
         if (instruction != null) {
             return instruction; // Used predefined immutable object, if available
         }
-
         switch (opcode) {
         case Const.BIPUSH:
             obj = new BIPUSH();
@@ -465,7 +474,7 @@ public abstract class Instruction implements Cloneable {
      *
      * @param cpg The constant pool generator.
      * @return Number of words consumed from stack by this instruction, or Constants.UNPREDICTABLE, if this cannot be
-     *         computed statically
+     *         computed statically.
      */
     public int consumeStack(final ConstantPoolGen cpg) {
         return Const.getConsumeStack(opcode);
@@ -475,8 +484,8 @@ public abstract class Instruction implements Cloneable {
      * Use with caution, since 'BranchInstruction's have a 'target' reference which is not copied correctly (only basic
      * types are). This also applies for 'Select' instructions with their multiple branch targets.
      *
-     * @see BranchInstruction
      * @return (shallow) copy of an instruction.
+     * @see BranchInstruction
      */
     public Instruction copy() {
         Instruction i = null;
@@ -588,7 +597,7 @@ public abstract class Instruction implements Cloneable {
      *
      * @param cpg The constant pool generator.
      * @return Number of words produced onto stack by this instruction, or Constants.UNPREDICTABLE, if this cannot be
-     *         computed statically
+     *         computed statically.
      */
     public int produceStack(final ConstantPoolGen cpg) {
         return Const.getProduceStack(opcode);
@@ -604,7 +613,7 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
-     * Needed in readInstruction and subclasses in this package
+     * Needed in readInstruction and subclasses in this package.
      */
     final void setOpcode(final short opcode) {
         this.opcode = opcode;
