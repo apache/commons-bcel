@@ -86,6 +86,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Add negative verifier tests for remaining array load/store component type checks (#524).</action>
       <action                  type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Validate u1 count bound in INVOKEINTERFACE and MULTIANEWARRAY (#523).</action>
       <action                  type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Match wide local variable instruction length to dumped bytes (#525).</action>
+      <action                  type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Bound IINC increment to signed short (#526).</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add support for permitted subclasses #493.</action>
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add RecordComponentInfo.getAttribute(byte tag)#494.</action>
