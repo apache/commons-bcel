@@ -124,8 +124,12 @@ public class IINC extends LocalVariableInstruction {
      * Sets increment factor.
      *
      * @param c The increment factor.
+     * @throws ClassGenException if the increment is out of bounds.
      */
     public final void setIncrement(final int c) {
+        if (!isValidShort(c)) {
+            throw new ClassGenException("Illegal increment: " + c);
+        }
         this.c = c;
         setWide();
     }
