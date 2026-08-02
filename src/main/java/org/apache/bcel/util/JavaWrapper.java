@@ -61,7 +61,7 @@ public class JavaWrapper {
      * Default main method used as wrapper, expects the fully qualified class name of the real class as the first argument.
      *
      * @param argv command line arguments where first argument is the class name.
-     * @throws Exception if an error occurs during execution.
+     * @throws Exception Thrown if an error occurs during execution.
      */
     public static void main(final String[] argv) throws Exception {
         /*
