@@ -53,7 +53,7 @@ public class ElementValuePair {
      * Dumps this element value pair to a DataOutputStream.
      *
      * @param dos The output stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     protected void dump(final DataOutputStream dos) throws IOException {
         dos.writeShort(elementNameIndex); // u2 name of the element

@@ -208,7 +208,7 @@ public class AnnotationEntryGen {
      * @param cpool The constant pool generator.
      * @param b whether the annotation is runtime visible.
      * @return The annotation entry generator.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public static AnnotationEntryGen read(final DataInput dis, final ConstantPoolGen cpool, final boolean b) throws IOException {
         final AnnotationEntryGen a = new AnnotationEntryGen(cpool);
@@ -290,7 +290,7 @@ public class AnnotationEntryGen {
      * Dumps this annotation entry to a DataOutputStream.
      *
      * @param dos The data output stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public void dump(final DataOutputStream dos) throws IOException {
         dos.writeShort(typeIndex); // u2 index of type name in cpool

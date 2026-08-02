@@ -48,7 +48,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
      * @param length Content length in bytes.
      * @param input Input stream.
      * @param constantPool Array of constants.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     LocalVariableTable(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
         this(nameIndex, length, (LocalVariable[]) null, constantPool);
@@ -110,7 +110,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
      * Dumps local variable table attribute to file stream in binary format.
      *
      * @param file Output file stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     @Override
     public final void dump(final DataOutputStream file) throws IOException {

@@ -68,7 +68,7 @@ final class ClassDumper {
      * fields and commands. A <em>ClassFormatException</em> is raised, if the file is not a valid .class file. (This does
      * not include verification of the byte code as it is performed by the Java interpreter).
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException
      */
     public void dump() throws IOException, ClassFormatException {
@@ -93,7 +93,7 @@ final class ClassDumper {
     /**
      * Processes information about the attributes of the class.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException
      */
     private void processAttributes() throws IOException, ClassFormatException {
@@ -115,7 +115,7 @@ final class ClassDumper {
     /**
      * Processes information about the class and its super class.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException
      */
     private void processClassInfo() throws IOException, ClassFormatException {
@@ -147,7 +147,7 @@ final class ClassDumper {
     /**
      * Processes constant pool entries.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException
      */
     private void processConstantPool() throws IOException, ClassFormatException {
@@ -183,7 +183,7 @@ final class ClassDumper {
      * Constructs object from file stream.
      *
      * @param file Input stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException
      */
     private void processFieldOrMethod() throws IOException, ClassFormatException {
@@ -232,7 +232,7 @@ final class ClassDumper {
     /**
      * Processes information about the fields of the class, that is, its variables.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException
      */
     private void processFields() throws IOException, ClassFormatException {
@@ -253,7 +253,7 @@ final class ClassDumper {
     /**
      * Checks whether the header of the file is ok. Of course, this has to be the first action on successive file reads.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException
      */
     private void processID() throws IOException, ClassFormatException {
@@ -270,7 +270,7 @@ final class ClassDumper {
     /**
      * Processes information about the interfaces implemented by this class.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException
      */
     private void processInterfaces() throws IOException, ClassFormatException {
@@ -296,7 +296,7 @@ final class ClassDumper {
     /**
      * Processes information about the methods of the class.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException
      */
     private void processMethods() throws IOException, ClassFormatException {
@@ -316,7 +316,7 @@ final class ClassDumper {
     /**
      * Processes major and minor version of compiler which created the file.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException
      */
     private void processVersion() throws IOException, ClassFormatException {

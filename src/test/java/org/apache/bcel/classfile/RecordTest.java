@@ -81,7 +81,7 @@ class RecordTest extends AbstractTest {
      * marked such that we can determine from the access flags
      * (through BCEL) that it is in fact a record.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException
      */
     @Test
@@ -109,7 +109,7 @@ class RecordTest extends AbstractTest {
      *
      * @throws ClassNotFoundException
      * @throws ClassFormatException
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     @Test
     void testRecordToString() throws ClassNotFoundException, ClassFormatException, IOException {

@@ -290,7 +290,7 @@ public abstract class Utility {
      * @param bytes stream of bytes.
      * @param constantPool The constant pool.
      * @return disassembled string representation.
-     * @throws IOException if a failure from reading from the bytes argument occurs.
+     * @throws IOException Thrown if a failure from reading from the bytes argument occurs.
      */
     public static String codeToString(final ByteSequence bytes, final ConstantPool constantPool) throws IOException {
         return codeToString(bytes, constantPool, true);
@@ -303,7 +303,7 @@ public abstract class Utility {
      * @param constantPool Array of constants.
      * @param verbose be verbose, for example print constant pool index.
      * @return String representation of byte code.
-     * @throws IOException if a failure from reading from the bytes argument occurs
+     * @throws IOException Thrown if a failure from reading from the bytes argument occurs
      */
     public static String codeToString(final ByteSequence bytes, final ConstantPool constantPool, final boolean verbose) throws IOException {
         final short opcode = (short) bytes.readUnsignedByte();
@@ -671,7 +671,7 @@ public abstract class Utility {
      * @param s The string to convert.
      * @param uncompress use gzip to uncompress the stream of bytes.
      * @return The decoded byte array.
-     * @throws IOException if there's a gzip exception.
+     * @throws IOException Thrown if there's a gzip exception.
      */
     public static byte[] decode(final String s, final boolean uncompress) throws IOException {
         byte[] bytes;
@@ -712,7 +712,7 @@ public abstract class Utility {
      * @param bytes The byte array to convert.
      * @param compress use gzip to minimize string.
      * @return The encoded string.
-     * @throws IOException if there's a gzip exception.
+     * @throws IOException Thrown if there's a gzip exception.
      */
     public static String encode(byte[] bytes, final boolean compress) throws IOException {
         if (compress) {

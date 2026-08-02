@@ -62,7 +62,7 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
      * @param input            Input stream.
      * @param constantPool     Array of constants.
      * @param isRuntimeVisible whether this Annotation visible at runtime.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     Annotations(final byte annotationType, final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool,
             final boolean isRuntimeVisible) throws IOException {
@@ -155,7 +155,7 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
      * Writes the annotations to a DataOutputStream.
      *
      * @param dos The data output stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     protected void writeAnnotations(final DataOutputStream dos) throws IOException {
         dos.writeShort(annotationTable.length);

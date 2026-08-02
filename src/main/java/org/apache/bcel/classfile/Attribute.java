@@ -110,7 +110,7 @@ public abstract class Attribute implements Cloneable, Node {
      * @param dataInput Input stream.
      * @param constantPool Array of constants.
      * @return Attribute.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @since 6.0
      */
     public static Attribute readAttribute(final DataInput dataInput, final ConstantPool constantPool) throws IOException {
@@ -216,7 +216,7 @@ public abstract class Attribute implements Cloneable, Node {
      * @param dataInputStream Input stream.
      * @param constantPool Array of constants.
      * @return Attribute.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public static Attribute readAttribute(final DataInputStream dataInputStream, final ConstantPool constantPool) throws IOException {
         return readAttribute((DataInput) dataInputStream, constantPool);
@@ -315,7 +315,7 @@ public abstract class Attribute implements Cloneable, Node {
      * Dumps attribute to file stream in binary format.
      *
      * @param file Output file stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public void dump(final DataOutputStream file) throws IOException {
         file.writeShort(name_index);

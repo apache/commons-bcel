@@ -61,7 +61,7 @@ public abstract class Constant implements Cloneable, Node {
      *
      * @param dataInput Input stream.
      * @return Constant object.
-     * @throws IOException if an I/O error occurs reading from the given {@code dataInput}.
+     * @throws IOException Thrown if an I/O error occurs reading from the given {@code dataInput}.
      * @throws ClassFormatException if the next byte is not recognized
      * @since 6.0 made public
      */
@@ -170,7 +170,7 @@ public abstract class Constant implements Cloneable, Node {
      * Dumps constant to file stream in binary format.
      *
      * @param file The output stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public abstract void dump(DataOutputStream file) throws IOException;
 

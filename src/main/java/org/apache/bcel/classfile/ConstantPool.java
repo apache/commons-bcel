@@ -79,7 +79,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * Reads constants from given input stream.
      *
      * @param input Input stream.
-     * @throws IOException if problem in readUnsignedShort or readConstant.
+     * @throws IOException Thrown if problem in readUnsignedShort or readConstant.
      */
     public ConstantPool(final DataInput input) throws IOException {
         byte tag;
@@ -233,7 +233,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * Dumps constant pool to file stream in binary format.
      *
      * @param file Output file stream.
-     * @throws IOException if problem in writeShort or dump
+     * @throws IOException Thrown if problem in writeShort or dump
      */
     public void dump(final DataOutputStream file) throws IOException {
         /*

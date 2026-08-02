@@ -68,7 +68,7 @@ public final class Module extends Attribute {
      * @param length Content length in bytes.
      * @param dataInput Input stream.
      * @param constantPool Array of constants.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     Module(final int nameIndex, final int length, final DataInput dataInput, final ConstantPool constantPool) throws IOException {
         super(Const.ATTR_MODULE, nameIndex, length, constantPool);
@@ -143,7 +143,7 @@ public final class Module extends Attribute {
      * Dumps Module attribute to file stream in binary format.
      *
      * @param file Output file stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     @Override
     public void dump(final DataOutputStream file) throws IOException {

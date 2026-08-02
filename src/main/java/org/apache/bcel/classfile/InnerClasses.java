@@ -60,7 +60,7 @@ public final class InnerClasses extends Attribute implements Iterable<InnerClass
      * @param length Content length in bytes.
      * @param input Input stream.
      * @param constantPool Array of constants.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     InnerClasses(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
         this(nameIndex, length, (InnerClass[]) null, constantPool);
@@ -115,7 +115,7 @@ public final class InnerClasses extends Attribute implements Iterable<InnerClass
      * Dumps source file attribute to file stream in binary format.
      *
      * @param file Output file stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     @Override
     public void dump(final DataOutputStream file) throws IOException {

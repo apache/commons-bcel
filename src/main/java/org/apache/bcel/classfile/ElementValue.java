@@ -101,7 +101,7 @@ public abstract class ElementValue {
      * @param input Raw data input.
      * @param cpool Constant pool.
      * @return A new ElementValue.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public static ElementValue readElementValue(final DataInput input, final ConstantPool cpool) throws IOException {
         return readElementValue(input, cpool, 0);
@@ -156,7 +156,7 @@ public abstract class ElementValue {
      * @param cpool Constant pool.
      * @param arrayNesting level of current array nesting.
      * @return A new ElementValue.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @since 6.7.0
      */
     public static ElementValue readElementValue(final DataInput input, final ConstantPool cpool, final int arrayNesting) throws IOException {
@@ -190,7 +190,7 @@ public abstract class ElementValue {
      * Dumps this element value to a DataOutputStream.
      *
      * @param dos The output stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public abstract void dump(DataOutputStream dos) throws IOException;
 

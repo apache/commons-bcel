@@ -60,7 +60,7 @@ public final class StackMapType implements Node, Cloneable {
      *
      * @param file Input stream.
      * @param constantPool The constant pool.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     StackMapType(final DataInput file, final ConstantPool constantPool) throws IOException {
         this(file.readByte(), -1, constantPool);
@@ -107,7 +107,7 @@ public final class StackMapType implements Node, Cloneable {
      * Dumps type entries to file.
      *
      * @param file Output file stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public void dump(final DataOutputStream file) throws IOException {
         file.writeByte(type);

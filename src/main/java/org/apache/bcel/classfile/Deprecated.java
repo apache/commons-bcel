@@ -71,7 +71,7 @@ public final class Deprecated extends Attribute {
      * @param length       JVM Specification: "The value of the attribute_length item must be zero.".
      * @param input        Input stream.
      * @param constantPool Array of constants.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.15">JVM Specification: The Deprecated Attribute</a>
      */
     Deprecated(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {

@@ -64,7 +64,7 @@ public final class Synthetic extends Attribute {
      * @param length       JVM Specification: "The value of the attribute_length item must be zero.".
      * @param input        Input stream.
      * @param constantPool Array of constants.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.8">JVM Specification: The Synthetic Attribute</a>
      */
     Synthetic(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {

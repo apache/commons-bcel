@@ -522,7 +522,7 @@ public abstract class Instruction implements Cloneable {
      * Dumps this instruction to a byte array.
      *
      * @return the byte array containing the dumped instruction
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     byte[] dumpToByteArray() throws IOException {
         final ByteArrayOutputStream bos = new ByteArrayOutputStream();

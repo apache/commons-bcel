@@ -82,7 +82,7 @@ public final class Method extends FieldOrMethod {
      * Constructs object from file stream.
      *
      * @param file Input stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file.
      */
     Method(final DataInput file, final ConstantPool constantPool) throws IOException, ClassFormatException {

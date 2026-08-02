@@ -43,7 +43,7 @@ public final class SourceFile extends Attribute {
      * @param length Content length in bytes.
      * @param input Input stream.
      * @param constantPool Array of constants.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     SourceFile(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
         this(nameIndex, length, input.readUnsignedShort(), constantPool);
@@ -98,7 +98,7 @@ public final class SourceFile extends Attribute {
      * Dumps source file attribute to file stream in binary format.
      *
      * @param file Output file stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     @Override
     public void dump(final DataOutputStream file) throws IOException {

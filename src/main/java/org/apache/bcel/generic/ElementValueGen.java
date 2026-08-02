@@ -115,7 +115,7 @@ public abstract class ElementValueGen {
      * @param dis The data input stream.
      * @param cpGen The constant pool.
      * @return The element value read.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public static ElementValueGen readElementValue(final DataInput dis, final ConstantPoolGen cpGen) throws IOException {
         final int type = dis.readUnsignedByte();
@@ -186,7 +186,7 @@ public abstract class ElementValueGen {
      * Dumps this element value to a DataOutputStream.
      *
      * @param dos The output stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public abstract void dump(DataOutputStream dos) throws IOException;
 

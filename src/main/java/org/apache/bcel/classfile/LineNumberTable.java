@@ -48,7 +48,7 @@ public final class LineNumberTable extends Attribute implements Iterable<LineNum
      * @param length Content length in bytes.
      * @param input Input stream.
      * @param constantPool Array of constants.
-     * @throws IOException if an I/O Exception occurs in readUnsignedShort.
+     * @throws IOException Thrown if an I/O Exception occurs in readUnsignedShort.
      */
     LineNumberTable(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
         this(nameIndex, length, (LineNumber[]) null, constantPool);
@@ -114,7 +114,7 @@ public final class LineNumberTable extends Attribute implements Iterable<LineNum
      * Dumps line number table attribute to file stream in binary format.
      *
      * @param file Output file stream.
-     * @throws IOException if an I/O Exception occurs in writeShort.
+     * @throws IOException Thrown if an I/O Exception occurs in writeShort.
      */
     @Override
     public void dump(final DataOutputStream file) throws IOException {

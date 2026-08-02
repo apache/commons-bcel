@@ -44,7 +44,7 @@ public class RecordComponentInfo implements Node {
      *
      * @param input        Input stream.
      * @param constantPool Array of constants.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public RecordComponentInfo(final DataInput input, final ConstantPool constantPool) throws IOException {
         this.index = input.readUnsignedShort();
@@ -66,7 +66,7 @@ public class RecordComponentInfo implements Node {
      * Dumps contents into a file stream in binary format.
      *
      * @param file Output file stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public void dump(final DataOutputStream file) throws IOException {
         file.writeShort(index);

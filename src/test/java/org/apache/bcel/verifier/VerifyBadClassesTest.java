@@ -67,7 +67,7 @@ class VerifyBadClassesTest {
      * @param command The command to be run in the process.
      * @return A String capturing the error output of executing the command.
      * @throws ExecuteException if executor fails
-     * @throws IOException if executor fails
+     * @throws IOException Thrown if executor fails
      */
     private String run(final List<String> command) throws ExecuteException, IOException {
 

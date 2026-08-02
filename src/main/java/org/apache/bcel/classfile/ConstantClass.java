@@ -46,7 +46,7 @@ public final class ConstantClass extends Constant implements ConstantObject {
      * Constructs an instance from file data.
      *
      * @param dataInput Input stream.
-     * @throws IOException if an I/O error occurs reading from the given {@code dataInput}.
+     * @throws IOException Thrown if an I/O error occurs reading from the given {@code dataInput}.
      */
     ConstantClass(final DataInput dataInput) throws IOException {
         this(dataInput.readUnsignedShort());
@@ -77,7 +77,7 @@ public final class ConstantClass extends Constant implements ConstantObject {
      * Dumps constant class to file stream in binary format.
      *
      * @param file Output file stream.
-     * @throws IOException if an I/O error occurs writing to the DataOutputStream.
+     * @throws IOException Thrown if an I/O error occurs writing to the DataOutputStream.
      */
     @Override
     public void dump(final DataOutputStream file) throws IOException {

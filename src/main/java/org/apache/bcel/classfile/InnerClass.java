@@ -41,7 +41,7 @@ public final class InnerClass implements Cloneable, Node {
      * Constructs object from file stream.
      *
      * @param file Input stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     InnerClass(final DataInput file) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort());
@@ -100,7 +100,7 @@ public final class InnerClass implements Cloneable, Node {
      * Dumps inner class attribute to file stream in binary format.
      *
      * @param file Output file stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public void dump(final DataOutputStream file) throws IOException {
         file.writeShort(innerClassIndex);

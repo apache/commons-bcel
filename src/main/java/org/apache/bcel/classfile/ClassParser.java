@@ -117,7 +117,7 @@ public final class ClassParser {
      * not include verification of the byte code as it is performed by the Java interpreter).
      *
      * @return Class object representing the parsed class file.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file.
      */
     public JavaClass parse() throws IOException, ClassFormatException {
@@ -185,7 +185,7 @@ public final class ClassParser {
     /**
      * Reads information about the attributes of the class.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file.
      */
     private void readAttributes() throws IOException, ClassFormatException {
@@ -199,7 +199,7 @@ public final class ClassParser {
     /**
      * Reads information about the class and its super class.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file.
      */
     private void readClassInfo() throws IOException, ClassFormatException {
@@ -220,7 +220,7 @@ public final class ClassParser {
     /**
      * Reads constant pool entries.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file.
      */
     private void readConstantPool() throws IOException, ClassFormatException {
@@ -230,7 +230,7 @@ public final class ClassParser {
     /**
      * Reads information about the fields of the class, that is, its variables.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file.
      */
     private void readFields() throws IOException, ClassFormatException {
@@ -244,7 +244,7 @@ public final class ClassParser {
     /**
      * Checks whether the header of the file is ok. Of course, this has to be the first action on successive file reads.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file.
      */
     private void readID() throws IOException, ClassFormatException {
@@ -256,7 +256,7 @@ public final class ClassParser {
     /**
      * Reads information about the interfaces implemented by this class.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file.
      */
     private void readInterfaces() throws IOException, ClassFormatException {
@@ -266,7 +266,7 @@ public final class ClassParser {
     /**
      * Reads information about the methods of the class.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file.
      */
     private void readMethods() throws IOException {
@@ -280,7 +280,7 @@ public final class ClassParser {
     /**
      * Reads major and minor version of compiler which created the file.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file.
      */
     private void readVersion() throws IOException, ClassFormatException {

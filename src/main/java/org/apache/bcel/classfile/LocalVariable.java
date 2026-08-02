@@ -67,7 +67,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
      * Constructs object from file stream.
      *
      * @param file Input stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     LocalVariable(final DataInput file, final ConstantPool constantPool) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), constantPool);
@@ -149,7 +149,7 @@ public final class LocalVariable implements Cloneable, Node, Constants {
      * Dumps local variable to file stream in binary format.
      *
      * @param dataOutputStream Output file stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @see java.io.FilterOutputStream#out
      */
     public void dump(final DataOutputStream dataOutputStream) throws IOException {

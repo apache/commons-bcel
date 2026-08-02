@@ -73,7 +73,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      *
      * @param file Input stream.
      * @param constantPool The constant pool.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     protected FieldOrMethod(final DataInput file, final ConstantPool constantPool) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), null, constantPool);
@@ -90,7 +90,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      *
      * @param file Input stream.
      * @param constantPool The constant pool.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @deprecated (6.0) Use {@link #FieldOrMethod(java.io.DataInput, ConstantPool)} instead.
      */
     @java.lang.Deprecated
@@ -149,7 +149,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * Dumps object to file stream on binary format.
      *
      * @param file Output file stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public final void dump(final DataOutputStream file) throws IOException {
         file.writeShort(super.getAccessFlags());

@@ -58,7 +58,7 @@ public class AnnotationEntry implements Node {
      * @param constantPool The constant pool.
      * @param isRuntimeVisible whether the annotation is runtime visible.
      * @return The entry.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public static AnnotationEntry read(final DataInput input, final ConstantPool constantPool, final boolean isRuntimeVisible) throws IOException {
         final AnnotationEntry annotationEntry = new AnnotationEntry(input.readUnsignedShort(), constantPool, isRuntimeVisible);
@@ -116,7 +116,7 @@ public class AnnotationEntry implements Node {
      * Dumps this annotation entry to a DataOutputStream.
      *
      * @param dos The output stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public void dump(final DataOutputStream dos) throws IOException {
         dos.writeShort(typeIndex); // u2 index of type name in cpool

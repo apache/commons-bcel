@@ -157,7 +157,7 @@ public class ClassPath implements Closeable {
          * Gets the input stream for class file.
          *
          * @return input stream for class file.
-         * @throws IOException if an I/O error occurs.
+         * @throws IOException Thrown if an I/O error occurs.
          */
         InputStream getInputStream() throws IOException;
 
@@ -616,7 +616,7 @@ public class ClassPath implements Closeable {
      *
      * @param name fully qualified file name, for example java/lang/String.
      * @return byte array for class.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public byte[] getBytes(final String name) throws IOException {
         return getBytes(name, JavaClass.EXTENSION);
@@ -628,7 +628,7 @@ public class ClassPath implements Closeable {
      * @param name fully qualified file name, for example java/lang/String.
      * @param suffix file name ends with suffix, for example .java.
      * @return byte array for file on class path.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public byte[] getBytes(final String name, final String suffix) throws IOException {
         DataInputStream dis = null;
@@ -652,7 +652,7 @@ public class ClassPath implements Closeable {
      *
      * @param name fully qualified class name, for example {@link String}.
      * @return input stream for class.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public ClassFile getClassFile(final String name) throws IOException {
         return getClassFile(name, JavaClass.EXTENSION);
@@ -664,7 +664,7 @@ public class ClassPath implements Closeable {
      * @param name fully qualified file name, for example java/lang/String.
      * @param suffix file name ends with suffix, for example .java.
      * @return class file for the Java class.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public ClassFile getClassFile(final String name, final String suffix) throws IOException {
         ClassFile cf = null;
@@ -702,7 +702,7 @@ public class ClassPath implements Closeable {
      *
      * @param name fully qualified class name, for example {@link String}.
      * @return input stream for class.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public InputStream getInputStream(final String name) throws IOException {
         return getInputStream(Utility.packageToPath(name), JavaClass.EXTENSION);
@@ -717,7 +717,7 @@ public class ClassPath implements Closeable {
      * @param name   fully qualified file name, for example java/lang/String.
      * @param suffix file name ends with suff, for example .java.
      * @return input stream for file on class path.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public InputStream getInputStream(final String name, final String suffix) throws IOException {
         try {
@@ -739,7 +739,7 @@ public class ClassPath implements Closeable {
      *
      * @param name name of file to search for, for example java/lang/String.java.
      * @return full (canonical) path for file.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public String getPath(String name) throws IOException {
         final int index = name.lastIndexOf('.');
@@ -757,7 +757,7 @@ public class ClassPath implements Closeable {
      * @param name name of file to search for, for example java/lang/String.
      * @param suffix file name suffix, for example .java.
      * @return full (canonical) path for file, if it exists.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public String getPath(final String name, final String suffix) throws IOException {
         return getClassFile(name, suffix).getPath();

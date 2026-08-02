@@ -42,7 +42,7 @@ public final class ModuleRequires implements Cloneable, Node {
      * Constructs object from file stream.
      *
      * @param file Input stream.
-     * @throws IOException if an I/O Exception occurs in readUnsignedShort.
+     * @throws IOException Thrown if an I/O Exception occurs in readUnsignedShort.
      */
     ModuleRequires(final DataInput file) throws IOException {
         requiresIndex = file.readUnsignedShort();
@@ -79,7 +79,7 @@ public final class ModuleRequires implements Cloneable, Node {
      * Dumps table entry to file stream in binary format.
      *
      * @param file Output file stream.
-     * @throws IOException if an I/O Exception occurs in writeShort.
+     * @throws IOException Thrown if an I/O Exception occurs in writeShort.
      */
     public void dump(final DataOutputStream file) throws IOException {
         file.writeShort(requiresIndex);

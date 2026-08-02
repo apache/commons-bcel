@@ -47,7 +47,7 @@ public final class PermittedSubclasses extends Attribute {
      * @param length Content length in bytes.
      * @param dataInput Input stream.
      * @param constantPool Array of constants.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     PermittedSubclasses(final int nameIndex, final int length, final DataInput dataInput, final ConstantPool constantPool) throws IOException {
         this(nameIndex, length, (int[]) null, constantPool);
@@ -108,7 +108,7 @@ public final class PermittedSubclasses extends Attribute {
      * Dumps PermittedSubclasses attribute to file stream in binary format.
      *
      * @param file Output file stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     @Override
     public void dump(final DataOutputStream file) throws IOException {

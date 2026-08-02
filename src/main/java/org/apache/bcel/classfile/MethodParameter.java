@@ -53,7 +53,7 @@ public class MethodParameter implements Cloneable, Node {
      * Constructs an instance from a DataInput.
      *
      * @param input Input stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
      */
     MethodParameter(final DataInput input) throws IOException {
@@ -84,7 +84,7 @@ public class MethodParameter implements Cloneable, Node {
      * Dumps object to file stream on binary format.
      *
      * @param file Output file stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public final void dump(final DataOutputStream file) throws IOException {
         file.writeShort(nameIndex);
