@@ -84,6 +84,7 @@ public final class ConstantUtf8 extends Constant {
 
     }
 
+    private static final Object LOCK = new Object();
     // TODO these should perhaps be AtomicInt?
     private static volatile int considered;
     private static volatile int created;
@@ -105,8 +106,10 @@ public final class ConstantUtf8 extends Constant {
      *
      * @since 6.4.0
      */
-    public static synchronized void clearCache() {
-        Cache.CACHE.clear();
+    public static void clearCache() {
+        synchronized (LOCK) {
+            Cache.CACHE.clear();
+        }
     }
 
     // for access by test code
@@ -129,21 +132,23 @@ public final class ConstantUtf8 extends Constant {
      * @return A new or cached instance of the given value.
      * @since 6.0
      */
-    public static synchronized ConstantUtf8 getCachedInstance(final String value) {
-        if (value.length() > Cache.MAX_ENTRY_SIZE) {
-            skipped++;
-            return new ConstantUtf8(value);
-        }
-        considered++;
-        synchronized (ConstantUtf8.class) { // might be better with a specific lock object
-            ConstantUtf8 result = Cache.CACHE.get(value);
-            if (result != null) {
-                hits++;
+    public static ConstantUtf8 getCachedInstance(final String value) {
+        synchronized (LOCK) {
+            if (value.length() > Cache.MAX_ENTRY_SIZE) {
+                skipped++;
+                return new ConstantUtf8(value);
+            }
+            considered++;
+            synchronized (ConstantUtf8.class) { // might be better with a specific lock object
+                ConstantUtf8 result = Cache.CACHE.get(value);
+                if (result != null) {
+                    hits++;
+                    return result;
+                }
+                result = new ConstantUtf8(value);
+                Cache.CACHE.put(value, result);
                 return result;
             }
-            result = new ConstantUtf8(value);
-            Cache.CACHE.put(value, result);
-            return result;
         }
     }
 
