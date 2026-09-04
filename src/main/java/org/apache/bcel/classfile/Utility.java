@@ -31,13 +31,14 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.util.ByteSequence;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.input.BoundedInputStream;
 import org.apache.commons.lang3.ArrayFill;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -53,6 +54,12 @@ public abstract class Utility {
      * nested generic signature such as "LA<LA<LA<...>;>;>;" drives one stack frame per nesting level and kills the calling thread with a StackOverflowError.
      */
     private static final int MAX_SIGNATURE_NESTING = 512;
+
+    /**
+     * The maximum number of bytes that {@link #decode(String, boolean)} will decompress. Guards against decompression bombs: the compressed input is
+     * attacker-controlled and a small input can decompress to an enormous size.
+     */
+    private static final int MAX_DECODED_LENGTH = 64 * 1024 * 1024;
 
     /**
      * Decode characters into bytes. Used by <a href="Utility.html#decode(java.lang.String, boolean)">decode()</a>
@@ -688,10 +695,10 @@ public abstract class Utility {
      * @param s The string to convert.
      * @param uncompress use gzip to uncompress the stream of bytes.
      * @return The decoded byte array.
-     * @throws IOException Thrown if there's a gzip exception.
+     * @throws IOException Thrown if there's a gzip exception or the decompressed data exceeds {@code MAX_DECODED_LENGTH}.
      */
     public static byte[] decode(final String s, final boolean uncompress) throws IOException {
-        byte[] bytes;
+        final byte[] bytes;
         try (JavaReader jr = new JavaReader(new CharArrayReader(s.toCharArray())); ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
             int ch;
             while ((ch = jr.read()) >= 0) {
@@ -700,14 +707,13 @@ public abstract class Utility {
             bytes = bos.toByteArray();
         }
         if (uncompress) {
-            final GZIPInputStream gis = new GZIPInputStream(new ByteArrayInputStream(bytes));
-            final byte[] tmp = new byte[bytes.length * 3]; // Rough estimate
-            int count = 0;
-            int b;
-            while ((b = gis.read()) >= 0) {
-                tmp[count++] = (byte) b;
+            // @formatter:off
+            try (BoundedInputStream gis = BoundedInputStream.builder()
+                    .setInputStream(new GZIPInputStream(new ByteArrayInputStream(bytes)))
+                    .setMaxCount(MAX_DECODED_LENGTH + 1).get()) {
+                return IOUtils.toByteArray(gis);
             }
-            bytes = Arrays.copyOf(tmp, count);
+            // @formatter:on
         }
         return bytes;
     }
