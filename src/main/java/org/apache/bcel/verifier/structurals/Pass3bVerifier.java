@@ -47,13 +47,16 @@ import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 import org.apache.bcel.verifier.exc.VerifierConstraintViolatedException;
 
 /**
- * This PassVerifier verifies a method of class file according to pass 3, so-called structural verification as described
- * in The Java Virtual Machine Specification, 2nd edition. More detailed information is to be found at the do_verify()
- * method's documentation.
+ * This PassVerifier verifies a method of class file according to pass 3, so-called structural verification as described in The Java Virtual Machine
+ * Specification, 2nd edition. More detailed information is to be found at the do_verify() method's documentation.
+ * <p>
+ * The system property {@code org.apache.bcel.verifier.maxFrameSlots} bounds the size of the pass 3b data flow analysis, measured in frame slots:
+ * {@code (max_locals + max_stack) * instruction count} of the method under verification. Methods above the bound are rejected instead of analyzed. The default
+ * is 100,000,000; a value of zero or less disables the bound.
+ * </p>
  *
  * @see #do_verify()
  */
-
 public final class Pass3bVerifier extends PassVerifier {
     /*
      * TODO: Throughout pass 3b, upper halves of LONG and DOUBLE are represented by Type.UNKNOWN. This should be changed in
@@ -139,6 +142,15 @@ public final class Pass3bVerifier extends PassVerifier {
 
     /** In DEBUG mode, the verification algorithm is not randomized. */
     private static final boolean DEBUG = true;
+
+    /**
+     * The name of the system property bounding the size of the pass 3b data flow analysis, measured in frame slots:
+     * {@code (max_locals + max_stack) * instruction count} of the method under verification. Methods above the bound
+     * are rejected instead of analyzed. The default is 100,000,000; a value of zero or less disables the bound.
+     */
+    private static final String MAX_FRAME_SLOTS_PROPERTY = "org.apache.bcel.verifier.maxFrameSlots";
+
+    private static final long MAX_FRAME_SLOTS = Long.getLong(MAX_FRAME_SLOTS_PROPERTY, 100_000_000L).longValue();
 
     /** The Verifier that created this. */
     private final Verifier myOwner;
@@ -363,6 +375,20 @@ public final class Pass3bVerifier extends PassVerifier {
 
             ////////////// DFA BEGINS HERE ////////////////
             if (!(mg.isAbstract() || mg.isNative())) { // IF mg HAS CODE (See pass 2)
+
+                // Reject pathological resource claims before running the data flow analysis: an 'in' and an 'out'
+                // Frame sized max_locals + max_stack is stored for every reachable instruction (and per calling
+                // subroutine), so a small crafted method declaring max_locals = max_stack = 65535 over tens of
+                // thousands of instructions would force tens of gigabytes of allocations before any constraint
+                // could fail. The limit can be changed (or disabled with a value <= 0) via the
+                // MAX_FRAME_SLOTS_PROPERTY system property.
+                final int instructionCount = mg.getInstructionList().getLength();
+                final long frameSlots = ((long) mg.getMaxLocals() + mg.getMaxStack()) * instructionCount;
+                if (MAX_FRAME_SLOTS > 0 && frameSlots > MAX_FRAME_SLOTS) {
+                    throw new StructuralCodeConstraintException("Data flow analysis of this method would require more than " + MAX_FRAME_SLOTS
+                        + " frame slots: max_locals '" + mg.getMaxLocals() + "' plus max_stack '" + mg.getMaxStack() + "' over '" + instructionCount
+                        + "' instructions. Adjust the '" + MAX_FRAME_SLOTS_PROPERTY + "' system property to change this limit.");
+                }
 
                 final ControlFlowGraph cfg = new ControlFlowGraph(mg);
 
