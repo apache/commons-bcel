@@ -89,6 +89,12 @@ abstract class AbstractClassPathRepository implements Repository {
             if (inputStream != null) {
                 final ClassParser parser = new ClassParser(inputStream, className);
                 final JavaClass clazz = parser.parse();
+                // The this_class name inside the parsed bytes is attacker-controlled: caching it under its own name
+                // would let a class file found under one name poison the repository entry for another (the JDK's
+                // defineClass() rejects the same mismatch). Refuse to cache or return it.
+                if (!clazz.getClassName().equals(className)) {
+                    throw new ClassNotFoundException("Class name mismatch: requested " + className + " but the class file declares " + clazz.getClassName());
+                }
                 storeClass(clazz);
                 return clazz;
             }

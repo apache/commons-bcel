@@ -39,7 +39,8 @@ class EnclosingMethodAttributeTest extends AbstractTest {
      */
     @Test
     void testAttributeSerializtion() throws ClassNotFoundException, IOException {
-        final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.AttributeTestClassEM02$1");
+        final String name = PACKAGE_BASE_NAME + ".data.AttributeTestClassEM02$1";
+        final JavaClass clazz = getTestJavaClass(name);
         final ConstantPool pool = clazz.getConstantPool();
         final Attribute[] encMethodAttrs = findAttribute("EnclosingMethod", clazz);
         assertEquals(1, encMethodAttrs.length, "Wrong number of EnclosingMethod attributes");
@@ -48,7 +49,7 @@ class EnclosingMethodAttributeTest extends AbstractTest {
         clazz.dump(tfile);
         // Read in the new version and check it is OK
         final SyntheticRepository repos2 = createRepos(".");
-        final JavaClass clazz2 = repos2.loadClass("AttributeTestClassEM02$1");
+        final JavaClass clazz2 = repos2.loadClass(name);
         assertNotNull(clazz2); // Use the variable to avoid a warning
         final EnclosingMethod em = (EnclosingMethod) encMethodAttrs[0];
         final String enclosingClassName = em.getEnclosingClass().getBytes(pool);

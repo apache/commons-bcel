@@ -93,6 +93,12 @@ public class ClassLoaderRepository implements Repository {
             }
             final ClassParser parser = new ClassParser(is, className);
             RC = parser.parse();
+            // The this_class name inside the parsed bytes is attacker-controlled: caching it under its own name
+            // would let a class file found under one name poison the repository entry for another (the JDK's
+            // defineClass() rejects the same mismatch). Refuse to cache or return it.
+            if (!RC.getClassName().equals(className)) {
+                throw new ClassNotFoundException("Class name mismatch: requested " + className + " but the class file declares " + RC.getClassName());
+            }
             storeClass(RC);
             return RC;
         } catch (final IOException e) {

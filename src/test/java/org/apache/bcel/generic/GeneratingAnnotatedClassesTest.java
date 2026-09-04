@@ -455,13 +455,14 @@ class GeneratingAnnotatedClassesTest extends AbstractTest {
      */
     @Test
     void testModifyingClasses2() throws ClassNotFoundException {
-        final JavaClass jc = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleAnnotatedClass");
+        final String name = PACKAGE_BASE_NAME + ".data.SimpleAnnotatedClass";
+        final JavaClass jc = getTestJavaClass(name);
         final ClassGen cgen = new ClassGen(jc);
         final ConstantPoolGen cp = cgen.getConstantPool();
         cgen.addAnnotationEntry(createCombinedAnnotation(cp));
         assertEquals(2, cgen.getAnnotationEntries().length, "Wrong number of annotations");
         dumpClass(cgen, "SimpleAnnotatedClass.class");
-        final JavaClass jc2 = getClassFrom(".", "SimpleAnnotatedClass");
+        final JavaClass jc2 = getClassFrom(".", name);
         jc2.getAnnotationEntries();
         assertTrue(delete("SimpleAnnotatedClass.class"));
         // System.err.println(jc2.toString());
