@@ -19,6 +19,8 @@
 package org.apache.bcel.verifier.statics;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
@@ -865,16 +867,6 @@ public final class Pass3aVerifier extends PassVerifier {
         }
     }
 
-    /** A small utility method returning if a given int i is in the given int[] ints. */
-    private static boolean contains(final int[] ints, final int i) {
-        for (final int k : ints) {
-            if (k == i) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     /** The Verifier that created this. */
     private final Verifier verifier;
 
@@ -919,6 +911,14 @@ public final class Pass3aVerifier extends PassVerifier {
         final int[] instructionPositions = instructionList.getInstructionPositions();
         final int codeLength = code.getCode().length;
 
+        // The number of instructions and the number of LineNumberTable, LocalVariableTable and exception_table entries
+        // are attacker-controlled u2 values, so each membership test below must be O(1): the previous linear scans made
+        // this method quadratic in the size of a crafted Code attribute (CPU exhaustion).
+        final Set<Integer> instructionPositionSet = new HashSet<>();
+        for (final int instructionPosition : instructionPositions) {
+            instructionPositionSet.add(Integer.valueOf(instructionPosition));
+        }
+
         /////////////////////
         // LineNumberTable //
         /////////////////////
@@ -926,22 +926,18 @@ public final class Pass3aVerifier extends PassVerifier {
         if (lnt != null) {
             final LineNumber[] lineNumbers = lnt.getLineNumberTable();
             final IntList offsets = new IntList();
-            lineNumberLoop: for (final LineNumber lineNumber : lineNumbers) { // may appear in any order.
-                for (final int instructionPosition : instructionPositions) {
-                    // TODO: Make this a binary search! The instructionPositions array is naturally ordered!
-                    final int offset = lineNumber.getStartPC();
-                    if (instructionPosition == offset) {
-                        if (offsets.contains(offset)) {
-                            addMessage("LineNumberTable attribute '" + code.getLineNumberTable() + "' refers to the same code offset ('" + offset
-                                + "') more than once which is violating the semantics [but is sometimes produced by IBM's 'jikes' compiler].");
-                        } else {
-                            offsets.add(offset);
-                        }
-                        continue lineNumberLoop;
-                    }
+            for (final LineNumber lineNumber : lineNumbers) { // may appear in any order.
+                final int offset = lineNumber.getStartPC();
+                if (!instructionPositionSet.contains(Integer.valueOf(offset))) {
+                    throw new ClassConstraintException("Code attribute '" + tostring(code) + "' has a LineNumberTable attribute '" + code.getLineNumberTable()
+                        + "' referring to a code offset ('" + offset + "') that does not exist.");
                 }
-                throw new ClassConstraintException("Code attribute '" + tostring(code) + "' has a LineNumberTable attribute '" + code.getLineNumberTable()
-                    + "' referring to a code offset ('" + lineNumber.getStartPC() + "') that does not exist.");
+                if (offsets.contains(offset)) {
+                    addMessage("LineNumberTable attribute '" + code.getLineNumberTable() + "' refers to the same code offset ('" + offset
+                        + "') more than once which is violating the semantics [but is sometimes produced by IBM's 'jikes' compiler].");
+                } else {
+                    offsets.add(offset);
+                }
             }
         }
 
@@ -958,11 +954,11 @@ public final class Pass3aVerifier extends PassVerifier {
                     final int startpc = localVariable.getStartPC();
                     final int length = localVariable.getLength();
 
-                    if (!contains(instructionPositions, startpc)) {
+                    if (!instructionPositionSet.contains(Integer.valueOf(startpc))) {
                         throw new ClassConstraintException("Code attribute '" + tostring(code) + "' has a LocalVariableTable attribute '"
                             + code.getLocalVariableTable() + "' referring to a code offset ('" + startpc + "') that does not exist.");
                     }
-                    if (!contains(instructionPositions, startpc + length) && startpc + length != codeLength) {
+                    if (!instructionPositionSet.contains(Integer.valueOf(startpc + length)) && startpc + length != codeLength) {
                         throw new ClassConstraintException(
                             "Code attribute '" + tostring(code) + "' has a LocalVariableTable attribute '" + code.getLocalVariableTable()
                                 + "' referring to a code offset start_pc+length ('" + (startpc + length) + "') that does not exist.");
@@ -986,16 +982,16 @@ public final class Pass3aVerifier extends PassVerifier {
                 throw new ClassConstraintException("Code attribute '" + tostring(code) + "' has an exception_table entry '" + element
                     + "' that has its start_pc ('" + startpc + "') not smaller than its end_pc ('" + endpc + "').");
             }
-            if (!contains(instructionPositions, startpc)) {
+            if (!instructionPositionSet.contains(Integer.valueOf(startpc))) {
                 throw new ClassConstraintException("Code attribute '" + tostring(code) + "' has an exception_table entry '" + element
                     + "' that has a non-existant bytecode offset as its start_pc ('" + startpc + "').");
             }
-            if (!contains(instructionPositions, endpc) && endpc != codeLength) {
+            if (!instructionPositionSet.contains(Integer.valueOf(endpc)) && endpc != codeLength) {
                 throw new ClassConstraintException("Code attribute '" + tostring(code) + "' has an exception_table entry '" + element
                     + "' that has a non-existant bytecode offset as its end_pc ('" + startpc + "') [that is also not equal to code_length ('" + codeLength
                     + "')].");
             }
-            if (!contains(instructionPositions, handlerpc)) {
+            if (!instructionPositionSet.contains(Integer.valueOf(handlerpc))) {
                 throw new ClassConstraintException("Code attribute '" + tostring(code) + "' has an exception_table entry '" + element
                     + "' that has a non-existant bytecode offset as its handler_pc ('" + handlerpc + "').");
             }

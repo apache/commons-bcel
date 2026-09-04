@@ -18,29 +18,29 @@
  */
 package org.apache.bcel.verifier.statics;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A small utility class representing a set of basic int values.
  */
 public class IntList {
 
-    /** The int are stored as Integer objects here. */
-    private final List<Integer> list;
+    /** The ints are stored as Integer objects in a hash set so that {@link #contains(int)} is O(1), not a linear scan. */
+    private final Set<Integer> set;
 
     /** This constructor creates an empty list. */
     IntList() {
-        list = new ArrayList<>();
+        set = new HashSet<>();
     }
 
     /** Adds an element to the list. */
     void add(final int i) {
-        list.add(Integer.valueOf(i));
+        set.add(Integer.valueOf(i));
     }
 
     /** Tests if the specified int is already in the list. */
     boolean contains(final int i) {
-        return list.contains(i);
+        return set.contains(Integer.valueOf(i));
     }
 }
