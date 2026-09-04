@@ -31,6 +31,7 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
@@ -48,18 +49,6 @@ import org.apache.commons.lang3.StringUtils;
  */
 // @since 6.0 methods are no longer final
 public abstract class Utility {
-
-    /*
-     * Maximum nesting depth accepted by typeSignatureToString(). Signatures are attacker-controlled bytes from untrusted class files; without a limit, a deeply
-     * nested generic signature such as "LA<LA<LA<...>;>;>;" drives one stack frame per nesting level and kills the calling thread with a StackOverflowError.
-     */
-    private static final int MAX_SIGNATURE_NESTING = 512;
-
-    /**
-     * The maximum number of bytes that {@link #decode(String, boolean)} will decompress. Guards against decompression bombs: the compressed input is
-     * attacker-controlled and a small input can decompress to an enormous size.
-     */
-    private static final int MAX_DECODED_LENGTH = 64 * 1024 * 1024;
 
     /**
      * Decode characters into bytes. Used by <a href="Utility.html#decode(java.lang.String, boolean)">decode()</a>
@@ -80,13 +69,22 @@ public abstract class Utility {
             if (i < 0) {
                 return -1;
             }
-            if (i >= '0' && i <= '9' || i >= 'a' && i <= 'f') { // Normal escape
+            if (isHex(i)) { // Normal escape
                 final int j = in.read();
                 if (j < 0) {
                     return -1;
                 }
-                final char[] tmp = {(char) i, (char) j};
+                if (!isHex(j)) {
+                    // Would otherwise reach Integer.parseInt and throw an undeclared NumberFormatException.
+                    throw new IOException("Invalid escape sequence: expected a second hexadecimal digit after '" + ESCAPE_CHAR + (char) i + "'");
+                }
+                final char[] tmp = { (char) i, (char) j };
                 return Integer.parseInt(new String(tmp), 16);
+            }
+            if (i >= MAP_CHAR.length || MAP_CHAR[i] == UNMAPPED) {
+                // Reject instead of throwing an undeclared ArrayIndexOutOfBoundsException (i >= 256) or silently
+                // aliasing every unmapped character to MAP_CHAR's default slot value (the '$A' encoding).
+                throw new IOException("Invalid escape character after '" + ESCAPE_CHAR + "': 0x" + Integer.toHexString(i));
             }
             return MAP_CHAR[i];
         }
@@ -94,7 +92,12 @@ public abstract class Utility {
         @Override
         public int read(final char[] cbuf, final int off, final int len) throws IOException {
             for (int i = 0; i < len; i++) {
-                cbuf[off + i] = (char) read();
+                final int ch = read();
+                if (ch < 0) {
+                    // Propagate end-of-stream instead of writing (char) -1 and over-reporting the read length.
+                    return i > 0 ? i : -1;
+                }
+                cbuf[off + i] = (char) ch;
             }
             return len;
         }
@@ -146,6 +149,21 @@ public abstract class Utility {
     }
 
     /*
+     * Maximum nesting depth accepted by typeSignatureToString(). Signatures are attacker-controlled bytes from untrusted class files; without a limit, a deeply
+     * nested generic signature such as "LA<LA<LA<...>;>;>;" drives one stack frame per nesting level and kills the calling thread with a StackOverflowError.
+     */
+    private static final int MAX_SIGNATURE_NESTING = 512;
+
+    /**
+     * The maximum number of bytes that {@link #decode(String, boolean)} will decompress. Guards against decompression bombs: the compressed input is
+     * attacker-controlled and a small input can decompress to an enormous size.
+     */
+    private static final int MAX_DECODED_LENGTH = 64 * 1024 * 1024;
+
+    /** Marker for {@link #MAP_CHAR} slots that do not correspond to a valid special escape character. */
+    private static final int UNMAPPED = -1;
+
+    /*
      * How many chars have been consumed during parsing in typeSignatureToString(). Read by methodSignatureToString(). Set
      * by side effect, but only internally.
      */
@@ -168,6 +186,7 @@ public abstract class Utility {
     private static final char ESCAPE_CHAR = '$';
 
     static {
+        Arrays.fill(MAP_CHAR, UNMAPPED);
         int j = 0;
         for (int i = 'A'; i <= 'Z'; i++) {
             CHAR_MAP[j] = i;
@@ -850,6 +869,10 @@ public abstract class Utility {
             buf.append('L').append(packageToPath(type)).append(';');
         }
         return buf.toString();
+    }
+
+    private static boolean isHex(final int i) {
+        return i >= '0' && i <= '9' || i >= 'a' && i <= 'f';
     }
 
     /**
