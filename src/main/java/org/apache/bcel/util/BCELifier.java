@@ -82,6 +82,37 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         return escaped;
     }
 
+    /**
+     * Checks that a name from the parsed class file is a dotted sequence of valid Java identifiers before it is
+     * emitted in identifier position of the generated source. The class file format allows characters in names (for
+     * example braces, parentheses or newlines) that the Java language does not, so an unchecked name from a crafted
+     * class file could inject arbitrary code into the generated program.
+     *
+     * @param name the class or package name to check.
+     * @return {@code name} if it is safe to emit as a Java identifier.
+     * @throws IllegalArgumentException if the name is not a dotted sequence of valid Java identifiers.
+     */
+    private static String checkJavaName(final String name) {
+        boolean expectStart = true;
+        for (int i = 0; i < name.length(); i++) {
+            final char ch = name.charAt(i);
+            if (expectStart) {
+                if (!Character.isJavaIdentifierStart(ch)) {
+                    throw new IllegalArgumentException("Invalid Java identifier in class file: " + Utility.convertString(name));
+                }
+                expectStart = false;
+            } else if (ch == '.') {
+                expectStart = true;
+            } else if (!Character.isJavaIdentifierPart(ch)) {
+                throw new IllegalArgumentException("Invalid Java identifier in class file: " + Utility.convertString(name));
+            }
+        }
+        if (expectStart) {
+            throw new IllegalArgumentException("Invalid Java identifier in class file: " + Utility.convertString(name));
+        }
+        return name;
+    }
+
     // Needs to be accessible from unit test code
     static JavaClass getJavaClass(final String name) throws ClassNotFoundException, IOException {
         JavaClass javaClass;
@@ -218,7 +249,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     }
 
     private void printMain() {
-        final String className = clazz.getClassName();
+        final String className = checkJavaName(clazz.getClassName());
         printWriter.println("  public static void main(String[] args) throws Exception {");
         printWriter.println("    " + className + "Creator creator = new " + className + "Creator();");
         printWriter.println("    creator.create(new FileOutputStream(\"" + Utility.convertString(className) + ".class\"));");
@@ -267,7 +298,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
 
     @Override
     public void visitJavaClass(final JavaClass clazz) {
-        String className = clazz.getClassName();
+        String className = checkJavaName(clazz.getClassName());
         final String superName = clazz.getSuperclassName();
         final String packageName = clazz.getPackageName();
         final String inter = Utility.printArray(escape(clazz.getInterfaceNames()), false, true);
