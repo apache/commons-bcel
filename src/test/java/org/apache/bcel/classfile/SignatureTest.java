@@ -41,6 +41,19 @@ class SignatureTest extends AbstractTest {
         assertThrowsExactly(IllegalArgumentException.class, () -> Signature.translate("<>"));
     }
 
+    /**
+     * Deeply nested attacker-supplied signatures must fail fast instead of overflowing the stack.
+     */
+    @Test
+    void testDeeplyNestedSignature() {
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 100_000; i++) {
+            sb.append("A<");
+        }
+        final String deep = sb.toString();
+        assertThrowsExactly(IllegalArgumentException.class, () -> Signature.translate(deep));
+    }
+
     @Test
     void testMap() throws Exception {
         final JavaClass jc = Repository.lookupClass(Map.class);

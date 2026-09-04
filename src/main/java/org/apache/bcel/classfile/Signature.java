@@ -81,14 +81,27 @@ public final class Signature extends Attribute {
         return s.startsWith("<") && s.indexOf(':') > 0;
     }
 
+    /**
+     * The maximum nesting depth of a signature accepted by {@link #translate(String)}. Guards against a
+     * {@link StackOverflowError} from deeply nested, attacker-supplied generic signatures.
+     */
+    private static final int MAX_NESTING_DEPTH = 512;
+
     private static void matchGJIdent(final MyByteArrayInputStream in, final StringBuilder buf) {
+        matchGJIdent(in, buf, 0);
+    }
+
+    private static void matchGJIdent(final MyByteArrayInputStream in, final StringBuilder buf, final int depth) {
+        if (depth > MAX_NESTING_DEPTH) {
+            throw new IllegalArgumentException("Illegal signature: " + in.getData() + " exceeds maximum nesting depth " + MAX_NESTING_DEPTH);
+        }
         int ch;
         matchIdent(in, buf);
         ch = in.read();
         if (ch == '<' || ch == '(') { // Parameterized or method
             // System.out.println("Enter <");
             buf.append((char) ch);
-            matchGJIdent(in, buf);
+            matchGJIdent(in, buf, depth + 1);
             while ((ch = in.read()) != '>' && ch != ')') { // List of parameters
                 if (ch == -1) {
                     throw new IllegalArgumentException("Illegal signature: " + in.getData() + " reaching EOF");
@@ -96,7 +109,7 @@ public final class Signature extends Attribute {
                 // System.out.println("Still no >");
                 buf.append(", ");
                 in.unread();
-                matchGJIdent(in, buf); // Recursive call
+                matchGJIdent(in, buf, depth + 1); // Recursive call
             }
             // System.out.println("Exit >");
             buf.append((char) ch);
@@ -106,7 +119,7 @@ public final class Signature extends Attribute {
         ch = in.read();
         if (identStart(ch)) {
             in.unread();
-            matchGJIdent(in, buf);
+            matchGJIdent(in, buf, depth + 1);
         } else if (ch == ')') {
             in.unread();
         } else if (ch != ';') {
