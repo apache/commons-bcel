@@ -18,24 +18,55 @@
  */
 package org.apache.bcel.verifier;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
 /**
- * This class produces instances of the Verifier class. Its purpose is to make sure that they are singleton instances
- * with respect to the class name they operate on. That means, for every class (represented by a unique fully qualified
- * class name) there is exactly one Verifier.
+ * This class produces instances of the Verifier class. Its purpose is to make sure that they are singleton instances with respect to the class name they
+ * operate on. That means, for every class (represented by a unique fully qualified class name) there is at most one cached Verifier. The cache is bounded (see
+ * {@link #MAX_CACHE_SIZE_PROPERTY}); after eviction, a new Verifier is transparently created on the next request for that class name.
+ * <p>
+ * The system property {@code org.apache.bcel.verifier.VerifierFactory.maxCacheSize} controls how many Verifier instances this factory caches;
+ * least-recently-used entries are evicted first. Verifier names are taken from the constant pools of the (possibly untrusted) classes being verified, so an
+ * unbounded cache would let a single hostile class file referencing many distinct bogus type names grow the heap without limit in a long-running process. Set
+ * the property to {@code 0} or a negative value to opt out and restore the historical unbounded behavior.
+ * </p>
  *
  * @see Verifier
  */
 public class VerifierFactory {
 
     /**
-     * The HashMap that holds the data about the already-constructed Verifier instances.
+     * Name of the system property controlling how many Verifier instances this factory caches; least-recently-used entries are evicted first. Verifier names
+     * are taken from the constant pools of the (possibly untrusted) classes being verified, so an unbounded cache would let a single hostile class file
+     * referencing many distinct bogus type names grow the heap without limit in a long-running process. Set the property to {@code 0} or a negative value to
+     * opt out and restore the historical unbounded behavior.
      */
-    private static final Map<String, Verifier> MAP = new HashMap<>();
+    static final String MAX_CACHE_SIZE_PROPERTY = "org.apache.bcel.verifier.VerifierFactory.maxCacheSize";
+
+    /**
+     * Default value used when {@link #MAX_CACHE_SIZE_PROPERTY} is not set.
+     *
+     * @since 6.13.0
+     */
+    public static final int DEFAULT_MAX_CACHE_SIZE = 10_000;
+
+    /**
+     * The map that holds the data about the already-constructed Verifier instances, in least-recently-used order,
+     * bounded by {@link #MAX_CACHE_SIZE_PROPERTY}.
+     */
+    private static final Map<String, Verifier> MAP = new LinkedHashMap<String, Verifier>(16, 0.75f, true) {
+
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        protected boolean removeEldestEntry(final Map.Entry<String, Verifier> eldest) {
+            final int maxCacheSize = Integer.getInteger(MAX_CACHE_SIZE_PROPERTY, DEFAULT_MAX_CACHE_SIZE).intValue();
+            return maxCacheSize > 0 && size() > maxCacheSize;
+        }
+    };
 
     /**
      * The VerifierFactoryObserver instances that observe the VerifierFactory.
@@ -71,11 +102,12 @@ public class VerifierFactory {
     }
 
     /**
-     * Returns the (only) verifier responsible for the class with the given name. Possibly a new Verifier object is
-     * transparently created.
+     * Returns the verifier responsible for the class with the given name. Possibly a new Verifier object is
+     * transparently created; if the cache bound ({@link #MAX_CACHE_SIZE_PROPERTY}) has been reached, the
+     * least-recently-used cached Verifier is evicted first.
      *
      * @param fullyQualifiedClassName The fully qualified class name.
-     * @return The (only) verifier responsible for the class with the given name.
+     * @return The verifier responsible for the class with the given name.
      */
     public static Verifier getVerifier(final String fullyQualifiedClassName) {
         return MAP.computeIfAbsent(fullyQualifiedClassName, k -> {
