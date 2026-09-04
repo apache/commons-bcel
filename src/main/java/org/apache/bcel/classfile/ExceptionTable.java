@@ -122,7 +122,7 @@ public final class ExceptionTable extends Attribute {
     @Override
     public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
-        file.writeShort(exceptionIndexTable.length);
+        file.writeShort(Args.requireU2(exceptionIndexTable.length, "exceptionIndexTable.length"));
         for (final int index : exceptionIndexTable) {
             file.writeShort(index);
         }

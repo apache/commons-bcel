@@ -109,7 +109,7 @@ public final class ModulePackages extends Attribute {
     @Override
     public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
-        file.writeShort(packageIndexTable.length);
+        file.writeShort(Args.requireU2(packageIndexTable.length, "packageIndexTable.length"));
         for (final int index : packageIndexTable) {
             file.writeShort(index);
         }

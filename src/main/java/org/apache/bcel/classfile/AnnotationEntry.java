@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.apache.bcel.util.Args;
 import org.apache.commons.lang3.stream.Streams;
 
 /**
@@ -136,7 +137,7 @@ public class AnnotationEntry implements Node {
      */
     public void dump(final DataOutputStream dos) throws IOException {
         dos.writeShort(typeIndex); // u2 index of type name in cpool
-        dos.writeShort(elementValuePairs.size()); // u2 element_value pair
+        dos.writeShort(Args.requireU2(elementValuePairs.size(), "elementValuePairs.size()")); // u2 element_value pair
         // count
         for (final ElementValuePair envp : elementValuePairs) {
             envp.dump(dos);

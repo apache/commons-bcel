@@ -116,7 +116,7 @@ public final class Record extends Attribute {
     @Override
     public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
-        file.writeShort(components.length);
+        file.writeShort(Args.requireU2(components.length, "components.length"));
         for (final RecordComponentInfo component : components) {
             component.dump(file);
         }

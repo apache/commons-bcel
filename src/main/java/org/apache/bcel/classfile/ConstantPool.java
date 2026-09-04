@@ -245,13 +245,15 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      */
     public void dump(final DataOutputStream file) throws IOException {
         /*
-         * Constants over the size of the constant pool shall not be written out. This is a redundant measure as the ConstantPoolGen should have already
-         * reported an error back in the situation.
+         * A constant pool larger than the u2 count field can represent must fail loudly instead of being silently
+         * truncated: class structures may still reference the dropped entries, and a wrapped count with extra bodies
+         * desynchronizes any consumer that reparses the emitted bytes (the CVE-2022-42920 writer-overflow shape).
          */
-        final int size = Math.min(constantPool.length, Const.MAX_CP_ENTRIES);
-
-        file.writeShort(size);
-        for (int i = 1; i < size; i++) {
+        if (constantPool.length > Const.MAX_CP_ENTRIES) {
+            throw new ClassFormatException("Constant pool size " + constantPool.length + " exceeds the u2 maximum of " + Const.MAX_CP_ENTRIES);
+        }
+        file.writeShort(constantPool.length);
+        for (int i = 1; i < constantPool.length; i++) {
             if (constantPool[i] != null) {
                 constantPool[i].dump(file);
             }

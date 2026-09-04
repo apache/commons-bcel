@@ -35,6 +35,7 @@ import java.util.TreeSet;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.generic.Type;
+import org.apache.bcel.util.Args;
 import org.apache.bcel.util.BCELComparator;
 import org.apache.bcel.util.ClassQueue;
 import org.apache.bcel.util.SyntheticRepository;
@@ -348,20 +349,20 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         file.writeShort(super.getAccessFlags());
         file.writeShort(classNameIndex);
         file.writeShort(superclassNameIndex);
-        file.writeShort(interfaces.length);
+        file.writeShort(Args.requireU2(interfaces.length, "interfaces.length"));
         for (final int interface1 : interfaces) {
             file.writeShort(interface1);
         }
-        file.writeShort(fields.length);
+        file.writeShort(Args.requireU2(fields.length, "fields.length"));
         for (final Field field : fields) {
             field.dump(file);
         }
-        file.writeShort(methods.length);
+        file.writeShort(Args.requireU2(methods.length, "methods.length"));
         for (final Method method : methods) {
             method.dump(file);
         }
         if (attributes != null) {
-            file.writeShort(attributes.length);
+            file.writeShort(Args.requireU2(attributes.length, "attributes.length"));
             for (final Attribute attribute : attributes) {
                 attribute.dump(file);
             }

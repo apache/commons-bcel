@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * This class represents a stack map entry recording the types of local variables and the of stack items at a given
@@ -198,11 +199,11 @@ public final class StackMapEntry implements Node, Cloneable {
             }
         } else if (frameType == Const.FULL_FRAME) {
             file.writeShort(byteCodeOffset);
-            file.writeShort(typesOfLocals.length);
+            file.writeShort(Args.requireU2(typesOfLocals.length, "typesOfLocals.length"));
             for (final StackMapType type : typesOfLocals) {
                 type.dump(file);
             }
-            file.writeShort(typesOfStackItems.length);
+            file.writeShort(Args.requireU2(typesOfStackItems.length, "typesOfStackItems.length"));
             for (final StackMapType type : typesOfStackItems) {
                 type.dump(file);
             }

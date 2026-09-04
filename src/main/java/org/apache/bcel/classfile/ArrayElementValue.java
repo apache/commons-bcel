@@ -21,6 +21,8 @@ package org.apache.bcel.classfile;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.apache.bcel.util.Args;
+
 /**
  * Represents an array element value in an annotation.
  *
@@ -48,7 +50,7 @@ public class ArrayElementValue extends ElementValue {
     @Override
     public void dump(final DataOutputStream dos) throws IOException {
         dos.writeByte(super.getType()); // u1 type of value (ARRAY == '[')
-        dos.writeShort(elementValues.length);
+        dos.writeShort(Args.requireU2(elementValues.length, "elementValues.length"));
         for (final ElementValue evalue : elementValues) {
             evalue.dump(dos);
         }

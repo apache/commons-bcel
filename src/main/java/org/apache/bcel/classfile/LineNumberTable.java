@@ -119,7 +119,7 @@ public final class LineNumberTable extends Attribute implements Iterable<LineNum
     @Override
     public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
-        file.writeShort(lineNumberTable.length);
+        file.writeShort(Args.requireU2(lineNumberTable.length, "lineNumberTable.length"));
         for (final LineNumber lineNumber : lineNumberTable) {
             lineNumber.dump(file);
         }

@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
@@ -108,7 +109,7 @@ public class BootstrapMethod implements Cloneable {
      */
     public final void dump(final DataOutputStream file) throws IOException {
         file.writeShort(bootstrapMethodRef);
-        file.writeShort(bootstrapArguments.length);
+        file.writeShort(Args.requireU2(bootstrapArguments.length, "bootstrapArguments.length"));
         for (final int bootstrapArgument : bootstrapArguments) {
             file.writeShort(bootstrapArgument);
         }

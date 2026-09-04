@@ -36,6 +36,7 @@ import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeInvisibleParameterAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleParameterAnnotations;
+import org.apache.bcel.util.Args;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.stream.Streams;
 
@@ -147,7 +148,7 @@ public class AnnotationEntryGen {
             // Lets do the visible ones
             final ByteArrayOutputStream rvaBytes = new ByteArrayOutputStream();
             try (DataOutputStream rvaDos = new DataOutputStream(rvaBytes)) {
-                rvaDos.writeByte(vec.length); // First goes number of parameters
+                rvaDos.writeByte(Args.requireU1(vec.length, "vec.length")); // First goes number of parameters
                 for (int i = 0; i < vec.length; i++) {
                     rvaDos.writeShort(visCount[i]);
                     if (visCount[i] > 0) {
@@ -162,7 +163,7 @@ public class AnnotationEntryGen {
             // Lets do the invisible ones
             final ByteArrayOutputStream riaBytes = new ByteArrayOutputStream();
             try (DataOutputStream riaDos = new DataOutputStream(riaBytes)) {
-                riaDos.writeByte(vec.length); // First goes number of parameters
+                riaDos.writeByte(Args.requireU1(vec.length, "vec.length")); // First goes number of parameters
                 for (int i = 0; i < vec.length; i++) {
                     riaDos.writeShort(invisCount[i]);
                     if (invisCount[i] > 0) {
@@ -294,7 +295,7 @@ public class AnnotationEntryGen {
      */
     public void dump(final DataOutputStream dos) throws IOException {
         dos.writeShort(typeIndex); // u2 index of type name in cpool
-        dos.writeShort(evs.size()); // u2 element_value pair count
+        dos.writeShort(Args.requireU2(evs.size(), "evs.size()")); // u2 element_value pair count
         for (final ElementValuePairGen envp : evs) {
             envp.dump(dos);
         }

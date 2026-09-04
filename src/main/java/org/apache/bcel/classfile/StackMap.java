@@ -113,7 +113,7 @@ public final class StackMap extends Attribute {
     @Override
     public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
-        file.writeShort(table.length);
+        file.writeShort(Args.requireU2(table.length, "table.length"));
         for (final StackMapEntry entry : table) {
             entry.dump(file);
         }

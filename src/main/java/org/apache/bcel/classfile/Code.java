@@ -202,11 +202,11 @@ public final class Code extends Attribute {
         file.writeShort(maxLocals);
         file.writeInt(code.length);
         file.write(code, 0, code.length);
-        file.writeShort(exceptionTable.length);
+        file.writeShort(Args.requireU2(exceptionTable.length, "exceptionTable.length"));
         for (final CodeException exception : exceptionTable) {
             exception.dump(file);
         }
-        file.writeShort(attributes.length);
+        file.writeShort(Args.requireU2(attributes.length, "attributes.length"));
         for (final Attribute attribute : attributes) {
             attribute.dump(file);
         }
@@ -359,6 +359,7 @@ public final class Code extends Attribute {
      */
     public void setExceptionTable(final CodeException[] exceptionTable) {
         this.exceptionTable = exceptionTable != null ? exceptionTable : CodeException.EMPTY_ARRAY;
+        Args.requireU2(this.exceptionTable.length, "exceptionTable.length");
         super.setLength(calculateLength()); // Adjust length
     }
 

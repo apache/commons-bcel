@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * This class is derived from <em>Attribute</em> and represents the list of modules required, exported, opened or
@@ -153,27 +154,27 @@ public final class Module extends Attribute {
         file.writeShort(moduleFlags);
         file.writeShort(moduleVersionIndex);
 
-        file.writeShort(requiresTable.length);
+        file.writeShort(Args.requireU2(requiresTable.length, "requiresTable.length"));
         for (final ModuleRequires entry : requiresTable) {
             entry.dump(file);
         }
 
-        file.writeShort(exportsTable.length);
+        file.writeShort(Args.requireU2(exportsTable.length, "exportsTable.length"));
         for (final ModuleExports entry : exportsTable) {
             entry.dump(file);
         }
 
-        file.writeShort(opensTable.length);
+        file.writeShort(Args.requireU2(opensTable.length, "opensTable.length"));
         for (final ModuleOpens entry : opensTable) {
             entry.dump(file);
         }
 
-        file.writeShort(usesIndex.length);
+        file.writeShort(Args.requireU2(usesIndex.length, "usesIndex.length"));
         for (final int entry : usesIndex) {
             file.writeShort(entry);
         }
 
-        file.writeShort(providesTable.length);
+        file.writeShort(Args.requireU2(providesTable.length, "providesTable.length"));
         for (final ModuleProvides entry : providesTable) {
             entry.dump(file);
         }

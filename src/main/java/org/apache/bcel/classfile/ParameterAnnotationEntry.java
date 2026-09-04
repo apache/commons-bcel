@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.bcel.util.Args;
+
 /**
  * represents one parameter annotation in the parameter annotation table
  *
@@ -94,7 +96,7 @@ public class ParameterAnnotationEntry implements Node {
      * @throws IOException Thrown if an I/O error occurs.
      */
     public void dump(final DataOutputStream dos) throws IOException {
-        dos.writeShort(annotationTable.length);
+        dos.writeShort(Args.requireU2(annotationTable.length, "annotationTable.length"));
         for (final AnnotationEntry entry : annotationTable) {
             entry.dump(dos);
         }

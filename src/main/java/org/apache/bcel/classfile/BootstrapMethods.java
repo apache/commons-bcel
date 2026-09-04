@@ -26,6 +26,7 @@ import java.util.Iterator;
 import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * This class represents a BootstrapMethods attribute.
@@ -118,7 +119,7 @@ public class BootstrapMethods extends Attribute implements Iterable<BootstrapMet
     public final void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
 
-        file.writeShort(bootstrapMethods.length);
+        file.writeShort(Args.requireU2(bootstrapMethods.length, "bootstrapMethods.length"));
         for (final BootstrapMethod bootstrapMethod : bootstrapMethods) {
             bootstrapMethod.dump(file);
         }

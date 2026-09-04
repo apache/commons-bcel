@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
+import org.apache.bcel.util.Args;
+
 /**
  * base class for parameter annotations
  *
@@ -93,7 +95,7 @@ public abstract class ParameterAnnotations extends Attribute implements Iterable
     @Override
     public void dump(final DataOutputStream dos) throws IOException {
         super.dump(dos);
-        dos.writeByte(parameterAnnotationTable.length);
+        dos.writeByte(Args.requireU1(parameterAnnotationTable.length, "parameterAnnotationTable.length"));
 
         for (final ParameterAnnotationEntry element : parameterAnnotationTable) {
             element.dump(dos);

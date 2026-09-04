@@ -120,7 +120,7 @@ public final class InnerClasses extends Attribute implements Iterable<InnerClass
     @Override
     public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
-        file.writeShort(innerClasses.length);
+        file.writeShort(Args.requireU2(innerClasses.length, "innerClasses.length"));
         for (final InnerClass innerClass : innerClasses) {
             innerClass.dump(file);
         }

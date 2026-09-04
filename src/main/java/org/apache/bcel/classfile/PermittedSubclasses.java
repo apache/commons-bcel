@@ -113,7 +113,7 @@ public final class PermittedSubclasses extends Attribute {
     @Override
     public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
-        file.writeShort(classes.length);
+        file.writeShort(Args.requireU2(classes.length, "classes.length"));
         for (final int index : classes) {
             file.writeShort(index);
         }

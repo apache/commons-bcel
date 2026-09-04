@@ -115,7 +115,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
     @Override
     public final void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
-        file.writeShort(localVariableTable.length);
+        file.writeShort(Args.requireU2(localVariableTable.length, "localVariableTable.length"));
         for (final LocalVariable variable : localVariableTable) {
             variable.dump(file);
         }

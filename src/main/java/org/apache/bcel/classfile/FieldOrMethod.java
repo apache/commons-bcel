@@ -24,6 +24,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
+import org.apache.bcel.util.Args;
+
 /**
  * Abstract super class for fields and methods.
  */
@@ -155,7 +157,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
         file.writeShort(super.getAccessFlags());
         file.writeShort(name_index);
         file.writeShort(signature_index);
-        file.writeShort(attributes_count);
+        file.writeShort(Args.requireU2(attributes_count, "attributes_count"));
         for (final Attribute attribute : attributes) {
             attribute.dump(file);
         }

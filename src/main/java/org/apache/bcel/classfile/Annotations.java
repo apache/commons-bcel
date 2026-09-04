@@ -25,6 +25,7 @@ import java.util.Iterator;
 import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * base class for annotations
@@ -158,7 +159,7 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
      * @throws IOException Thrown if an I/O error occurs.
      */
     protected void writeAnnotations(final DataOutputStream dos) throws IOException {
-        dos.writeShort(annotationTable.length);
+        dos.writeShort(Args.requireU2(annotationTable.length, "annotationTable.length"));
         for (final AnnotationEntry element : annotationTable) {
             element.dump(dos);
         }

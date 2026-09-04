@@ -23,6 +23,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * Record component info from a record. Instances from this class maps
@@ -71,7 +72,7 @@ public class RecordComponentInfo implements Node {
     public void dump(final DataOutputStream file) throws IOException {
         file.writeShort(index);
         file.writeShort(descriptorIndex);
-        file.writeShort(attributes.length);
+        file.writeShort(Args.requireU2(attributes.length, "attributes.length"));
         for (final Attribute attribute : attributes) {
             attribute.dump(file);
         }

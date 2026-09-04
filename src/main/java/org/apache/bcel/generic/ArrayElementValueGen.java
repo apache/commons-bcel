@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 
 import org.apache.bcel.classfile.ArrayElementValue;
 import org.apache.bcel.classfile.ElementValue;
+import org.apache.bcel.util.Args;
 import org.apache.commons.lang3.stream.Streams;
 
 /**
@@ -91,7 +92,7 @@ public class ArrayElementValueGen extends ElementValueGen {
     @Override
     public void dump(final DataOutputStream dos) throws IOException {
         dos.writeByte(super.getElementValueType()); // u1 type of value (ARRAY == '[')
-        dos.writeShort(evalues.size());
+        dos.writeShort(Args.requireU2(evalues.size(), "evalues.size()"));
         for (final ElementValueGen element : evalues) {
             element.dump(dos);
         }

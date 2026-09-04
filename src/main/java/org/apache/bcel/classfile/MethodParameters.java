@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * This class represents a MethodParameters attribute.
@@ -76,7 +77,7 @@ public class MethodParameters extends Attribute implements Iterable<MethodParame
     @Override
     public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
-        file.writeByte(parameters.length);
+        file.writeByte(Args.requireU1(parameters.length, "parameters.length"));
         for (final MethodParameter parameter : parameters) {
             parameter.dump(file);
         }
