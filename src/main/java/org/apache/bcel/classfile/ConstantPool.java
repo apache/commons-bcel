@@ -166,8 +166,16 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
             // Note that the ReferenceIndex may point to a Fieldref, Methodref or
             // InterfaceMethodref - so we need to peek ahead to get the actual type.
             final ConstantMethodHandle cmh = (ConstantMethodHandle) c;
-            str = Const.getMethodHandleName(cmh.getReferenceKind()) + " "
-                    + constantToString(cmh.getReferenceIndex(), getConstant(cmh.getReferenceIndex()).getTag());
+            final byte referenceTag = getConstant(cmh.getReferenceIndex()).getTag();
+            // JVMS 4.4.8: the reference_index of a CONSTANT_MethodHandle must point to a CONSTANT_Fieldref,
+            // CONSTANT_Methodref or CONSTANT_InterfaceMethodref entry. Anything else is malformed; in particular, a
+            // CONSTANT_MethodHandle referencing another CONSTANT_MethodHandle (such as itself) would otherwise make
+            // this method recurse without bound until a StackOverflowError.
+            if (referenceTag != Const.CONSTANT_Fieldref && referenceTag != Const.CONSTANT_Methodref && referenceTag != Const.CONSTANT_InterfaceMethodref) {
+                throw new ClassFormatException(
+                        "Constant pool at index " + cmh.getReferenceIndex() + " has an invalid tag " + referenceTag + " for a CONSTANT_MethodHandle reference");
+            }
+            str = Const.getMethodHandleName(cmh.getReferenceKind()) + " " + constantToString(cmh.getReferenceIndex(), referenceTag);
             break;
         case Const.CONSTANT_MethodType:
             final ConstantMethodType cmt = (ConstantMethodType) c;

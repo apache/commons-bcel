@@ -131,6 +131,17 @@ class ConstantPoolTest extends AbstractTest {
     }
 
     @Test
+    void testSelfReferencingConstantMethodHandle() {
+        // A malformed CONSTANT_MethodHandle whose reference_index points at itself (JVMS 4.4.8 requires a
+        // CONSTANT_Fieldref, CONSTANT_Methodref or CONSTANT_InterfaceMethodref there) must be reported
+        // instead of recursing until a StackOverflowError.
+        final Constant[] constants = new Constant[2];
+        constants[1] = new ConstantMethodHandle(Const.REF_invokeStatic, 1);
+        final ConstantPool pool = new ConstantPool(constants);
+        assertThrows(ClassFormatException.class, () -> pool.constantToString(1, Const.CONSTANT_MethodHandle));
+    }
+
+    @Test
     void testTooManyConstants() throws ClassNotFoundException {
         final JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleClassWithDefaultConstructor");
         final ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
