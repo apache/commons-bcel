@@ -19,6 +19,7 @@
 package org.apache.bcel.verifier.structurals;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -223,7 +224,7 @@ public class Subroutines {
             for (final int lv : lvs) {
                 s.add(Integer.valueOf(lv));
             }
-            getRecursivelyAccessedLocalsIndicesHelper(s, subSubs());
+            getRecursivelyAccessedLocalsIndicesHelper(s, subSubs(), new HashSet<>());
             final int[] ret = new int[s.size()];
             int j = -1;
             for (final Integer index : s) {
@@ -234,18 +235,24 @@ public class Subroutines {
         }
 
         /**
-         * A recursive helper method for getRecursivelyAccessedLocalsIndices().
+         * A recursive helper method for getRecursivelyAccessedLocalsIndices(). Every subroutine is visited at most
+         * once: since the computed set is a plain union, re-exploring an already visited subroutine cannot add
+         * anything, but doing so once per call path made this helper exponential in the depth of the JSR call graph
+         * (and made it recurse forever on a cyclic one).
          *
          * @see #getRecursivelyAccessedLocalsIndices()
          */
-        private void getRecursivelyAccessedLocalsIndicesHelper(final Set<Integer> set, final Subroutine[] subs) {
+        private void getRecursivelyAccessedLocalsIndicesHelper(final Set<Integer> set, final Subroutine[] subs, final Set<Subroutine> visited) {
             for (final Subroutine sub : subs) {
+                if (!visited.add(sub)) {
+                    continue;
+                }
                 final int[] lvs = sub.getAccessedLocalsIndices();
                 for (final int lv : lvs) {
                     set.add(Integer.valueOf(lv));
                 }
                 if (sub.subSubs().length != 0) {
-                    getRecursivelyAccessedLocalsIndicesHelper(set, sub.subSubs());
+                    getRecursivelyAccessedLocalsIndicesHelper(set, sub.subSubs(), visited);
                 }
             }
         }
@@ -577,7 +584,7 @@ public class Subroutines {
         // This includes that subroutines may not call themselves
         // recursively, even not through intermediate calls to other
         // subroutines.
-        noRecursiveCalls(getTopLevel(), new HashSet<>());
+        noRecursiveCalls(getTopLevel());
 
     }
 
@@ -617,30 +624,66 @@ public class Subroutines {
     }
 
     /**
-     * This (recursive) utility method makes sure that no subroutine is calling a subroutine that uses the same local
+     * This utility method makes sure that no subroutine is calling a subroutine that uses the same local
      * variable for the RET as themselves (recursively). This includes that subroutines may not call themselves recursively,
      * even not through intermediate calls to other subroutines.
      *
+     * Every subroutine is fully validated exactly once, memoizing the RET local variable indices used anywhere in its
+     * call subtree. The former implementation re-explored a subroutine once per call path, which is exponential in the
+     * number of subroutines for a layered JSR call graph.
+     *
      * @throws StructuralCodeConstraintException if the above constraint is not satisfied.
      */
-    private void noRecursiveCalls(final Subroutine sub, final Set<Integer> set) {
-        final Subroutine[] subs = sub.subSubs();
+    private void noRecursiveCalls(final Subroutine sub) {
+        noRecursiveCalls(sub, new BitSet(), new HashMap<>(), new HashMap<>());
+    }
 
-        for (final Subroutine sub2 : subs) {
-            final int index = ((RET) sub2.getLeavingRET().getInstruction()).getIndex();
+    /**
+     * The recursive helper for {@link #noRecursiveCalls(Subroutine)}.
+     *
+     * @param sub the subroutine whose callees are validated.
+     * @param pathLocals compact ids (see {@code localIds}) of the RET local variables used by the subroutines on the current call path.
+     * @param validated maps every fully validated subroutine to the compact ids of the RET local variables used by it and its entire call subtree.
+     * @param localIds maps a RET local variable index to a compact id so the bit sets stay small.
+     * @return the compact ids of the RET local variables used by {@code sub}'s callees and their call subtrees.
+     * @throws StructuralCodeConstraintException if a subroutine calls a subroutine using the same RET local variable.
+     */
+    private BitSet noRecursiveCalls(final Subroutine sub, final BitSet pathLocals, final Map<Subroutine, BitSet> validated,
+        final Map<Integer, Integer> localIds) {
+        final BitSet subtreeLocals = new BitSet();
 
-            if (!set.add(Integer.valueOf(index))) {
-                // Don't use toString() here because of possibly infinite recursive subSubs() calls then.
-                final SubroutineImpl si = (SubroutineImpl) sub2;
-                throw new StructuralCodeConstraintException("Subroutine with local variable '" + si.localVariable + "', JSRs '" + si.theJSRs + "', RET '"
-                    + si.theRET + "' is called by a subroutine which uses the same local variable index as itself; maybe even a recursive call?"
-                    + " JustIce's clean definition of a subroutine forbids both.");
+        for (final Subroutine sub2 : sub.subSubs()) {
+            final Integer index = Integer.valueOf(((RET) sub2.getLeavingRET().getInstruction()).getIndex());
+            final int localId = localIds.computeIfAbsent(index, k -> Integer.valueOf(localIds.size())).intValue();
+
+            BitSet childLocals = validated.get(sub2);
+            if (childLocals == null) {
+                if (pathLocals.get(localId)) {
+                    // sub2 uses a RET local variable also used by a subroutine on the current call path;
+                    // this also covers (possibly indirect) recursive calls.
+                    throw recursiveCallException(sub2);
+                }
+                pathLocals.set(localId);
+                childLocals = noRecursiveCalls(sub2, pathLocals, validated, localIds);
+                pathLocals.clear(localId);
+                childLocals.set(localId);
+                validated.put(sub2, childLocals);
+            } else if (childLocals.intersects(pathLocals)) {
+                // A subroutine in sub2's (already validated) call subtree uses a RET local variable also
+                // used by a subroutine on the current call path.
+                throw recursiveCallException(sub2);
             }
-
-            noRecursiveCalls(sub2, set);
-
-            set.remove(Integer.valueOf(index));
+            subtreeLocals.or(childLocals);
         }
+        return subtreeLocals;
+    }
+
+    private static StructuralCodeConstraintException recursiveCallException(final Subroutine sub2) {
+        // Don't use toString() here because of possibly infinite recursive subSubs() calls then.
+        final SubroutineImpl si = (SubroutineImpl) sub2;
+        return new StructuralCodeConstraintException("Subroutine with local variable '" + si.localVariable + "', JSRs '" + si.theJSRs + "', RET '"
+            + si.theRET + "' is called by a subroutine which uses the same local variable index as itself; maybe even a recursive call?"
+            + " JustIce's clean definition of a subroutine forbids both.");
     }
 
     /**
