@@ -48,10 +48,8 @@ public class VerifierFactory {
 
     /**
      * Default value used when {@link #MAX_CACHE_SIZE_PROPERTY} is not set.
-     *
-     * @since 6.13.0
      */
-    public static final int DEFAULT_MAX_CACHE_SIZE = 10_000;
+    private static final int DEFAULT_MAX_CACHE_SIZE = 10_000;
 
     /**
      * The map that holds the data about the already-constructed Verifier instances, in least-recently-used order,
