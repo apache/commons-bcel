@@ -110,6 +110,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">BCELifier interpolates attacker class/package names into generated Java source unescaped (f022).</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Verifier pass 3a delayed checks are quadratic in attribute and code size (f023).</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Verifier cache grows unboundedly with attacker-chosen class names (f024).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Static WIDE ThreadLocal survives exceptions, corrupting the next class's disassembly on the same thread (f025).</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add support for permitted subclasses #493.</action>
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add RecordComponentInfo.getAttribute(byte tag)#494.</action>

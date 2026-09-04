@@ -118,6 +118,26 @@ class UtilityTest {
     }
 
     @Test
+    void testCodeToStringWideDoesNotLeakAcrossCalls() {
+        // A truncated code array ending right after a WIDE opcode must not leave the thread-local WIDE flag
+        // set, or the next (unrelated) disassembly on the same thread is mis-decoded.
+        final String first = Utility.codeToString(new byte[] {(byte) Const.WIDE}, new ConstantPool(), 0, -1, false);
+        assertTrue(first.contains("wide"), first);
+        // iload with a single index byte; without the reset this reads a 16-bit index (%258) and swallows a byte.
+        final String next = Utility.codeToString(new byte[] {(byte) Const.ILOAD, 1, 2}, new ConstantPool(), 0, -1, false);
+        assertTrue(next.contains("iload\t\t%1"), next);
+        // Same for the exceptional path: wide iload with its operand missing throws, but must still reset the flag.
+        try {
+            Utility.codeToString(new byte[] {(byte) Const.WIDE, (byte) Const.ILOAD}, new ConstantPool(), 0, -1, false);
+            fail("Expected ClassFormatException for a truncated wide instruction");
+        } catch (final ClassFormatException e) {
+            // expected: the operand of the wide iload is missing
+        }
+        final String afterThrow = Utility.codeToString(new byte[] {(byte) Const.ILOAD, 1, 2}, new ConstantPool(), 0, -1, false);
+        assertTrue(afterThrow.contains("iload\t\t%1"), afterThrow);
+    }
+
+    @Test
     void testCodeToStringWideIsThreadLocal() throws Exception {
         // A WIDE opcode disassembled on one thread must not change how the next
         // local-variable instruction is decoded on another thread.

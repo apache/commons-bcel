@@ -281,6 +281,8 @@ public abstract class Utility {
      */
     public static String codeToString(final byte[] code, final ConstantPool constantPool, final int index, final int length, final boolean verbose) {
         final StringBuilder buf = new StringBuilder(code.length * 20); // Should be sufficient // CHECKSTYLE IGNORE MagicNumber
+        // Defend against a stale flag left behind by a previous (possibly truncated) disassembly on this thread.
+        WIDE.set(Boolean.FALSE);
         try (ByteSequence stream = new ByteSequence(code)) {
             for (int i = 0; i < index; i++) {
                 codeToString(stream, constantPool, verbose);
@@ -293,6 +295,11 @@ public abstract class Utility {
             }
         } catch (final IOException e) {
             throw new ClassFormatException("Byte code error: " + buf.toString(), e);
+        } finally {
+            // A crafted code array can end right after a WIDE opcode (normal loop exit) or throw before the flag is
+            // consumed; never leak the flag to the next disassembly on this thread, or that (unrelated) input is
+            // mis-decoded from its first load/store/iinc/ret instruction onwards.
+            WIDE.remove();
         }
         return buf.toString();
     }
