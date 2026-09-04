@@ -40,7 +40,13 @@ import org.apache.bcel.util.Args;
  *   u1 info[attribute_length];
  * }
  * </pre>
- *
+ * <p>
+ * The default maximum number of attribute nesting levels in {@link #readAttribute(DataInput, ConstantPool)} is {@code 64} before throwing a
+ * {@link ClassFormatException}. This is configurable through the system property {@code org.apache.bcel.classfile.Attribute.maxNestingDepth}. Attributes may
+ * legitimately nest (for example, a <em>Code</em> attribute carries its own attribute table, and <em>Record</em> components carry theirs), but a malicious
+ * class file can nest such attributes deeply enough to overflow the parser's stack.
+ * </p>
+ * 
  * @see ConstantValue
  * @see SourceFile
  * @see Code
@@ -56,6 +62,19 @@ import org.apache.bcel.util.Args;
 public abstract class Attribute implements Cloneable, Node {
 
     private static final boolean debug = Boolean.getBoolean(Attribute.class.getCanonicalName() + ".debug"); // Debugging on/off
+
+    /**
+     * Maximum number of attribute nesting levels {@link #readAttribute(DataInput, ConstantPool)} accepts before throwing a {@link ClassFormatException},
+     * configurable through the system property {@code org.apache.bcel.classfile.Attribute.maxNestingDepth}. Attributes may legitimately nest (for example, a
+     * <em>Code</em> attribute carries its own attribute table, and <em>Record</em> components carry theirs), but a malicious class file can nest such
+     * attributes deeply enough to overflow the parser's stack.
+     */
+    private static final int MAX_NESTING_DEPTH = Integer.getInteger(Attribute.class.getCanonicalName() + ".maxNestingDepth", 64).intValue();
+
+    /**
+     * The per-thread attribute nesting depth of {@link #readAttribute(DataInput, ConstantPool)}.
+     */
+    private static final ThreadLocal<Integer> NESTING_DEPTH = ThreadLocal.withInitial(() -> Integer.valueOf(0));
 
     private static final Map<String, Object> READERS = new HashMap<>();
 
@@ -114,6 +133,29 @@ public abstract class Attribute implements Cloneable, Node {
      * @since 6.0
      */
     public static Attribute readAttribute(final DataInput dataInput, final ConstantPool constantPool) throws IOException {
+        // Track the nesting depth to guard against malicious class files that nest attributes (for example, a Code attribute inside a Code attribute, or
+        // mutually recursive Record component attributes) deeply enough to overflow the parser's stack (CWE-674).
+        final int depth = NESTING_DEPTH.get().intValue() + 1;
+        if (depth > MAX_NESTING_DEPTH) {
+            throw new ClassFormatException("Attributes are nested more than " + MAX_NESTING_DEPTH + " levels deep; if this is a valid class file, raise the"
+                    + " limit with the system property " + Attribute.class.getCanonicalName() + ".maxNestingDepth.");
+        }
+        NESTING_DEPTH.set(Integer.valueOf(depth));
+        try {
+            return readAttribute0(dataInput, constantPool);
+        } finally {
+            if (depth == 1) {
+                NESTING_DEPTH.remove();
+            } else {
+                NESTING_DEPTH.set(Integer.valueOf(depth - 1));
+            }
+        }
+    }
+
+    /**
+     * Reads one attribute without tracking the nesting depth; only to be called by {@link #readAttribute(DataInput, ConstantPool)}.
+     */
+    private static Attribute readAttribute0(final DataInput dataInput, final ConstantPool constantPool) throws IOException {
         byte tag = Const.ATTR_UNKNOWN; // Unknown attribute
         // Get class name from constant pool via 'name_index' indirection
         final int nameIndex = dataInput.readUnsignedShort();
