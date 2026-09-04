@@ -31,18 +31,6 @@ import org.junit.jupiter.api.Test;
 class IINCTest {
 
     /**
-     * The increment of a wide {@code iinc} is a signed short, so a value inside that range must round-trip through
-     * {@code dump}.
-     */
-    @Test
-    void testWideIncrementRoundTrips() throws Exception {
-        final IINC iinc = new IINC(0, 30000);
-        try (ByteSequence bytes = new ByteSequence(iinc.dumpToByteArray())) {
-            assertEquals(30000, ((IINC) Instruction.readInstruction(bytes)).getIncrement());
-        }
-    }
-
-    /**
      * {@code dump} emits the wide-form increment with {@code writeShort}, so the constructor and {@link IINC#setIncrement}
      * must reject an increment outside the signed-short range instead of truncating it to a different value.
      */
@@ -62,5 +50,17 @@ class IINCTest {
     void testSetIncrementRejectsOutOfRange() {
         final IINC iinc = new IINC(0, 1);
         assertThrows(ClassGenException.class, () -> iinc.setIncrement(40000));
+    }
+
+    /**
+     * The increment of a wide {@code iinc} is a signed short, so a value inside that range must round-trip through
+     * {@code dump}.
+     */
+    @Test
+    void testWideIncrementRoundTrips() throws Exception {
+        final IINC iinc = new IINC(0, 30000);
+        try (ByteSequence bytes = new ByteSequence(iinc.dumpToByteArray())) {
+            assertEquals(30000, ((IINC) Instruction.readInstruction(bytes)).getIncrement());
+        }
     }
 }

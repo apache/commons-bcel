@@ -70,16 +70,6 @@ class VerifierArrayAccessTest extends AbstractVerifierTest {
         // @formatter:on
     }
 
-    @ParameterizedTest
-    @MethodSource("invalidComponentTypeArrayAccess")
-    void testInvalidComponentTypeArrayAccess(final ArrayInstruction arrayInstruction, final Type arrayElementType)
-        throws IOException, ClassNotFoundException {
-        final TestArrayAccess07Creator creator = new TestArrayAccess07Creator(arrayInstruction, arrayElementType);
-        creator.create();
-        assertVerifyRejected(creator.getSimpleClassName(),
-            "Verification of " + arrayInstruction.getName() + " applied to a " + arrayElementType + "[] must fail.");
-    }
-
     @Test
     void testInvalidArrayAccess() throws IOException, ClassNotFoundException {
         new TestArrayAccess03Creator().create();
@@ -100,6 +90,16 @@ class VerifierArrayAccessTest extends AbstractVerifierTest {
         assertVerifyRejected("TestArrayAccess05", "Verification of iaload applied to a multidimensional int[][] must fail.");
         new TestArrayAccess06Creator().create();
         assertVerifyRejected("TestArrayAccess06", "Verification of caload applied to an int[] must fail.");
+    }
+
+    @ParameterizedTest
+    @MethodSource("invalidComponentTypeArrayAccess")
+    void testInvalidComponentTypeArrayAccess(final ArrayInstruction arrayInstruction, final Type arrayElementType)
+        throws IOException, ClassNotFoundException {
+        final TestArrayAccess07Creator creator = new TestArrayAccess07Creator(arrayInstruction, arrayElementType);
+        creator.create();
+        assertVerifyRejected(creator.getSimpleClassName(),
+            "Verification of " + arrayInstruction.getName() + " applied to a " + arrayElementType + "[] must fail.");
     }
 
     @Test
