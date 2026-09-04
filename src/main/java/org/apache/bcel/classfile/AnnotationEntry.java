@@ -61,11 +61,27 @@ public class AnnotationEntry implements Node {
      * @throws IOException Thrown if an I/O error occurs.
      */
     public static AnnotationEntry read(final DataInput input, final ConstantPool constantPool, final boolean isRuntimeVisible) throws IOException {
+        return read(input, constantPool, isRuntimeVisible, 0);
+    }
+
+    /**
+     * Factory method to create an AnnotionEntry from a DataInput, carrying the nesting depth of the enclosing element values so that
+     * {@link ElementValue#readElementValue(DataInput, ConstantPool, boolean, int)} can bound the combined annotation/array nesting depth.
+     *
+     * @param input The input stream.
+     * @param constantPool The constant pool.
+     * @param isRuntimeVisible whether the annotation is runtime visible.
+     * @param nesting the current element value nesting level.
+     * @return The entry.
+     * @throws IOException Thrown if an I/O error occurs.
+     */
+    static AnnotationEntry read(final DataInput input, final ConstantPool constantPool, final boolean isRuntimeVisible, final int nesting)
+            throws IOException {
         final AnnotationEntry annotationEntry = new AnnotationEntry(input.readUnsignedShort(), constantPool, isRuntimeVisible);
         final int numElementValuePairs = input.readUnsignedShort();
         for (int i = 0; i < numElementValuePairs; i++) {
-            annotationEntry.elementValuePairs
-                .add(new ElementValuePair(input.readUnsignedShort(), ElementValue.readElementValue(input, constantPool, isRuntimeVisible, 0), constantPool));
+            annotationEntry.elementValuePairs.add(
+                new ElementValuePair(input.readUnsignedShort(), ElementValue.readElementValue(input, constantPool, isRuntimeVisible, nesting), constantPool));
         }
         return annotationEntry;
     }
