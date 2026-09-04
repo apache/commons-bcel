@@ -199,9 +199,15 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                         JavaClass e = Repository.lookupClass(cname);
                         final JavaClass t = Repository.lookupClass(Type.THROWABLE.getClassName());
                         final JavaClass o = Repository.lookupClass(Type.OBJECT.getClassName());
+                        final Set<String> ancestors = new HashSet<>(); // save class names to detect circular inheritance
                         while (e != o) {
                             if (e == t) {
                                 break; // It's a subclass of Throwable, OKAY, leave.
+                            }
+                            if (!ancestors.add(e.getClassName())) {
+                                throw new ClassConstraintException("Code attribute '" + tostring(obj) + "' (method '" + m + "') has an exception_table entry '"
+                                        + tostring(element) + "' that references '" + cname
+                                        + "' as an Exception but its superclass hierarchy is circular at '" + e.getClassName() + "'.");
                             }
 
                             v = VerifierFactory.getVerifier(e.getSuperclassName());
@@ -528,9 +534,14 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                     JavaClass e = Repository.lookupClass(cname);
                     final JavaClass t = Repository.lookupClass(Type.THROWABLE.getClassName());
                     final JavaClass o = Repository.lookupClass(Type.OBJECT.getClassName());
+                    final Set<String> ancestors = new HashSet<>(); // save class names to detect circular inheritance
                     while (e != o) {
                         if (e == t) {
                             break; // It's a subclass of Throwable, OKAY, leave.
+                        }
+                        if (!ancestors.add(e.getClassName())) {
+                            throw new ClassConstraintException("Exceptions attribute '" + tostring(obj) + "' references '" + cname
+                                + "' as an Exception but its superclass hierarchy is circular at '" + e.getClassName() + "'.");
                         }
 
                         v = VerifierFactory.getVerifier(e.getSuperclassName());
