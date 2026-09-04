@@ -469,10 +469,10 @@ public class Subroutines {
         final List<InstructionHandle> qList = new ArrayList<>();
         for (final InstructionHandle actual : subLeaders) {
             // Do some BFS with "actual" as the root of the graph.
-            // Init colors
-            for (final InstructionHandle element : all) {
-                colors.put(element, ColourConstants.WHITE);
-            }
+            // Init colors: an instruction absent from the map is WHITE. Explicitly coloring every
+            // instruction WHITE on every round would make this initialization quadratic in the
+            // method size.
+            colors.clear();
             colors.put(actual, ColourConstants.GRAY);
             // Init Queue
 
@@ -496,16 +496,18 @@ public class Subroutines {
                 final InstructionHandle u = qList.remove(0);
                 final InstructionHandle[] successors = getSuccessors(u);
                 for (final InstructionHandle successor : successors) {
-                    if (colors.get(successor) == ColourConstants.WHITE) {
+                    if (successor != null && colors.get(successor) == null) { // absent from the map means WHITE
                         colors.put(successor, ColourConstants.GRAY);
                         qList.add(successor);
                     }
                 }
                 colors.put(u, ColourConstants.BLACK);
             }
-            // BFS ended above.
-            for (final InstructionHandle element : all) {
-                if (colors.get(element) == ColourConstants.BLACK) {
+            // BFS ended above. Only instructions visited by this BFS round are in the color map,
+            // so this scan is proportional to the round, not to the whole method.
+            for (final Map.Entry<InstructionHandle, ColourConstants> entry : colors.entrySet()) {
+                if (entry.getValue() == ColourConstants.BLACK) {
+                    final InstructionHandle element = entry.getKey();
                     ((SubroutineImpl) (actual == all[0] ? getTopLevel() : getSubroutine(actual))).addInstruction(element);
                     if (instructionsAssigned.contains(element)) {
                         throw new StructuralCodeConstraintException(
@@ -519,20 +521,52 @@ public class Subroutines {
             }
         }
 
-        if (enableJustIceCheck) {
+        if (enableJustIceCheck && handlers.length > 0) {
             // Now make sure no instruction of a Subroutine is protected by exception handling code
             // as is mandated by JustIces notion of subroutines.
+            // The handler coverage of every instruction is computed once, with a difference array
+            // over instruction list indices. Walking every handler's protected range and, per
+            // protected instruction, every subroutine would let a crafted method (thousands of
+            // handlers over large ranges) keep this constructor busy nearly forever.
+            final Map<InstructionHandle, Integer> instructionIndexes = new HashMap<>();
+            for (int i = 0; i < all.length; i++) {
+                instructionIndexes.put(all[i], Integer.valueOf(i));
+            }
+            final int[] coverageDelta = new int[all.length + 1];
             for (final CodeExceptionGen handler : handlers) {
-                InstructionHandle protectedIh = handler.getStartPC();
-                while (protectedIh != handler.getEndPC().getNext()) {
-                    // Note the inclusive/inclusive notation of "generic API" exception handlers!
-                    for (final Subroutine sub : subroutines.values()) {
-                        if (sub != subroutines.get(all[0]) && sub.contains(protectedIh)) {
-                            throw new StructuralCodeConstraintException("Subroutine instruction '" + protectedIh + "' is protected by an exception handler, '"
-                                + handler + "'. This is forbidden by the JustIce verifier due to its clear definition of subroutines.");
+                // Note the inclusive/inclusive notation of "generic API" exception handlers!
+                final Integer startIndex = instructionIndexes.get(handler.getStartPC());
+                final Integer endIndex = instructionIndexes.get(handler.getEndPC());
+                if (startIndex == null || endIndex == null || startIndex.intValue() > endIndex.intValue()) {
+                    throw new StructuralCodeConstraintException("Exception handler '" + handler + "' does not protect a valid instruction range.");
+                }
+                coverageDelta[startIndex.intValue()]++;
+                coverageDelta[endIndex.intValue() + 1]--;
+            }
+            final boolean[] isProtected = new boolean[all.length];
+            int covered = 0;
+            for (int i = 0; i < all.length; i++) {
+                covered += coverageDelta[i];
+                isProtected[i] = covered > 0;
+            }
+            for (final Subroutine sub : subroutines.values()) {
+                if (sub == subroutines.get(all[0])) {
+                    continue;
+                }
+                for (final InstructionHandle protectedIh : sub.getInstructions()) {
+                    final Integer index = instructionIndexes.get(protectedIh);
+                    if (index != null && isProtected[index.intValue()]) {
+                        // Only the error message needs the offending handler; this scan runs at most once.
+                        for (final CodeExceptionGen handler : handlers) {
+                            final int startIndex = instructionIndexes.get(handler.getStartPC()).intValue();
+                            final int endIndex = instructionIndexes.get(handler.getEndPC()).intValue();
+                            if (startIndex <= index.intValue() && index.intValue() <= endIndex) {
+                                throw new StructuralCodeConstraintException("Subroutine instruction '" + protectedIh
+                                    + "' is protected by an exception handler, '" + handler
+                                    + "'. This is forbidden by the JustIce verifier due to its clear definition of subroutines.");
+                            }
                         }
                     }
-                    protectedIh = protectedIh.getNext();
                 }
             }
         }
