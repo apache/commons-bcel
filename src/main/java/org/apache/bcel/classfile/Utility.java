@@ -48,6 +48,12 @@ import org.apache.commons.lang3.StringUtils;
 // @since 6.0 methods are no longer final
 public abstract class Utility {
 
+    /*
+     * Maximum nesting depth accepted by typeSignatureToString(). Signatures are attacker-controlled bytes from untrusted class files; without a limit, a deeply
+     * nested generic signature such as "LA<LA<LA<...>;>;>;" drives one stack frame per nesting level and kills the calling thread with a StackOverflowError.
+     */
+    private static final int MAX_SIGNATURE_NESTING = 512;
+
     /**
      * Decode characters into bytes. Used by <a href="Utility.html#decode(java.lang.String, boolean)">decode()</a>
      */
@@ -1460,6 +1466,22 @@ public abstract class Utility {
      * @since 6.4.0
      */
     public static String typeSignatureToString(final String signature, final boolean chopit) throws ClassFormatException {
+        return typeSignatureToString(signature, chopit, 0);
+    }
+
+    /**
+     * Recursive worker for {@link #typeSignatureToString(String, boolean)} carrying the current nesting depth.
+     *
+     * @param signature type signature.
+     * @param chopit    flag that determines whether chopping is executed or not.
+     * @param depth     current nesting depth.
+     * @return string containing human readable type signature.
+     * @throws ClassFormatException if the signature is malformed or nested deeper than {@code MAX_SIGNATURE_NESTING}.
+     */
+    private static String typeSignatureToString(final String signature, final boolean chopit, final int depth) throws ClassFormatException {
+        if (depth > MAX_SIGNATURE_NESTING) {
+            throw new ClassFormatException("Invalid signature: nesting depth exceeds " + MAX_SIGNATURE_NESTING);
+        }
         // corrected concurrent private static field acess
         wrap(CONSUMER_CHARS, 1); // This is the default, read just one char like 'B'
         try {
@@ -1539,7 +1561,7 @@ public abstract class Utility {
                     type.append("?");
                     consumedChars++;
                 } else {
-                    type.append(typeSignatureToString(signature.substring(consumedChars), chopit));
+                    type.append(typeSignatureToString(signature.substring(consumedChars), chopit, depth + 1));
                     // update our consumed count by the number of characters the for type argument
                     consumedChars = unwrap(CONSUMER_CHARS) + consumedChars;
                     wrap(CONSUMER_CHARS, consumedChars);
@@ -1560,7 +1582,7 @@ public abstract class Utility {
                         type.append("?");
                         consumedChars++;
                     } else {
-                        type.append(typeSignatureToString(signature.substring(consumedChars), chopit));
+                        type.append(typeSignatureToString(signature.substring(consumedChars), chopit, depth + 1));
                         // update our consumed count by the number of characters the for type argument
                         consumedChars = unwrap(CONSUMER_CHARS) + consumedChars;
                         wrap(CONSUMER_CHARS, consumedChars);
@@ -1576,7 +1598,7 @@ public abstract class Utility {
                     type.append(".");
                     // convert SimpleClassTypeSignature to fake ClassTypeSignature
                     // and then recurse to parse it
-                    type.append(typeSignatureToString("L" + signature.substring(consumedChars + 1), chopit));
+                    type.append(typeSignatureToString("L" + signature.substring(consumedChars + 1), chopit, depth + 1));
                     // update our consumed count by the number of characters the for type argument
                     // note that this count includes the "L" we added, but that is ok
                     // as it accounts for the "." we didn't consume
@@ -1603,7 +1625,7 @@ public abstract class Utility {
                 }
                 final int consumedChars = n; // Remember value
                 // The rest of the string denotes a '<field_type>'
-                final String type = typeSignatureToString(signature.substring(n), chopit);
+                final String type = typeSignatureToString(signature.substring(n), chopit, depth + 1);
                 // corrected concurrent private static field acess
                 // consumed_chars += consumed_chars; is replaced by:
                 final int temp = unwrap(CONSUMER_CHARS) + consumedChars;

@@ -35,7 +35,11 @@ import org.apache.bcel.Repository;
 import org.apache.bcel.util.ByteSequence;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests {@link Utility}.
+ */
 class UtilityTest {
+
 
     @Test
     void testClearBit() {
@@ -90,6 +94,7 @@ class UtilityTest {
             assertTrue(code.contains("47:   return"), code);
         }
     }
+
 
     @Test
     void testCodeToStringOversizedLookupSwitch() {
@@ -150,6 +155,21 @@ class UtilityTest {
     }
 
     @Test
+    void testDeeplyNestedTypeSignatureThrows() {
+        // One recursion level per generic nesting level: must fail fast, not StackOverflowError.
+        final int depth = 20_000;
+        final StringBuilder sig = new StringBuilder();
+        for (int i = 0; i < depth; i++) {
+            sig.append("LA<");
+        }
+        sig.append("LB;");
+        for (int i = 0; i < depth; i++) {
+            sig.append(">;");
+        }
+        assertThrows(ClassFormatException.class, () -> Utility.typeSignatureToString(sig.toString(), false));
+    }
+
+    @Test
     void testIsSet() {
         assertTrue(Utility.isSet(1, 0));
         assertTrue(Utility.isSet(7, 1));
@@ -159,6 +179,11 @@ class UtilityTest {
         assertFalse(Utility.isSet(0, 0));
         assertFalse(Utility.isSet(8, 4));
         assertFalse(Utility.isSet(9, 1));
+    }
+
+    @Test
+    void testModeratelyNestedTypeSignatureStillParses() {
+        assertEquals("A<A<B>>", Utility.typeSignatureToString("LA<LA<LB;>;>;", false));
     }
 
     @Test
