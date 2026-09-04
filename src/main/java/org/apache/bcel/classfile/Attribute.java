@@ -46,7 +46,7 @@ import org.apache.bcel.util.Args;
  * legitimately nest (for example, a <em>Code</em> attribute carries its own attribute table, and <em>Record</em> components carry theirs), but a malicious
  * class file can nest such attributes deeply enough to overflow the parser's stack.
  * </p>
- * 
+ *
  * @see ConstantValue
  * @see SourceFile
  * @see Code
@@ -153,6 +153,21 @@ public abstract class Attribute implements Cloneable, Node {
     }
 
     /**
+     * Class method reads one attribute from the input data stream. This method must not be accessible from the outside. It
+     * is called by the Field and Method constructor methods.
+     *
+     * @see Field
+     * @see Method
+     * @param dataInputStream Input stream.
+     * @param constantPool Array of constants.
+     * @return Attribute.
+     * @throws IOException Thrown if an I/O error occurs.
+     */
+    public static Attribute readAttribute(final DataInputStream dataInputStream, final ConstantPool constantPool) throws IOException {
+        return readAttribute((DataInput) dataInputStream, constantPool);
+    }
+
+    /**
      * Reads one attribute without tracking the nesting depth; only to be called by {@link #readAttribute(DataInput, ConstantPool)}.
      */
     private static Attribute readAttribute0(final DataInput dataInput, final ConstantPool constantPool) throws IOException {
@@ -247,21 +262,6 @@ public abstract class Attribute implements Cloneable, Node {
             // Never reached
             throw new IllegalStateException("Unrecognized attribute type tag parsed: " + tag);
         }
-    }
-
-    /**
-     * Class method reads one attribute from the input data stream. This method must not be accessible from the outside. It
-     * is called by the Field and Method constructor methods.
-     *
-     * @see Field
-     * @see Method
-     * @param dataInputStream Input stream.
-     * @param constantPool Array of constants.
-     * @return Attribute.
-     * @throws IOException Thrown if an I/O error occurs.
-     */
-    public static Attribute readAttribute(final DataInputStream dataInputStream, final ConstantPool constantPool) throws IOException {
-        return readAttribute((DataInput) dataInputStream, constantPool);
     }
 
     /**
