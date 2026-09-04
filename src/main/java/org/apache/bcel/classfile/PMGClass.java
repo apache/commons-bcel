@@ -23,6 +23,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * This class is derived from <em>Attribute</em> and represents a reference to a PMG attribute.
@@ -57,7 +58,7 @@ public final class PMGClass extends Attribute {
      * @param constantPool Array of constants.
      */
     public PMGClass(final int nameIndex, final int length, final int pmgIndex, final int pmgClassIndex, final ConstantPool constantPool) {
-        super(Const.ATTR_PMG, nameIndex, length, constantPool);
+        super(Const.ATTR_PMG, nameIndex, Args.require(length, 4, "PMG attribute length"), constantPool);
         this.pmgIndex = pmgIndex;
         this.pmgClassIndex = pmgClassIndex;
     }
