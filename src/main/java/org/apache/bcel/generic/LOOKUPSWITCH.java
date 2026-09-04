@@ -21,6 +21,7 @@ package org.apache.bcel.generic;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.util.ByteSequence;
 
 /**
@@ -89,6 +90,11 @@ public class LOOKUPSWITCH extends Select {
     protected void initFromFile(final ByteSequence bytes, final boolean wide) throws IOException {
         super.initFromFile(bytes, wide); // reads padding
         final int matchLength = bytes.readInt();
+        // Require the match table to actually fit into the remaining code bytes (8 bytes per match-offset pair). The npairs field is attacker-controlled in
+        // a malicious class file and could otherwise request a multi-gigabyte allocation, or a negative array size, before a single pair is read.
+        if (matchLength < 0 || matchLength > bytes.available() / 8) {
+            throw new ClassFormatException("Invalid lookupswitch: npairs=" + matchLength + ", but only " + bytes.available() + " bytes of code remain.");
+        }
         setMatchLength(matchLength);
         final short fixedLength = (short) (9 + matchLength * 8);
         setFixedLength(fixedLength);

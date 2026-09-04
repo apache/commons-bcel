@@ -90,6 +90,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs USO_UNSAFE_METHOD_SYNCHRONIZATION in ConstantUtf8.</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Nested Code/Record attributes drive unbounded parse-time recursion in ClassParser (f001).</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Nested annotation element values recurse unboundedly; MAX_ARRAY_DIMENSIONS cap bypassed (f002).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Opcodes tableswitch and lookupswitch add boundary checks (f003).</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add support for permitted subclasses #493.</action>
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add RecordComponentInfo.getAttribute(byte tag)#494.</action>

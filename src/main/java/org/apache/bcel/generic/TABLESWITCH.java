@@ -21,6 +21,7 @@ package org.apache.bcel.generic;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.util.ByteSequence;
 
 /**
@@ -92,7 +93,15 @@ public class TABLESWITCH extends Select {
         super.initFromFile(bytes, wide);
         final int low = bytes.readInt();
         final int high = bytes.readInt();
-        final int matchLength = high - low + 1;
+        // Compute in long arithmetic to guard against integer overflow, and require the match table to actually fit into the remaining code bytes (4 bytes
+        // per jump offset). The low and high fields are attacker-controlled in a malicious class file and could otherwise request a multi-gigabyte
+        // allocation, or a negative array size, before a single table entry is read.
+        final long matchLengthLong = (long) high - low + 1;
+        if (matchLengthLong < 0 || matchLengthLong > bytes.available() / 4) {
+            throw new ClassFormatException(
+                    "Invalid tableswitch: low=" + low + ", high=" + high + ", but only " + bytes.available() + " bytes of code remain.");
+        }
+        final int matchLength = (int) matchLengthLong;
         setMatchLength(matchLength);
         final short fixedLength = (short) (13 + matchLength * 4);
         setFixedLength(fixedLength);
