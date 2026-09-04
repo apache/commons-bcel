@@ -343,8 +343,15 @@ public abstract class Utility {
             high = bytes.readInt();
             offset = bytes.getIndex() - 12 - noPadBytes - 1;
             defaultOffset += offset;
+            // Each jump table entry is a 4 byte offset, so a well-formed table cannot declare more entries than fit
+            // into the remaining byte code; checking before allocating keeps a crafted low/high pair from forcing a
+            // huge allocation.
+            final long jumpTableLength = (long) high - low + 1;
+            if (jumpTableLength < 0 || jumpTableLength * 4 > bytes.available()) {
+                throw new ClassFormatException("Invalid TABLESWITCH: low = " + low + ", high = " + high + " but only " + bytes.available() + " bytes remain");
+            }
             buf.append("\tdefault = ").append(defaultOffset).append(", low = ").append(low).append(", high = ").append(high).append("(");
-            jumpTable = new int[high - low + 1];
+            jumpTable = new int[(int) jumpTableLength];
             for (int i = 0; i < jumpTable.length; i++) {
                 jumpTable[i] = offset + bytes.readInt();
                 buf.append(jumpTable[i]);
@@ -360,6 +367,10 @@ public abstract class Utility {
         case Const.LOOKUPSWITCH: {
             npairs = bytes.readInt();
             offset = bytes.getIndex() - 8 - noPadBytes - 1;
+            // Each match-offset pair is 8 bytes, see the TABLESWITCH check above.
+            if (npairs < 0 || (long) npairs * 8 > bytes.available()) {
+                throw new ClassFormatException("Invalid LOOKUPSWITCH: npairs = " + npairs + " but only " + bytes.available() + " bytes remain");
+            }
             match = new int[npairs];
             jumpTable = new int[npairs];
             defaultOffset += offset;

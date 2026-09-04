@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -88,6 +89,27 @@ class UtilityTest {
             assertTrue(code.contains("44:   invokevirtual\tjava.io.PrintStream.print "), code);
             assertTrue(code.contains("47:   return"), code);
         }
+    }
+
+    @Test
+    void testCodeToStringOversizedLookupSwitch() {
+        // A LOOKUPSWITCH claiming Integer.MAX_VALUE pairs without any table bytes behind it
+        // must be rejected instead of allocating two huge arrays.
+        final byte[] code = { (byte) Const.LOOKUPSWITCH, 0, 0, 0, // opcode plus 3 padding bytes
+            0, 0, 0, 0, // default offset
+            0x7f, (byte) 0xff, (byte) 0xff, (byte) 0xff }; // npairs = Integer.MAX_VALUE
+        assertThrows(ClassFormatException.class, () -> Utility.codeToString(new ByteSequence(code), new ConstantPool()));
+    }
+
+    @Test
+    void testCodeToStringOversizedTableSwitch() {
+        // A TABLESWITCH claiming 2^32 entries without any table bytes behind it must be
+        // rejected instead of allocating a huge jump table.
+        final byte[] code = { (byte) Const.TABLESWITCH, 0, 0, 0, // opcode plus 3 padding bytes
+            0, 0, 0, 0, // default offset
+            (byte) 0x80, 0, 0, 0, // low = Integer.MIN_VALUE
+            0x7f, (byte) 0xff, (byte) 0xff, (byte) 0xff }; // high = Integer.MAX_VALUE
+        assertThrows(ClassFormatException.class, () -> Utility.codeToString(new ByteSequence(code), new ConstantPool()));
     }
 
     @Test

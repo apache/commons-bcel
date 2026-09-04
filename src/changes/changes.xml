@@ -96,6 +96,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Pass 3b dataflow stores frames per instruction and clones ever-growing execution chains (f006).</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Cubic handlers × range × subroutines scan in Subroutines constructor hangs JustIce Pass 3b (f007).</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Subroutines.noRecursiveCalls enumerates exponentially many JSR call paths (f008).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Disassembler and Class2HTML re-implement the unchecked switch-table allocation (f009).</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add support for permitted subclasses #493.</action>
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add RecordComponentInfo.getAttribute(byte tag)#494.</action>
