@@ -56,4 +56,25 @@ class Class2HTMLXSSTest {
         assertFalse(methods.contains("\">x<script>"), "field name was emitted unescaped in text context");
         assertTrue(methods.contains("&lt;script&gt;"), "expected the field name to be HTML-escaped");
     }
+
+    /**
+     * Quotes in attacker-controlled names must be escaped in attribute context (HREF/NAME values), or the name
+     * breaks out of the attribute and injects live event handlers.
+     */
+    @Test
+    void testFieldNameQuotesAreEscapedInAttributeContext() throws Exception {
+        final ClassGen cg = new ClassGen("Evil2", "java.lang.Object", "Evil2.java", Const.ACC_PUBLIC, null);
+        cg.addField(new FieldGen(Const.ACC_PUBLIC, Type.INT, "x\" onmouseover=\"alert(1)", cg.getConstantPool()).getField());
+        final JavaClass jc = cg.getJavaClass();
+
+        final File outputDir = new File("target/test-output/html-xss");
+        if (!outputDir.mkdirs()) {
+            assertTrue(outputDir.isDirectory());
+        }
+        new Class2HTML(jc, outputDir.getAbsolutePath() + File.separator);
+
+        final String methods = new String(Files.readAllBytes(new File(outputDir, "Evil2_methods.html").toPath()), StandardCharsets.UTF_8);
+        assertFalse(methods.contains("x\" onmouseover"), "field name broke out of the attribute context");
+        assertTrue(methods.contains("x&quot; onmouseover"), "expected quotes in the field name to be escaped");
+    }
 }

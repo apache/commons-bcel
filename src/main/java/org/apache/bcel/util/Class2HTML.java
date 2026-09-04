@@ -150,7 +150,16 @@ public class Class2HTML implements Constants {
         if (basicTypes.contains(baseType)) {
             return "<FONT COLOR=\"#00FF00\">" + type + "</FONT>";
         }
-        return "<A HREF=\"" + baseType + ".html\" TARGET=_top>" + toHTML(shortType) + "</A>";
+        return "<A HREF=\"" + toHTMLRef(baseType) + ".html\" TARGET=_top>" + toHTML(shortType) + "</A>";
+    }
+
+    /**
+     * Escapes a class or type name taken from the constant pool for use as a relative link target inside an HREF
+     * attribute value. On top of the text escaping done by {@code toHTML(String)}, any ':' is replaced so an
+     * attacker-chosen name cannot smuggle a URL scheme such as "javascript:" into the generated link.
+     */
+    static String toHTMLRef(final String str) {
+        return toHTML(str.replace(':', '_'));
     }
 
     static String toHTML(final String str) {
@@ -158,11 +167,20 @@ public class Class2HTML implements Constants {
         for (int i = 0; i < str.length(); i++) {
             final char ch;
             switch (ch = str.charAt(i)) {
+            case '&':
+                buf.append("&amp;");
+                break;
             case '<':
                 buf.append("&lt;");
                 break;
             case '>':
                 buf.append("&gt;");
+                break;
+            case '"':
+                buf.append("&quot;");
+                break;
+            case '\'':
+                buf.append("&#39;");
                 break;
             case '\n':
                 buf.append("\\n");

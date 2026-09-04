@@ -78,7 +78,7 @@ final class MethodHTML {
         final Attribute[] attributes;
         access = Utility.replace(access, " ", "&nbsp;");
         printWriter.print("<TR><TD><FONT COLOR=\"#FF0000\">" + access + "</FONT></TD>\n<TD>" + Class2HTML.referenceType(type) + "</TD><TD><A NAME=\"field"
-            + name + "\">" + Class2HTML.toHTML(name) + "</A></TD>");
+            + Class2HTML.toHTML(name) + "\">" + Class2HTML.toHTML(name) + "</A></TD>");
         attributes = field.getAttributes();
         // Write them to the Attributes.html file with anchor "<name>[<i>]"
         for (int i = 0; i < attributes.length; i++) {
@@ -88,7 +88,8 @@ final class MethodHTML {
             if (attributes[i].getTag() == Const.ATTR_CONSTANT_VALUE) { // Default value
                 final String str = attributes[i].toString();
                 // Reference attribute in _attributes.html
-                printWriter.print("<TD>= <A HREF=\"" + className + "_attributes.html#" + name + "@" + i + "\" TARGET=\"Attributes\">" + str + "</TD>\n");
+                printWriter.print("<TD>= <A HREF=\"" + className + "_attributes.html#" + Class2HTML.toHTML(name) + "@" + i + "\" TARGET=\"Attributes\">"
+                    + Class2HTML.toHTML(str) + "</TD>\n");
                 break;
             }
         }
@@ -114,7 +115,7 @@ final class MethodHTML {
         access = Utility.replace(access, " ", "&nbsp;");
         final String htmlName = Class2HTML.toHTML(name);
         printWriter.print("<TR VALIGN=TOP><TD><FONT COLOR=\"#FF0000\"><A NAME=method" + methodNumber + ">" + access + "</A></FONT></TD>");
-        printWriter.print("<TD>" + Class2HTML.referenceType(type) + "</TD><TD><A HREF=" + className + "_code.html#method" + methodNumber + " TARGET=Code>"
+        printWriter.print("<TD>" + Class2HTML.referenceType(type) + "</TD><TD><A HREF=\"" + className + "_code.html#method" + methodNumber + "\" TARGET=Code>"
             + htmlName + "</A></TD>\n<TD>(");
         for (int i = 0; i < args.length; i++) {
             printWriter.print(Class2HTML.referenceType(args[i]));

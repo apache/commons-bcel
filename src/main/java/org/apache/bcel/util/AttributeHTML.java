@@ -88,7 +88,7 @@ final class AttributeHTML implements Closeable {
         } else {
             printWriter.print("<TR BGCOLOR=\"#A0A0A0\"><TD>");
         }
-        printWriter.println("<H4><A NAME=\"" + anchor + "\">" + attrCount + " " + Const.getAttributeName(tag) + "</A></H4>");
+        printWriter.println("<H4><A NAME=\"" + Class2HTML.toHTML(anchor) + "\">" + attrCount + " " + Const.getAttributeName(tag) + "</A></H4>");
         /*
          * Handle different attributes
          */
@@ -184,7 +184,7 @@ final class AttributeHTML implements Closeable {
             printWriter.print("</UL>\n");
             break;
         default: // Such as Unknown attribute or Deprecated
-            printWriter.print("<P>" + attribute);
+            printWriter.print("<P>" + Class2HTML.toHTML(String.valueOf(attribute)));
         }
         printWriter.println("</TD></TR>");
         printWriter.flush();
