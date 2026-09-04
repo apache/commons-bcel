@@ -92,6 +92,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Nested annotation element values recurse unboundedly; MAX_ARRAY_DIMENSIONS cap bypassed (f002).</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Opcodes tableswitch and lookupswitch add boundary checks (f003).</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">JustIce Pass 2 hangs on cyclic superclass chain of a referenced exception class (f004).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">JustIce Pass 2 LVT check amplifies each 10-byte entry into ~131k hashtable operations (f005).</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add support for permitted subclasses #493.</action>
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add RecordComponentInfo.getAttribute(byte tag)#494.</action>
