@@ -215,6 +215,7 @@ public class Class2HTML implements Constants {
         this.javaClass = javaClass;
         this.dir = dir;
         className = javaClass.getClassName(); // Remember full name
+        checkFileNameSafe(className);
         constantPool = javaClass.getConstantPool();
         // Get package name by tacking off everything after the last '.'
         final int index = className.lastIndexOf('.');
@@ -232,6 +233,29 @@ public class Class2HTML implements Constants {
             // Write main file (with frames, yuk)
             writeMainHTML(attributeHtml, charset);
             new CodeHTML(dir, className, methods, constantPool, constantHtml, charset);
+        }
+    }
+
+    /**
+     * The class name comes from the attacker-controlled this_class constant of the parsed class file and is
+     * concatenated into the five output file paths ("dir + className + suffix"). Class file parsing only folds
+     * '/' into '.', so Windows separators ('\\'), drive designators (':') and ".." segments survive and would
+     * let a crafted class file write its HTML output outside the target directory (CWE-22).
+     *
+     * @param name the class name about to be used as part of a file name.
+     * @throws IOException if the name contains a path separator, a Windows-reserved file name character, a
+     *         control character, or a ".." sequence.
+     */
+    private static void checkFileNameSafe(final String name) throws IOException {
+        for (int i = 0; i < name.length(); i++) {
+            final char c = name.charAt(i);
+            if (c < ' ' || "\\/:*?\"<>|".indexOf(c) >= 0) {
+                throw new IOException("Refusing to write HTML for a class whose name contains the unsafe character (0x"
+                    + Integer.toHexString(c) + "): " + name);
+            }
+        }
+        if (name.contains("..")) {
+            throw new IOException("Refusing to write HTML for a class whose name contains \"..\": " + name);
         }
     }
 

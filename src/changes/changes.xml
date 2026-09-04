@@ -101,7 +101,8 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Utility.typeSignatureToString recurses per generic-nesting level, unbounded, with quadratic substring copies. (f011).</action>      
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Repositories cache classes under the input-defined this_class name; global static Repository/VerifierFactory make the poisoning ClassLoader-wide. (f012).</action>      
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Silent u2/u1 count truncation across dump paths corrupts emitted bytecode. (f013).</action>      
-      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Class2HTML emitters write attacker class-file strings into HTML unescaped (stored XSS in reports) (f014).</action>      
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Class2HTML emitters write attacker class-file strings into HTML unescaped (stored XSS in reports) (f014).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Class2HTML builds output file paths from the unvalidated class name (f015).</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add support for permitted subclasses #493.</action>
       <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add RecordComponentInfo.getAttribute(byte tag)#494.</action>
