@@ -19,7 +19,6 @@
 package org.apache.bcel.util;
 
 import java.io.Closeable;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FilenameFilter;
@@ -631,19 +630,14 @@ public class ClassPath implements Closeable {
      * @throws IOException Thrown if an I/O error occurs.
      */
     public byte[] getBytes(final String name, final String suffix) throws IOException {
-        DataInputStream dis = null;
         try (InputStream inputStream = getInputStream(name, suffix)) {
             if (inputStream == null) {
                 throw new IOException("Couldn't find: " + name + suffix);
             }
-            dis = new DataInputStream(inputStream);
-            final byte[] bytes = new byte[inputStream.available()];
-            dis.readFully(bytes);
-            return bytes;
-        } finally {
-            if (dis != null) {
-                dis.close();
-            }
+            // Read until EOF instead of sizing the buffer from InputStream.available(): for ZIP/JAR entries, available()
+            // reflects the archive's declared uncompressed-size field, which is untrusted metadata. Trusting it lets a
+            // tiny archive force a forged multi-gigabyte allocation, or silently truncate the returned bytes.
+            return IOUtils.toByteArray(inputStream);
         }
     }
 
