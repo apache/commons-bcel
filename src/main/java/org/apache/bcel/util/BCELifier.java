@@ -79,7 +79,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
      *
      * @param name the class or package name to check.
      * @return {@code name} if it is safe to emit as a Java identifier.
-     * @throws IllegalArgumentException if the name is not a dotted sequence of valid Java identifiers.
+     * @throws IllegalArgumentException Thrown if the name is not a dotted sequence of valid Java identifiers.
      */
     private static String checkJavaName(final String name) {
         boolean expectStart = true;

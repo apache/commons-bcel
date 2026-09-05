@@ -62,7 +62,7 @@ public abstract class Constant implements Cloneable, Node {
      * @param dataInput Input stream.
      * @return Constant object.
      * @throws IOException Thrown if an I/O error occurs reading from the given {@code dataInput}.
-     * @throws ClassFormatException if the next byte is not recognized
+     * @throws ClassFormatException Thrown if the next byte is not recognized
      * @since 6.0 made public
      */
     public static Constant readConstant(final DataInput dataInput) throws IOException, ClassFormatException {

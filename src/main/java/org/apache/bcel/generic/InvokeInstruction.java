@@ -80,7 +80,7 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
      * This overrides the deprecated version as we know here that the referenced class may legally be an array.
      *
      * @return name of the referenced class/interface.
-     * @throws IllegalArgumentException if the referenced class is an array (this should not happen)
+     * @throws IllegalArgumentException Thrown if the referenced class is an array (this should not happen)
      */
     @Override
     public String getClassName(final ConstantPoolGen cpg) {

@@ -428,7 +428,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * @param fieldName The field name to find.
      * @param fieldType The field type to find.
      * @return field matching given name and type, null if field is not found or not accessible from this class.
-     * @throws ClassNotFoundException if the class cannot be found.
+     * @throws ClassNotFoundException Thrown if the class cannot be found.
      * @since 6.8.0
      */
     public Field findField(final String fieldName, final Type fieldType) throws ClassNotFoundException {
@@ -475,7 +475,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * Gets all interfaces implemented by this JavaClass (transitively).
      *
      * @return all interfaces.
-     * @throws ClassNotFoundException if any of the class's superclasses or interfaces can't be found.
+     * @throws ClassNotFoundException Thrown if any of the class's superclasses or interfaces can't be found.
      */
     public JavaClass[] getAllInterfaces() throws ClassNotFoundException {
         final ClassQueue queue = new ClassQueue();
@@ -626,7 +626,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * Gets interfaces directly implemented by this JavaClass.
      *
      * @return The interfaces.
-     * @throws ClassNotFoundException if any of the class's interfaces can't be found.
+     * @throws ClassNotFoundException Thrown if any of the class's interfaces can't be found.
      */
     public JavaClass[] getInterfaces() throws ClassNotFoundException {
         final String[] interfaces = getInterfaceNames();
@@ -736,7 +736,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * Gets the superclass for this JavaClass object, or null if this is {@link Object}.
      *
      * @return The superclass for this JavaClass object, or null if this is {@link Object}.
-     * @throws ClassNotFoundException if the superclass can't be found.
+     * @throws ClassNotFoundException Thrown if the superclass can't be found.
      */
     public JavaClass getSuperClass() throws ClassNotFoundException {
         if (CLASS_NAME_OBJECT.equals(getClassName())) {
@@ -749,7 +749,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * Gets list of super classes of this class in ascending order.
      *
      * @return list of super classes of this class in ascending order, that is, {@link Object} is always the last element.
-     * @throws ClassNotFoundException if any of the superclasses can't be found.
+     * @throws ClassNotFoundException Thrown if any of the superclasses can't be found.
      */
     public JavaClass[] getSuperClasses() throws ClassNotFoundException {
         JavaClass clazz = this;
@@ -799,7 +799,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      *
      * @param inter The interface to check.
      * @return true, if this class is an implementation of interface inter.
-     * @throws ClassNotFoundException if superclasses or superinterfaces of this class can't be found.
+     * @throws ClassNotFoundException Thrown if superclasses or superinterfaces of this class can't be found.
      */
     public boolean implementationOf(final JavaClass inter) throws ClassNotFoundException {
         if (!inter.isInterface()) {
@@ -822,7 +822,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      *
      * @param superclass The superclass to check.
      * @return true if this JavaClass is derived from the super class.
-     * @throws ClassNotFoundException if superclasses or superinterfaces of this object can't be found.
+     * @throws ClassNotFoundException Thrown if superclasses or superinterfaces of this object can't be found.
      */
     public final boolean instanceOf(final JavaClass superclass) throws ClassNotFoundException {
         if (equals(superclass)) {

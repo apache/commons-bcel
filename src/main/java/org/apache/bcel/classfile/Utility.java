@@ -925,7 +925,7 @@ public abstract class Utility {
      *
      * @param signature Method signature.
      * @return String Array of argument types.
-     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
+     * @throws ClassFormatException Thrown if a class is malformed or cannot be interpreted as a class file
      */
     public static String[] methodSignatureArgumentTypes(final String signature) throws ClassFormatException {
         return methodSignatureArgumentTypes(signature, true);
@@ -937,7 +937,7 @@ public abstract class Utility {
      * @param signature Method signature.
      * @param chopit flag that determines whether chopping is executed or not.
      * @return String Array of argument types.
-     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
+     * @throws ClassFormatException Thrown if a class is malformed or cannot be interpreted as a class file
      */
     public static String[] methodSignatureArgumentTypes(final String signature, final boolean chopit) throws ClassFormatException {
         final List<String> vec = new ArrayList<>();
@@ -964,7 +964,7 @@ public abstract class Utility {
      *
      * @param signature Method signature.
      * @return String representation of method return type.
-     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
+     * @throws ClassFormatException Thrown if a class is malformed or cannot be interpreted as a class file
      */
     public static String methodSignatureReturnType(final String signature) throws ClassFormatException {
         return methodSignatureReturnType(signature, true);
@@ -976,7 +976,7 @@ public abstract class Utility {
      * @param signature Method signature.
      * @param chopit flag that determines whether chopping is executed or not.
      * @return String representation of method return type.
-     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
+     * @throws ClassFormatException Thrown if a class is malformed or cannot be interpreted as a class file
      */
     public static String methodSignatureReturnType(final String signature, final boolean chopit) throws ClassFormatException {
         try {
@@ -1026,7 +1026,7 @@ public abstract class Utility {
      * @param chopit flag that determines whether chopping is executed or not.
      * @param vars The LocalVariableTable for the method.
      * @return Java type declaration.
-     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
+     * @throws ClassFormatException Thrown if a class is malformed or cannot be interpreted as a class file
      */
     public static String methodSignatureToString(final String signature, final String name, final String access, final boolean chopit,
         final LocalVariableTable vars) throws ClassFormatException {
@@ -1081,7 +1081,7 @@ public abstract class Utility {
      * @param ret Return type of method.
      * @param argv Types of method arguments.
      * @return Byte code representation of method signature.
-     * @throws ClassFormatException if the signature is for Void
+     * @throws ClassFormatException Thrown if the signature is for Void
      */
     public static String methodTypeToSignature(final String ret, final String[] argv) throws ClassFormatException {
         final StringBuilder buf = new StringBuilder("(");
@@ -1347,7 +1347,7 @@ public abstract class Utility {
      * @param signature in format described above.
      * @return type of method signature.
      * @see Const
-     * @throws ClassFormatException if signature is not a method signature
+     * @throws ClassFormatException Thrown if signature is not a method signature
      */
     public static byte typeOfMethodSignature(final String signature) throws ClassFormatException {
         try {
@@ -1367,7 +1367,7 @@ public abstract class Utility {
      * @param signature in format described above.
      * @return type of signature.
      * @see Const
-     * @throws ClassFormatException if signature isn't a known type
+     * @throws ClassFormatException Thrown if signature isn't a known type
      */
     public static byte typeOfSignature(final String signature) throws ClassFormatException {
         try {
@@ -1498,7 +1498,7 @@ public abstract class Utility {
      * @param signature type signature.
      * @param chopit flag that determines whether chopping is executed or not.
      * @return string containing human readable type signature.
-     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
+     * @throws ClassFormatException Thrown if a class is malformed or cannot be interpreted as a class file
      * @since 6.4.0
      */
     public static String typeSignatureToString(final String signature, final boolean chopit) throws ClassFormatException {
@@ -1512,7 +1512,7 @@ public abstract class Utility {
      * @param chopit    flag that determines whether chopping is executed or not.
      * @param depth     current nesting depth.
      * @return string containing human readable type signature.
-     * @throws ClassFormatException if the signature is malformed or nested deeper than {@code MAX_SIGNATURE_NESTING}.
+     * @throws ClassFormatException Thrown if the signature is malformed or nested deeper than {@code MAX_SIGNATURE_NESTING}.
      */
     private static String typeSignatureToString(final String signature, final boolean chopit, final int depth) throws ClassFormatException {
         if (depth > MAX_SIGNATURE_NESTING) {

@@ -1276,7 +1276,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * Ensures that the constant pool entries satisfy the static constraints as described in The Java Virtual Machine
      * Specification, 2nd Edition.
      *
-     * @throws ClassConstraintException otherwise.
+     * @throws AssertionViolatedException Thrown if the class is missing.
      */
     private void constantPoolEntriesSatisfyStaticConstraints() {
         try {
@@ -1393,7 +1393,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * otherwise. <B>Precondition: index-style cross referencing in the constant pool must be valid. Simply invoke
      * constant_pool_entries_satisfy_static_constraints() before.</B>
      *
-     * @throws ClassConstraintException otherwise.
+     * @throws AssertionViolatedException Thrown if the class is missing.
      * @see #constantPoolEntriesSatisfyStaticConstraints()
      */
     private void fieldAndMethodRefsAreValid() {
@@ -1401,7 +1401,6 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             final JavaClass jc = Repository.lookupClass(verifier.getClassName());
             final DescendingVisitor v = new DescendingVisitor(jc, new FAMRAV_Visitor(jc));
             v.visit();
-
         } catch (final ClassNotFoundException e) {
             // FIXME: this might not be the best way to handle missing classes.
             throw new AssertionViolatedException("Missing class: " + e, e);
@@ -1413,7 +1412,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * constant_pool_entries_satisfy_static_constraints() and every_class_has_an_accessible_superclass() have to be invoked
      * before (in that order).</B>
      *
-     * @throws ClassConstraintException otherwise.
+     * @throws AssertionViolatedException Thrown if the class is missing.
      * @see #constantPoolEntriesSatisfyStaticConstraints()
      * @see #everyClassHasAnAccessibleSuperclass()
      */

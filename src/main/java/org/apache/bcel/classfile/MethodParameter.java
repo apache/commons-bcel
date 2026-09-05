@@ -54,7 +54,7 @@ public class MethodParameter implements Cloneable, Node {
      *
      * @param input Input stream.
      * @throws IOException Thrown if an I/O error occurs.
-     * @throws ClassFormatException if a class is malformed or cannot be interpreted as a class file
+     * @throws ClassFormatException Thrown if a class is malformed or cannot be interpreted as a class file
      */
     MethodParameter(final DataInput input) throws IOException {
         nameIndex = input.readUnsignedShort();

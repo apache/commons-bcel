@@ -100,7 +100,7 @@ public class JavaWrapper {
      *
      * @param className The fully qualified class name.
      * @param argv The arguments just as you would pass them directly.
-     * @throws ClassNotFoundException if {@code className} can't be found.
+     * @throws ClassNotFoundException Thrown if {@code className} can't be found.
      */
     public void runMain(final String className, final String[] argv) throws ClassNotFoundException {
         final Class<?> cl = loader.loadClass(className);

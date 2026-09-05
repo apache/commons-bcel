@@ -71,7 +71,7 @@ public class LocalVariableInfo {
      * @param startPc Range in which the variable is valid.
      * @param length length of ...
      * @param type variable type.
-     * @throws LocalVariableInfoInconsistentException if the new information conflicts with already gathered information.
+     * @throws LocalVariableInfoInconsistentException Thrown if the new information conflicts with already gathered information.
      */
     public void add(final String name, final int startPc, final int length, final Type type) throws LocalVariableInfoInconsistentException {
         final int endPc = startPc + length; // incl/incl-notation!

@@ -53,7 +53,7 @@ public interface Repository {
      *
      * @param clazz The class.
      * @return The JavaClass instance.
-     * @throws ClassNotFoundException if the class can't be found.
+     * @throws ClassNotFoundException Thrown if the class can't be found.
      */
     JavaClass loadClass(Class<?> clazz) throws ClassNotFoundException;
 
@@ -62,7 +62,7 @@ public interface Repository {
      *
      * @param className The class name.
      * @return The JavaClass instance.
-     * @throws ClassNotFoundException if the class can't be found.
+     * @throws ClassNotFoundException Thrown if the class can't be found.
      */
     JavaClass loadClass(String className) throws ClassNotFoundException;
 

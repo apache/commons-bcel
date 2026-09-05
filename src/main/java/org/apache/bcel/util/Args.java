@@ -122,8 +122,8 @@ public class Args {
      * @param max     The maximum required u4 value.
      * @param message The message prefix.
      * @return The value to test.
-     * @throws IllegalArgumentException if {@code min < 0} or {@code max > Integer.MAX_VALUE}.
-     * @throws ClassFormatException     if {@code value < min} or {@code value > max}.
+     * @throws IllegalArgumentException Thrown if {@code min < 0} or {@code max > Integer.MAX_VALUE}.
+     * @throws ClassFormatException     Thrown if {@code value < min} or {@code value > max}.
      * @since 6.12.0
      */
     public static int requireU4(final int value, final int min, final int max, final String message) {

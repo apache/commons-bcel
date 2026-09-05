@@ -62,7 +62,7 @@ abstract class AbstractClassPathRepository implements Repository {
      * @see Class
      * @param clazz The runtime Class object.
      * @return JavaClass object for given runtime class.
-     * @throws ClassNotFoundException if the class is not in the Repository, and its representation could not be found
+     * @throws ClassNotFoundException Thrown if the class is not in the Repository, and its representation could not be found
      */
     @Override
     public JavaClass loadClass(final Class<?> clazz) throws ClassNotFoundException {
@@ -110,7 +110,7 @@ abstract class AbstractClassPathRepository implements Repository {
      *
      * @param className The name of the class.
      * @return The JavaClass object.
-     * @throws ClassNotFoundException if the class is not in the Repository, and could not be found on the classpath
+     * @throws ClassNotFoundException Thrown if the class is not in the Repository, and could not be found on the classpath
      */
     @Override
     public JavaClass loadClass(String className) throws ClassNotFoundException {

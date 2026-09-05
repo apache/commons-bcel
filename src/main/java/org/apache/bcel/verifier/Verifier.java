@@ -206,7 +206,7 @@ public class Verifier {
      * message originates.
      *
      * @return The array of messages.
-     * @throws ClassNotFoundException if this class can't be found.
+     * @throws ClassNotFoundException Thrown if this class can't be found.
      */
     public String[] getMessages() throws ClassNotFoundException {
         final List<String> messages = new ArrayList<>();

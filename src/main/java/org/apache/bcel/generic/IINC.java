@@ -124,7 +124,7 @@ public class IINC extends LocalVariableInstruction {
      * Sets increment factor.
      *
      * @param c The increment factor.
-     * @throws ClassGenException if the increment is out of bounds.
+     * @throws ClassGenException Thrown if the increment is out of bounds.
      */
     public final void setIncrement(final int c) {
         if (!isValidShort(c)) {
@@ -138,7 +138,7 @@ public class IINC extends LocalVariableInstruction {
      * Sets index of local variable.
      *
      * @param index index of local variable.
-     * @throws ClassGenException if index is out of bounds.
+     * @throws ClassGenException Thrown if index is out of bounds.
      */
     @Override
     public final void setIndex(final int index) {

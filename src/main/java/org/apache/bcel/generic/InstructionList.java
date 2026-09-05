@@ -468,7 +468,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * Remove instruction from this list. The corresponding Instruction handles must not be reused!
      *
      * @param i instruction to remove.
-     * @throws TargetLostException if target is lost.
+     * @throws TargetLostException Thrown if target is lost.
      */
     public void delete(final Instruction i) throws TargetLostException {
         final InstructionHandle ih;
@@ -484,7 +484,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
      *
      * @param from where to start deleting (inclusive).
      * @param to where to end deleting (inclusive).
-     * @throws TargetLostException if target is lost.
+     * @throws TargetLostException Thrown if target is lost.
      */
     public void delete(final Instruction from, final Instruction to) throws TargetLostException {
         final InstructionHandle fromIh;
@@ -502,7 +502,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
      * Remove instruction from this list. The corresponding Instruction handles must not be reused!
      *
      * @param ih instruction (handle) to remove.
-     * @throws TargetLostException if target is lost.
+     * @throws TargetLostException Thrown if target is lost.
      */
     public void delete(final InstructionHandle ih) throws TargetLostException {
         remove(ih.getPrev(), ih.getNext());
@@ -514,7 +514,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
      *
      * @param from where to start deleting (inclusive).
      * @param to where to end deleting (inclusive).
-     * @throws TargetLostException if target is lost.
+     * @throws TargetLostException Thrown if target is lost.
      */
     public void delete(final InstructionHandle from, final InstructionHandle to) throws TargetLostException {
         remove(from.getPrev(), to.getNext());

@@ -120,7 +120,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      *
      * @param c Constant to be printed.
      * @return String representation.
-     * @throws IllegalArgumentException if c is unknown constant type.
+     * @throws IllegalArgumentException Thrown if c is unknown constant type.
      */
     public String constantToString(Constant c) throws IllegalArgumentException {
         final String str;
@@ -267,7 +267,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * @param index Index in constant pool.
      * @return Constant value.
      * @see Constant
-     * @throws ClassFormatException if index is invalid.
+     * @throws ClassFormatException Thrown if index is invalid.
      */
     @SuppressWarnings("unchecked")
     public <T extends Constant> T getConstant(final int index) throws ClassFormatException {
@@ -282,7 +282,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * @param tag   Tag of expected constant, that is, its type.
      * @return Constant value.
      * @see Constant
-     * @throws ClassFormatException if constant type does not match tag.
+     * @throws ClassFormatException Thrown if constant type does not match tag.
      */
     @SuppressWarnings("unchecked")
     public <T extends Constant> T getConstant(final int index, final byte tag) throws ClassFormatException {
@@ -298,7 +298,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * @param castTo The class to cast to.
      * @return Constant value.
      * @see Constant
-     * @throws ClassFormatException if constant type does not match tag.
+     * @throws ClassFormatException Thrown if constant type does not match tag.
      * @since 6.6.0
      */
     public <T extends Constant> T getConstant(final int index, final byte tag, final Class<T> castTo) throws ClassFormatException {
@@ -316,7 +316,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * @param index Index in constant pool.
      * @param castTo The {@link Constant} subclass to cast to.
      * @return Constant value.
-     * @throws ClassFormatException if index is invalid.
+     * @throws ClassFormatException Thrown if index is invalid.
      * @see Constant
      * @since 6.6.0
      */
@@ -348,7 +348,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      *
      * @param index Index in constant pool.
      * @return ConstantInteger value.
-     * @throws ClassFormatException if constant type does not match tag.
+     * @throws ClassFormatException Thrown if constant type does not match tag.
      * @see ConstantInteger
      */
     public ConstantInteger getConstantInteger(final int index) {
@@ -372,7 +372,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      * @param index Index in constant pool.
      * @param tag   Tag of expected constant, either ConstantClass or ConstantString.
      * @return Contents of string reference.
-     * @throws IllegalArgumentException if tag is invalid.
+     * @throws IllegalArgumentException Thrown if tag is invalid.
      * @see ConstantClass
      * @see ConstantString
      */
@@ -410,7 +410,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      *
      * @param index Index in constant pool.
      * @return ConstantUtf8 value.
-     * @throws ClassFormatException if constant type does not match tag.
+     * @throws ClassFormatException Thrown if constant type does not match tag.
      * @see ConstantUtf8
      */
     public ConstantUtf8 getConstantUtf8(final int index) throws ClassFormatException {

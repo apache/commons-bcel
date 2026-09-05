@@ -60,7 +60,7 @@ public abstract class Repository {
      * @param clazz The class.
      * @return all interfaces implemented by class and its super classes and the interfaces that those interfaces extend,
      *         and so on. (Some people call this a transitive hull).
-     * @throws ClassNotFoundException if any of the class's superclasses or superinterfaces can't be found.
+     * @throws ClassNotFoundException Thrown if any of the class's superclasses or superinterfaces can't be found.
      */
     public static JavaClass[] getInterfaces(final JavaClass clazz) throws ClassNotFoundException {
         return clazz.getAllInterfaces();
@@ -72,7 +72,7 @@ public abstract class Repository {
      * @param className The class name.
      * @return all interfaces implemented by class and its super classes and the interfaces that extend those interfaces,
      *         and so on.
-     * @throws ClassNotFoundException if the named class can't be found, or if any of its superclasses or superinterfaces
+     * @throws ClassNotFoundException Thrown if the named class can't be found, or if any of its superclasses or superinterfaces
      *         can't be found.
      */
     public static JavaClass[] getInterfaces(final String className) throws ClassNotFoundException {
@@ -93,7 +93,7 @@ public abstract class Repository {
      *
      * @param clazz The class.
      * @return list of super classes of clazz in ascending order, that is, Object is always the last element.
-     * @throws ClassNotFoundException if any of the superclasses can't be found.
+     * @throws ClassNotFoundException Thrown if any of the superclasses can't be found.
      */
     public static JavaClass[] getSuperClasses(final JavaClass clazz) throws ClassNotFoundException {
         return clazz.getSuperClasses();
@@ -104,7 +104,7 @@ public abstract class Repository {
      *
      * @param className The class name.
      * @return list of super classes of clazz in ascending order, that is, Object is always the last element.
-     * @throws ClassNotFoundException if the named class or any of its superclasses can't be found.
+     * @throws ClassNotFoundException Thrown if the named class or any of its superclasses can't be found.
      */
     public static JavaClass[] getSuperClasses(final String className) throws ClassNotFoundException {
         return getSuperClasses(lookupClass(className));
@@ -116,7 +116,7 @@ public abstract class Repository {
      * @param clazz The class to test.
      * @param inter The interface.
      * @return true, if clazz is an implementation of interface inter.
-     * @throws ClassNotFoundException if any superclasses or superinterfaces of clazz can't be found.
+     * @throws ClassNotFoundException Thrown if any superclasses or superinterfaces of clazz can't be found.
      */
     public static boolean implementationOf(final JavaClass clazz, final JavaClass inter) throws ClassNotFoundException {
         return clazz.implementationOf(inter);
@@ -128,7 +128,7 @@ public abstract class Repository {
      * @param clazz The class to test.
      * @param inter The interface name.
      * @return true, if clazz is an implementation of interface inter.
-     * @throws ClassNotFoundException if inter or any superclasses or superinterfaces of clazz can't be found.
+     * @throws ClassNotFoundException Thrown if inter or any superclasses or superinterfaces of clazz can't be found.
      */
     public static boolean implementationOf(final JavaClass clazz, final String inter) throws ClassNotFoundException {
         return implementationOf(clazz, lookupClass(inter));
@@ -140,7 +140,7 @@ public abstract class Repository {
      * @param clazz The class name to test.
      * @param inter The interface.
      * @return true, if clazz is an implementation of interface inter.
-     * @throws ClassNotFoundException if clazz or any superclasses or superinterfaces of clazz can't be found.
+     * @throws ClassNotFoundException Thrown if clazz or any superclasses or superinterfaces of clazz can't be found.
      */
     public static boolean implementationOf(final String clazz, final JavaClass inter) throws ClassNotFoundException {
         return implementationOf(lookupClass(clazz), inter);
@@ -152,7 +152,7 @@ public abstract class Repository {
      * @param clazz The class name to test.
      * @param inter The interface name.
      * @return true, if clazz is an implementation of interface inter.
-     * @throws ClassNotFoundException if clazz, inter, or any superclasses or superinterfaces of clazz can't be found.
+     * @throws ClassNotFoundException Thrown if clazz, inter, or any superclasses or superinterfaces of clazz can't be found.
      */
     public static boolean implementationOf(final String clazz, final String inter) throws ClassNotFoundException {
         return implementationOf(lookupClass(clazz), lookupClass(inter));
@@ -164,7 +164,7 @@ public abstract class Repository {
      * @param clazz The class to test.
      * @param superclass The superclass.
      * @return true, if clazz is an instance of superclass.
-     * @throws ClassNotFoundException if any superclasses or superinterfaces of clazz can't be found.
+     * @throws ClassNotFoundException Thrown if any superclasses or superinterfaces of clazz can't be found.
      */
     public static boolean instanceOf(final JavaClass clazz, final JavaClass superclass) throws ClassNotFoundException {
         return clazz.instanceOf(superclass);
@@ -176,7 +176,7 @@ public abstract class Repository {
      * @param clazz The class to test.
      * @param superclass The superclass name.
      * @return true, if clazz is an instance of superclass.
-     * @throws ClassNotFoundException if superclass can't be found.
+     * @throws ClassNotFoundException Thrown if superclass can't be found.
      */
     public static boolean instanceOf(final JavaClass clazz, final String superclass) throws ClassNotFoundException {
         return instanceOf(clazz, lookupClass(superclass));
@@ -188,7 +188,7 @@ public abstract class Repository {
      * @param clazz The class name to test.
      * @param superclass The superclass.
      * @return true, if clazz is an instance of superclass.
-     * @throws ClassNotFoundException if clazz can't be found.
+     * @throws ClassNotFoundException Thrown if clazz can't be found.
      */
     public static boolean instanceOf(final String clazz, final JavaClass superclass) throws ClassNotFoundException {
         return instanceOf(lookupClass(clazz), superclass);
@@ -200,7 +200,7 @@ public abstract class Repository {
      * @param clazz The class name to test.
      * @param superclass The superclass name.
      * @return true, if clazz is an instance of superclass.
-     * @throws ClassNotFoundException if either clazz or superclass can't be found.
+     * @throws ClassNotFoundException Thrown if either clazz or superclass can't be found.
      */
     public static boolean instanceOf(final String clazz, final String superclass) throws ClassNotFoundException {
         return instanceOf(lookupClass(clazz), lookupClass(superclass));
@@ -212,7 +212,7 @@ public abstract class Repository {
      * @param clazz The class.
      * @see Class
      * @return JavaClass object for given runtime class.
-     * @throws ClassNotFoundException if the class could not be found or parsed correctly.
+     * @throws ClassNotFoundException Thrown if the class could not be found or parsed correctly.
      */
     public static JavaClass lookupClass(final Class<?> clazz) throws ClassNotFoundException {
         return repository.loadClass(clazz);
@@ -223,7 +223,7 @@ public abstract class Repository {
      *
      * @param className The class name.
      * @return class object for given fully qualified class name.
-     * @throws ClassNotFoundException if the class could not be found or parsed correctly.
+     * @throws ClassNotFoundException Thrown if the class could not be found or parsed correctly.
      */
     public static JavaClass lookupClass(final String className) throws ClassNotFoundException {
         return repository.loadClass(className);

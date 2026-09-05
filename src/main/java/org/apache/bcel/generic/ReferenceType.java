@@ -54,7 +54,7 @@ public abstract class ReferenceType extends Type {
      *
      * @param t The other type.
      * @return The first common superclass.
-     * @throws ClassNotFoundException on failure to find superclasses of this type, or the type passed as a parameter.
+     * @throws ClassNotFoundException Thrown on failure to find superclasses of this type, or the type passed as a parameter.
      * @deprecated Use getFirstCommonSuperclass(ReferenceType t) which has slightly changed semantics.
      */
     @Deprecated
@@ -89,7 +89,7 @@ public abstract class ReferenceType extends Type {
      *
      * @param t The other type.
      * @return The first common superclass.
-     * @throws ClassNotFoundException on failure to find superclasses of this type, or the type passed as a parameter.
+     * @throws ClassNotFoundException Thrown on failure to find superclasses of this type, or the type passed as a parameter.
      */
     public ReferenceType getFirstCommonSuperclass(final ReferenceType t) throws ClassNotFoundException {
         if (equals(NULL)) {
@@ -160,7 +160,7 @@ public abstract class ReferenceType extends Type {
      *
      * @param t The other type.
      * @return true iff this is assignment compatible with another type t.
-     * @throws ClassNotFoundException if any classes or interfaces required to determine assignment compatibility can't be
+     * @throws ClassNotFoundException Thrown if any classes or interfaces required to determine assignment compatibility can't be
      *         found.
      */
     public boolean isAssignmentCompatibleWith(final Type t) throws ClassNotFoundException {
@@ -261,7 +261,7 @@ public abstract class ReferenceType extends Type {
      *
      * @param t The other type.
      * @return true iff this type is castable to another type t.
-     * @throws ClassNotFoundException if any classes or interfaces required to determine assignment compatibility can't be
+     * @throws ClassNotFoundException Thrown if any classes or interfaces required to determine assignment compatibility can't be
      *         found.
      */
     public boolean isCastableTo(final Type t) throws ClassNotFoundException {

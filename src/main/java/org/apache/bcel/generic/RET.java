@@ -116,7 +116,7 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
      * Sets index of local variable containg the return address
      *
      * @param index index of local variable containg the return address.
-     * @throws ClassGenException if index is out of bounds.
+     * @throws ClassGenException Thrown if index is out of bounds.
      */
     @Override
     public final void setIndex(final int index) {

@@ -640,7 +640,7 @@ public class Subroutines {
      * call subtree. The former implementation re-explored a subroutine once per call path, which is exponential in the
      * number of subroutines for a layered JSR call graph.
      *
-     * @throws StructuralCodeConstraintException if the above constraint is not satisfied.
+     * @throws StructuralCodeConstraintException Thrown if the above constraint is not satisfied.
      */
     private void noRecursiveCalls(final Subroutine sub) {
         noRecursiveCalls(sub, new BitSet(), new HashMap<>(), new HashMap<>());
@@ -654,7 +654,7 @@ public class Subroutines {
      * @param validated maps every fully validated subroutine to the compact ids of the RET local variables used by it and its entire call subtree.
      * @param localIds maps a RET local variable index to a compact id so the bit sets stay small.
      * @return the compact ids of the RET local variables used by {@code sub}'s callees and their call subtrees.
-     * @throws StructuralCodeConstraintException if a subroutine calls a subroutine using the same RET local variable.
+     * @throws StructuralCodeConstraintException Thrown if a subroutine calls a subroutine using the same RET local variable.
      */
     private BitSet noRecursiveCalls(final Subroutine sub, final BitSet pathLocals, final Map<Subroutine, BitSet> validated,
         final Map<Integer, Integer> localIds) {

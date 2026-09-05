@@ -903,7 +903,7 @@ public final class Pass3aVerifier extends PassVerifier {
      * checks need access to the code array of the Code attribute of a Method so it's okay to perform them here. Also see
      * the description of the do_verify() method.
      *
-     * @throws ClassConstraintException if the verification fails.
+     * @throws ClassConstraintException Thrown if the verification fails.
      * @see #do_verify()
      */
     private void delayedPass2Checks() {
@@ -1006,7 +1006,7 @@ public final class Pass3aVerifier extends PassVerifier {
      * LocalVariableTable attribute of a Code attribute is delayed until this pass. All these checks need access to the code
      * array of the Code attribute.
      *
-     * @throws InvalidMethodException if the method to verify does not exist.
+     * @throws InvalidMethodException Thrown if the method to verify does not exist.
      */
     @Override
     public VerificationResult do_verify() {
@@ -1083,7 +1083,7 @@ public final class Pass3aVerifier extends PassVerifier {
      * These are the checks if constraints are satisfied which are described in the Java Virtual Machine Specification,
      * Second Edition as Static Constraints on the instructions of Java Virtual Machine Code (chapter 4.8.1).
      *
-     * @throws StaticCodeConstraintException if the verification fails.
+     * @throws StaticCodeConstraintException Thrown if the verification fails.
      */
     private void pass3StaticInstructionChecks() {
 
@@ -1145,7 +1145,7 @@ public final class Pass3aVerifier extends PassVerifier {
      * (chapter 4.8.1). BCEL parses the code array to create an InstructionList and therefore has to check some of these
      * constraints. Additional checks are also implemented here.
      *
-     * @throws StaticCodeConstraintException if the verification fails.
+     * @throws StaticCodeConstraintException Thrown if the verification fails.
      */
     private void pass3StaticInstructionOperandsChecks() {
         try {

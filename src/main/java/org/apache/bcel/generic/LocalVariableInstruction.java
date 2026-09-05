@@ -167,7 +167,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
      * Sets the local variable index. also updates opcode and length TODO Why?
      *
      * @param index local variable index (unsigned short).
-     * @throws ClassGenException if index is out of bounds.
+     * @throws ClassGenException Thrown if index is out of bounds.
      * @see #setIndexOnly(int)
      */
     @Override

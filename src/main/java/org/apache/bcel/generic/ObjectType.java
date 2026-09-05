@@ -56,7 +56,7 @@ public class ObjectType extends ReferenceType {
      *
      * @param accessor The accessing type.
      * @return true if accessible.
-     * @throws ClassNotFoundException if the class referenced by this type can't be found.
+     * @throws ClassNotFoundException Thrown if the class referenced by this type can't be found.
      */
     public boolean accessibleTo(final ObjectType accessor) throws ClassNotFoundException {
         final JavaClass jc = Repository.lookupClass(className);
@@ -114,7 +114,7 @@ public class ObjectType extends ReferenceType {
      * Return true if this type references a class, false if it references an interface.
      *
      * @return true if the type references a class, false if it references an interface.
-     * @throws ClassNotFoundException if the class or interface referenced by this type can't be found
+     * @throws ClassNotFoundException Thrown if the class or interface referenced by this type can't be found
      */
     public boolean referencesClassExact() throws ClassNotFoundException {
         final JavaClass jc = Repository.lookupClass(className);
@@ -142,7 +142,7 @@ public class ObjectType extends ReferenceType {
      * Return true if this type references an interface, false if it references a class.
      *
      * @return true if the type references an interface, false if it references a class.
-     * @throws ClassNotFoundException if the class or interface referenced by this type can't be found
+     * @throws ClassNotFoundException Thrown if the class or interface referenced by this type can't be found
      */
     public boolean referencesInterfaceExact() throws ClassNotFoundException {
         final JavaClass jc = Repository.lookupClass(className);
@@ -154,7 +154,7 @@ public class ObjectType extends ReferenceType {
      *
      * @param superclass The superclass to check against.
      * @return true if this is a subclass.
-     * @throws ClassNotFoundException if any of this class's superclasses can't be found.
+     * @throws ClassNotFoundException Thrown if any of this class's superclasses can't be found.
      */
     public boolean subclassOf(final ObjectType superclass) throws ClassNotFoundException {
         if (referencesInterfaceExact() || superclass.referencesInterfaceExact()) {

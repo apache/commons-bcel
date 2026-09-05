@@ -87,7 +87,7 @@ public abstract class FieldOrMethod extends CPInstruction implements LoadClass {
      *
      * @param cpg The constant pool generator.
      * @return type of the referenced class/interface.
-     * @throws ClassGenException when the field is (or method returns) an array.
+     * @throws ClassGenException Thrown when the field is (or method returns) an array.
      */
     @Override
     public ObjectType getLoadClassType(final ConstantPoolGen cpg) {

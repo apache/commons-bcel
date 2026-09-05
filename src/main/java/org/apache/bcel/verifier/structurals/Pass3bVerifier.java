@@ -447,7 +447,7 @@ public final class Pass3bVerifier extends PassVerifier {
      *
      * @param returnedType The type of the returned expression.
      * @param m The method we are processing.
-     * @throws StructuralCodeConstraintException always
+     * @throws StructuralCodeConstraintException Always thrown.
      * @since 6.0
      */
     public void invalidReturnTypeError(final Type returnedType, final MethodGen m) {

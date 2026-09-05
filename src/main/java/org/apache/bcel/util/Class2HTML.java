@@ -78,7 +78,7 @@ public class Class2HTML implements Constants {
      * let a crafted class file write its HTML output outside the target directory (CWE-22).
      *
      * @param name the class name about to be used as part of a file name.
-     * @throws IOException if the name contains a path separator, a Windows-reserved file name character, a
+     * @throws IOException Thrown if the name contains a path separator, a Windows-reserved file name character, a
      *         control character, or a ".." sequence.
      */
     private static void checkFileNameSafe(final String name) throws IOException {

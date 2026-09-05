@@ -585,7 +585,7 @@ public abstract class Instruction implements Cloneable {
      *
      * @param bytes byte sequence to read from.
      * @param wide "wide" instruction flag.
-     * @throws IOException may be thrown if the implementation needs to read data from the file
+     * @throws IOException Thrown if the implementation needs to read data from the file
      */
     @SuppressWarnings("unused") // thrown by subclasses
     protected void initFromFile(final ByteSequence bytes, final boolean wide) throws IOException {

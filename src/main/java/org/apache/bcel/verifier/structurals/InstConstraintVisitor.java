@@ -260,7 +260,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
     /**
      * Assures arrayref is of ArrayType or NULL; returns true if and only if arrayref is non-NULL.
      *
-     * @throws StructuralCodeConstraintException if the above constraint is violated.
+     * @throws StructuralCodeConstraintException Thrown if the above constraint is violated.
      */
     private boolean arrayrefOfArrayType(final Instruction o, final Type arrayref) {
         if (!(arrayref instanceof ArrayType || arrayref.equals(Type.NULL))) {
@@ -308,7 +308,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      * This method is called by the visitXXX() to notify the acceptor of this InstConstraintVisitor that a constraint
      * violation has occurred. This is done by throwing an instance of a StructuralCodeConstraintException.
      *
-     * @throws StructuralCodeConstraintException always.
+     * @throws StructuralCodeConstraintException Always thrown.
      */
     private void constraintViolated(final Instruction violator, final String description) {
         final String fqClassName = violator.getClass().getName();
@@ -328,7 +328,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
     /**
      * Assures index is of type INT.
      *
-     * @throws StructuralCodeConstraintException if the above constraint is not satisfied.
+     * @throws StructuralCodeConstraintException Thrown if the above constraint is not satisfied.
      */
     private void indexOfInt(final Instruction o, final Type index) {
         if (!index.equals(Type.INT)) {
@@ -349,7 +349,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      * Assures the ReferenceType r is initialized (or Type.NULL). Formally, this means (!(r instanceof
      * UninitializedObjectType)), because there are no uninitialized array types.
      *
-     * @throws StructuralCodeConstraintException if the above constraint is not satisfied.
+     * @throws StructuralCodeConstraintException Thrown if the above constraint is not satisfied.
      */
     private void referenceTypeIsInitialized(final Instruction o, final ReferenceType r) {
         if (r instanceof UninitializedObjectType) {
