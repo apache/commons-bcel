@@ -394,6 +394,14 @@ public class Subroutines {
         return single;
     }
 
+    private static StructuralCodeConstraintException recursiveCallException(final Subroutine sub2) {
+        // Don't use toString() here because of possibly infinite recursive subSubs() calls then.
+        final SubroutineImpl si = (SubroutineImpl) sub2;
+        return new StructuralCodeConstraintException("Subroutine with local variable '" + si.localVariable + "', JSRs '" + si.theJSRs + "', RET '"
+            + si.theRET + "' is called by a subroutine which uses the same local variable index as itself; maybe even a recursive call?"
+            + " JustIce's clean definition of a subroutine forbids both.");
+    }
+
     /**
      * The map containing the subroutines found. Key: InstructionHandle of the leader of the subroutine. Elements:
      * SubroutineImpl objects.
@@ -676,14 +684,6 @@ public class Subroutines {
             subtreeLocals.or(childLocals);
         }
         return subtreeLocals;
-    }
-
-    private static StructuralCodeConstraintException recursiveCallException(final Subroutine sub2) {
-        // Don't use toString() here because of possibly infinite recursive subSubs() calls then.
-        final SubroutineImpl si = (SubroutineImpl) sub2;
-        return new StructuralCodeConstraintException("Subroutine with local variable '" + si.localVariable + "', JSRs '" + si.theJSRs + "', RET '"
-            + si.theRET + "' is called by a subroutine which uses the same local variable index as itself; maybe even a recursive call?"
-            + " JustIce's clean definition of a subroutine forbids both.");
     }
 
     /**

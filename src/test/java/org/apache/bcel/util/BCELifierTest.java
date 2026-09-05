@@ -178,6 +178,17 @@ class BCELifierTest extends AbstractTest {
     }
 
     @Test
+    void testClassNameRejectedWhenNotJavaIdentifier() {
+        // Class file names may contain characters the Java language forbids (JVMS 4.2.2 bans only . ; [ /).
+        // BCELifier must refuse to emit such a name in identifier position rather than let a crafted
+        // this_class inject statements into the generated source.
+        final ClassGen cg = new ClassGen("Evil {}\nclass Injected {}//", "java.lang.Object", "Evil.java", Const.ACC_PUBLIC | Const.ACC_SUPER,
+            new String[] {});
+        final BCELifier bcelifier = new BCELifier(cg.getJavaClass(), new ByteArrayOutputStream());
+        assertThrows(IllegalArgumentException.class, bcelifier::start);
+    }
+
+    @Test
     void testClassNamesEscapedInOutput() throws Exception {
         // Superclass and source file names are constant-pool derived and can hold any UTF-8.
         final String toEscapeSuper = "java.lang.Object\"); System.exit(1); _cg = new ClassGen(\"x";
@@ -192,17 +203,6 @@ class BCELifierTest extends AbstractTest {
         assertTrue(source.contains(Utility.convertString(toEscapeSource)), source);
         assertFalse(source.contains('"' + toEscapeSuper + '"'), source);
         assertFalse(source.contains('"' + toEscapeSource + '"'), source);
-    }
-
-    @Test
-    void testClassNameRejectedWhenNotJavaIdentifier() {
-        // Class file names may contain characters the Java language forbids (JVMS 4.2.2 bans only . ; [ /).
-        // BCELifier must refuse to emit such a name in identifier position rather than let a crafted
-        // this_class inject statements into the generated source.
-        final ClassGen cg = new ClassGen("Evil {}\nclass Injected {}//", "java.lang.Object", "Evil.java", Const.ACC_PUBLIC | Const.ACC_SUPER,
-            new String[] {});
-        final BCELifier bcelifier = new BCELifier(cg.getJavaClass(), new ByteArrayOutputStream());
-        assertThrows(IllegalArgumentException.class, bcelifier::start);
     }
 
     private void testClassOnPath(final String javaClassFileName) throws Exception {

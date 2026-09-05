@@ -71,17 +71,6 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     private static final String BASE_PACKAGE = Const.class.getPackage().getName();
     private static final String CONSTANT_PREFIX = Const.class.getSimpleName() + ".";
 
-    private static String[] escape(final String[] names) {
-        if (names == null) {
-            return null;
-        }
-        final String[] escaped = new String[names.length];
-        for (int i = 0; i < names.length; i++) {
-            escaped[i] = names[i] == null ? null : Utility.convertString(names[i]);
-        }
-        return escaped;
-    }
-
     /**
      * Checks that a name from the parsed class file is a dotted sequence of valid Java identifiers before it is
      * emitted in identifier position of the generated source. The class file format allows characters in names (for
@@ -111,6 +100,17 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
             throw new IllegalArgumentException("Invalid Java identifier in class file: " + Utility.convertString(name));
         }
         return name;
+    }
+
+    private static String[] escape(final String[] names) {
+        if (names == null) {
+            return null;
+        }
+        final String[] escaped = new String[names.length];
+        for (int i = 0; i < names.length; i++) {
+            escaped[i] = names[i] == null ? null : Utility.convertString(names[i]);
+        }
+        return escaped;
     }
 
     // Needs to be accessible from unit test code

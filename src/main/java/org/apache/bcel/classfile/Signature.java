@@ -55,6 +55,12 @@ public final class Signature extends Attribute {
         }
     }
 
+    /**
+     * The maximum nesting depth of a signature accepted by {@link #translate(String)}. Guards against a
+     * {@link StackOverflowError} from deeply nested, attacker-supplied generic signatures.
+     */
+    private static final int MAX_NESTING_DEPTH = 512;
+
     private static boolean identStart(final int ch) {
         return ch == 'T' || ch == 'L';
     }
@@ -80,12 +86,6 @@ public final class Signature extends Attribute {
     public static boolean isFormalParameterList(final String s) {
         return s.startsWith("<") && s.indexOf(':') > 0;
     }
-
-    /**
-     * The maximum nesting depth of a signature accepted by {@link #translate(String)}. Guards against a
-     * {@link StackOverflowError} from deeply nested, attacker-supplied generic signatures.
-     */
-    private static final int MAX_NESTING_DEPTH = 512;
 
     private static void matchGJIdent(final MyByteArrayInputStream in, final StringBuilder buf) {
         matchGJIdent(in, buf, 0);

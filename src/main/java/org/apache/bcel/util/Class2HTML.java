@@ -72,6 +72,29 @@ public class Class2HTML implements Constants {
     }
 
     /**
+     * The class name comes from the attacker-controlled this_class constant of the parsed class file and is
+     * concatenated into the five output file paths ("dir + className + suffix"). Class file parsing only folds
+     * '/' into '.', so Windows separators ('\\'), drive designators (':') and ".." segments survive and would
+     * let a crafted class file write its HTML output outside the target directory (CWE-22).
+     *
+     * @param name the class name about to be used as part of a file name.
+     * @throws IOException if the name contains a path separator, a Windows-reserved file name character, a
+     *         control character, or a ".." sequence.
+     */
+    private static void checkFileNameSafe(final String name) throws IOException {
+        for (int i = 0; i < name.length(); i++) {
+            final char c = name.charAt(i);
+            if (c < ' ' || "\\/:*?\"<>|".indexOf(c) >= 0) {
+                throw new IOException("Refusing to write HTML for a class whose name contains the unsafe character (0x"
+                    + Integer.toHexString(c) + "): " + name);
+            }
+        }
+        if (name.contains("..")) {
+            throw new IOException("Refusing to write HTML for a class whose name contains \"..\": " + name);
+        }
+    }
+
+    /**
      * Main program to convert class files to HTML.
      *
      * @param argv command line arguments.
@@ -153,15 +176,6 @@ public class Class2HTML implements Constants {
         return "<A HREF=\"" + toHTMLRef(baseType) + ".html\" TARGET=_top>" + toHTML(shortType) + "</A>";
     }
 
-    /**
-     * Escapes a class or type name taken from the constant pool for use as a relative link target inside an HREF
-     * attribute value. On top of the text escaping done by {@code toHTML(String)}, any ':' is replaced so an
-     * attacker-chosen name cannot smuggle a URL scheme such as "javascript:" into the generated link.
-     */
-    static String toHTMLRef(final String str) {
-        return toHTML(str.replace(':', '_'));
-    }
-
     static String toHTML(final String str) {
         final StringBuilder buf = new StringBuilder();
         for (int i = 0; i < str.length(); i++) {
@@ -193,6 +207,15 @@ public class Class2HTML implements Constants {
             }
         }
         return buf.toString();
+    }
+
+    /**
+     * Escapes a class or type name taken from the constant pool for use as a relative link target inside an HREF
+     * attribute value. On top of the text escaping done by {@code toHTML(String)}, any ':' is replaced so an
+     * attacker-chosen name cannot smuggle a URL scheme such as "javascript:" into the generated link.
+     */
+    static String toHTMLRef(final String str) {
+        return toHTML(str.replace(':', '_'));
     }
 
     private final JavaClass javaClass; // current class object
@@ -233,29 +256,6 @@ public class Class2HTML implements Constants {
             // Write main file (with frames, yuk)
             writeMainHTML(attributeHtml, charset);
             new CodeHTML(dir, className, methods, constantPool, constantHtml, charset);
-        }
-    }
-
-    /**
-     * The class name comes from the attacker-controlled this_class constant of the parsed class file and is
-     * concatenated into the five output file paths ("dir + className + suffix"). Class file parsing only folds
-     * '/' into '.', so Windows separators ('\\'), drive designators (':') and ".." segments survive and would
-     * let a crafted class file write its HTML output outside the target directory (CWE-22).
-     *
-     * @param name the class name about to be used as part of a file name.
-     * @throws IOException if the name contains a path separator, a Windows-reserved file name character, a
-     *         control character, or a ".." sequence.
-     */
-    private static void checkFileNameSafe(final String name) throws IOException {
-        for (int i = 0; i < name.length(); i++) {
-            final char c = name.charAt(i);
-            if (c < ' ' || "\\/:*?\"<>|".indexOf(c) >= 0) {
-                throw new IOException("Refusing to write HTML for a class whose name contains the unsafe character (0x"
-                    + Integer.toHexString(c) + "): " + name);
-            }
-        }
-        if (name.contains("..")) {
-            throw new IOException("Refusing to write HTML for a class whose name contains \"..\": " + name);
         }
     }
 
