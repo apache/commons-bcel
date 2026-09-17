@@ -60,7 +60,7 @@ public class SimpleElementValue extends ElementValue {
             dos.writeShort(getIndex());
             break;
         default:
-            throw new ClassFormatException("SimpleElementValue doesn't know how to write out type " + type);
+            throw new ClassFormatException("SimpleElementValue doesn't know how to write out type %d", type);
         }
     }
 

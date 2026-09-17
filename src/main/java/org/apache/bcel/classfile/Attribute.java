@@ -137,8 +137,9 @@ public abstract class Attribute implements Cloneable, Node {
         // mutually recursive Record component attributes) deeply enough to overflow the parser's stack (CWE-674).
         final int depth = NESTING_DEPTH.get().intValue() + 1;
         if (depth > MAX_NESTING_DEPTH) {
-            throw new ClassFormatException("Attributes are nested more than " + MAX_NESTING_DEPTH + " levels deep; if this is a valid class file, raise the"
-                    + " limit with the system property " + Attribute.class.getCanonicalName() + ".maxNestingDepth.");
+            throw new ClassFormatException(
+                    "Attributes are nested more than %,d levels deep; if this is a valid class file, raise the limit with the system property %s.maxNestingDepth.",
+                    MAX_NESTING_DEPTH, Attribute.class.getCanonicalName());
         }
         NESTING_DEPTH.set(Integer.valueOf(depth));
         try {

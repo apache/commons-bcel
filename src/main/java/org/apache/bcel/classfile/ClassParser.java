@@ -211,7 +211,7 @@ public final class ClassParser {
             accessFlags |= Const.ACC_ABSTRACT;
         }
         if ((accessFlags & Const.ACC_ABSTRACT) != 0 && (accessFlags & Const.ACC_FINAL) != 0) {
-            throw new ClassFormatException("Class " + fileName + " can't be both final and abstract");
+            throw new ClassFormatException("Class %s can't be both final and abstract", fileName);
         }
         classNameIndex = dataInputStream.readUnsignedShort();
         superclassNameIndex = dataInputStream.readUnsignedShort();
@@ -249,7 +249,7 @@ public final class ClassParser {
      */
     private void readID() throws IOException, ClassFormatException {
         if (dataInputStream.readInt() != Const.JVM_CLASSFILE_MAGIC) {
-            throw new ClassFormatException(fileName + " is not a Java .class file");
+            throw new ClassFormatException("%s is not a Java .class file", fileName);
         }
     }
 

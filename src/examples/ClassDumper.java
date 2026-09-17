@@ -127,7 +127,7 @@ final class ClassDumper {
             accessFlags |= Const.ACC_ABSTRACT;
         }
         if ((accessFlags & Const.ACC_ABSTRACT) != 0 && (accessFlags & Const.ACC_FINAL) != 0) {
-            throw new ClassFormatException("Class " + fileName + " can't be both final and abstract");
+            throw new ClassFormatException("Class %s can't be both final and abstract", fileName);
         }
 
         System.out.printf("%nClass info:%n");
@@ -259,7 +259,7 @@ final class ClassDumper {
     private void processID() throws IOException, ClassFormatException {
         final int magic = file.readInt();
         if (magic != Const.JVM_CLASSFILE_MAGIC) {
-            throw new ClassFormatException(fileName + " is not a Java .class file");
+            throw new ClassFormatException("%s is not a Java .class file", fileName);
         }
         System.out.println("Java Class Dump");
         System.out.println("  file: " + fileName);

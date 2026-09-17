@@ -98,7 +98,7 @@ public final class StackMapEntry implements Node, Cloneable {
             }
         } else {
             /* Can't happen */
-            throw new ClassFormatException("Invalid frame type found while parsing stack map table: " + frameType);
+            throw new ClassFormatException("Invalid frame type found while parsing stack map table: %d", frameType);
         }
     }
 
@@ -209,7 +209,7 @@ public final class StackMapEntry implements Node, Cloneable {
             }
         } else if (!(frameType >= Const.SAME_FRAME && frameType <= Const.SAME_FRAME_MAX)) {
             /* Can't happen */
-            throw new ClassFormatException("Invalid Stack map table tag: " + frameType);
+            throw new ClassFormatException("Invalid Stack map table tag: %d", frameType);
         }
     }
 

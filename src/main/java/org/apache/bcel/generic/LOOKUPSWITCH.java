@@ -93,7 +93,7 @@ public class LOOKUPSWITCH extends Select {
         // Require the match table to actually fit into the remaining code bytes (8 bytes per match-offset pair). The npairs field is attacker-controlled in
         // a malicious class file and could otherwise request a multi-gigabyte allocation, or a negative array size, before a single pair is read.
         if (matchLength < 0 || matchLength > bytes.available() / 8) {
-            throw new ClassFormatException("Invalid lookupswitch: npairs=" + matchLength + ", but only " + bytes.available() + " bytes of code remain.");
+            throw new ClassFormatException("Invalid lookupswitch: npairs=%,d, but only %,d bytes of code remain.", matchLength, bytes.available());
         }
         setMatchLength(matchLength);
         final short fixedLength = (short) (9 + matchLength * 8);

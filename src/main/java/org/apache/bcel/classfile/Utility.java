@@ -387,7 +387,7 @@ public abstract class Utility {
             // huge allocation.
             final long jumpTableLength = (long) high - low + 1;
             if (jumpTableLength < 0 || jumpTableLength * 4 > bytes.available()) {
-                throw new ClassFormatException("Invalid TABLESWITCH: low = " + low + ", high = " + high + " but only " + bytes.available() + " bytes remain");
+                throw new ClassFormatException("Invalid TABLESWITCH: low = %,d, high = %,d but only %,d bytes remain", low, high, bytes.available());
             }
             buf.append("\tdefault = ").append(defaultOffset).append(", low = ").append(low).append(", high = ").append(high).append("(");
             jumpTable = new int[(int) jumpTableLength];
@@ -408,7 +408,7 @@ public abstract class Utility {
             offset = bytes.getIndex() - 8 - noPadBytes - 1;
             // Each match-offset pair is 8 bytes, see the TABLESWITCH check above.
             if (npairs < 0 || (long) npairs * 8 > bytes.available()) {
-                throw new ClassFormatException("Invalid LOOKUPSWITCH: npairs = " + npairs + " but only " + bytes.available() + " bytes remain");
+                throw new ClassFormatException("Invalid LOOKUPSWITCH: npairs = %,d but only %,d bytes remain", npairs, bytes.available());
             }
             match = new int[npairs];
             jumpTable = new int[npairs];
@@ -1090,7 +1090,7 @@ public abstract class Utility {
             for (final String element : argv) {
                 str = getSignature(element);
                 if (str.endsWith("V")) {
-                    throw new ClassFormatException("Invalid type: " + element);
+                    throw new ClassFormatException("Invalid type: %s", element);
                 }
                 buf.append(str);
             }
@@ -1441,7 +1441,7 @@ public abstract class Utility {
     private static String typeParamTypeToString(final String signature, final boolean chopit) {
         int index = signature.indexOf(':');
         if (index <= 0) {
-            throw new ClassFormatException("Invalid type parameter signature: " + signature);
+            throw new ClassFormatException("Invalid type parameter signature: %s", signature);
         }
         // get the TypeParameter identifier
         final StringBuilder typeParam = new StringBuilder(signature.substring(0, index));
@@ -1516,7 +1516,7 @@ public abstract class Utility {
      */
     private static String typeSignatureToString(final String signature, final boolean chopit, final int depth) throws ClassFormatException {
         if (depth > MAX_SIGNATURE_NESTING) {
-            throw new ClassFormatException("Invalid signature: nesting depth exceeds " + MAX_SIGNATURE_NESTING);
+            throw new ClassFormatException("Invalid signature: nesting depth exceeds %,d", MAX_SIGNATURE_NESTING);
         }
         // corrected concurrent private static field acess
         wrap(CONSUMER_CHARS, 1); // This is the default, read just one char like 'B'
@@ -1537,7 +1537,7 @@ public abstract class Utility {
             case 'T': { // TypeVariableSignature
                 final int index = signature.indexOf(';'); // Look for closing ';'
                 if (index < 0) {
-                    throw new ClassFormatException("Invalid type variable signature: " + signature);
+                    throw new ClassFormatException("Invalid type variable signature: %s", signature);
                 }
                 // corrected concurrent private static field acess
                 wrap(CONSUMER_CHARS, index + 1); // "Tblabla;" 'T' and ';' are removed
@@ -1552,12 +1552,12 @@ public abstract class Utility {
                 } else {
                     fromIndex = signature.indexOf('>', fromIndex);
                     if (fromIndex < 0) {
-                        throw new ClassFormatException("Invalid signature: " + signature);
+                        throw new ClassFormatException("Invalid signature: %s", signature);
                     }
                 }
                 final int index = signature.indexOf(';', fromIndex); // Look for closing ';'
                 if (index < 0) {
-                    throw new ClassFormatException("Invalid signature: " + signature);
+                    throw new ClassFormatException("Invalid signature: %s", signature);
                 }
 
                 // check to see if there are any TypeArguments
@@ -1570,7 +1570,7 @@ public abstract class Utility {
                 // but make sure we are not looking past the end of the current item
                 fromIndex = signature.indexOf(';');
                 if (fromIndex < 0) {
-                    throw new ClassFormatException("Invalid signature: " + signature);
+                    throw new ClassFormatException("Invalid signature: %s", signature);
                 }
                 if (fromIndex < bracketIndex) {
                     // just a class identifier
@@ -1643,7 +1643,7 @@ public abstract class Utility {
                     return type.toString();
                 }
                 if (signature.charAt(consumedChars) != ';') {
-                    throw new ClassFormatException("Invalid signature: " + signature);
+                    throw new ClassFormatException("Invalid signature: %s", signature);
                 }
                 wrap(CONSUMER_CHARS, consumedChars + 1); // remove final ";"
                 return type.toString();
@@ -1671,7 +1671,7 @@ public abstract class Utility {
             case 'V':
                 return "void";
             default:
-                throw new ClassFormatException("Invalid signature: '" + signature + "'");
+                throw new ClassFormatException("Invalid signature: '%s'", signature);
             }
         } catch (final StringIndexOutOfBoundsException e) { // Should never occur
             throw new ClassFormatException("Invalid signature: " + signature, e);

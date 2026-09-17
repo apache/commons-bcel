@@ -115,7 +115,7 @@ final class CodeHTML {
             // huge allocation.
             final long jumpTableLength = (long) high - low + 1;
             if (jumpTableLength < 0 || jumpTableLength * 4 > bytes.available()) {
-                throw new ClassFormatException("Invalid TABLESWITCH: low = " + low + ", high = " + high + " but only " + bytes.available() + " bytes remain");
+                throw new ClassFormatException("Invalid TABLESWITCH: low = %,d, high = %,d but only %,d bytes remain", low, high, bytes.available());
             }
             buf.append("<TABLE BORDER=1><TR>");
             // Print switch indices in first row (and default)
@@ -140,7 +140,7 @@ final class CodeHTML {
             offset = bytes.getIndex() - 8 - noPadBytes - 1;
             // Each match-offset pair is 8 bytes, see the TABLESWITCH check above.
             if (npairs < 0 || (long) npairs * 8 > bytes.available()) {
-                throw new ClassFormatException("Invalid LOOKUPSWITCH: npairs = " + npairs + " but only " + bytes.available() + " bytes remain");
+                throw new ClassFormatException("Invalid LOOKUPSWITCH: npairs = %,d but only %,d bytes remain", npairs, bytes.available());
             }
             jumpTable = new int[npairs];
             defaultOffset += offset;

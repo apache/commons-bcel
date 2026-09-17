@@ -43,6 +43,17 @@ public class ClassFormatException extends RuntimeException {
     }
 
     /**
+     * Constructs a new instance with the specified detail message formatted with See {@link String#format(String, Object...)}.
+     *
+     * @param format See {@link String#format(String, Object...)}.
+     * @param args   See {@link String#format(String, Object...)}.
+     * @since 6.14.0
+     */
+    public ClassFormatException(String format, Object... args) {
+        super(String.format(format, args));
+    }
+
+    /**
      * Constructs a new instance with the specified detail message and cause.
      *
      * @param message The detail message (which is saved for later retrieval by the {@link #getMessage()} method).

@@ -134,8 +134,7 @@ public abstract class ElementValue {
                 // Annotation element values may legitimately nest (annotations whose members are annotations or arrays thereof), but a malicious class file
                 // can alternate annotation and array nesting to recurse without limit. Count both kinds of nesting against the same JVM spec 4.4.1 bound so
                 // the depth cannot be reset by wrapping an array in an annotation (CWE-674).
-                throw new ClassFormatException(
-                    String.format("Annotation element values are only valid if they nest %,d or fewer levels.", Const.MAX_ARRAY_DIMENSIONS));
+                throw new ClassFormatException("Annotation element values are only valid if they nest %,d or fewer levels.", Const.MAX_ARRAY_DIMENSIONS);
             }
             return new AnnotationElementValue(ANNOTATION, AnnotationEntry.read(input, cpool, isRuntimeVisible, arrayNesting), cpool);
 
@@ -143,7 +142,7 @@ public abstract class ElementValue {
             arrayNesting++;
             if (arrayNesting > Const.MAX_ARRAY_DIMENSIONS) {
                 // JVM spec 4.4.1
-                throw new ClassFormatException(String.format("Arrays are only valid if they represent %,d or fewer dimensions.", Const.MAX_ARRAY_DIMENSIONS));
+                throw new ClassFormatException("Arrays are only valid if they represent %,d or fewer dimensions.", Const.MAX_ARRAY_DIMENSIONS);
             }
             final int numArrayVals = input.readUnsignedShort();
             final ElementValue[] evalues = new ElementValue[numArrayVals];

@@ -98,8 +98,7 @@ public class TABLESWITCH extends Select {
         // allocation, or a negative array size, before a single table entry is read.
         final long matchLengthLong = (long) high - low + 1;
         if (matchLengthLong < 0 || matchLengthLong > bytes.available() / 4) {
-            throw new ClassFormatException(
-                    "Invalid tableswitch: low=" + low + ", high=" + high + ", but only " + bytes.available() + " bytes of code remain.");
+            throw new ClassFormatException("Invalid tableswitch: low=%,d, high=%,d, but only %,d bytes of code remain.", low, high, bytes.available());
         }
         final int matchLength = (int) matchLengthLong;
         setMatchLength(matchLength);

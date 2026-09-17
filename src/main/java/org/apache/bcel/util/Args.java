@@ -39,7 +39,7 @@ public class Args {
      */
     public static int require(final int value, final int required, final String message) {
         if (value != required) {
-            throw new ClassFormatException(String.format("%s [Value must be 0: %,d]", message, value));
+            throw new ClassFormatException("%s [Value must be 0: %,d]", message, value);
         }
         return value;
     }
@@ -64,7 +64,7 @@ public class Args {
      */
     public static int requireU1(final int value, final String message) {
         if (value < 0 || value > Const.MAX_BYTE) {
-            throw new ClassFormatException(String.format("%s [Value out of range (0 - %,d) for type u1: %,d]", message, Const.MAX_BYTE, value));
+            throw new ClassFormatException("%s [Value out of range (0 - %,d) for type u1: %,d]", message, Const.MAX_BYTE, value);
         }
         return value;
     }
@@ -86,7 +86,7 @@ public class Args {
             throw new IllegalArgumentException(String.format("%s programming error: min %,d < 0", message, min));
         }
         if (value < min || value > max) {
-            throw new ClassFormatException(String.format("%s [Value out of range (%,d - %,d) for type u2: %,d]", message, min, max, value));
+            throw new ClassFormatException("%s [Value out of range (%,d - %,d) for type u2: %,d]", message, min, max, value);
         }
         return value;
     }
@@ -131,8 +131,7 @@ public class Args {
             throw new IllegalArgumentException(String.format("%s programming error: min %,d < 0", message, min));
         }
         if (value < min || value > max) {
-            throw new ClassFormatException(
-                    String.format("%s [Value out of range (%,d - %,d) for type u4: %,d]", message, min, Integer.MAX_VALUE, value & 0xFFFFFFFFL));
+            throw new ClassFormatException("%s [Value out of range (%,d - %,d) for type u4: %,d]", message, min, Integer.MAX_VALUE, value & 0xFFFFFFFFL);
         }
         return value;
     }

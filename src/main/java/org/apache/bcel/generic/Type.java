@@ -315,7 +315,7 @@ public abstract class Type {
         }
         final int index = signature.indexOf(';'); // Look for closing ';'
         if (index < 0) {
-            throw new ClassFormatException("Invalid signature: " + signature);
+            throw new ClassFormatException("Invalid signature: %s", signature);
         }
         return encode(1, index + 1);
     }

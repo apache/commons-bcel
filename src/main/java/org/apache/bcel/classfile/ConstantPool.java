@@ -172,8 +172,8 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
             // CONSTANT_MethodHandle referencing another CONSTANT_MethodHandle (such as itself) would otherwise make
             // this method recurse without bound until a StackOverflowError.
             if (referenceTag != Const.CONSTANT_Fieldref && referenceTag != Const.CONSTANT_Methodref && referenceTag != Const.CONSTANT_InterfaceMethodref) {
-                throw new ClassFormatException(
-                        "Constant pool at index " + cmh.getReferenceIndex() + " has an invalid tag " + referenceTag + " for a CONSTANT_MethodHandle reference");
+                throw new ClassFormatException("Constant pool at index %,d has an invalid tag %s for a CONSTANT_MethodHandle reference",
+                        cmh.getReferenceIndex(), referenceTag);
             }
             str = Const.getMethodHandleName(cmh.getReferenceKind()) + " " + constantToString(cmh.getReferenceIndex(), referenceTag);
             break;
@@ -250,7 +250,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
          * desynchronizes any consumer that reparses the emitted bytes (the CVE-2022-42920 writer-overflow shape).
          */
         if (constantPool.length > Const.MAX_CP_ENTRIES) {
-            throw new ClassFormatException("Constant pool size " + constantPool.length + " exceeds the u2 maximum of " + Const.MAX_CP_ENTRIES);
+            throw new ClassFormatException("Constant pool size %,d exceeds the u2 maximum of %,d", constantPool.length, Const.MAX_CP_ENTRIES);
         }
         file.writeShort(constantPool.length);
         for (int i = 1; i < constantPool.length; i++) {
@@ -304,7 +304,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
     public <T extends Constant> T getConstant(final int index, final byte tag, final Class<T> castTo) throws ClassFormatException {
         final T c = getConstant(index);
         if (c == null || c.getTag() != tag) {
-            throw new ClassFormatException("Expected class '" + Const.getConstantName(tag) + "' at index " + index + " and got " + c);
+            throw new ClassFormatException("Expected class '%s' at index %,d and got %s", Const.getConstantName(tag), index, c);
         }
         return c;
     }
@@ -322,23 +322,23 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
      */
     public <T extends Constant> T getConstant(final int index, final Class<T> castTo) throws ClassFormatException {
         if (index >= constantPool.length || index < 1) {
-            throw new ClassFormatException("Invalid constant pool reference using index: " + index + ". Constant pool size is: " + constantPool.length);
+            throw new ClassFormatException("Invalid constant pool reference using index: %,d. Constant pool size is: %,d", index, constantPool.length);
         }
         if (constantPool[index] != null && !castTo.isAssignableFrom(constantPool[index].getClass())) {
-            throw new ClassFormatException("Invalid constant pool reference at index: " + index +
-                    ". Expected " + castTo + " but was " + constantPool[index].getClass());
+            throw new ClassFormatException("Invalid constant pool reference at index: %,d. Expected %s but was %s", index, castTo,
+                    constantPool[index].getClass());
         }
         if (index > 1) {
             final Constant prev = constantPool[index - 1];
             if (prev != null && (prev.getTag() == Const.CONSTANT_Double || prev.getTag() == Const.CONSTANT_Long)) {
-                throw new ClassFormatException("Constant pool at index " + index + " is invalid. The index is unused due to the preceeding "
-                        + Const.getConstantName(prev.getTag()) + ".");
+                throw new ClassFormatException("Constant pool at index %,d is invalid. The index is unused due to the preceeding %s.", index,
+                        Const.getConstantName(prev.getTag()));
             }
         }
         // Previous check ensures this won't throw a ClassCastException
         final T c = castTo.cast(constantPool[index]);
         if (c == null) {
-            throw new ClassFormatException("Constant pool at index " + index + " is null.");
+            throw new ClassFormatException("Constant pool at index %,d is null.", index);
         }
         return c;
     }

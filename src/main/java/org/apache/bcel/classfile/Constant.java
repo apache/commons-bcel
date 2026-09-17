@@ -103,7 +103,7 @@ public abstract class Constant implements Cloneable, Node {
         case Const.CONSTANT_Package:
             return new ConstantPackage(dataInput);
         default:
-            throw new ClassFormatException("Invalid byte tag in constant pool: " + b);
+            throw new ClassFormatException("Invalid byte tag in constant pool: %s", b);
         }
     }
 

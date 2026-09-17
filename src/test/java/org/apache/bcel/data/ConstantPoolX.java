@@ -202,7 +202,7 @@ public abstract class ConstantPoolX implements Cloneable, Node {
      */
     public Constant getConstant(final int index) {
         if (index >= constantPool.length || index < 0) {
-            throw new ClassFormatException("Invalid constant pool reference: " + index + ". Constant pool size is: " + constantPool.length);
+            throw new ClassFormatException("Invalid constant pool reference: %,d. Constant pool size is: %,d", index, constantPool.length);
         }
         return constantPool[index];
     }
@@ -219,10 +219,10 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     public Constant getConstant(final int index, final byte tag) throws ClassFormatException {
         final Constant c = getConstant(index);
         if (c == null) {
-            throw new ClassFormatException("Constant pool at index " + index + " is null.");
+            throw new ClassFormatException("Constant pool at index %,d is null.", index);
         }
         if (c.getTag() != tag) {
-            throw new ClassFormatException("Expected class '" + Const.getConstantName(tag) + "' at index " + index + " and got " + c);
+            throw new ClassFormatException("Expected class '%s' at index %,d and got %s", Const.getConstantName(tag), index, c);
         }
         return c;
     }

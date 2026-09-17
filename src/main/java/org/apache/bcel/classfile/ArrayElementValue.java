@@ -42,7 +42,7 @@ public class ArrayElementValue extends ElementValue {
     public ArrayElementValue(final int type, final ElementValue[] elementValues, final ConstantPool cpool) {
         super(type, cpool);
         if (type != ARRAY) {
-            throw new ClassFormatException("Only element values of type array can be built with this ctor - type specified: " + type);
+            throw new ClassFormatException("Only element values of type array can be built with this ctor - type specified: %s", type);
         }
         this.elementValues = elementValues != null ? elementValues : EMPTY_ARRAY;
     }
