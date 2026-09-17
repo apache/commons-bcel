@@ -29,7 +29,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.util.Args;
 
 /**
- * This class represents colection of local variables in a method. This attribute is contained in the <em>Code</em>
+ * This class represents a collection of local variables in a method. This attribute is contained in the <em>Code</em>
  * attribute.
  *
  * @see Code

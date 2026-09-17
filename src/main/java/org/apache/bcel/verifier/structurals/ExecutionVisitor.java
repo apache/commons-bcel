@@ -97,8 +97,7 @@ public class ExecutionVisitor extends EmptyVisitor {
     }
 
     /**
-     * The only method granting access to the single instance of the ExecutionVisitor class. Before actively using this
-     * instance, <strong>SET THE ConstantPoolGen FIRST</strong>.
+     * Sets the execution frame. Configure the constant pool before using this visitor.
      *
      * @param f The frame.
      * @see #setConstantPoolGen(ConstantPoolGen)

@@ -133,7 +133,7 @@ class JavaClassCyclicTest {
     void testGetAllInterfacesCyclic() throws Exception {
         // TODO Use the test method once ClassCircularityError is implemented for this case
         // test(cyclicTestClass::getAllInterfaces);
-        // TOOO Remove once the above is used
+        // TODO Remove once the above is used
         final ExecutorService executor = Executors.newSingleThreadExecutor();
         try {
             final Future<JavaClass[]> future = executor.submit(() -> cyclicTestClass.getAllInterfaces());

@@ -25,7 +25,7 @@ import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.ConstantUtf8;
 
 /**
- * Super class for FieldOrMethod and INVOKEDYNAMIC, since they both have names and signatures
+ * Superclass for FieldOrMethod and INVOKEDYNAMIC, since they both have names and signatures
  *
  * @since 6.0
  */

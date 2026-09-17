@@ -63,7 +63,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
             int l = 0;
             int r = count - 1;
             /*
-             * Do a binary search since the pos array is orderd.
+             * Do a binary search since the pos array is ordered.
              */
             do {
                 final int i = l + r >>> 1;
@@ -583,7 +583,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * When everything is finished, use this method to convert the instruction list into an array of bytes.
+     * Gets the bytecode for this instruction list as an array of bytes.
      *
      * @return The byte code ready to be dumped.
      */
@@ -631,7 +631,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
 
     /**
      * Gets positions (offsets) of all instructions in the list. This relies on that the list has been freshly created from
-     * an byte code array, or that setPositions() has been called. Otherwise this may be inaccurate.
+     * a bytecode array, or that setPositions() has been called. Otherwise this may be inaccurate.
      *
      * @return array containing all instruction's offset in byte code.
      */
@@ -877,6 +877,11 @@ public class InstructionList implements Iterable<InstructionHandle> {
                 return i;
             }
 
+            /**
+             * Always throws {@link UnsupportedOperationException} because this iterator does not support removal.
+             *
+             * @throws UnsupportedOperationException Thrown unconditionally.
+             */
             @Override
             public void remove() {
                 throw new UnsupportedOperationException();
@@ -896,7 +901,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
 
     /**
      * Take all instructions (handles) from "start" to "end" and append them after the new location "target". Of course,
-     * "end" must be after "start" and target must not be located withing this range. If you want to move something to the
+     * "end" must be after "start" and target must not be located within this range. If you want to move something to the
      * start of the list use null as value for target.
      * <p>
      * Any instruction targeters pointing to handles within the block, keep their targets.
@@ -1114,7 +1119,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
     }
 
     /**
-     * Give all instructions their position number (offset in byte stream), that is, make the list ready to be dumped.
+     * Sets the position number (offset in the byte stream) of each instruction to prepare the list for dumping.
      *
      * @param check Perform sanity checks, for example if all targeted instructions really belong to this list.
      */

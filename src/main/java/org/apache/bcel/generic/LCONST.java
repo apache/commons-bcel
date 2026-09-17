@@ -69,6 +69,8 @@ public class LCONST extends Instruction implements ConstantPushInstruction {
     }
 
     /**
+     * Gets {@code Type.LONG}.
+     *
      * @return Type.LONG.
      */
     @Override

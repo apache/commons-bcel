@@ -99,7 +99,7 @@ public class ArrayElementValueGen extends ElementValueGen {
     }
 
     /**
-     * Return immutable variant of this ArrayElementValueGen.
+     * Gets an immutable variant of this ArrayElementValueGen.
      *
      * @return immutable variant of this ArrayElementValueGen.
      */

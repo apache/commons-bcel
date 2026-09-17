@@ -71,6 +71,8 @@ public class FCONST extends Instruction implements ConstantPushInstruction {
     }
 
     /**
+     * Gets {@code Type.FLOAT}.
+     *
      * @return Type.FLOAT.
      */
     @Override

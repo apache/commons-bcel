@@ -55,12 +55,12 @@ public final class ExceptionConst {
     public static final Class<Throwable> THROWABLE = Throwable.class;
 
     /**
-     * Super class of any run-time exception
+     * Superclass of any run-time exception
      */
     public static final Class<RuntimeException> RUNTIME_EXCEPTION = RuntimeException.class;
 
     /**
-     * Super class of any linking exception (aka Linkage Error)
+     * Superclass of any linking exception (a.k.a. Linkage Error)
      */
     public static final Class<LinkageError> LINKING_EXCEPTION = LinkageError.class;
 

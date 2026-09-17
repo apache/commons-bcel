@@ -30,7 +30,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * This class represents a chunk of Java byte code contained in a method. It is instantiated by the
- * <em>Attribute.readAttribute()</em> method. A <em>Code</em> attribute contains informations about operand stack, local
+ * <em>Attribute.readAttribute()</em> method. A <em>Code</em> attribute contains information about operand stack, local
  * variables, byte code and the exceptions handled within this method.
  *
  * This attribute has attributes itself, namely <em>LineNumberTable</em> which is used for debugging purposes and
@@ -316,7 +316,7 @@ public final class Code extends Attribute {
     }
 
     /**
-     * Finds the attribute of {@link StackMap} instance.
+     * Gets the {@link StackMap} attribute.
      *
      * @return StackMap of Code, if it has one, else null.
      * @since 6.8.0

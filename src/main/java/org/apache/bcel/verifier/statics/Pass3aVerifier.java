@@ -131,14 +131,16 @@ public final class Pass3aVerifier extends PassVerifier {
         }
 
         /**
-         * A utility method to always raise an exception.
+         * Always throws {@link StaticCodeInstructionOperandConstraintException} because the instruction violates an operand constraint.
+         *
+         * @throws StaticCodeInstructionOperandConstraintException Thrown unconditionally.
          */
         private void constraintViolated(final Instruction i, final String message) {
             throw new StaticCodeInstructionOperandConstraintException("Instruction " + tostring(i) + " constraint violated: " + message);
         }
 
         /**
-         * Looks for the method referenced by the given invoke instruction in the given class.
+         * Gets the method referenced by the given invoke instruction in the given class.
          *
          * @param jc The class that defines the referenced method.
          * @param invoke The instruction that references the method.
@@ -158,8 +160,8 @@ public final class Pass3aVerifier extends PassVerifier {
         }
 
         /**
-         * Looks for the method referenced by the given invoke instruction in the given class or its super classes and super
-         * interfaces.
+         * Gets the method referenced by the given invoke instruction in the given class or its superclasses and
+         * superinterfaces.
          *
          * @param jc The class that defines the referenced method.
          * @param invoke The instruction that references the method.
@@ -173,19 +175,19 @@ public final class Pass3aVerifier extends PassVerifier {
                 // method found in given class
                 return m;
             }
-            // method not found, look in super classes
+            // method not found, look in superclasses
             for (final JavaClass superclass : jc.getSuperClasses()) {
                 m = getMethod(superclass, invoke);
                 if (m != null) {
-                    // method found in super class
+                    // method found in superclass
                     return m;
                 }
             }
-            // method not found, look in super interfaces
+            // method not found, look in superinterfaces
             for (final JavaClass superclass : jc.getInterfaces()) {
                 m = getMethod(superclass, invoke);
                 if (m != null) {
-                    // method found in super interface
+                    // method found in superinterface
                     return m;
                 }
             }
@@ -426,7 +428,11 @@ public final class Pass3aVerifier extends PassVerifier {
             }
         }
 
-        /** Checks if the constraints of operands of the said instruction(s) are satisfied. */
+        /**
+         * Always throws {@link UnsupportedOperationException} because this instruction is not supported.
+         *
+         * @throws UnsupportedOperationException Thrown unconditionally.
+         */
         @Override
         public void visitINVOKEDYNAMIC(final INVOKEDYNAMIC o) {
             throw new UnsupportedOperationException("INVOKEDYNAMIC instruction is not supported at this time");
@@ -457,7 +463,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 if (!(c instanceof ConstantInterfaceMethodref) && !(c instanceof ConstantInvokeDynamic)) {
                     constraintViolated(o, "Indexing a constant that's not a CONSTANT_InterfaceMethodref/InvokeDynamic but a '" + tostring(c) + "'.");
                 }
-                // TODO: From time to time check if BCEL allows to detect if the
+                // TODO: From time to time check if BCEL can detect whether the
                 // 'count' operand is consistent with the information in the
                 // CONSTANT_InterfaceMethodref and if the last operand is zero.
                 // By now, BCEL hides those two operands because they're superfluous.
@@ -1071,7 +1077,7 @@ public final class Pass3aVerifier extends PassVerifier {
     }
 
     /**
-     * Returns the method number as supplied when instantiating.
+     * Gets the method number as supplied when instantiating.
      *
      * @return The method number.
      */

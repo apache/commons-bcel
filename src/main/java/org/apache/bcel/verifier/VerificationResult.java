@@ -32,7 +32,7 @@ public class VerificationResult {
     /** Constant to indicate verification was passed. */
     public static final int VERIFIED_OK = 1;
 
-    /** Constant to indicate verfication failed. */
+    /** Constant to indicate verification failed. */
     public static final int VERIFIED_REJECTED = 2;
 
     /**
@@ -86,7 +86,7 @@ public class VerificationResult {
     }
 
     /**
-     * Returns a detailed message.
+     * Gets a detailed message.
      *
      * @return The detail message.
      */
@@ -95,7 +95,7 @@ public class VerificationResult {
     }
 
     /**
-     * Returns one of the {@link #VERIFIED_OK}, {@link #VERIFIED_NOTYET}, {@link #VERIFIED_REJECTED} constants.
+     * Gets one of the {@link #VERIFIED_OK}, {@link #VERIFIED_NOTYET}, {@link #VERIFIED_REJECTED} constants.
      *
      * @return The verification status.
      */

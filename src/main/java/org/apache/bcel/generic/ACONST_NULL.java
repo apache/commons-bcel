@@ -49,6 +49,8 @@ public class ACONST_NULL extends Instruction implements PushInstruction, TypedIn
     }
 
     /**
+     * Gets {@code Type.NULL}.
+     *
      * @return Type.NULL.
      */
     @Override

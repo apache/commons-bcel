@@ -87,7 +87,7 @@ public class AnnotationElementValueGen extends ElementValueGen {
     }
 
     /**
-     * Returns an immutable variant of this AnnotationElementValueGen.
+     * Gets an immutable variant of this AnnotationElementValueGen.
      *
      * @return An immutable variant of this AnnotationElementValueGen.
      */
@@ -96,6 +96,11 @@ public class AnnotationElementValueGen extends ElementValueGen {
         return new AnnotationElementValue(super.getElementValueType(), a.getAnnotation(), getConstantPool().getConstantPool());
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException} because this operation is not implemented.
+     *
+     * @throws UnsupportedOperationException Thrown unconditionally.
+     */
     @Override
     public String stringifyValue() {
         throw new UnsupportedOperationException("Not implemented yet");

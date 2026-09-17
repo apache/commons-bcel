@@ -112,7 +112,7 @@ public final class Pass3bVerifier extends PassVerifier {
         }
 
         /**
-         * Tests if InstructionContext queue is empty.
+         * Tests whether the InstructionContext queue is empty.
          *
          * @return true if the InstructionContext queue is empty.
          */
@@ -434,7 +434,7 @@ public final class Pass3bVerifier extends PassVerifier {
     }
 
     /**
-     * Returns the method number as supplied when instantiating.
+     * Gets the method number as supplied when instantiating.
      *
      * @return The method number.
      */
@@ -443,11 +443,11 @@ public final class Pass3bVerifier extends PassVerifier {
     }
 
     /**
-     * Throws an exception indicating the returned type is not compatible with the return type of the given method.
+     * Always throws {@link StructuralCodeConstraintException} because the returned type is incompatible with the method return type.
      *
      * @param returnedType The type of the returned expression.
      * @param m The method we are processing.
-     * @throws StructuralCodeConstraintException Always thrown.
+     * @throws StructuralCodeConstraintException Thrown unconditionally.
      * @since 6.0
      */
     public void invalidReturnTypeError(final Type returnedType, final MethodGen m) {

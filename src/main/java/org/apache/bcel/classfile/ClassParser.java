@@ -197,7 +197,7 @@ public final class ClassParser {
     }
 
     /**
-     * Reads information about the class and its super class.
+     * Reads information about the class and its superclass.
      *
      * @throws IOException Thrown if an I/O error occurs.
      * @throws ClassFormatException Thrown if a class is malformed or cannot be interpreted as a class file.

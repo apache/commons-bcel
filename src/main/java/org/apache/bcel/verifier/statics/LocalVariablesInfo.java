@@ -67,7 +67,7 @@ public class LocalVariablesInfo {
     }
 
     /**
-     * Returns the LocalVariableInfo for the given slot.
+     * Gets the LocalVariableInfo for the given slot.
      *
      * @param slot Slot to query.
      * @return The LocalVariableInfo for the given slot.

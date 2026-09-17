@@ -56,7 +56,7 @@ import org.apache.bcel.classfile.Utility;
 public class Class2HTML implements Constants {
 
     private static String classPackage; // name of package, unclean to make it static, but ...
-    private static String className; // name of current class, dito
+    private static String className; // name of current class, ditto
     private static ConstantPool constantPool;
     private static final Set<String> basicTypes = new HashSet<>();
     static {

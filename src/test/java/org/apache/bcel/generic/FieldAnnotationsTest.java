@@ -123,7 +123,7 @@ class FieldAnnotationsTest extends AbstractTest {
         clg.removeField(f);
         clg.addField(fg.getField());
         f = clg.getFields()[1]; // there are two fields in the class, removing
-                                // and readding has changed the order
+                                // and re-adding has changed the order
         // so this time index [1] is the 'int i' field
         if (dbg) {
             System.err.println("Field now looks like this: " + f);

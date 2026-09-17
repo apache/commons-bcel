@@ -146,6 +146,8 @@ public final class Unknown extends Attribute {
     }
 
     /**
+     * Gets the name of the attribute.
+     *
      * @return name of attribute.
      */
     @Override

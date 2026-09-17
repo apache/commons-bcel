@@ -190,7 +190,7 @@ public class Verifier {
     }
 
     /**
-     * Returns the name of the class this verifier operates on. This is particularly interesting when this verifier was
+     * Gets the name of the class this verifier operates on. This is particularly interesting when this verifier was
      * created recursively by another Verifier and you got a reference to this Verifier by the getVerifiers() method of the
      * VerifierFactory.
      *
@@ -202,7 +202,7 @@ public class Verifier {
     }
 
     /**
-     * This returns all the (warning) messages collected during verification. A prefix shows from which verifying pass a
+     * Gets all the (warning) messages collected during verification. A prefix shows from which verifying pass a
      * message originates.
      *
      * @return The array of messages.

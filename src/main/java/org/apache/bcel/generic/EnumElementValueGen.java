@@ -92,7 +92,7 @@ public class EnumElementValueGen extends ElementValueGen {
     }
 
     /**
-     * Returns immutable variant of this EnumElementValueGen.
+     * Gets an immutable variant of this EnumElementValueGen.
      *
      * @return immutable variant.
      */

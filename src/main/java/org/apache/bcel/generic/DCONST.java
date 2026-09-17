@@ -70,6 +70,8 @@ public class DCONST extends Instruction implements ConstantPushInstruction {
     }
 
     /**
+     * Gets {@code Type.DOUBLE}.
+     *
      * @return Type.DOUBLE.
      */
     @Override

@@ -305,10 +305,9 @@ public class InstConstraintVisitor extends EmptyVisitor {
     }
 
     /**
-     * This method is called by the visitXXX() to notify the acceptor of this InstConstraintVisitor that a constraint
-     * violation has occurred. This is done by throwing an instance of a StructuralCodeConstraintException.
+     * Always throws {@link StructuralCodeConstraintException} because the instruction violates a structural constraint.
      *
-     * @throws StructuralCodeConstraintException Always thrown.
+     * @throws StructuralCodeConstraintException Thrown unconditionally.
      */
     private void constraintViolated(final Instruction violator, final String description) {
         final String fqClassName = violator.getClass().getName();
@@ -367,8 +366,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
     }
 
     /**
-     * This returns the single instance of the InstConstraintVisitor class. To operate correctly, other values must have
-     * been set before actually using the instance. Use this method for performance reasons.
+     * Sets the execution frame. Configure the constant pool before using this visitor.
      *
      * @param f The frame to set.
      * @see #setConstantPoolGen(ConstantPoolGen cpg)
@@ -596,7 +594,9 @@ public class InstConstraintVisitor extends EmptyVisitor {
     }
 
     /**
-     * Ensures the specific preconditions of the said instruction.
+     * Always throws {@link AssertionViolatedException} because this instruction is illegal in this verification pass.
+     *
+     * @throws AssertionViolatedException Thrown unconditionally.
      */
     @Override
     public void visitBREAKPOINT(final BREAKPOINT o) {
@@ -1492,7 +1492,9 @@ public class InstConstraintVisitor extends EmptyVisitor {
     }
 
     /**
-     * Ensures the specific preconditions of the said instruction.
+     * Always throws {@link AssertionViolatedException} because this instruction is illegal in this verification pass.
+     *
+     * @throws AssertionViolatedException Thrown unconditionally.
      */
     @Override
     public void visitIMPDEP1(final IMPDEP1 o) {
@@ -1500,7 +1502,9 @@ public class InstConstraintVisitor extends EmptyVisitor {
     }
 
     /**
-     * Ensures the specific preconditions of the said instruction.
+     * Always throws {@link AssertionViolatedException} because this instruction is illegal in this verification pass.
+     *
+     * @throws AssertionViolatedException Thrown unconditionally.
      */
     @Override
     public void visitIMPDEP2(final IMPDEP2 o) {
@@ -1547,8 +1551,9 @@ public class InstConstraintVisitor extends EmptyVisitor {
     }
 
     /**
-     * Ensures the specific preconditions of the said instruction.
+     * Always throws {@link UnsupportedOperationException} because this instruction is not supported.
      *
+     * @throws UnsupportedOperationException Thrown unconditionally.
      * @since 6.0
      */
     @Override

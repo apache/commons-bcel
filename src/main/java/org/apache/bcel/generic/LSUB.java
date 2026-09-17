@@ -19,7 +19,7 @@
 package org.apache.bcel.generic;
 
 /**
- * LSUB - Substract longs
+ * LSUB - Subtract longs
  *
  * <pre>
  * Stack: ..., value1.word1, value1.word2, value2.word1, value2.word2 -&gt;

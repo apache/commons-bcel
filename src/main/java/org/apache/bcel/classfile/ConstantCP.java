@@ -25,7 +25,7 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * Abstract super class for Fieldref, Methodref, InterfaceMethodref and InvokeDynamic constants.
+ * Abstract superclass for Fieldref, Methodref, InterfaceMethodref and InvokeDynamic constants.
  *
  * @see ConstantFieldref
  * @see ConstantMethodref

@@ -84,7 +84,7 @@ public class LocalVariables implements Cloneable {
     }
 
     /**
-     * Returns a (correctly typed) clone of this object. This is equivalent to ((LocalVariables) this.clone()).
+     * Gets a (correctly typed) clone of this object. This is equivalent to ((LocalVariables) this.clone()).
      *
      * @return A (correctly typed) clone of this object.
      */
@@ -148,7 +148,7 @@ public class LocalVariables implements Cloneable {
     private void merge(final LocalVariables lv, final int i) {
         try {
 
-            // We won't accept an unitialized object if we know it was initialized;
+            // We won't accept an uninitialized object if we know it was initialized;
             // compare vmspec2, 4.9.4, last paragraph.
             if (!(locals[i] instanceof UninitializedObjectType) && lv.locals[i] instanceof UninitializedObjectType) {
                 throw new StructuralCodeConstraintException("Backwards branch with an uninitialized object in the local variables detected.");

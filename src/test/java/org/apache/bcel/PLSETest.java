@@ -156,7 +156,7 @@ class PLSETest extends AbstractTest {
                 // TODO: need for real assertions here
                 final String encoded = Utility.encode(code.getCode(), compress);
                 assertNotNull(encoded);
-                // following statement will throw exeception without classfile/Utility.encode fix
+                // following statement will throw exception without classfile/Utility.encode fix
                 assertNotNull(Utility.decode(encoded, compress));
                 assertNotNull(code.toString());
             }

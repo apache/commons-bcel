@@ -24,7 +24,7 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * This class is derived from the abstract {@link Constant} and represents a reference to a invoke dynamic.
+ * This class is derived from the abstract {@link Constant} and represents a reference to an invokedynamic constant.
  *
  * @see Constant
  * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.10"> The

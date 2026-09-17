@@ -3343,7 +3343,7 @@ public final class Const {
     }
 
     /**
-     * The primitive class names corresponding to the T_XX constants, for example, CLASS_TYPE_NAMES[T_INT] = "java.lang.Integer".
+     * Gets the class name corresponding to a primitive type constant, for example, CLASS_TYPE_NAMES[T_INT] = "java.lang.Integer".
      *
      * @param index index into {@code CLASS_TYPE_NAMES}.
      * @return The class name.
@@ -3476,7 +3476,7 @@ public final class Const {
     }
 
     /**
-     * The primitive type names corresponding to the T_XX constants, for example, TYPE_NAMES[T_INT] = "int".
+     * Gets the name corresponding to a primitive type constant, for example, TYPE_NAMES[T_INT] = "int".
      *
      * @param index The index.
      * @return The type name.

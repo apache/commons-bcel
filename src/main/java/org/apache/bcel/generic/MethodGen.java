@@ -134,7 +134,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Computes stack usage of an instruction list by performing control flow analysis.
+     * Gets the maximum stack depth of an instruction list by performing control flow analysis.
      *
      * @param cp The constant pool generator.
      * @param il The instruction list.
@@ -667,7 +667,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     // is more likely to suggest to the caller it is readonly (which a List does not).
 
     /**
-     * Return a list of AnnotationGen objects representing parameter annotations.
+     * Gets a list of AnnotationGen objects representing parameter annotations.
      *
      * @param i The parameter index.
      * @return list of AnnotationGen objects.
@@ -738,6 +738,8 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
+     * Gets the exception handlers for the 'Code' attribute.
+     *
      * @return code exceptions for 'Code' attribute.
      */
     private CodeException[] getCodeExceptions() {
@@ -748,7 +750,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Gets array of declared exception handlers.
+     * Gets an array of declared exception handlers.
      *
      * @return array of declared exception handlers.
      */
@@ -757,7 +759,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Gets array of thrown exceptions.
+     * Gets an array of thrown exceptions.
      *
      * @return array of thrown exceptions.
      */
@@ -766,6 +768,8 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
+     * Gets the 'Exceptions' attribute of all the exceptions thrown by this method.
+     *
      * @return 'Exceptions' attribute of all the exceptions thrown by this method.
      */
     private ExceptionTable getExceptionTable(final ConstantPoolGen cp) {
@@ -785,7 +789,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Gets array of line numbers.
+     * Gets an array of line numbers.
      *
      * @return array of line numbers.
      */
@@ -807,7 +811,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Gets array of declared local variables sorted by index.
+     * Gets an array of declared local variables sorted by index.
      *
      * If the range of the variable has not been set yet, it will be set to be valid from the start to the end of the
      * instruction list.
@@ -1188,7 +1192,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Compute maximum number of local variables.
+     * Sets the maximum number of local variables by examining the method signature and instructions.
      */
     public void setMaxLocals() { // TODO could be package-protected? (some tests would need repackaging)
         if (il != null) {
@@ -1221,7 +1225,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Computes max. stack size by performing control flow analysis.
+     * Sets the maximum stack size by performing control flow analysis.
      */
     public void setMaxStack() { // TODO could be package-protected? (some tests would need repackaging)
         if (il != null) {

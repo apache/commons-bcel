@@ -53,6 +53,8 @@ public class IREM extends ArithmeticInstruction implements ExceptionThrower {
     }
 
     /**
+     * Gets the exceptions this instruction may cause.
+     *
      * @return exceptions this instruction may cause.
      */
     @Override

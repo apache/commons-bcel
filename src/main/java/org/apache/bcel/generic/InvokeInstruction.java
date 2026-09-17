@@ -27,7 +27,7 @@ import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.Utility;
 
 /**
- * Super class for the INVOKExxx family of instructions.
+ * Superclass for the INVOKExxx family of instructions.
  */
 public abstract class InvokeInstruction extends FieldOrMethod implements ExceptionThrower, StackConsumer, StackProducer {
 
@@ -77,7 +77,10 @@ public abstract class InvokeInstruction extends FieldOrMethod implements Excepti
     }
 
     /**
+     * Gets the name of the referenced class or interface.
+     * <p>
      * This overrides the deprecated version as we know here that the referenced class may legally be an array.
+     * </p>
      *
      * @return name of the referenced class/interface.
      * @throws IllegalArgumentException Thrown if the referenced class is an array (this should not happen)

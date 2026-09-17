@@ -27,7 +27,7 @@ import java.util.Arrays;
 import org.apache.bcel.util.Args;
 
 /**
- * Abstract super class for fields and methods.
+ * Abstract superclass for fields and methods.
  */
 public abstract class FieldOrMethod extends AccessFlags implements Cloneable, Node {
 
@@ -215,7 +215,7 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     }
 
     /**
-     * Hunts for a signature attribute on the member and returns its contents. So where the 'regular' signature may be
+     * Gets the contents of the signature attribute on this member. So where the 'regular' signature may be
      * (Ljava/util/Vector;)V the signature attribute may in fact say 'Ljava/lang/Vector&lt;Ljava/lang/String&gt;;' Coded for
      * performance - searches for the attribute only when requested - only searches for it once.
      *

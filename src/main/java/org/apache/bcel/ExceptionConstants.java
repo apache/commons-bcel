@@ -32,12 +32,12 @@ public interface ExceptionConstants {
     Class<Throwable> THROWABLE = Throwable.class;
 
     /**
-     * Super class of any run-time exception
+     * Superclass of any run-time exception
      */
     Class<RuntimeException> RUNTIME_EXCEPTION = RuntimeException.class;
 
     /**
-     * Super class of any linking exception (aka Linkage Error)
+     * Superclass of any linking exception (a.k.a. Linkage Error)
      */
     Class<LinkageError> LINKING_EXCEPTION = LinkageError.class;
 

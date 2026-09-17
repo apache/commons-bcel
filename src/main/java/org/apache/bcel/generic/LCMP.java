@@ -49,6 +49,8 @@ public class LCMP extends Instruction implements TypedInstruction, StackProducer
     }
 
     /**
+     * Gets {@code Type.LONG}.
+     *
      * @return Type.LONG.
      */
     @Override

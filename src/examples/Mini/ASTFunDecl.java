@@ -468,7 +468,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants {
         }
 
         /*
-         * Update entry of this function, that is, sets argument references. The entry is already in there by garantee, but may be
+         * Updates the entry for this function, that is, sets argument references. The entry is guaranteed to exist, but may be
          * of the wrong type: The user-defined a function 'TRUE', for example and 'TRUE' is of type 'Variable'.
          */
         try {

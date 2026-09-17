@@ -34,7 +34,7 @@ import org.apache.bcel.util.ByteSequence;
 public class RET extends Instruction implements IndexedInstruction, TypedInstruction {
 
     private boolean wide;
-    private int index; // index to local variable containg the return address
+    private int index; // index to local variable containing the return address
 
     /**
      * Default constructor needed for Instruction.readInstruction. Not to be used otherwise.
@@ -82,7 +82,9 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
     }
 
     /**
-     * @return index of local variable containg the return address.
+     * Gets the index of the local variable containing the return address.
+     *
+     * @return index of local variable containing the return address.
      */
     @Override
     public final int getIndex() {
@@ -90,6 +92,8 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
     }
 
     /**
+     * Gets the return address type.
+     *
      * @return return address type.
      */
     @Override
@@ -113,9 +117,9 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
     }
 
     /**
-     * Sets index of local variable containg the return address
+     * Sets the index of the local variable containing the return address.
      *
-     * @param index index of local variable containg the return address.
+     * @param index index of local variable containing the return address.
      * @throws ClassGenException Thrown if index is out of bounds.
      */
     @Override

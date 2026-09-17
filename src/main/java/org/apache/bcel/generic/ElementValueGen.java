@@ -200,7 +200,7 @@ public abstract class ElementValueGen {
     }
 
     /**
-     * Subtypes return an immutable variant of the ElementValueGen.
+     * Gets an immutable variant of this ElementValueGen.
      *
      * @return An immutable variant of the ElementValueGen.
      */

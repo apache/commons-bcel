@@ -21,7 +21,7 @@ package org.apache.bcel.generic;
 import org.apache.bcel.Const;
 
 /**
- * Super class for the family of arithmetic instructions.
+ * Superclass for the family of arithmetic instructions.
  */
 public abstract class ArithmeticInstruction extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 
@@ -41,6 +41,8 @@ public abstract class ArithmeticInstruction extends Instruction implements Typed
     }
 
     /**
+     * Gets the type associated with the instruction.
+     *
      * @return type associated with the instruction.
      */
     @Override

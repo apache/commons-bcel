@@ -29,7 +29,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.util.Args;
 
 /**
- * Abstract super class for <em>Attribute</em> objects. Currently the <em>ConstantValue</em>, <em>SourceFile</em>, <em>Code</em>, <em>Exceptiontable</em>,
+ * Abstract superclass for <em>Attribute</em> objects. Currently the <em>ConstantValue</em>, <em>SourceFile</em>, <em>Code</em>, <em>Exceptiontable</em>,
  * <em>LineNumberTable</em>, <em>LocalVariableTable</em>, <em>InnerClasses</em> and <em>Synthetic</em> attributes are supported. The <em>Unknown</em> attribute
  * stands for non-standard-attributes.
  *
@@ -385,7 +385,7 @@ public abstract class Attribute implements Cloneable, Node {
     }
 
     /**
-     * Gets the name of attribute.
+     * Gets the name of the attribute.
      *
      * @return Name of attribute.
      * @since 6.0

@@ -62,6 +62,8 @@ public class CHECKCAST extends CPInstruction implements LoadClass, ExceptionThro
     }
 
     /**
+     * Gets the exceptions this instruction may cause.
+     *
      * @return exceptions this instruction may cause.
      */
     @Override

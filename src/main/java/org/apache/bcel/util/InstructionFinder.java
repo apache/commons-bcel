@@ -261,7 +261,9 @@ public class InstructionFinder {
     }
 
     /**
-     * @return The matched piece of code as an array of instruction (handles).
+     * Gets the matched piece of code as an array of instruction handles.
+     *
+     * @return The matched piece of code as an array of instruction handles.
      */
     private InstructionHandle[] getMatch(final int matchedFrom, final int matchLength) {
         return Arrays.copyOfRange(handles, matchedFrom, matchedFrom + matchLength);
@@ -315,7 +317,7 @@ public class InstructionFinder {
 
     /**
      * Search for the given pattern in the instruction list. You can search for any valid opcode via its symbolic name, for example
-     * "istore". You can also use a super class or an interface name to match a whole set of instructions, for example
+     * "istore". You can also use a superclass or an interface name to match a whole set of instructions, for example
      * "BranchInstruction" or "LoadInstruction". "istore" is also an alias for all "istore_x" instructions. Additional
      * aliases are "if" for "ifxx", "if_icmp" for "if_icmpxx", "if_acmp" for "if_acmpxx".
      *

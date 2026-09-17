@@ -53,7 +53,7 @@ public class InstructionHandle {
     static final InstructionTargeter[] EMPTY_INSTRUCTION_TARGETER_ARRAY = {};
 
     /**
-     * Factory method.
+     * Gets a new instruction handle for the given instruction.
      */
     static InstructionHandle getInstructionHandle(final Instruction i) {
         return new InstructionHandle(i);
@@ -140,7 +140,7 @@ public class InstructionHandle {
     }
 
     /**
-     * Gets attribute of an instruction handle.
+     * Gets an attribute of an instruction handle.
      *
      * @param key The key object to store/retrieve the attribute.
      * @return The attribute value.
@@ -213,7 +213,7 @@ public class InstructionHandle {
     }
 
     /**
-     * Checks if this handle has targeters.
+     * Tests whether this handle has targeters.
      *
      * @return true if this handle has targeters, false otherwise.
      */
@@ -253,7 +253,7 @@ public class InstructionHandle {
     }
 
     /**
-     * Replace current instruction contained in this handle. Old instruction is disposed using Instruction.dispose().
+     * Sets the instruction contained in this handle. The old instruction is disposed of using Instruction.dispose().
      *
      * @param i The new instruction.
      */

@@ -100,7 +100,7 @@ public class ElementValuePairGen {
     }
 
     /**
-     * Retrieves an immutable version of this ElementValuePairGen.
+     * Gets an immutable version of this ElementValuePairGen.
      *
      * @return An immutable ElementValuePair.
      */

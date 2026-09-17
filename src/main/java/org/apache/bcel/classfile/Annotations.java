@@ -112,7 +112,7 @@ public abstract class Annotations extends Attribute implements Iterable<Annotati
     }
 
     /**
-     * Gets whether this annotation is runtime visible.
+     * Tests whether this annotation is runtime visible.
      *
      * @return true if this annotation is runtime visible.
      */

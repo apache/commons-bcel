@@ -87,6 +87,8 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
     }
 
     /**
+     * Gets the name of the method used to invoke the generated lambda method.
+     *
      * Override the parent method because our class name is held elsewhere.
      *
      * Note: Contrary to this method's name it does not return the class name of the invoke target; rather it returns the
@@ -106,8 +108,11 @@ public class INVOKEDYNAMIC extends InvokeInstruction {
     }
 
     /**
+     * Gets the reference type, which is {@link Object} for this instruction.
+     * <p>
      * Since InvokeDynamic doesn't refer to a reference type, just return {@link Object}, as that is the only type we can
      * say for sure the reference will be.
+     * </p>
      *
      * @param cpg The ConstantPoolGen used to create the instruction.
      * @return An ObjectType for {@link Object}.

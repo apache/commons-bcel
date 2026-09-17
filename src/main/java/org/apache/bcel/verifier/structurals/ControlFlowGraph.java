@@ -227,7 +227,7 @@ public class ControlFlowGraph {
         }
 
         /**
-         * Returns the exception handlers of this instruction.
+         * Gets the exception handlers of this instruction.
          */
         @Override
         public ExceptionHandler[] getExceptionHandlers() {
@@ -235,7 +235,7 @@ public class ControlFlowGraph {
         }
 
         /**
-         * Returns the control flow execution chain. This is built while execute(Frame, ArrayList)-ing the code represented by
+         * Gets the control flow execution chain. This is built while execute(Frame, ArrayList)-ing the code represented by
          * the surrounding ControlFlowGraph.
          */
         private String getExecutionChain() {
@@ -262,7 +262,7 @@ public class ControlFlowGraph {
         }
 
         /**
-         * Returns a clone of the "outgoing" frame situation with respect to the given ExecutionChain.
+         * Gets a clone of the "outgoing" frame situation with respect to the given ExecutionChain.
          */
         @Override
         public Frame getOutFrame(final ArrayList<InstructionContext> execChain) {
@@ -416,7 +416,7 @@ public class ControlFlowGraph {
     }
 
     /**
-     * Returns an InstructionContext[] with all the InstructionContext instances for the method whose control flow is
+     * Gets an InstructionContext[] with all the InstructionContext instances for the method whose control flow is
      * represented by this ControlFlowGraph <strong>(NOT ORDERED!)</strong>.
      *
      * @return array of InstructionContext instances.
@@ -427,8 +427,7 @@ public class ControlFlowGraph {
     }
 
     /**
-     * Returns true, if and only if the said instruction is not reachable; that means, if it is not part of this
-     * ControlFlowGraph.
+     * Tests whether the instruction is unreachable, that is, whether it is absent from this ControlFlowGraph.
      *
      * @param i The instruction handle.
      * @return true if the instruction is not reachable, false otherwise.

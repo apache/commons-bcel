@@ -39,8 +39,8 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     private boolean liveToEnd;
 
     /**
-     * Generate a local variable that with index 'index'. Note that double and long variables need two indexs. Index indices
-     * have to be provided by the user.
+     * Generates a local variable with the given index. Note that double and long variables occupy two local variable slots.
+     * The index must be provided by the user.
      *
      * @param index index of local variable.
      * @param name its name.
@@ -62,8 +62,8 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     }
 
     /**
-     * Generates a local variable that with index 'index'. Note that double and long variables need two indexs. Index
-     * indices have to be provided by the user.
+     * Generates a local variable with the given index. Note that double and long variables occupy two local variable slots.
+     * The index must be provided by the user.
      *
      * @param index index of local variable.
      * @param name its name.
@@ -143,13 +143,13 @@ public class LocalVariableGen implements InstructionTargeter, NamedAndTyped, Clo
     }
 
     /**
-     * Gets LocalVariable object.
+     * Gets the LocalVariable object.
      *
      * This relies on that the instruction list has already been dumped to byte code or that the 'setPositions' methods
      * has been called for the instruction list.
      *
      * Note that due to the conversion from byte code offset to InstructionHandle, it is impossible to tell the difference
-     * between a live range that ends BEFORE the last insturction of the method or a live range that ends AFTER the last
+     * between a live range that ends BEFORE the last instruction of the method or a live range that ends AFTER the last
      * instruction of the method. Hence the liveToEnd flag to differentiate between these two cases.
      *
      * @param cp constant pool.

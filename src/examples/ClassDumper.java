@@ -30,7 +30,7 @@ import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.util.BCELifier;
 
 /**
- * Display Java .class file data. Output is based on javap tool. Built using the BCEL libary.
+ * Display Java .class file data. Output is based on javap tool. Built using the BCEL library.
  */
 final class ClassDumper {
 
@@ -69,7 +69,7 @@ final class ClassDumper {
      * not include verification of the byte code as it is performed by the Java interpreter).
      *
      * @throws IOException Thrown if an I/O error occurs.
-     * @throws ClassFormatException
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     public void dump() throws IOException, ClassFormatException {
         // Check magic tag of class file
@@ -94,7 +94,7 @@ final class ClassDumper {
      * Processes information about the attributes of the class.
      *
      * @throws IOException Thrown if an I/O error occurs.
-     * @throws ClassFormatException
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     private void processAttributes() throws IOException, ClassFormatException {
         final int attributesCount = file.readUnsignedShort();
@@ -113,10 +113,10 @@ final class ClassDumper {
     }
 
     /**
-     * Processes information about the class and its super class.
+     * Processes information about the class and its superclass.
      *
      * @throws IOException Thrown if an I/O error occurs.
-     * @throws ClassFormatException
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     private void processClassInfo() throws IOException, ClassFormatException {
         accessFlags = file.readUnsignedShort();
@@ -148,7 +148,7 @@ final class ClassDumper {
      * Processes constant pool entries.
      *
      * @throws IOException Thrown if an I/O error occurs.
-     * @throws ClassFormatException
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     private void processConstantPool() throws IOException, ClassFormatException {
         byte tag;
@@ -184,7 +184,7 @@ final class ClassDumper {
      *
      * @param file Input stream.
      * @throws IOException Thrown if an I/O error occurs.
-     * @throws ClassFormatException
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     private void processFieldOrMethod() throws IOException, ClassFormatException {
         final int accessFlags = file.readUnsignedShort();
@@ -207,10 +207,10 @@ final class ClassDumper {
             final int attributeLength = file.readInt();
             // restore file location
             file.reset();
-            // Usefull for debugging
+            // Useful for debugging
             // System.out.printf(" attribute_name_index: %d (", attribute_name_index);
             // System.out.println(constantToString(attribute_name_index) + ")");
-            // System.out.printf(" atribute offset in file: %x%n", + file.getStreamPosition());
+            // System.out.printf(" attribute offset in file: %x%n", + file.getStreamPosition());
             // System.out.println(" atribute_length: " + attribute_length);
 
             // A stronger verification test would be to read attribute_length bytes
@@ -233,7 +233,7 @@ final class ClassDumper {
      * Processes information about the fields of the class, that is, its variables.
      *
      * @throws IOException Thrown if an I/O error occurs.
-     * @throws ClassFormatException
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     private void processFields() throws IOException, ClassFormatException {
         final int fieldsCount = file.readUnsignedShort();
@@ -254,7 +254,7 @@ final class ClassDumper {
      * Checks whether the header of the file is ok. Of course, this has to be the first action on successive file reads.
      *
      * @throws IOException Thrown if an I/O error occurs.
-     * @throws ClassFormatException
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     private void processID() throws IOException, ClassFormatException {
         final int magic = file.readInt();
@@ -271,7 +271,7 @@ final class ClassDumper {
      * Processes information about the interfaces implemented by this class.
      *
      * @throws IOException Thrown if an I/O error occurs.
-     * @throws ClassFormatException
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     private void processInterfaces() throws IOException, ClassFormatException {
         final int interfacesCount = file.readUnsignedShort();
@@ -297,7 +297,7 @@ final class ClassDumper {
      * Processes information about the methods of the class.
      *
      * @throws IOException Thrown if an I/O error occurs.
-     * @throws ClassFormatException
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     private void processMethods() throws IOException, ClassFormatException {
         final int methodsCount = file.readUnsignedShort();
@@ -317,7 +317,7 @@ final class ClassDumper {
      * Processes major and minor version of compiler which created the file.
      *
      * @throws IOException Thrown if an I/O error occurs.
-     * @throws ClassFormatException
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     private void processVersion() throws IOException, ClassFormatException {
         minor = file.readUnsignedShort();

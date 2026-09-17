@@ -51,7 +51,7 @@ import org.apache.bcel.classfile.Utility;
 /**
  * This class represents the constant pool, that is, a table of constants, of a parsed classfile. It may contain null
  * references, due to the JVM specification that skips an entry after an 8-byte constant (double, long) entry. Those
- * interested in generating constant pools programatically should see <a href="../generic/ConstantPoolGen.html">
+ * interested in generating constant pools programmatically should see <a href="../generic/ConstantPoolGen.html">
  * ConstantPoolGen</a>.
  *
  * @see Constant
@@ -214,7 +214,7 @@ public abstract class ConstantPoolX implements Cloneable, Node {
      * @param tag Tag of expected constant, that is, its type.
      * @return Constant value.
      * @see Constant
-     * @throws ClassFormatException
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     public Constant getConstant(final int index, final byte tag) throws ClassFormatException {
         final Constant c = getConstant(index);
@@ -228,6 +228,8 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     }
 
     /**
+     * Gets the array of constants.
+     *
      * @return Array of constants.
      * @see Constant
      */
@@ -245,7 +247,7 @@ public abstract class ConstantPoolX implements Cloneable, Node {
      * @return Contents of string reference.
      * @see ConstantClass
      * @see ConstantString
-     * @throws ClassFormatException
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     public String getConstantString(final int index, final byte tag) throws ClassFormatException {
         final int i;
@@ -277,6 +279,8 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     }
 
     /**
+     * Gets the length of the constant pool.
+     *
      * @return Length of constant pool.
      */
     public int getLength() {
@@ -284,6 +288,8 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     }
 
     /**
+     * Sets the constant pool entry at the given index.
+     *
      * @param constant Constant to set.
      */
     public void setConstant(final int index, final Constant constant) {
@@ -291,7 +297,9 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     }
 
     /**
-     * @param constantPool.
+     * Sets the constant pool.
+     *
+     * @param constantPool The new constant pool.
      */
     public void setConstantPool(final Constant[] constantPool) {
         this.constantPool = constantPool;

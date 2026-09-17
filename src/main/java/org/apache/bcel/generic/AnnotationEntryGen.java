@@ -50,7 +50,7 @@ public class AnnotationEntryGen {
     static final AnnotationEntryGen[] EMPTY_ARRAY = {};
 
     /**
-     * Converts a list of AnnotationGen objects into a set of attributes that can be attached to the class file.
+     * Gets the attributes for an array of AnnotationEntryGen objects so they can be attached to the class file.
      *
      * @param cp The constant pool gen where we can create the necessary name refs.
      * @param annotationEntryGens An array of AnnotationGen objects.
@@ -122,8 +122,7 @@ public class AnnotationEntryGen {
     }
 
     /**
-     * Annotations against a class are stored in one of four attribute kinds: - RuntimeVisibleParameterAnnotations -
-     * RuntimeInvisibleParameterAnnotations
+     * Gets the runtime-visible and runtime-invisible parameter annotation attributes.
      */
     static Attribute[] getParameterAnnotationAttributes(final ConstantPoolGen cp,
         final List<AnnotationEntryGen>[] /* Array of lists, array size depends on #params */ vec) {
@@ -302,7 +301,7 @@ public class AnnotationEntryGen {
     }
 
     /**
-     * Retrieves an immutable version of this AnnotationGen.
+     * Gets an immutable version of this AnnotationGen.
      *
      * @return An immutable version of this AnnotationGen.
      */
@@ -345,7 +344,7 @@ public class AnnotationEntryGen {
     }
 
     /**
-     * Returns list of ElementNameValuePair objects.
+     * Gets the list of ElementNameValuePair objects.
      *
      * @return list of ElementNameValuePair objects.
      */
@@ -354,7 +353,7 @@ public class AnnotationEntryGen {
     }
 
     /**
-     * Gets whether this annotation is runtime visible.
+     * Tests whether this annotation is runtime visible.
      *
      * @return true if this annotation is runtime visible.
      */

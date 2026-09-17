@@ -150,6 +150,8 @@ public final class Field extends FieldOrMethod {
     }
 
     /**
+     * Gets the field type.
+     *
      * See https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.2.2
      *
      * @return type of field.

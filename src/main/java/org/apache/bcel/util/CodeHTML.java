@@ -551,7 +551,7 @@ final class CodeHTML {
                     final String str = codeToHTML(stream, methodNumber);
                     String anchor = "";
                     /*
-                     * Sets an anchor mark if this line is targetted by a goto, jsr, etc. Defining an anchor for every line is very
+                     * Sets an anchor mark if this line is targeted by a goto, jsr, etc. Defining an anchor for every line is very
                      * inefficient!
                      */
                     if (gotoSet.get(offset)) {
@@ -566,7 +566,7 @@ final class CodeHTML {
                     printWriter.println("<TR VALIGN=TOP><TD>" + anchor2 + "</TD><TD>" + anchor + str + "</TR>");
                 }
             }
-            // Mark last line, may be targetted from Attributes window
+            // Mark last line, may be targeted from Attributes window
             printWriter.println("<TR><TD> </A></TD></TR>");
             printWriter.println("</TABLE>");
         }

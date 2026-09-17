@@ -47,7 +47,7 @@ public interface InstructionContext {
     boolean execute(Frame inFrame, ArrayList<InstructionContext> executionPredecessors, InstConstraintVisitor icv, ExecutionVisitor ev);
 
     /**
-     * Returns the exception handlers that protect this instruction. They are special control flow successors.
+     * Gets the exception handlers that protect this instruction. They are special control flow successors.
      *
      * @return The exception handlers.
      */
@@ -61,14 +61,14 @@ public interface InstructionContext {
     Frame getInFrame();
 
     /**
-     * Returns the InstructionHandle this InstructionContext is wrapped around.
+     * Gets the InstructionHandle this InstructionContext is wrapped around.
      *
      * @return The InstructionHandle this InstructionContext is wrapped around.
      */
     InstructionHandle getInstruction();
 
     /**
-     * This method returns the outgoing execution frame situation; therefore <B>it has to be calculated by execute(Frame,
+     * Gets the outgoing execution frame situation; therefore <B>it has to be calculated by execute(Frame,
      * ArrayList) first.</B>
      *
      * @param executionPredecessors The execution predecessors.
@@ -78,7 +78,7 @@ public interface InstructionContext {
     Frame getOutFrame(ArrayList<InstructionContext> executionPredecessors);
 
     /**
-     * Returns the usual control flow successors.
+     * Gets the usual control flow successors.
      *
      * @return The successors.
      * @see #getExceptionHandlers()
@@ -86,8 +86,11 @@ public interface InstructionContext {
     InstructionContext[] getSuccessors();
 
     /**
+     * Gets the tag value used for temporary flagging.
+     * <p>
      * The getTag and setTag methods may be used for temporary flagging, such as graph coloring. Nothing in the
      * InstructionContext object depends on the value of the tag. JustIce does not use it.
+     * </p>
      *
      * @return The tag value.
      * @see #setTag(int tag)
@@ -95,8 +98,11 @@ public interface InstructionContext {
     int getTag();
 
     /**
+     * Sets the tag value used for temporary flagging.
+     * <p>
      * The getTag and setTag methods may be used for temporary flagging, such as graph coloring. Nothing in the
      * InstructionContext object depends on the value of the tag. JustIce does not use it.
+     * </p>
      *
      * @param tag The tag value.
      * @see #getTag()

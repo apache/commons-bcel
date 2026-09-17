@@ -72,7 +72,7 @@ public abstract class PassVerifier {
     public abstract VerificationResult do_verify();
 
     /**
-     * Returns the (warning) messages that this PassVerifier accumulated during its do_verify()ing work.
+     * Gets the (warning) messages that this PassVerifier accumulated during verification.
      *
      * @return The (warning) messages.
      * @see #addMessage(String)
@@ -83,7 +83,7 @@ public abstract class PassVerifier {
     }
 
     /**
-     * Returns the (warning) messages that this PassVerifier accumulated during its do_verify()ing work.
+     * Gets the (warning) messages that this PassVerifier accumulated during verification.
      *
      * @return The list of messages.
      * @see #addMessage(String)

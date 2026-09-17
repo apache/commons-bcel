@@ -76,7 +76,7 @@ public abstract class VerifierConstraintViolatedException extends RuntimeExcepti
     }
 
     /**
-     * Returns the error message string of this VerifierConstraintViolatedException object.
+     * Gets the error message string of this VerifierConstraintViolatedException object.
      *
      * @return The error message string of this VerifierConstraintViolatedException.
      */

@@ -66,6 +66,8 @@ public class ICONST extends Instruction implements ConstantPushInstruction {
     }
 
     /**
+     * Gets {@code Type.INT}.
+     *
      * @return Type.INT.
      */
     @Override

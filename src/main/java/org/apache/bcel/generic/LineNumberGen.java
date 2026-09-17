@@ -74,7 +74,7 @@ public class LineNumberGen implements InstructionTargeter, Cloneable {
     }
 
     /**
-     * Gets LineNumber attribute.
+     * Gets the LineNumber attribute.
      *
      * This relies on that the instruction list has already been dumped to byte code or that the 'setPositions' methods
      * has been called for the instruction list.

@@ -22,7 +22,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.ExceptionConst;
 
 /**
- * Super class for the xRETURN family of instructions.
+ * Superclass for the xRETURN family of instructions.
  */
 public abstract class ReturnInstruction extends Instruction implements ExceptionThrower, TypedInstruction, StackConsumer {
 
@@ -72,6 +72,8 @@ public abstract class ReturnInstruction extends Instruction implements Exception
     }
 
     /**
+     * Gets the type associated with the instruction.
+     *
      * @return type associated with the instruction.
      */
     @Override

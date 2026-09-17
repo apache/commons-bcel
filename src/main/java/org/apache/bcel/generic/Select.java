@@ -24,7 +24,7 @@ import java.io.IOException;
 import org.apache.bcel.util.ByteSequence;
 
 /**
- * Select - Abstract super class for LOOKUPSWITCH and TABLESWITCH instructions.
+ * Select - Abstract superclass for LOOKUPSWITCH and TABLESWITCH instructions.
  *
  * <p>
  * We use our super's {@code target} property as the default target.
@@ -152,6 +152,8 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
+     * Gets the instruction length without padding.
+     *
      * @return The fixed_length.
      * @since 6.0
      */
@@ -169,6 +171,8 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
+     * Gets the target offset at the given index.
+     *
      * @return index entry from indices.
      * @since 6.0
      */
@@ -177,6 +181,8 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
+     * Gets the match value at the given index.
+     *
      * @return match entry.
      * @since 6.0
      */
@@ -185,6 +191,8 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
+     * Gets the number of match values.
+     *
      * @return The match_length.
      * @since 6.0
      */
@@ -202,6 +210,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
+     * Gets the number of padding bytes.
      *
      * @return The padding.
      * @since 6.0
@@ -211,6 +220,8 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
+     * Gets the target at the given index.
+     *
      * @return target entry.
      * @since 6.0
      */
@@ -241,6 +252,8 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
+     * Sets the instruction length without padding.
+     *
      * @param fixedLength The fixed_length to set.
      * @since 6.0
      */
@@ -248,15 +261,20 @@ public abstract class Select extends BranchInstruction implements VariableLength
         this.fixed_length = fixedLength;
     }
 
-    /** @since 6.0 */
+    /**
+     * Sets the target offset at the given index.
+     *
+     * @since 6.0
+     */
     final int setIndices(final int i, final int value) {
         indices[i] = value;
         return value; // Allow use in nested calls
     }
 
     /**
+     * Sets the target offsets.
      *
-     * @param array.
+     * @param array The new target offsets.
      * @since 6.0
      */
     final void setIndices(final int[] array) {
@@ -264,9 +282,10 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
+     * Sets the match value at the given index.
      *
-     * @param index.
-     * @param value.
+     * @param index The match index.
+     * @param value The match value.
      * @since 6.0
      */
     final void setMatch(final int index, final int value) {
@@ -274,8 +293,9 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
+     * Sets the match values.
      *
-     * @param array.
+     * @param array The new match values.
      * @since 6.0
      */
     final void setMatches(final int[] array) {
@@ -283,6 +303,8 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
+     * Sets the number of match values.
+     *
      * @param matchLength The match_length to set.
      * @since 6.0
      */
@@ -303,8 +325,9 @@ public abstract class Select extends BranchInstruction implements VariableLength
     }
 
     /**
+     * Sets the match targets.
      *
-     * @param array.
+     * @param array The new match targets.
      * @since 6.0
      */
     final void setTargets(final InstructionHandle[] array) {
@@ -349,7 +372,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
      */
     @Override
     protected int updatePosition(final int offset, final int maxOffset) {
-        setPosition(getPosition() + offset); // Additional offset caused by preceding SWITCHs, GOTOs, etc.
+        setPosition(getPosition() + offset); // Additional offset caused by preceding switch instructions, GOTO instructions, etc.
         final short oldLength = (short) super.getLength();
         /*
          * Alignment on 4-byte-boundary, + 1, because of tag byte.

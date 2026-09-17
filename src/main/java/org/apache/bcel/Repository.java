@@ -25,7 +25,7 @@ import org.apache.bcel.util.ClassPath;
 import org.apache.bcel.util.SyntheticRepository;
 
 /**
- * The repository maintains informations about class interdependencies, for example, whether a class is a sub-class of another.
+ * The repository maintains information about class interdependencies, for example, whether a class is a subclass of another.
  * Delegates actual class loading to SyntheticRepository with current class path by default.
  *
  * @see org.apache.bcel.util.Repository
@@ -58,7 +58,7 @@ public abstract class Repository {
      * Gets all interfaces implemented by the class.
      *
      * @param clazz The class.
-     * @return all interfaces implemented by class and its super classes and the interfaces that those interfaces extend,
+     * @return all interfaces implemented by class and its superclasses and the interfaces that those interfaces extend,
      *         and so on. (Some people call this a transitive hull).
      * @throws ClassNotFoundException Thrown if any of the class's superclasses or superinterfaces can't be found.
      */
@@ -70,7 +70,7 @@ public abstract class Repository {
      * Gets all interfaces implemented by the class.
      *
      * @param className The class name.
-     * @return all interfaces implemented by class and its super classes and the interfaces that extend those interfaces,
+     * @return all interfaces implemented by class and its superclasses and the interfaces that extend those interfaces,
      *         and so on.
      * @throws ClassNotFoundException Thrown if the named class can't be found, or if any of its superclasses or superinterfaces
      *         can't be found.
@@ -89,10 +89,10 @@ public abstract class Repository {
     }
 
     /**
-     * Gets the list of super classes.
+     * Gets the list of superclasses.
      *
      * @param clazz The class.
-     * @return list of super classes of clazz in ascending order, that is, Object is always the last element.
+     * @return list of superclasses of clazz in ascending order, that is, Object is always the last element.
      * @throws ClassNotFoundException Thrown if any of the superclasses can't be found.
      */
     public static JavaClass[] getSuperClasses(final JavaClass clazz) throws ClassNotFoundException {
@@ -100,10 +100,10 @@ public abstract class Repository {
     }
 
     /**
-     * Gets the list of super classes.
+     * Gets the list of superclasses.
      *
      * @param className The class name.
-     * @return list of super classes of clazz in ascending order, that is, Object is always the last element.
+     * @return list of superclasses of clazz in ascending order, that is, Object is always the last element.
      * @throws ClassNotFoundException Thrown if the named class or any of its superclasses can't be found.
      */
     public static JavaClass[] getSuperClasses(final String className) throws ClassNotFoundException {

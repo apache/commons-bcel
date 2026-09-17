@@ -26,7 +26,7 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * Represents the default value of a annotation for a method info.
+ * Represents the default value of an annotation for a method info.
  *
  * @since 6.0
  */

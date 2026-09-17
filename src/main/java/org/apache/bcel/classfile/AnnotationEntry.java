@@ -200,7 +200,7 @@ public class AnnotationEntry implements Node {
     }
 
     /**
-     * Gets whether this annotation is runtime visible.
+     * Tests whether this annotation is runtime visible.
      *
      * @return true if this annotation is runtime visible.
      */

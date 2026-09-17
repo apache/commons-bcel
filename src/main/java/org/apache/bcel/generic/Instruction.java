@@ -27,7 +27,7 @@ import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.util.ByteSequence;
 
 /**
- * Abstract super class for all Java byte codes.
+ * Abstract superclass for all Java byte codes.
  */
 public abstract class Instruction implements Cloneable {
 
@@ -36,7 +36,7 @@ public abstract class Instruction implements Cloneable {
     private static InstructionComparator cmp = InstructionComparator.DEFAULT;
 
     /**
-     * Gets Comparator object used in the equals() method to determine equality of instructions.
+     * Gets the Comparator object used in the equals() method to determine equality of instructions.
      *
      * @return currently used comparator for equals().
      * @deprecated (6.0) use the built in comparator, or wrap this class in another object that implements these methods
@@ -604,6 +604,8 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
+     * Sets the instruction length.
+     *
      * Needed in readInstruction and subclasses in this package
      *
      * @since 6.0
@@ -613,6 +615,8 @@ public abstract class Instruction implements Cloneable {
     }
 
     /**
+     * Sets the instruction opcode.
+     *
      * Needed in readInstruction and subclasses in this package.
      */
     final void setOpcode(final short opcode) {

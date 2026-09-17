@@ -19,7 +19,7 @@
 package org.apache.bcel.generic;
 
 /**
- * Super class for stack operations like DUP and POP.
+ * Superclass for stack operations like DUP and POP.
  */
 public abstract class StackInstruction extends Instruction {
 

@@ -51,6 +51,8 @@ public class ATHROW extends Instruction implements UnconditionalBranch, Exceptio
     }
 
     /**
+     * Gets the exceptions this instruction may cause.
+     *
      * @return exceptions this instruction may cause.
      */
     @Override

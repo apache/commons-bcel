@@ -83,7 +83,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     }
 
     /**
-     * Gets CodeException object.
+     * Gets the CodeException object.
      *
      * This relies on that the instruction list has already been dumped to byte code or that the 'setPositions' methods
      * has been called for the instruction list.
@@ -133,7 +133,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     }
 
     /**
-     * Sets end of handler.
+     * Sets the end of the handler.
      *
      * @param endPc End of handled region (inclusive).
      */
@@ -153,7 +153,7 @@ public final class CodeExceptionGen implements InstructionTargeter, Cloneable {
     }
 
     /**
-     * Sets start of handler.
+     * Sets the start of the handler.
      *
      * @param startPc Start of handled region (inclusive).
      */

@@ -21,7 +21,7 @@ package org.apache.bcel.classfile;
 import org.apache.bcel.Const;
 
 /**
- * Super class for all objects that have modifiers like private, final, ... I.e. classes, fields, and methods.
+ * Superclass for all objects that have modifiers like private, final, ... I.e. classes, fields, and methods.
  */
 public abstract class AccessFlags {
 
@@ -303,14 +303,14 @@ public abstract class AccessFlags {
     /**
      * Tests whether the transient bit is on.
      *
-     * @return whether the varargs bit is on.
+     * @return whether the transient bit is on.
      */
     public final boolean isTransient() {
         return test(Const.ACC_TRANSIENT);
     }
 
     /**
-     * Sets the varargs bit.
+     * Sets the transient bit.
      *
      * @param flag The new value.
      */

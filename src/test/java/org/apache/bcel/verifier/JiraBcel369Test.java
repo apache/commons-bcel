@@ -114,7 +114,7 @@ Slots used: 0 MaxStack: 1.
     ... 74 more
      * }</pre>
      *
-     * @throws ClassNotFoundException
+     * @throws ClassNotFoundException Thrown if the class cannot be found.
      */
     @Test
     @Disabled

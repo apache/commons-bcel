@@ -113,7 +113,7 @@ public class ClassLoader extends java.lang.ClassLoader {
      * You must ensure however not to use any "illegal" characters, that is, characters that may not appear in a Java class
      * name too.
      * <p>
-     * The default implementation interprets the string as a encoded compressed Java class, unpacks and decodes it with the
+     * The default implementation interprets the string as an encoded, compressed Java class, unpacks and decodes it with the
      * Utility.decode() method, and parses the resulting byte array and returns the resulting JavaClass object.
      * </p>
      *

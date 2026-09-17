@@ -657,7 +657,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         @Override
         public void visitInnerClasses(final InnerClasses innerClasses) { // vmspec2 4.7.5
 
-            // exactly one InnerClasses attr per ClassFile if some inner class is refernced: see visitJavaClass()
+            // exactly one InnerClasses attr per ClassFile if some inner class is referenced: see visitJavaClass()
 
             checkIndex(innerClasses, innerClasses.getNameIndex(), CONST_Utf8);
 
@@ -1339,12 +1339,12 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
     }
 
     /**
-     * Ensures that every class has a super class and that {@code final} classes are not subclassed. This means, the class
-     * this Pass2Verifier operates on has proper super classes (transitively) up to {@link Object}. The reason for really
+     * Ensures that every class has a superclass and that {@code final} classes are not subclassed. This means, the class
+     * this Pass2Verifier operates on has proper superclasses (transitively) up to {@link Object}. The reason for really
      * loading (and Pass1-verifying) all of those classes here is that we need them in Pass2 anyway to verify no final
      * methods are overridden (that could be declared anywhere in the ancestor hierarchy).
      *
-     * @throws ClassConstraintException otherwise.
+     * @throws ClassConstraintException Thrown if a class has an invalid superclass or extends a final class.
      */
     private void everyClassHasAnAccessibleSuperclass() {
         try {
@@ -1455,10 +1455,10 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
     }
 
     /**
-     * Returns a LocalVariablesInfo object containing information about the usage of the local variables in the Code
+     * Gets a LocalVariablesInfo object containing information about the usage of the local variables in the Code
      * attribute of the said method or {@code null} if the class file this Pass2Verifier operates on could not be
      * pass-2-verified correctly. The method number method_nr is the method you get using
-     * {@code Repository.lookupClass(myOwner.getClassname()).getMethods()[method_nr];}. You should not add own information.
+     * {@code Repository.lookupClass(myOwner.getClassname()).getMethods()[method_nr];}. You should not add your own information.
      * Leave that to JustIce.
      *
      * @param methodNr The method number.

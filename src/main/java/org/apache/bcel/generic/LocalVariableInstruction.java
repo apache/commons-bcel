@@ -25,7 +25,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.util.ByteSequence;
 
 /**
- * Abstract super class for instructions dealing with local variables.
+ * Abstract superclass for instructions dealing with local variables.
  */
 public abstract class LocalVariableInstruction extends Instruction implements TypedInstruction, IndexedInstruction {
 
@@ -97,6 +97,8 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     }
 
     /**
+     * Gets the local variable index (n) referred to by this instruction.
+     *
      * @return local variable index (n) referred by this instruction.
      */
     @Override
@@ -105,7 +107,7 @@ public abstract class LocalVariableInstruction extends Instruction implements Ty
     }
 
     /**
-     * Returns the type associated with the instruction - in case of ALOAD or ASTORE Type.OBJECT is returned. This is just a
+     * Gets the type associated with the instruction - in case of ALOAD or ASTORE Type.OBJECT is returned. This is just a
      * bit incorrect, because ALOAD and ASTORE may work on every ReferenceType (including Type.NULL) and ASTORE may even
      * work on a ReturnaddressType.
      *

@@ -21,7 +21,7 @@ package org.apache.bcel.generic;
 import org.apache.bcel.classfile.ConstantPool;
 
 /**
- * Super class for the GET/PUTxxx family of instructions.
+ * Superclass for the GET/PUTxxx family of instructions.
  */
 public abstract class FieldInstruction extends FieldOrMethod {
 
@@ -72,6 +72,8 @@ public abstract class FieldInstruction extends FieldOrMethod {
     }
 
     /**
+     * Gets the type of the referenced field.
+     *
      * @return return type of referenced field.
      */
     @Override

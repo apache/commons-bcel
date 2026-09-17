@@ -70,7 +70,7 @@ public class VerifyDialog extends JDialog {
     private static final long serialVersionUID = -6374807677043142313L;
 
     /**
-     * This field is here to count the number of open VerifyDialog instances so the JVM can be exited afer every Dialog had
+     * This field is here to count the number of open VerifyDialog instances so the JVM can be exited after every Dialog had
      * been closed.
      */
     private static int classesToVerify;
@@ -315,7 +315,7 @@ public class VerifyDialog extends JDialog {
         getPass3Panel().repaint();
     }
 
-    /** Machine-generated. */
+    /** Gets the flush button. */
     private JButton getFlushButton() {
         if (ivjFlushButton == null) {
             try {
@@ -337,7 +337,7 @@ public class VerifyDialog extends JDialog {
         return ivjFlushButton;
     }
 
-    /** Machine-generated. */
+    /** Gets the dialog content pane. */
     private JPanel getJDialogContentPane() {
         if (ivjJDialogContentPane == null) {
             try {
@@ -362,7 +362,7 @@ public class VerifyDialog extends JDialog {
         return ivjJDialogContentPane;
     }
 
-    /** Machine-generated. */
+    /** Gets the pass 1 button. */
     private JButton getPass1Button() {
         if (ivjPass1Button == null) {
             try {
@@ -383,7 +383,7 @@ public class VerifyDialog extends JDialog {
         return ivjPass1Button;
     }
 
-    /** Machine-generated. */
+    /** Gets the pass 1 panel. */
     private JPanel getPass1Panel() {
         if (ivjPass1Panel == null) {
             try {
@@ -403,7 +403,7 @@ public class VerifyDialog extends JDialog {
         return ivjPass1Panel;
     }
 
-    /** Machine-generated. */
+    /** Gets the pass 2 button. */
     private JButton getPass2Button() {
         if (ivjPass2Button == null) {
             try {
@@ -424,7 +424,7 @@ public class VerifyDialog extends JDialog {
         return ivjPass2Button;
     }
 
-    /** Machine-generated. */
+    /** Gets the pass 2 panel. */
     private JPanel getPass2Panel() {
         if (ivjPass2Panel == null) {
             try {
@@ -444,7 +444,7 @@ public class VerifyDialog extends JDialog {
         return ivjPass2Panel;
     }
 
-    /** Machine-generated. */
+    /** Gets the pass 3 button. */
     private JButton getPass3Button() {
         if (ivjPass3Button == null) {
             try {
@@ -465,7 +465,7 @@ public class VerifyDialog extends JDialog {
         return ivjPass3Button;
     }
 
-    /** Machine-generated. */
+    /** Gets the pass 3 panel. */
     private JPanel getPass3Panel() {
         if (ivjPass3Panel == null) {
             try {

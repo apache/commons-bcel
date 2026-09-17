@@ -87,7 +87,7 @@ public final class Pass1Verifier extends PassVerifier {
      * code attribute.</li>
      * <li>there should be exactly attribute_length many bytes in each attribute. Inconsistency between attribute_length and
      * the actually size of the attribute content should be uncovered. For example, in an Exceptions attribute, the actual
-     * number of exceptions as required by the number_of_exceptions field might yeild an attribute size that doesn't match
+     * number of exceptions as required by the number_of_exceptions field might yield an attribute size that doesn't match
      * the attribute_length. Such an anomaly should be detected.</li>
      * <li>all attributes should have proper length. In particular, under certain context (for example while parsing method_info),
      * recognizable attributes (for example "Code" attribute) should have correct format (for example attribute_length is 2).</li>
@@ -161,7 +161,7 @@ public final class Pass1Verifier extends PassVerifier {
     }
 
     /**
-     * Used to load in and return the myOwner-matching JavaClass object when needed. Avoids loading in a class file when
+     * Gets the JavaClass object matching myOwner, loading it when needed. Avoids loading in a class file when
      * it's not really needed!
      */
     private JavaClass getJavaClass() {
@@ -179,7 +179,7 @@ public final class Pass1Verifier extends PassVerifier {
     }
 
     /**
-     * Currently this returns an empty array of String. One could parse the error messages of BCEL (written to
+     * Gets the warning messages, currently an empty String array. One could parse the error messages of BCEL (written to
      * {@link System#err}) when loading a class file such as detecting unknown attributes or trailing garbage at the end
      * of a class file. However, Markus Dahm does not like the idea so this method is currently useless and therefore marked
      * as <strong>TODO</strong>.

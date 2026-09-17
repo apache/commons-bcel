@@ -29,7 +29,7 @@ package org.apache.bcel.generic;
 public final class BranchHandle extends InstructionHandle {
 
     /**
-     * Factory method.
+     * Gets a new branch handle for the given instruction.
      */
     static BranchHandle getBranchHandle(final BranchInstruction i) {
         return new BranchHandle(i);
@@ -82,7 +82,7 @@ public final class BranchHandle extends InstructionHandle {
     }
 
     /**
-     * Pass new target to instruction.
+     * Sets the target of the instruction.
      *
      * @param ih The new target.
      */

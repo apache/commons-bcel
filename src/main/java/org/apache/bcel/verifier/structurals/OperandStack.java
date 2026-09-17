@@ -91,7 +91,7 @@ public class OperandStack implements Cloneable {
     }
 
     /**
-     * Returns a (typed!) clone of this.
+     * Gets a (typed!) clone of this.
      *
      * @return A clone of this operand stack.
      * @see #clone()
@@ -124,7 +124,7 @@ public class OperandStack implements Cloneable {
     }
 
     /**
-     * Returns true IFF this OperandStack is empty.
+     * Tests whether this OperandStack is empty.
      *
      * @return true if empty, false otherwise.
      */

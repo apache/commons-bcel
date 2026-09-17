@@ -75,6 +75,8 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
     }
 
     /**
+     * Gets {@code Type.BYTE}.
+     *
      * @return Type.BYTE.
      */
     @Override

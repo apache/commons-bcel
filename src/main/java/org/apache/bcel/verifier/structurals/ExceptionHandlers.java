@@ -59,7 +59,7 @@ public class ExceptionHandlers {
     }
 
     /**
-     * Returns all the ExceptionHandler instances representing exception handlers that protect the instruction ih.
+     * Gets all the ExceptionHandler instances representing exception handlers that protect the instruction ih.
      *
      * @param ih The instruction handle.
      * @return array of exception handlers.

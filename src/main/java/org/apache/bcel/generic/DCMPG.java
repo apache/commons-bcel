@@ -47,6 +47,8 @@ public class DCMPG extends Instruction implements TypedInstruction, StackProduce
     }
 
     /**
+     * Gets {@code Type.DOUBLE}.
+     *
      * @return Type.DOUBLE.
      */
     @Override

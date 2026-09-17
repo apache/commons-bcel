@@ -19,7 +19,7 @@
 package org.apache.bcel.generic;
 
 /**
- * Super class for JSR - Jump to subroutine
+ * Superclass for JSR - Jump to subroutine
  */
 public abstract class JsrInstruction extends BranchInstruction implements UnconditionalBranch, TypedInstruction, StackProducer {
 
@@ -34,6 +34,8 @@ public abstract class JsrInstruction extends BranchInstruction implements Uncond
     }
 
     /**
+     * Gets the return address type.
+     *
      * @return return address type.
      */
     @Override

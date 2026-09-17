@@ -135,7 +135,7 @@ public class IINC extends LocalVariableInstruction {
     }
 
     /**
-     * Sets index of local variable.
+     * Sets the index of the local variable.
      *
      * @param index index of local variable.
      * @throws ClassGenException Thrown if index is out of bounds.

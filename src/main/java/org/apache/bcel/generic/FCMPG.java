@@ -47,6 +47,8 @@ public class FCMPG extends Instruction implements TypedInstruction, StackProduce
     }
 
     /**
+     * Gets {@code Type.FLOAT}.
+     *
      * @return Type.FLOAT.
      */
     @Override

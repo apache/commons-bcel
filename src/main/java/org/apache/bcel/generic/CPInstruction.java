@@ -29,7 +29,7 @@ import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.ByteSequence;
 
 /**
- * Abstract super class for instructions that use an index into the constant pool such as LDC, INVOKEVIRTUAL, etc.
+ * Abstract superclass for instructions that use an index into the constant pool such as LDC, INVOKEVIRTUAL, etc.
  *
  * @see ConstantPoolGen
  * @see LDC
@@ -72,6 +72,8 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
     }
 
     /**
+     * Gets the constant pool index referred to by this instruction.
+     *
      * @return index in constant pool referred by this instruction.
      */
     @Override
@@ -80,6 +82,8 @@ public abstract class CPInstruction extends Instruction implements TypedInstruct
     }
 
     /**
+     * Gets the type associated with this instruction.
+     *
      * @return type related with this instruction.
      */
     @Override

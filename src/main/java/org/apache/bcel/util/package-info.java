@@ -24,7 +24,7 @@
  * <li>A converter for class files to HTML</li>
  * <li>A tool to find instructions patterns via regular expressions</li>
  * <li>A class to find classes as defined in the CLASSPATH</li>
- * <li>A class loader that allows to create classes at run time</li>
+ * <li>A class loader that allows classes to be created at run time</li>
  * </ul>
  */
 package org.apache.bcel.util;

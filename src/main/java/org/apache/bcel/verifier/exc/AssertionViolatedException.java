@@ -90,7 +90,7 @@ public final class AssertionViolatedException extends RuntimeException {
     }
 
     /**
-     * Returns the error message string of this AssertionViolatedException object.
+     * Gets the error message string of this AssertionViolatedException object.
      *
      * @return The error message string of this AssertionViolatedException.
      */

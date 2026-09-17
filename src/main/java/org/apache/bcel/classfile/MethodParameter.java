@@ -123,7 +123,7 @@ public class MethodParameter implements Cloneable, Node {
     }
 
     /**
-     * Checks if this parameter is final.
+     * Tests whether this parameter is final.
      *
      * @return true if this parameter is final.
      */
@@ -132,7 +132,7 @@ public class MethodParameter implements Cloneable, Node {
     }
 
     /**
-     * Checks if this parameter is mandated.
+     * Tests whether this parameter is mandated.
      *
      * @return true if this parameter is mandated.
      */
@@ -141,7 +141,7 @@ public class MethodParameter implements Cloneable, Node {
     }
 
     /**
-     * Checks if this parameter is synthetic.
+     * Tests whether this parameter is synthetic.
      *
      * @return true if this parameter is synthetic.
      */

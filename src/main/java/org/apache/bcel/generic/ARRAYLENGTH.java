@@ -30,7 +30,7 @@ import org.apache.bcel.ExceptionConst;
 public class ARRAYLENGTH extends Instruction implements ExceptionThrower, StackProducer, StackConsumer /* since 6.0 */ {
 
     /**
-     * Gets length of array
+     * Gets the length of the array.
      */
     public ARRAYLENGTH() {
         super(org.apache.bcel.Const.ARRAYLENGTH, (short) 1);
@@ -50,6 +50,8 @@ public class ARRAYLENGTH extends Instruction implements ExceptionThrower, StackP
     }
 
     /**
+     * Gets the exceptions this instruction may cause.
+     *
      * @return exceptions this instruction may cause.
      */
     @Override

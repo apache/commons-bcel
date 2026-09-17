@@ -155,7 +155,7 @@ public final class StackMapType implements Node, Cloneable {
     }
 
     /**
-     * Checks if this type has an index.
+     * Tests whether this type has an index.
      *
      * @return true, if type is either ITEM_Object or ITEM_NewObject.
      */

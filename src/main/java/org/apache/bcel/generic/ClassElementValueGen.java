@@ -97,7 +97,7 @@ public class ClassElementValueGen extends ElementValueGen {
     }
 
     /**
-     * Return immutable variant of this ClassElementValueGen.
+     * Gets an immutable variant of this ClassElementValueGen.
      *
      * @return immutable variant of this ClassElementValueGen.
      */

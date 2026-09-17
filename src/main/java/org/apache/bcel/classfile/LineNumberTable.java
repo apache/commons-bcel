@@ -135,7 +135,7 @@ public final class LineNumberTable extends Attribute implements Iterable<LineNum
     }
 
     /**
-     * Map byte code positions to source code lines.
+     * Gets the source code line corresponding to a bytecode position.
      *
      * @param pos byte code offset.
      * @return corresponding line in source code.

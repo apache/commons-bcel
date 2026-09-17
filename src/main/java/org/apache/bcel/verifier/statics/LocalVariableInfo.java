@@ -108,8 +108,8 @@ public class LocalVariableInfo {
     }
 
     /**
-     * Returns the name of the local variable that uses this local variable slot at the given bytecode offset. Care for
-     * legal bytecode offsets yourself, otherwise the return value might be wrong. May return 'null' if nothing is known
+     * Gets the name of the local variable that uses this local variable slot at the given bytecode offset. Ensure that
+     * the bytecode offset is valid; otherwise, the return value might be wrong. May return 'null' if nothing is known
      * about the type of this local variable slot at the given bytecode offset.
      *
      * @param offset bytecode offset.
@@ -121,8 +121,8 @@ public class LocalVariableInfo {
     }
 
     /**
-     * Returns the type of the local variable that uses this local variable slot at the given bytecode offset. Care for
-     * legal bytecode offsets yourself, otherwise the return value might be wrong. May return 'null' if nothing is known
+     * Gets the type of the local variable that uses this local variable slot at the given bytecode offset. Ensure that
+     * the bytecode offset is valid; otherwise, the return value might be wrong. May return 'null' if nothing is known
      * about the type of this local variable slot at the given bytecode offset.
      *
      * @param offset bytecode offset.

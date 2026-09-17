@@ -145,7 +145,7 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
-     * Gets array of method argument types.
+     * Gets an array of method argument types.
      *
      * @return array of method argument types.
      */
@@ -154,7 +154,7 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
-     * Gets Code attribute of method, if any.
+     * Gets the Code attribute of the method, if any.
      *
      * @return Code attribute of method, if any.
      */
@@ -168,7 +168,7 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
-     * Gets ExceptionTable attribute of method, if any.
+     * Gets the ExceptionTable attribute of the method, if any.
      *
      * @return ExceptionTable attribute of method, if any, that is, list all exceptions the method may throw not exception handlers.
      */
@@ -182,7 +182,7 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
-     * Gets LineNumberTable of code attribute if any.
+     * Gets the LineNumberTable of the code attribute, if any.
      *
      * @return LineNumberTable of code attribute if any, for example the call is forwarded to the Code attribute.
      */
@@ -195,7 +195,7 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
-     * Gets LocalVariableTable of code attribute if any.
+     * Gets the LocalVariableTable of the code attribute, if any.
      *
      * @return LocalVariableTable of code attribute if any, for example the call is forwarded to the Code attribute.
      */
@@ -222,7 +222,7 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
-     * Gets Annotations on the parameters of a method.
+     * Gets the annotations on the parameters of a method.
      *
      * @return Annotations on the parameters of a method.
      * @since 6.0

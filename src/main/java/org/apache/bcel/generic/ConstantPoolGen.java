@@ -775,6 +775,8 @@ public class ConstantPoolGen {
     }
 
     /**
+     * Sets the constant pool entry at the given index.
+     *
      * Use with care!
      *
      * @param i index in constant pool.

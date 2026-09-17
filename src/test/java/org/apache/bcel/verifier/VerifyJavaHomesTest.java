@@ -36,7 +36,7 @@ class VerifyJavaHomesTest extends AbstractVerifierTest {
      * Eventually runs out of memory? Super now calls VerifierFactory.clear();
      *
      * @param name.
-     * @throws ClassNotFoundException
+     * @throws ClassNotFoundException Thrown if the class cannot be found.
      */
     @Disabled("Run once in a while, it takes a very long time.")
     @ParameterizedTest

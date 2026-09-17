@@ -151,7 +151,7 @@ public class LDC extends CPInstruction implements PushInstruction, ExceptionThro
     }
 
     /**
-     * Adjusts to proper size.
+     * Sets the opcode and length to accommodate the constant pool index.
      */
     protected final void setSize() {
         if (super.getIndex() <= org.apache.bcel.Const.MAX_BYTE) { // Fits in one byte?

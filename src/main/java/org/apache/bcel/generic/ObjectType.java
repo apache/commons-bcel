@@ -29,7 +29,7 @@ import org.apache.bcel.classfile.Utility;
 public class ObjectType extends ReferenceType {
 
     /**
-     * Constructs a new instance.
+     * Gets a new instance.
      *
      * @param className fully qualified class name, for example {@link String}.
      * @return A new instance.
@@ -76,6 +76,8 @@ public class ObjectType extends ReferenceType {
     }
 
     /**
+     * Gets the name of the referenced class.
+     *
      * @return name of referenced class.
      */
     @Override
@@ -94,7 +96,7 @@ public class ObjectType extends ReferenceType {
     }
 
     /**
-     * If "this" doesn't reference a class, it references an interface or a non-existant entity.
+     * If "this" doesn't reference a class, it references an interface or a nonexistent entity.
      *
      * @return true if it references a class, false otherwise.
      * @deprecated (since 6.0) this method returns an inaccurate result if the class or interface referenced cannot be
@@ -122,7 +124,7 @@ public class ObjectType extends ReferenceType {
     }
 
     /**
-     * If "this" doesn't reference an interface, it references a class or a non-existant entity.
+     * If "this" doesn't reference an interface, it references a class or a nonexistent entity.
      *
      * @return true if it references an interface, false otherwise.
      * @deprecated (since 6.0) this method returns an inaccurate result if the class or interface referenced cannot be

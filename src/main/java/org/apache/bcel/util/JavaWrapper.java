@@ -65,7 +65,7 @@ public class JavaWrapper {
      */
     public static void main(final String[] argv) throws Exception {
         /*
-         * Expects class name as first argument, other arguments are by-passed.
+         * Expects class name as first argument, other arguments are bypassed.
          */
         if (argv.length == 0) {
             System.out.println("Missing class name.");

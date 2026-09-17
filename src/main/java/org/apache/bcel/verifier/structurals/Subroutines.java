@@ -235,10 +235,13 @@ public class Subroutines {
         }
 
         /**
+         * Gets the recursively accessed local variable indexes and adds them to the supplied set.
+         * <p>
          * A recursive helper method for getRecursivelyAccessedLocalsIndices(). Every subroutine is visited at most
          * once: since the computed set is a plain union, re-exploring an already visited subroutine cannot add
          * anything, but doing so once per call path made this helper exponential in the depth of the JSR call graph
          * (and made it recurse forever on a cyclic one).
+         * </p>
          *
          * @see #getRecursivelyAccessedLocalsIndices()
          */
@@ -346,7 +349,7 @@ public class Subroutines {
     } // end Inner Class SubrouteImpl
 
     /**
-     * A utility method that calculates the successors of a given InstructionHandle <strong>in the same subroutine</strong>. That
+     * Gets the successors of a given InstructionHandle <strong>in the same subroutine</strong>. That
      * means, a RET does not have any successors as defined here. A JsrInstruction has its physical successor as its
      * successor (opposed to its target) as defined here.
      */
@@ -597,7 +600,7 @@ public class Subroutines {
     }
 
     /**
-     * Returns the Subroutine object associated with the given leader (that is, the first instruction of the subroutine).
+     * Gets the Subroutine object associated with the given leader (that is, the first instruction of the subroutine).
      * You must not use this to get the top-level instructions modeled as a Subroutine object.
      *
      * @param leader The leader instruction handle.
@@ -619,6 +622,8 @@ public class Subroutines {
     }
 
     /**
+     * Gets the Subroutine object representing the top-level code.
+     *
      * For easy handling, the piece of code that is <strong>not</strong> a subroutine, the top-level, is also modeled as a Subroutine
      * object. It is a special Subroutine object where <B>you must not invoke getEnteringJsrInstructions() or
      * getLeavingRET()</B>.
@@ -708,7 +713,7 @@ public class Subroutines {
     }
 
     /**
-     * Returns a String representation of this object; merely for debugging puposes.
+     * Returns a String representation of this object; merely for debugging purposes.
      */
     @Override
     public String toString() {

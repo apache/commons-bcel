@@ -37,7 +37,7 @@ public interface Subroutine {
     boolean contains(InstructionHandle inst);
 
     /**
-     * Returns an int[] containing the indices of the local variable slots accessed by this Subroutine (read-accessed,
+     * Gets an int[] containing the indices of the local variable slots accessed by this Subroutine (read-accessed,
      * write-accessed or both); local variables referenced by subroutines of this subroutine are not included.
      *
      * @return An int[] containing the indices of the local variable slots.
@@ -46,7 +46,7 @@ public interface Subroutine {
     int[] getAccessedLocalsIndices();
 
     /**
-     * Returns all the JsrInstructions that have the first instruction of this subroutine as their target. <B>Must not be
+     * Gets all the JsrInstructions that have the first instruction of this subroutine as their target. <B>Must not be
      * invoked on the 'top-level subroutine'.</B>
      *
      * @return The JsrInstructions that have the first instruction of this subroutine as their target.
@@ -54,7 +54,7 @@ public interface Subroutine {
     InstructionHandle[] getEnteringJsrInstructions();
 
     /**
-     * Returns all instructions that together form this subroutine. Note that an instruction is part of exactly one
+     * Gets all instructions that together form this subroutine. Note that an instruction is part of exactly one
      * subroutine (the top-level code is considered to be a special subroutine) - else it is not reachable at all (dead
      * code).
      *
@@ -63,7 +63,7 @@ public interface Subroutine {
     InstructionHandle[] getInstructions();
 
     /**
-     * Returns the one and only RET that leaves the subroutine. Note that JustIce has a pretty rigid notion of a subroutine.
+     * Gets the one and only RET that leaves the subroutine. Note that JustIce has a pretty rigid notion of a subroutine.
      * <strong>Must not be invoked on the 'top-level subroutine'.</strong>
      *
      * @return The one and only RET that leaves the subroutine.
@@ -72,7 +72,7 @@ public interface Subroutine {
     InstructionHandle getLeavingRET();
 
     /**
-     * Returns an int[] containing the indices of the local variable slots accessed by this Subroutine (read-accessed,
+     * Gets an int[] containing the indices of the local variable slots accessed by this Subroutine (read-accessed,
      * write-accessed or both); local variables referenced by subroutines of this subroutine are included.
      *
      * @return An int[] containing the indices of the local variable slots.

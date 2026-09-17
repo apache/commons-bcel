@@ -89,17 +89,17 @@ public class Package {
     TreeMap<String, String> notFound = new TreeMap<>();
 
     /**
-     * See wheather we print the classes that were not found (default = false)
+     * See whether we print the classes that were not found (default = false)
      */
     boolean showNotFound = false;
 
     /**
-     * Remember wheather to print allClasses at the end (default = false)
+     * Remember whether to print allClasses at the end (default = false)
      */
     boolean printClasses = false;
 
     /**
-     * Wheather we log classes during processing (default = false)
+     * Whether we log classes during processing (default = false)
      */
     boolean log = false;
 
@@ -112,7 +112,7 @@ public class Package {
             System.out.println("processing: " + clas + " referenced by " + from);
         }
 
-        // must check if it's an arrary (start with "[")
+        // must check if it's an array (starts with "[")
         if (clas.startsWith("[")) {
             if (clas.length() == 2) {
                 // it's an array of built in type, ignore

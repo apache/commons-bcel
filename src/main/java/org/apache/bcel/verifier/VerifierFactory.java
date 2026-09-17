@@ -100,7 +100,7 @@ public class VerifierFactory {
     }
 
     /**
-     * Returns the verifier responsible for the class with the given name. Possibly a new Verifier object is
+     * Gets the verifier responsible for the class with the given name. Possibly a new Verifier object is
      * transparently created; if the cache bound ({@link #MAX_CACHE_SIZE_PROPERTY}) has been reached, the
      * least-recently-used cached Verifier is evicted first.
      *
@@ -116,7 +116,7 @@ public class VerifierFactory {
     }
 
     /**
-     * Returns all Verifier instances created so far. This is useful when a Verifier recursively lets the VerifierFactory
+     * Gets all Verifier instances created so far. This is useful when a Verifier recursively lets the VerifierFactory
      * create other Verifier instances and if you want to verify the transitive hull of referenced class files.
      *
      * @return array of all Verifier instances.

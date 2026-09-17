@@ -538,7 +538,7 @@ public abstract class Utility {
         case Const.INVOKEDYNAMIC:
             index = bytes.readUnsignedShort();
             buf.append("\t").append(constantPool.constantToString(index, Const.CONSTANT_InvokeDynamic)).append(verbose ? " (" + index + ")\t" : "")
-                .append(bytes.readUnsignedByte()) // Thrid byte is a reserved space
+                .append(bytes.readUnsignedByte()) // Third byte is a reserved space
                 .append(bytes.readUnsignedByte()); // Last byte is a reserved space
             break;
         /*
@@ -813,7 +813,7 @@ public abstract class Utility {
     }
 
     /**
-     * Parse Java type such as "char", or "java.lang.String[]" and return the signature in byte code format, for example "C" or
+     * Gets the bytecode signature for a Java type such as "char" or "java.lang.String[]", for example, "C" or
      * "[Ljava/lang/String;" respectively.
      *
      * @param type Java type.
@@ -879,7 +879,7 @@ public abstract class Utility {
      * WARNING:
      *
      * There is some nomenclature confusion through much of the BCEL code base with respect to the terms Descriptor and
-     * Signature. For the offical definitions see:
+     * Signature. For the official definitions see:
      *
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.3"> Descriptors in The Java
      *      Virtual Machine Specification</a>
@@ -950,7 +950,7 @@ public abstract class Utility {
             }
             while (signature.charAt(index) != ')') {
                 vec.add(typeSignatureToString(signature.substring(index), chopit));
-                // corrected concurrent private static field acess
+                // corrected concurrent private static field access
                 index += unwrap(CONSUMER_CHARS); // update position
             }
         } catch (final StringIndexOutOfBoundsException e) { // Should never occur
@@ -1057,7 +1057,7 @@ public abstract class Utility {
                     varIndex++;
                 }
                 buf.append(", ");
-                // corrected concurrent private static field acess
+                // corrected concurrent private static field access
                 index += unwrap(CONSUMER_CHARS); // update position
             }
             index++; // update position
@@ -1261,7 +1261,7 @@ public abstract class Utility {
      * Enum and Interface signatures are not supported.
      *
      * @param signature signature to convert.
-     * @return String containg human readable signature.
+     * @return String containing a human-readable signature.
      */
     public static String signatureToString(final String signature) {
         return signatureToString(signature, true);
@@ -1273,7 +1273,7 @@ public abstract class Utility {
      *
      * @param signature signature to convert.
      * @param chopit flag that determines whether chopping is executed or not.
-     * @return String containg human readable signature.
+     * @return String containing a human-readable signature.
      */
     public static String signatureToString(final String signature, final boolean chopit) {
         String type = "";
@@ -1412,10 +1412,10 @@ public abstract class Utility {
      *
      * @param signature signature to convert.
      * @param chopit flag that determines whether chopping is executed or not.
-     * @return String containg human readable signature.
+     * @return String containing a human-readable signature.
      */
     private static String typeParamTypesToString(final String signature, final boolean chopit) {
-        // The first character is guranteed to be '<'
+        // The first character is guaranteed to be '<'
         final StringBuilder typeParams = new StringBuilder("<");
         int index = 1; // skip the '<'
         // get the first TypeParameter
@@ -1436,7 +1436,7 @@ public abstract class Utility {
      *
      * @param signature signature to convert.
      * @param chopit flag that determines whether chopping is executed or not.
-     * @return String containg human readable signature.
+     * @return String containing a human-readable signature.
      */
     private static String typeParamTypeToString(final String signature, final boolean chopit) {
         int index = signature.indexOf(':');
@@ -1469,7 +1469,7 @@ public abstract class Utility {
      * @param signature signature to convert.
      * @param chopit flag that determines whether chopping is executed or not.
      * @param term character indicating the end of the list.
-     * @return String containg human readable signature.
+     * @return String containing a human-readable signature.
      */
     private static String typeSignaturesToString(final String signature, final boolean chopit, final char term) {
         // The first character will be an 'open' that matches the 'close' contained in term.
@@ -1518,7 +1518,7 @@ public abstract class Utility {
         if (depth > MAX_SIGNATURE_NESTING) {
             throw new ClassFormatException("Invalid signature: nesting depth exceeds %,d", MAX_SIGNATURE_NESTING);
         }
-        // corrected concurrent private static field acess
+        // corrected concurrent private static field access
         wrap(CONSUMER_CHARS, 1); // This is the default, read just one char like 'B'
         try {
             switch (signature.charAt(0)) {
@@ -1539,7 +1539,7 @@ public abstract class Utility {
                 if (index < 0) {
                     throw new ClassFormatException("Invalid type variable signature: %s", signature);
                 }
-                // corrected concurrent private static field acess
+                // corrected concurrent private static field access
                 wrap(CONSUMER_CHARS, index + 1); // "Tblabla;" 'T' and ';' are removed
                 return compactClassName(signature.substring(1, index), chopit);
             }
@@ -1662,7 +1662,7 @@ public abstract class Utility {
                 final int consumedChars = n; // Remember value
                 // The rest of the string denotes a '<field_type>'
                 final String type = typeSignatureToString(signature.substring(n), chopit, depth + 1);
-                // corrected concurrent private static field acess
+                // corrected concurrent private static field access
                 // consumed_chars += consumed_chars; is replaced by:
                 final int temp = unwrap(CONSUMER_CHARS) + consumedChars;
                 wrap(CONSUMER_CHARS, temp);

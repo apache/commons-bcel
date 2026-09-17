@@ -82,7 +82,7 @@ class RecordTest extends AbstractTest {
      * (through BCEL) that it is in fact a record.
      *
      * @throws IOException Thrown if an I/O error occurs.
-     * @throws ClassFormatException
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     @Test
     void testRecordClassSaysItIs() throws ClassNotFoundException, ClassFormatException, IOException {
@@ -107,8 +107,8 @@ class RecordTest extends AbstractTest {
      * A simple record with two simple fields, an integer and a String field, should
      * show its content in its string representation.
      *
-     * @throws ClassNotFoundException
-     * @throws ClassFormatException
+     * @throws ClassNotFoundException Thrown if the class cannot be found.
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      * @throws IOException Thrown if an I/O error occurs.
      */
     @Test

@@ -28,7 +28,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 public final class Utility {
 
     /**
-     * This method returns the stack trace of a Throwable instance as a String.
+     * Gets the stack trace of a Throwable instance as a String.
      *
      * @param t The Throwable instance.
      * @return The stack trace as a String.

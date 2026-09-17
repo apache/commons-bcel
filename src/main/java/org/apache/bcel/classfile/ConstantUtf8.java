@@ -257,7 +257,10 @@ public final class ConstantUtf8 extends Constant {
     }
 
     /**
+     * Always throws {@link UnsupportedOperationException} because this constant is immutable.
+     *
      * @param bytes The raw bytes of this UTF-8.
+     * @throws UnsupportedOperationException Thrown unconditionally.
      * @deprecated (since 6.0)
      */
     @java.lang.Deprecated

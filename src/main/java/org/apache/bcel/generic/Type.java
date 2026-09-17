@@ -31,7 +31,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 
 /**
- * Abstract super class for all possible Java types, namely basic types such as int, object types like String and array
+ * Abstract superclass for all possible Java types, namely basic types such as int, object types like String and array
  * types, for example int[]
  */
 public abstract class Type {
@@ -104,7 +104,7 @@ public abstract class Type {
     }
 
     /**
-     * Convert arguments of a method (signature) to an array of Type objects.
+     * Gets the argument types of a method from its signature as an array of Type objects.
      *
      * @param signature signature string such as (Ljava/lang/String;)V.
      * @return array of argument types.
@@ -152,7 +152,7 @@ public abstract class Type {
     }
 
     /**
-     * Convert type to Java method signature, for example int[] f(java.lang.String x) becomes (Ljava/lang/String;)[I
+     * Gets the Java method signature for the given types, for example, int[] f(java.lang.String x) becomes (Ljava/lang/String;)[I.
      *
      * @param returnType what the method returns.
      * @param argTypes what are the argument types.
@@ -171,7 +171,7 @@ public abstract class Type {
     }
 
     /**
-     * Convert return value of a method (signature) to a Type object.
+     * Gets the return type of a method from its signature as a Type object.
      *
      * @param signature signature string such as (Ljava/lang/String;)V.
      * @return return type.
@@ -209,7 +209,7 @@ public abstract class Type {
     }
 
     /**
-     * Convert runtime {@link Class} to BCEL Type object.
+     * Gets the BCEL Type object corresponding to a runtime {@link Class}.
      *
      * @param cls Java class.
      * @return corresponding Type object.
@@ -256,7 +256,7 @@ public abstract class Type {
     }
 
     /**
-     * Convert signature to a Type object.
+     * Gets the Type object corresponding to a signature.
      *
      * @param signature signature string such as Ljava/lang/String;.
      * @return type object.
@@ -288,7 +288,7 @@ public abstract class Type {
     }
 
     /**
-     * Convert runtime {@code java.lang.Class[]} to BCEL Type objects.
+     * Gets the BCEL Type objects corresponding to an array of runtime classes.
      *
      * @param classes An array of runtime class objects.
      * @return array of corresponding Type objects.

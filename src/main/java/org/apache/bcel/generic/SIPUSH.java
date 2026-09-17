@@ -75,6 +75,8 @@ public class SIPUSH extends Instruction implements ConstantPushInstruction {
     }
 
     /**
+     * Gets {@code Type.SHORT}.
+     *
      * @return Type.SHORT.
      */
     @Override

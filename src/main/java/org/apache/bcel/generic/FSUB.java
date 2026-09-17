@@ -19,7 +19,7 @@
 package org.apache.bcel.generic;
 
 /**
- * FSUB - Substract floats
+ * FSUB - Subtract floats
  *
  * <pre>
  * Stack: ..., value1, value2 -&gt; result
@@ -28,7 +28,7 @@ package org.apache.bcel.generic;
 public class FSUB extends ArithmeticInstruction {
 
     /**
-     * Substract floats
+     * Subtract floats
      */
     public FSUB() {
         super(org.apache.bcel.Const.FSUB);

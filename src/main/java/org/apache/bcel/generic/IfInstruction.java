@@ -19,7 +19,7 @@
 package org.apache.bcel.generic;
 
 /**
- * Super class for the IFxxx family of instructions.
+ * Superclass for the IFxxx family of instructions.
  */
 public abstract class IfInstruction extends BranchInstruction implements StackConsumer {
 

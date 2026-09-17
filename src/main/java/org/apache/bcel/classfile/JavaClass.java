@@ -423,7 +423,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * Finds a visible field by name and type in this class and its super classes.
+     * Finds a visible field by name and type in this class and its superclasses.
      *
      * @param fieldName The field name to find.
      * @param fieldType The field type to find.
@@ -746,9 +746,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * Gets list of super classes of this class in ascending order.
+     * Gets the list of superclasses of this class in ascending order.
      *
-     * @return list of super classes of this class in ascending order, that is, {@link Object} is always the last element.
+     * @return list of superclasses of this class in ascending order, that is, {@link Object} is always the last element.
      * @throws ClassNotFoundException Thrown if any of the superclasses can't be found.
      */
     public JavaClass[] getSuperClasses() throws ClassNotFoundException {
@@ -766,7 +766,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * returns the super class name of this class. In the case that this class is {@link Object}, it will return itself
+     * Gets the superclass name of this class. In the case that this class is {@link Object}, it will return itself
      * ({@link Object}). This is probably incorrect but isn't fixed at this time to not break existing clients.
      *
      * @return Superclass name.
@@ -821,7 +821,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      * Equivalent to runtime "instanceof" operator.
      *
      * @param superclass The superclass to check.
-     * @return true if this JavaClass is derived from the super class.
+     * @return true if this JavaClass is derived from the superclass.
      * @throws ClassNotFoundException Thrown if superclasses or superinterfaces of this object can't be found.
      */
     public final boolean instanceOf(final JavaClass superclass) throws ClassNotFoundException {
@@ -840,7 +840,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * Checks if this class is anonymous.
+     * Tests whether this class is anonymous.
      *
      * @return true if anonymous.
      * @since 6.0
@@ -851,7 +851,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * Checks if this is a class.
+     * Tests whether this is a class.
      *
      * @return true if this is a class.
      */
@@ -860,7 +860,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * Checks if this class is nested.
+     * Tests whether this class is nested.
      *
      * @return true if nested.
      * @since 6.0
@@ -882,9 +882,9 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * Checks if this is a super class.
+     * Tests whether the ACC_SUPER flag is set.
      *
-     * @return true if this is a super class.
+     * @return true if the ACC_SUPER flag is set.
      */
     public final boolean isSuper() {
         return (super.getAccessFlags() & Const.ACC_SUPER) != 0;
@@ -936,7 +936,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     }
 
     /**
-     * Sets File name of class, aka SourceFile attribute value.
+     * Sets the source file name of the class, that is, the SourceFile attribute value.
      *
      * @param fileName The file name.
      */

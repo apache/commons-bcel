@@ -19,7 +19,7 @@
 package org.apache.bcel.generic;
 
 /**
- * DSUB - Substract doubles
+ * DSUB - Subtract doubles
  *
  * <pre>
  * Stack: ..., value1.word1, value1.word2, value2.word1, value2.word2 -&gt;
@@ -30,7 +30,7 @@ package org.apache.bcel.generic;
 public class DSUB extends ArithmeticInstruction {
 
     /**
-     * Substract doubles
+     * Subtract doubles
      */
     public DSUB() {
         super(org.apache.bcel.Const.DSUB);

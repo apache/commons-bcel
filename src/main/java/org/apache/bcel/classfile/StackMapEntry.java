@@ -241,7 +241,7 @@ public final class StackMapEntry implements Node, Cloneable {
     }
 
     /**
-     * Calculate stack map entry size.
+     * Gets the stack map entry size.
      */
     int getMapEntrySize() {
         if (frameType >= Const.SAME_FRAME && frameType <= Const.SAME_FRAME_MAX) {

@@ -27,7 +27,7 @@ import org.apache.bcel.classfile.AccessFlags;
 import org.apache.bcel.classfile.Attribute;
 
 /**
- * Super class for FieldGen and MethodGen objects, since they have some methods in common!
+ * Superclass for FieldGen and MethodGen objects, since they have some methods in common!
  */
 public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAndTyped, Cloneable {
 
@@ -138,6 +138,8 @@ public abstract class FieldGenOrMethodGen extends AccessFlags implements NamedAn
     }
 
     /**
+     * Gets the name of the method or field.
+     *
      * @return name of method/field.
      */
     @Override
