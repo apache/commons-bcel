@@ -525,6 +525,16 @@
         <commons.jacoco.complexityRatio>0.58</commons.jacoco.complexityRatio>
       </properties>
     </profile>
+    <profile>
+      <id>java11-up</id>
+      <!-- Avoid Mockito failures on Java 21 and 25 -->
+      <activation>
+        <jdk>[11,)</jdk>
+      </activation>
+      <properties>
+        <commons.mockito.version>5.23.0</commons.mockito.version>
+      </properties>
+    </profile>
   </profiles>
   <developers>
     <developer>

@@ -397,8 +397,11 @@ class ConstantPoolModuleToStringTest {
                     "net.bytebuddy",
                     "com.sun.jna",
                     "junit",
-                    // com.azul.* for reproducibility with Azul JDK
-                    "com.azul.");
+                    "com.azul.",
+                    "com.github.spotbugs.annotations",
+                    "org.hamcrest",
+                    "org.objenesis",
+                    "org.jspecify");
             assertTrue(condition, s);
         }
 
