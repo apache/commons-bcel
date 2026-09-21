@@ -61,6 +61,7 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
     <release version="6.14.0" date="YYYY-MM-DD" description="This is a feature and maintenance release. Java 8 or later is required.">
       <!-- FIX -->
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Use modern Mockito on Java 11+ (#528).</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add and use ClassFormatException.ClassFormatException(String, Object...).</action>
       <!-- UPDATE -->
