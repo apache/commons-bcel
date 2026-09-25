@@ -30,6 +30,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
@@ -142,5 +143,30 @@ class MethodGenTest {
         assertFalse(Arrays.asList(end.getTargeters()).contains(lv), "scope end still targeted by the removed variable");
         assertNull(lv.getStart(), "scope start");
         assertNull(lv.getEnd(), "scope end");
+    }
+
+    @Test
+    void testSetMaxLocalsAccountsForLocalVariableTable() {
+        // BCEL-280: some compilers (e.g. kotlinc) emit LocalVariableTable entries for slots that no
+        // instruction in the method body ever touches. setMaxLocals() must not shrink maxLocals below
+        // what those entries require, or the resulting class file fails verification with a
+        // "Invalid index ... in LocalVariableTable" ClassFormatError.
+        final InstructionList il = new InstructionList();
+        il.append(InstructionConst.ALOAD_0);
+        il.append(InstructionConst.RETURN);
+
+        final MethodGen mg = new MethodGen(Const.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[0], "bar", "Foo", il,
+            new ConstantPoolGen());
+
+        final InstructionHandle start = il.getStart();
+        final InstructionHandle end = il.getEnd();
+        // Slot 6 is only referenced through the local variable table below, never by an instruction.
+        mg.addLocalVariable("unusedByCompiler", Type.INT, 6, start, end);
+        assertEquals(7, mg.getMaxLocals(), "addLocalVariable() should already have grown maxLocals");
+
+        // Simulate a later pass (e.g. instrumentation) recomputing maxLocals from the instruction list.
+        mg.setMaxLocals();
+
+        assertEquals(7, mg.getMaxLocals(), "setMaxLocals() dropped a local variable table entry unreferenced by instructions");
     }
 }

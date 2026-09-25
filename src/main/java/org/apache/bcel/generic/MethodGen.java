@@ -1192,7 +1192,8 @@ public class MethodGen extends FieldGenOrMethodGen {
     }
 
     /**
-     * Sets the maximum number of local variables by examining the method signature and instructions.
+     * Sets the maximum number of local variables by examining the method signature, the instructions and the local
+     * variable table entries added via {@link #addLocalVariable}.
      */
     public void setMaxLocals() { // TODO could be package-protected? (some tests would need repackaging)
         if (il != null) {
@@ -1207,6 +1208,15 @@ public class MethodGen extends FieldGenOrMethodGen {
                     if (index > max) {
                         max = index;
                     }
+                }
+            }
+            // Local variables may be registered (for example, copied from an existing LocalVariableTable) without
+            // being referenced by any instruction, e.g. unused variables emitted by some compilers. Account for
+            // those too, so a later call does not shrink maxLocals below what those entries require.
+            for (final LocalVariableGen lv : variableList) {
+                final int index = lv.getIndex() + lv.getType().getSize();
+                if (index > max) {
+                    max = index;
                 }
             }
             maxLocals = max;
