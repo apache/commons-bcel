@@ -67,6 +67,8 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add and use ClassFormatException.ClassFormatException(String, Object...).</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 104 to 105.</action>
+      <!-- REMOVE -->
+      <action                  type="remove" dev="ggregory" due-to="Gary Gregory" issue="BCEL-280">Remove obsolete class file src/examples/Mini/MiniParser$JJCalls.</action>
     </release>
     <release version="6.13.0" date="2026-09-06" description="This is a feature and maintenance release. Java 8 or later is required.">
       <!-- FIX -->

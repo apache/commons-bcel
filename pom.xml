@@ -131,7 +131,6 @@
             <inputExclude>**/*.bnf</inputExclude>
             <inputExclude>**/*.mini</inputExclude>
             <inputExclude>TODO.JustIce</inputExclude>
-            <inputExclude>src/examples/Mini/MiniParser$JJCalls</inputExclude>
           </inputExcludes>
         </configuration>
       </plugin>
@@ -315,7 +314,6 @@
             <inputExclude>**/*.bnf</inputExclude>
             <inputExclude>**/*.mini</inputExclude>
             <inputExclude>TODO.JustIce</inputExclude>
-            <inputExclude>src/examples/Mini/MiniParser$JJCalls</inputExclude>
           </inputExcludes>
         </configuration>
       </plugin>
