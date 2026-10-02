@@ -67,6 +67,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add and use ClassFormatException.ClassFormatException(String, Object...).</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 104 to 105.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-lang3 from 3.20.0 to 3.21.0 #531.</action>
       <!-- REMOVE -->
       <action                  type="remove" dev="ggregory" due-to="Gary Gregory" issue="BCEL-280">Remove obsolete class file src/examples/Mini/MiniParser$JJCalls.</action>
     </release>
