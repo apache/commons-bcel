@@ -33,10 +33,10 @@ jobs:
       max-parallel: 20
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        java: [ 8, 11, 17, 21, 25, 26 ]
+        java: [ 8, 11, 17, 21, 25, 27 ]
         experimental: [false]
         include:
-          - java: 27-ea
+          - java: 28-ea
             os: ubuntu-latest
             experimental: true
 
