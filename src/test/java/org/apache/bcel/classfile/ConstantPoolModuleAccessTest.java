@@ -160,6 +160,9 @@ public final class ConstantPoolModuleAccessTest {
                         expected.add("java.text.spi.NumberFormatProvider");
                         expected.add("java.time.chrono.AbstractChronology");
                         expected.add("java.time.chrono.Chronology");
+                        if (javaClass.getMajor() >= Const.MAJOR_27) {
+                            expected.add("java.time.format.DateTimeFormatterPatternProvider");
+                        }
                         expected.add("java.time.zone.ZoneRulesProvider");
                         if (javaClass.getMajor() > Const.MAJOR_11 && javaClass.getMajor() < Const.MAJOR_24) {
                             expected.add("java.util.random.RandomGenerator");
@@ -177,7 +180,9 @@ public final class ConstantPoolModuleAccessTest {
                             expected.add("jdk.internal.io.JdkConsoleProvider");
                         }
                         expected.add("jdk.internal.logger.DefaultLoggerFinder");
-                        expected.add("sun.text.spi.JavaTimeDateTimePatternProvider");
+                        if (javaClass.getMajor() < Const.MAJOR_27) {
+                            expected.add("sun.text.spi.JavaTimeDateTimePatternProvider");
+                        }
                         expected.add("sun.util.locale.provider.LocaleDataMetaInfo");
                         if (javaClass.getMajor() <= Const.MAJOR_25) {
                             expected.add("sun.util.resources.LocaleData$CommonResourceBundleProvider");
