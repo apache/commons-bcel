@@ -24,10 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -68,28 +66,32 @@ public final class ConstantPoolModuleAccessTest {
                         assertEquals(1, usedClassNames.length);
                         assertEquals("org.junit.jupiter.api.extension.Extension", usedClassNames[0]);
                     } else if (urlPath.contains("junit-platform-launcher")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("org.junit.platform.engine.TestEngine");
                         expected.add("org.junit.platform.launcher.LauncherDiscoveryListener");
                         expected.add("org.junit.platform.launcher.LauncherInterceptor");
                         expected.add("org.junit.platform.launcher.LauncherSessionListener");
                         expected.add("org.junit.platform.launcher.PostDiscoveryFilter");
                         expected.add("org.junit.platform.launcher.TestExecutionListener");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("junit-platform-common")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("org.junit.platform.commons.support.scanning.ClasspathScanner");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("junit-platform-engine")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("org.junit.platform.engine.discovery.DiscoverySelectorIdentifierParser");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/java.rmi/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("java.rmi.server.RMIClassLoaderSpi");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/java.xml/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("javax.xml.datatype.DatatypeFactory");
                         expected.add("javax.xml.parsers.DocumentBuilderFactory");
                         expected.add("javax.xml.parsers.SAXParserFactory");
@@ -100,13 +102,15 @@ public final class ConstantPoolModuleAccessTest {
                         expected.add("javax.xml.validation.SchemaFactory");
                         expected.add("javax.xml.xpath.XPathFactory");
                         expected.add("org.xml.sax.XMLReader");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/java.datatransfer/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("sun.datatransfer.DesktopDatatransferService");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/java.desktop/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("java.awt.im.spi.InputMethodDescriptor");
                         expected.add("javax.accessibility.AccessibilityProvider");
                         expected.add("javax.imageio.spi.ImageInputStreamSpi");
@@ -125,21 +129,24 @@ public final class ConstantPoolModuleAccessTest {
                         expected.add("javax.sound.sampled.spi.FormatConversionProvider");
                         expected.add("javax.sound.sampled.spi.MixerProvider");
                         expected.add("sun.swing.InteropProvider");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/java.naming/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("javax.naming.ldap.StartTlsResponse");
                         expected.add("javax.naming.spi.InitialContextFactory");
                         if (javaClass.getMajor() > Const.MAJOR_11) {
                             expected.add("javax.naming.ldap.spi.LdapDnsProvider");
                         }
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/java.prefs/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("java.util.prefs.PreferencesFactory");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/java.base/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("java.lang.System$LoggerFinder");
                         expected.add("java.net.ContentHandlerFactory");
                         if (javaClass.getMajor() > Const.MAJOR_17) {
@@ -160,6 +167,9 @@ public final class ConstantPoolModuleAccessTest {
                         expected.add("java.text.spi.NumberFormatProvider");
                         expected.add("java.time.chrono.AbstractChronology");
                         expected.add("java.time.chrono.Chronology");
+                        if (javaClass.getMajor() >= Const.MAJOR_27) {
+                            expected.add("java.time.format.DateTimeFormatterPatternProvider");
+                        }
                         expected.add("java.time.zone.ZoneRulesProvider");
                         if (javaClass.getMajor() > Const.MAJOR_11 && javaClass.getMajor() < Const.MAJOR_24) {
                             expected.add("java.util.random.RandomGenerator");
@@ -177,7 +187,9 @@ public final class ConstantPoolModuleAccessTest {
                             expected.add("jdk.internal.io.JdkConsoleProvider");
                         }
                         expected.add("jdk.internal.logger.DefaultLoggerFinder");
-                        expected.add("sun.text.spi.JavaTimeDateTimePatternProvider");
+                        if (javaClass.getMajor() < Const.MAJOR_27) {
+                            expected.add("sun.text.spi.JavaTimeDateTimePatternProvider");
+                        }
                         expected.add("sun.util.locale.provider.LocaleDataMetaInfo");
                         if (javaClass.getMajor() <= Const.MAJOR_25) {
                             expected.add("sun.util.resources.LocaleData$CommonResourceBundleProvider");
@@ -186,49 +198,59 @@ public final class ConstantPoolModuleAccessTest {
                             expected.add("sun.util.resources.LocaleData$LocaleDataResourceBundleProvider");
                         }
                         expected.add("sun.util.spi.CalendarProvider");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/jdk.management.agent/module-info.class") && javaClass.getMajor() < Const.MAJOR_21) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("jdk.internal.agent.spi.AgentProvider");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/java.management/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("javax.management.remote.JMXConnectorProvider");
                         expected.add("javax.management.remote.JMXConnectorServerProvider");
                         expected.add("sun.management.spi.PlatformMBeanProvider");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/java.sql/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("java.sql.Driver");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/jdk.httpserver/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("com.sun.net.httpserver.spi.HttpServerProvider");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/java.sql.rowset/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("javax.sql.rowset.RowSetFactory");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/java.compiler/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("javax.tools.DocumentationTool");
                         expected.add("javax.tools.JavaCompiler");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/java.scripting/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("javax.script.ScriptEngineFactory");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/jdk.dynalink/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("jdk.dynalink.linker.GuardingDynamicLinkerExporter");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/jdk.jdi/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("com.sun.jdi.connect.Connector");
                         expected.add("com.sun.jdi.connect.spi.TransportService");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/jdk.compiler/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("javax.annotation.processing.Processor");
                         expected.add("com.sun.source.util.Plugin");
                         if (javaClass.getMajor() > Const.MAJOR_11) {
@@ -238,52 +260,63 @@ public final class ConstantPoolModuleAccessTest {
                         if (javaClass.getMajor() > Const.MAJOR_23) {
                             expected.add("com.sun.tools.javac.api.JavacTrees$DocCommentTreeTransformer");
                         }
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/jdk.jconsole/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("com.sun.tools.jconsole.JConsolePlugin");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/jdk.attach/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("com.sun.tools.attach.spi.AttachProvider");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/jdk.jshell/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("jdk.jshell.spi.ExecutionControlProvider");
                         expected.add("jdk.internal.editor.spi.BuildInEditorProvider");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/jdk.internal.le/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        final Set<String> expected = new TreeSet<>();
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/jdk.jlink/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("jdk.tools.jlink.plugin.Plugin");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/jdk.internal.jvmstat/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("sun.jvmstat.monitor.MonitoredHostService");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/jdk.jpackage/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         if (javaClass.getMajor() <= Const.MAJOR_25) {
                             expected.add("jdk.jpackage.internal.Bundler");
                             expected.add("jdk.jpackage.internal.Bundlers");
                         } else {
                             expected.add("jdk.jpackage.internal.cli.CliBundlingEnvironment");
                         }
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/jdk.naming.ldap/module-info.class")) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("com.sun.jndi.ldap.spi.LdapDnsProvider");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/jdk.jsobject/module-info.class") && javaClass.getMajor() == Const.MAJOR_11) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("jdk.internal.netscape.javascript.spi.JSObjectProvider");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else if (urlPath.contains("/jdk.jdeps/module-info.class") && javaClass.getMajor() > Const.MAJOR_24) {
-                        final List<String> expected = new ArrayList<>();
+                        final Set<String> expected = new TreeSet<>();
                         expected.add("com.sun.tools.javac.platform.PlatformProvider");
-                        assertEquals(expected, Arrays.asList(usedClassNames));
+                        assertEquals(expected.size(), usedClassNames.length);
+                        assertEquals(expected, new TreeSet<>(Arrays.asList(usedClassNames)));
                     } else {
                         assertEquals(0, usedClassNames.length, () -> "Found " + Arrays.toString(usedClassNames) + " in " + urlPath);
                     }
