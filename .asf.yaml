@@ -16,6 +16,8 @@
 github:
   description: "Apache Commons BCEL"
   homepage: https://commons.apache.org/bcel/
+  autolink_jira:
+    - BCEL
 
   pull_requests:
     # allow auto-merge
