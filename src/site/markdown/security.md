@@ -17,7 +17,7 @@
  under the License.
 -->
 
-# Apache Commons Security Reports
+# Apache Commons Security
 
 ## About Security
 
@@ -35,8 +35,35 @@ If you have encountered an unlisted security vulnerability or other unexpected b
 
 The [Apache Commons security model](https://commons.apache.org/security.html#Security_Model) specifies that it is unsafe to pass possibly malicious input to Commons libraries unless otherwise specified. For Commons BCEL, processing untrusted class data is supported to the extent that this should never allow the supplier of the data to trigger arbitrary code execution, filesystem or network access. It may still trigger other crashes, such as for example `StackOverflowError` or `OutOfMemoryError`: if your code uses BCEL to process untrusted input then it is up to you to compensate for that as necessary. Loading or executing the generated classes is unsafe and may cause unexpected behavior, including execute arbitrary code execution.
 
-## Security Vulnerabilities
+## Security Vulnerabilities Fixed in 6.13.0
 
+### CVE-2026-105111
+
+- CVE-2026-105111: Apache Commons BCEL `Class2HTML` emits unescaped class strings, enabling stored cross-site scripting (XSS).
+- Severity: Low
+- CWE-ID: CWE-79
+- Vendor: The Apache Software Foundation
+- Versions Affected: Apache Commons BCEL before 6.13.0.
+- Description: When `Class2HTML` is used to generate web pages for possibly attacker-controlled class files, its HTML emitters write class-file strings into HTML without escaping them. This enables stored XSS in the generated reports.
+- Mitigation: Users are recommended to upgrade to version 6.13.0 or later, which fixes the issue.
+- Credit: Found by The Apache Software Foundation using Claude Security.
+- Reference: [Apache security advisory](https://lists.apache.org/thread.html/d87nxx7nb5bombqggxhxo9lz16nwtsf9)
+- Reference: [Fix commit](https://github.com/apache/commons-bcel/commit/fb72c225cbc6ec3d94060ed6edb269f07428d504)
+
+### CVE-2026-94114 Fixed
+
+- CVE-2026-94114: Apache Commons BCEL class repositories cache class files under their self-declared names, enabling cache poisoning.
+- Severity: Important
+- CWE-ID: CWE-386
+- Vendor: The Apache Software Foundation
+- Versions Affected: Apache Commons BCEL before 6.13.0.
+- Description: BCEL caches attacker-controlled classes under their self-declared names without validating the requested name, allowing subsequent lookups and name-keyed verification results to refer to a different class.
+- Mitigation: Users are recommended to upgrade to version 6.13.0 or later, which fixes the issue.
+- Credit: Found by The Apache Software Foundation using Claude Security.
+- Reference: [Apache security advisory](https://lists.apache.org/thread.html/co1wfk2lyrmpnfhn49o370pvfl978rw6)
+- Reference: [Fix commit](https://github.com/apache/commons-bcel/commit/14890bf2b9014df25f9b4de86f29b5e917e5656b)
+
+## Security Vulnerabilities Fixed in 6.6.0
 ### CVE-2022-42920
 
 - CVE-2022-42920: Apache Commons BCEL prior to 6.6.0 allows producing arbitrary bytecode via out-of-bounds writing.
