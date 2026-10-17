@@ -43,6 +43,7 @@ import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.generic.BinaryOpCreator;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.FieldGen;
 import org.apache.bcel.generic.InstructionConst;
 import org.apache.bcel.generic.InstructionFactory;
 import org.apache.bcel.generic.InstructionList;
@@ -178,6 +179,31 @@ class BCELifierTest extends AbstractTest {
     }
 
     @Test
+    void testBooleanConstantFieldInitValue() throws Exception {
+        // javac stores "static final boolean ON = true;" as a CONSTANT_Integer ConstantValue; the generated creator
+        // must call FieldGen.setInitValue(boolean), since setInitValue(int) throws for boolean fields.
+        final ClassGen cg = new ClassGen("Example", "java.lang.Object", "Example.java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
+        final ConstantPoolGen cp = cg.getConstantPool();
+        final FieldGen fg = new FieldGen(Const.ACC_PUBLIC | Const.ACC_STATIC | Const.ACC_FINAL, Type.BOOLEAN, "ON", cp);
+        fg.setInitValue(true);
+        cg.addField(fg.getField());
+
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        new BCELifier(cg.getJavaClass(), os).start();
+        final String source = new String(os.toByteArray(), StandardCharsets.UTF_8);
+
+        assertTrue(source.contains("field.setInitValue(true);"), source);
+        assertFalse(source.contains("field.setInitValue(1);"), source);
+
+        final ByteArrayOutputStream compiledClassOutput = new ByteArrayOutputStream();
+        new BCELifier(BCELifier.getJavaClass("BooleanConstants"), compiledClassOutput).start();
+        final String compiledClassSource = new String(compiledClassOutput.toByteArray(), StandardCharsets.UTF_8);
+        assertTrue(compiledClassSource.contains("field.setInitValue(true);"), compiledClassSource);
+        assertTrue(compiledClassSource.contains("field.setInitValue(false);"), compiledClassSource);
+        assertFalse(compiledClassSource.contains("field.setInitValue(0);"), compiledClassSource);
+    }
+
+    @Test
     void testClassNameRejectedWhenNotJavaIdentifier() {
         // Class file names may contain characters the Java language forbids (JVMS 4.2.2 bans only . ; [ /).
         // BCELifier must refuse to emit such a name in identifier position rather than let a crafted
@@ -297,7 +323,8 @@ class BCELifierTest extends AbstractTest {
         "org.apache.commons.lang.builder.ToStringBuilder.class",
         "org.apache.commons.lang.SerializationUtils.class",
         "org.apache.commons.lang.ArrayUtils.class",
-        "target/test-classes/Java4Example.class"
+        "target/test-classes/Java4Example.class",
+        "target/test-classes/BooleanConstants.class"
     // @formatter:on
     })
     void testJavapCompare(final String pathToClass) throws Exception {
