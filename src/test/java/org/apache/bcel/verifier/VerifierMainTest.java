@@ -22,24 +22,29 @@ package org.apache.bcel.verifier;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.bcel.AbstractTest;
+import org.apache.bcel.Const;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
+import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.EmptyVisitor;
+import org.apache.bcel.generic.ILOAD;
+import org.apache.bcel.generic.InstructionConst;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.SWAP;
+import org.apache.bcel.generic.Type;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemProperties;
-import org.eclipse.jdt.internal.compiler.batch.Main;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -50,16 +55,36 @@ class VerifierMainTest extends AbstractTest {
 
     @Test
     void testSWAP() throws Exception {
-        final String[] argv = { "src/test/java/org/apache/bcel/data/SWAP.java", "-g", "-source", "1.4", "-target", "1.4", "-d", tempDir.toString() };
-        new Main(new PrintWriter(System.out), new PrintWriter(System.err), false/*systemExit*/, null/*options*/, null/*progress*/).compile(argv);
+        final String className = "org.apache.bcel.data.SWAP";
+        final Path classFile = tempDir.resolve("org/apache/bcel/data/SWAP.class");
+        final ClassGen classGen = new ClassGen(className, "java.lang.Object", "SWAP.java", Const.ACC_PUBLIC | Const.ACC_SUPER, null);
+        classGen.setMajor(Const.MAJOR_1_4);
+        classGen.setMinor(Const.MINOR_1_4);
+        classGen.addEmptyConstructor(Const.ACC_PUBLIC);
+        final InstructionList instructions = new InstructionList();
+        try {
+            instructions.append(new ILOAD(0));
+            instructions.append(new ILOAD(1));
+            instructions.append(InstructionConst.SWAP);
+            instructions.append(InstructionConst.ISUB);
+            instructions.append(InstructionConst.IRETURN);
+            final MethodGen methodGen = new MethodGen(Const.ACC_PUBLIC | Const.ACC_STATIC, Type.INT, new Type[] { Type.INT, Type.INT },
+                new String[] { "first", "second" }, "swap", className, instructions, classGen.getConstantPool());
+            methodGen.setMaxStack();
+            methodGen.setMaxLocals();
+            classGen.addMethod(methodGen.getMethod());
+        } finally {
+            instructions.dispose();
+        }
+        classGen.getJavaClass().dump(classFile.toFile());
         final String javaAgent = getJavaAgent();
         final List<String> args = new ArrayList<>();
-        args.add("java");
+        args.add(SystemProperties.getJavaHome() + File.separator + "bin" + File.separator + "java");
         if (javaAgent != null) {
             args.add(javaAgent.replace("jacoco.exec", "jacoco_org.apache.bcel.data.SWAP.exec"));
         }
         args.add("-cp");
-        args.add(SystemProperties.getJavaClassPath());
+        args.add(tempDir + File.pathSeparator + SystemProperties.getJavaClassPath());
         args.add("org.apache.bcel.verifier.Verifier");
         args.add("org/apache/bcel/data/SWAP.class");
         final ProcessBuilder pb = new ProcessBuilder(args);
@@ -76,7 +101,7 @@ class VerifierMainTest extends AbstractTest {
             assertEquals(0, StringUtils.countMatches(output, "VERIFIED_REJECTED"), output);
             assertEquals(6, StringUtils.countMatches(output, "VERIFIED_OK"), output);
         }
-        // Class has passed the JustIce verifier, but now we need to ensure that the SWAP instruction is in the compiled class.
+        // Class has passed the JustIce verifier, but now we need to ensure that the SWAP instruction is in the generated class.
         final List<SWAP> swapInstructionsList = new ArrayList<>();
         final EmptyVisitor swapCollector = new EmptyVisitor() {
             @Override
@@ -85,14 +110,18 @@ class VerifierMainTest extends AbstractTest {
                 super.visitSWAP(obj);
             }
         };
-        try (InputStream in = Files.newInputStream(tempDir.resolve("org/apache/bcel/data/SWAP.class"))) {
+        try (InputStream in = Files.newInputStream(classFile)) {
             final ClassParser classParser = new ClassParser(in, "SWAP.class");
             final JavaClass javaClass = classParser.parse();
-            final Method method = javaClass.getMethod(org.apache.bcel.data.SWAP.class.getMethod("getTestConstructor", Class.class));
-            final byte[] code = method.getCode().getCode();
-            final InstructionList instructionList = new InstructionList(code);
-            for (final InstructionHandle instructionHandle : instructionList) {
-                instructionHandle.accept(swapCollector);
+            for (final Method method : javaClass.getMethods()) {
+                final InstructionList instructionList = new InstructionList(method.getCode().getCode());
+                try {
+                    for (final InstructionHandle instructionHandle : instructionList) {
+                        instructionHandle.accept(swapCollector);
+                    }
+                } finally {
+                    instructionList.dispose();
+                }
             }
         }
         assertEquals(1, swapInstructionsList.size());
