@@ -65,11 +65,14 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Max Kammerer, akashchamp, Gary Gregory" issue="BCEL-280">MethodGen.setMaxLocals() should account for LocalVariableTable entries (#529).</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix constant pool module access test on Java 27 (#534).</action>
       <action issue="BCEL-379" type="fix" due-to="Gary Gregory, Aryan Ganjoo">BCELifier emits boolean literals for boolean ConstantValue fields so generated creator classes run. FieldGen preserves explicit false initial values (#536).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Update ECJ versions and generate the SWAP fixture with BCEL (#537).</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add and use ClassFormatException.ClassFormatException(String, Object...).</action>
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 104 to 106.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-lang3 from 3.20.0 to 3.21.0 #531.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump ecj.version from 3.26 to 3.46.100 on Java 17 and up (#537).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump ecj.version from 3.26 to 3.33 on Java 11 (#537).</action>
       <!-- REMOVE -->
       <action                  type="remove" dev="ggregory" due-to="Gary Gregory" issue="BCEL-280">Remove obsolete class file src/examples/Mini/MiniParser$JJCalls.</action>
     </release>
