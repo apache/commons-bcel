@@ -19,14 +19,20 @@
 
 package org.apache.bcel.generic;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.apache.bcel.Const;
 import org.apache.bcel.classfile.ConstantLong;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.Field;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * Tests {@link FieldGen}.
@@ -42,5 +48,35 @@ class FieldGenTest {
         assertTrue(FieldGen.getComparator().equals(obj, obj));
         assertFalse(FieldGen.getComparator().equals(obj, null));
         assertFalse(FieldGen.getComparator().equals(null, obj));
+    }
+
+    @ParameterizedTest
+    @ValueSource(booleans = { false, true })
+    void testBooleanInitValue(final boolean value) {
+        final FieldGen fg = new FieldGen(Const.ACC_PUBLIC | Const.ACC_STATIC | Const.ACC_FINAL, Type.BOOLEAN, "VALUE", new ConstantPoolGen());
+        fg.setInitValue(value);
+        final Field field = fg.getField();
+        assertNotNull(field.getConstantValue());
+        assertEquals(value ? 1 : 0, field.getConstantPool().getConstantInteger(field.getConstantValue().getConstantValueIndex()).getBytes());
+    }
+
+    @ParameterizedTest
+    @ValueSource(booleans = { false, true })
+    void testBooleanInitValueReplacement(final boolean value) {
+        final FieldGen fg = new FieldGen(Const.ACC_PUBLIC | Const.ACC_STATIC | Const.ACC_FINAL, Type.BOOLEAN, "VALUE", new ConstantPoolGen());
+        fg.setInitValue(!value);
+        fg.setInitValue(value);
+        final Field field = fg.getField();
+        assertNotNull(field.getConstantValue());
+        assertEquals(value ? 1 : 0, field.getConstantPool().getConstantInteger(field.getConstantValue().getConstantValueIndex()).getBytes());
+    }
+
+    @ParameterizedTest
+    @ValueSource(booleans = { false, true })
+    void testCancelBooleanInitValue(final boolean value) {
+        final FieldGen fg = new FieldGen(Const.ACC_PUBLIC | Const.ACC_STATIC | Const.ACC_FINAL, Type.BOOLEAN, "VALUE", new ConstantPoolGen());
+        fg.setInitValue(value);
+        fg.cancelInitValue();
+        assertNull(fg.getField().getConstantValue());
     }
 }

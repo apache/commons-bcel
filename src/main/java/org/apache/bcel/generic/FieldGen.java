@@ -251,13 +251,13 @@ public class FieldGen extends FieldGenOrMethodGen {
     /**
      * Sets the initial value.
      *
+     * <p>Records an explicit constant value, including {@code false}. Use {@link #cancelInitValue()} to remove it.</p>
+     *
      * @param b The boolean value.
      */
     public void setInitValue(final boolean b) {
         checkType(Type.BOOLEAN);
-        if (b) {
-            value = Integer.valueOf(1);
-        }
+        value = Integer.valueOf(b ? 1 : 0);
     }
 
     /**

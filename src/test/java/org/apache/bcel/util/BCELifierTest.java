@@ -38,11 +38,15 @@ import java.util.regex.Pattern;
 import org.apache.bcel.AbstractTest;
 import org.apache.bcel.Const;
 import org.apache.bcel.HelloWorldCreator;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.ConstantValue;
+import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.generic.BinaryOpCreator;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.FieldGen;
 import org.apache.bcel.generic.InstructionConst;
 import org.apache.bcel.generic.InstructionFactory;
 import org.apache.bcel.generic.InstructionList;
@@ -54,6 +58,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledForJreRange;
 import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class BCELifierTest extends AbstractTest {
@@ -178,6 +183,46 @@ class BCELifierTest extends AbstractTest {
     }
 
     @Test
+    void testBooleanConstantFieldInitValue() throws Exception {
+        // javac stores "static final boolean ON = true;" as a CONSTANT_Integer ConstantValue; the generated creator
+        // must call FieldGen.setInitValue(boolean), since setInitValue(int) throws for boolean fields.
+        final ClassGen cg = new ClassGen("Example", "java.lang.Object", "Example.java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
+        final ConstantPoolGen cp = cg.getConstantPool();
+        final FieldGen fg = new FieldGen(Const.ACC_PUBLIC | Const.ACC_STATIC | Const.ACC_FINAL, Type.BOOLEAN, "ON", cp);
+        fg.setInitValue(true);
+        cg.addField(fg.getField());
+
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        new BCELifier(cg.getJavaClass(), os).start();
+        final String source = new String(os.toByteArray(), StandardCharsets.UTF_8);
+
+        assertTrue(source.contains("field.setInitValue(true);"), source);
+        assertFalse(source.contains("field.setInitValue(1);"), source);
+
+        final ByteArrayOutputStream compiledClassOutput = new ByteArrayOutputStream();
+        new BCELifier(BCELifier.getJavaClass("BooleanConstants"), compiledClassOutput).start();
+        final String compiledClassSource = new String(compiledClassOutput.toByteArray(), StandardCharsets.UTF_8);
+        assertTrue(compiledClassSource.contains("field.setInitValue(true);"), compiledClassSource);
+        assertTrue(compiledClassSource.contains("field.setInitValue(false);"), compiledClassSource);
+        assertFalse(compiledClassSource.contains("field.setInitValue(0);"), compiledClassSource);
+    }
+
+    @ParameterizedTest
+    @CsvSource({ "0, false", "1, true", "2, false", "3, true", "-2, false", "-1, true" })
+    void testBooleanConstantFieldLowBit(final int value, final boolean expected) {
+        final ClassGen cg = new ClassGen("Example", "java.lang.Object", "Example.java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
+        final ConstantPoolGen cp = cg.getConstantPool();
+        final FieldGen fg = new FieldGen(Const.ACC_PUBLIC | Const.ACC_STATIC | Const.ACC_FINAL, Type.BOOLEAN, "VALUE", cp);
+        fg.addAttribute(new ConstantValue(cp.addUtf8("ConstantValue"), 2, cp.addInteger(value), cp.getConstantPool()));
+        cg.addField(fg.getField());
+
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        new BCELifier(cg.getJavaClass(), os).start();
+        final String source = new String(os.toByteArray(), StandardCharsets.UTF_8);
+        assertTrue(source.contains("field.setInitValue(" + expected + ");"), source);
+    }
+
+    @Test
     void testClassNameRejectedWhenNotJavaIdentifier() {
         // Class file names may contain characters the Java language forbids (JVMS 4.2.2 bans only . ; [ /).
         // BCELifier must refuse to emit such a name in identifier position rather than let a crafted
@@ -244,6 +289,23 @@ class BCELifierTest extends AbstractTest {
         final String javapOutput = exec(workDir, getAppJavaP(), "-p", "-c", inFile.getName());
         // Finally compares the output of the roundtrip
         assertEquals(canonHashRef(javapOutInital), canonHashRef(javapOutput));
+        // javap -p -c does not show ConstantValue attributes. Check boolean constants explicitly.
+        final JavaClass regenerated = new ClassParser(new File(workDir, javaClassName + JavaClass.EXTENSION).getPath()).parse();
+        final Field[] originalFields = javaClass.getFields();
+        final Field[] regeneratedFields = regenerated.getFields();
+        assertEquals(originalFields.length, regeneratedFields.length);
+        for (int i = 0; i < originalFields.length; i++) {
+            final Field original = originalFields[i];
+            if (original.getType() == Type.BOOLEAN && original.getConstantValue() != null) {
+                final Field actual = regeneratedFields[i];
+                assertEquals(original.getName(), actual.getName());
+                assertEquals(original.getSignature(), actual.getSignature());
+                assertNotNull(actual.getConstantValue(), original.getName());
+                final int expectedValue = original.getConstantPool().getConstantInteger(original.getConstantValue().getConstantValueIndex()).getBytes() & 1;
+                assertEquals(expectedValue, actual.getConstantPool().getConstantInteger(actual.getConstantValue().getConstantValueIndex()).getBytes(),
+                    original.getName());
+            }
+        }
     }
 
     @Test
@@ -297,7 +359,8 @@ class BCELifierTest extends AbstractTest {
         "org.apache.commons.lang.builder.ToStringBuilder.class",
         "org.apache.commons.lang.SerializationUtils.class",
         "org.apache.commons.lang.ArrayUtils.class",
-        "target/test-classes/Java4Example.class"
+        "target/test-classes/Java4Example.class",
+        "target/test-classes/BooleanConstants.class"
     // @formatter:on
     })
     void testJavapCompare(final String pathToClass) throws Exception {

@@ -281,7 +281,13 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
             if (field.getType() == Type.BYTE) {
                 printWriter.print("(byte)");
             }
-            printWriter.print(cv);
+            if (field.getType() == Type.BOOLEAN) {
+                // A boolean ConstantValue is stored as a CONSTANT_Integer, but FieldGen.setInitValue(int) rejects boolean fields.
+                // Match HotSpot initialization for noncanonical integer encodings by using the low bit.
+                printWriter.print((field.getConstantPool().getConstantInteger(cv.getConstantValueIndex()).getBytes() & 1) != 0);
+            } else {
+                printWriter.print(cv);
+            }
             if (field.getType() == Type.LONG) {
                 printWriter.print("L");
             }
