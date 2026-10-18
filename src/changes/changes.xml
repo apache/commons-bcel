@@ -73,6 +73,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-lang3 from 3.20.0 to 3.21.0 #531.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump ecj.version from 3.26 to 3.46.100 on Java 17 and up (#537).</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump ecj.version from 3.26 to 3.33 on Java 11 (#537).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory, Dependabot">Bump org.jetbrains.kotlin:kotlin-stdlib from 2.4.0 to 2.4.21 (#532).</action>
       <!-- REMOVE -->
       <action                  type="remove" dev="ggregory" due-to="Gary Gregory" issue="BCEL-280">Remove obsolete class file src/examples/Mini/MiniParser$JJCalls.</action>
     </release>
