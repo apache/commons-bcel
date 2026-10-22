@@ -291,9 +291,13 @@ public class TypeAnnotationEntry {
     }
 
     /**
-     * Gets the number of steps of the type path, which leads from the type of the target to the part of it that is annotated. The path is empty when the
-     * annotation applies to the outermost part of that type where an annotation is allowed: for a nested type, the outermost class ({@code @A Outer.Inner}),
-     * while {@code Outer.@A Inner} needs a step.
+     * Gets the number of steps in the type path.
+     *
+     * <p>
+     * The path leads from the type of the target to the part of it that is annotated. An empty path identifies the outermost part of the type where an
+     * annotation is allowed. For a non-static inner class, {@code @A Outer.Inner} has an empty path, while {@code Outer.@A Inner} requires one step.
+     * For a static nested class, {@code Outer.@A Nested} has an empty path.
+     * </p>
      *
      * @return The number of steps of the type path.
      */

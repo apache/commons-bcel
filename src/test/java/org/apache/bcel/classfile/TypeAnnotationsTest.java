@@ -34,11 +34,19 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.verifier.statics.StringRepresentation;
 import org.junit.jupiter.api.Test;
 
@@ -47,7 +55,40 @@ import org.junit.jupiter.api.Test;
  */
 class TypeAnnotationsTest {
 
+    @Target(ElementType.TYPE_USE)
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface TypeUse {
+    }
+
+    static class Outer {
+        class Inner {
+        }
+
+        static class Nested {
+        }
+    }
+
+    static class AnnotatedTypes {
+        @TypeUse Outer.Inner outer;
+        Outer.@TypeUse Inner inner;
+        Outer.@TypeUse Nested nested;
+        List<? extends @TypeUse Number[]> wildcard;
+
+        String cast(final Object value) {
+            @TypeUse final String local = (@TypeUse String) value;
+            return local;
+        }
+    }
+
     private static final String CLASS_FILE = "src/test/resources/typeannotations/TypeAnnotated.class";
+
+    private static JavaClass annotatedTypes() throws IOException {
+        final String resource = "TypeAnnotationsTest$AnnotatedTypes.class";
+        try (InputStream input = TypeAnnotationsTest.class.getResourceAsStream(resource)) {
+            assertNotNull(input);
+            return new ClassParser(input, resource).parse();
+        }
+    }
 
     private static JavaClass parse() throws IOException {
         return new ClassParser(CLASS_FILE).parse();
@@ -134,6 +175,7 @@ class TypeAnnotationsTest {
         try (DataOutputStream dos = new DataOutputStream(out)) {
             clazz.dump(dos);
         }
+        assertArrayEquals(Files.readAllBytes(Paths.get(CLASS_FILE)), out.toByteArray());
         final JavaClass reread = new ClassParser(new ByteArrayInputStream(out.toByteArray()), CLASS_FILE).parse();
         for (final String name : new String[] {"field", "items", "hidden"}) {
             final Field original = field(clazz, name);
@@ -274,5 +316,79 @@ class TypeAnnotationsTest {
         assertThrows(IllegalArgumentException.class,
                 () -> new TypeAnnotationEntry(TypeAnnotationEntry.TARGET_LOCAL_VARIABLE, twoRangesAnnouncedAsOne, new byte[0], annotation));
         assertEquals(2, new TypeAnnotationEntry(TypeAnnotationEntry.TARGET_LOCAL_VARIABLE, new byte[2], new byte[0], annotation).getTargetInfo().length);
+    }
+
+    @Test
+    void distinguishesInnerClassesFromStaticNestedClasses() throws IOException {
+        final JavaClass clazz = annotatedTypes();
+        final TypeAnnotationEntry outer = typeAnnotationsOf(field(clazz, "outer"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS).getTypeAnnotationEntries()[0];
+        final TypeAnnotationEntry inner = typeAnnotationsOf(field(clazz, "inner"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS).getTypeAnnotationEntries()[0];
+        final TypeAnnotationEntry nested = typeAnnotationsOf(field(clazz, "nested"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS).getTypeAnnotationEntries()[0];
+        assertEquals(0, outer.getTypePathLength());
+        assertEquals(1, inner.getTypePathLength());
+        assertEquals(1, inner.getTypePathKind(0));
+        assertEquals(0, inner.getTypePathArgumentIndex(0));
+        assertEquals(0, nested.getTypePathLength());
+    }
+
+    @Test
+    void followsTypeArgumentsWildcardBoundsAndArrayElements() throws IOException {
+        final TypeAnnotationEntry entry = typeAnnotationsOf(field(annotatedTypes(), "wildcard"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS)
+                .getTypeAnnotationEntries()[0];
+        assertEquals(3, entry.getTypePathLength());
+        assertEquals(3, entry.getTypePathKind(0));
+        assertEquals(2, entry.getTypePathKind(1));
+        assertEquals(0, entry.getTypePathKind(2));
+        for (int step = 0; step < 3; step++) {
+            assertEquals(0, entry.getTypePathArgumentIndex(step));
+        }
+    }
+
+    @Test
+    void visitsCompilerGeneratedCodeAnnotations() throws IOException {
+        final JavaClass clazz = annotatedTypes();
+        final Code code = method(clazz, "cast").getCode();
+        final TypeAnnotations annotations = (TypeAnnotations) Stream.of(code.getAttributes()).filter(TypeAnnotations.class::isInstance).findFirst()
+                .orElseThrow(AssertionError::new);
+        assertEquals(2, annotations.getNumTypeAnnotations());
+        final List<Integer> targets = new ArrayList<>();
+        annotations.forEach(entry -> targets.add(entry.getTargetType()));
+        assertTrue(targets.contains(TypeAnnotationEntry.TARGET_LOCAL_VARIABLE));
+        assertTrue(targets.contains(TypeAnnotationEntry.TARGET_CAST));
+        for (final TypeAnnotationEntry entry : annotations) {
+            try (DataInputStream info = new DataInputStream(new ByteArrayInputStream(entry.getTargetInfo()))) {
+                if (entry.getTargetType() == TypeAnnotationEntry.TARGET_CAST) {
+                    final int offset = info.readUnsignedShort();
+                    assertTrue(offset < code.getCode().length);
+                    // javac 8 points to the operand load here, while newer compilers can point to checkcast.
+                    assertNotNull(new InstructionList(code.getCode()).findHandle(offset), "The cast annotation must point to an instruction boundary");
+                    assertEquals(0, info.readUnsignedByte()); // first type in the cast
+                } else {
+                    final int ranges = info.readUnsignedShort();
+                    assertTrue(ranges > 0);
+                    for (int range = 0; range < ranges; range++) {
+                        final int start = info.readUnsignedShort();
+                        final int length = info.readUnsignedShort();
+                        assertTrue(start < code.getCode().length);
+                        assertTrue(start + length <= code.getCode().length);
+                        assertTrue(info.readUnsignedShort() < code.getMaxLocals());
+                    }
+                }
+                assertEquals(0, info.available());
+            }
+        }
+        final int[] entries = {0};
+        final DescendingVisitor[] descending = new DescendingVisitor[1];
+        descending[0] = new DescendingVisitor(clazz, new EmptyVisitor() {
+            @Override
+            public void visitAnnotationEntry(final AnnotationEntry entry) {
+                if (descending[0].predecessor() == annotations) {
+                    assertSame(code, descending[0].predecessor(1));
+                    entries[0]++;
+                }
+            }
+        });
+        descending[0].visit();
+        assertEquals(2, entries[0]);
     }
 }
