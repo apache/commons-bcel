@@ -259,6 +259,10 @@ public abstract class Attribute implements Cloneable, Node {
             return new Record(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_PERMITTED_SUBCLASSES:
             return new PermittedSubclasses(nameIndex, length, dataInput, constantPool);
+        case Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS:
+            return new RuntimeVisibleTypeAnnotations(nameIndex, length, dataInput, constantPool);
+        case Const.ATTR_RUNTIME_INVISIBLE_TYPE_ANNOTATIONS:
+            return new RuntimeInvisibleTypeAnnotations(nameIndex, length, dataInput, constantPool);
         default:
             // Never reached
             throw new IllegalStateException("Unrecognized attribute type tag parsed: " + tag);

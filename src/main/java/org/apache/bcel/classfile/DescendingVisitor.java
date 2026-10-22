@@ -537,6 +537,15 @@ public class DescendingVisitor implements Visitor {
         stack.pop();
     }
 
+    /** @since 6.14.0 */
+    @Override
+    public void visitTypeAnnotations(final TypeAnnotations obj) {
+        stack.push(obj);
+        obj.accept(visitor);
+        accept(Stream.of(obj.getTypeAnnotationEntries()).map(TypeAnnotationEntry::getAnnotationEntry).toArray(AnnotationEntry[]::new));
+        stack.pop();
+    }
+
     @Override
     public void visitSignature(final Signature attribute) {
         stack.push(attribute);
