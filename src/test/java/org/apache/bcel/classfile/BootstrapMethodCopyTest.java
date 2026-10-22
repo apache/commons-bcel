@@ -20,27 +20,42 @@
 package org.apache.bcel.classfile;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests that {@link BootstrapMethod} copies do not share the mutable {@code bootstrapArguments} array with their source.
+ * Tests that {@link BootstrapMethod} copies preserve their source's values and can be updated independently.
  */
 class BootstrapMethodCopyTest {
 
-    @Test
-    void testCopyConstructorDoesNotShareArguments() {
-        final BootstrapMethod original = new BootstrapMethod(1, new int[] {10, 20, 30});
-        final BootstrapMethod copy = new BootstrapMethod(original);
-        copy.getBootstrapArguments()[0] = 999;
+    private static void assertIndependentUpdates(final BootstrapMethod original, final BootstrapMethod copy) {
+        assertEquals(original.getBootstrapMethodRef(), copy.getBootstrapMethodRef());
+        assertArrayEquals(original.getBootstrapArguments(), copy.getBootstrapArguments());
+
+        final int[] changedArguments = copy.getBootstrapArguments();
+        changedArguments[0] = 999;
+        copy.setBootstrapArguments(changedArguments);
+        assertArrayEquals(new int[] {999, 20, 30}, copy.getBootstrapArguments());
         assertArrayEquals(new int[] {10, 20, 30}, original.getBootstrapArguments());
+
+        original.setBootstrapArguments(new int[] {40, 50});
+        original.setBootstrapMethodRef(2);
+        assertArrayEquals(new int[] {40, 50}, original.getBootstrapArguments());
+        assertArrayEquals(new int[] {999, 20, 30}, copy.getBootstrapArguments());
+        assertEquals(2, original.getBootstrapMethodRef());
+        assertEquals(1, copy.getBootstrapMethodRef());
     }
 
     @Test
-    void testCopyDoesNotShareArguments() {
+    void testCopyConstructorCanBeUpdatedIndependently() {
         final BootstrapMethod original = new BootstrapMethod(1, new int[] {10, 20, 30});
-        final BootstrapMethod copy = original.copy();
-        copy.getBootstrapArguments()[0] = 999;
-        assertArrayEquals(new int[] {10, 20, 30}, original.getBootstrapArguments());
+        assertIndependentUpdates(original, new BootstrapMethod(original));
+    }
+
+    @Test
+    void testCopyCanBeUpdatedIndependently() {
+        final BootstrapMethod original = new BootstrapMethod(1, new int[] {10, 20, 30});
+        assertIndependentUpdates(original, original.copy());
     }
 }

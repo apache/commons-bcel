@@ -77,6 +77,8 @@ public class BootstrapMethod implements Cloneable {
     /**
      * Constructs a BootstrapMethod.
      *
+     * <p>The supplied argument array is copied. A {@code null} array is treated as an empty array.</p>
+     *
      * @param bootstrapMethodRef int index into constant_pool of CONSTANT_MethodHandle.
      * @param bootstrapArguments int[] indices into constant_pool of CONSTANT_[type]_info.
      */
@@ -116,12 +118,14 @@ public class BootstrapMethod implements Cloneable {
     }
 
     /**
-     * Gets the bootstrap arguments.
+     * Gets a copy of the bootstrap arguments.
      *
-     * @return int[] of bootstrap_method indices into constant_pool of CONSTANT_[type]_info.
+     * <p>Changes to the returned array do not affect this object. Use {@link #setBootstrapArguments(int[])} to update the arguments.</p>
+     *
+     * @return a copy of the bootstrap_method indices into constant_pool of CONSTANT_[type]_info.
      */
     public int[] getBootstrapArguments() {
-        return bootstrapArguments;
+        return bootstrapArguments.clone();
     }
 
     /**
@@ -143,12 +147,14 @@ public class BootstrapMethod implements Cloneable {
     }
 
     /**
-     * Sets the bootstrap arguments.
+     * Sets the bootstrap arguments from a copy of the supplied array.
+     *
+     * <p>A {@code null} array is treated as an empty array.</p>
      *
      * @param bootstrapArguments int[] indices into constant_pool of CONSTANT_[type]_info.
      */
     public void setBootstrapArguments(final int[] bootstrapArguments) {
-        this.bootstrapArguments = ArrayUtils.nullToEmpty(bootstrapArguments);
+        this.bootstrapArguments = ArrayUtils.nullToEmpty(bootstrapArguments).clone();
     }
 
     /**
