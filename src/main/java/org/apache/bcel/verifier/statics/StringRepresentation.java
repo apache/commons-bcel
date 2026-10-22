@@ -69,6 +69,7 @@ import org.apache.bcel.classfile.SourceFile;
 import org.apache.bcel.classfile.StackMap;
 import org.apache.bcel.classfile.StackMapEntry;
 import org.apache.bcel.classfile.Synthetic;
+import org.apache.bcel.classfile.TypeAnnotations;
 import org.apache.bcel.classfile.Unknown;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
 
@@ -409,6 +410,16 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
      */
     @Override
     public void visitPermittedSubclasses(final PermittedSubclasses obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * Visits RuntimeVisibleTypeAnnotations and RuntimeInvisibleTypeAnnotations attributes.
+     *
+     * @since 6.14.0
+     */
+    @Override
+    public void visitTypeAnnotations(final TypeAnnotations obj) {
         tostring = toString(obj);
     }
 
