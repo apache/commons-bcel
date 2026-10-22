@@ -29,8 +29,10 @@ import org.apache.bcel.util.Args;
 
 /**
  * Base class for the type annotation attributes, {@link RuntimeVisibleTypeAnnotations} and {@link RuntimeInvisibleTypeAnnotations}: the annotations written on
- * the types used in a declaration, such as {@code List<@Nullable String>} or {@code <T extends @Nullable Object>}, which the attributes of the declaration
- * annotations do not hold.
+ * the types used in a declaration (such as {@code List<@Nullable String>}, the supertypes of a class, a {@code throws} clause, or the declaration and the
+ * bounds of a type parameter as in {@code <T extends @Nullable Object>}) or in the code of a method (such as a cast, an {@code instanceof}, a {@code new}
+ * expression or a local variable), which the attributes of the declaration annotations do not hold. They are attributes of a class, a field, a method, a
+ * record component or a {@link Code} attribute.
  *
  * @see <a href="https://docs.oracle.com/javase/specs/jvms/se21/html/jvms-4.html#jvms-4.7.20">JVMS 4.7.20 The RuntimeVisibleTypeAnnotations attribute</a>
  * @since 6.14.0
@@ -81,6 +83,16 @@ public abstract class TypeAnnotations extends Attribute implements Iterable<Type
     @Override
     public void accept(final Visitor v) {
         v.visitTypeAnnotations(this);
+    }
+
+    /**
+     * Creates deep copies of the type annotations, which refer to the given constant pool.
+     *
+     * @param constantPool The constant pool of the copies.
+     * @return The copies.
+     */
+    protected final TypeAnnotationEntry[] copyTypeAnnotations(final ConstantPool constantPool) {
+        return Stream.of(typeAnnotationTable).map(e -> e.copy(constantPool)).toArray(TypeAnnotationEntry[]::new);
     }
 
     /**

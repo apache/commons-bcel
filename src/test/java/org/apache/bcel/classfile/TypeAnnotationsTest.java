@@ -23,7 +23,9 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -144,24 +146,70 @@ class TypeAnnotationsTest {
     }
 
     @Test
-    void copiesTheAttribute() throws IOException {
+    void copiesTheAttributeWithItsOwnAnnotationsAndTheGivenConstantPool() throws IOException {
         final JavaClass clazz = parse();
-        final TypeAnnotations annotations = typeAnnotationsOf(field(clazz, "field"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS);
-        assertEquals(annotations.toString(), annotations.copy(clazz.getConstantPool()).toString());
+        final ConstantPool otherPool = clazz.getConstantPool().copy();
+        final TypeAnnotations original = typeAnnotationsOf(field(clazz, "field"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS);
+        final TypeAnnotations copy = (TypeAnnotations) original.copy(otherPool);
+        assertEquals(original.toString(), copy.toString());
+        assertTrue(copy instanceof RuntimeVisibleTypeAnnotations);
+        assertTrue(copy.isRuntimeVisible());
+        // the copy is bound to the given pool, the original to its own
+        assertSame(otherPool, copy.getConstantPool());
+        assertSame(otherPool, copy.getTypeAnnotationEntries()[0].getAnnotationEntry().getConstantPool());
+        assertSame(clazz.getConstantPool(), original.getConstantPool());
+        assertSame(clazz.getConstantPool(), original.getTypeAnnotationEntries()[0].getAnnotationEntry().getConstantPool());
+        // nothing is shared: changing the copy leaves the original unchanged
+        assertNotSame(original.getTypeAnnotationEntries(), copy.getTypeAnnotationEntries());
+        assertNotSame(original.getTypeAnnotationEntries()[0], copy.getTypeAnnotationEntries()[0]);
+        assertNotSame(original.getTypeAnnotationEntries()[0].getAnnotationEntry(), copy.getTypeAnnotationEntries()[0].getAnnotationEntry());
+        copy.getTypeAnnotationEntries()[0].getAnnotationEntry().addElementNameValuePair(
+                new ElementValuePair(1, new SimpleElementValue(ElementValue.PRIMITIVE_INT, 1, otherPool), otherPool));
+        copy.setTypeAnnotationTable(null);
+        assertEquals(0, original.getTypeAnnotationEntries()[0].getAnnotationEntry().getNumElementValuePairs());
+        assertEquals(1, original.getNumTypeAnnotations());
     }
 
     @Test
-    void isVisitedAndRepresented() throws IOException {
+    void copiesTheInvisibleAttribute() throws IOException {
         final JavaClass clazz = parse();
-        final int[] visited = new int[1];
-        new DescendingVisitor(clazz, new EmptyVisitor() {
+        final TypeAnnotations original = typeAnnotationsOf(field(clazz, "hidden"), Const.ATTR_RUNTIME_INVISIBLE_TYPE_ANNOTATIONS);
+        final TypeAnnotations copy = (TypeAnnotations) original.copy(clazz.getConstantPool().copy());
+        assertTrue(copy instanceof RuntimeInvisibleTypeAnnotations);
+        assertFalse(copy.isRuntimeVisible());
+        assertFalse(copy.getTypeAnnotationEntries()[0].getAnnotationEntry().isRuntimeVisible());
+        assertEquals(original.toString(), copy.toString());
+    }
+
+    @Test
+    void isVisitedWithItsAnnotations() throws IOException {
+        final JavaClass clazz = parse();
+        final List<String> events = new ArrayList<>();
+        final DescendingVisitor[] descending = new DescendingVisitor[1];
+        descending[0] = new DescendingVisitor(clazz, new EmptyVisitor() {
+            @Override
+            public void visitAnnotationEntry(final AnnotationEntry obj) {
+                // the annotation is visited within its attribute
+                events.add("entry " + obj.getAnnotationType() + " in " + descending[0].predecessor().getClass().getSimpleName());
+            }
+
             @Override
             public void visitTypeAnnotations(final TypeAnnotations obj) {
-                visited[0]++;
+                events.add("attribute " + obj.getClass().getSimpleName());
             }
-        }).visit();
-        // the class, three fields and one method have one
-        assertEquals(5, visited[0]);
+        });
+        descending[0].visit();
+        // the class, three fields and one method have an attribute, which holds six annotations in all
+        assertEquals(5, events.stream().filter(e -> e.startsWith("attribute")).count());
+        assertEquals(6, events.stream().filter(e -> e.startsWith("entry")).count());
+        assertEquals(1, events.stream().filter(e -> e.equals("attribute RuntimeInvisibleTypeAnnotations")).count());
+        assertEquals(1, events.stream().filter(e -> e.equals("entry Ltypeannotations/Invisible; in RuntimeInvisibleTypeAnnotations")).count());
+        assertEquals(5, events.stream().filter(e -> e.startsWith("entry Ltypeannotations/Visible; in RuntimeVisibleTypeAnnotations")).count());
+    }
+
+    @Test
+    void isRepresented() throws IOException {
+        final JavaClass clazz = parse();
         final StringRepresentation representation = new StringRepresentation(typeAnnotationsOf(field(clazz, "field"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS));
         assertTrue(representation.toString().contains("RuntimeVisibleTypeAnnotations"), representation.toString());
     }
@@ -197,5 +245,34 @@ class TypeAnnotationsTest {
         final ConstantPool constantPool = parse().getConstantPool();
         final DataInputStream input = new DataInputStream(new ByteArrayInputStream(new byte[] {0x7F, 0, 0, 0}));
         assertThrows(ClassFormatException.class, () -> TypeAnnotationEntry.read(input, constantPool, true));
+    }
+
+    @Test
+    void rejectsAMalformedTypePath() throws IOException {
+        final AnnotationEntry annotation = typeAnnotationsOf(field(parse(), "field"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS).getTypeAnnotationEntries()[0]
+                .getAnnotationEntry();
+        // a path is made of pairs of bytes
+        assertThrows(IllegalArgumentException.class, () -> new TypeAnnotationEntry(TypeAnnotationEntry.TARGET_FIELD, new byte[0], new byte[1], annotation));
+        assertThrows(IllegalArgumentException.class, () -> new TypeAnnotationEntry(TypeAnnotationEntry.TARGET_FIELD, new byte[0], new byte[3], annotation));
+        // and has at most 255 steps
+        assertThrows(IllegalArgumentException.class, () -> new TypeAnnotationEntry(TypeAnnotationEntry.TARGET_FIELD, new byte[0], new byte[256 * 2], annotation));
+        assertEquals(255, new TypeAnnotationEntry(TypeAnnotationEntry.TARGET_FIELD, new byte[0], new byte[255 * 2], annotation).getTypePathLength());
+    }
+
+    @Test
+    void rejectsATargetInfoOfTheWrongSize() throws IOException {
+        final AnnotationEntry annotation = typeAnnotationsOf(field(parse(), "field"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS).getTypeAnnotationEntries()[0]
+                .getAnnotationEntry();
+        assertThrows(IllegalArgumentException.class, () -> new TypeAnnotationEntry(TypeAnnotationEntry.TARGET_FIELD, new byte[1], new byte[0], annotation));
+        assertThrows(IllegalArgumentException.class,
+                () -> new TypeAnnotationEntry(TypeAnnotationEntry.TARGET_METHOD_FORMAL_PARAMETER, new byte[0], new byte[0], annotation));
+        assertThrows(IllegalArgumentException.class,
+                () -> new TypeAnnotationEntry(TypeAnnotationEntry.TARGET_CLASS_TYPE_PARAMETER_BOUND, new byte[3], new byte[0], annotation));
+        assertThrows(ClassFormatException.class, () -> new TypeAnnotationEntry(0x7F, new byte[0], new byte[0], annotation));
+        // a table of two ranges of 6 bytes, announced as one
+        final byte[] twoRangesAnnouncedAsOne = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        assertThrows(IllegalArgumentException.class,
+                () -> new TypeAnnotationEntry(TypeAnnotationEntry.TARGET_LOCAL_VARIABLE, twoRangesAnnouncedAsOne, new byte[0], annotation));
+        assertEquals(2, new TypeAnnotationEntry(TypeAnnotationEntry.TARGET_LOCAL_VARIABLE, new byte[2], new byte[0], annotation).getTargetInfo().length);
     }
 }

@@ -18,9 +18,13 @@
  */
 package org.apache.bcel.classfile;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInput;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.Arrays;
 
 import org.apache.bcel.util.Args;
@@ -40,7 +44,7 @@ public class TypeAnnotationEntry {
     /** Target type: type parameter declaration of a generic method or constructor. */
     public static final int TARGET_METHOD_TYPE_PARAMETER = 0x01;
 
-    /** Target type: type in an extends or implements clause of a class declaration. */
+    /** Target type: type in an extends or implements clause of a class or interface declaration. */
     public static final int TARGET_CLASS_EXTENDS = 0x10;
 
     /** Target type: bound of a type parameter of a generic class or interface. */
@@ -105,6 +109,9 @@ public class TypeAnnotationEntry {
      */
     public static final TypeAnnotationEntry[] EMPTY_ARRAY = {};
 
+    /** Maximum number of steps of a type path, which its length of one byte limits. */
+    private static final int MAX_TYPE_PATH_LENGTH = 255;
+
     /** Number of bytes of a {@code localvar_target} entry: start_pc, length and index. */
     private static final int LOCAL_VARIABLE_RANGE_SIZE = 6;
 
@@ -146,6 +153,19 @@ public class TypeAnnotationEntry {
             return 3;
         default:
             throw new ClassFormatException("Invalid type annotation target type: 0x" + Integer.toHexString(targetType));
+        }
+    }
+
+    private static void checkTargetInfo(final int targetType, final byte[] targetInfo) {
+        final int size = targetInfoSize(targetType);
+        if (size >= 0) {
+            if (targetInfo.length != size) {
+                throw new IllegalArgumentException("The target info of the target type 0x" + Integer.toHexString(targetType) + " must have " + size
+                        + " bytes, not " + targetInfo.length);
+            }
+        } else if (targetInfo.length < 2 || targetInfo.length != 2 + ((targetInfo[0] & 0xFF) << 8 | targetInfo[1] & 0xFF) * LOCAL_VARIABLE_RANGE_SIZE) {
+            throw new IllegalArgumentException("The target info of the target type 0x" + Integer.toHexString(targetType)
+                    + " must be a length followed by that many ranges of 6 bytes");
         }
     }
 
@@ -192,12 +212,39 @@ public class TypeAnnotationEntry {
      * @param targetInfo The target info, as it is stored in the class file.
      * @param typePath The type path, as it is stored in the class file without its length: a pair of bytes (path kind, type argument index) per step.
      * @param annotationEntry The annotation.
+     * @throws ClassFormatException if the target type is not defined.
+     * @throws IllegalArgumentException if the target info does not have the size its target type requires, or if the type path is not a sequence of pairs
+     *         of bytes of at most 255 steps.
      */
     public TypeAnnotationEntry(final int targetType, final byte[] targetInfo, final byte[] typePath, final AnnotationEntry annotationEntry) {
+        checkTargetInfo(targetType, targetInfo);
+        if (typePath.length % 2 != 0 || typePath.length > MAX_TYPE_PATH_LENGTH * 2) {
+            throw new IllegalArgumentException("The type path must be at most " + MAX_TYPE_PATH_LENGTH + " pairs of bytes (kind, argument index), not "
+                    + typePath.length + " bytes");
+        }
         this.targetType = targetType;
         this.targetInfo = targetInfo.clone();
         this.typePath = typePath.clone();
         this.annotationEntry = annotationEntry;
+    }
+
+    /**
+     * Creates a deep copy of this entry, whose annotation is independent of this one and refers to the given constant pool. The indexes it holds are kept, as they
+     * are in {@link Attribute#copy(ConstantPool)}: the constant pool must have the same constants as the one of this entry at these indexes.
+     *
+     * @param constantPool The constant pool of the copy.
+     * @return A deep copy of this entry.
+     */
+    public TypeAnnotationEntry copy(final ConstantPool constantPool) {
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        try {
+            try (DataOutputStream dos = new DataOutputStream(out)) {
+                dump(dos);
+            }
+            return read(new DataInputStream(new ByteArrayInputStream(out.toByteArray())), constantPool, annotationEntry.isRuntimeVisible());
+        } catch (final IOException e) {
+            throw new UncheckedIOException(e);
+        }
     }
 
     /**
@@ -244,7 +291,9 @@ public class TypeAnnotationEntry {
     }
 
     /**
-     * Gets the number of steps of the type path, which is empty when the annotation applies to the whole type of the target.
+     * Gets the number of steps of the type path, which leads from the type of the target to the part of it that is annotated. The path is empty when the
+     * annotation applies to the outermost part of that type where an annotation is allowed: for a nested type, the outermost class ({@code @A Outer.Inner}),
+     * while {@code Outer.@A Inner} needs a step.
      *
      * @return The number of steps of the type path.
      */

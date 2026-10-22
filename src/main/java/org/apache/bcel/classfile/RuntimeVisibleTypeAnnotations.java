@@ -25,7 +25,7 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * The type annotations of a declaration, provided to the JVM and visible at runtime.
+ * The type annotations of a class, field, method, record component or {@link Code} attribute, provided to the JVM and visible at runtime.
  *
  * @since 6.14.0
  */
@@ -45,13 +45,17 @@ public class RuntimeVisibleTypeAnnotations extends TypeAnnotations {
     }
 
     /**
-     * Creates a deep copy of this attribute.
+     * Creates a deep copy of this attribute, whose type annotations are independent of this one's and refer to the given constant pool.
      *
+     * @param constantPool The constant pool of the copy.
      * @return deep copy of this attribute.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {
-        return (Attribute) clone();
+        final RuntimeVisibleTypeAnnotations c = (RuntimeVisibleTypeAnnotations) clone();
+        c.setConstantPool(constantPool);
+        c.setTypeAnnotationTable(copyTypeAnnotations(constantPool));
+        return c;
     }
 
     @Override

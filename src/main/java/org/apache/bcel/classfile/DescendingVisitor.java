@@ -542,6 +542,7 @@ public class DescendingVisitor implements Visitor {
     public void visitTypeAnnotations(final TypeAnnotations obj) {
         stack.push(obj);
         obj.accept(visitor);
+        accept(Stream.of(obj.getTypeAnnotationEntries()).map(TypeAnnotationEntry::getAnnotationEntry).toArray(AnnotationEntry[]::new));
         stack.pop();
     }
 
