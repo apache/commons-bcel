@@ -36,12 +36,12 @@
 
         <ol type="1">
           <li> A package that contains classes that describe "static"
-            constraints of class files, i.e., reflects the class file format and
+            constraints of class files, that is, a package that reflects the class file format and
             is not intended for byte code modifications. The classes may be
             used to read and write class files from or to a file.  This is
             useful especially for analyzing Java classes without having the
             source files at hand.  The main data structure is called
-            <tt>JavaClass</tt> which contains methods, fields, etc..</li>
+            <tt>JavaClass</tt> which contains methods, fields, and so on.</li>
 
           <li> A package to dynamically generate or modify
             <tt>JavaClass</tt> or <tt>Method</tt> objects.  It may be used to
@@ -100,8 +100,8 @@
       <p>
         Methods and fields contain a signature, symbolically defining
         their types.  Access flags like <tt>public static final</tt> occur
-        in several places and are encoded by an integer bit mask, e.g.,
-        <tt>public static final</tt> matches to the Java expression
+        in several places and are encoded by an integer bit mask. For example,
+        <tt>public static final</tt> corresponds to the Java expression
       </p>
 
 
@@ -117,7 +117,7 @@
         table of handled exceptions, and some optional debugging
         information coded as <tt>LineNumberTable</tt> and
         <tt>LocalVariableTable</tt> attributes. Attributes are in general
-        specific to some data structure, i.e., no two components share the
+        specific to some data structure, that is, no two components share the
         same kind of attribute, though this is not explicitly
         forbidden. In the figure the <tt>Attribute</tt> classes are stereotyped
         with the component they belong to.
@@ -232,7 +232,7 @@ Type[] arg_types = new Type[] { new ArrayType(Type.STRING, 1) };
       <p>
         Fields are represented by <tt>FieldGen</tt> objects, which may be
         freely modified by the user. If they have the access rights
-        <tt>static final</tt>, i.e., are constants and of basic type, they
+        <tt>static final</tt>, that is, are constants and of basic type, they
         may optionally have an initializing value.
       </p>
 
@@ -267,7 +267,7 @@ Type[] arg_types = new Type[] { new ArrayType(Type.STRING, 1) };
         offsets.  Instructions consist of an opcode (sometimes called
         tag), their length in bytes and an offset (or index) within the
         byte code. Since many instructions are immutable (stack operators,
-        e.g.), the <tt>InstructionConstants</tt> interface offers
+        for example), the <tt>InstructionConstants</tt> interface offers
         shareable predefined "fly-weight" constants to use.
       </p>
 
@@ -275,24 +275,23 @@ Type[] arg_types = new Type[] { new ArrayType(Type.STRING, 1) };
         Instructions are grouped via sub-classing, the type hierarchy of
         instruction classes is illustrated by (incomplete) figure in the
         appendix. The most important family of instructions are the
-        <em>branch instructions</em>, e.g., <tt>goto</tt>, that branch to
+        <em>branch instructions</em>, for example, <tt>goto</tt>, that branch to
         targets somewhere within the byte code. Obviously, this makes them
         candidates for playing an <tt>InstructionTargeter</tt> role,
         too. Instructions are further grouped by the interfaces they
-        implement, there are, e.g., <tt>TypedInstruction</tt>s that are
+        implement. There are, for example, <tt>TypedInstruction</tt>s that are
         associated with a specific type like <tt>ldc</tt>, or
         <tt>ExceptionThrower</tt> instructions that may raise exceptions
         when executed.
       </p>
 
       <p>
-        All instructions can be traversed via <tt>accept(Visitor v)</tt>
-        methods, i.e., the Visitor design pattern. There is however some
-        special trick in these methods that allows to merge the handling
-        of certain instruction groups. The <tt>accept()</tt> do not only
-        call the corresponding <tt>visit()</tt> method, but call
-        <tt>visit()</tt> methods of their respective super classes and
-        implemented interfaces first, i.e., the most specific
+        All instructions can be traversed using <tt>accept(Visitor v)</tt>
+        methods, which implement the Visitor design pattern. These methods
+        allow the handling of certain instruction groups to be combined.
+        Before calling the corresponding <tt>visit()</tt> method, each
+        <tt>accept()</tt> method calls the <tt>visit()</tt> methods for the
+        respective superclasses and implemented interfaces. The most specific
         <tt>visit()</tt> call is last. Thus one can group the handling of,
         say, all <tt>BranchInstruction</tt>s into one single method.
       </p>
@@ -326,7 +325,7 @@ Type[] arg_types = new Type[] { new ArrayType(Type.STRING, 1) };
         areas of code very simple and also allows us to reuse immutable
         instruction objects (fly-weight objects). Since we use symbolic
         references, computation of concrete byte code offsets does not
-        need to occur until finalization, i.e., until the user has
+        need to occur until finalization, that is, until the user has
         finished the process of generating or transforming code. We will
         use the term instruction handle and instruction synonymously
         throughout the rest of the paper. Instruction handles may contain
@@ -339,7 +338,7 @@ Type[] arg_types = new Type[] { new ArrayType(Type.STRING, 1) };
         lists anywhere to an existing list. The instructions are appended
         after the given instruction handle. All append methods return a
         new instruction handle which may then be used as the target of a
-        branch instruction, e.g.:
+        branch instruction, for example:
       </p>
 
       <source>
@@ -494,8 +493,8 @@ il.append(f.createReturn(type));
         simplify handling such situations BCEL introduces a special feature:
         One can search for given code patterns within an instruction list
         using <em>regular expressions</em>. In such expressions,
-        instructions are represented by their opcode names, e.g.,
-        <tt>LDC</tt>, one may also use their respective super classes, e.g.,
+        instructions are represented by their opcode names, for example,
+        <tt>LDC</tt>. One may also use their respective super classes, for example,
         "<tt>IfInstruction</tt>". Meta characters like <tt>+</tt>,
         <tt>*</tt>, and <tt>(..|..)</tt> have their usual meanings. Thus,
         the expression
@@ -533,7 +532,7 @@ il.append(f.createReturn(type));
       <p>
         When the code has been finalized these chunks can be optimized
         with a <em>peep hole</em> algorithm: An <tt>IfInstruction</tt>
-        (e.g.  the comparison of two integers: <tt>if_icmpeq</tt>) that
+        (for example, the comparison of two integers: <tt>if_icmpeq</tt>) that
         either produces a 1 or a 0 on the stack and is followed by an
         <tt>ifne</tt> instruction (branch if stack value 0) may be
         replaced by the <tt>IfInstruction</tt> with its branch target

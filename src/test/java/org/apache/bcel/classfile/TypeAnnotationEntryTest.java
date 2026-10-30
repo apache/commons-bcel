@@ -279,6 +279,12 @@ class TypeAnnotationEntryTest {
     void wrapsCopyIoFailures() {
         final IOException failure = new IOException("Cannot encode the entry");
         final TypeAnnotationEntry entry = new TypeAnnotationEntry(0x13, new byte[0], new byte[0], null) {
+            /**
+             * Always throws the configured {@link IOException} to simulate an encoding failure.
+             *
+             * @param out The unused output stream.
+             * @throws IOException Thrown unconditionally to simulate an encoding failure.
+             */
             @Override
             public void dump(final DataOutputStream out) throws IOException {
                 throw failure;

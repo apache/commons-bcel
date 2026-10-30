@@ -238,7 +238,7 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     }
 
     /**
-     * Gets string from constant pool and bypass the indirection of 'ConstantClass' and 'ConstantString' objects. I.e. these
+     * Gets a string from the constant pool and bypasses the indirection of 'ConstantClass' and 'ConstantString' objects. That is, these
      * classes have an index field that points to another entry of the constant pool of type 'ConstantUtf8' which contains
      * the real data.
      *

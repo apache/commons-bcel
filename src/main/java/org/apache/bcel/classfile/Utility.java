@@ -652,7 +652,7 @@ public abstract class Utility {
     }
 
     /**
-     * Escape all occurrences of newline chars '\n', quotes \", etc.
+     * Escape all occurrences of newline chars '\n', quotes \", and so on.
      *
      * @param label The string to convert.
      * @return The converted string.
@@ -1230,7 +1230,7 @@ public abstract class Utility {
     }
 
     /**
-     * Map opcode names to opcode numbers. E.g., return Constants.ALOAD for "aload".
+     * Map opcode names to opcode numbers. For example, return Constants.ALOAD for "aload".
      *
      * @param name The opcode name.
      * @return The value.

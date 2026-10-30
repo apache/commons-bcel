@@ -1211,7 +1211,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                 }
             }
             // Local variables may be registered (for example, copied from an existing LocalVariableTable) without
-            // being referenced by any instruction, e.g. unused variables emitted by some compilers. Account for
+            // being referenced by any instruction, for example unused variables emitted by some compilers. Account for
             // those too, so a later call does not shrink maxLocals below what those entries require.
             for (final LocalVariableGen lv : variableList) {
                 final int index = lv.getIndex() + lv.getType().getSize();

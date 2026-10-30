@@ -30,7 +30,7 @@ Mini uses the JavaCC parser generator which comes precompiled from
     http://www.webgain.com/products/java_cc/
 
 After  setting the  CLASSPATH to  the  directory  just above the  Mini
-directory, e.g.
+directory, for example
 
     % cd Mini
     % setenv CLASSPATH $CLASSPATH:.:..
@@ -46,7 +46,7 @@ This produces a Java class file (max.class) which you can execute with
 Enter a number (for example, 4)  and you will be asked to enter 4 numbers. The
 program will then tell you the biggest of them.
 
-Alternatively you can  produce a  Java  file (max.java) which  will be
+Alternatively, you can  produce a  Java  file (max.java) which  will be
 translated automatically to a .class file.
 
     % java Mini.MiniC -java max.mini

@@ -33,7 +33,7 @@ If you have encountered an unlisted security vulnerability or other unexpected b
 
 ## Security Model
 
-The [Apache Commons security model](https://commons.apache.org/security.html#Security_Model) specifies that it is unsafe to pass possibly malicious input to Commons libraries unless otherwise specified. For Commons BCEL, processing untrusted class data is supported to the extent that this should never allow the supplier of the data to trigger arbitrary code execution, filesystem or network access. It may still trigger other crashes, such as for example `StackOverflowError` or `OutOfMemoryError`: if your code uses BCEL to process untrusted input then it is up to you to compensate for that as necessary. Loading or executing the generated classes is unsafe and may cause unexpected behavior, including execute arbitrary code execution.
+The [Apache Commons security model](https://commons.apache.org/security.html#Security_Model) specifies that it is unsafe to pass possibly malicious input to Commons libraries unless otherwise specified. For Commons BCEL, processing untrusted class data is supported to the extent that this should never allow the supplier of the data to trigger arbitrary code execution, filesystem or network access. It may still trigger other crashes, such as `StackOverflowError` or `OutOfMemoryError`: if your code uses BCEL to process untrusted input then it is up to you to compensate for that as necessary. Loading or executing the generated classes is unsafe and may cause unexpected behavior, including arbitrary code execution.
 
 ## Security Vulnerabilities Fixed in 6.13.0
 

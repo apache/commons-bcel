@@ -29,7 +29,7 @@ import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.util.ByteSequence;
 
 /**
- * Abstract superclass for instructions that use an index into the constant pool such as LDC, INVOKEVIRTUAL, etc.
+ * Abstract superclass for instructions that use an index into the constant pool such as LDC, INVOKEVIRTUAL, and so on.
  *
  * @see ConstantPoolGen
  * @see LDC

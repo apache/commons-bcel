@@ -21,7 +21,7 @@ package org.apache.bcel.classfile;
 import org.apache.bcel.Const;
 
 /**
- * Superclass for all objects that have modifiers like private, final, ... I.e. classes, fields, and methods.
+ * Superclass for objects that have modifiers such as private and final, including classes, fields, and methods.
  */
 public abstract class AccessFlags {
 

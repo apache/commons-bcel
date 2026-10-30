@@ -88,7 +88,7 @@ public class ClassGen extends AccessFlags implements Cloneable {
     private int major = Const.MAJOR_1_1;
     private int minor = Const.MINOR_1_1;
     private ConstantPoolGen cp; // Template for building up constant pool
-    // ArrayLists instead of arrays to gather fields, methods, etc.
+    // ArrayLists instead of arrays to gather fields, methods, and so on.
     private final List<Field> fieldList = new ArrayList<>();
     private final List<Method> methodList = new ArrayList<>();
 

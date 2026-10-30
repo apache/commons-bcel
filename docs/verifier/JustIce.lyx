@@ -405,8 +405,8 @@ ce from operating systems and concrete hardware.
  use the JVM bytecode as target.
 \layout Standard
 
-Nowadays, many other programming languages do have the JVM as its target
- platform; e.g.
+Nowadays, many other programming languages have the JVM as their target
+ platform, for example
  Fortran 
 \begin_inset LatexCommand \cite{f2j}
 
@@ -983,7 +983,7 @@ As we will see, the
 ClassFile
 \family default 
  structure and its sub-structures are defined for upwards compatibility,
- i.e., new structure definitions can be added to the specification easily
+ that is, new structure definitions can be added to the specification easily
  at a later time.
 \newline 
 
@@ -1082,7 +1082,7 @@ You may read an '
 \family typewriter 
 u
 \family default 
-' as 'byte times'; e.g., '
+' as 'byte times'. For example, '
 \family typewriter 
 u2
 \family default 
@@ -1383,7 +1383,7 @@ attribute_info attributes[attributes_count];
 
 \newline 
 This is the most complex of all predefined attributes.
- Every method that has code (i.e., every non-native, non-abstract method)
+ Every method that has code (that is, every non-native, non-abstract method)
  must have such an attribute.
  Note that the maximum stack depth and the number of local variables for
  a method invocation are defined here.
@@ -1628,7 +1628,7 @@ The most important item, however, is the
 code
 \family default 
  item.
- It defines the bytecode of this method; i.e., the JVM machine instructions.
+ It defines the bytecode of this method, that is, the JVM machine instructions.
 \layout Subsubsection
 
 
@@ -1858,7 +1858,7 @@ u1 bytes[length];
 
 \family default 
 A CONSTANT_Utf8 represents a constant string.
- Such a string is e.g.
+ Such a string is, for example,
  used to describe names of methods, names of fields, names of attributes,
  types of methods or types of fields.
  This string is encoded in UTF-8 format, a variant of the unicode character
@@ -2052,7 +2052,7 @@ A field has to be unique in a class file with respect to its name and descriptor
 \layout Standard
 
 The descriptor of a field describes its type.
- E.g., a descriptor of 
+ For example, a descriptor of
 \begin_inset Quotes eld
 \end_inset 
 
@@ -2105,7 +2105,7 @@ visibility
 .
 \end_float 
  of the field.
- E.g., a field with the 
+ For example, a field with the
 \family typewriter 
 ACC_PRIVATE
 \begin_float footnote 
@@ -2474,7 +2474,7 @@ operations: Constants can be pushed onto the stack either by loading
 texttt{ldc}
 \latex default 
  instruction or with special ``short-cut'' instructions where the operand
- is encoded into the instructions, e.g., 
+ is encoded into the instructions, for example,
 \latex latex 
 
 \backslash 
@@ -2501,13 +2501,13 @@ operations: The instruction set of the JVM distinguishes its operand
 texttt{i}
 \latex default 
 , for example, denote an integer operation.
- E.g.,
+ For example,
 \latex latex 
  
 \backslash 
 texttt{iadd}
 \latex default 
- that adds two integers and pushes the result back on the operand stack.
+ adds two integers and pushes the result back on the operand stack.
  The Java types 
 \latex latex 
 
@@ -2629,7 +2629,7 @@ texttt{athrow}
 \latex default 
  instruction.
  Branch targets are coded as offsets from the current byte code position,
- i.e., they are coded with an integer number.
+ that is, they are coded with an integer number.
 \layout Description
 
 Load\SpecialChar ~
@@ -2830,7 +2830,7 @@ bytecode
 The JVM is a stack-based machine.
  There are local variables which may be compared to registers, but most
  instructions work on the operand stack.
- E.g., the 
+ For example, the
 \latex latex 
 
 \backslash 
@@ -6228,7 +6228,7 @@ this attribute has a length of 1234 bytes in total
 Resolution
 \emph default 
  is the transformation of a symbolic reference to an actual reference --
- i.e., as long as there is only a symbolic reference to an entity, this entity
+ that is, as long as there is only a symbolic reference to an entity, this entity
  cannot be verified at all because it has not been loaded yet.
  Passes two and three are performed during the 
 \emph on 
@@ -6329,7 +6329,7 @@ This performance enhancement has an ugly side effect.
 \emph on 
 used
 \emph default 
-, i.e., 
+, that is,
 \emph on 
 resolved
 \emph default 
@@ -7148,7 +7148,7 @@ Reachability of Instructions
 \layout Standard
 
 For the data flow analysis algorithm, you need to know all the possible
- control flow successors of every instruction, i.e., you need to build a 
+ control flow successors of every instruction, that is, you need to build a
 \emph on 
 control flow graph
 \emph default 
@@ -7768,7 +7768,7 @@ texttt{ret}
 \emph on 
 N
 \emph default 
-; i.e., it is a 
+; that is, it is a
 \latex latex 
 
 \backslash 
@@ -8602,7 +8602,7 @@ The Byte Code Engineering Library (BCEL) presents an object oriented view
  JustIce uses the BCEL, so there was nothing left to do to load a class
  file in.
  Only minor changes were made to the BCEL to make it more verbose when exception
-al situations occur; i.e., when a garbled class file is loaded in.
+al situations occur, that is, when a garbled class file is loaded in.
  The BCEL uses Java's exception mechanism to signal these situations; JustIce
  transforms this behavior into the behavior expected by users of the Verificat
 ion API (see section 
@@ -8670,7 +8670,7 @@ all verification that can be performed without looking at the bytecodes
  For some reasons (like determining a valid ancestor hierarchy of a class),
  pass two of JustIce has to load referenced classes.
  Of course, this is done in a careful way: by pass-one-verifying them.
- If loading of a referenced class should fail (i.e., verification pass one
+ If loading of a referenced class should fail (that is, verification pass one
  fails on this class), the referencing class is rejected by JustIce's pass
  two.
  Pass two of JustIce does not pass-two-verify any referenced classes.
@@ -8896,7 +8896,7 @@ trustful
 \begin_inset Quotes erd
 \end_inset 
 
- when parsing, i.e., where BCEL relies on the correctness of the class file.
+ when parsing, that is, where BCEL relies on the correctness of the class file.
 \layout Standard
 
 Pass 3a consists of the checking of static constraints on instructions and
@@ -9946,7 +9946,7 @@ Comparison to Sun's Implementation
 JustIce was originally aimed to be as compatible to Sun's implementation
  as possible.
  However, the unclear specification prevents clean room implementations
- (i.e., implementations whose programmers did not look into Sun's code) from
+ (that is, implementations whose programmers did not look into Sun's code) from
  perfect compatibility.
 \layout Standard
 
@@ -9958,7 +9958,7 @@ de.fub.bytecode.verifier.Verifier
 \emph default 
  class.
  This set includes most of the classes of the Java 2 API supplied by Sun
- Microsystems, i.e., a few hundreds of apparently correct classes.
+ Microsystems, that is, a few hundred apparently correct classes.
  A very small number of class files was rejected by JustIce because of its
  different specification of subroutine constraints.
  No other rejects were encountered.
@@ -10144,7 +10144,7 @@ VerificationResult
 .
 \layout Standard
 
-All class files are fetched from the BCEL's class file repository, i.e., the
+All class files are fetched from the BCEL's class file repository, that is, the
  class 
 \family typewriter 
 Re\SpecialChar \-
@@ -10269,9 +10269,9 @@ A Verifier creates instances of PassVerifiers.
  A PassVerifier instance in charge of performing some later verification
  pass transparently creates PassVerifier instances for the preceding passes.
  Therefore, users of the Verification API do not have to care about the
- order of verification passes; i.e., earlier passes are run always before
+ order of verification passes; that is, earlier passes are always run before
  later passes.
- All verification results are cached; this way an unsual order of calls
+ All verification results are cached; this way an unusual order of calls
  to the 
 \emph on 
 doPassX()
@@ -11069,7 +11069,7 @@ What Was Achieved
 \layout Standard
 
 About a third of the development time of JustIce was spent examining the
- various issues in connection with subroutines, i.e., issues concerning the
+ various issues in connection with subroutines, that is, issues concerning the
  bytecode instructions 
 \latex latex 
 
@@ -11220,7 +11220,7 @@ While this might be possible in some cases, in general the constraints of
  data flow analyzer in a sane way.
  As another example, if a user preferred not to care about stack underflow
  the verification algorithm would require complicated user interaction;
- i.e., the user would have to decide what type to put onto the simulated operand
+ that is, the user would have to decide what type to put onto the simulated operand
  stack just before it is read.
 \layout Standard
 
@@ -11462,7 +11462,7 @@ This code is harmless, because lines 6 and 7 can never be executed (it would
 
 We conclude that there cannot be a perfect verifier.
  All that could be done is reduce the degree of uncertainty.
- For practical purposes, i.e., to be compatible with Sun's implementation,
+ For practical purposes, that is, to be compatible with Sun's implementation,
  one should not even do that.
 \layout Standard
 
@@ -11640,7 +11640,7 @@ interface}
 ).
 \layout Standard
 
-St�rk et al.
+St�rk and colleagues
  suggest the use of 
 \emph on 
 sets
@@ -11843,7 +11843,7 @@ LocalVariableTable
 \layout Standard
 
 JustIce builds data structures to warn if it detects contradicting and overlappi
-ng areas; e.g., if some local variable is anounced to carry an 
+ng areas; for example, if some local variable is announced to carry an
 \family typewriter 
 int
 \family default 
@@ -12502,7 +12502,7 @@ javac
  compiler may create class files with a '$' character in their names as
  a result of Java source files defining inner classes, this character should
  no longer be a valid part of a Java name to avoid problems.
- I.e., the method invocation 
+ That is, the method invocation
 \emph on 
 ja\SpecialChar \-
 va.lang.Cha\SpecialChar \-

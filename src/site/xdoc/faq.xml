@@ -51,7 +51,7 @@
       <br/>
       <b>A: </b> Yes, this is covered by the <a
       href="https://www.apache.org/licenses/">Apache License</a>, if you add a note about the original
-      author and where to find the sources, i.e.,
+      author and where to find the sources, that is,
       <a href="https://commons.apache.org/bcel/">https://commons.apache.org/bcel/</a>
     </p>
 
@@ -64,10 +64,10 @@
     </p>
     <p>
       <b>A: </b> The answer lies in internal limitations of the JVM,
-      branch instruction like goto can not address offsets larger than
-      a short integer, i.e. offsets >= 32767.<br/>
-      The solution is to split the branch into in intermediate hops,
-      which the XSLTC obviously doesn't take care off.
+      branch instructions like goto cannot address offsets larger than
+      a short integer, that is, offsets >= 32767.<br/>
+      The solution is to split the branch into intermediate hops,
+      which XSLTC does not handle.
       (In fact you could replace gotos with the goto_w instruction,
       but this wouldn't help in the other cases).
     </p>

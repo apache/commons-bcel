@@ -19,7 +19,7 @@
 package org.apache.bcel.generic;
 
 /**
- * Interface implementing the Visitor pattern programming style. I.e., a class that implements this interface can handle
+ * Interface implementing the Visitor pattern programming style. That is, a class that implements this interface can handle
  * all types of instructions with the properly typed methods just by calling the accept() method.
  */
 public interface Visitor {

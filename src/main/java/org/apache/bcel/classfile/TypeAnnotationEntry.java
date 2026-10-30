@@ -120,7 +120,7 @@ public class TypeAnnotationEntry {
      *
      * @param targetType The target type.
      * @return the size of the target info, or -1 if it depends on its content (the table of a {@code localvar_target}).
-     * @throws ClassFormatException if the target type is not defined.
+     * @throws ClassFormatException Thrown if the target type is not defined.
      */
     private static int targetInfoSize(final int targetType) {
         switch (targetType) {
@@ -212,8 +212,8 @@ public class TypeAnnotationEntry {
      * @param targetInfo The target info, as it is stored in the class file.
      * @param typePath The type path, as it is stored in the class file without its length: a pair of bytes (path kind, type argument index) per step.
      * @param annotationEntry The annotation.
-     * @throws ClassFormatException if the target type is not defined.
-     * @throws IllegalArgumentException if the target info does not have the size its target type requires, or if the type path is not a sequence of pairs
+     * @throws ClassFormatException Thrown if the target type is not defined.
+     * @throws IllegalArgumentException Thrown if the target info does not have the size its target type requires, or if the type path is not a sequence of pairs
      *         of bytes of at most 255 steps.
      */
     public TypeAnnotationEntry(final int targetType, final byte[] targetInfo, final byte[] typePath, final AnnotationEntry annotationEntry) {

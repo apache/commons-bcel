@@ -105,8 +105,8 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
     }
 
     /**
-     * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class. I.e., the hierarchy of methods, fields,
-     * attributes, etc. spawns a tree of objects.
+     * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class. That is, the hierarchy of methods, fields,
+     * attributes, and other elements forms a tree of objects.
      *
      * @param v Visitor object.
      */
@@ -366,8 +366,8 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
     }
 
     /**
-     * Gets string from constant pool and bypass the indirection of 'ConstantClass' and 'ConstantString' objects. I.e. these classes have an index field that
-     * points to another entry of the constant pool of type 'ConstantUtf8' which contains the real data.
+     * Gets a string from the constant pool and bypasses the indirection of 'ConstantClass' and 'ConstantString' objects. These classes have an index field
+     * that points to another entry of the constant pool of type 'ConstantUtf8' which contains the real data.
      *
      * @param index Index in constant pool.
      * @param tag   Tag of expected constant, either ConstantClass or ConstantString.

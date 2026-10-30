@@ -409,7 +409,7 @@ final class CodeHTML {
                 }
             }
         }
-        // Get target addresses from GOTO, JSR, TABLESWITCH, etc.
+        // Get target addresses from GOTO, JSR, TABLESWITCH, and so on.
         while (bytes.available() > 0) {
             opcode = bytes.readUnsignedByte();
             // System.out.println(getOpcodeName(opcode));
@@ -551,7 +551,7 @@ final class CodeHTML {
                     final String str = codeToHTML(stream, methodNumber);
                     String anchor = "";
                     /*
-                     * Sets an anchor mark if this line is targeted by a goto, jsr, etc. Defining an anchor for every line is very
+                     * Sets an anchor mark if this line is targeted by a goto, jsr, and so on. Defining an anchor for every line is very
                      * inefficient!
                      */
                     if (gotoSet.get(offset)) {

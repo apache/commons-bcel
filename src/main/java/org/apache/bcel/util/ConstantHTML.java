@@ -121,7 +121,7 @@ final class ConstantHTML {
             final String htmlMethodName = Class2HTML.toHTML(methodName);
             // Partially compacted class name, that is, / -> .
             final String methodClass = constantPool.constantToString(classIndex, Const.CONSTANT_Class);
-            String shortMethodClass = Utility.compactClassName(methodClass); // I.e., remove java.lang.
+            String shortMethodClass = Utility.compactClassName(methodClass); // That is, remove java.lang.
             shortMethodClass = Utility.compactClassName(shortMethodClass, classPackage + ".", true); // Remove class package prefix
             shortMethodClass = Class2HTML.toHTML(shortMethodClass);
             // Get method signature
@@ -158,7 +158,7 @@ final class ConstantHTML {
             nameIndex = c3.getNameAndTypeIndex();
             // Get method name and its class (compacted)
             final String fieldClass = constantPool.constantToString(classIndex, Const.CONSTANT_Class);
-            String shortFieldClass = Utility.compactClassName(fieldClass); // I.e., remove java.lang.
+            String shortFieldClass = Utility.compactClassName(fieldClass); // That is, remove java.lang.
             shortFieldClass = Utility.compactClassName(shortFieldClass, classPackage + ".", true); // Remove class package prefix
             shortFieldClass = Class2HTML.toHTML(shortFieldClass);
             final String fieldName = constantPool.constantToString(nameIndex, Const.CONSTANT_NameAndType);
@@ -177,7 +177,7 @@ final class ConstantHTML {
             final ConstantClass c4 = constantPool.getConstant(index, Const.CONSTANT_Class, ConstantClass.class);
             nameIndex = c4.getNameIndex();
             final String className2 = constantPool.constantToString(index, tag); // / -> .
-            String shortClassName = Utility.compactClassName(className2); // I.e., remove java.lang.
+            String shortClassName = Utility.compactClassName(className2); // That is, remove java.lang.
             shortClassName = Utility.compactClassName(shortClassName, classPackage + ".", true); // Remove class package prefix
             shortClassName = Class2HTML.toHTML(shortClassName);
             ref = "<A HREF=\"" + Class2HTML.toHTMLRef(className2) + ".html\" TARGET=_top>" + shortClassName + "</A>";

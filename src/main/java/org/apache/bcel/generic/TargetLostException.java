@@ -19,7 +19,7 @@
 package org.apache.bcel.generic;
 
 /**
- * Thrown by {@link InstructionList} when one or multiple disposed instructions are still being referenced by an {@link InstructionTargeter} object. I.e. the
+ * Thrown by {@link InstructionList} when one or multiple disposed instructions are still being referenced by an {@link InstructionTargeter} object. That is, the
  * {@link InstructionTargeter} has to be notified that (one of) the {@link InstructionHandle} it is referencing is being removed from the
  * {@link InstructionList} and thus not valid anymore.
  *

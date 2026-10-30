@@ -2459,8 +2459,8 @@ public class InstConstraintVisitor extends EmptyVisitor {
 
     /**
      * Ensures the general preconditions of an instruction that accesses the stack. This method is here because BCEL has no
-     * such superinterface for the stack accessing instructions; and there are funny unexpected exceptions in the semantices
-     * of the superinterfaces and superclasses provided. E.g. SWAP is a StackConsumer, but DUP_X1 is not a StackProducer.
+     * such superinterface for the stack accessing instructions; and there are funny unexpected exceptions in the semantics
+     * of the superinterfaces and superclasses provided. For example, SWAP is a StackConsumer, but DUP_X1 is not a StackProducer.
      * Therefore, this method is called by all StackProducer, StackConsumer, and StackInstruction instances via their
      * visitXXX() method. Unfortunately, as the superclasses and superinterfaces overlap, some instructions cause this
      * method to be called two or three times. [TODO: Fix this.]

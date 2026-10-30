@@ -147,7 +147,7 @@ class MethodGenTest {
 
     @Test
     void testSetMaxLocalsAccountsForLocalVariableTable() {
-        // BCEL-280: some compilers (e.g. kotlinc) emit LocalVariableTable entries for slots that no
+        // BCEL-280: some compilers (for example kotlinc) emit LocalVariableTable entries for slots that no
         // instruction in the method body ever touches. setMaxLocals() must not shrink maxLocals below
         // what those entries require, or the resulting class file fails verification with a
         // "Invalid index ... in LocalVariableTable" ClassFormatError.
@@ -164,7 +164,7 @@ class MethodGenTest {
         mg.addLocalVariable("unusedByCompiler", Type.INT, 6, start, end);
         assertEquals(7, mg.getMaxLocals(), "addLocalVariable() should already have grown maxLocals");
 
-        // Simulate a later pass (e.g. instrumentation) recomputing maxLocals from the instruction list.
+        // Simulate a later pass (for example instrumentation) recomputing maxLocals from the instruction list.
         mg.setMaxLocals();
 
         assertEquals(7, mg.getMaxLocals(), "setMaxLocals() dropped a local variable table entry unreferenced by instructions");

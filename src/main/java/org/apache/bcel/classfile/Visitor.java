@@ -19,7 +19,7 @@
 package org.apache.bcel.classfile;
 
 /**
- * Interface to make use of the Visitor pattern programming style. I.e. a class that implements this interface can
+ * Interface to make use of the Visitor pattern programming style. That is, a class that implements this interface can
  * traverse the contents of a Java class just by calling the 'accept' method which all classes have.
  */
 public interface Visitor {

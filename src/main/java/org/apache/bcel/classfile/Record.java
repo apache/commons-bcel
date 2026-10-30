@@ -83,7 +83,7 @@ public final class Record extends Attribute {
     /**
      * Called by objects that are traversing the nodes of the tree implicitly
      * defined by the contents of a Java class. For example, the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
+     * fields, attributes, and other elements forms a tree of objects.
      *
      * @param v Visitor object.
      */

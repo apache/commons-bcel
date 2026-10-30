@@ -64,7 +64,7 @@ public class InstructionFinder {
 
     /**
      * Code patterns found may be checked using an additional user-defined constraint object whether they really match the
-     * needed criterion. I.e., check constraints that cannot expressed with regular expressions.
+     * needed criterion. That is, check constraints that cannot be expressed with regular expressions.
      */
     public interface CodeConstraint {
 

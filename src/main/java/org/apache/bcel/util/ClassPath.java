@@ -472,8 +472,11 @@ public class ClassPath implements Closeable {
     }
 
     /**
-     * Checks for class path components in the following properties: "java.class.path", "sun.boot.class.path",
-     * "java.ext.dirs"
+     * Gets the default class path used by BCEL.
+     *
+     * <p>
+     * Collects class path components from "java.class.path", "sun.boot.class.path", and "java.ext.dirs", along with runtime modules under "java.home".
+     * </p>
      *
      * @return class path as used by default by BCEL.
      */

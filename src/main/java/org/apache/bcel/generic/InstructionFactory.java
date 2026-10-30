@@ -241,7 +241,7 @@ public class InstructionFactory implements InstructionConstants {
     /**
      * Create binary operation for simple basic types, such as int and float.
      *
-     * @param op operation, such as "+", "*", "&lt;&lt;", etc.
+     * @param op operation, such as "+", "*", "&lt;&lt;", and so on.
      * @param type The operand type.
      * @return The binary arithmetic instruction.
      */

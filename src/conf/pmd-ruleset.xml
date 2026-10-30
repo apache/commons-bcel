@@ -66,7 +66,7 @@
   <rule ref="category/java/codestyle.xml/UnnecessaryFullyQualifiedName">
     <properties>
       <!-- java.lang annotations have the same name as BCEL classes so must be fully
-        qualified, e.g. java.lang.Deprecated -->
+        qualified, for example java.lang.Deprecated -->
       <property name="violationSuppressXPath"
         value="//ClassOrInterfaceDeclaration[@SimpleName='AccessFlags' or @SimpleName='Attribute'
           or @SimpleName='AttributeReader' or @SimpleName='Constant'

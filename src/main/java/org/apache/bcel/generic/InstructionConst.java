@@ -24,12 +24,11 @@ import org.apache.bcel.Const;
 /**
  * Contains shareable instruction objects.
  * <p>
- * In order to save memory you can use some instructions multiply, since they have an immutable state and are directly derived from Instruction. I.e. they have
- * no instance fields that could be changed. Since some of these instructions like ICONST_0 occur very frequently this can save a lot of time and space. This
- * feature is an adaptation of the FlyWeight design pattern, we just use an array instead of a factory.
+ * Reusing predefined instruction objects can save time and memory, especially for frequently used instructions such as ICONST_0.
+ * These objects are shared and should not be modified. This approach adapts the Flyweight design pattern by using an array instead of a factory.
  * </p>
  * <p>
- * The Instructions can also accessed directly under their names, so it's possible to write il.append(Instruction.ICONST_0);
+ * The instruction objects can also be accessed directly by name, for example, {@code il.append(InstructionConst.ICONST_0)}.
  * </p>
  */
 public final class InstructionConst {
@@ -402,7 +401,7 @@ public final class InstructionConst {
     public static final LocalVariableInstruction ISTORE_2 = new ISTORE(2);
 
     /**
-     * Gets object via its opcode, for immutable instructions like branch instructions entries are set to null.
+     * Instruction objects indexed by opcode. Entries for instructions without a predefined instance, such as branch instructions, are null.
      */
     static final Instruction[] INSTRUCTIONS = new Instruction[256];
 

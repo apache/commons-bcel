@@ -82,8 +82,8 @@
         instruction set are described in more detail in the <a
               href="https://docs.oracle.com/javase/specs/">Java
         Virtual Machine Specification</a>. Especially, we will not deal
-        with the security constraints that the Java Virtual Machine has to
-        check at run-time, i.e. the byte code verifier.
+        with the security constraints that the byte code verifier checks
+        at run-time.
       </p>
 
       <p>
@@ -95,12 +95,12 @@
         rights</em> of the class encoded by a bit mask, a list of
         interfaces implemented by the class, lists containing the fields
         and methods of the class, and finally the <em>class
-        attributes</em>, e.g.,  the <tt>SourceFile</tt> attribute telling
+        attributes</em>, for example, the <tt>SourceFile</tt> attribute telling
         the name of the source file. Attributes are a way of putting
         additional, user-defined information into class file data
         structures. For example, a custom class loader may evaluate such
         attribute data in order to perform its transformations. The JVM
-        specification declares that unknown, i.e., user-defined attributes
+        specification declares that unknown, that is, user-defined attributes
         must be ignored by any Virtual Machine implementation.
       </p>
 
@@ -155,11 +155,11 @@
       <p>
         For example, the <tt>invokevirtual</tt> instruction refers to a
         <tt>MethodRef</tt> constant that contains information about the
-        name of the called method, the signature (i.e., the encoded
+        name of the called method, the signature (that is, the encoded
         argument and return types), and to which class the method belongs.
         In fact, as emphasized by the boxed value, the <tt>MethodRef</tt>
         constant itself just refers to other entries holding the real
-        data, e.g., it refers to a <tt>ConstantClass</tt> entry containing
+        data. For example, it refers to a <tt>ConstantClass</tt> entry containing
         a symbolic reference to the class <tt>java.io.PrintStream</tt>.
         To keep the class file compact, such constants are typically
         shared by different instructions and other constant pool
@@ -183,9 +183,9 @@
         local stack has to be computed by the compiler. Values may also be
         stored intermediately in a frame area containing <em>local
         variables</em> which can be used like a set of registers. These
-        local variables are numbered from 0 to 65535, i.e., you have a
-        maximum of 65536 of local variables per method. The stack frames
-        of caller and callee method are overlapping, i.e., the caller
+        local variables are numbered from 0 to 65535, giving a
+        maximum of 65536 local variables per method. The stack frames
+        of the caller and callee overlap: the caller
         pushes arguments onto the operand stack and the called method
         receives them in local variables.
       </p>
@@ -203,7 +203,7 @@
         either by loading them from the constant pool with the
         <tt>ldc</tt> instruction or with special "short-cut"
         instructions where the operand is encoded into the instructions,
-        e.g.,  <tt>iconst_0</tt> or <tt>bipush</tt> (push byte value).
+        for example, <tt>iconst_0</tt> or <tt>bipush</tt> (push byte value).
       </p>
 
       <p>
@@ -211,7 +211,7 @@
         Virtual Machine distinguishes its operand types using different
         instructions to operate on values of specific type. Arithmetic
         operations starting with <tt>i</tt>, for example, denote an
-        integer operation. E.g., <tt>iadd</tt> that adds two integers
+        integer operation. For example, <tt>iadd</tt> adds two integers
         and pushes the result back on the stack. The Java types
         <tt>boolean</tt>, <tt>byte</tt>, <tt>short</tt>, and
         <tt>char</tt> are handled as integers by the JVM.
@@ -225,7 +225,7 @@
         the <tt>finally</tt> clause of <tt>try-catch</tt> blocks.
         Exceptions may be thrown with the <tt>athrow</tt> instruction.
         Branch targets are coded as offsets from the current byte code
-        position, i.e., with an integer number.
+        position, that is, with an integer number.
       </p>
 
       <p>
@@ -301,7 +301,7 @@
       <p>
         Whenever an exception is raised during execution, the JVM performs
         exception handling by looking into a table of exception
-        handlers. The table marks handlers, i.e., code chunks, to be
+        handlers. The table marks handlers, that is, code chunks, to be
         responsible for exceptions of certain types that are raised within
         a given area of the byte code. When there is no appropriate
         handler the exception is propagated back to the caller of the
@@ -318,7 +318,7 @@
         and local variables refer to absolute addresses within the byte
         code.  The former contains references to the start and the end of
         the <tt>try</tt> block, and to the instruction handler code. The
-        latter marks the range in which a local variable is valid, i.e.,
+        latter marks the range in which a local variable is valid, that is,
         its scope. This makes it difficult to insert or delete code areas
         on this level of abstraction, since one has to recompute the
         offsets every time and update the referring objects. We will see
@@ -352,7 +352,7 @@
         Classes are internally represented by strings like
         <tt>"java/lang/String"</tt>, basic types like <tt>float</tt> by an
         integer number. Within signatures they are represented by single
-        characters, e.g., <tt>I</tt>, for integer. Arrays are denoted with
+        characters, for example, <tt>I</tt>, for integer. Arrays are denoted with
         a <tt>[</tt> at the start of the signature.
       </p>
 
@@ -419,7 +419,8 @@ public class Factorial {
         LocalVariable(start_pc = 0, length = 16, index = 0:int n)
       </source>
 
-      <p><b>fac():</b>
+      <p>
+        <b>fac():</b>
         The method <tt>fac</tt> has only one local variable, the argument
         <tt>n</tt>, stored at index 0. This variable's scope ranges from
         the start of the byte code sequence to the very end.  If the value
@@ -469,7 +470,8 @@ public class Factorial {
         4       22      36      NumberFormatException(10)
       </source>
 
-      <p><b>readInt():</b> First the local variable <tt>n</tt> (at index 0)
+      <p>
+        <b>readInt():</b> First the local variable <tt>n</tt> (at index 0)
         is initialized to the value 4711.  The next instruction,
         <tt>getstatic</tt>, loads the references held by the static
         <tt>System.out</tt> field onto the stack. Then a string is loaded
@@ -494,7 +496,7 @@ public class Factorial {
       <p>
         The handler for <tt>java.io.IOException</tt> starts at
         offset 25. It simply prints the error and branches back to the
-        normal execution flow, i.e., as if no exception had occurred.
+        normal execution flow, that is, as if no exception had occurred.
       </p>
 
     </subsection>

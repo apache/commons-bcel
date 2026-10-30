@@ -1165,7 +1165,7 @@ public class InstructionList implements Iterable<InstructionHandle> {
             pos[count++] = index;
             /*
              * Gets an estimate about how many additional bytes may be added, because BranchInstructions may have variable length
-             * depending on the target offset (short vs. int) or alignment issues (TABLESWITCH and LOOKUPSWITCH).
+             * depending on the target offset (short or int) or alignment issues (TABLESWITCH and LOOKUPSWITCH).
              */
             switch (i.getOpcode()) {
             case Const.JSR:
