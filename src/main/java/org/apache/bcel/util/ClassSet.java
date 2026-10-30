@@ -33,22 +33,54 @@ public class ClassSet {
 
     private final Map<String, JavaClass> map = new HashMap<>();
 
+    /**
+     * Constructs a new ClassSet.
+     */
+    public ClassSet() {
+    }
+
+    /**
+     * Adds a JavaClass to the set.
+     *
+     * @param clazz The JavaClass to add.
+     * @return true if the class was added.
+     */
     public boolean add(final JavaClass clazz) {
         return map.putIfAbsent(clazz.getClassName(), clazz) != null;
     }
 
+    /**
+     * Checks if the set is empty.
+     *
+     * @return true if the set is empty.
+     */
     public boolean empty() {
         return map.isEmpty();
     }
 
+    /**
+     * Gets the class names in the set.
+     *
+     * @return The class names in the set.
+     */
     public String[] getClassNames() {
         return map.keySet().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
+    /**
+     * Removes a JavaClass from the set.
+     *
+     * @param clazz The JavaClass to remove.
+     */
     public void remove(final JavaClass clazz) {
         map.remove(clazz.getClassName());
     }
 
+    /**
+     * Converts the set to an array.
+     *
+     * @return An array of JavaClass objects.
+     */
     public JavaClass[] toArray() {
         return map.values().toArray(JavaClass.EMPTY_ARRAY);
     }

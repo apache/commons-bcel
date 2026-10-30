@@ -35,6 +35,8 @@ public class LoadingException extends VerifierConstraintViolatedException {
 
     /**
      * Constructs a new LoadingException with the specified error message.
+     *
+     * @param message The error message.
      */
     public LoadingException(final String message) {
         super(message);

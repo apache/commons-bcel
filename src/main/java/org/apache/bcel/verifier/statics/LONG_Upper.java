@@ -32,7 +32,7 @@ public final class LONG_Upper extends Type {
     /**
      * Gets the single instance of this class.
      *
-     * @return the single instance of this class.
+     * @return The single instance of this class.
      */
     public static LONG_Upper theInstance() {
         return INSTANCE;

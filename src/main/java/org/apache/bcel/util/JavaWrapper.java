@@ -24,7 +24,7 @@ import java.lang.reflect.Modifier;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Java interpreter replacement, i.e., wrapper that uses its own ClassLoader to modify/generate classes as they're
+ * Java interpreter replacement, that is, wrapper that uses its own ClassLoader to modify/generate classes as they're
  * requested. You can take this as a template for your own applications.
  * <p>
  * Call this wrapper with:
@@ -59,10 +59,13 @@ public class JavaWrapper {
 
     /**
      * Default main method used as wrapper, expects the fully qualified class name of the real class as the first argument.
+     *
+     * @param argv command line arguments where first argument is the class name.
+     * @throws Exception Thrown if an error occurs during execution.
      */
     public static void main(final String[] argv) throws Exception {
         /*
-         * Expects class name as first argument, other arguments are by-passed.
+         * Expects class name as first argument, other arguments are bypassed.
          */
         if (argv.length == 0) {
             System.out.println("Missing class name.");
@@ -76,10 +79,18 @@ public class JavaWrapper {
 
     private final java.lang.ClassLoader loader;
 
+    /**
+     * Constructs a JavaWrapper with the default class loader.
+     */
     public JavaWrapper() {
         this(getClassLoader());
     }
 
+    /**
+     * Constructs a JavaWrapper with the specified class loader.
+     *
+     * @param loader The class loader to use.
+     */
     public JavaWrapper(final java.lang.ClassLoader loader) {
         this.loader = loader;
     }
@@ -87,9 +98,9 @@ public class JavaWrapper {
     /**
      * Runs the main method of the given class with the arguments passed in argv
      *
-     * @param className the fully qualified class name
-     * @param argv the arguments just as you would pass them directly
-     * @throws ClassNotFoundException if {@code className} can't be found.
+     * @param className The fully qualified class name.
+     * @param argv The arguments just as you would pass them directly.
+     * @throws ClassNotFoundException Thrown if {@code className} can't be found.
      */
     public void runMain(final String className, final String[] argv) throws ClassNotFoundException {
         final Class<?> cl = loader.loadClass(className);

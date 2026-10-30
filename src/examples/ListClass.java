@@ -161,11 +161,17 @@ public class ListClass {
                     exclude = true;
                     break;
                 case "-help":
-                    System.out.println("Usage: java listclass [-constants] [-code] [-brief] " + "[-dependencies] [-nocontents] [-recurse] class... "
-                        + "[-exclude <list>]\n" + "-constants       Print constants table (constant pool)\n" + "-code            Dump byte code of methods\n"
-                        + "-brief           Brief listing\n" + "-dependencies    Show class dependencies\n"
-                        + "-nocontents      Do not print field/method information\n" + "-recurse         Recurse into dependent classes\n"
-                        + "-exclude <list>  Do not list classes beginning with " + "strings in <list>");
+                    // @formatter:off
+                    System.out.println(
+                        "Usage: java listclass [-constants] [-code] [-brief] [-dependencies] [-nocontents] [-recurse] class... [-exclude <list>]\n"
+                        + "-constants       Print constants table (constant pool)\n"
+                        + "-code            Dump byte code of methods\n"
+                        + "-brief           Brief listing\n"
+                        + "-dependencies    Show class dependencies\n"
+                        + "-nocontents      Do not print field/method information\n"
+                        + "-recurse         Recurse into dependent classes\n"
+                        + "-exclude <list>  Do not list classes beginning with strings in <list>");
+                    // @formatter:on
                     System.exit(0);
                     break;
                 default:
@@ -193,7 +199,7 @@ public class ListClass {
     }
 
     /**
-     * Dump the list of classes this class is dependent on
+     * Dumps the list of classes this class is dependent on
      */
     public static void printClassDependencies(final ConstantPool pool) {
         System.out.println("Dependencies:");
@@ -203,7 +209,7 @@ public class ListClass {
     }
 
     /**
-     * Dump the disassembled code of all methods in the class.
+     * Dumps the disassembled code of all methods in the class.
      */
     public static void printCode(final Method[] methods, final boolean verbose) {
         Streams.of(methods).forEach(method -> {

@@ -122,7 +122,7 @@ public class ASTIdent extends ASTExpr {
     }
 
     /**
-     * @return identifier and line/column number of appearance
+     * @return identifier and line/column number of appearance.
      */
     @Override
     public String toString() {

@@ -26,7 +26,7 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Utility;
 
 /**
- * This abstract class provides a logic of a loading {@link JavaClass} objects class names via {@link ClassPath}.
+ * This abstract class provides logic for loading {@link JavaClass} objects by class name through {@link ClassPath}.
  *
  * <p>
  * Subclasses can choose caching strategy of the objects by implementing the abstract methods (for example,
@@ -60,9 +60,9 @@ abstract class AbstractClassPathRepository implements Repository {
      * class's representation. If the representation is found, it is added to the Repository.
      *
      * @see Class
-     * @param clazz the runtime Class object
-     * @return JavaClass object for given runtime class
-     * @throws ClassNotFoundException if the class is not in the Repository, and its representation could not be found
+     * @param clazz The runtime Class object.
+     * @return JavaClass object for given runtime class.
+     * @throws ClassNotFoundException Thrown if the class is not in the Repository, and its representation could not be found
      */
     @Override
     public JavaClass loadClass(final Class<?> clazz) throws ClassNotFoundException {
@@ -89,6 +89,12 @@ abstract class AbstractClassPathRepository implements Repository {
             if (inputStream != null) {
                 final ClassParser parser = new ClassParser(inputStream, className);
                 final JavaClass clazz = parser.parse();
+                // The this_class name inside the parsed bytes is attacker-controlled: caching it under its own name
+                // would let a class file found under one name poison the repository entry for another (the JDK's
+                // defineClass() rejects the same mismatch). Refuse to cache or return it.
+                if (!clazz.getClassName().equals(className)) {
+                    throw new ClassNotFoundException("Class name mismatch: requested " + className + " but the class file declares " + clazz.getClassName());
+                }
                 storeClass(clazz);
                 return clazz;
             }
@@ -102,9 +108,9 @@ abstract class AbstractClassPathRepository implements Repository {
      * Finds a JavaClass object by name. If it is already in this Repository, the Repository version is returned. Otherwise,
      * the Repository's classpath is searched for the class (and it is added to the Repository if found).
      *
-     * @param className the name of the class
-     * @return the JavaClass object
-     * @throws ClassNotFoundException if the class is not in the Repository, and could not be found on the classpath
+     * @param className The name of the class.
+     * @return The JavaClass object.
+     * @throws ClassNotFoundException Thrown if the class is not in the Repository, and could not be found on the classpath
      */
     @Override
     public JavaClass loadClass(String className) throws ClassNotFoundException {

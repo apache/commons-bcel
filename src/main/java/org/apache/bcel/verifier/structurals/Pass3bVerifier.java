@@ -47,13 +47,16 @@ import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 import org.apache.bcel.verifier.exc.VerifierConstraintViolatedException;
 
 /**
- * This PassVerifier verifies a method of class file according to pass 3, so-called structural verification as described
- * in The Java Virtual Machine Specification, 2nd edition. More detailed information is to be found at the do_verify()
- * method's documentation.
+ * This PassVerifier verifies a method of class file according to pass 3, so-called structural verification as described in The Java Virtual Machine
+ * Specification, 2nd edition. More detailed information is to be found at the do_verify() method's documentation.
+ * <p>
+ * The system property {@code org.apache.bcel.verifier.maxFrameSlots} bounds the size of the pass 3b data flow analysis, measured in frame slots:
+ * {@code (max_locals + max_stack) * instruction count} of the method under verification. Methods above the bound are rejected instead of analyzed. The default
+ * is 100,000,000; a value of zero or less disables the bound.
+ * </p>
  *
  * @see #do_verify()
  */
-
 public final class Pass3bVerifier extends PassVerifier {
     /*
      * TODO: Throughout pass 3b, upper halves of LONG and DOUBLE are represented by Type.UNKNOWN. This should be changed in
@@ -62,7 +65,7 @@ public final class Pass3bVerifier extends PassVerifier {
 
     /**
      * An InstructionContextQueue is a utility class that holds (InstructionContext, ArrayList) pairs in a Queue data
-     * structure. This is used to hold information about InstructionContext objects externally --- i.e. that information is
+     * structure. This is used to hold information about InstructionContext objects externally --- for example that information is
      * not saved inside the InstructionContext object itself. This is useful to save the execution path of the symbolic
      * execution of the Pass3bVerifier - this is not information that belongs into the InstructionContext object itself.
      * Only at "execute()"ing time, an InstructionContext object will get the current information we have about its symbolic
@@ -70,16 +73,18 @@ public final class Pass3bVerifier extends PassVerifier {
      */
     private static final class InstructionContextQueue {
         // The following two fields together represent the queue.
+
         /** The first elements from pairs in the queue. */
         private final List<InstructionContext> ics = new Vector<>();
+
         /** The second elements from pairs in the queue. */
         private final List<ArrayList<InstructionContext>> ecs = new Vector<>();
 
         /**
          * Adds an (InstructionContext, ExecutionChain) pair to this queue.
          *
-         * @param ic the InstructionContext
-         * @param executionChain the ExecutionChain
+         * @param ic The InstructionContext.
+         * @param executionChain The ExecutionChain.
          */
         public void add(final InstructionContext ic, final ArrayList<InstructionContext> executionChain) {
             ics.add(ic);
@@ -89,8 +94,8 @@ public final class Pass3bVerifier extends PassVerifier {
         /**
          * Gets a specific ExecutionChain from the queue.
          *
-         * @param i the index of the item to be fetched
-         * @return the indicated ExecutionChain
+         * @param i The index of the item to be fetched.
+         * @return The indicated ExecutionChain.
          */
         public ArrayList<InstructionContext> getEC(final int i) {
             return ecs.get(i);
@@ -99,15 +104,15 @@ public final class Pass3bVerifier extends PassVerifier {
         /**
          * Gets a specific InstructionContext from the queue.
          *
-         * @param i the index of the item to be fetched
-         * @return the indicated InstructionContext
+         * @param i The index of the item to be fetched.
+         * @return The indicated InstructionContext.
          */
         public InstructionContext getIC(final int i) {
             return ics.get(i);
         }
 
         /**
-         * Tests if InstructionContext queue is empty.
+         * Tests whether the InstructionContext queue is empty.
          *
          * @return true if the InstructionContext queue is empty.
          */
@@ -118,7 +123,7 @@ public final class Pass3bVerifier extends PassVerifier {
         /**
          * Removes a specific (InstructionContext, ExecutionChain) pair from their respective queues.
          *
-         * @param i the index of the items to be removed
+         * @param i The index of the items to be removed.
          */
         public void remove(final int i) {
             ics.remove(i);
@@ -128,7 +133,7 @@ public final class Pass3bVerifier extends PassVerifier {
         /**
          * Gets the size of the InstructionContext queue.
          *
-         * @return the size of the InstructionQueue
+         * @return The size of the InstructionQueue.
          */
         public int size() {
             return ics.size();
@@ -137,6 +142,15 @@ public final class Pass3bVerifier extends PassVerifier {
 
     /** In DEBUG mode, the verification algorithm is not randomized. */
     private static final boolean DEBUG = true;
+
+    /**
+     * The name of the system property bounding the size of the pass 3b data flow analysis, measured in frame slots:
+     * {@code (max_locals + max_stack) * instruction count} of the method under verification. Methods above the bound
+     * are rejected instead of analyzed. The default is 100,000,000; a value of zero or less disables the bound.
+     */
+    private static final String MAX_FRAME_SLOTS_PROPERTY = "org.apache.bcel.verifier.maxFrameSlots";
+
+    private static final long MAX_FRAME_SLOTS = Long.getLong(MAX_FRAME_SLOTS_PROPERTY, 100_000_000L).longValue();
 
     /** The Verifier that created this. */
     private final Verifier myOwner;
@@ -147,6 +161,8 @@ public final class Pass3bVerifier extends PassVerifier {
     /**
      * This class should only be instantiated by a Verifier.
      *
+     * @param myOwner The verifier that owns this Pass3bVerifier.
+     * @param methodNo The method number.
      * @see org.apache.bcel.verifier.Verifier
      */
     public Pass3bVerifier(final Verifier myOwner, final int methodNo) {
@@ -202,7 +218,7 @@ public final class Pass3bVerifier extends PassVerifier {
                 int skipJsr = 0;
                 for (int ss = oldchain.size() - 1; ss >= 0; ss--) {
                     if (skipJsr < 0) {
-                        throw new AssertionViolatedException("More RET than JSR in execution chain?!");
+                        throw new AssertionViolatedException("More RET instructions than JSR instructions in the execution chain?");
                     }
 //System.err.println("+"+oldchain.get(ss));
                     if (oldchain.get(ss).getInstruction().getInstruction() instanceof JsrInstruction) {
@@ -360,6 +376,20 @@ public final class Pass3bVerifier extends PassVerifier {
             ////////////// DFA BEGINS HERE ////////////////
             if (!(mg.isAbstract() || mg.isNative())) { // IF mg HAS CODE (See pass 2)
 
+                // Reject pathological resource claims before running the data flow analysis: an 'in' and an 'out'
+                // Frame sized max_locals + max_stack is stored for every reachable instruction (and per calling
+                // subroutine), so a small crafted method declaring max_locals = max_stack = 65535 over tens of
+                // thousands of instructions would force tens of gigabytes of allocations before any constraint
+                // could fail. The limit can be changed (or disabled with a value <= 0) via the
+                // MAX_FRAME_SLOTS_PROPERTY system property.
+                final int instructionCount = mg.getInstructionList().getLength();
+                final long frameSlots = ((long) mg.getMaxLocals() + mg.getMaxStack()) * instructionCount;
+                if (MAX_FRAME_SLOTS > 0 && frameSlots > MAX_FRAME_SLOTS) {
+                    throw new StructuralCodeConstraintException("Data flow analysis of this method would require more than " + MAX_FRAME_SLOTS
+                        + " frame slots: max_locals '" + mg.getMaxLocals() + "' plus max_stack '" + mg.getMaxStack() + "' over '" + instructionCount
+                        + "' instructions. Adjust the '" + MAX_FRAME_SLOTS_PROPERTY + "' system property to change this limit.");
+                }
+
                 final ControlFlowGraph cfg = new ControlFlowGraph(mg);
 
                 // Build the initial frame situation for this method.
@@ -397,23 +427,27 @@ public final class Pass3bVerifier extends PassVerifier {
             final PrintWriter pw = new PrintWriter(sw);
             re.printStackTrace(pw);
 
-            throw new AssertionViolatedException("Some RuntimeException occurred while verify()ing class '" + jc.getClassName() + "', method '"
+            throw new AssertionViolatedException("Some RuntimeException occurred while verifying class '" + jc.getClassName() + "', method '"
                 + methods[methodNo] + "'. Original RuntimeException's stack trace:\n---\n" + sw + "---\n", re);
         }
         return VerificationResult.VR_OK;
     }
 
-    /** Returns the method number as supplied when instantiating. */
+    /**
+     * Gets the method number as supplied when instantiating.
+     *
+     * @return The method number.
+     */
     public int getMethodNo() {
         return methodNo;
     }
 
     /**
-     * Throws an exception indicating the returned type is not compatible with the return type of the given method.
+     * Always throws {@link StructuralCodeConstraintException} because the returned type is incompatible with the method return type.
      *
-     * @param returnedType the type of the returned expression
-     * @param m the method we are processing
-     * @throws StructuralCodeConstraintException always
+     * @param returnedType The type of the returned expression.
+     * @param m The method we are processing.
+     * @throws StructuralCodeConstraintException Thrown unconditionally.
      * @since 6.0
      */
     public void invalidReturnTypeError(final Type returnedType, final MethodGen m) {

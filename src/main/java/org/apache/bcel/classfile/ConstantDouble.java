@@ -45,15 +45,17 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     /**
      * Initialize instance from file data.
      *
-     * @param file Input stream
-     * @throws IOException if an I/O error occurs.
+     * @param file Input stream.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     ConstantDouble(final DataInput file) throws IOException {
         this(file.readDouble());
     }
 
     /**
-     * @param bytes Data
+     * Constructs a ConstantDouble.
+     *
+     * @param bytes Data.
      */
     public ConstantDouble(final double bytes) {
         super(Const.CONSTANT_Double);
@@ -62,9 +64,9 @@ public final class ConstantDouble extends Constant implements ConstantObject {
 
     /**
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
-     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
+     * That is, the hierarchy of methods, fields, attributes, and other elements forms a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -72,10 +74,10 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     }
 
     /**
-     * Dump constant double to file stream in binary format.
+     * Dumps constant double to file stream in binary format.
      *
-     * @param file Output file stream
-     * @throws IOException if an I/O error occurs.
+     * @param file Output file stream.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     @Override
     public void dump(final DataOutputStream file) throws IOException {
@@ -84,14 +86,19 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     }
 
     /**
-     * @return data, i.e., 8 bytes.
+     * Gets the data.
+     *
+     * @return data, that is, 8 bytes.
      */
     public double getBytes() {
         return bytes;
     }
 
     /**
-     * @return Double object
+     * Gets the Double object.
+     *
+     * @param cp The constant pool (not used).
+     * @return Double object.
      */
     @Override
     public Object getConstantValue(final ConstantPool cp) {
@@ -99,7 +106,9 @@ public final class ConstantDouble extends Constant implements ConstantObject {
     }
 
     /**
-     * @param bytes the raw bytes that represent the double value
+     * Sets the raw bytes that represent the double value.
+     *
+     * @param bytes The raw bytes that represent the double value.
      */
     public void setBytes(final double bytes) {
         this.bytes = bytes;

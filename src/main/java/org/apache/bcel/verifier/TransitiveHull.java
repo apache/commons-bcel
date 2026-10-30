@@ -31,6 +31,8 @@ public class TransitiveHull implements VerifierFactoryObserver {
     /**
      * This method implements a demonstration program of how to use the VerifierFactoryObserver. It transitively verifies
      * all class files encountered; this may take up a lot of time and, more notably, memory.
+     *
+     * @param args command line arguments (expects one argument: the root class to verify).
      */
     public static void main(final String[] args) {
         if (args.length != 1) {

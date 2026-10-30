@@ -21,23 +21,26 @@ package org.apache.bcel.generic;
 /**
  * LAND - Bitwise AND longs
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1.word1, value1.word2, value2.word1, value2.word2 -&gt;
- * </PRE>
+ * </pre>
  *
  * ..., result.word1, result.word2
  */
 public class LAND extends ArithmeticInstruction {
 
+    /**
+     * Constructs an LAND instruction.
+     */
     public LAND() {
         super(org.apache.bcel.Const.LAND);
     }
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {

@@ -559,7 +559,7 @@ TOKEN : /* Boolean and arithmetic operands */
 	< WRITE : "WRITE">
 }
 
-/* Has to be and the, otherwise every string wil become an <IDENT> token
+/* Must be at the end; otherwise, every string will become an <IDENT> token.
  * Who knows why ...
  */
 TOKEN : /* LITERALS */

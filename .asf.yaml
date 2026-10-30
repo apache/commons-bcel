@@ -16,6 +16,29 @@
 github:
   description: "Apache Commons BCEL"
   homepage: https://commons.apache.org/bcel/
+  autolink_jira:
+    - BCEL
+
+  pull_requests:
+    # allow auto-merge
+    allow_auto_merge: false
+    # enable updating head branches of pull requests
+    allow_update_branch: true
+    # auto-delete head branches after being merged
+    del_branch_on_merge: true
+
+  rulesets:
+    - name: "Protect Main Branches"
+      type: branch
+      branches:
+        includes:
+          - main
+          - master
+        excludes: []
+      bypass_teams:
+        - root
+      restrict_deletion: true
+      restrict_force_push: true
 
 notifications:
     commits:      commits@commons.apache.org
@@ -23,7 +46,8 @@ notifications:
     pullrequests: issues@commons.apache.org
     jira_options: link label
     jobs:         notifications@commons.apache.org
-    issues_bot_dependabot: notifications@commons.apache.org
-    pullrequests_bot_dependabot: notifications@commons.apache.org
+    # commits_bot_dependabot: dependabot@commons.apache.org
+    issues_bot_dependabot: dependabot@commons.apache.org
+    pullrequests_bot_dependabot: dependabot@commons.apache.org
     issues_bot_codecov-commenter: notifications@commons.apache.org
     pullrequests_bot_codecov-commenter: notifications@commons.apache.org

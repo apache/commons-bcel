@@ -26,9 +26,12 @@ import java.util.stream.Collectors;
 
 import org.apache.bcel.classfile.ArrayElementValue;
 import org.apache.bcel.classfile.ElementValue;
+import org.apache.bcel.util.Args;
 import org.apache.commons.lang3.stream.Streams;
 
 /**
+ * Generates array element values in annotations.
+ *
  * @since 6.0
  */
 public class ArrayElementValueGen extends ElementValueGen {
@@ -37,8 +40,11 @@ public class ArrayElementValueGen extends ElementValueGen {
     private final List<ElementValueGen> evalues;
 
     /**
-     * @param value
-     * @param cpool
+     * Constructs an ArrayElementValueGen.
+     *
+     * @param value The array element value.
+     * @param cpool The constant pool generator.
+     * @param copyPoolEntries whether to copy pool entries.
      */
     public ArrayElementValueGen(final ArrayElementValue value, final ConstantPoolGen cpool, final boolean copyPoolEntries) {
         super(ARRAY, cpool);
@@ -49,11 +55,23 @@ public class ArrayElementValueGen extends ElementValueGen {
         }
     }
 
+    /**
+     * Constructs an ArrayElementValueGen.
+     *
+     * @param cp The constant pool generator.
+     */
     public ArrayElementValueGen(final ConstantPoolGen cp) {
         super(ARRAY, cp);
         evalues = new ArrayList<>();
     }
 
+    /**
+     * Constructs an ArrayElementValueGen.
+     *
+     * @param type The type.
+     * @param elementValues The element values.
+     * @param cpool The constant pool generator.
+     */
     public ArrayElementValueGen(final int type, final ElementValue[] elementValues, final ConstantPoolGen cpool) {
         super(type, cpool);
         if (type != ARRAY) {
@@ -62,6 +80,11 @@ public class ArrayElementValueGen extends ElementValueGen {
         this.evalues = Streams.of(elementValues).map(e -> copy(e, cpool, true)).collect(Collectors.toList());
     }
 
+    /**
+     * Adds an element.
+     *
+     * @param gen The element value generator.
+     */
     public void addElement(final ElementValueGen gen) {
         evalues.add(gen);
     }
@@ -69,14 +92,16 @@ public class ArrayElementValueGen extends ElementValueGen {
     @Override
     public void dump(final DataOutputStream dos) throws IOException {
         dos.writeByte(super.getElementValueType()); // u1 type of value (ARRAY == '[')
-        dos.writeShort(evalues.size());
+        dos.writeShort(Args.requireU2(evalues.size(), "evalues.size()"));
         for (final ElementValueGen element : evalues) {
             element.dump(dos);
         }
     }
 
     /**
-     * Return immutable variant of this ArrayElementValueGen
+     * Gets an immutable variant of this ArrayElementValueGen.
+     *
+     * @return immutable variant of this ArrayElementValueGen.
      */
     @Override
     public ElementValue getElementValue() {
@@ -88,10 +113,20 @@ public class ArrayElementValueGen extends ElementValueGen {
         return new ArrayElementValue(super.getElementValueType(), immutableData, getConstantPool().getConstantPool());
     }
 
+    /**
+     * Gets the element values.
+     *
+     * @return The element values.
+     */
     public List<ElementValueGen> getElementValues() {
         return evalues;
     }
 
+    /**
+     * Gets the element values size.
+     *
+     * @return The element values size.
+     */
     public int getElementValuesSize() {
         return evalues.size();
     }

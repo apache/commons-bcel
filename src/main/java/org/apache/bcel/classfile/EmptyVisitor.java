@@ -25,6 +25,8 @@ package org.apache.bcel.classfile;
  * @see DescendingVisitor
  */
 public class EmptyVisitor implements Visitor {
+
+    /** Constructs an EmptyVisitor. */
     protected EmptyVisitor() {
     }
 
@@ -296,6 +298,11 @@ public class EmptyVisitor implements Visitor {
     public void visitParameterAnnotationEntry(final ParameterAnnotationEntry parameterAnnotationEntry) {
     }
 
+    /** @since 6.13.0 */
+    @Override
+    public void visitPermittedSubclasses(final PermittedSubclasses obj) {
+    }
+
     @Override
     public void visitSignature(final Signature obj) {
     }
@@ -314,7 +321,8 @@ public class EmptyVisitor implements Visitor {
 
     /**
      * Visits a {@link StackMapType} object.
-     * @param obj object to visit
+     *
+     * @param obj object to visit.
      * @since 6.8.0
      */
     @Override
@@ -323,6 +331,11 @@ public class EmptyVisitor implements Visitor {
 
     @Override
     public void visitSynthetic(final Synthetic obj) {
+    }
+
+    /** @since 6.14.0 */
+    @Override
+    public void visitTypeAnnotations(final TypeAnnotations obj) {
     }
 
     @Override

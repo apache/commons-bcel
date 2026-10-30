@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * ILOAD - Load int from local variable onto stack
  *
- * <PRE>
+ * <pre>
  * Stack: ... -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class ILOAD extends LoadInstruction {
 
@@ -37,7 +37,7 @@ public class ILOAD extends LoadInstruction {
     /**
      * Load int from local variable
      *
-     * @param n index of local variable
+     * @param n index of local variable.
      */
     public ILOAD(final int n) {
         super(org.apache.bcel.Const.ILOAD, org.apache.bcel.Const.ILOAD_0, n);
@@ -45,9 +45,9 @@ public class ILOAD extends LoadInstruction {
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {

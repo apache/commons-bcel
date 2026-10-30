@@ -21,21 +21,24 @@ package org.apache.bcel.generic;
 /**
  * LCMP - Compare longs:
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1.word1, value1.word2, value2.word1, value2.word2 -&gt; ..., result &lt;= -1, 0, 1&gt;
- * </PRE>
+ * </pre>
  */
 public class LCMP extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 
+    /**
+     * Constructs an LCMP instruction.
+     */
     public LCMP() {
         super(org.apache.bcel.Const.LCMP, (short) 1);
     }
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -46,7 +49,9 @@ public class LCMP extends Instruction implements TypedInstruction, StackProducer
     }
 
     /**
-     * @return Type.LONG
+     * Gets {@code Type.LONG}.
+     *
+     * @return Type.LONG.
      */
     @Override
     public Type getType(final ConstantPoolGen cp) {

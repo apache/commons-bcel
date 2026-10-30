@@ -7,3 +7,7 @@
 /maven-eclipse.xml
 .idea
 *.iml
+
+# NetBeans files
+nb-configuration.xml
+nbactions.xml

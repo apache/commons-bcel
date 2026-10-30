@@ -21,21 +21,24 @@ package org.apache.bcel.generic;
 /**
  * POP2 - Pop two top operand stack words
  *
- * <PRE>
+ * <pre>
  * Stack: ..., word2, word1 -&gt; ...
- * </PRE>
+ * </pre>
  */
 public class POP2 extends StackInstruction implements PopInstruction {
 
+    /**
+     * Constructs a POP2 instruction.
+     */
     public POP2() {
         super(org.apache.bcel.Const.POP2);
     }
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {

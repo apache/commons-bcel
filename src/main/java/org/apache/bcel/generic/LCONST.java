@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * LCONST - Push 0 or 1, other values cause an exception
  *
- * <PRE>
+ * <pre>
  * Stack: ... -&gt; ...,
- * </PRE>
+ * </pre>
  */
 public class LCONST extends Instruction implements ConstantPushInstruction {
 
@@ -36,6 +36,11 @@ public class LCONST extends Instruction implements ConstantPushInstruction {
         this(0);
     }
 
+    /**
+     * Constructs an LCONST instruction.
+     *
+     * @param l long constant value.
+     */
     public LCONST(final long l) {
         super(org.apache.bcel.Const.LCONST_0, (short) 1);
         if (l == 0) {
@@ -50,9 +55,9 @@ public class LCONST extends Instruction implements ConstantPushInstruction {
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -64,7 +69,9 @@ public class LCONST extends Instruction implements ConstantPushInstruction {
     }
 
     /**
-     * @return Type.LONG
+     * Gets {@code Type.LONG}.
+     *
+     * @return Type.LONG.
      */
     @Override
     public Type getType(final ConstantPoolGen cp) {

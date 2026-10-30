@@ -21,21 +21,24 @@ package org.apache.bcel.generic;
 /**
  * IOR - Bitwise OR int
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1, value2 -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class IOR extends ArithmeticInstruction {
 
+    /**
+     * Constructs an IOR instruction.
+     */
     public IOR() {
         super(org.apache.bcel.Const.IOR);
     }
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {

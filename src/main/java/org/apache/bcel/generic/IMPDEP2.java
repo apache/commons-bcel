@@ -23,15 +23,18 @@ package org.apache.bcel.generic;
  */
 public class IMPDEP2 extends Instruction {
 
+    /**
+     * Constructs an IMPDEP2 instruction.
+     */
     public IMPDEP2() {
         super(org.apache.bcel.Const.IMPDEP2, (short) 1);
     }
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {

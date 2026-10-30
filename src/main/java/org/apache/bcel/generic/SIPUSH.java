@@ -26,9 +26,9 @@ import org.apache.bcel.util.ByteSequence;
 /**
  * SIPUSH - Push short
  *
- * <PRE>
+ * <pre>
  * Stack: ... -&gt; ..., value
- * </PRE>
+ * </pre>
  */
 public class SIPUSH extends Instruction implements ConstantPushInstruction {
 
@@ -40,6 +40,11 @@ public class SIPUSH extends Instruction implements ConstantPushInstruction {
     SIPUSH() {
     }
 
+    /**
+     * Constructs a SIPUSH.
+     *
+     * @param b The value.
+     */
     public SIPUSH(final short b) {
         super(org.apache.bcel.Const.SIPUSH, (short) 3);
         this.b = b;
@@ -47,9 +52,9 @@ public class SIPUSH extends Instruction implements ConstantPushInstruction {
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -61,7 +66,7 @@ public class SIPUSH extends Instruction implements ConstantPushInstruction {
     }
 
     /**
-     * Dump instruction as short code to stream out.
+     * Dumps instruction as short code to stream out.
      */
     @Override
     public void dump(final DataOutputStream out) throws IOException {
@@ -70,7 +75,9 @@ public class SIPUSH extends Instruction implements ConstantPushInstruction {
     }
 
     /**
-     * @return Type.SHORT
+     * Gets {@code Type.SHORT}.
+     *
+     * @return Type.SHORT.
      */
     @Override
     public Type getType(final ConstantPoolGen cp) {
@@ -83,7 +90,7 @@ public class SIPUSH extends Instruction implements ConstantPushInstruction {
     }
 
     /**
-     * Read needed data (for example index) from file.
+     * Reads needed data (for example index) from file.
      */
     @Override
     protected void initFromFile(final ByteSequence bytes, final boolean wide) throws IOException {
@@ -92,7 +99,7 @@ public class SIPUSH extends Instruction implements ConstantPushInstruction {
     }
 
     /**
-     * @return mnemonic for instruction
+     * @return mnemonic for instruction.
      */
     @Override
     public String toString(final boolean verbose) {

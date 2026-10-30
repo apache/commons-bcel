@@ -56,7 +56,7 @@ import org.apache.bcel.classfile.Utility;
 public class Class2HTML implements Constants {
 
     private static String classPackage; // name of package, unclean to make it static, but ...
-    private static String className; // name of current class, dito
+    private static String className; // name of current class, ditto
     private static ConstantPool constantPool;
     private static final Set<String> basicTypes = new HashSet<>();
     static {
@@ -71,6 +71,35 @@ public class Class2HTML implements Constants {
         basicTypes.add("float");
     }
 
+    /**
+     * The class name comes from the attacker-controlled this_class constant of the parsed class file and is
+     * concatenated into the five output file paths ("dir + className + suffix"). Class file parsing only folds
+     * '/' into '.', so Windows separators ('\\'), drive designators (':') and ".." segments survive and would
+     * let a crafted class file write its HTML output outside the target directory (CWE-22).
+     *
+     * @param name the class name about to be used as part of a file name.
+     * @throws IOException Thrown if the name contains a path separator, a Windows-reserved file name character, a
+     *         control character, or a ".." sequence.
+     */
+    private static void checkFileNameSafe(final String name) throws IOException {
+        for (int i = 0; i < name.length(); i++) {
+            final char c = name.charAt(i);
+            if (c < ' ' || "\\/:*?\"<>|".indexOf(c) >= 0) {
+                throw new IOException("Refusing to write HTML for a class whose name contains the unsafe character (0x"
+                    + Integer.toHexString(c) + "): " + name);
+            }
+        }
+        if (name.contains("..")) {
+            throw new IOException("Refusing to write HTML for a class whose name contains \"..\": " + name);
+        }
+    }
+
+    /**
+     * Main program to convert class files to HTML.
+     *
+     * @param argv command line arguments.
+     * @throws IOException Thrown if an I/O error occurs.
+     */
     public static void main(final String[] argv) throws IOException {
         final String[] fileName = new String[argv.length];
         int files = 0;
@@ -123,13 +152,13 @@ public class Class2HTML implements Constants {
     }
 
     /**
-     * Utility method that converts a class reference in the constant pool, i.e., an index to a string.
+     * Utility method that converts a class reference in the constant pool, that is, an index to a string.
      */
     static String referenceClass(final int index) {
         String str = constantPool.getConstantString(index, Const.CONSTANT_Class);
         str = Utility.compactClassName(str);
         str = Utility.compactClassName(str, classPackage + ".", true);
-        return "<A HREF=\"" + className + "_cp.html#cp" + index + "\" TARGET=ConstantPool>" + str + "</A>";
+        return "<A HREF=\"" + className + "_cp.html#cp" + index + "\" TARGET=ConstantPool>" + toHTML(str) + "</A>";
     }
 
     static String referenceType(final String type) {
@@ -144,7 +173,7 @@ public class Class2HTML implements Constants {
         if (basicTypes.contains(baseType)) {
             return "<FONT COLOR=\"#00FF00\">" + type + "</FONT>";
         }
-        return "<A HREF=\"" + baseType + ".html\" TARGET=_top>" + shortType + "</A>";
+        return "<A HREF=\"" + toHTMLRef(baseType) + ".html\" TARGET=_top>" + toHTML(shortType) + "</A>";
     }
 
     static String toHTML(final String str) {
@@ -152,11 +181,20 @@ public class Class2HTML implements Constants {
         for (int i = 0; i < str.length(); i++) {
             final char ch;
             switch (ch = str.charAt(i)) {
+            case '&':
+                buf.append("&amp;");
+                break;
             case '<':
                 buf.append("&lt;");
                 break;
             case '>':
                 buf.append("&gt;");
+                break;
+            case '"':
+                buf.append("&quot;");
+                break;
+            case '\'':
+                buf.append("&#39;");
                 break;
             case '\n':
                 buf.append("\\n");
@@ -171,15 +209,24 @@ public class Class2HTML implements Constants {
         return buf.toString();
     }
 
+    /**
+     * Escapes a class or type name taken from the constant pool for use as a relative link target inside an HREF
+     * attribute value. On top of the text escaping done by {@code toHTML(String)}, any ':' is replaced so an
+     * attacker-chosen name cannot smuggle a URL scheme such as "javascript:" into the generated link.
+     */
+    static String toHTMLRef(final String str) {
+        return toHTML(str.replace(':', '_'));
+    }
+
     private final JavaClass javaClass; // current class object
 
     private final String dir;
 
     /**
-     * Write contents of the given JavaClass into HTML files.
+     * Writes contents of the given JavaClass into HTML files.
      *
-     * @param javaClass The class to write
-     * @param dir The directory to put the files in
+     * @param javaClass The class to write.
+     * @param dir The directory to put the files in.
      * @throws IOException Thrown when an I/O exception of some sort has occurred.
      */
     public Class2HTML(final JavaClass javaClass, final String dir) throws IOException {
@@ -191,6 +238,7 @@ public class Class2HTML implements Constants {
         this.javaClass = javaClass;
         this.dir = dir;
         className = javaClass.getClassName(); // Remember full name
+        checkFileNameSafe(className);
         constantPool = javaClass.getConstantPool();
         // Get package name by tacking off everything after the last '.'
         final int index = className.lastIndexOf('.');
@@ -213,13 +261,26 @@ public class Class2HTML implements Constants {
 
     private void writeMainHTML(final AttributeHTML attributeHtml, final Charset charset) throws FileNotFoundException, UnsupportedEncodingException {
         try (PrintWriter file = new PrintWriter(dir + className + ".html", charset.name())) {
-            file.println("<HTML>\n" + "<HEAD><TITLE>Documentation for " + className + "</TITLE>" + "</HEAD>\n" + "<FRAMESET BORDER=1 cols=\"30%,*\">\n"
-                + "<FRAMESET BORDER=1 rows=\"80%,*\">\n" + "<FRAME NAME=\"ConstantPool\" SRC=\"" + className + "_cp.html" + "\"\n MARGINWIDTH=\"0\" "
-                + "MARGINHEIGHT=\"0\" FRAMEBORDER=\"1\" SCROLLING=\"AUTO\">\n" + "<FRAME NAME=\"Attributes\" SRC=\"" + className + "_attributes.html"
-                + "\"\n MARGINWIDTH=\"0\" " + "MARGINHEIGHT=\"0\" FRAMEBORDER=\"1\" SCROLLING=\"AUTO\">\n" + "</FRAMESET>\n"
-                + "<FRAMESET BORDER=1 rows=\"80%,*\">\n" + "<FRAME NAME=\"Code\" SRC=\"" + className + "_code.html\"\n MARGINWIDTH=0 "
-                + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n" + "<FRAME NAME=\"Methods\" SRC=\"" + className + "_methods.html\"\n MARGINWIDTH=0 "
-                + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n" + "</FRAMESET></FRAMESET></HTML>");
+            // @formatter:off
+            file.println("<HTML>\n"
+                + "<HEAD><TITLE>Documentation for " + toHTML(className) + "</TITLE></HEAD>\n"
+                + "<FRAMESET BORDER=1 cols=\"30%,*\">\n"
+                + "<FRAMESET BORDER=1 rows=\"80%,*\">\n"
+                + "<FRAME NAME=\"ConstantPool\" SRC=\"" + className + "_cp.html" + "\"\n"
+                + "MARGINWIDTH=\"0\" "
+                + "MARGINHEIGHT=\"0\" FRAMEBORDER=\"1\" SCROLLING=\"AUTO\">\n"
+                + "<FRAME NAME=\"Attributes\" SRC=\"" + className + "_attributes.html\"\n"
+                + " MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" FRAMEBORDER=\"1\" SCROLLING=\"AUTO\">\n"
+                + "</FRAMESET>\n"
+                + "<FRAMESET BORDER=1 rows=\"80%,*\">\n"
+                + "<FRAME NAME=\"Code\" SRC=\"" + className + "_code.html\"\n"
+                + " MARGINWIDTH=0 "
+                + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n"
+                + "<FRAME NAME=\"Methods\" SRC=\"" + className + "_methods.html\"\n"
+                + " MARGINWIDTH=0 "
+                + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n"
+                + "</FRAMESET></FRAMESET></HTML>");
+            // @formatter:on
         }
         final Attribute[] attributes = javaClass.getAttributes();
         for (int i = 0; i < attributes.length; i++) {

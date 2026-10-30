@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * IFEQ - Branch if int comparison with zero succeeds
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value -&gt; ...
- * </PRE>
+ * </pre>
  */
 public class IFEQ extends IfInstruction {
 
@@ -33,15 +33,20 @@ public class IFEQ extends IfInstruction {
     IFEQ() {
     }
 
+    /**
+     * Constructs an IFEQ instruction.
+     *
+     * @param target The target instruction.
+     */
     public IFEQ(final InstructionHandle target) {
         super(org.apache.bcel.Const.IFEQ, target);
     }
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -52,7 +57,7 @@ public class IFEQ extends IfInstruction {
     }
 
     /**
-     * @return negation of instruction, for example IFEQ.negate() == IFNE
+     * @return negation of instruction, for example IFEQ.negate() == IFNE.
      */
     @Override
     public IfInstruction negate() {

@@ -42,7 +42,7 @@ public class LocalVariables implements Cloneable {
     }
 
     /**
-     * Returns a deep copy of this object; i.e. the clone operates on a new local variable array. However, the Type objects
+     * Returns a deep copy of this object; for example the clone operates on a new local variable array. However, the Type objects
      * in the array are shared.
      */
     @Override
@@ -77,23 +77,23 @@ public class LocalVariables implements Cloneable {
      * Returns the type of the local variable slot index.
      *
      * @param slotIndex Slot to look up.
-     * @return the type of the local variable slot index.
+     * @return The type of the local variable slot index.
      */
     public Type get(final int slotIndex) {
         return locals[slotIndex];
     }
 
     /**
-     * Returns a (correctly typed) clone of this object. This is equivalent to ((LocalVariables) this.clone()).
+     * Gets a (correctly typed) clone of this object. This is equivalent to ((LocalVariables) this.clone()).
      *
-     * @return a (correctly typed) clone of this object.
+     * @return A (correctly typed) clone of this object.
      */
     public LocalVariables getClone() {
         return (LocalVariables) clone();
     }
 
     /**
-     * @return a hash code value for the object.
+     * @return A hash code value for the object.
      */
     @Override
     public int hashCode() {
@@ -104,7 +104,7 @@ public class LocalVariables implements Cloneable {
      * Replaces all occurrences of {@code uninitializedObjectType} in this local variables set with an "initialized"
      * ObjectType.
      *
-     * @param uninitializedObjectType the object to match.
+     * @param uninitializedObjectType The object to match.
      */
     public void initializeObject(final UninitializedObjectType uninitializedObjectType) {
         for (int i = 0; i < locals.length; i++) {
@@ -117,7 +117,7 @@ public class LocalVariables implements Cloneable {
     /**
      * Returns the number of local variable slots.
      *
-     * @return the number of local variable slots.
+     * @return The number of local variable slots.
      */
     public int maxLocals() {
         return locals.length;
@@ -132,7 +132,7 @@ public class LocalVariables implements Cloneable {
     public void merge(final LocalVariables localVariable) {
 
         if (this.locals.length != localVariable.locals.length) {
-            throw new AssertionViolatedException("Merging LocalVariables of different size?!? From different methods or what?!?");
+            throw new AssertionViolatedException("Merging LocalVariables of different sizes?!? From different methods or what?!?");
         }
 
         for (int i = 0; i < locals.length; i++) {
@@ -148,14 +148,14 @@ public class LocalVariables implements Cloneable {
     private void merge(final LocalVariables lv, final int i) {
         try {
 
-            // We won't accept an unitialized object if we know it was initialized;
+            // We won't accept an uninitialized object if we know it was initialized;
             // compare vmspec2, 4.9.4, last paragraph.
             if (!(locals[i] instanceof UninitializedObjectType) && lv.locals[i] instanceof UninitializedObjectType) {
-                throw new StructuralCodeConstraintException("Backwards branch with an uninitialized object in the local variables detected.");
+                throw new StructuralCodeConstraintException("Backward branch with an uninitialized object in the local variables detected.");
             }
             // Even harder, what about _different_ uninitialized object types?!
             if (!locals[i].equals(lv.locals[i]) && locals[i] instanceof UninitializedObjectType && lv.locals[i] instanceof UninitializedObjectType) {
-                throw new StructuralCodeConstraintException("Backwards branch with an uninitialized object in the local variables detected.");
+                throw new StructuralCodeConstraintException("Backward branch with an uninitialized object in the local variables detected.");
             }
             // If we just didn't know that it was initialized, we have now learned.
             if (locals[i] instanceof UninitializedObjectType && !(lv.locals[i] instanceof UninitializedObjectType)) {
@@ -167,7 +167,7 @@ public class LocalVariables implements Cloneable {
 
                     if (sup == null) {
                         // We should have checked this in Pass2!
-                        throw new AssertionViolatedException("Could not load all the super classes of '" + locals[i] + "' and '" + lv.locals[i] + "'.");
+                        throw new AssertionViolatedException("Could not load all the superclasses of '" + locals[i] + "' and '" + lv.locals[i] + "'.");
                     }
                     locals[i] = sup;
                 }

@@ -42,12 +42,12 @@ public class LocalVariablesInfo {
      * Adds information about the local variable in slot 'slot'. Automatically adds information for slot+1 if 't' is
      * Type.LONG or Type.DOUBLE.
      *
-     * @param slot Slot number for local variable information
-     * @param name variable name
+     * @param slot Slot number for local variable information.
+     * @param name variable name.
      * @param startPc Range in which the variable is valid.
      * @param length length of ...
-     * @param type variable type
-     * @throws LocalVariableInfoInconsistentException if the new information conflicts with already gathered information.
+     * @param type variable type.
+     * @throws LocalVariableInfoInconsistentException Thrown if the new information conflicts with already gathered information.
      */
     public void add(final int slot, final String name, final int startPc, final int length, final Type type) throws LocalVariableInfoInconsistentException {
         // The add operation on LocalVariableInfo may throw the '...Inconsistent...' exception, we don't throw it explicitly
@@ -67,7 +67,7 @@ public class LocalVariablesInfo {
     }
 
     /**
-     * Returns the LocalVariableInfo for the given slot.
+     * Gets the LocalVariableInfo for the given slot.
      *
      * @param slot Slot to query.
      * @return The LocalVariableInfo for the given slot.

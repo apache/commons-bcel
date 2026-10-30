@@ -27,10 +27,10 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link ClassGen}.
  */
-public class ClassGenTest {
+class ClassGenTest {
 
     @Test
-    public void testBCELComparator() throws Exception {
+    void testBCELComparator() throws Exception {
         final ClassGen obj = new ClassGen("", "", "", 0, null);
         assertTrue(ClassGen.getComparator().equals(null, null));
         assertTrue(ClassGen.getComparator().equals(obj, obj));

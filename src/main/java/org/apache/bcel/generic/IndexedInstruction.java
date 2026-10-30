@@ -19,11 +19,21 @@
 package org.apache.bcel.generic;
 
 /**
- * Denote entity that refers to an index, for example local variable instructions, RET, CPInstruction, etc.
+ * Denotes an entity that refers to an index, for example local variable instructions, RET, CPInstruction, and so on.
  */
 public interface IndexedInstruction {
 
+    /**
+     * Gets the index.
+     *
+     * @return The index.
+     */
     int getIndex();
 
+    /**
+     * Sets the index.
+     *
+     * @param index The index.
+     */
     void setIndex(int index);
 }

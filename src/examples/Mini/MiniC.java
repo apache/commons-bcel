@@ -36,21 +36,21 @@ public class MiniC {
     private static String file;
     private static int pass;
 
-    final static void addError(final int line, final int column, final String err) {
+    static final void addError(final int line, final int column, final String err) {
         if (pass != 2) {
             errors.addElement(file + ":" + fillup(line, 3) + "," + fillup(column, 2) + ": " + err);
         }
     }
 
-    final static void addWarning(final int line, final int column, final String err) {
+    static final void addWarning(final int line, final int column, final String err) {
         warnings.addElement("Warning: " + file + ":" + fillup(line, 3) + "," + fillup(column, 3) + ": " + err);
     }
 
-    final static void addWarning(final String err) {
+    static final void addWarning(final String err) {
         warnings.addElement(err);
     }
 
-    final static String fillup(final int n, final int len) {
+    static final String fillup(final int n, final int len) {
         final String str = Integer.toString(n);
         final int diff = len - str.length();
 

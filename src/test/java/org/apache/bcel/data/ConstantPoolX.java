@@ -49,9 +49,9 @@ import org.apache.bcel.classfile.Node;
 import org.apache.bcel.classfile.Utility;
 
 /**
- * This class represents the constant pool, i.e., a table of constants, of a parsed classfile. It may contain null
+ * This class represents the constant pool, that is, a table of constants, of a parsed classfile. It may contain null
  * references, due to the JVM specification that skips an entry after an 8-byte constant (double, long) entry. Those
- * interested in generating constant pools programatically should see <a href="../generic/ConstantPoolGen.html">
+ * interested in generating constant pools programmatically should see <a href="../generic/ConstantPoolGen.html">
  * ConstantPoolGen</a>.
  *
  * @see Constant
@@ -92,8 +92,8 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     /**
      * Resolves constant to a string representation.
      *
-     * @param c Constant to be printed
-     * @return String representation
+     * @param c Constant to be printed.
+     * @return String representation.
      */
     public String constantToString(Constant c) throws ClassFormatException {
         final String str;
@@ -169,9 +169,9 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     /**
      * Retrieves constant at 'index' from constant pool and resolve it to a string representation.
      *
-     * @param index of constant in constant pool
-     * @param tag expected type
-     * @return String representation
+     * @param index of constant in constant pool.
+     * @param tag expected type.
+     * @return String representation.
      */
     public String constantToString(final int index, final byte tag) throws ClassFormatException {
         final Constant c = getConstant(index, tag);
@@ -179,10 +179,10 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     }
 
     /**
-     * Dump constant pool to file stream in binary format.
+     * Dumps constant pool to file stream in binary format.
      *
-     * @param file Output file stream
-     * @throws IOException
+     * @param file Output file stream.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public void dump(final DataOutputStream file) throws IOException {
         file.writeShort(constantPool.length);
@@ -196,13 +196,13 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     /**
      * Gets constant from constant pool.
      *
-     * @param index Index in constant pool
-     * @return Constant value
+     * @param index Index in constant pool.
+     * @return Constant value.
      * @see Constant
      */
     public Constant getConstant(final int index) {
         if (index >= constantPool.length || index < 0) {
-            throw new ClassFormatException("Invalid constant pool reference: " + index + ". Constant pool size is: " + constantPool.length);
+            throw new ClassFormatException("Invalid constant pool reference: %,d. Constant pool size is: %,d", index, constantPool.length);
         }
         return constantPool[index];
     }
@@ -210,24 +210,26 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     /**
      * Gets constant from constant pool and check whether it has the expected type.
      *
-     * @param index Index in constant pool
-     * @param tag Tag of expected constant, i.e., its type
-     * @return Constant value
+     * @param index Index in constant pool.
+     * @param tag Tag of expected constant, that is, its type.
+     * @return Constant value.
      * @see Constant
-     * @throws ClassFormatException
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     public Constant getConstant(final int index, final byte tag) throws ClassFormatException {
         final Constant c = getConstant(index);
         if (c == null) {
-            throw new ClassFormatException("Constant pool at index " + index + " is null.");
+            throw new ClassFormatException("Constant pool at index %,d is null.", index);
         }
         if (c.getTag() != tag) {
-            throw new ClassFormatException("Expected class '" + Const.getConstantName(tag) + "' at index " + index + " and got " + c);
+            throw new ClassFormatException("Expected class '%s' at index %,d and got %s", Const.getConstantName(tag), index, c);
         }
         return c;
     }
 
     /**
+     * Gets the array of constants.
+     *
      * @return Array of constants.
      * @see Constant
      */
@@ -236,16 +238,16 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     }
 
     /**
-     * Gets string from constant pool and bypass the indirection of 'ConstantClass' and 'ConstantString' objects. I.e. these
+     * Gets a string from the constant pool and bypasses the indirection of 'ConstantClass' and 'ConstantString' objects. That is, these
      * classes have an index field that points to another entry of the constant pool of type 'ConstantUtf8' which contains
      * the real data.
      *
-     * @param index Index in constant pool
-     * @param tag Tag of expected constant, either ConstantClass or ConstantString
-     * @return Contents of string reference
+     * @param index Index in constant pool.
+     * @param tag Tag of expected constant, either ConstantClass or ConstantString.
+     * @return Contents of string reference.
      * @see ConstantClass
      * @see ConstantString
-     * @throws ClassFormatException
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     public String getConstantString(final int index, final byte tag) throws ClassFormatException {
         final int i;
@@ -277,6 +279,8 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     }
 
     /**
+     * Gets the length of the constant pool.
+     *
      * @return Length of constant pool.
      */
     public int getLength() {
@@ -284,14 +288,18 @@ public abstract class ConstantPoolX implements Cloneable, Node {
     }
 
     /**
-     * @param constant Constant to set
+     * Sets the constant pool entry at the given index.
+     *
+     * @param constant Constant to set.
      */
     public void setConstant(final int index, final Constant constant) {
         constantPool[index] = constant;
     }
 
     /**
-     * @param constantPool
+     * Sets the constant pool.
+     *
+     * @param constantPool The new constant pool.
      */
     public void setConstantPool(final Constant[] constantPool) {
         this.constantPool = constantPool;

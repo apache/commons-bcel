@@ -21,17 +21,28 @@ package org.apache.bcel.classfile;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.apache.bcel.util.Args;
+
 /**
+ * Represents an array element value in an annotation.
+ *
  * @since 6.0
  */
 public class ArrayElementValue extends ElementValue {
     // For array types, this is the array
     private final ElementValue[] elementValues;
 
+    /**
+     * Constructs an ArrayElementValue.
+     *
+     * @param type The type.
+     * @param elementValues The element values.
+     * @param cpool The constant pool.
+     */
     public ArrayElementValue(final int type, final ElementValue[] elementValues, final ConstantPool cpool) {
         super(type, cpool);
         if (type != ARRAY) {
-            throw new ClassFormatException("Only element values of type array can be built with this ctor - type specified: " + type);
+            throw new ClassFormatException("Only element values of type array can be built with this ctor - type specified: %s", type);
         }
         this.elementValues = elementValues != null ? elementValues : EMPTY_ARRAY;
     }
@@ -39,16 +50,26 @@ public class ArrayElementValue extends ElementValue {
     @Override
     public void dump(final DataOutputStream dos) throws IOException {
         dos.writeByte(super.getType()); // u1 type of value (ARRAY == '[')
-        dos.writeShort(elementValues.length);
+        dos.writeShort(Args.requireU2(elementValues.length, "elementValues.length"));
         for (final ElementValue evalue : elementValues) {
             evalue.dump(dos);
         }
     }
 
+    /**
+     * Gets the element values array.
+     *
+     * @return The element values array.
+     */
     public ElementValue[] getElementValuesArray() {
         return elementValues;
     }
 
+    /**
+     * Gets the element values array size.
+     *
+     * @return The element values array size.
+     */
     public int getElementValuesArraySize() {
         return elementValues.length;
     }

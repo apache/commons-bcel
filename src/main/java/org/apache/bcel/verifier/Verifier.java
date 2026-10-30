@@ -55,6 +55,8 @@ public class Verifier {
      * used. You should supply command-line arguments which are fully qualified namea of the classes to verify. These class
      * files must be somewhere in your CLASSPATH (refer to Sun's documentation for questions about this) or you must have
      * put the classes into the BCEL Repository yourself (via 'addClass(JavaClass)').
+     *
+     * @param args command line arguments (fully qualified class names).
      */
     public static void main(final String[] args) {
         System.out.println(BANNER);
@@ -132,7 +134,11 @@ public class Verifier {
         className = fullyQualifiedClassName;
     }
 
-    /** Returns the VerificationResult for the given pass. */
+    /**
+     * Returns the VerificationResult for the given pass.
+     *
+     * @return The VerificationResult for pass 1.
+     */
     public VerificationResult doPass1() {
         if (p1v == null) {
             p1v = new Pass1Verifier(this);
@@ -140,7 +146,11 @@ public class Verifier {
         return p1v.verify();
     }
 
-    /** Returns the VerificationResult for the given pass. */
+    /**
+     * Returns the VerificationResult for the given pass.
+     *
+     * @return The VerificationResult for pass 2.
+     */
     public VerificationResult doPass2() {
         if (p2v == null) {
             p2v = new Pass2Verifier(this);
@@ -151,8 +161,8 @@ public class Verifier {
     /**
      * Returns the VerificationResult for the given pass.
      *
-     * @param methodNo The method to verify
-     * @return the VerificationResult
+     * @param methodNo The method to verify.
+     * @return The VerificationResult.
      */
     public VerificationResult doPass3a(final int methodNo) {
         return p3avs.computeIfAbsent(Integer.toString(methodNo), k -> new Pass3aVerifier(this, methodNo)).verify();
@@ -161,8 +171,8 @@ public class Verifier {
     /**
      * Returns the VerificationResult for the given pass.
      *
-     * @param methodNo The method to verify
-     * @return the VerificationResult
+     * @param methodNo The method to verify.
+     * @return The VerificationResult.
      */
     public VerificationResult doPass3b(final int methodNo) {
         return p3bvs.computeIfAbsent(Integer.toString(methodNo), k -> new Pass3bVerifier(this, methodNo)).verify();
@@ -180,10 +190,11 @@ public class Verifier {
     }
 
     /**
-     * Returns the name of the class this verifier operates on. This is particularly interesting when this verifier was
+     * Gets the name of the class this verifier operates on. This is particularly interesting when this verifier was
      * created recursively by another Verifier and you got a reference to this Verifier by the getVerifiers() method of the
      * VerifierFactory.
      *
+     * @return The class name.
      * @see VerifierFactory
      */
     public final String getClassName() {
@@ -191,10 +202,11 @@ public class Verifier {
     }
 
     /**
-     * This returns all the (warning) messages collected during verification. A prefix shows from which verifying pass a
+     * Gets all the (warning) messages collected during verification. A prefix shows from which verifying pass a
      * message originates.
      *
-     * @throws ClassNotFoundException if this class can't be found.
+     * @return The array of messages.
+     * @throws ClassNotFoundException Thrown if this class can't be found.
      */
     public String[] getMessages() throws ClassNotFoundException {
         final List<String> messages = new ArrayList<>();

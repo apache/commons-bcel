@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * This class represents a MethodParameters attribute.
@@ -68,20 +69,25 @@ public class MethodParameters extends Attribute implements Iterable<MethodParame
     }
 
     /**
-     * Dump method parameters attribute to file stream in binary format.
+     * Dumps method parameters attribute to file stream in binary format.
      *
-     * @param file Output file stream
-     * @throws IOException if an I/O error occurs.
+     * @param file Output file stream.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     @Override
     public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
-        file.writeByte(parameters.length);
+        file.writeByte(Args.requireU1(parameters.length, "parameters.length"));
         for (final MethodParameter parameter : parameters) {
             parameter.dump(file);
         }
     }
 
+    /**
+     * Gets the method parameters.
+     *
+     * @return The method parameters.
+     */
     public MethodParameter[] getParameters() {
         return parameters;
     }
@@ -91,6 +97,11 @@ public class MethodParameters extends Attribute implements Iterable<MethodParame
         return Stream.of(parameters).iterator();
     }
 
+    /**
+     * Sets the method parameters.
+     *
+     * @param parameters The method parameters to set.
+     */
     public void setParameters(final MethodParameter[] parameters) {
         this.parameters = parameters != null ? parameters : EMPTY_ARRAY;
     }

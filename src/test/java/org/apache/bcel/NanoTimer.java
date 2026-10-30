@@ -41,7 +41,7 @@ public class NanoTimer {
     }
 
     /**
-     * May ony be called after stop has been called as many times as start.
+     * May only be called after stop has been called as many times as start.
      */
     @Override
     public String toString() {

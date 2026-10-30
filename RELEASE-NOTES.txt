@@ -1,3 +1,266 @@
+Apache Commons BCEL Version 6.13.0
+RELEASE NOTES
+
+
+Introduction
+------------
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.13.0.
+
+The Commons Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files.
+
+This is a feature and maintenance release. Java 8 or later is required.
+
+New Features
+------------
+*           Add support for permitted subclasses #493. Thanks to nbauma109, Gary Gregory.
+*           Add RecordComponentInfo.getAttribute(byte tag)#494. Thanks to nbauma109, Gary Gregory.
+*           Add Const.MAJOR_27. Thanks to Gary Gregory.
+*           Add Const.MINOR_27. Thanks to Gary Gregory.
+*           Add and use ArrayType.isElementType(Type). Thanks to Gary Gregory.
+*           Add Const.MAJOR_28. Thanks to Gary Gregory.
+*           Add Const.MINOR_28. Thanks to Gary Gregory.
+
+Fixed Bugs
+----------
+*           Fix constant pool module access test on Java 26 and above #492. Thanks to nbauma109.
+*           Deprecate org.apache.bcel.classfile.Utility.Utility(). Thanks to Gary Gregory.
+*           Deprecate org.apache.bcel.verifier.exc.Utility.getStackTrace(Throwable). Thanks to Gary Gregory.
+*           Fix all Javadoc warnings and enforce checks by default. Thanks to Gary Gregory.
+*           Escape constant pool names in generated HTML (#500). Thanks to Dexter.k.
+*           Escape referenced names in BCELFactory Java output (#501). Thanks to Dexter.k, Gary Gregory.
+*           Make wide flag thread-local in Utility.codeToString (#502). Thanks to Dexter.k, Gary Gregory.
+*           Read multianewarray dimensions as unsigned byte (#504). Thanks to Dexter.k, Gary Gregory.
+*           Site docs: clarify security model (#503). Thanks to Arnout Engelen.
+*           Read ConstantDynamic indices as unsigned shorts (#505). Thanks to Dexter.k, Gary Gregory.
+*           Validate index upper bound in CPInstruction, IINC and RET setIndex (#506). Thanks to Dexter.k, Gary Gregory.
+*           Use correct attribute tag in NestHost and ModuleMainClass (#507). Thanks to Dexter.k, Gary Gregory.
+*           Propagate runtime-visible flag when parsing parameter annotations (#509). Thanks to Dexter.k, Gary Gregory.
+*           Use fixedLength for parsed LOOKUPSWITCH length (#499). Thanks to Digiscrypt Technologies, Gary Gregory.
+*           Fix ConstantPoolGen dedup key collisions for names with delimiters (#510). Thanks to Dexter.k, Gary Gregory.
+*           Read unsigned bytecode operands in CodeHTML disassembler (#511). Thanks to Dexter.k, Gary Gregory.
+*           Deep-copy bootstrap arguments array in BootstrapMethod.copy() (#516). Thanks to Dexter.k, Gary Gregory.
+*           Use exclusive live-range end in LocalVariableTable.getLocalVariable (#517). Thanks to Dexter.k, Gary Gregory.
+*           Build TABLESWITCH from sorted arrays in SWITCH (#518). Thanks to Naveed Khan, Gary Gregory.
+*           Use array element type not basic type for primitive array access (#520). Thanks to Naveed Khan, Gary Gregory.
+*           Set length in INVOKEDYNAMIC constructor (#521). Thanks to Naveed Khan, Gary Gregory.
+*           Reject CALOAD on non-char arrays in structural verification (#522). Thanks to Naveed Khan, Gary Gregory.
+*           Add negative verifier tests for remaining array load/store component type checks (#524). Thanks to Naveed Khan, Gary Gregory.
+*           Validate u1 count bound in INVOKEINTERFACE and MULTIANEWARRAY (#523). Thanks to Naveed Khan, Gary Gregory.
+*           Match wide local variable instruction length to dumped bytes (#525). Thanks to Naveed Khan, Gary Gregory.
+*           Bound IINC increment to signed short (#526). Thanks to Naveed Khan, Gary Gregory.
+*           Fix SpotBugs USO_UNSAFE_METHOD_SYNCHRONIZATION in ConstantUtf8. Thanks to Gary Gregory.
+*           Nested Code/Record attributes drive unbounded parse-time recursion in ClassParser (f001). Thanks to Gary Gregory.
+*           Nested annotation element values recurse unboundedly; MAX_ARRAY_DIMENSIONS cap bypassed (f002). Thanks to Gary Gregory.
+*           Opcodes tableswitch and lookupswitch add boundary checks (f003). Thanks to Gary Gregory.
+*           JustIce Pass 2 hangs on cyclic superclass chain of a referenced exception class (f004). Thanks to Gary Gregory.
+*           JustIce Pass 2 LVT check amplifies each 10-byte entry into ~131k hashtable operations (f005). Thanks to Gary Gregory.
+*           Pass 3b dataflow stores frames per instruction and clones ever-growing execution chains (f006). Thanks to Gary Gregory.
+*           Cubic handlers × range × subroutines scan in Subroutines constructor hangs JustIce Pass 3b (f007). Thanks to Gary Gregory.
+*           Subroutines.noRecursiveCalls enumerates exponentially many JSR call paths (f008). Thanks to Gary Gregory.
+*           Disassembler and Class2HTML re-implement the unchecked switch-table allocation (f009). Thanks to Gary Gregory.
+*           ConstantPool.constantToString recurses forever on self-referencing CONSTANT_MethodHandle (f010). Thanks to Gary Gregory.
+*           Utility.typeSignatureToString recurses per generic-nesting level, unbounded, with quadratic substring copies. (f011). Thanks to Gary Gregory.
+*           Repositories cache classes under the input-defined this_class name; global static Repository/VerifierFactory make the poisoning ClassLoader-wide. (f012). Thanks to Gary Gregory.
+*           Silent u2/u1 count truncation across dump paths corrupts emitted bytecode. (f013). Thanks to Gary Gregory.
+*           Class2HTML emitters write attacker class-file strings into HTML unescaped (stored XSS in reports) (f014). Thanks to Gary Gregory.
+*           Class2HTML builds output file paths from the unvalidated class name (f015). Thanks to Gary Gregory.
+*           ClassPath.getBytes() sizes its buffer from the forged ZIP uncompressed-size field (f016). Thanks to Gary Gregory.
+*           PMG attribute ignores declared length, enabling BCEL-vs-JVM parse divergence (f019). Thanks to Gary Gregory.
+*           Signature.matchGJIdent recurses unboundedly on nested generic signatures (Signature.translate) (f020). Thanks to Gary Gregory.
+*           Utility.decode fixed 3x buffer breaks the encode/decode round trip and throws unchecked AIOOBE (f021). Thanks to Gary Gregory.
+*           BCELifier interpolates attacker class/package names into generated Java source unescaped (f022). Thanks to Gary Gregory.
+*           Verifier pass 3a delayed checks are quadratic in attribute and code size (f023). Thanks to Gary Gregory.
+*           Verifier cache grows unboundedly with attacker-chosen class names (f024). Thanks to Gary Gregory.
+*           Static WIDE ThreadLocal survives exceptions, corrupting the next class's disassembly on the same thread (f025). Thanks to Gary Gregory.
+*           Utility.JavaReader escape decoding: OOB table index, bad-hex crash, silent non-canonical aliasing (f026). Thanks to Gary Gregory.
+
+Changes
+-------
+*           Bump org.apache.commons:commons-parent from 95 to 104. Thanks to Gary Gregory.
+*           Bump org.jetbrains.kotlin:kotlin-stdlib from 2.3.0 to 2.4.20 (#497, #519). Thanks to Gary Gregory, Dependabot.
+*           Bump commons-io:commons-io from 2.21.0 to 2.22.0. Thanks to Gary Gregory.
+*           Bump jna.version from 5.18.1 to 5.19.1 (#514). Thanks to Gary Gregory, Dependabot.
+*           [test] Bump org.apache.commons:commons-collections4 from 4.5.0 to 4.6.0. Thanks to Gary Gregory.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-bcel/changes.html
+
+For complete information on Apache Commons BCEL, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons BCEL website:
+
+https://commons.apache.org/proper/commons-bcel
+
+Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+Open source works best when you give feedback:
+
+    https://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
+Apache Commons BCEL Version 6.12.0
+RELEASE NOTES
+
+
+Introduction
+------------
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.12.0.
+
+The Commons Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files.
+
+This is a feature and maintenance release. Java 8 or later is required.
+
+New Features
+------------
+*           Add Const.MAJOR_26. Thanks to Gary Gregory.
+*           Add Const.MINOR_26. Thanks to Gary Gregory.
+
+Fixed Bugs
+----------
+*           Fix infinite loop in example.TransitiveHull #476. Thanks to fmantz, Gary Gregory.
+*           Fix Apache RAT plugin console warnings. Thanks to Gary Gregory.
+*           Fix malformed Javadoc comments. Thanks to Gary Gregory.
+*           Make the build reproducible on the Azul JDK. Thanks to Gary Gregory.
+*           Fix infinite loop in JavaClass.findField() on invalid input. Thanks to Gary Gregory, Pavel Kohout.
+*           Fix infinite loop in JavaClass.getAllInterfaces() on invalid input. Thanks to Gary Gregory, Pavel Kohout.
+*           Fix infinite loop in JavaClass.getSuperClasses() on invalid input. Thanks to Gary Gregory, Pavel Kohout.
+*           Exception message in Args.requireU4() refers to the wrong data type. Thanks to Gary Gregory.
+*           Exception message in Args.requireU2() refers to the wrong upper range value. Thanks to Gary Gregory.
+*           Code.Code(int, int, DataInput, ConstantPool) now throws a ClassFormatException if the code array is greater than the JVM specification allows. Thanks to Gary Gregory, Stanislav Fort.
+*           Code.Code(int, int, int, int, byte[], CodeException[], Attribute[], ConstantPool) now throws a ClassFormatException if the code array is greater than the JVM specification allows. Thanks to Gary Gregory, Stanislav Fort.
+*           Code.setCode(byte[]) now throws a ClassFormatException if the code array is greater than the JVM specification allows. Thanks to Gary Gregory.
+*           ClassDumper.dump() should not call the input stream it didn't open; fixes IOException when calling DumpClass.main(ClassDumper.java:351). Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.ConstantPool.ConstantPool(Constant[]) now uses varagrs: ConstantPool(Constant...). Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.Deprecated now requires its the attribute_length item be zero; see https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.15. Thanks to Gary Gregory.
+*           org.apache.bcel.classfile.Synthetic now requires its the attribute_length item be zero; see https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.8. Thanks to Gary Gregory.
+*           The size of an Attribute unknown to the JVM specification is limited to 1 MB and is overridden with the system property BCEL.Attribute.Unknown.max_attribute_length; see https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7. Thanks to Gary Gregory, Stanislav Fort.
+
+Changes
+-------
+*           Bump org.apache.commons:commons-parent from 89 to 95 #482. Thanks to Gary Gregory.
+*           [test] Bump org.jetbrains.kotlin:kotlin-stdlib from 2.2.20 to 2.3.0 #481. Thanks to Gary Gregory.
+*           Bump commons-io:commons-io from 2.20.0 to 2.21.0. Thanks to Gary Gregory.
+*           Bump commons-lang3 from 3.19.0 to 3.20.0. Thanks to Gary Gregory.
+*           [test] Bump org.apache.commons:commons-exec from 1.5.0 to 1.6.0. Thanks to Gary Gregory.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-bcel/changes.html
+
+For complete information on Apache Commons BCEL, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons BCEL website:
+
+https://commons.apache.org/proper/commons-bcel
+
+Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+Open source works best when you give feedback:
+
+    https://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
+Apache Commons BCEL Version 6.11.0
+RELEASE NOTES
+
+
+Introduction
+------------
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.11.0.
+
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
+
+This is a feature and maintenance release. Java 8 or later is required.
+
+New Features
+------------
+*           Add Const.MAJOR_25. Thanks to Gary Gregory.
+*           Add Const.MINOR_25. Thanks to Gary Gregory.
+*           Add experimental CycloneDX VEX file #446. Thanks to Piotr P. Karwasz, Gary Gregory.
+*           Refactor to use new Maven POM variable ecj.version. Thanks to Gary Gregory.
+
+Fixed Bugs
+----------
+*           Replace internal use of Locale.ENGLISH with Locale.ROOT. Thanks to Gary Gregory.
+* BCEL-375: Wrong permissions on bcel .jar file in binary .tar.gz distribution file. Thanks to J. Lewis Muir, Gary Gregory.
+* BCEL-376: ClassPath.close() throws UnsupportedOperationException when created with system-classpath. Thanks to Dominik Stadler, Gary Gregory.
+*           ClassPath.getResources(String) can use an ArrayList instead of a Vector. Thanks to Gary Gregory.
+*           Fix SpotBugs [ERROR] Medium: Operation on the "created" shared variable in "ConstantUtf8" class is not atomic [org.apache.bcel.classfile.ConstantUtf8] At ConstantUtf8.java:[line 119] AT_NONATOMIC_OPERATIONS_ON_SHARED_VARIABLE. Thanks to Gary Gregory.
+*           Fix SpotBugs [ERROR] Medium: Operation on the "considered" shared variable in "ConstantUtf8" class is not atomic [org.apache.bcel.classfile.ConstantUtf8] At ConstantUtf8.java:[line 137] AT_NONATOMIC_OPERATIONS_ON_SHARED_VARIABLE. Thanks to Gary Gregory.
+*           Fix SpotBugs [ERROR] Medium: Operation on the "skipped" shared variable in "ConstantUtf8" class is not atomic [org.apache.bcel.classfile.ConstantUtf8] At ConstantUtf8.java:[line 134] AT_NONATOMIC_OPERATIONS_ON_SHARED_VARIABLE. Thanks to Gary Gregory.
+*           org.apache.bcel.util.ClassPath.addJdkModules(String, List<String>) now reads the system property "jdk.module.path" instead of "java.modules.path"; see https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/System.html#jdk.module.path. Thanks to Gary Gregory.
+*           Fix ConstantPoolModuleAccessTest failures on Java 25. Thanks to Andrey Loskutov.
+* 377:    Fix testing on Java 24 and up. Thanks to Dejan Stojadinović, Gary Gregory, Andrey Loskutov.
+
+Changes
+-------
+*           Bump org.apache.commons:commons-parent from 72 to 89 #346, #349, #559, #364, #368, #378, #464. Thanks to Dependabot, Gary Gregory.
+*           Bump org.apache.commons:commons-lang3 from 3.14.0 to 3.19.0 #334, #341, #351, #444. Thanks to Dependabot, Gary Gregory.
+*           Bump org.jetbrains.kotlin:kotlin-stdlib from 2.0.0 to 2.2.20 #340, #347, #369, #390, #407, #422, #434, #441, #452, #462. Thanks to Dependabot, Gary Gregory.
+*           Bump commons-io:commons-io from 2.16.1 to 2.20.0 #357, #387. Thanks to Dependabot, Gary Gregory.
+*           Bump jna.version from 5.14.0 to 5.18.1 #358, #399, #466, #470. Thanks to Dependabot, Gary Gregory.
+*           Bump org.codehaus.mojo:taglist-maven-plugin from 3.1.0 to 3.2.1 #376. Thanks to Dependabot, Gary Gregory.
+*           Bump org.apache.commons:commons-collections4 from 4.5.0-M2 to 4.5.0 #395. Thanks to Dependabot, Gary Gregory.
+*           Bump org.apache.commons:commons-exec from 1.4.0 to 1.5.0. Thanks to Dependabot, Gary Gregory.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-bcel/changes.html
+
+For complete information on Apache Commons BCEL, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons BCEL website:
+
+https://commons.apache.org/proper/commons-bcel
+
+Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+Open source works best when you give feedback:
+
+    https://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
 Apache Commons BCEL Version 6.10.0
 RELEASE NOTES
 
@@ -7,10 +270,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.10.0.
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields, and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Maintenance and bug fix release. Requires a minimum of Java 8.
 
@@ -79,10 +340,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.9.0.
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields, and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Maintenance and bug fix release.
 
@@ -167,10 +426,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.8.2.
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields, and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Maintenance and bug fix release.
 
@@ -223,10 +480,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.8.1.
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields, and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Maintenance and bug fix release.
 
@@ -291,10 +546,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.8.0!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Maintenance and bug fix release.
 
@@ -379,10 +632,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.7.0!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Maintenance and bug fix release.
 
@@ -491,10 +742,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.6.1!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Maintenance and bug fix release.
 
@@ -550,11 +799,10 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.6.0!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
+Fixes CVE-2022-42920: Apache Commons BCEL prior to 6.6.0 allows producing arbitrary bytecode via out-of-bounds writing.
 
 New Features
 -------------
@@ -680,10 +928,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.5.0!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Minor feature and bug fix release.
 
@@ -753,10 +999,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.4.1!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Bug fix release.
 
@@ -809,10 +1053,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.4.0!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Feature and bug fix release.
 
@@ -883,10 +1125,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.3.1!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Bug fix release
 
@@ -933,10 +1173,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.3!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 
 New Features
@@ -990,10 +1228,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.2!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Experimental Java 9 Support
 
@@ -1036,10 +1272,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.1!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Apache Commons BCEL 6.1 is a bugfix and feature release supporting bringing
 experimental support for Java 9.
@@ -1123,10 +1357,8 @@ Introduction
 The Apache Commons BCEL team is pleased to announce the release of
 Apache Commons BCEL 6.0!
 
-The Byte Code Engineering Library (BCEL) is intended to give users a convenient
-way to analyze, create, and manipulate compiled .class files. Classes are
-represented by objects containing all the symbolic information of the given
-class: methods, fields and byte code instructions.
+The Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files. 
+Classes are represented by objects containing all the symbolic information of the given class: methods, fields, and bytecode instructions.
 
 Apache Commons BCEL 6.0 is a major release supporting the new features
 introduced in Java 6, 7 and 8.

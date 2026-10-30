@@ -27,7 +27,7 @@ import org.apache.bcel.generic.Type;
 import org.apache.bcel.util.BCELComparator;
 
 /**
- * This class represents the field info structure, i.e., the representation for a variable in the class. See JVM
+ * This class represents the field info structure, that is, the representation for a variable in the class. See JVM
  * specification for details.
  */
 public final class Field extends FieldOrMethod {
@@ -53,6 +53,8 @@ public final class Field extends FieldOrMethod {
     };
 
     /**
+     * Gets the comparison strategy object.
+     *
      * @return Comparison strategy object.
      */
     public static BCELComparator<Field> getComparator() {
@@ -60,6 +62,8 @@ public final class Field extends FieldOrMethod {
     }
 
     /**
+     * Sets the comparison strategy object.
+     *
      * @param comparator Comparison strategy object.
      */
     public static void setComparator(final BCELComparator<Field> comparator) {
@@ -70,6 +74,7 @@ public final class Field extends FieldOrMethod {
      * Constructs object from file stream.
      *
      * @param file Input stream.
+     * @param constantPool The constant pool.
      */
     Field(final DataInput file, final ConstantPool constantPool) throws IOException, ClassFormatException {
         super(file, constantPool);
@@ -86,11 +91,13 @@ public final class Field extends FieldOrMethod {
     }
 
     /**
-     * @param accessFlags Access rights of field
-     * @param nameIndex Points to field name in constant pool
-     * @param signatureIndex Points to encoded signature
-     * @param attributes Collection of attributes
-     * @param constantPool Array of constants
+     * Constructs a Field.
+     *
+     * @param accessFlags Access rights of field.
+     * @param nameIndex Points to field name in constant pool.
+     * @param signatureIndex Points to encoded signature.
+     * @param attributes Collection of attributes.
+     * @param constantPool Array of constants.
      */
     public Field(final int accessFlags, final int nameIndex, final int signatureIndex, final Attribute[] attributes, final ConstantPool constantPool) {
         super(accessFlags, nameIndex, signatureIndex, attributes, constantPool);
@@ -98,9 +105,9 @@ public final class Field extends FieldOrMethod {
 
     /**
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
-     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
+     * That is, the hierarchy of methods, fields, attributes, and other elements forms a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -108,7 +115,10 @@ public final class Field extends FieldOrMethod {
     }
 
     /**
-     * @return deep copy of this field
+     * Creates a deep copy of this field.
+     *
+     * @param constantPool The constant pool.
+     * @return deep copy of this field.
      */
     public Field copy(final ConstantPool constantPool) {
         return (Field) copy_(constantPool);
@@ -126,7 +136,9 @@ public final class Field extends FieldOrMethod {
     }
 
     /**
-     * @return constant value associated with this field (may be null)
+     * Gets the constant value associated with this field.
+     *
+     * @return constant value associated with this field (may be null).
      */
     public ConstantValue getConstantValue() {
         for (final Attribute attribute : super.getAttributes()) {
@@ -138,9 +150,11 @@ public final class Field extends FieldOrMethod {
     }
 
     /**
+     * Gets the field type.
+     *
      * See https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.2.2
      *
-     * @return type of field
+     * @return type of field.
      */
     public Type getType() {
         return Type.getType(getSignature());

@@ -70,7 +70,7 @@ public class VerifyDialog extends JDialog {
     private static final long serialVersionUID = -6374807677043142313L;
 
     /**
-     * This field is here to count the number of open VerifyDialog instances so the JVM can be exited afer every Dialog had
+     * This field is here to count the number of open VerifyDialog instances so the JVM can be exited after every Dialog had
      * been closed.
      */
     private static int classesToVerify;
@@ -108,16 +108,22 @@ public class VerifyDialog extends JDialog {
 
     /** Machine-generated. */
     private JPanel ivjJDialogContentPane;
+
     /** Machine-generated. */
     private JPanel ivjPass1Panel;
+
     /** Machine-generated. */
     private JPanel ivjPass2Panel;
+
     /** Machine-generated. */
     private JPanel ivjPass3Panel;
+
     /** Machine-generated. */
     private JButton ivjPass1Button;
+
     /** Machine-generated. */
     private JButton ivjPass2Button;
+
     /** Machine-generated. */
     private JButton ivjPass3Button;
 
@@ -138,42 +144,82 @@ public class VerifyDialog extends JDialog {
         initialize();
     }
 
-    /** Machine-generated. */
+    /**
+     * Constructs a new instance.
+     *
+     * @param owner The parent Dialog.
+     */
     public VerifyDialog(final Dialog owner) {
         super(owner);
     }
 
-    /** Machine-generated. */
+    /**
+     * Constructs a new instance.
+     *
+     * @param owner The parent Dialog.
+     * @param modal whether the dialog is modal.
+     */
     public VerifyDialog(final Dialog owner, final boolean modal) {
         super(owner, modal);
     }
 
-    /** Machine-generated. */
+    /**
+     * Constructs a new instance.
+     *
+     * @param owner The parent Dialog.
+     * @param title The dialog title.
+     */
     public VerifyDialog(final Dialog owner, final String title) {
         super(owner, title);
     }
 
-    /** Machine-generated. */
+    /**
+     * Constructs a new instance.
+     *
+     * @param owner The parent Dialog.
+     * @param title The dialog title.
+     * @param modal whether the dialog is modal.
+     */
     public VerifyDialog(final Dialog owner, final String title, final boolean modal) {
         super(owner, title, modal);
     }
 
-    /** Machine-generated. */
+    /**
+     * Constructs a new instance.
+     *
+     * @param owner The parent Frame.
+     */
     public VerifyDialog(final Frame owner) {
         super(owner);
     }
 
-    /** Machine-generated. */
+    /**
+     * Constructs a new instance.
+     *
+     * @param owner The parent Frame.
+     * @param modal whether the dialog is modal.
+     */
     public VerifyDialog(final Frame owner, final boolean modal) {
         super(owner, modal);
     }
 
-    /** Machine-generated. */
+    /**
+     * Constructs a new instance.
+     *
+     * @param owner The parent Frame.
+     * @param title The dialog title.
+     */
     public VerifyDialog(final Frame owner, final String title) {
         super(owner, title);
     }
 
-    /** Machine-generated. */
+    /**
+     * Constructs a new instance.
+     *
+     * @param owner The parent Frame.
+     * @param title The dialog title.
+     * @param modal whether the dialog is modal.
+     */
     public VerifyDialog(final Frame owner, final String title, final boolean modal) {
         super(owner, title, modal);
     }
@@ -181,7 +227,7 @@ public class VerifyDialog extends JDialog {
     /**
      * Use this constructor if you want a possibility to verify other class files than {@link Object}.
      *
-     * @param fullyQualifiedClassName "java.lang.String"
+     * @param fullyQualifiedClassName "java.lang.String".
      */
     public VerifyDialog(String fullyQualifiedClassName) {
         final int dotclasspos = fullyQualifiedClassName.lastIndexOf(JavaClass.EXTENSION);
@@ -253,7 +299,11 @@ public class VerifyDialog extends JDialog {
         }
     }
 
-    /** Machine-generated. */
+    /**
+     * Called when an action is performed.
+     *
+     * @param actionEvent The action event.
+     */
     public void flushButton_ActionPerformed(final ActionEvent actionEvent) {
         VerifierFactory.getVerifier(className).flush();
         Repository.removeClass(className); // Make sure it will be reloaded.
@@ -265,7 +315,7 @@ public class VerifyDialog extends JDialog {
         getPass3Panel().repaint();
     }
 
-    /** Machine-generated. */
+    /** Gets the flush button. */
     private JButton getFlushButton() {
         if (ivjFlushButton == null) {
             try {
@@ -287,7 +337,7 @@ public class VerifyDialog extends JDialog {
         return ivjFlushButton;
     }
 
-    /** Machine-generated. */
+    /** Gets the dialog content pane. */
     private JPanel getJDialogContentPane() {
         if (ivjJDialogContentPane == null) {
             try {
@@ -312,7 +362,7 @@ public class VerifyDialog extends JDialog {
         return ivjJDialogContentPane;
     }
 
-    /** Machine-generated. */
+    /** Gets the pass 1 button. */
     private JButton getPass1Button() {
         if (ivjPass1Button == null) {
             try {
@@ -333,7 +383,7 @@ public class VerifyDialog extends JDialog {
         return ivjPass1Button;
     }
 
-    /** Machine-generated. */
+    /** Gets the pass 1 panel. */
     private JPanel getPass1Panel() {
         if (ivjPass1Panel == null) {
             try {
@@ -353,7 +403,7 @@ public class VerifyDialog extends JDialog {
         return ivjPass1Panel;
     }
 
-    /** Machine-generated. */
+    /** Gets the pass 2 button. */
     private JButton getPass2Button() {
         if (ivjPass2Button == null) {
             try {
@@ -374,7 +424,7 @@ public class VerifyDialog extends JDialog {
         return ivjPass2Button;
     }
 
-    /** Machine-generated. */
+    /** Gets the pass 2 panel. */
     private JPanel getPass2Panel() {
         if (ivjPass2Panel == null) {
             try {
@@ -394,7 +444,7 @@ public class VerifyDialog extends JDialog {
         return ivjPass2Panel;
     }
 
-    /** Machine-generated. */
+    /** Gets the pass 3 button. */
     private JButton getPass3Button() {
         if (ivjPass3Button == null) {
             try {
@@ -415,7 +465,7 @@ public class VerifyDialog extends JDialog {
         return ivjPass3Button;
     }
 
-    /** Machine-generated. */
+    /** Gets the pass 3 panel. */
     private JPanel getPass3Panel() {
         if (ivjPass3Panel == null) {
             try {
@@ -480,7 +530,11 @@ public class VerifyDialog extends JDialog {
         // user code end
     }
 
-    /** Machine-generated. */
+    /**
+     * Called when an action is performed.
+     *
+     * @param actionEvent The action event.
+     */
     public void pass1Button_ActionPerformed(final ActionEvent actionEvent) {
         final Verifier v = VerifierFactory.getVerifier(className);
         final VerificationResult vr = v.doPass1();
@@ -494,7 +548,11 @@ public class VerifyDialog extends JDialog {
         }
     }
 
-    /** Machine-generated. */
+    /**
+     * Called when an action is performed.
+     *
+     * @param actionEvent The action event.
+     */
     public void pass2Button_ActionPerformed(final ActionEvent actionEvent) {
         pass1Button_ActionPerformed(actionEvent);
         final Verifier v = VerifierFactory.getVerifier(className);
@@ -513,7 +571,11 @@ public class VerifyDialog extends JDialog {
         }
     }
 
-    /** Machine-generated. */
+    /**
+     * Called when an action is performed.
+     *
+     * @param actionEvent The action event.
+     */
     public void pass4Button_ActionPerformed(final ActionEvent actionEvent) {
         pass2Button_ActionPerformed(actionEvent);
         Color color = Color.green;

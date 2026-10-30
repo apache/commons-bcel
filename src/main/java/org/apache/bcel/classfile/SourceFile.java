@@ -39,17 +39,19 @@ public final class SourceFile extends Attribute {
     /**
      * Constructs object from input stream.
      *
-     * @param nameIndex Index in constant pool to CONSTANT_Utf8
-     * @param length Content length in bytes
-     * @param input Input stream
-     * @param constantPool Array of constants
-     * @throws IOException if an I/O error occurs.
+     * @param nameIndex Index in constant pool to CONSTANT_Utf8.
+     * @param length Content length in bytes.
+     * @param input Input stream.
+     * @param constantPool Array of constants.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     SourceFile(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
         this(nameIndex, length, input.readUnsignedShort(), constantPool);
     }
 
     /**
+     * Constructs a SourceFile.
+     *
      * @param nameIndex Index in constant pool to CONSTANT_Utf8, which should represent the string "SourceFile".
      * @param length Content length in bytes, the value should be 2.
      * @param constantPool The constant pool that this attribute is associated with.
@@ -75,9 +77,9 @@ public final class SourceFile extends Attribute {
 
     /**
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
-     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
+     * That is, the hierarchy of methods, fields, attributes, and other elements forms a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -85,7 +87,7 @@ public final class SourceFile extends Attribute {
     }
 
     /**
-     * @return deep copy of this attribute
+     * @return deep copy of this attribute.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {
@@ -93,10 +95,10 @@ public final class SourceFile extends Attribute {
     }
 
     /**
-     * Dump source file attribute to file stream in binary format.
+     * Dumps source file attribute to file stream in binary format.
      *
-     * @param file Output file stream
-     * @throws IOException if an I/O error occurs.
+     * @param file Output file stream.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     @Override
     public void dump(final DataOutputStream file) throws IOException {
@@ -105,6 +107,8 @@ public final class SourceFile extends Attribute {
     }
 
     /**
+     * Gets the source file index.
+     *
      * @return Index in constant pool of source file name.
      */
     public int getSourceFileIndex() {
@@ -112,6 +116,8 @@ public final class SourceFile extends Attribute {
     }
 
     /**
+     * Gets the source file name.
+     *
      * @return Source file name.
      */
     public String getSourceFileName() {
@@ -119,14 +125,16 @@ public final class SourceFile extends Attribute {
     }
 
     /**
-     * @param sourceFileIndex
+     * Sets the source file index.
+     *
+     * @param sourceFileIndex The source file index to set.
      */
     public void setSourceFileIndex(final int sourceFileIndex) {
         this.sourceFileIndex = sourceFileIndex;
     }
 
     /**
-     * @return String representation
+     * @return String representation.
      */
     @Override
     public String toString() {

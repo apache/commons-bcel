@@ -21,21 +21,24 @@ package org.apache.bcel.generic;
 /**
  * SWAP - Swa top operand stack word
  *
- * <PRE>
+ * <pre>
  * Stack: ..., word2, word1 -&gt; ..., word1, word2
- * </PRE>
+ * </pre>
  */
 public class SWAP extends StackInstruction implements StackConsumer, StackProducer {
 
+    /**
+     * Constructs a SWAP instruction.
+     */
     public SWAP() {
         super(org.apache.bcel.Const.SWAP);
     }
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {

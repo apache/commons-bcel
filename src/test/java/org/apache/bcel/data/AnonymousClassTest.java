@@ -19,7 +19,7 @@
 
 package org.apache.bcel.data;
 
-public class AnonymousClassTest {
+class AnonymousClassTest {
     final class X {
     }
 

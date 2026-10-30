@@ -26,11 +26,11 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link StackMap}.
  */
-public class StackMapTest {
+class StackMapTest {
 
     @Test
-    public void testSetStackMap() {
-        final StackMap stackMap = new StackMap(0, 0, StackMapEntry.EMPTY_ARRAY, new ConstantPool(new Constant[] { new ConstantLong(0) }));
+    void testSetStackMap() {
+        final StackMap stackMap = new StackMap(0, 0, StackMapEntry.EMPTY_ARRAY, new ConstantPool(new ConstantLong(0)));
         // No NPE
         stackMap.setStackMap(null);
         assertArrayEquals(StackMapEntry.EMPTY_ARRAY, stackMap.getStackMap());

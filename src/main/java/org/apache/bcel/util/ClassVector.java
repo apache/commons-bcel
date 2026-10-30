@@ -35,26 +35,61 @@ public class ClassVector implements Serializable {
 
     private static final long serialVersionUID = 5600397075672780806L;
 
+    /**
+     * The vector of JavaClass objects.
+     *
+     * @deprecated Will be made private; do not access directly, use getter/setter.
+     */
     @Deprecated
     protected transient List<JavaClass> vec = new ArrayList<>();
 
+    /**
+     * Constructs a new ClassVector.
+     */
+    public ClassVector() {
+    }
+
+    /**
+     * Adds a JavaClass to the vector.
+     *
+     * @param clazz The JavaClass to add.
+     */
     public void addElement(final JavaClass clazz) {
         vec.add(clazz);
     }
 
+    /**
+     * Gets the JavaClass at the specified index.
+     *
+     * @param index The index.
+     * @return The JavaClass at the specified index.
+     */
     public JavaClass elementAt(final int index) {
         return vec.get(index);
     }
 
+    /**
+     * Initializes the vector when deserializing without data.
+     */
     @SuppressWarnings("unused") // SE_TRANSIENT_FIELD_NOT_RESTORED
     private void readObjectNoData() {
         vec = new ArrayList<>();
     }
 
+    /**
+     * Removes the JavaClass at the specified index.
+     *
+     * @param index The index.
+     */
     public void removeElementAt(final int index) {
         vec.remove(index);
     }
 
+    /**
+     * Converts the vector to an array.
+     *
+     * @return An array of JavaClass objects.
+     */
     public JavaClass[] toArray() {
         return vec.toArray(JavaClass.EMPTY_ARRAY);
     }

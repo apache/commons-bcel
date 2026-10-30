@@ -22,7 +22,7 @@ import org.apache.bcel.Const;
 import org.apache.bcel.ExceptionConst;
 
 /**
- * Super class for the xRETURN family of instructions.
+ * Superclass for the xRETURN family of instructions.
  */
 public abstract class ReturnInstruction extends Instruction implements ExceptionThrower, TypedInstruction, StackConsumer {
 
@@ -33,7 +33,9 @@ public abstract class ReturnInstruction extends Instruction implements Exception
     }
 
     /**
-     * @param opcode of instruction
+     * Constructs a ReturnInstruction.
+     *
+     * @param opcode of instruction.
      */
     protected ReturnInstruction(final short opcode) {
         super(opcode, (short) 1);
@@ -44,6 +46,11 @@ public abstract class ReturnInstruction extends Instruction implements Exception
         return new Class[] {ExceptionConst.ILLEGAL_MONITOR_STATE};
     }
 
+    /**
+     * Gets the type of the returned value.
+     *
+     * @return The type.
+     */
     public Type getType() {
         final short opcode = super.getOpcode();
         switch (opcode) {
@@ -65,7 +72,9 @@ public abstract class ReturnInstruction extends Instruction implements Exception
     }
 
     /**
-     * @return type associated with the instruction
+     * Gets the type associated with the instruction.
+     *
+     * @return type associated with the instruction.
      */
     @Override
     public Type getType(final ConstantPoolGen cp) {

@@ -54,11 +54,11 @@ public final class Record extends Attribute {
     /**
      * Constructs object from input stream.
      *
-     * @param nameIndex    Index in constant pool
-     * @param length       Content length in bytes
-     * @param input        Input stream
-     * @param constantPool Array of constants
-     * @throws IOException if an I/O error occurs.
+     * @param nameIndex    Index in constant pool.
+     * @param length       Content length in bytes.
+     * @param input        Input stream.
+     * @param constantPool Array of constants.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     Record(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool)
             throws IOException {
@@ -68,10 +68,10 @@ public final class Record extends Attribute {
     /**
      * Constructs a new instance using components.
      *
-     * @param nameIndex    Index in constant pool
-     * @param length       Content length in bytes
-     * @param classes      Array of Record Component Info elements
-     * @param constantPool Array of constants
+     * @param nameIndex    Index in constant pool.
+     * @param length       Content length in bytes.
+     * @param classes      Array of Record Component Info elements.
+     * @param constantPool Array of constants.
      */
     public Record(final int nameIndex, final int length, final RecordComponentInfo[] classes,
             final ConstantPool constantPool) {
@@ -83,9 +83,9 @@ public final class Record extends Attribute {
     /**
      * Called by objects that are traversing the nodes of the tree implicitly
      * defined by the contents of a Java class. For example, the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
+     * fields, attributes, and other elements forms a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -95,7 +95,7 @@ public final class Record extends Attribute {
     /**
      * Copies this instance and its components.
      *
-     * @return a deep copy of this instance and its components.
+     * @return A deep copy of this instance and its components.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {
@@ -111,12 +111,12 @@ public final class Record extends Attribute {
      * Dumps this instance into a file stream in binary format.
      *
      * @param file output stream.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     @Override
     public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
-        file.writeShort(components.length);
+        file.writeShort(Args.requireU2(components.length, "components.length"));
         for (final RecordComponentInfo component : components) {
             component.dump(file);
         }

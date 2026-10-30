@@ -23,9 +23,9 @@ import org.apache.bcel.ExceptionConst;
 /**
  * NEW - Create new object
  *
- * <PRE>
+ * <pre>
  * Stack: ... -&gt; ..., objectref
- * </PRE>
+ * </pre>
  */
 public class NEW extends CPInstruction implements LoadClass, AllocationInstruction, ExceptionThrower, StackProducer {
 
@@ -35,15 +35,20 @@ public class NEW extends CPInstruction implements LoadClass, AllocationInstructi
     NEW() {
     }
 
+    /**
+     * Constructs a NEW instruction.
+     *
+     * @param index index into constant pool.
+     */
     public NEW(final int index) {
         super(org.apache.bcel.Const.NEW, index);
     }
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {

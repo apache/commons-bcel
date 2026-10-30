@@ -25,10 +25,11 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
- * This class represents a bootstrap method attribute, i.e., the bootstrap method ref, the number of bootstrap arguments
+ * This class represents a bootstrap method attribute, that is, the bootstrap method ref, the number of bootstrap arguments
  * and an array of the bootstrap arguments.
  *
  * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.23"> The class File Format :
@@ -51,14 +52,14 @@ public class BootstrapMethod implements Cloneable {
      * @param c Source to copy.
      */
     public BootstrapMethod(final BootstrapMethod c) {
-        this(c.getBootstrapMethodRef(), c.getBootstrapArguments());
+        this(c.getBootstrapMethodRef(), c.getBootstrapArguments().clone());
     }
 
     /**
      * Constructs object from input stream.
      *
-     * @param input Input stream
-     * @throws IOException if an I/O error occurs.
+     * @param input Input stream.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     BootstrapMethod(final DataInput input) throws IOException {
         this(input.readUnsignedShort(), input.readUnsignedShort());
@@ -74,8 +75,10 @@ public class BootstrapMethod implements Cloneable {
     }
 
     /**
-     * @param bootstrapMethodRef int index into constant_pool of CONSTANT_MethodHandle
-     * @param bootstrapArguments int[] indices into constant_pool of CONSTANT_[type]_info
+     * Constructs a BootstrapMethod.
+     *
+     * @param bootstrapMethodRef int index into constant_pool of CONSTANT_MethodHandle.
+     * @param bootstrapArguments int[] indices into constant_pool of CONSTANT_[type]_info.
      */
     public BootstrapMethod(final int bootstrapMethodRef, final int[] bootstrapArguments) {
         this.bootstrapMethodRef = bootstrapMethodRef;
@@ -83,11 +86,15 @@ public class BootstrapMethod implements Cloneable {
     }
 
     /**
-     * @return deep copy of this object
+     * Creates a deep copy of this object.
+     *
+     * @return deep copy of this object.
      */
     public BootstrapMethod copy() {
         try {
-            return (BootstrapMethod) clone();
+            final BootstrapMethod c = (BootstrapMethod) clone();
+            c.bootstrapArguments = bootstrapArguments.clone();
+            return c;
         } catch (final CloneNotSupportedException ignore) {
             // TODO should this throw?
         }
@@ -95,55 +102,67 @@ public class BootstrapMethod implements Cloneable {
     }
 
     /**
-     * Dump object to file stream in binary format.
+     * Dumps object to file stream in binary format.
      *
-     * @param file Output file stream
-     * @throws IOException if an I/O error occurs.
+     * @param file Output file stream.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public final void dump(final DataOutputStream file) throws IOException {
         file.writeShort(bootstrapMethodRef);
-        file.writeShort(bootstrapArguments.length);
+        file.writeShort(Args.requireU2(bootstrapArguments.length, "bootstrapArguments.length"));
         for (final int bootstrapArgument : bootstrapArguments) {
             file.writeShort(bootstrapArgument);
         }
     }
 
     /**
-     * @return int[] of bootstrap_method indices into constant_pool of CONSTANT_[type]_info
+     * Gets the bootstrap arguments.
+     *
+     * @return int[] of bootstrap_method indices into constant_pool of CONSTANT_[type]_info.
      */
     public int[] getBootstrapArguments() {
         return bootstrapArguments;
     }
 
     /**
-     * @return index into constant_pool of bootstrap_method
+     * Gets the bootstrap method reference.
+     *
+     * @return index into constant_pool of bootstrap_method.
      */
     public int getBootstrapMethodRef() {
         return bootstrapMethodRef;
     }
 
     /**
-     * @return count of number of boostrap arguments
+     * Gets the count of number of bootstrap arguments.
+     *
+     * @return count of number of bootstrap arguments.
      */
     public int getNumBootstrapArguments() {
         return bootstrapArguments.length;
     }
 
     /**
-     * @param bootstrapArguments int[] indices into constant_pool of CONSTANT_[type]_info
+     * Sets the bootstrap arguments.
+     *
+     * @param bootstrapArguments int[] indices into constant_pool of CONSTANT_[type]_info.
      */
     public void setBootstrapArguments(final int[] bootstrapArguments) {
         this.bootstrapArguments = ArrayUtils.nullToEmpty(bootstrapArguments);
     }
 
     /**
-     * @param bootstrapMethodRef int index into constant_pool of CONSTANT_MethodHandle
+     * Sets the bootstrap method reference.
+     *
+     * @param bootstrapMethodRef int index into constant_pool of CONSTANT_MethodHandle.
      */
     public void setBootstrapMethodRef(final int bootstrapMethodRef) {
         this.bootstrapMethodRef = bootstrapMethodRef;
     }
 
     /**
+     * Gets a string representation.
+     *
      * @return String representation.
      */
     @Override
@@ -152,7 +171,10 @@ public class BootstrapMethod implements Cloneable {
     }
 
     /**
-     * @return Resolved string representation
+     * Gets a resolved string representation.
+     *
+     * @param constantPool The constant pool.
+     * @return Resolved string representation.
      */
     public final String toString(final ConstantPool constantPool) {
         final StringBuilder buf = new StringBuilder();

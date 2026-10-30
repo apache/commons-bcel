@@ -25,43 +25,41 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>79</version>
+    <version>106</version>
   </parent>
   <groupId>org.apache.bcel</groupId>
   <artifactId>bcel</artifactId>
   <packaging>jar</packaging>
-  <version>6.11.0-SNAPSHOT</version>
+  <version>6.14.0-SNAPSHOT</version>
   <name>Apache Commons BCEL</name>
-  <description>Apache Commons Bytecode Engineering Library</description>
+  <description>The Commons Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files.</description>
   <url>https://commons.apache.org/proper/commons-bcel</url>
   <inceptionYear>2004</inceptionYear>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- project.build.outputTimestamp is managed by Maven plugins, see https://maven.apache.org/guides/mini/guide-reproducible-builds.html -->
-    <project.build.outputTimestamp>2024-07-13T18:11:44Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2026-09-10T05:20:57Z</project.build.outputTimestamp>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <commons.componentid>bcel</commons.componentid>
     <commons.module.name>org.apache.bcel</commons.module.name>
-    <commons.release.version>6.11.0</commons.release.version>
-    <commons.release.next>6.11.1</commons.release.next>
+    <commons.release.version>6.14.0</commons.release.version>
+    <commons.release.next>6.14.1</commons.release.next>
     <commons.release.isDistModule>true</commons.release.isDistModule>
     <commons.rc.version>RC1</commons.rc.version>
-    <commons.bc.version>6.10.0</commons.bc.version>
+    <commons.bc.version>6.13.0</commons.bc.version>
     <commons.release.desc>(Java 8 or above)</commons.release.desc>
     <commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-bcel</commons.scmPubUrl>
     <commons.distSvnStagingUrl>scm:svn:https://dist.apache.org/repos/dist/dev/commons/${commons.componentid}</commons.distSvnStagingUrl>
     <!-- Configuration properties for the OSGi maven-bundle-plugin -->
     <commons.osgi.symbolicName>org.apache.${commons.componentid}</commons.osgi.symbolicName>
     <commons.osgi.export>org.apache.bcel.*;version=${project.version};-noimport:=true</commons.osgi.export>
-    <commons.osgi.import>*</commons.osgi.import>
-    <commons.osgi.dynamicImport />
-    <commons.osgi.private />
     <commons.jira.id>BCEL</commons.jira.id>
     <commons.jira.pid>12314220</commons.jira.pid>
-    <jna.version>5.16.0</jna.version>
+    <jna.version>5.19.1</jna.version>
     <japicmp.skip>false</japicmp.skip>
+    <ecj.version>3.46.100</ecj.version>
     <!-- JaCoCo on Java 8 is different from other versions. On JDK9+ there is a profile -->
     <!-- JaCoCo: Don't make code coverage worse than: -->
     <commons.jacoco.haltOnFailure>true</commons.jacoco.haltOnFailure>
@@ -89,7 +87,6 @@
     <url>https://github.com/apache/commons-bcel/actions</url>
   </ciManagement>
   <issueManagement>
-    <system>jira</system>
     <url>https://issues.apache.org/jira/browse/BCEL</url>
   </issueManagement>
   <scm>
@@ -123,17 +120,16 @@
         <groupId>org.apache.rat</groupId>
         <artifactId>apache-rat-plugin</artifactId>
         <configuration>
-          <excludes>
-            <exclude>src/test/resources/**</exclude>
-            <exclude>docs/*.bib</exclude>
-            <exclude>docs/*.mdl</exclude>
-            <exclude>docs/eps/*</exclude>
-            <exclude>**/*.eps</exclude>
-            <exclude>**/*.bnf</exclude>
-            <exclude>**/*.mini</exclude>
-            <exclude>TODO.JustIce</exclude>
-            <exclude>src/examples/Mini/MiniParser$JJCalls</exclude>
-          </excludes>
+          <inputExcludes>
+            <inputExclude>src/test/resources/**</inputExclude>
+            <inputExclude>docs/*.bib</inputExclude>
+            <inputExclude>docs/*.mdl</inputExclude>
+            <inputExclude>docs/eps/*</inputExclude>
+            <inputExclude>**/*.eps</inputExclude>
+            <inputExclude>**/*.bnf</inputExclude>
+            <inputExclude>**/*.mini</inputExclude>
+            <inputExclude>TODO.JustIce</inputExclude>
+          </inputExcludes>
         </configuration>
       </plugin>
       <plugin>
@@ -185,12 +181,14 @@
 			<PerformanceTest.report>false</PerformanceTest.report>
 		  </systemPropertyVariables>
           <includes>
+            <include>**/*Test.java</include>
             <include>**/*TestCase.java</include>
             <include>**/PerformanceTest.java</include>
           </includes>
           <excludes>
             <exclude>**/Abstract*</exclude>
             <!-- Takes rather a long time (especially rt.jar) ; only needs to be done occasionally -->
+            <exclude>**/JDKClassDumpTest.java</exclude>
             <exclude>**/JDKClassDumpTestCase.java</exclude>
           </excludes>
         </configuration>
@@ -305,17 +303,16 @@
         <artifactId>apache-rat-plugin</artifactId>
         <version>${commons.rat.version}</version>
         <configuration>
-          <excludes>
-            <exclude>src/test/resources/**</exclude>
-            <exclude>docs/*.bib</exclude>
-            <exclude>docs/*.mdl</exclude>
-            <exclude>docs/eps/*</exclude>
-            <exclude>**/*.eps</exclude>
-            <exclude>**/*.bnf</exclude>
-            <exclude>**/*.mini</exclude>
-            <exclude>TODO.JustIce</exclude>
-            <exclude>src/examples/Mini/MiniParser$JJCalls</exclude>
-          </excludes>
+          <inputExcludes>
+            <inputExclude>src/test/resources/**</inputExclude>
+            <inputExclude>docs/*.bib</inputExclude>
+            <inputExclude>docs/*.mdl</inputExclude>
+            <inputExclude>docs/eps/*</inputExclude>
+            <inputExclude>**/*.eps</inputExclude>
+            <inputExclude>**/*.bnf</inputExclude>
+            <inputExclude>**/*.mini</inputExclude>
+            <inputExclude>TODO.JustIce</inputExclude>
+          </inputExcludes>
         </configuration>
       </plugin>
       <plugin>
@@ -344,7 +341,6 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>${commons.mockito.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -362,13 +358,12 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>3.17.0</version>
+      <version>3.21.0</version>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
-      <version>2.18.0</version>
-      <scope>test</scope>
+      <version>2.22.0</version>
     </dependency>
     <dependency>
       <!-- BCEL-336 refers to this specific version.  -->
@@ -380,7 +375,7 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-exec</artifactId>
-      <version>1.4.0</version>
+      <version>1.6.0</version>
       <scope>test</scope>
     </dependency>
     <!-- START very old jars for Justice verifier -->
@@ -391,6 +386,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <!-- Test expects 1.5.3 -->
       <groupId>wsdl4j</groupId>
       <artifactId>wsdl4j</artifactId>
       <version>1.5.3</version>
@@ -401,13 +397,13 @@
       <!-- Eclipse compiler: useful to generate specific .class file patterns -->
       <groupId>org.eclipse.jdt</groupId>
       <artifactId>ecj</artifactId>
-      <version>3.26.0</version> <!-- last JDK8-compatible version -->
+      <version>${ecj.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-stdlib</artifactId>
-      <version>2.1.0</version>
+      <version>2.4.21</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -435,25 +431,24 @@
       <properties>
         <skipTests>true</skipTests>
         <benchmark>org.apache</benchmark>
-        <jmh.version>1.37</jmh.version>
       </properties>
       <dependencies>
         <dependency>
           <groupId>org.openjdk.jmh</groupId>
           <artifactId>jmh-core</artifactId>
-          <version>${jmh.version}</version>
+          <version>${commons.jmh.version}</version>
           <scope>test</scope>
         </dependency>
         <dependency>
           <groupId>org.openjdk.jmh</groupId>
           <artifactId>jmh-generator-annprocess</artifactId>
-          <version>${jmh.version}</version>
+          <version>${commons.jmh.version}</version>
           <scope>test</scope>
         </dependency>
         <dependency>
           <groupId>org.apache.commons</groupId>
           <artifactId>commons-collections4</artifactId>
-          <version>4.5.0-M3</version>
+          <version>4.6.0</version>
           <scope>test</scope>
         </dependency>
       </dependencies>
@@ -501,6 +496,37 @@
       </build>
     </profile>
     <profile>
+      <id>ecj-java-11-down</id>
+      <activation>
+        <jdk>(,12)</jdk>
+      </activation>
+      <properties>
+        <!-- Last ECJ version compatible with Java 11. -->
+        <ecj.version>3.33.0</ecj.version>
+      </properties>
+    </profile>
+    <!-- Keep this profile after ecj-java-11-down so its property takes precedence on Java 8 and below. -->
+    <profile>
+      <id>ecj-java-8-down</id>
+      <activation>
+        <jdk>(,1.9)</jdk>
+      </activation>
+      <properties>
+        <!-- Last ECJ version compatible with Java 8. -->
+        <ecj.version>3.26.0</ecj.version>
+      </properties>
+    </profile>
+    <profile>
+      <id>spdx-java-11</id>
+      <activation>
+	    <jdk>11</jdk>
+      </activation>
+      <properties>
+        <!-- spdx can require Java 17 depending on undocumented behavior which kicks in for us here on macOS (but not on Java 8 somehow). -->
+       <commons.spdx.version>0.5.5</commons.spdx.version>
+      </properties>
+    </profile>
+    <profile>
       <!-- Java 9 and up -->
       <id>java-9-up</id>
       <activation>
@@ -516,6 +542,16 @@
         <commons.jacoco.complexityRatio>0.58</commons.jacoco.complexityRatio>
       </properties>
     </profile>
+    <profile>
+      <id>java11-up</id>
+      <!-- Avoid Mockito failures on Java 21 and 25 -->
+      <activation>
+        <jdk>[11,)</jdk>
+      </activation>
+      <properties>
+        <commons.mockito.version>5.23.0</commons.mockito.version>
+      </properties>
+    </profile>
   </profiles>
   <developers>
     <developer>
@@ -528,7 +564,7 @@
       <id>tcurdt</id>
       <email>tcurdt at apache.org</email>
       <organization>ASF</organization>
-      <organizationUrl>http://www.apache.org/</organizationUrl>
+      <organizationUrl>https://www.apache.org/</organizationUrl>
       <timezone>+1</timezone>
     </developer>
     <developer>

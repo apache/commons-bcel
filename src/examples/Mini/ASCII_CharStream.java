@@ -47,7 +47,7 @@ public final class ASCII_CharStream {
     static private int inBuf;
 
     /**
-     * Method to adjust line and column numbers for the start of a token.<BR>
+     * Method to adjust line and column numbers for the start of a token.
      */
     static public void adjustBeginLineColumn(int newLine, final int newCol) {
         int start = tokenBegin;

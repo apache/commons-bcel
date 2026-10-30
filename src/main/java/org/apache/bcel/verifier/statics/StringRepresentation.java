@@ -61,6 +61,7 @@ import org.apache.bcel.classfile.NestMembers;
 import org.apache.bcel.classfile.Node;
 import org.apache.bcel.classfile.ParameterAnnotationEntry;
 import org.apache.bcel.classfile.ParameterAnnotations;
+import org.apache.bcel.classfile.PermittedSubclasses;
 import org.apache.bcel.classfile.Record;
 import org.apache.bcel.classfile.RecordComponentInfo;
 import org.apache.bcel.classfile.Signature;
@@ -68,20 +69,23 @@ import org.apache.bcel.classfile.SourceFile;
 import org.apache.bcel.classfile.StackMap;
 import org.apache.bcel.classfile.StackMapEntry;
 import org.apache.bcel.classfile.Synthetic;
+import org.apache.bcel.classfile.TypeAnnotations;
 import org.apache.bcel.classfile.Unknown;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
 
 /**
- * BCEL's Node classes (those from the classfile API that <B>accept()</B> Visitor instances) have <B>toString()</B>
+ * BCEL's Node classes (those from the classfile API that {@code accept()} Visitor instances) have {@code toString()}
  * methods that were not designed to be robust, this gap is closed by this class. When performing class file
- * verification, it may be useful to output which entity (for example a <B>Code</B> instance) is not satisfying the verifier's
- * constraints, but in this case it could be possible for the <B>toString()</B> method to throw a RuntimeException. A
+ * verification, it may be useful to output which entity (for example a {@code Code} instance) is not satisfying the verifier's
+ * constraints, but in this case it could be possible for the {@code toString()} method to throw a RuntimeException. A
  * (new StringRepresentation(Node n)).toString() never throws any exception. Note that this class also serves as a
  * placeholder for more sophisticated message handling in future versions of JustIce.
  */
 public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor {
+
     /** The string representation, created by a visitXXX() method, output by toString(). */
     private String tostring;
+
     /** The node we ask for its string representation. Not really needed; only for debug output. */
     private final Node n;
 
@@ -399,6 +403,16 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         tostring = toString(obj);
     }
 
+    /**
+     * Visits PermittedSubclasses attribute.
+     *
+     * @since 6.13.0
+     */
+    @Override
+    public void visitPermittedSubclasses(final PermittedSubclasses obj) {
+        tostring = toString(obj);
+    }
+
     @Override
     public void visitRecord(final Record obj) {
         tostring = toString(obj);
@@ -434,6 +448,16 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
 
     @Override
     public void visitSynthetic(final Synthetic obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * Visits RuntimeVisibleTypeAnnotations and RuntimeInvisibleTypeAnnotations attributes.
+     *
+     * @since 6.14.0
+     */
+    @Override
+    public void visitTypeAnnotations(final TypeAnnotations obj) {
         tostring = toString(obj);
     }
 

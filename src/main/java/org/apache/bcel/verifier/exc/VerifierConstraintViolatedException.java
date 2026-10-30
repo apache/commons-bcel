@@ -28,6 +28,7 @@ public abstract class VerifierConstraintViolatedException extends RuntimeExcepti
     // String name_of_offending_class;
 
     private static final long serialVersionUID = 2946136970490179465L;
+
     /** The specified error message. */
     private String detailMessage;
 
@@ -57,6 +58,9 @@ public abstract class VerifierConstraintViolatedException extends RuntimeExcepti
      * Extends the error message with a string before ("pre") and after ("post") the 'old' error message. All of these three
      * strings are allowed to be null, and null is always replaced by the empty string (""). In particular, after invoking
      * this method, the error message of this object can no longer be null.
+     *
+     * @param pre string to prepend.
+     * @param post string to append.
      */
     public void extendMessage(String pre, String post) {
         if (pre == null) {
@@ -72,9 +76,9 @@ public abstract class VerifierConstraintViolatedException extends RuntimeExcepti
     }
 
     /**
-     * Returns the error message string of this VerifierConstraintViolatedException object.
+     * Gets the error message string of this VerifierConstraintViolatedException object.
      *
-     * @return the error message string of this VerifierConstraintViolatedException.
+     * @return The error message string of this VerifierConstraintViolatedException.
      */
     @Override
     public String getMessage() {

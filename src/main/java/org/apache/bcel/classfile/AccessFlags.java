@@ -21,7 +21,7 @@ package org.apache.bcel.classfile;
 import org.apache.bcel.Const;
 
 /**
- * Super class for all objects that have modifiers like private, final, ... I.e. classes, fields, and methods.
+ * Superclass for objects that have modifiers such as private and final, including classes, fields, and methods.
  */
 public abstract class AccessFlags {
 
@@ -101,6 +101,7 @@ public abstract class AccessFlags {
     public final void isAnnotation(final boolean flag) {
         setFlag(Const.ACC_ANNOTATION, flag);
     }
+
     /**
      * Tests whether the enum bit is on.
      *
@@ -302,14 +303,14 @@ public abstract class AccessFlags {
     /**
      * Tests whether the transient bit is on.
      *
-     * @return whether the varargs bit is on.
+     * @return whether the transient bit is on.
      */
     public final boolean isTransient() {
         return test(Const.ACC_TRANSIENT);
     }
 
     /**
-     * Sets the varargs bit.
+     * Sets the transient bit.
      *
      * @param flag The new value.
      */
@@ -384,7 +385,7 @@ public abstract class AccessFlags {
     /**
      * Tests whether the bit is on.
      *
-     * @param test the bit to test.
+     * @param test The bit to test.
      * @return whether the bit is on.
      */
     private boolean test(final short test) {

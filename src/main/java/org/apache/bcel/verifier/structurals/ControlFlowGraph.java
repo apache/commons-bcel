@@ -104,7 +104,7 @@ public class ControlFlowGraph {
                 final Subroutine s = subroutines.subroutineOf(getInstruction());
                 if (s == null) { // return empty;
                     // RET in dead code. "empty" would be the correct answer, but we know something about the surrounding project...
-                    throw new AssertionViolatedException("Asking for successors of a RET in dead code?!");
+                    throw new AssertionViolatedException("Asking for successors of a RET in dead code?");
                 }
 
 //TODO: remove. Only JustIce must not use it, but foreign users of the ControlFlowGraph
@@ -161,7 +161,7 @@ public class ControlFlowGraph {
          * calculates the "outgoing" frame situation. Returns: True iff the "incoming" frame situation changed after merging
          * with "inFrame". The execPreds ArrayList must contain the InstructionContext objects executed so far in the correct
          * order. This is just one execution path [out of many]. This is needed to correctly "merge" in the special case of a
-         * RET's successor. <B>The InstConstraintVisitor and ExecutionVisitor instances must be set up correctly.</B>
+         * RET's successor. <strong>The InstConstraintVisitor and ExecutionVisitor instances must be set up correctly.</strong>
          *
          * @return true - if and only if the "outgoing" frame situation changed from the one before execute()ing.
          */
@@ -227,7 +227,7 @@ public class ControlFlowGraph {
         }
 
         /**
-         * Returns the exception handlers of this instruction.
+         * Gets the exception handlers of this instruction.
          */
         @Override
         public ExceptionHandler[] getExceptionHandlers() {
@@ -235,7 +235,7 @@ public class ControlFlowGraph {
         }
 
         /**
-         * Returns the control flow execution chain. This is built while execute(Frame, ArrayList)-ing the code represented by
+         * Gets the control flow execution chain. This is built while execute(Frame, ArrayList)-ing the code represented by
          * the surrounding ControlFlowGraph.
          */
         private String getExecutionChain() {
@@ -262,7 +262,7 @@ public class ControlFlowGraph {
         }
 
         /**
-         * Returns a clone of the "outgoing" frame situation with respect to the given ExecutionChain.
+         * Gets a clone of the "outgoing" frame situation with respect to the given ExecutionChain.
          */
         @Override
         public Frame getOutFrame(final ArrayList<InstructionContext> execChain) {
@@ -288,7 +288,7 @@ public class ControlFlowGraph {
 
         /**
          * Returns the InstructionContextImpl with an JSR/JSR_W that was last in the ExecutionChain, without a corresponding
-         * RET, i.e. we were called by this one. Returns null if we were called from the top level.
+         * RET, for example we were called by this one. Returns null if we were called from the top level.
          */
         private InstructionContextImpl lastExecutionJSR() {
 
@@ -364,7 +364,7 @@ public class ControlFlowGraph {
     /**
      * A Control Flow Graph; with additional JustIce checks
      *
-     * @param methodGen the method generator instance
+     * @param methodGen The method generator instance.
      */
     public ControlFlowGraph(final MethodGen methodGen) {
         this(methodGen, true);
@@ -373,8 +373,8 @@ public class ControlFlowGraph {
     /**
      * A Control Flow Graph.
      *
-     * @param methodGen the method generator instance
-     * @param enableJustIceCheck if true, additional JustIce checks are performed
+     * @param methodGen The method generator instance.
+     * @param enableJustIceCheck if true, additional JustIce checks are performed.
      * @since 6.0
      */
     public ControlFlowGraph(final MethodGen methodGen, final boolean enableJustIceCheck) {
@@ -391,17 +391,23 @@ public class ControlFlowGraph {
 
     /**
      * Returns the InstructionContext of a given instruction.
+     *
+     * @param inst The instruction handle.
+     * @return The InstructionContext of the given instruction.
      */
     public InstructionContext contextOf(final InstructionHandle inst) {
         final InstructionContext ic = instructionContexts.get(inst);
         if (ic == null) {
-            throw new AssertionViolatedException("InstructionContext requested for an InstructionHandle that's not known!");
+            throw new AssertionViolatedException("InstructionContext requested for an InstructionHandle that's not known.");
         }
         return ic;
     }
 
     /**
      * Returns the InstructionContext[] of a given InstructionHandle[], in a naturally ordered manner.
+     *
+     * @param insts The instruction handles.
+     * @return The InstructionContext array of the given instruction handles.
      */
     public InstructionContext[] contextsOf(final InstructionHandle[] insts) {
         final InstructionContext[] ret = new InstructionContext[insts.length];
@@ -410,8 +416,10 @@ public class ControlFlowGraph {
     }
 
     /**
-     * Returns an InstructionContext[] with all the InstructionContext instances for the method whose control flow is
-     * represented by this ControlFlowGraph <B>(NOT ORDERED!)</B>.
+     * Gets an InstructionContext[] with all the InstructionContext instances for the method whose control flow is
+     * represented by this ControlFlowGraph <strong>(NOT ORDERED!)</strong>.
+     *
+     * @return array of InstructionContext instances.
      */
     public InstructionContext[] getInstructionContexts() {
         final InstructionContext[] ret = new InstructionContext[instructionContexts.size()];
@@ -419,8 +427,10 @@ public class ControlFlowGraph {
     }
 
     /**
-     * Returns true, if and only if the said instruction is not reachable; that means, if it is not part of this
-     * ControlFlowGraph.
+     * Tests whether the instruction is unreachable, that is, whether it is absent from this ControlFlowGraph.
+     *
+     * @param i The instruction handle.
+     * @return true if the instruction is not reachable, false otherwise.
      */
     public boolean isDead(final InstructionHandle i) {
         return subroutines.subroutineOf(i) == null;

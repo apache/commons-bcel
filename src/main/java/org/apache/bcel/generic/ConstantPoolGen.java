@@ -59,7 +59,22 @@ public class ConstantPoolGen {
 
     private static final String FIELDREF_DELIM = "&";
 
-    private static final String NAT_DELIM = "%"; // Name and Type
+    /**
+     * Builds a lookup key that stays collision-free even when the parts contain the ASCII characters used as
+     * delimiters above. Class, member and signature names read from a class file may legally contain those characters
+     * (the JVMS only forbids {@code . ; [ /} and, for members, {@code < >}), so each part is prefixed with its length
+     * to keep distinct triples distinct.
+     *
+     * @param parts The key parts.
+     * @return A collision-free key.
+     */
+    private static String toKey(final String... parts) {
+        final StringBuilder buf = new StringBuilder();
+        for (final String part : parts) {
+            buf.append(part.length()).append(':').append(part);
+        }
+        return buf.toString();
+    }
 
     /**
      * @deprecated (since 6.0) will be made private; do not access directly, use getter/setter
@@ -100,11 +115,9 @@ public class ConstantPoolGen {
     /**
      * Constructs a new instance with the given array of constants.
      *
-     * @param cs array of given constants, new ones will be appended
+     * @param cs array of given constants, new ones will be appended.
      */
     public ConstantPoolGen(final Constant[] cs) {
-        final StringBuilder sb = new StringBuilder(DEFAULT_BUFFER_SIZE);
-
         size = Math.min(Math.max(DEFAULT_BUFFER_SIZE, cs.length + 64), Const.MAX_CP_ENTRIES + 1);
         constants = Arrays.copyOf(cs, size);
 
@@ -132,13 +145,7 @@ public class ConstantPoolGen {
                 final ConstantNameAndType n = (ConstantNameAndType) c;
                 final ConstantUtf8 u8NameIdx = (ConstantUtf8) constants[n.getNameIndex()];
                 final ConstantUtf8 u8SigIdx = (ConstantUtf8) constants[n.getSignatureIndex()];
-
-                sb.append(u8NameIdx.getBytes());
-                sb.append(NAT_DELIM);
-                sb.append(u8SigIdx.getBytes());
-                final String key = sb.toString();
-                sb.delete(0, sb.length());
-
+                final String key = toKey(u8NameIdx.getBytes(), u8SigIdx.getBytes());
                 if (!natTable.containsKey(key)) {
                     natTable.put(key, Integer.valueOf(i));
                 }
@@ -169,22 +176,14 @@ public class ConstantPoolGen {
                 u8 = (ConstantUtf8) constants[n.getSignatureIndex()];
                 final String signature = u8.getBytes();
 
-                // Since name cannot begin with digit, we can use METHODREF_DELIM without fear of duplicates
+                // Distinguishes the three kinds of reference that share cpTable.
                 String delim = METHODREF_DELIM;
                 if (c instanceof ConstantInterfaceMethodref) {
                     delim = IMETHODREF_DELIM;
                 } else if (c instanceof ConstantFieldref) {
                     delim = FIELDREF_DELIM;
                 }
-
-                sb.append(className);
-                sb.append(delim);
-                sb.append(methodName);
-                sb.append(delim);
-                sb.append(signature);
-                final String key = sb.toString();
-                sb.delete(0, sb.length());
-
+                final String key = toKey(delim, className, methodName, signature);
                 if (!cpTable.containsKey(key)) {
                     cpTable.put(key, Integer.valueOf(i));
                 }
@@ -217,7 +216,7 @@ public class ConstantPoolGen {
     /**
      * Constructs a new instance with the given constant pool.
      *
-     * @param cp the constant pool.
+     * @param cp The constant pool.
      */
     public ConstantPoolGen(final ConstantPool cp) {
         this(cp.getConstantPool());
@@ -226,8 +225,8 @@ public class ConstantPoolGen {
     /**
      * Add a reference to an array class (for example, String[][]) as needed by MULTIANEWARRAY instruction, for example, to the ConstantPool.
      *
-     * @param type type of array class
-     * @return index of entry
+     * @param type type of array class.
+     * @return index of entry.
      */
     public int addArrayClass(final ArrayType type) {
         return addClass_(type.getSignature());
@@ -236,8 +235,8 @@ public class ConstantPoolGen {
     /**
      * Add a new Class reference to the ConstantPool for a given type.
      *
-     * @param type Class to add
-     * @return index of entry
+     * @param type Class to add.
+     * @return index of entry.
      */
     public int addClass(final ObjectType type) {
         return addClass(type.getClassName());
@@ -246,8 +245,8 @@ public class ConstantPoolGen {
     /**
      * Add a new Class reference to the ConstantPool, if it is not already in there.
      *
-     * @param str Class to add
-     * @return index of entry
+     * @param str Class to add.
+     * @return index of entry.
      */
     public int addClass(final String str) {
         return addClass_(Utility.packageToPath(str));
@@ -270,7 +269,7 @@ public class ConstantPoolGen {
      *
      * @param constant The constant to add.
      * @param cpGen Source pool.
-     * @return index of entry
+     * @return index of entry.
      */
     public int addConstant(final Constant constant, final ConstantPoolGen cpGen) {
         final Constant[] constants = cpGen.getConstantPool().getConstantPool();
@@ -332,8 +331,8 @@ public class ConstantPoolGen {
     /**
      * Add a new double constant to the ConstantPool, if it is not already in there.
      *
-     * @param n Double number to add
-     * @return index of entry
+     * @param n Double number to add.
+     * @return index of entry.
      */
     public int addDouble(final double n) {
         int ret;
@@ -350,10 +349,10 @@ public class ConstantPoolGen {
     /**
      * Add a new Fieldref constant to the ConstantPool, if it is not already in there.
      *
-     * @param className class name string to add
-     * @param fieldName field name string to add
-     * @param signature signature string to add
-     * @return index of entry
+     * @param className class name string to add.
+     * @param fieldName field name string to add.
+     * @param signature signature string to add.
+     * @return index of entry.
      */
     public int addFieldref(final String className, final String fieldName, final String signature) {
         final int cpRet;
@@ -365,14 +364,14 @@ public class ConstantPoolGen {
         final int nameAndTypeIndex = addNameAndType(fieldName, signature);
         final int ret = index;
         constants[index++] = new ConstantFieldref(classIndex, nameAndTypeIndex);
-        return computeIfAbsent(cpTable, className + FIELDREF_DELIM + fieldName + FIELDREF_DELIM + signature, ret);
+        return computeIfAbsent(cpTable, toKey(FIELDREF_DELIM, className, fieldName, signature), ret);
     }
 
     /**
      * Add a new Float constant to the ConstantPool, if it is not already in there.
      *
-     * @param n Float number to add
-     * @return index of entry
+     * @param n Float number to add.
+     * @return index of entry.
      */
     public int addFloat(final float n) {
         int ret;
@@ -388,8 +387,8 @@ public class ConstantPoolGen {
     /**
      * Add a new Integer constant to the ConstantPool, if it is not already in there.
      *
-     * @param n integer number to add
-     * @return index of entry
+     * @param n integer number to add.
+     * @return index of entry.
      */
     public int addInteger(final int n) {
         int ret;
@@ -402,6 +401,12 @@ public class ConstantPoolGen {
         return ret;
     }
 
+    /**
+     * Adds a new InterfaceMethodref constant to the ConstantPool.
+     *
+     * @param method The method to add.
+     * @return index of entry.
+     */
     public int addInterfaceMethodref(final MethodGen method) {
         return addInterfaceMethodref(method.getClassName(), method.getName(), method.getSignature());
     }
@@ -409,10 +414,10 @@ public class ConstantPoolGen {
     /**
      * Add a new InterfaceMethodref constant to the ConstantPool, if it is not already in there.
      *
-     * @param className class name string to add
-     * @param methodName method name string to add
-     * @param signature signature string to add
-     * @return index of entry
+     * @param className class name string to add.
+     * @param methodName method name string to add.
+     * @param signature signature string to add.
+     * @return index of entry.
      */
     public int addInterfaceMethodref(final String className, final String methodName, final String signature) {
         final int cpRet;
@@ -424,14 +429,14 @@ public class ConstantPoolGen {
         final int nameAndTypeIndex = addNameAndType(methodName, signature);
         final int ret = index;
         constants[index++] = new ConstantInterfaceMethodref(classIndex, nameAndTypeIndex);
-        return computeIfAbsent(cpTable, className + IMETHODREF_DELIM + methodName + IMETHODREF_DELIM + signature, ret);
+        return computeIfAbsent(cpTable, toKey(IMETHODREF_DELIM, className, methodName, signature), ret);
     }
 
     /**
      * Add a new long constant to the ConstantPool, if it is not already in there.
      *
-     * @param n Long number to add
-     * @return index of entry
+     * @param n Long number to add.
+     * @return index of entry.
      */
     public int addLong(final long n) {
         int ret;
@@ -444,6 +449,13 @@ public class ConstantPoolGen {
         index += 2; // Wastes one entry according to spec
         return ret;
     }
+
+    /**
+     * Adds a new Methodref constant to the ConstantPool.
+     *
+     * @param method The method to add.
+     * @return index of entry.
+     */
     public int addMethodref(final MethodGen method) {
         return addMethodref(method.getClassName(), method.getName(), method.getSignature());
     }
@@ -451,10 +463,10 @@ public class ConstantPoolGen {
     /**
      * Add a new Methodref constant to the ConstantPool, if it is not already in there.
      *
-     * @param className class name string to add
-     * @param methodName method name string to add
-     * @param signature method signature string to add
-     * @return index of entry
+     * @param className class name string to add.
+     * @param methodName method name string to add.
+     * @param signature method signature string to add.
+     * @return index of entry.
      */
     public int addMethodref(final String className, final String methodName, final String signature) {
         final int cpRet;
@@ -466,15 +478,15 @@ public class ConstantPoolGen {
         final int classIndex = addClass(className);
         final int ret = index;
         constants[index++] = new ConstantMethodref(classIndex, nameAndTypeIndex);
-        return computeIfAbsent(cpTable, className + METHODREF_DELIM + methodName + METHODREF_DELIM + signature, ret);
+        return computeIfAbsent(cpTable, toKey(METHODREF_DELIM, className, methodName, signature), ret);
     }
 
     /**
      * Add a new NameAndType constant to the ConstantPool if it is not already in there.
      *
-     * @param name Name string to add
-     * @param signature signature string to add
-     * @return index of entry
+     * @param name Name string to add.
+     * @param signature signature string to add.
+     * @return index of entry.
      */
     public int addNameAndType(final String name, final String signature) {
         int ret;
@@ -486,14 +498,14 @@ public class ConstantPoolGen {
         final int signatureIndex = addUtf8(signature);
         ret = index;
         constants[index++] = new ConstantNameAndType(nameIndex, signatureIndex);
-        return computeIfAbsent(natTable, name + NAT_DELIM + signature, ret);
+        return computeIfAbsent(natTable, toKey(name, signature), ret);
     }
 
     /**
      * Add a new String constant to the ConstantPool, if it is not already in there.
      *
-     * @param str String to add
-     * @return index of entry
+     * @param str String to add.
+     * @return index of entry.
      */
     public int addString(final String str) {
         int ret;
@@ -511,8 +523,8 @@ public class ConstantPoolGen {
     /**
      * Add a new Utf8 constant to the ConstantPool, if it is not already in there.
      *
-     * @param n Utf8 string to add
-     * @return index of entry
+     * @param n Utf8 string to add.
+     * @return index of entry.
      */
     public int addUtf8(final String n) {
         int ret;
@@ -551,22 +563,28 @@ public class ConstantPoolGen {
     }
 
     /**
-     * @param i index in constant pool
-     * @return constant pool entry at index i
+     * Gets a constant pool entry at the specified index.
+     *
+     * @param i index in constant pool.
+     * @return constant pool entry at index i.
      */
     public Constant getConstant(final int i) {
         return constants[i];
     }
 
     /**
-     * @return intermediate constant pool
+     * Gets the intermediate constant pool.
+     *
+     * @return intermediate constant pool.
      */
     public ConstantPool getConstantPool() {
         return new ConstantPool(constants);
     }
 
     /**
-     * @return constant pool with proper length
+     * Gets the constant pool with proper length.
+     *
+     * @return constant pool with proper length.
      */
     public ConstantPool getFinalConstantPool() {
         return new ConstantPool(Arrays.copyOf(constants, index));
@@ -577,7 +595,9 @@ public class ConstantPoolGen {
     }
 
     /**
-     * @return current size of constant pool
+     * Gets the current size of constant pool.
+     *
+     * @return current size of constant pool.
      */
     public int getSize() {
         return index;
@@ -586,8 +606,8 @@ public class ConstantPoolGen {
     /**
      * Look for ConstantClass in ConstantPool named 'str'.
      *
-     * @param str String to search for
-     * @return index on success, -1 otherwise
+     * @param str String to search for.
+     * @return index on success, -1 otherwise.
      */
     public int lookupClass(final String str) {
         return getIndex(classTable, Utility.packageToPath(str));
@@ -596,8 +616,8 @@ public class ConstantPoolGen {
     /**
      * Look for ConstantDouble in ConstantPool.
      *
-     * @param n Double number to look for
-     * @return index on success, -1 otherwise
+     * @param n Double number to look for.
+     * @return index on success, -1 otherwise.
      */
     public int lookupDouble(final double n) {
         final long bits = Double.doubleToLongBits(n);
@@ -615,20 +635,20 @@ public class ConstantPoolGen {
     /**
      * Look for ConstantFieldref in ConstantPool.
      *
-     * @param className Where to find method
-     * @param fieldName Guess what
-     * @param signature return and argument types
-     * @return index on success, -1 otherwise
+     * @param className Where to find method.
+     * @param fieldName Guess what.
+     * @param signature return and argument types.
+     * @return index on success, -1 otherwise.
      */
     public int lookupFieldref(final String className, final String fieldName, final String signature) {
-        return getIndex(cpTable, className + FIELDREF_DELIM + fieldName + FIELDREF_DELIM + signature);
+        return getIndex(cpTable, toKey(FIELDREF_DELIM, className, fieldName, signature));
     }
 
     /**
      * Look for ConstantFloat in ConstantPool.
      *
-     * @param n Float number to look for
-     * @return index on success, -1 otherwise
+     * @param n Float number to look for.
+     * @return index on success, -1 otherwise.
      */
     public int lookupFloat(final float n) {
         final int bits = Float.floatToIntBits(n);
@@ -646,8 +666,8 @@ public class ConstantPoolGen {
     /**
      * Look for ConstantInteger in ConstantPool.
      *
-     * @param n integer number to look for
-     * @return index on success, -1 otherwise
+     * @param n integer number to look for.
+     * @return index on success, -1 otherwise.
      */
     public int lookupInteger(final int n) {
         for (int i = 1; i < index; i++) {
@@ -661,6 +681,12 @@ public class ConstantPoolGen {
         return -1;
     }
 
+    /**
+     * Looks up an InterfaceMethodref in the ConstantPool.
+     *
+     * @param method The method to look for.
+     * @return index on success, -1 otherwise.
+     */
     public int lookupInterfaceMethodref(final MethodGen method) {
         return lookupInterfaceMethodref(method.getClassName(), method.getName(), method.getSignature());
     }
@@ -668,20 +694,20 @@ public class ConstantPoolGen {
     /**
      * Look for ConstantInterfaceMethodref in ConstantPool.
      *
-     * @param className Where to find method
-     * @param methodName Guess what
-     * @param signature return and argument types
-     * @return index on success, -1 otherwise
+     * @param className Where to find method.
+     * @param methodName Guess what.
+     * @param signature return and argument types.
+     * @return index on success, -1 otherwise.
      */
     public int lookupInterfaceMethodref(final String className, final String methodName, final String signature) {
-        return getIndex(cpTable, className + IMETHODREF_DELIM + methodName + IMETHODREF_DELIM + signature);
+        return getIndex(cpTable, toKey(IMETHODREF_DELIM, className, methodName, signature));
     }
 
     /**
      * Look for ConstantLong in ConstantPool.
      *
-     * @param n Long number to look for
-     * @return index on success, -1 otherwise
+     * @param n Long number to look for.
+     * @return index on success, -1 otherwise.
      */
     public int lookupLong(final long n) {
         for (int i = 1; i < index; i++) {
@@ -695,6 +721,12 @@ public class ConstantPoolGen {
         return -1;
     }
 
+    /**
+     * Looks up a Methodref in the ConstantPool.
+     *
+     * @param method The method to look for.
+     * @return index on success, -1 otherwise.
+     */
     public int lookupMethodref(final MethodGen method) {
         return lookupMethodref(method.getClassName(), method.getName(), method.getSignature());
     }
@@ -702,31 +734,31 @@ public class ConstantPoolGen {
     /**
      * Look for ConstantMethodref in ConstantPool.
      *
-     * @param className Where to find method
-     * @param methodName Guess what
-     * @param signature return and argument types
-     * @return index on success, -1 otherwise
+     * @param className Where to find method.
+     * @param methodName Guess what.
+     * @param signature return and argument types.
+     * @return index on success, -1 otherwise.
      */
     public int lookupMethodref(final String className, final String methodName, final String signature) {
-        return getIndex(cpTable, className + METHODREF_DELIM + methodName + METHODREF_DELIM + signature);
+        return getIndex(cpTable, toKey(METHODREF_DELIM, className, methodName, signature));
     }
 
     /**
      * Look for ConstantNameAndType in ConstantPool.
      *
-     * @param name of variable/method
-     * @param signature of variable/method
-     * @return index on success, -1 otherwise
+     * @param name of variable/method.
+     * @param signature of variable/method.
+     * @return index on success, -1 otherwise.
      */
     public int lookupNameAndType(final String name, final String signature) {
-        return getIndex(natTable, name + NAT_DELIM + signature);
+        return getIndex(natTable, toKey(name, signature));
     }
 
     /**
      * Look for ConstantString in ConstantPool containing String 'str'.
      *
-     * @param str String to search for
-     * @return index on success, -1 otherwise
+     * @param str String to search for.
+     * @return index on success, -1 otherwise.
      */
     public int lookupString(final String str) {
         return getIndex(stringTable, str);
@@ -735,18 +767,20 @@ public class ConstantPoolGen {
     /**
      * Look for ConstantUtf8 in ConstantPool.
      *
-     * @param n Utf8 string to look for
-     * @return index on success, -1 otherwise
+     * @param n Utf8 string to look for.
+     * @return index on success, -1 otherwise.
      */
     public int lookupUtf8(final String n) {
         return getIndex(utf8Table, n);
     }
 
     /**
+     * Sets the constant pool entry at the given index.
+     *
      * Use with care!
      *
-     * @param i index in constant pool
-     * @param c new constant pool entry at index i
+     * @param i index in constant pool.
+     * @param c new constant pool entry at index i.
      */
     public void setConstant(final int i, final Constant c) {
         constants[i] = c;

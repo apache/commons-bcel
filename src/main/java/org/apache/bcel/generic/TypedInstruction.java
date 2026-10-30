@@ -23,5 +23,11 @@ package org.apache.bcel.generic;
  */
 public interface TypedInstruction {
 
+    /**
+     * Gets the type associated with this instruction.
+     *
+     * @param cpg The constant pool generator.
+     * @return The type associated with this instruction.
+     */
     Type getType(ConstantPoolGen cpg);
 }

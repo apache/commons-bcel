@@ -97,7 +97,7 @@ public class JavaHome {
     /**
      * Used from {@code @MethodSource} for tests.
      *
-     * @return a stream of JarFile.
+     * @return A stream of JarFile.
      */
     public static Stream<JarEntry> streamJarEntry() {
         return streamJavaHome().flatMap(JavaHome::streamJarEntryByExt);
@@ -106,7 +106,7 @@ public class JavaHome {
     /**
      * Used from {@code @MethodSource} for tests.
      *
-     * @return a stream of JarFile.
+     * @return A stream of JarFile.
      */
     public static Stream<JarEntry> streamJarEntryClass() {
         return streamJavaHome().flatMap(JavaHome::streamJarEntryByExtClass);
@@ -115,7 +115,7 @@ public class JavaHome {
     /**
      * Used from {@code @MethodSource} for tests.
      *
-     * @return a stream of JarFile.
+     * @return A stream of JarFile.
      */
     public static Stream<String> streamJarEntryClassName() {
         return streamJavaHome().flatMap(JavaHome::streamJarEntryByExtClassName);
@@ -124,7 +124,7 @@ public class JavaHome {
     /**
      * Used from {@code @MethodSource} for tests.
      *
-     * @return a stream of JarFile.
+     * @return A stream of JarFile.
      */
     public static Stream<JarFile> streamJarFile() {
         return streamJavaHome().flatMap(JavaHome::streamJarFileByExt);
@@ -133,7 +133,7 @@ public class JavaHome {
     /**
      * Used from {@code @MethodSource} for tests.
      *
-     * @return a stream of Java jar paths.
+     * @return A stream of Java jar paths.
      */
     public static Stream<Path> streamJarPath() {
         return streamJavaHome().flatMap(JavaHome::streamJarPathByExt);
@@ -142,7 +142,7 @@ public class JavaHome {
     /**
      * Used from {@code @MethodSource} for tests.
      *
-     * @return a stream of Java homes.
+     * @return A stream of Java homes.
      */
     public static Stream<JavaHome> streamJavaHome() {
         return streamJavaHomeString().map(JavaHome::from);
@@ -151,7 +151,7 @@ public class JavaHome {
     /**
      * Used from {@code @MethodSource} for tests.
      *
-     * @return a stream of Java homes.
+     * @return A stream of Java homes.
      */
     public static Stream<String> streamJavaHomeString() {
         final Stream<String> streamW = SystemUtils.IS_OS_WINDOWS ? streamWindowsStrings() : Stream.empty();
@@ -163,7 +163,7 @@ public class JavaHome {
     /**
      * Used from {@code @MethodSource} for tests.
      *
-     * @return a stream of Java jar paths.
+     * @return A stream of Java jar paths.
      */
     public static Stream<ModularRuntimeImage> streamModularRuntimeImage() {
         return streamJavaHome().map(JavaHome::getModularRuntimeImage);
@@ -172,7 +172,7 @@ public class JavaHome {
     /**
      * Used from {@code @MethodSource} for tests.
      *
-     * @return a stream of Java jar paths.
+     * @return A stream of Java jar paths.
      */
     public static Stream<Path> streamModulePath() {
         return streamJavaHome().flatMap(JavaHome::streamModuleByExt);

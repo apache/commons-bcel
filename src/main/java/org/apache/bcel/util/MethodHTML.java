@@ -52,13 +52,13 @@ final class MethodHTML {
             printWriter.print(charset.name());
             printWriter.println("\"></head>");
             printWriter.println("<BODY BGCOLOR=\"#C0C0C0\"><TABLE BORDER=0>");
-            printWriter.println("<TR><TH ALIGN=LEFT>Access&nbsp;flags</TH><TH ALIGN=LEFT>Type</TH>" + "<TH ALIGN=LEFT>Field&nbsp;name</TH></TR>");
+            printWriter.println("<TR><TH ALIGN=LEFT>Access&nbsp;flags</TH><TH ALIGN=LEFT>Type</TH><TH ALIGN=LEFT>Field&nbsp;name</TH></TR>");
             for (final Field field : fields) {
                 writeField(field);
             }
             printWriter.println("</TABLE>");
             printWriter.println("<TABLE BORDER=0><TR><TH ALIGN=LEFT>Access&nbsp;flags</TH>"
-                + "<TH ALIGN=LEFT>Return&nbsp;type</TH><TH ALIGN=LEFT>Method&nbsp;name</TH>" + "<TH ALIGN=LEFT>Arguments</TH></TR>");
+                + "<TH ALIGN=LEFT>Return&nbsp;type</TH><TH ALIGN=LEFT>Method&nbsp;name</TH><TH ALIGN=LEFT>Arguments</TH></TR>");
             for (int i = 0; i < methods.length; i++) {
                 writeMethod(methods[i], i);
             }
@@ -69,7 +69,7 @@ final class MethodHTML {
     /**
      * Print field of class.
      *
-     * @param field field to print
+     * @param field field to print.
      */
     private void writeField(final Field field) {
         final String type = Utility.signatureToString(field.getSignature());
@@ -78,7 +78,7 @@ final class MethodHTML {
         final Attribute[] attributes;
         access = Utility.replace(access, " ", "&nbsp;");
         printWriter.print("<TR><TD><FONT COLOR=\"#FF0000\">" + access + "</FONT></TD>\n<TD>" + Class2HTML.referenceType(type) + "</TD><TD><A NAME=\"field"
-            + name + "\">" + name + "</A></TD>");
+            + Class2HTML.toHTML(name) + "\">" + Class2HTML.toHTML(name) + "</A></TD>");
         attributes = field.getAttributes();
         // Write them to the Attributes.html file with anchor "<name>[<i>]"
         for (int i = 0; i < attributes.length; i++) {
@@ -88,7 +88,8 @@ final class MethodHTML {
             if (attributes[i].getTag() == Const.ATTR_CONSTANT_VALUE) { // Default value
                 final String str = attributes[i].toString();
                 // Reference attribute in _attributes.html
-                printWriter.print("<TD>= <A HREF=\"" + className + "_attributes.html#" + name + "@" + i + "\" TARGET=\"Attributes\">" + str + "</TD>\n");
+                printWriter.print("<TD>= <A HREF=\"" + className + "_attributes.html#" + Class2HTML.toHTML(name) + "@" + i + "\" TARGET=\"Attributes\">"
+                    + Class2HTML.toHTML(str) + "</TD>\n");
                 break;
             }
         }
@@ -114,7 +115,7 @@ final class MethodHTML {
         access = Utility.replace(access, " ", "&nbsp;");
         final String htmlName = Class2HTML.toHTML(name);
         printWriter.print("<TR VALIGN=TOP><TD><FONT COLOR=\"#FF0000\"><A NAME=method" + methodNumber + ">" + access + "</A></FONT></TD>");
-        printWriter.print("<TD>" + Class2HTML.referenceType(type) + "</TD><TD>" + "<A HREF=" + className + "_code.html#method" + methodNumber + " TARGET=Code>"
+        printWriter.print("<TD>" + Class2HTML.referenceType(type) + "</TD><TD><A HREF=\"" + className + "_code.html#method" + methodNumber + "\" TARGET=Code>"
             + htmlName + "</A></TD>\n<TD>(");
         for (int i = 0; i < args.length; i++) {
             printWriter.print(Class2HTML.referenceType(args[i]));

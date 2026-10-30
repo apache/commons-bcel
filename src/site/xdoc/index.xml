@@ -36,7 +36,7 @@
       </p>
       <p>
         Such objects can be read from an existing file, be transformed
-        by a program (e.g. a class loader at run-time) and written to a file again.
+        by a program (for example a class loader at run-time) and written to a file again.
         An even more interesting application is the creation of classes from scratch
         at run-time. The Byte Code Engineering Library (BCEL) may be also useful
         if you want to learn about the Java Virtual Machine (JVM) and the format of
@@ -66,7 +66,9 @@
       </p>
     </section>
     <section name="Release Information">
-      <p>The latest stable release of BCEL is here, you may: </p>
+      <p>
+        For the latest stable release of BCEL, you can:
+      </p>
       <ul>
         <li><a href="https://commons.apache.org/proper/commons-bcel/download_bcel.cgi">Download</a></li>
 	    <li>Read the <a href="https://www.apache.org/dist/commons/bcel/RELEASE-NOTES.txt">release notes</a></li>
@@ -79,10 +81,17 @@
     </section>
     <section name="Getting Involved">
       <p>
-        The <a href="mail-lists.html">commons developer mailing list</a> is the main channel of communication for contributors. Please remember that the lists are shared between all commons components, so prefix your email by [bcel]. </p>
-      <p>You can also peruse <a href="issue-tracking.html">JIRA</a>.</p>
-      <p>Alternatively you can go through the <em>Needs Work</em> tags in the <a href="taglist.html">TagList report</a>.</p>
-      <p>If you'd like to offer up pull requests via GitHub rather than applying patches to JIRA, we have a <a href="https://github.com/apache/commons-bcel/">GitHub mirror</a>. </p>
+        The <a href="mail-lists.html">commons developer mailing list</a> is the main channel of communication for contributors. Please remember that the lists are shared between all commons components, so prefix your email subject with [bcel].
+      </p>
+      <p>
+        You can also peruse <a href="issue-tracking.html">JIRA</a>.
+      </p>
+      <p>
+        Alternatively, you can go through the <em>Needs Work</em> tags in the <a href="taglist.html">TagList report</a>.
+      </p>
+      <p>
+        If you'd like to offer up pull requests via GitHub rather than applying patches to JIRA, we have a <a href="https://github.com/apache/commons-bcel/">GitHub mirror</a>.
+      </p>
     </section>
   </body>
 </document>

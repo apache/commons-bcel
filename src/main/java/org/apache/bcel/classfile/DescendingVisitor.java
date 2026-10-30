@@ -26,7 +26,7 @@ import org.apache.commons.lang3.stream.Streams;
 
 /**
  * Traverses a JavaClass with another Visitor object 'piggy-backed' that is applied to all components of a JavaClass
- * object. I.e. this class supplies the traversal strategy, other classes can make use of it.
+ * object. This class supplies the traversal strategy, which other classes can use.
  */
 public class DescendingVisitor implements Visitor {
     private final JavaClass clazz;
@@ -36,8 +36,10 @@ public class DescendingVisitor implements Visitor {
     private final Stack<Object> stack = new Stack<>();
 
     /**
-     * @param clazz Class to traverse
-     * @param visitor visitor object to apply to all components
+     * Constructs a DescendingVisitor.
+     *
+     * @param clazz Class to traverse.
+     * @param visitor visitor object to apply to all components.
      */
     public DescendingVisitor(final JavaClass clazz, final Visitor visitor) {
         this.clazz = clazz;
@@ -49,22 +51,28 @@ public class DescendingVisitor implements Visitor {
     }
 
     /**
-     * @return current object
+     * Gets the current object.
+     *
+     * @return current object.
      */
     public Object current() {
         return stack.peek();
     }
 
     /**
-     * @return container of current entitity, i.e., predecessor during traversal
+     * Gets the container of current entity, that is, predecessor during traversal.
+     *
+     * @return container of current entity, that is, predecessor during traversal.
      */
     public Object predecessor() {
         return predecessor(0);
     }
 
     /**
-     * @param level nesting level, i.e., 0 returns the direct predecessor
-     * @return container of current entitity, i.e., predecessor during traversal
+     * Gets the container of current entity, that is, predecessor during traversal.
+     *
+     * @param level nesting level, that is, 0 returns the direct predecessor.
+     * @return container of current entity, that is, predecessor during traversal.
      */
     public Object predecessor(final int level) {
         final int size = stack.size();
@@ -506,6 +514,14 @@ public class DescendingVisitor implements Visitor {
         stack.pop();
     }
 
+    /** @since 6.13.0 */
+    @Override
+    public void visitPermittedSubclasses(final PermittedSubclasses obj) {
+        stack.push(obj);
+        obj.accept(visitor);
+        stack.pop();
+    }
+
     @Override
     public void visitRecord(final Record record) {
         stack.push(record);
@@ -554,7 +570,8 @@ public class DescendingVisitor implements Visitor {
 
     /**
      * Visits a {@link StackMapType} object.
-     * @param var object to visit
+     *
+     * @param var object to visit.
      * @since 6.8.0
      */
     @Override
@@ -568,6 +585,15 @@ public class DescendingVisitor implements Visitor {
     public void visitSynthetic(final Synthetic attribute) {
         stack.push(attribute);
         attribute.accept(visitor);
+        stack.pop();
+    }
+
+    /** @since 6.14.0 */
+    @Override
+    public void visitTypeAnnotations(final TypeAnnotations obj) {
+        stack.push(obj);
+        obj.accept(visitor);
+        accept(Stream.of(obj.getTypeAnnotationEntries()).map(TypeAnnotationEntry::getAnnotationEntry).toArray(AnnotationEntry[]::new));
         stack.pop();
     }
 

@@ -56,11 +56,11 @@ public final class InnerClasses extends Attribute implements Iterable<InnerClass
     /**
      * Constructs object from input stream.
      *
-     * @param nameIndex Index in constant pool to CONSTANT_Utf8
-     * @param length Content length in bytes
-     * @param input Input stream
-     * @param constantPool Array of constants
-     * @throws IOException if an I/O error occurs.
+     * @param nameIndex Index in constant pool to CONSTANT_Utf8.
+     * @param length Content length in bytes.
+     * @param input Input stream.
+     * @param constantPool Array of constants.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     InnerClasses(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
         this(nameIndex, length, (InnerClass[]) null, constantPool);
@@ -72,10 +72,12 @@ public final class InnerClasses extends Attribute implements Iterable<InnerClass
     }
 
     /**
-     * @param nameIndex Index in constant pool to CONSTANT_Utf8
-     * @param length Content length in bytes
-     * @param innerClasses array of inner classes attributes
-     * @param constantPool Array of constants
+     * Constructs an InnerClasses attribute.
+     *
+     * @param nameIndex Index in constant pool to CONSTANT_Utf8.
+     * @param length Content length in bytes.
+     * @param innerClasses array of inner classes attributes.
+     * @param constantPool Array of constants.
      */
     public InnerClasses(final int nameIndex, final int length, final InnerClass[] innerClasses, final ConstantPool constantPool) {
         super(Const.ATTR_INNER_CLASSES, nameIndex, length, constantPool);
@@ -85,9 +87,9 @@ public final class InnerClasses extends Attribute implements Iterable<InnerClass
 
     /**
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
-     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
+     * That is, the hierarchy of methods, fields, attributes, and other elements forms a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -95,7 +97,9 @@ public final class InnerClasses extends Attribute implements Iterable<InnerClass
     }
 
     /**
-     * @return deep copy of this attribute
+     * Creates a deep copy of this attribute.
+     *
+     * @return deep copy of this attribute.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {
@@ -108,22 +112,24 @@ public final class InnerClasses extends Attribute implements Iterable<InnerClass
     }
 
     /**
-     * Dump source file attribute to file stream in binary format.
+     * Dumps source file attribute to file stream in binary format.
      *
-     * @param file Output file stream
-     * @throws IOException if an I/O error occurs.
+     * @param file Output file stream.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     @Override
     public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
-        file.writeShort(innerClasses.length);
+        file.writeShort(Args.requireU2(innerClasses.length, "innerClasses.length"));
         for (final InnerClass innerClass : innerClasses) {
             innerClass.dump(file);
         }
     }
 
     /**
-     * @return array of inner class "records"
+     * Gets the array of inner class records.
+     *
+     * @return array of inner class "records".
      */
     public InnerClass[] getInnerClasses() {
         return innerClasses;
@@ -135,7 +141,9 @@ public final class InnerClasses extends Attribute implements Iterable<InnerClass
     }
 
     /**
-     * @param innerClasses the array of inner classes
+     * Sets the array of inner classes.
+     *
+     * @param innerClasses The array of inner classes.
      */
     public void setInnerClasses(final InnerClass[] innerClasses) {
         this.innerClasses = innerClasses != null ? innerClasses : EMPTY_ARRAY;

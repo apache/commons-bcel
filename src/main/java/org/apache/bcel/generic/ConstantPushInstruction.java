@@ -19,7 +19,7 @@
 package org.apache.bcel.generic;
 
 /**
- * Denotes a push instruction that produces a literal on the stack such as SIPUSH, BIPUSH, ICONST, etc.
+ * Denotes a push instruction that produces a literal on the stack such as SIPUSH, BIPUSH, ICONST, and so on.
  *
  *
  * @see ICONST
@@ -27,5 +27,10 @@ package org.apache.bcel.generic;
  */
 public interface ConstantPushInstruction extends PushInstruction, TypedInstruction {
 
+    /**
+     * Gets the value to push onto the stack.
+     *
+     * @return The value to push onto the stack.
+     */
     Number getValue();
 }

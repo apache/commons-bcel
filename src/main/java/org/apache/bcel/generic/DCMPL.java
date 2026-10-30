@@ -21,21 +21,22 @@ package org.apache.bcel.generic;
 /**
  * DCMPL - Compare doubles: value1 &lt; value2
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1.word1, value1.word2, value2.word1, value2.word2 -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class DCMPL extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 
+    /** Constructs a DCMPL instruction. */
     public DCMPL() {
         super(org.apache.bcel.Const.DCMPL, (short) 1);
     }
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -46,7 +47,9 @@ public class DCMPL extends Instruction implements TypedInstruction, StackProduce
     }
 
     /**
-     * @return Type.DOUBLE
+     * Gets {@code Type.DOUBLE}.
+     *
+     * @return Type.DOUBLE.
      */
     @Override
     public Type getType(final ConstantPoolGen cp) {

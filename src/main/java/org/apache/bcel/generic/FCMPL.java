@@ -21,21 +21,22 @@ package org.apache.bcel.generic;
 /**
  * FCMPL - Compare floats: value1 &lt; value2
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1, value2 -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class FCMPL extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 
+    /** Constructs an FCMPL instruction. */
     public FCMPL() {
         super(org.apache.bcel.Const.FCMPL, (short) 1);
     }
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -46,7 +47,9 @@ public class FCMPL extends Instruction implements TypedInstruction, StackProduce
     }
 
     /**
-     * @return Type.FLOAT
+     * Gets {@code Type.FLOAT}.
+     *
+     * @return Type.FLOAT.
      */
     @Override
     public Type getType(final ConstantPoolGen cp) {

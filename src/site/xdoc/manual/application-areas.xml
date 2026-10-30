@@ -52,9 +52,8 @@
         Class loaders are responsible for loading class files from the
         file system or other resources and passing the byte code to the
         Virtual Machine. A custom <tt>ClassLoader</tt> object may be used
-        to intercept the standard procedure of loading a class, i.e.m  the
-        system class loader, and perform some transformations before
-        actually passing the byte code to the JVM.
+        to intercept the standard class-loading procedure and transform
+        the byte code before passing it to the JVM.
       </p>
 
       <p>
@@ -108,14 +107,14 @@
         performs some transformations on the loaded class and passes them
         to the VM. The following algorithm illustrates how the load method
         of the class loader fulfills the request for a parameterized
-        class, e.g., <tt>Stack&lt;String&gt;</tt>
+        class, for example, <tt>Stack&lt;String&gt;</tt>.
       </p>
 
         <ol type="1">
           <li> Search for class <tt>Stack</tt>, load it, and check for a
             certain class attribute containing additional type
-            information. I.e.  the attribute defines the "real" name of the
-            class, i.e., <tt>Stack&lt;A&gt;</tt>.</li>
+            information. That is, the attribute defines the "real" name of the
+            class, that is, <tt>Stack&lt;A&gt;</tt>.</li>
 
           <li>Replace all occurrences and references to the formal type
             <tt>A</tt> with references to the actual type <tt>String</tt>. For

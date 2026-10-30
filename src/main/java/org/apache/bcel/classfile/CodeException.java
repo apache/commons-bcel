@@ -66,7 +66,7 @@ public final class CodeException implements Cloneable, Node, Constants {
     private int endPc;
 
     /**
-     * Starting address of exception handler, i.e., an offset from start of code.
+     * Starting address of exception handler, that is, an offset from start of code.
      */
     private int handlerPc;
 
@@ -87,8 +87,8 @@ public final class CodeException implements Cloneable, Node, Constants {
     /**
      * Constructs a new instance from a DataInput.
      *
-     * @param file Input stream
-     * @throws IOException if an I/O error occurs.
+     * @param file Input stream.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     CodeException(final DataInput file) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort());
@@ -97,9 +97,9 @@ public final class CodeException implements Cloneable, Node, Constants {
     /**
      * Constructs a new instance.
      *
-     * @param startPc Range in the code the exception handler is active, startPc is inclusive while
-     * @param endPc is exclusive
-     * @param handlerPc Starting address of exception handler, i.e., an offset from start of code.
+     * @param startPc Range in the code the exception handler is active, startPc is inclusive while.
+     * @param endPc is exclusive.
+     * @param handlerPc Starting address of exception handler, that is, an offset from start of code.
      * @param catchType If zero the handler catches any exception, otherwise it points to the exception class which is to be
      *        caught.
      */
@@ -112,9 +112,9 @@ public final class CodeException implements Cloneable, Node, Constants {
 
     /**
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
-     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
+     * That is, the hierarchy of methods, fields, attributes, and other elements forms a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -122,7 +122,9 @@ public final class CodeException implements Cloneable, Node, Constants {
     }
 
     /**
-     * @return deep copy of this object
+     * Creates a deep copy of this object.
+     *
+     * @return deep copy of this object.
      */
     public CodeException copy() {
         try {
@@ -136,8 +138,8 @@ public final class CodeException implements Cloneable, Node, Constants {
     /**
      * Dumps code exception to file stream in binary format.
      *
-     * @param file Output file stream
-     * @throws IOException if an I/O error occurs.
+     * @param file Output file stream.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public void dump(final DataOutputStream file) throws IOException {
         file.writeShort(startPc);
@@ -147,6 +149,8 @@ public final class CodeException implements Cloneable, Node, Constants {
     }
 
     /**
+     * Gets the type of exception that is caught.
+     *
      * @return 0, if the handler catches any exception, otherwise it points to the exception class which is to be caught.
      */
     public int getCatchType() {
@@ -154,6 +158,8 @@ public final class CodeException implements Cloneable, Node, Constants {
     }
 
     /**
+     * Gets the exclusive end index of the region where the handler is active.
+     *
      * @return Exclusive end index of the region where the handler is active.
      */
     public int getEndPC() {
@@ -161,6 +167,8 @@ public final class CodeException implements Cloneable, Node, Constants {
     }
 
     /**
+     * Gets the starting address of exception handler, relative to the code.
+     *
      * @return Starting address of exception handler, relative to the code.
      */
     public int getHandlerPC() {
@@ -168,6 +176,8 @@ public final class CodeException implements Cloneable, Node, Constants {
     }
 
     /**
+     * Gets the inclusive start index of the region where the handler is active.
+     *
      * @return Inclusive start index of the region where the handler is active.
      */
     public int getStartPC() {
@@ -175,34 +185,44 @@ public final class CodeException implements Cloneable, Node, Constants {
     }
 
     /**
-     * @param catchType the type of exception that is caught
+     * Sets the type of exception that is caught.
+     *
+     * @param catchType The type of exception that is caught.
      */
     public void setCatchType(final int catchType) {
         this.catchType = catchType;
     }
 
     /**
-     * @param endPc end of handled block
+     * Sets the end of handled block.
+     *
+     * @param endPc end of handled block.
      */
     public void setEndPC(final int endPc) {
         this.endPc = endPc;
     }
 
     /**
-     * @param handlerPc where the actual code is
+     * Sets where the actual code is.
+     *
+     * @param handlerPc where the actual code is.
      */
     public void setHandlerPC(final int handlerPc) { // TODO unused
         this.handlerPc = handlerPc;
     }
 
     /**
-     * @param startPc start of handled block
+     * Sets the start of handled block.
+     *
+     * @param startPc start of handled block.
      */
     public void setStartPC(final int startPc) { // TODO unused
         this.startPc = startPc;
     }
 
     /**
+     * Gets a string representation.
+     *
      * @return String representation.
      */
     @Override
@@ -210,11 +230,19 @@ public final class CodeException implements Cloneable, Node, Constants {
         return "CodeException(startPc = " + startPc + ", endPc = " + endPc + ", handlerPc = " + handlerPc + ", catchType = " + catchType + ")";
     }
 
+    /**
+     * Gets a string representation with constant pool.
+     *
+     * @param cp constant pool source.
+     * @return String representation.
+     */
     public String toString(final ConstantPool cp) {
         return toString(cp, true);
     }
 
     /**
+     * Gets a string representation with constant pool.
+     *
      * @param cp constant pool source.
      * @param verbose Output more if true.
      * @return String representation.

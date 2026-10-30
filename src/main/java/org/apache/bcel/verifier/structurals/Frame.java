@@ -34,7 +34,9 @@ public class Frame {
     protected static UninitializedObjectType _this;
 
     /**
-     * @return the _this
+     * Gets the static _this reference.
+     *
+     * @return The _this.
      * @since 6.0
      */
     public static UninitializedObjectType getThis() {
@@ -42,7 +44,9 @@ public class Frame {
     }
 
     /**
-     * @param _this the _this to set
+     * Sets the static _this reference.
+     *
+     * @param _this The _this to set.
      * @since 6.0
      */
     public static void setThis(final UninitializedObjectType _this) {
@@ -50,14 +54,20 @@ public class Frame {
     }
 
     /**
+     * The local variables.
      */
     private final LocalVariables locals;
 
     /**
+     * The operand stack.
      */
     private final OperandStack stack;
 
     /**
+     * Constructs a Frame.
+     *
+     * @param maxLocals The maximum number of local variables.
+     * @param maxStack The maximum stack size.
      */
     public Frame(final int maxLocals, final int maxStack) {
         locals = new LocalVariables(maxLocals);
@@ -65,6 +75,10 @@ public class Frame {
     }
 
     /**
+     * Constructs a Frame.
+     *
+     * @param locals The local variables.
+     * @param stack The operand stack.
      */
     public Frame(final LocalVariables locals, final OperandStack stack) {
         this.locals = locals;
@@ -72,6 +86,9 @@ public class Frame {
     }
 
     /**
+     * Creates a clone of this frame.
+     *
+     * @return A clone of this frame.
      */
     @Override
     protected Object clone() {
@@ -79,6 +96,10 @@ public class Frame {
     }
 
     /**
+     * Checks if this frame equals another object.
+     *
+     * @param o The object to compare.
+     * @return true if equal, false otherwise.
      */
     @Override
     public boolean equals(final Object o) {
@@ -90,25 +111,34 @@ public class Frame {
     }
 
     /**
+     * Gets a clone of this frame.
+     *
+     * @return A clone of this frame.
      */
     public Frame getClone() {
         return (Frame) clone();
     }
 
     /**
+     * Gets the local variables.
+     *
+     * @return The local variables.
      */
     public LocalVariables getLocals() {
         return locals;
     }
 
     /**
+     * Gets the operand stack.
+     *
+     * @return The operand stack.
      */
     public OperandStack getStack() {
         return stack;
     }
 
     /**
-     * @return a hash code value for the object.
+     * @return A hash code value for the object.
      */
     @Override
     public int hashCode() {

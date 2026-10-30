@@ -23,6 +23,10 @@ package org.apache.bcel.generic;
  */
 public abstract class EmptyVisitor implements Visitor {
 
+    /** Constructs an EmptyVisitor. */
+    public EmptyVisitor() {
+    }
+
     @Override
     public void visitAALOAD(final AALOAD obj) {
     }

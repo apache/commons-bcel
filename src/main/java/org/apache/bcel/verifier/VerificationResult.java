@@ -32,7 +32,7 @@ public class VerificationResult {
     /** Constant to indicate verification was passed. */
     public static final int VERIFIED_OK = 1;
 
-    /** Constant to indicate verfication failed. */
+    /** Constant to indicate verification failed. */
     public static final int VERIFIED_REJECTED = 2;
 
     /**
@@ -59,7 +59,12 @@ public class VerificationResult {
     /** The detailed message. */
     private final String detailMessage;
 
-    /** The usual constructor. */
+    /**
+     * The usual constructor.
+     *
+     * @param status The verification status.
+     * @param message The detail message.
+     */
     public VerificationResult(final int status, final String message) {
         numeric = status;
         detailMessage = message;
@@ -67,6 +72,9 @@ public class VerificationResult {
 
     /**
      * Returns if two VerificationResult instances are equal.
+     *
+     * @param o The object to compare.
+     * @return true if equal.
      */
     @Override
     public boolean equals(final Object o) {
@@ -77,20 +85,26 @@ public class VerificationResult {
         return other.numeric == this.numeric && other.detailMessage.equals(this.detailMessage);
     }
 
-    /** Returns a detailed message. */
+    /**
+     * Gets a detailed message.
+     *
+     * @return The detail message.
+     */
     public String getMessage() {
         return detailMessage;
     }
 
     /**
-     * Returns one of the {@link #VERIFIED_OK}, {@link #VERIFIED_NOTYET}, {@link #VERIFIED_REJECTED} constants.
+     * Gets one of the {@link #VERIFIED_OK}, {@link #VERIFIED_NOTYET}, {@link #VERIFIED_REJECTED} constants.
+     *
+     * @return The verification status.
      */
     public int getStatus() {
         return numeric;
     }
 
     /**
-     * @return a hash code value for the object.
+     * @return A hash code value for the object.
      */
     @Override
     public int hashCode() {

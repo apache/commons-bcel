@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * D2F - Convert double to float
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value.word1, value.word2 -&gt; ..., result
- * </PRE>
+ * </pre>
  */
 public class D2F extends ConversionInstruction {
 
@@ -36,9 +36,9 @@ public class D2F extends ConversionInstruction {
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {

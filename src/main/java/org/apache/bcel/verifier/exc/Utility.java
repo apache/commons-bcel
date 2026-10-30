@@ -18,8 +18,7 @@
  */
 package org.apache.bcel.verifier.exc;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 /**
  * A utility class providing convenience methods concerning Throwable instances.
@@ -27,12 +26,16 @@ import java.io.StringWriter;
  * @see Throwable
  */
 public final class Utility {
-    /** This method returns the stack trace of a Throwable instance as a String. */
+
+    /**
+     * Gets the stack trace of a Throwable instance as a String.
+     *
+     * @param t The Throwable instance.
+     * @return The stack trace as a String.
+     * @deprecated Use {@link ExceptionUtils#getStackTrace(Throwable)}.
+     */
     public static String getStackTrace(final Throwable t) {
-        final StringWriter sw = new StringWriter();
-        final PrintWriter pw = new PrintWriter(sw);
-        t.printStackTrace(pw);
-        return sw.toString();
+        return ExceptionUtils.getStackTrace(t);
     }
 
     /** This class is not instantiable. */

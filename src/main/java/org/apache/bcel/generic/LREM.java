@@ -23,21 +23,24 @@ import org.apache.bcel.ExceptionConst;
 /**
  * LREM - Remainder of long
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1, value2 -&gt; result
- * </PRE>
+ * </pre>
  */
 public class LREM extends ArithmeticInstruction implements ExceptionThrower {
 
+    /**
+     * Constructs an LREM instruction.
+     */
     public LREM() {
         super(org.apache.bcel.Const.LREM);
     }
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {

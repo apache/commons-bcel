@@ -42,8 +42,16 @@ public abstract class PassVerifier {
 
     /** The (warning) messages. */
     private final List<String> messages = new ArrayList<>();
+
     /** The VerificationResult cache. */
     private VerificationResult verificationResult;
+
+    /**
+     * Constructs a PassVerifier.
+     */
+    public PassVerifier() {
+        // Default constructor for subclasses
+    }
 
     /**
      * This method adds a (warning) message to the message pool of this PassVerifier. This method is normally only
@@ -59,14 +67,14 @@ public abstract class PassVerifier {
     /**
      * Verifies, not cached.
      *
-     * @return The VerificationResult
+     * @return The VerificationResult.
      */
     public abstract VerificationResult do_verify();
 
     /**
-     * Returns the (warning) messages that this PassVerifier accumulated during its do_verify()ing work.
+     * Gets the (warning) messages that this PassVerifier accumulated during verification.
      *
-     * @return the (warning) messages.
+     * @return The (warning) messages.
      * @see #addMessage(String)
      * @see #do_verify()
      */
@@ -75,8 +83,9 @@ public abstract class PassVerifier {
     }
 
     /**
-     * Returns the (warning) messages that this PassVerifier accumulated during its do_verify()ing work.
+     * Gets the (warning) messages that this PassVerifier accumulated during verification.
      *
+     * @return The list of messages.
      * @see #addMessage(String)
      * @see #do_verify()
      */
@@ -87,11 +96,11 @@ public abstract class PassVerifier {
 
     /**
      * This method runs a verification pass conforming to the Java Virtual Machine Specification, 2nd edition, on a class
-     * file. PassVerifier instances perform caching; i.e. if the verify() method once determined a VerificationResult, then
+     * file. PassVerifier instances perform caching; for example if the verify() method once determined a VerificationResult, then
      * this result may be returned after every invocation of this method instead of running the verification pass anew;
      * likewise with the result of getMessages().
      *
-     * @return a VerificationResult.
+     * @return A VerificationResult.
      * @see #getMessages()
      * @see #addMessage(String)
      */

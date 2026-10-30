@@ -23,21 +23,24 @@ import org.apache.bcel.ExceptionConst;
 /**
  * MONITORENTER - Enter monitor for object
  *
- * <PRE>
+ * <pre>
  * Stack: ..., objectref -&gt; ...
- * </PRE>
+ * </pre>
  */
 public class MONITORENTER extends Instruction implements ExceptionThrower, StackConsumer {
 
+    /**
+     * Constructs a MONITORENTER instruction.
+     */
     public MONITORENTER() {
         super(org.apache.bcel.Const.MONITORENTER, (short) 1);
     }
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {

@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * IF_ICMPEQ - Branch if int comparison succeeds
  *
- * <PRE>
+ * <pre>
  * Stack: ..., value1, value2 -&gt; ...
- * </PRE>
+ * </pre>
  */
 public class IF_ICMPEQ extends IfInstruction {
 
@@ -33,15 +33,20 @@ public class IF_ICMPEQ extends IfInstruction {
     IF_ICMPEQ() {
     }
 
+    /**
+     * Constructs an IF_ICMPEQ instruction.
+     *
+     * @param target The target instruction.
+     */
     public IF_ICMPEQ(final InstructionHandle target) {
         super(org.apache.bcel.Const.IF_ICMPEQ, target);
     }
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -52,7 +57,7 @@ public class IF_ICMPEQ extends IfInstruction {
     }
 
     /**
-     * @return negation of instruction
+     * @return negation of instruction.
      */
     @Override
     public IfInstruction negate() {

@@ -23,17 +23,23 @@ import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 
 /**
- * Super class for object and array types.
+ * Superclass for object and array types.
  */
 public abstract class ReferenceType extends Type {
 
     /**
-     * Class is non-abstract but not instantiable from the outside
+     * Class is non-abstract but not instantiable from the outside.
      */
     ReferenceType() {
         super(Const.T_OBJECT, "<null object>");
     }
 
+    /**
+     * Constructs a ReferenceType.
+     *
+     * @param t The type.
+     * @param s The signature.
+     */
     protected ReferenceType(final byte t, final String s) {
         super(t, s);
     }
@@ -46,8 +52,10 @@ public abstract class ReferenceType extends Type {
      * interface, then {@link #OBJECT} is returned. If not all of the two classes' superclasses cannot be found, "null" is
      * returned. See the JVM specification edition 2, "�4.9.2 The Bytecode Verifier".
      *
-     * @deprecated use getFirstCommonSuperclass(ReferenceType t) which has slightly changed semantics.
-     * @throws ClassNotFoundException on failure to find superclasses of this type, or the type passed as a parameter
+     * @param t The other type.
+     * @return The first common superclass.
+     * @throws ClassNotFoundException Thrown on failure to find superclasses of this type, or the type passed as a parameter.
+     * @deprecated Use getFirstCommonSuperclass(ReferenceType t) which has slightly changed semantics.
      */
     @Deprecated
     public ReferenceType firstCommonSuperclass(final ReferenceType t) throws ClassNotFoundException {
@@ -70,16 +78,18 @@ public abstract class ReferenceType extends Type {
     }
 
     /**
-     * This commutative operation returns the first common superclass (narrowest ReferenceType referencing a class, not an
+     * Gets the first common superclass (narrowest ReferenceType referencing a class, not an
      * interface). If one of the types is a superclass of the other, the former is returned. If "this" is NULL, then t
      * is returned. If t is NULL, then "this" is returned. If "this" equals t ['this.equals(t)'] "this" is returned. If
      * "this" or t is an ArrayType, then {@link #OBJECT} is returned; unless their dimensions match. Then an ArrayType of the
-     * same number of dimensions is returned, with its basic type being the first common super class of the basic types of
+     * same number of dimensions is returned, with its basic type being the first common superclass of the basic types of
      * "this" and t. If "this" or t is a ReferenceType referencing an interface, then {@link #OBJECT} is returned. If not all of
      * the two classes' superclasses cannot be found, "null" is returned. See the JVM specification edition 2, "�4.9.2 The
      * Bytecode Verifier".
      *
-     * @throws ClassNotFoundException on failure to find superclasses of this type, or the type passed as a parameter
+     * @param t The other type.
+     * @return The first common superclass.
+     * @throws ClassNotFoundException Thrown on failure to find superclasses of this type, or the type passed as a parameter.
      */
     public ReferenceType getFirstCommonSuperclass(final ReferenceType t) throws ClassNotFoundException {
         if (equals(NULL)) {
@@ -145,11 +155,13 @@ public abstract class ReferenceType extends Type {
     }
 
     /**
-     * Return true iff this is assignment compatible with another type t as defined in the JVM specification; see the
+     * Tests whether this type is assignment compatible with another type t as defined in the JVM specification; see the
      * AASTORE definition there.
      *
-     * @throws ClassNotFoundException if any classes or interfaces required to determine assignment compatibility can't be
-     *         found
+     * @param t The other type.
+     * @return true iff this is assignment compatible with another type t.
+     * @throws ClassNotFoundException Thrown if any classes or interfaces required to determine assignment compatibility can't be
+     *         found.
      */
     public boolean isAssignmentCompatibleWith(final Type t) throws ClassNotFoundException {
         if (!(t instanceof ReferenceType)) {
@@ -243,12 +255,14 @@ public abstract class ReferenceType extends Type {
     }
 
     /**
-     * Return true iff this type is castable to another type t as defined in the JVM specification. The case where this is
+     * Tests whether this type is castable to another type t as defined in the JVM specification. The case where this is
      * {@link #NULL} is not defined (see the CHECKCAST definition in the JVM specification). However, because for example CHECKCAST
      * doesn't throw a ClassCastException when casting a null reference to any Object, true is returned in this case.
      *
-     * @throws ClassNotFoundException if any classes or interfaces required to determine assignment compatibility can't be
-     *         found
+     * @param t The other type.
+     * @return true iff this type is castable to another type t.
+     * @throws ClassNotFoundException Thrown if any classes or interfaces required to determine assignment compatibility can't be
+     *         found.
      */
     public boolean isCastableTo(final Type t) throws ClassNotFoundException {
         if (equals(NULL)) {

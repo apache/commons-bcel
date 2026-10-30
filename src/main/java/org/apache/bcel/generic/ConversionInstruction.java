@@ -21,7 +21,7 @@ package org.apache.bcel.generic;
 import org.apache.bcel.Const;
 
 /**
- * Super class for the x2y family of instructions.
+ * Superclass for the x2y family of instructions.
  */
 public abstract class ConversionInstruction extends Instruction implements TypedInstruction, StackProducer, StackConsumer {
 
@@ -32,14 +32,18 @@ public abstract class ConversionInstruction extends Instruction implements Typed
     }
 
     /**
-     * @param opcode opcode of instruction
+     * Constructs a ConversionInstruction.
+     *
+     * @param opcode opcode of instruction.
      */
     protected ConversionInstruction(final short opcode) {
         super(opcode, (short) 1);
     }
 
     /**
-     * @return type associated with the instruction
+     * Gets the type associated with the instruction.
+     *
+     * @return type associated with the instruction.
      */
     @Override
     public Type getType(final ConstantPoolGen cp) {

@@ -42,26 +42,24 @@ public final class NestMembers extends Attribute {
     /**
      * Constructs object from input stream.
      *
-     * @param nameIndex Index in constant pool
-     * @param length Content length in bytes
-     * @param input Input stream
-     * @param constantPool Array of constants
-     * @throws IOException if an I/O error occurs.
+     * @param nameIndex Index in constant pool.
+     * @param length Content length in bytes.
+     * @param dataInput Input stream.
+     * @param constantPool Array of constants.
+     * @throws IOException Thrown if an I/O error occurs.
      */
-    NestMembers(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+    NestMembers(final int nameIndex, final int length, final DataInput dataInput, final ConstantPool constantPool) throws IOException {
         this(nameIndex, length, (int[]) null, constantPool);
-        final int classCount = input.readUnsignedShort();
-        classes = new int[classCount];
-        for (int i = 0; i < classCount; i++) {
-            classes[i] = input.readUnsignedShort();
-        }
+        classes = ClassParser.readU2U2Table(dataInput);
     }
 
     /**
-     * @param nameIndex Index in constant pool
-     * @param length Content length in bytes
-     * @param classes Table of indices in constant pool
-     * @param constantPool Array of constants
+     * Constructs a new NestMembers.
+     *
+     * @param nameIndex Index in constant pool.
+     * @param length Content length in bytes.
+     * @param classes Table of indices in constant pool.
+     * @param constantPool Array of constants.
      */
     public NestMembers(final int nameIndex, final int length, final int[] classes, final ConstantPool constantPool) {
         super(Const.ATTR_NEST_MEMBERS, nameIndex, length, constantPool);
@@ -81,9 +79,9 @@ public final class NestMembers extends Attribute {
 
     /**
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
-     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
+     * That is, the hierarchy of methods, fields, attributes, and other elements forms a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -91,7 +89,7 @@ public final class NestMembers extends Attribute {
     }
 
     /**
-     * @return deep copy of this attribute
+     * @return deep copy of this attribute.
      */
     @Override
     public Attribute copy(final ConstantPool constantPool) {
@@ -104,21 +102,23 @@ public final class NestMembers extends Attribute {
     }
 
     /**
-     * Dump NestMembers attribute to file stream in binary format.
+     * Dumps NestMembers attribute to file stream in binary format.
      *
-     * @param file Output file stream
-     * @throws IOException if an I/O error occurs.
+     * @param file Output file stream.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     @Override
     public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
-        file.writeShort(classes.length);
+        file.writeShort(Args.requireU2(classes.length, "classes.length"));
         for (final int index : classes) {
             file.writeShort(index);
         }
     }
 
     /**
+     * Gets the classes.
+     *
      * @return array of indices into constant pool of class names.
      */
     public int[] getClasses() {
@@ -126,7 +126,9 @@ public final class NestMembers extends Attribute {
     }
 
     /**
-     * @return string array of class names
+     * Gets the class names.
+     *
+     * @return string array of class names.
      */
     public String[] getClassNames() {
         final String[] names = new String[classes.length];
@@ -135,6 +137,8 @@ public final class NestMembers extends Attribute {
     }
 
     /**
+     * Gets the number of classes.
+     *
      * @return Length of classes table.
      */
     public int getNumberClasses() {
@@ -142,14 +146,16 @@ public final class NestMembers extends Attribute {
     }
 
     /**
-     * @param classes the list of class indexes Also redefines number_of_classes according to table length.
+     * Sets the classes.
+     *
+     * @param classes The list of class indexes Also redefines number_of_classes according to table length.
      */
     public void setClasses(final int[] classes) {
         this.classes = ArrayUtils.nullToEmpty(classes);
     }
 
     /**
-     * @return String representation, i.e., a list of classes.
+     * @return String representation, that is, a list of classes.
      */
     @Override
     public String toString() {

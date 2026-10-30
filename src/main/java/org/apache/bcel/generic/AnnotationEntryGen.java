@@ -36,10 +36,13 @@ import org.apache.bcel.classfile.RuntimeInvisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeInvisibleParameterAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleParameterAnnotations;
+import org.apache.bcel.util.Args;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.stream.Streams;
 
 /**
+ * Generates annotation entries.
+ *
  * @since 6.0
  */
 public class AnnotationEntryGen {
@@ -47,10 +50,10 @@ public class AnnotationEntryGen {
     static final AnnotationEntryGen[] EMPTY_ARRAY = {};
 
     /**
-     * Converts a list of AnnotationGen objects into a set of attributes that can be attached to the class file.
+     * Gets the attributes for an array of AnnotationEntryGen objects so they can be attached to the class file.
      *
-     * @param cp The constant pool gen where we can create the necessary name refs
-     * @param annotationEntryGens An array of AnnotationGen objects
+     * @param cp The constant pool gen where we can create the necessary name refs.
+     * @param annotationEntryGens An array of AnnotationGen objects.
      */
     static Attribute[] getAnnotationAttributes(final ConstantPoolGen cp, final AnnotationEntryGen[] annotationEntryGens) {
         if (ArrayUtils.isEmpty(annotationEntryGens)) {
@@ -112,15 +115,14 @@ public class AnnotationEntryGen {
 
             return newAttributes.toArray(Attribute.EMPTY_ARRAY);
         } catch (final IOException e) {
-            System.err.println("IOException whilst processing annotations");
+            System.err.println("IOException while processing annotations");
             e.printStackTrace();
         }
         return null;
     }
 
     /**
-     * Annotations against a class are stored in one of four attribute kinds: - RuntimeVisibleParameterAnnotations -
-     * RuntimeInvisibleParameterAnnotations
+     * Gets the runtime-visible and runtime-invisible parameter annotation attributes.
      */
     static Attribute[] getParameterAnnotationAttributes(final ConstantPoolGen cp,
         final List<AnnotationEntryGen>[] /* Array of lists, array size depends on #params */ vec) {
@@ -145,7 +147,7 @@ public class AnnotationEntryGen {
             // Lets do the visible ones
             final ByteArrayOutputStream rvaBytes = new ByteArrayOutputStream();
             try (DataOutputStream rvaDos = new DataOutputStream(rvaBytes)) {
-                rvaDos.writeByte(vec.length); // First goes number of parameters
+                rvaDos.writeByte(Args.requireU1(vec.length, "vec.length")); // First goes number of parameters
                 for (int i = 0; i < vec.length; i++) {
                     rvaDos.writeShort(visCount[i]);
                     if (visCount[i] > 0) {
@@ -160,7 +162,7 @@ public class AnnotationEntryGen {
             // Lets do the invisible ones
             final ByteArrayOutputStream riaBytes = new ByteArrayOutputStream();
             try (DataOutputStream riaDos = new DataOutputStream(riaBytes)) {
-                riaDos.writeByte(vec.length); // First goes number of parameters
+                riaDos.writeByte(Args.requireU1(vec.length, "vec.length")); // First goes number of parameters
                 for (int i = 0; i < vec.length; i++) {
                     riaDos.writeShort(invisCount[i]);
                     if (invisCount[i] > 0) {
@@ -193,12 +195,21 @@ public class AnnotationEntryGen {
             }
             return newAttributes.toArray(Attribute.EMPTY_ARRAY);
         } catch (final IOException e) {
-            System.err.println("IOException whilst processing parameter annotations");
+            System.err.println("IOException while processing parameter annotations");
             e.printStackTrace();
         }
         return null;
     }
 
+    /**
+     * Reads an AnnotationEntryGen from a DataInput.
+     *
+     * @param dis The data input stream.
+     * @param cpool The constant pool generator.
+     * @param b whether the annotation is runtime visible.
+     * @return The annotation entry generator.
+     * @throws IOException Thrown if an I/O error occurs.
+     */
     public static AnnotationEntryGen read(final DataInput dis, final ConstantPoolGen cpool, final boolean b) throws IOException {
         final AnnotationEntryGen a = new AnnotationEntryGen(cpool);
         a.typeIndex = dis.readUnsignedShort();
@@ -224,6 +235,10 @@ public class AnnotationEntryGen {
      * passed in is for a different class file, then copyPoolEntries should have been passed as true as that will force us
      * to do a deep copy of the annotation and move the cpool entries across. We need to copy the type and the element name
      * value pairs and the visibility.
+     *
+     * @param a The annotation entry.
+     * @param cpool The constant pool generator.
+     * @param copyPoolEntries whether to copy pool entries.
      */
     public AnnotationEntryGen(final AnnotationEntry a, final ConstantPoolGen cpool, final boolean copyPoolEntries) {
         this.cpool = cpool;
@@ -240,6 +255,14 @@ public class AnnotationEntryGen {
         this.cpool = cpool;
     }
 
+    /**
+     * Constructs an AnnotationEntryGen.
+     *
+     * @param type The object type.
+     * @param elements The element value pairs.
+     * @param vis whether the annotation is visible.
+     * @param cpool The constant pool generator.
+     */
     public AnnotationEntryGen(final ObjectType type, final List<ElementValuePairGen> elements, final boolean vis, final ConstantPoolGen cpool) {
         this.cpool = cpool;
         this.typeIndex = cpool.addUtf8(type.getSignature());
@@ -247,6 +270,11 @@ public class AnnotationEntryGen {
         isRuntimeVisible = vis;
     }
 
+    /**
+     * Adds an element name value pair.
+     *
+     * @param evp The element value pair generator.
+     */
     public void addElementNameValuePair(final ElementValuePairGen evp) {
         if (evs == null) {
             evs = new ArrayList<>();
@@ -258,16 +286,24 @@ public class AnnotationEntryGen {
         return Streams.of(in).map(nvp -> new ElementValuePairGen(nvp, cpool, copyPoolEntries)).collect(Collectors.toList());
     }
 
+    /**
+     * Dumps this annotation entry to a DataOutputStream.
+     *
+     * @param dos The data output stream.
+     * @throws IOException Thrown if an I/O error occurs.
+     */
     public void dump(final DataOutputStream dos) throws IOException {
         dos.writeShort(typeIndex); // u2 index of type name in cpool
-        dos.writeShort(evs.size()); // u2 element_value pair count
+        dos.writeShort(Args.requireU2(evs.size(), "evs.size()")); // u2 element_value pair count
         for (final ElementValuePairGen envp : evs) {
             envp.dump(dos);
         }
     }
 
     /**
-     * Retrieve an immutable version of this AnnotationGen
+     * Gets an immutable version of this AnnotationGen.
+     *
+     * @return An immutable version of this AnnotationGen.
      */
     public AnnotationEntry getAnnotation() {
         final AnnotationEntry a = new AnnotationEntry(typeIndex, cpool.getConstantPool(), isRuntimeVisible);
@@ -277,15 +313,30 @@ public class AnnotationEntryGen {
         return a;
     }
 
+    /**
+     * Gets the type index.
+     *
+     * @return The type index.
+     */
     public int getTypeIndex() {
         return typeIndex;
     }
 
+    /**
+     * Gets the type name.
+     *
+     * @return The type name.
+     */
     public final String getTypeName() {
         return getTypeSignature(); // BCELBUG: Should I use this instead?
         // Utility.signatureToString(getTypeSignature());
     }
 
+    /**
+     * Gets the type signature.
+     *
+     * @return The type signature.
+     */
     public final String getTypeSignature() {
         // ConstantClass c = (ConstantClass) cpool.getConstant(typeIndex);
         final ConstantUtf8 utf8 = (ConstantUtf8) cpool.getConstant(typeIndex/* c.getNameIndex() */);
@@ -293,7 +344,7 @@ public class AnnotationEntryGen {
     }
 
     /**
-     * Returns list of ElementNameValuePair objects.
+     * Gets the list of ElementNameValuePair objects.
      *
      * @return list of ElementNameValuePair objects.
      */
@@ -301,6 +352,11 @@ public class AnnotationEntryGen {
         return evs;
     }
 
+    /**
+     * Tests whether this annotation is runtime visible.
+     *
+     * @return true if this annotation is runtime visible.
+     */
     public boolean isRuntimeVisible() {
         return isRuntimeVisible;
     }
@@ -309,6 +365,11 @@ public class AnnotationEntryGen {
         isRuntimeVisible = b;
     }
 
+    /**
+     * Returns a short string representation of this annotation.
+     *
+     * @return A short string representation of this annotation.
+     */
     public String toShortString() {
         final StringBuilder s = new StringBuilder();
         s.append("@").append(getTypeName()).append("(");

@@ -45,15 +45,17 @@ public final class ConstantInteger extends Constant implements ConstantObject {
     /**
      * Initialize instance from file data.
      *
-     * @param file Input stream
-     * @throws IOException if an I/O error occurs.
+     * @param file Input stream.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     ConstantInteger(final DataInput file) throws IOException {
         this(file.readInt());
     }
 
     /**
-     * @param bytes Data
+     * Constructs a ConstantInteger.
+     *
+     * @param bytes Data.
      */
     public ConstantInteger(final int bytes) {
         super(Const.CONSTANT_Integer);
@@ -62,9 +64,9 @@ public final class ConstantInteger extends Constant implements ConstantObject {
 
     /**
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
-     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
+     * That is, the hierarchy of methods, fields, attributes, and other elements forms a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -72,10 +74,10 @@ public final class ConstantInteger extends Constant implements ConstantObject {
     }
 
     /**
-     * Dump constant integer to file stream in binary format.
+     * Dumps constant integer to file stream in binary format.
      *
-     * @param file Output file stream
-     * @throws IOException if an I/O error occurs.
+     * @param file Output file stream.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     @Override
     public void dump(final DataOutputStream file) throws IOException {
@@ -84,14 +86,19 @@ public final class ConstantInteger extends Constant implements ConstantObject {
     }
 
     /**
-     * @return data, i.e., 4 bytes.
+     * Gets the data.
+     *
+     * @return data, that is, 4 bytes.
      */
     public int getBytes() {
         return bytes;
     }
 
     /**
-     * @return Integer object
+     * Gets the Integer object.
+     *
+     * @param cp The constant pool (not used).
+     * @return Integer object.
      */
     @Override
     public Object getConstantValue(final ConstantPool cp) {
@@ -99,7 +106,9 @@ public final class ConstantInteger extends Constant implements ConstantObject {
     }
 
     /**
-     * @param bytes the raw bytes that represent this integer
+     * Sets the raw bytes that represent the integer value.
+     *
+     * @param bytes The raw bytes that represent the integer value.
      */
     public void setBytes(final int bytes) {
         this.bytes = bytes;

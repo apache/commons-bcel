@@ -31,8 +31,8 @@ public final class ArrayType extends ReferenceType {
     /**
      * Convenience constructor for array type, for example int[]
      *
-     * @param type array type, for example T_INT
-     * @param dimensions array dimensions
+     * @param type array type, for example T_INT.
+     * @param dimensions array dimensions.
      */
     public ArrayType(final byte type, final int dimensions) {
         this(BasicType.getType(type), dimensions);
@@ -41,8 +41,8 @@ public final class ArrayType extends ReferenceType {
     /**
      * Convenience constructor for reference array type, for example Object[]
      *
-     * @param className complete name of class ({@link String}, for example)
-     * @param dimensions array dimensions
+     * @param className complete name of class ({@link String}, for example).
+     * @param dimensions array dimensions.
      */
     public ArrayType(final String className, final int dimensions) {
         this(ObjectType.getInstance(className), dimensions);
@@ -51,8 +51,8 @@ public final class ArrayType extends ReferenceType {
     /**
      * Constructor for array of given type
      *
-     * @param type type of array (may be an array itself)
-     * @param dimensions array dimensions
+     * @param type type of array (may be an array itself).
+     * @param dimensions array dimensions.
      */
     public ArrayType(final Type type, final int dimensions) {
         super(Const.T_ARRAY, "<dummy>");
@@ -93,7 +93,9 @@ public final class ArrayType extends ReferenceType {
     }
 
     /**
-     * @return basic type of array, i.e., for int[][][] the basic type is int
+     * Gets the basic type of array, that is, for {@code int[][][]} the basic type is int.
+     *
+     * @return basic type of array, that is, for {@code int[][][]} the basic type is int.
      */
     public Type getBasicType() {
         return basicType;
@@ -111,14 +113,18 @@ public final class ArrayType extends ReferenceType {
     }
 
     /**
-     * @return number of dimensions of array
+     * Gets the number of dimensions of array.
+     *
+     * @return number of dimensions of array.
      */
     public int getDimensions() {
         return dimensions;
     }
 
     /**
-     * @return element type of array, i.e., for int[][][] the element type is int[][]
+     * Gets the element type of array, that is, for {@code int[][][]} the element type is {@code int[][]}.
+     *
+     * @return element type of array, that is, for {@code int[][][]} the element type is {@code int[][]}.
      */
     public Type getElementType() {
         if (dimensions == 1) {
@@ -128,10 +134,21 @@ public final class ArrayType extends ReferenceType {
     }
 
     /**
-     * @return a hash code value for the object.
+     * @return A hash code value for the object.
      */
     @Override
     public int hashCode() {
         return basicType.hashCode() ^ dimensions;
+    }
+
+    /**
+     * Tests whether the given type is the element type of this array type, that is, for {@code int[][][]} the element type is {@code int[][]}.
+     *
+     * @param type the type to test.
+     * @return true if the given type is the element type of this array type, that is, for {@code int[][][]} the element type is {@code int[][]}.
+     * @since 6.13.0
+     */
+    public boolean isElementType(final Type type) {
+        return getElementType().equals(type);
     }
 }

@@ -20,7 +20,6 @@ package org.apache.bcel.verifier.statics;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -74,6 +73,7 @@ import org.apache.bcel.verifier.VerifierFactory;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
 import org.apache.bcel.verifier.exc.ClassConstraintException;
 import org.apache.bcel.verifier.exc.LocalVariableInfoInconsistentException;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * This PassVerifier verifies a class file according to pass 2 as described in The Java Virtual Machine Specification,
@@ -170,7 +170,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                     return;
                 }
                 final Method m = (Method) carrier.predecessor(); // we can assume this method was visited before;
-                                                                 // i.e. the data consistency was verified.
+                                                                 // for example the data consistency was verified.
 
                 if (obj.getCode().length == 0) {
                     throw new ClassConstraintException("Code array of Code attribute '" + tostring(obj) + "' (method '" + m + "') must not be empty.");
@@ -199,9 +199,15 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                         JavaClass e = Repository.lookupClass(cname);
                         final JavaClass t = Repository.lookupClass(Type.THROWABLE.getClassName());
                         final JavaClass o = Repository.lookupClass(Type.OBJECT.getClassName());
+                        final Set<String> ancestors = new HashSet<>(); // save class names to detect circular inheritance
                         while (e != o) {
                             if (e == t) {
                                 break; // It's a subclass of Throwable, OKAY, leave.
+                            }
+                            if (!ancestors.add(e.getClassName())) {
+                                throw new ClassConstraintException("Code attribute '" + tostring(obj) + "' (method '" + m + "') has an exception_table entry '"
+                                        + tostring(element) + "' that references '" + cname
+                                        + "' as an Exception but its superclass hierarchy is circular at '" + e.getClassName() + "'.");
                             }
 
                             v = VerifierFactory.getVerifier(e.getSuperclassName());
@@ -209,7 +215,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                             if (vr != VerificationResult.VR_OK) {
                                 throw new ClassConstraintException("Code attribute '" + tostring(obj) + "' (method '" + m + "') has an exception_table entry '"
                                         + tostring(element) + "' that references '" + cname + "' as an Exception but '" + e.getSuperclassName()
-                                        + "' in the ancestor hierachy does not pass verification pass 1: " + vr);
+                                        + "' in the ancestor hierarchy does not pass verification pass 1: " + vr);
                             }
                             e = Repository.lookupClass(e.getSuperclassName());
                         }
@@ -528,16 +534,21 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                     JavaClass e = Repository.lookupClass(cname);
                     final JavaClass t = Repository.lookupClass(Type.THROWABLE.getClassName());
                     final JavaClass o = Repository.lookupClass(Type.OBJECT.getClassName());
+                    final Set<String> ancestors = new HashSet<>(); // save class names to detect circular inheritance
                     while (e != o) {
                         if (e == t) {
                             break; // It's a subclass of Throwable, OKAY, leave.
+                        }
+                        if (!ancestors.add(e.getClassName())) {
+                            throw new ClassConstraintException("Exceptions attribute '" + tostring(obj) + "' references '" + cname
+                                + "' as an Exception but its superclass hierarchy is circular at '" + e.getClassName() + "'.");
                         }
 
                         v = VerifierFactory.getVerifier(e.getSuperclassName());
                         vr = v.doPass1();
                         if (vr != VerificationResult.VR_OK) {
                             throw new ClassConstraintException("Exceptions attribute '" + tostring(obj) + "' references '" + cname + "' as an Exception but '"
-                                + e.getSuperclassName() + "' in the ancestor hierachy does not pass verification pass 1: " + vr);
+                                + e.getSuperclassName() + "' in the ancestor hierarchy does not pass verification pass 1: " + vr);
                         }
                         e = Repository.lookupClass(e.getSuperclassName());
                     }
@@ -572,22 +583,22 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 }
                 if (maxone > 1) {
                     throw new ClassConstraintException(
-                        "Field '" + tostring(obj) + "' must only have at most one of its ACC_PRIVATE, ACC_PROTECTED, ACC_PUBLIC modifiers set.");
+                        "Field '" + tostring(obj) + "' must have at most one of its ACC_PRIVATE, ACC_PROTECTED, ACC_PUBLIC modifiers set.");
                 }
 
                 if (obj.isFinal() && obj.isVolatile()) {
                     throw new ClassConstraintException(
-                        "Field '" + tostring(obj) + "' must only have at most one of its ACC_FINAL, ACC_VOLATILE modifiers set.");
+                        "Field '" + tostring(obj) + "' must have at most one of its ACC_FINAL, ACC_VOLATILE modifiers set.");
                 }
             } else { // isInterface!
                 if (!obj.isPublic()) {
-                    throw new ClassConstraintException("Interface field '" + tostring(obj) + "' must have the ACC_PUBLIC modifier set but hasn't!");
+                    throw new ClassConstraintException("Interface field '" + tostring(obj) + "' must have the ACC_PUBLIC modifier set but hasn't.");
                 }
                 if (!obj.isStatic()) {
-                    throw new ClassConstraintException("Interface field '" + tostring(obj) + "' must have the ACC_STATIC modifier set but hasn't!");
+                    throw new ClassConstraintException("Interface field '" + tostring(obj) + "' must have the ACC_STATIC modifier set but hasn't.");
                 }
                 if (!obj.isFinal()) {
-                    throw new ClassConstraintException("Interface field '" + tostring(obj) + "' must have the ACC_FINAL modifier set but hasn't!");
+                    throw new ClassConstraintException("Interface field '" + tostring(obj) + "' must have the ACC_FINAL modifier set but hasn't.");
                 }
             }
 
@@ -601,7 +612,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             final String name = obj.getName();
             if (!validFieldName(name)) {
-                throw new ClassConstraintException("Field '" + tostring(obj) + "' has illegal name '" + obj.getName() + "'.");
+                throw new ClassConstraintException("Field '" + tostring(obj) + "' has an illegal name '" + obj.getName() + "'.");
             }
 
             // A descriptor is often named signature in BCEL
@@ -617,7 +628,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             final String nameanddesc = name + sig;
             if (fieldNamesAndDesc.contains(nameanddesc)) {
-                throw new ClassConstraintException("No two fields (like '" + tostring(obj) + "') are allowed have same names and descriptors!");
+                throw new ClassConstraintException("No two fields (like '" + tostring(obj) + "') are allowed to have the same name and descriptor.");
             }
             if (fieldNames.contains(name)) {
                 addMessage("More than one field of name '" + name + "' detected (but with different type descriptors). This is very unusual.");
@@ -646,7 +657,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         @Override
         public void visitInnerClasses(final InnerClasses innerClasses) { // vmspec2 4.7.5
 
-            // exactly one InnerClasses attr per ClassFile if some inner class is refernced: see visitJavaClass()
+            // exactly one InnerClasses attr per ClassFile if some inner class is referenced: see visitJavaClass()
 
             checkIndex(innerClasses, innerClasses.getNameIndex(), CONST_Utf8);
 
@@ -709,7 +720,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                         foundInnerClasses = true;
                     } else if (hasInnerClass) {
                         throw new ClassConstraintException("A Classfile structure (like '" + tostring(obj) + "') must have exactly one InnerClasses attribute"
-                            + " if at least one Inner Class is referenced (which is the case)." + " More than one InnerClasses attribute was found.");
+                            + " if at least one Inner Class is referenced (which is the case). More than one InnerClasses attribute was found.");
                     }
                     if (!hasInnerClass) {
                         addMessage("No referenced Inner Class found, but InnerClasses attribute '" + tostring(att)
@@ -787,7 +798,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             final String name = obj.getName();
             if (!validMethodName(name, true)) {
-                throw new ClassConstraintException("Method '" + tostring(obj) + "' has illegal name '" + name + "'.");
+                throw new ClassConstraintException("Method '" + tostring(obj) + "' has an illegal name '" + name + "'.");
             }
 
             // A descriptor is often named signature in BCEL
@@ -836,8 +847,8 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             // Nearly forgot this! Funny return values are allowed, but a non-empty arguments list makes a different method out of
             // it!
             if (name.equals(Const.STATIC_INITIALIZER_NAME) && ts.length != 0) {
-                throw new ClassConstraintException("Method '" + tostring(obj) + "' has illegal name '" + name + "'."
-                    + " Its name resembles the class or interface initialization method" + " which it isn't because of its arguments (==descriptor).");
+                throw new ClassConstraintException("Method '" + tostring(obj) + "' has an illegal name '" + name + "'."
+                    + " Its name resembles the class or interface initialization method which it isn't because of its arguments (==descriptor).");
             }
 
             if (jc.isClass()) {
@@ -853,7 +864,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 }
                 if (maxone > 1) {
                     throw new ClassConstraintException(
-                        "Method '" + tostring(obj) + "' must only have at most one of its ACC_PRIVATE, ACC_PROTECTED, ACC_PUBLIC modifiers set.");
+                        "Method '" + tostring(obj) + "' must have at most one of its ACC_PRIVATE, ACC_PROTECTED, ACC_PUBLIC modifiers set.");
                 }
 
                 if (obj.isAbstract()) {
@@ -888,7 +899,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 if (jc.getMajor() >= Const.MAJOR_1_8) {
                     if (obj.isPublic() == obj.isPrivate()) {
                         throw new ClassConstraintException(
-                            "Interface method '" + tostring(obj) + "' must have" + " exactly one of its ACC_PUBLIC and ACC_PRIVATE modifiers set.");
+                            "Interface method '" + tostring(obj) + "' must have exactly one of its ACC_PUBLIC and ACC_PRIVATE modifiers set.");
                     }
                     if (obj.isProtected() || obj.isFinal() || obj.isSynchronized() || obj.isNative()) {
                         throw new ClassConstraintException("Interface method '" + tostring(obj) + "' must not have"
@@ -897,10 +908,10 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
                 } else {
                     if (!obj.isPublic()) {
-                        throw new ClassConstraintException("Interface method '" + tostring(obj) + "' must have the ACC_PUBLIC modifier set but hasn't!");
+                        throw new ClassConstraintException("Interface method '" + tostring(obj) + "' must have the ACC_PUBLIC modifier set but hasn't.");
                     }
                     if (!obj.isAbstract()) {
-                        throw new ClassConstraintException("Interface method '" + tostring(obj) + "' must have the ACC_ABSTRACT modifier set but hasn't!");
+                        throw new ClassConstraintException("Interface method '" + tostring(obj) + "' must have the ACC_ABSTRACT modifier set but hasn't.");
                     }
                     if (obj.isPrivate() || obj.isProtected() || obj.isStatic() || obj.isFinal() || obj.isSynchronized() || obj.isNative() || obj.isStrictfp()) {
                         throw new ClassConstraintException("Interface method '" + tostring(obj) + "' must not have"
@@ -912,13 +923,13 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             if ((obj.getAccessFlags() & ~(Const.ACC_PUBLIC | Const.ACC_PRIVATE | Const.ACC_PROTECTED | Const.ACC_STATIC | Const.ACC_FINAL |
                 Const.ACC_SYNCHRONIZED | Const.ACC_NATIVE | Const.ACC_ABSTRACT | Const.ACC_STRICT)) > 0) {
-                addMessage("Method '" + tostring(obj) + "' has access flag(s) other than" + " ACC_PUBLIC, ACC_PRIVATE, ACC_PROTECTED, ACC_STATIC, ACC_FINAL,"
+                addMessage("Method '" + tostring(obj) + "' has access flag(s) other than ACC_PUBLIC, ACC_PRIVATE, ACC_PROTECTED, ACC_STATIC, ACC_FINAL,"
                     + " ACC_SYNCHRONIZED, ACC_NATIVE, ACC_ABSTRACT, ACC_STRICT set (ignored).");
             }
 
             final String nameanddesc = name + sig;
             if (methodNamesAndDesc.contains(nameanddesc)) {
-                throw new ClassConstraintException("No two methods (like '" + tostring(obj) + "') are allowed have same names and desciptors!");
+                throw new ClassConstraintException("No two methods (like '" + tostring(obj) + "') are allowed to have the same name and descriptor.");
             }
             methodNamesAndDesc.add(nameanddesc);
 
@@ -966,7 +977,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             checkIndex(obj, obj.getSourceFileIndex(), CONST_Utf8);
 
             final String sourceFileName = ((ConstantUtf8) cp.getConstant(obj.getSourceFileIndex())).getBytes(); // ==obj.getSourceFileName() ?
-            final String sourceFileNameLc = sourceFileName.toLowerCase(Locale.ROOT);
+            final String sourceFileNameLc = StringUtils.toRootLowerCase(sourceFileName);
 
             if (sourceFileName.indexOf('/') != -1 || sourceFileName.indexOf('\\') != -1 || sourceFileName.indexOf(':') != -1
                 || sourceFileNameLc.lastIndexOf(".java") == -1) {
@@ -1015,7 +1026,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         @Override
         public void visitConstantFieldref(final ConstantFieldref obj) {
             if (obj.getTag() != Const.CONSTANT_Fieldref) {
-                throw new ClassConstraintException("ConstantFieldref '" + tostring(obj) + "' has wrong tag!");
+                throw new ClassConstraintException("ConstantFieldref '" + tostring(obj) + "' has the wrong tag.");
             }
             final int nameAndTypeIndex = obj.getNameAndTypeIndex();
             final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(nameAndTypeIndex);
@@ -1043,7 +1054,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         @Override
         public void visitConstantInterfaceMethodref(final ConstantInterfaceMethodref obj) {
             if (obj.getTag() != Const.CONSTANT_InterfaceMethodref) {
-                throw new ClassConstraintException("ConstantInterfaceMethodref '" + tostring(obj) + "' has wrong tag!");
+                throw new ClassConstraintException("ConstantInterfaceMethodref '" + tostring(obj) + "' has the wrong tag.");
             }
             final int nameAndTypeIndex = obj.getNameAndTypeIndex();
             final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(nameAndTypeIndex);
@@ -1076,7 +1087,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         @Override
         public void visitConstantMethodref(final ConstantMethodref obj) {
             if (obj.getTag() != Const.CONSTANT_Methodref) {
-                throw new ClassConstraintException("ConstantMethodref '" + tostring(obj) + "' has wrong tag!");
+                throw new ClassConstraintException("ConstantMethodref '" + tostring(obj) + "' has the wrong tag.");
             }
             final int nameAndTypeIndex = obj.getNameAndTypeIndex();
             final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(nameAndTypeIndex);
@@ -1247,12 +1258,14 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * variables of method number i in the JavaClass this verifier operates on.
      */
     private LocalVariablesInfo[] localVariablesInfos;
+
     /** The Verifier that created this. */
     private final Verifier verifier;
 
     /**
      * Should only be instantiated by a Verifier.
      *
+     * @param verifier The verifier.
      * @see Verifier
      */
     public Pass2Verifier(final Verifier verifier) {
@@ -1263,7 +1276,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * Ensures that the constant pool entries satisfy the static constraints as described in The Java Virtual Machine
      * Specification, 2nd Edition.
      *
-     * @throws ClassConstraintException otherwise.
+     * @throws AssertionViolatedException Thrown if the class is missing.
      */
     private void constantPoolEntriesSatisfyStaticConstraints() {
         try {
@@ -1283,12 +1296,16 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * Pass 2 is the pass where static properties of the class file are checked without looking into "Code" arrays of
      * methods. This verification pass is usually invoked when a class is resolved; and it may be possible that this
      * verification pass has to load in other classes such as superclasses or implemented interfaces. Therefore, Pass 1 is
-     * run on them.<BR>
-     * Note that most referenced classes are <B>not</B> loaded in for verification or for an existance check by this pass;
-     * only the syntactical correctness of their names and descriptors (a.k.a. signatures) is checked.<BR>
+     * run on them.
+     * <p>
+     * Note that most referenced classes are <strong>not</strong> loaded in for verification or for an existence check by this pass;
+     * only the syntactical correctness of their names and descriptors (a.k.a. signatures) is checked.
+     * </p>
+     * <p>
      * Very few checks that conceptually belong here are delayed until pass 3a in JustIce. JustIce does not only check for
      * syntactical correctness but also for semantical sanity - therefore it needs access to the "Code" array of methods in
      * a few cases. Please see the pass 3a documentation, too.
+     * </p>
      *
      * @see Pass3aVerifier
      */
@@ -1322,12 +1339,12 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
     }
 
     /**
-     * Ensures that every class has a super class and that <B>final</B> classes are not subclassed. This means, the class
-     * this Pass2Verifier operates on has proper super classes (transitively) up to {@link Object}. The reason for really
+     * Ensures that every class has a superclass and that {@code final} classes are not subclassed. This means, the class
+     * this Pass2Verifier operates on has proper superclasses (transitively) up to {@link Object}. The reason for really
      * loading (and Pass1-verifying) all of those classes here is that we need them in Pass2 anyway to verify no final
      * methods are overridden (that could be declared anywhere in the ancestor hierarchy).
      *
-     * @throws ClassConstraintException otherwise.
+     * @throws ClassConstraintException Thrown if a class has an invalid superclass or extends a final class.
      */
     private void everyClassHasAnAccessibleSuperclass() {
         try {
@@ -1376,7 +1393,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
      * otherwise. <B>Precondition: index-style cross referencing in the constant pool must be valid. Simply invoke
      * constant_pool_entries_satisfy_static_constraints() before.</B>
      *
-     * @throws ClassConstraintException otherwise.
+     * @throws AssertionViolatedException Thrown if the class is missing.
      * @see #constantPoolEntriesSatisfyStaticConstraints()
      */
     private void fieldAndMethodRefsAreValid() {
@@ -1384,7 +1401,6 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             final JavaClass jc = Repository.lookupClass(verifier.getClassName());
             final DescendingVisitor v = new DescendingVisitor(jc, new FAMRAV_Visitor(jc));
             v.visit();
-
         } catch (final ClassNotFoundException e) {
             // FIXME: this might not be the best way to handle missing classes.
             throw new AssertionViolatedException("Missing class: " + e, e);
@@ -1392,11 +1408,11 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
     }
 
     /**
-     * Ensures that <B>final</B> methods are not overridden. <B>Precondition to run this method:
+     * Ensures that {@code final} methods are not overridden. <B>Precondition to run this method:
      * constant_pool_entries_satisfy_static_constraints() and every_class_has_an_accessible_superclass() have to be invoked
      * before (in that order).</B>
      *
-     * @throws ClassConstraintException otherwise.
+     * @throws AssertionViolatedException Thrown if the class is missing.
      * @see #constantPoolEntriesSatisfyStaticConstraints()
      * @see #everyClassHasAnAccessibleSuperclass()
      */
@@ -1416,11 +1432,11 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                     if (map.containsKey(nameAndSig) && method.isFinal()) {
                         if (!method.isPrivate()) {
                             throw new ClassConstraintException("Method '" + nameAndSig + "' in class '" + map.get(nameAndSig)
-                                + "' overrides the final (not-overridable) definition in class '" + jc.getClassName() + "'.");
+                                + "' overrides the final (non-overridable) definition in class '" + jc.getClassName() + "'.");
                         }
                         addMessage("Method '" + nameAndSig + "' in class '" + map.get(nameAndSig)
-                            + "' overrides the final (not-overridable) definition in class '" + jc.getClassName()
-                            + "'. This is okay, as the original definition was private; however this constraint leverage"
+                            + "' overrides the final (non-overridable) definition in class '" + jc.getClassName()
+                            + "'. This is okay, as the original definition was private; however, this relaxation of the constraint"
                             + " was introduced by JLS 8.4.6 (not vmspec2) and the behavior of the Sun verifiers.");
                     } else if (!method.isStatic()) { // static methods don't inherit
                         map.put(nameAndSig, jc.getClassName());
@@ -1439,11 +1455,14 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
     }
 
     /**
-     * Returns a LocalVariablesInfo object containing information about the usage of the local variables in the Code
-     * attribute of the said method or <B>null</B> if the class file this Pass2Verifier operates on could not be
+     * Gets a LocalVariablesInfo object containing information about the usage of the local variables in the Code
+     * attribute of the said method or {@code null} if the class file this Pass2Verifier operates on could not be
      * pass-2-verified correctly. The method number method_nr is the method you get using
-     * <B>Repository.lookupClass(myOwner.getClassname()).getMethods()[method_nr];</B>. You should not add own information.
+     * {@code Repository.lookupClass(myOwner.getClassname()).getMethods()[method_nr];}. You should not add your own information.
      * Leave that to JustIce.
+     *
+     * @param methodNr The method number.
+     * @return The LocalVariablesInfo object or null.
      */
     public LocalVariablesInfo getLocalVariablesInfo(final int methodNr) {
         if (verify() != VerificationResult.VR_OK) {

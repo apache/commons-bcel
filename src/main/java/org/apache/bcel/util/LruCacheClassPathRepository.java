@@ -37,6 +37,12 @@ public class LruCacheClassPathRepository extends AbstractClassPathRepository {
 
     private final LinkedHashMap<String, JavaClass> loadedClasses;
 
+    /**
+     * Constructs a new LruCacheClassPathRepository.
+     *
+     * @param path The class path.
+     * @param cacheSize The cache size.
+     */
     public LruCacheClassPathRepository(final ClassPath path, final int cacheSize) {
         super(path);
 

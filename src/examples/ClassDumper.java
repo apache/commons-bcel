@@ -30,7 +30,7 @@ import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.util.BCELifier;
 
 /**
- * Display Java .class file data. Output is based on javap tool. Built using the BCEL libary.
+ * Display Java .class file data. Output is based on javap tool. Built using the BCEL library.
  */
 final class ClassDumper {
 
@@ -43,15 +43,15 @@ final class ClassDumper {
     private int[] interfaces; // Names of implemented interfaces
     private ConstantPool constantPool; // collection of constants
     private Constant[] constantItems; // collection of constants
-    // private Field[] fields; // class fields, i.e., its variables
+    // private Field[] fields; // class fields, that is, its variables
     // private Method[] methods; // methods defined in the class
     private Attribute[] attributes; // attributes defined in the class
 
     /**
      * Parses class from the given stream.
      *
-     * @param file Input stream
-     * @param fileName File name
+     * @param file Input stream.
+     * @param fileName File name.
      */
     public ClassDumper(final FileImageInputStream file, final String fileName) {
         this.fileName = fileName;
@@ -64,48 +64,37 @@ final class ClassDumper {
     }
 
     /**
-     * Parses the given Java class file and return an object that represents the contained data, i.e., constants, methods,
+     * Parses the given Java class file and return an object that represents the contained data, that is, constants, methods,
      * fields and commands. A <em>ClassFormatException</em> is raised, if the file is not a valid .class file. (This does
      * not include verification of the byte code as it is performed by the Java interpreter).
      *
-     * @throws IOException
-     * @throws ClassFormatException
+     * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     public void dump() throws IOException, ClassFormatException {
-        try {
-            // Check magic tag of class file
-            processID();
-            // Get compiler version
-            processVersion();
-            // process constant pool entries
-            processConstantPool();
-            // Get class information
-            processClassInfo();
-            // Get interface information, i.e., implemented interfaces
-            processInterfaces();
-            // process class fields, i.e., the variables of the class
-            processFields();
-            // process class methods, i.e., the functions in the class
-            processMethods();
-            // process class attributes
-            processAttributes();
-        } finally {
-            // Processed everything of interest, so close the file
-            try {
-                if (file != null) {
-                    file.close();
-                }
-            } catch (final IOException ioe) {
-                // ignore close exceptions
-            }
-        }
+        // Check magic tag of class file
+        processID();
+        // Get compiler version
+        processVersion();
+        // process constant pool entries
+        processConstantPool();
+        // Get class information
+        processClassInfo();
+        // Get interface information, that is, implemented interfaces
+        processInterfaces();
+        // process class fields, that is, the variables of the class
+        processFields();
+        // process class methods, that is, the functions in the class
+        processMethods();
+        // process class attributes
+        processAttributes();
     }
 
     /**
      * Processes information about the attributes of the class.
      *
-     * @throws IOException
-     * @throws ClassFormatException
+     * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     private void processAttributes() throws IOException, ClassFormatException {
         final int attributesCount = file.readUnsignedShort();
@@ -124,10 +113,10 @@ final class ClassDumper {
     }
 
     /**
-     * Processes information about the class and its super class.
+     * Processes information about the class and its superclass.
      *
-     * @throws IOException
-     * @throws ClassFormatException
+     * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     private void processClassInfo() throws IOException, ClassFormatException {
         accessFlags = file.readUnsignedShort();
@@ -138,12 +127,12 @@ final class ClassDumper {
             accessFlags |= Const.ACC_ABSTRACT;
         }
         if ((accessFlags & Const.ACC_ABSTRACT) != 0 && (accessFlags & Const.ACC_FINAL) != 0) {
-            throw new ClassFormatException("Class " + fileName + " can't be both final and abstract");
+            throw new ClassFormatException("Class %s can't be both final and abstract", fileName);
         }
 
         System.out.printf("%nClass info:%n");
         System.out.println("  flags: " + BCELifier.printFlags(accessFlags, BCELifier.FLAGS.CLASS));
-        int classNameIndex = file.readUnsignedShort();
+        final int classNameIndex = file.readUnsignedShort();
         System.out.printf("  this_class: %d (", classNameIndex);
         System.out.println(constantToString(classNameIndex) + ")");
 
@@ -158,8 +147,8 @@ final class ClassDumper {
     /**
      * Processes constant pool entries.
      *
-     * @throws IOException
-     * @throws ClassFormatException
+     * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     private void processConstantPool() throws IOException, ClassFormatException {
         byte tag;
@@ -193,9 +182,9 @@ final class ClassDumper {
     /**
      * Constructs object from file stream.
      *
-     * @param file Input stream
-     * @throws IOException
-     * @throws ClassFormatException
+     * @param file Input stream.
+     * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     private void processFieldOrMethod() throws IOException, ClassFormatException {
         final int accessFlags = file.readUnsignedShort();
@@ -218,10 +207,10 @@ final class ClassDumper {
             final int attributeLength = file.readInt();
             // restore file location
             file.reset();
-            // Usefull for debugging
+            // Useful for debugging
             // System.out.printf(" attribute_name_index: %d (", attribute_name_index);
             // System.out.println(constantToString(attribute_name_index) + ")");
-            // System.out.printf(" atribute offset in file: %x%n", + file.getStreamPosition());
+            // System.out.printf(" attribute offset in file: %x%n", + file.getStreamPosition());
             // System.out.println(" atribute_length: " + attribute_length);
 
             // A stronger verification test would be to read attribute_length bytes
@@ -241,10 +230,10 @@ final class ClassDumper {
     }
 
     /**
-     * Processes information about the fields of the class, i.e., its variables.
+     * Processes information about the fields of the class, that is, its variables.
      *
-     * @throws IOException
-     * @throws ClassFormatException
+     * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     private void processFields() throws IOException, ClassFormatException {
         final int fieldsCount = file.readUnsignedShort();
@@ -264,13 +253,13 @@ final class ClassDumper {
     /**
      * Checks whether the header of the file is ok. Of course, this has to be the first action on successive file reads.
      *
-     * @throws IOException
-     * @throws ClassFormatException
+     * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     private void processID() throws IOException, ClassFormatException {
         final int magic = file.readInt();
         if (magic != Const.JVM_CLASSFILE_MAGIC) {
-            throw new ClassFormatException(fileName + " is not a Java .class file");
+            throw new ClassFormatException("%s is not a Java .class file", fileName);
         }
         System.out.println("Java Class Dump");
         System.out.println("  file: " + fileName);
@@ -281,8 +270,8 @@ final class ClassDumper {
     /**
      * Processes information about the interfaces implemented by this class.
      *
-     * @throws IOException
-     * @throws ClassFormatException
+     * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     private void processInterfaces() throws IOException, ClassFormatException {
         final int interfacesCount = file.readUnsignedShort();
@@ -307,8 +296,8 @@ final class ClassDumper {
     /**
      * Processes information about the methods of the class.
      *
-     * @throws IOException
-     * @throws ClassFormatException
+     * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     private void processMethods() throws IOException, ClassFormatException {
         final int methodsCount = file.readUnsignedShort();
@@ -327,8 +316,8 @@ final class ClassDumper {
     /**
      * Processes major and minor version of compiler which created the file.
      *
-     * @throws IOException
-     * @throws ClassFormatException
+     * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the class file format is invalid.
      */
     private void processVersion() throws IOException, ClassFormatException {
         minor = file.readUnsignedShort();
@@ -343,18 +332,12 @@ final class ClassDumper {
 final class DumpClass {
 
     public static void main(final String[] args) throws IOException {
-
         if (args.length != 1) {
-            throw new IllegalArgumentException("Require file name as only argument");
+            throw new IllegalArgumentException("A file name is required as the only argument");
         }
-
         try (FileImageInputStream file = new FileImageInputStream(new File(args[0]))) {
-
-            final ClassDumper cd = new ClassDumper(file, args[0]);
-            cd.dump();
+            new ClassDumper(file, args[0]).dump();
         }
-
         System.out.printf("End of Class Dump%n");
-
     }
 }

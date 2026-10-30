@@ -50,7 +50,7 @@ The <action> type attribute can be add,update,fix,remove.
   with a new-line in the release notes. (These spaces are ignored when displaying HTML).
   If the output is not quite correct, check for invisible trailing spaces!
 
-  N.B. The release notes template groups actions by type, and only extracts data for the current release.
+  The release notes template groups actions by type, and only extracts data for the current release.
   The changes report outputs actions in the order they appear in this file.
 
   To regenerate the release notes:
@@ -59,21 +59,150 @@ The <action> type attribute can be add,update,fix,remove.
   Defining changes.version allows one to create the RN without first removing the SNAPSHOT suffix.
    -->
   <body>
-    <release version="6.11.0" date="YYYY-MM-DD" description="This is a feature and maintenance release. Java 8 or later is required.">
+    <release version="6.14.0" date="YYYY-MM-DD" description="This is a feature and maintenance release. Java 8 or later is required.">
+      <!-- FIX -->
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Use modern Mockito on Java 11+ (#528).</action>
+      <action issue="BCEL-280" type="fix" dev="ggregory" due-to="Max Kammerer, akashchamp, Gary Gregory">MethodGen.setMaxLocals() should account for LocalVariableTable entries (#529).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix constant pool module access test on Java 27 (#534).</action>
+      <action issue="BCEL-379" type="fix" dev="ggregory" due-to="Gary Gregory, Aryan Ganjoo">BCELifier emits boolean literals for boolean ConstantValue fields so generated creator classes run. FieldGen preserves explicit false initial values (#536).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Update ECJ versions and generate the SWAP fixture with BCEL (#537).</action>
+      <action                  type="fix" dev="ggregory" due-to="Mohd Irshad">Fix typo 'preceeding' in ConstantPool exception message (#541).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Clean up comments for spelling, grammar, and readability.</action>
+      <!-- ADD -->
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add and use ClassFormatException.ClassFormatException(String, Object...).</action>
+      <action                  type="add" dev="ggregory" due-to="Nicolas Baumann, Gary Gregory">Add support for the RuntimeVisibleTypeAnnotations and RuntimeInvisibleTypeAnnotations attributes.</action>
+      <!-- UPDATE -->
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 104 to 106.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-lang3 from 3.20.0 to 3.21.0 #531.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump ecj.version from 3.26 to 3.46.100 on Java 17 and up (#537).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump ecj.version from 3.26 to 3.33 on Java 11 (#537).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory, Dependabot">Bump org.jetbrains.kotlin:kotlin-stdlib from 2.4.0 to 2.4.21 (#532).</action>
+      <!-- REMOVE -->
+      <action                  type="remove" dev="ggregory" due-to="Gary Gregory" issue="BCEL-280">Remove obsolete class file src/examples/Mini/MiniParser$JJCalls.</action>
+    </release>
+    <release version="6.13.0" date="2026-09-06" description="This is a feature and maintenance release. Java 8 or later is required.">
+      <!-- FIX -->
+      <action                  type="fix" dev="ggregory" due-to="nbauma109">Fix constant pool module access test on Java 26 and above #492.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Deprecate org.apache.bcel.classfile.Utility.Utility().</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Deprecate org.apache.bcel.verifier.exc.Utility.getStackTrace(Throwable).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix all Javadoc warnings and enforce checks by default.</action>
+      <action                  type="fix" dev="ggregory" due-to="Dexter.k">Escape constant pool names in generated HTML (#500).</action>
+      <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Escape referenced names in BCELFactory Java output (#501).</action>
+      <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Make wide flag thread-local in Utility.codeToString (#502).</action>
+      <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Read multianewarray dimensions as unsigned byte (#504).</action>
+      <action                  type="fix" dev="ggregory" due-to="Arnout Engelen">Site docs: clarify security model (#503).</action>
+      <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Read ConstantDynamic indices as unsigned shorts (#505).</action>
+      <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Validate index upper bound in CPInstruction, IINC and RET setIndex (#506).</action>
+      <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Use correct attribute tag in NestHost and ModuleMainClass (#507).</action>
+      <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Propagate runtime-visible flag when parsing parameter annotations (#509).</action>
+      <action                  type="fix" dev="ggregory" due-to="Digiscrypt Technologies, Gary Gregory">Use fixedLength for parsed LOOKUPSWITCH length (#499).</action>
+      <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Fix ConstantPoolGen dedup key collisions for names with delimiters (#510).</action>
+      <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Read unsigned bytecode operands in CodeHTML disassembler (#511).</action>
+      <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Deep-copy bootstrap arguments array in BootstrapMethod.copy() (#516).</action>
+      <action                  type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Use exclusive live-range end in LocalVariableTable.getLocalVariable (#517).</action>
+      <action                  type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Build TABLESWITCH from sorted arrays in SWITCH (#518).</action>
+      <action                  type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Use array element type not basic type for primitive array access (#520).</action>
+      <action                  type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Set length in INVOKEDYNAMIC constructor (#521).</action>
+      <action                  type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Reject CALOAD on non-char arrays in structural verification (#522).</action>
+      <action                  type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Add negative verifier tests for remaining array load/store component type checks (#524).</action>
+      <action                  type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Validate u1 count bound in INVOKEINTERFACE and MULTIANEWARRAY (#523).</action>
+      <action                  type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Match wide local variable instruction length to dumped bytes (#525).</action>
+      <action                  type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Bound IINC increment to signed short (#526).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs USO_UNSAFE_METHOD_SYNCHRONIZATION in ConstantUtf8.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Nested Code/Record attributes drive unbounded parse-time recursion in ClassParser (f001).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Nested annotation element values recurse unboundedly; MAX_ARRAY_DIMENSIONS cap bypassed (f002).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Opcodes tableswitch and lookupswitch add boundary checks (f003).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">JustIce Pass 2 hangs on cyclic superclass chain of a referenced exception class (f004).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">JustIce Pass 2 LVT check amplifies each 10-byte entry into ~131k hashtable operations (f005).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Pass 3b dataflow stores frames per instruction and clones ever-growing execution chains (f006).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Cubic handlers × range × subroutines scan in Subroutines constructor hangs JustIce Pass 3b (f007).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Subroutines.noRecursiveCalls enumerates exponentially many JSR call paths (f008).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Disassembler and Class2HTML re-implement the unchecked switch-table allocation (f009).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">ConstantPool.constantToString recurses forever on self-referencing CONSTANT_MethodHandle (f010).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Utility.typeSignatureToString recurses per generic-nesting level, unbounded, with quadratic substring copies. (f011).</action>      
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Repositories cache classes under the input-defined this_class name; global static Repository/VerifierFactory make the poisoning ClassLoader-wide. (f012).</action>      
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Silent u2/u1 count truncation across dump paths corrupts emitted bytecode. (f013).</action>      
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Class2HTML emitters write attacker class-file strings into HTML unescaped (stored XSS in reports) (f014).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Class2HTML builds output file paths from the unvalidated class name (f015).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">ClassPath.getBytes() sizes its buffer from the forged ZIP uncompressed-size field (f016).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">PMG attribute ignores declared length, enabling BCEL-vs-JVM parse divergence (f019).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Signature.matchGJIdent recurses unboundedly on nested generic signatures (Signature.translate) (f020).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Utility.decode fixed 3x buffer breaks the encode/decode round trip and throws unchecked AIOOBE (f021).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">BCELifier interpolates attacker class/package names into generated Java source unescaped (f022).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Verifier pass 3a delayed checks are quadratic in attribute and code size (f023).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Verifier cache grows unboundedly with attacker-chosen class names (f024).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Static WIDE ThreadLocal survives exceptions, corrupting the next class's disassembly on the same thread (f025).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Utility.JavaReader escape decoding: OOB table index, bad-hex crash, silent non-canonical aliasing (f026).</action>
+      <!-- ADD -->
+      <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add support for permitted subclasses #493.</action>
+      <action                  type="add" dev="ggregory" due-to="nbauma109, Gary Gregory">Add RecordComponentInfo.getAttribute(byte tag)#494.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_27.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_27.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add and use ArrayType.isElementType(Type).</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_28.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_28.</action>
+      <!-- UPDATE -->
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 95 to 104.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory, Dependabot">Bump org.jetbrains.kotlin:kotlin-stdlib from 2.3.0 to 2.4.20 (#497, #519).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-io:commons-io from 2.21.0 to 2.22.0.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory, Dependabot">Bump jna.version from 5.18.1 to 5.19.1 (#514).</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">[test] Bump org.apache.commons:commons-collections4 from 4.5.0 to 4.6.0.</action>
+    </release>
+    <release version="6.12.0" date="2026-01-18" description="This is a feature and maintenance release. Java 8 or later is required.">
+      <!-- FIX -->
+      <action                  type="fix" dev="ggregory" due-to="fmantz, Gary Gregory">Fix infinite loop in example.TransitiveHull #476.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix Apache RAT plugin console warnings.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix malformed Javadoc comments.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Make the build reproducible on the Azul JDK.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory, Pavel Kohout">Fix infinite loop in JavaClass.findField() on invalid input.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory, Pavel Kohout">Fix infinite loop in JavaClass.getAllInterfaces() on invalid input.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory, Pavel Kohout">Fix infinite loop in JavaClass.getSuperClasses() on invalid input.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Exception message in Args.requireU4() refers to the wrong data type.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Exception message in Args.requireU2() refers to the wrong upper range value.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory, Stanislav Fort">Code.Code(int, int, DataInput, ConstantPool) now throws a ClassFormatException if the code array is greater than the JVM specification allows.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory, Stanislav Fort">Code.Code(int, int, int, int, byte[], CodeException[], Attribute[], ConstantPool) now throws a ClassFormatException if the code array is greater than the JVM specification allows.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Code.setCode(byte[]) now throws a ClassFormatException if the code array is greater than the JVM specification allows.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">ClassDumper.dump() should not call the input stream it didn't open; fixes IOException when calling DumpClass.main(ClassDumper.java:351).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.classfile.ConstantPool.ConstantPool(Constant[]) now uses varagrs: ConstantPool(Constant...).</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.classfile.Deprecated now requires its the attribute_length item be zero; see https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.15.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.classfile.Synthetic now requires its the attribute_length item be zero; see https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.8.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory, Stanislav Fort">The size of an Attribute unknown to the JVM specification is limited to 1 MB and is overridden with the system property BCEL.Attribute.Unknown.max_attribute_length; see https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.</action>
+      <!-- ADD -->
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_26.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_26.</action>
+      <!-- UPDATE -->
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 89 to 95 #482.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">[test] Bump org.jetbrains.kotlin:kotlin-stdlib from 2.2.20 to 2.3.0 #481.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-io:commons-io from 2.20.0 to 2.21.0.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-lang3 from 3.19.0 to 3.20.0.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">[test] Bump org.apache.commons:commons-exec from 1.5.0 to 1.6.0.</action>
+    </release>
+    <release version="6.11.0" date="2025-10-09" description="This is a feature and maintenance release. Java 8 or later is required.">
       <!-- FIX -->
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Replace internal use of Locale.ENGLISH with Locale.ROOT.</action>
       <action issue="BCEL-375" type="fix" dev="ggregory" due-to="J. Lewis Muir, Gary Gregory">Wrong permissions on bcel .jar file in binary .tar.gz distribution file.</action>
+      <action issue="BCEL-376" type="fix" dev="ggregory" due-to="Dominik Stadler, Gary Gregory">ClassPath.close() throws UnsupportedOperationException when created with system-classpath.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">ClassPath.getResources(String) can use an ArrayList instead of a Vector.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs [ERROR] Medium: Operation on the "created" shared variable in "ConstantUtf8" class is not atomic [org.apache.bcel.classfile.ConstantUtf8] At ConstantUtf8.java:[line 119] AT_NONATOMIC_OPERATIONS_ON_SHARED_VARIABLE.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs [ERROR] Medium: Operation on the "considered" shared variable in "ConstantUtf8" class is not atomic [org.apache.bcel.classfile.ConstantUtf8] At ConstantUtf8.java:[line 137] AT_NONATOMIC_OPERATIONS_ON_SHARED_VARIABLE.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix SpotBugs [ERROR] Medium: Operation on the "skipped" shared variable in "ConstantUtf8" class is not atomic [org.apache.bcel.classfile.ConstantUtf8] At ConstantUtf8.java:[line 134] AT_NONATOMIC_OPERATIONS_ON_SHARED_VARIABLE.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">org.apache.bcel.util.ClassPath.addJdkModules(String, List&lt;String&gt;) now reads the system property "jdk.module.path" instead of "java.modules.path"; see https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/System.html#jdk.module.path.</action>
+      <action                  type="fix" dev="iloveeclipse" due-to="Andrey Loskutov">Fix ConstantPoolModuleAccessTest failures on Java 25.</action>
+      <action issue="377"      type="fix" dev="ggregory" due-to="Dejan Stojadinović, Gary Gregory, Andrey Loskutov">Fix testing on Java 24 and up.</action>
       <!-- ADD -->
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_25.</action>
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_25.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MAJOR_25.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add Const.MINOR_25.</action>
+      <action                  type="add" dev="ggregory" due-to="Piotr P. Karwasz, Gary Gregory">Add experimental CycloneDX VEX file #446.</action>
+      <action                  type="add" dev="ggregory" due-to="Gary Gregory">Refactor to use new Maven POM variable ecj.version.</action>
       <!-- UPDATE -->
-      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.apache.commons:commons-lang3 from 3.14.0 to 3.17.0 #334, #341, #351.</action>
-      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.jetbrains.kotlin:kotlin-stdlib from 2.0.0 to 2.1.0 #340, #347, #369, #390.</action>
-      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.apache.commons:commons-parent from 72 to 79 #346, #349, #559, #364, #368, #378.</action>
-      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump commons-io:commons-io from 2.16.1 to 2.18.0 #357, #387.</action>
-      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump jna.version from 5.14.0 to 5.16.0 #358, #399.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.apache.commons:commons-parent from 72 to 89 #346, #349, #559, #364, #368, #378, #464.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.apache.commons:commons-lang3 from 3.14.0 to 3.19.0 #334, #341, #351, #444.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.jetbrains.kotlin:kotlin-stdlib from 2.0.0 to 2.2.20 #340, #347, #369, #390, #407, #422, #434, #441, #452, #462.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump commons-io:commons-io from 2.16.1 to 2.20.0 #357, #387.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump jna.version from 5.14.0 to 5.18.1 #358, #399, #466, #470.</action>
       <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.codehaus.mojo:taglist-maven-plugin from 3.1.0 to 3.2.1 #376.</action>
-      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.apache.commons:commons-collections4 from 4.5.0-M2 to 4.5.0-M3 #395.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.apache.commons:commons-collections4 from 4.5.0-M2 to 4.5.0 #395.</action>
+      <action                  type="update" dev="ggregory" due-to="Dependabot, Gary Gregory">Bump org.apache.commons:commons-exec from 1.4.0 to 1.5.0.</action>
     </release>
     <release version="6.10.0" date="2024-07-13" description="Maintenance and bug fix release. Requires a minimum of Java 8.">
       <!-- FIX -->
@@ -280,7 +409,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump spotbugs-maven-plugub from 4.7.2.1 to 4.7.2.2.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump pmd from 6.50.0 to 6.51.0.</action>
     </release>
-    <release version="6.6.0" date="2022-10-08" description="Minor feature and bug fix release.">
+    <release version="6.6.0" date="2022-10-08" description="Minor feature and bug fix release. Fixes CVE-2022-42920: Apache Commons BCEL prior to 6.6.0 allows producing arbitrary bytecode via out-of-bounds writing">
       <!-- FIX -->
       <action                  type="fix" dev="ggregory" due-to="Mark Roberts, Gary Gregory">Improve test case coverage; fix Utility.encode bug #46.</action>
       <action issue="BCEL-342" type="fix" dev="ggregory" due-to="Allon Murienik, Gary Gregory">Migrate test suite to JUnit Jupiter #68.</action>

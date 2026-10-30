@@ -26,9 +26,9 @@ import org.apache.bcel.util.ByteSequence;
 /**
  * BIPUSH - Push byte on stack
  *
- * <PRE>
+ * <pre>
  * Stack: ... -&gt; ..., value
- * </PRE>
+ * </pre>
  */
 public class BIPUSH extends Instruction implements ConstantPushInstruction {
 
@@ -41,7 +41,9 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
     }
 
     /**
-     * Push byte on stack
+     * Push byte on stack.
+     *
+     * @param b The byte value to push.
      */
     public BIPUSH(final byte b) {
         super(org.apache.bcel.Const.BIPUSH, (short) 2);
@@ -50,9 +52,9 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -64,7 +66,7 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
     }
 
     /**
-     * Dump instruction as byte code to stream out.
+     * Dumps instruction as byte code to stream out.
      */
     @Override
     public void dump(final DataOutputStream out) throws IOException {
@@ -73,7 +75,9 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
     }
 
     /**
-     * @return Type.BYTE
+     * Gets {@code Type.BYTE}.
+     *
+     * @return Type.BYTE.
      */
     @Override
     public Type getType(final ConstantPoolGen cp) {
@@ -86,7 +90,7 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
     }
 
     /**
-     * Read needed data (for example index) from file.
+     * Reads needed data (for example index) from file.
      */
     @Override
     protected void initFromFile(final ByteSequence bytes, final boolean wide) throws IOException {
@@ -95,7 +99,7 @@ public class BIPUSH extends Instruction implements ConstantPushInstruction {
     }
 
     /**
-     * @return mnemonic for instruction
+     * @return mnemonic for instruction.
      */
     @Override
     public String toString(final boolean verbose) {

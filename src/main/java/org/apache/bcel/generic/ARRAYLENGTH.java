@@ -23,14 +23,14 @@ import org.apache.bcel.ExceptionConst;
 /**
  * ARRAYLENGTH - Get length of array
  *
- * <PRE>
+ * <pre>
  * Stack: ..., arrayref -&gt; ..., length
- * </PRE>
+ * </pre>
  */
 public class ARRAYLENGTH extends Instruction implements ExceptionThrower, StackProducer, StackConsumer /* since 6.0 */ {
 
     /**
-     * Gets length of array
+     * Gets the length of the array.
      */
     public ARRAYLENGTH() {
         super(org.apache.bcel.Const.ARRAYLENGTH, (short) 1);
@@ -38,9 +38,9 @@ public class ARRAYLENGTH extends Instruction implements ExceptionThrower, StackP
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -50,7 +50,9 @@ public class ARRAYLENGTH extends Instruction implements ExceptionThrower, StackP
     }
 
     /**
-     * @return exceptions this instruction may cause
+     * Gets the exceptions this instruction may cause.
+     *
+     * @return exceptions this instruction may cause.
      */
     @Override
     public Class<?>[] getExceptions() {

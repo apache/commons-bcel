@@ -40,6 +40,8 @@ public class OperandStack implements Cloneable {
 
     /**
      * Creates an empty stack with a maximum of maxStack slots.
+     *
+     * @param maxStack The maximum stack size.
      */
     public OperandStack(final int maxStack) {
         this.maxStack = maxStack;
@@ -47,6 +49,9 @@ public class OperandStack implements Cloneable {
 
     /**
      * Creates an otherwise empty stack with a maximum of maxStack slots and the ObjectType 'obj' at the top.
+     *
+     * @param maxStack The maximum stack size.
+     * @param obj The object type to place at the top.
      */
     public OperandStack(final int maxStack, final ObjectType obj) {
         this.maxStack = maxStack;
@@ -86,8 +91,9 @@ public class OperandStack implements Cloneable {
     }
 
     /**
-     * Returns a (typed!) clone of this.
+     * Gets a (typed!) clone of this.
      *
+     * @return A clone of this operand stack.
      * @see #clone()
      */
     public OperandStack getClone() {
@@ -95,7 +101,9 @@ public class OperandStack implements Cloneable {
     }
 
     /**
-     * @return a hash code value for the object.
+     * Gets the hash code.
+     *
+     * @return A hash code value for the object.
      */
     @Override
     public int hashCode() {
@@ -104,6 +112,8 @@ public class OperandStack implements Cloneable {
 
     /**
      * Replaces all occurrences of u in this OperandStack instance with an "initialized" ObjectType.
+     *
+     * @param u The uninitialized object type.
      */
     public void initializeObject(final UninitializedObjectType u) {
         for (int i = 0; i < stack.size(); i++) {
@@ -114,7 +124,9 @@ public class OperandStack implements Cloneable {
     }
 
     /**
-     * Returns true IFF this OperandStack is empty.
+     * Tests whether this OperandStack is empty.
+     *
+     * @return true if empty, false otherwise.
      */
     public boolean isEmpty() {
         return stack.isEmpty();
@@ -122,6 +134,8 @@ public class OperandStack implements Cloneable {
 
     /**
      * Returns the number of stack slots this stack can hold.
+     *
+     * @return The maximum stack size.
      */
     public int maxStack() {
         return this.maxStack;
@@ -130,24 +144,26 @@ public class OperandStack implements Cloneable {
     /**
      * Merges another stack state into this instance's stack state. See the Java Virtual Machine Specification, Second
      * Edition, page 146: 4.9.2 for details.
+     *
+     * @param s The stack to merge.
      */
     public void merge(final OperandStack s) {
         try {
             if (slotsUsed() != s.slotsUsed() || size() != s.size()) {
-                throw new StructuralCodeConstraintException("Cannot merge stacks of different size:\nOperandStack A:\n" + this + "\nOperandStack B:\n" + s);
+                throw new StructuralCodeConstraintException("Cannot merge stacks of different sizes:\nOperandStack A:\n" + this + "\nOperandStack B:\n" + s);
             }
 
             for (int i = 0; i < size(); i++) {
                 // If the object _was_ initialized and we're supposed to merge
                 // in some uninitialized object, we reject the code (see vmspec2, 4.9.4, last paragraph).
                 if (!(stack.get(i) instanceof UninitializedObjectType) && s.stack.get(i) instanceof UninitializedObjectType) {
-                    throw new StructuralCodeConstraintException("Backwards branch with an uninitialized object on the stack detected.");
+                    throw new StructuralCodeConstraintException("Backward branch with an uninitialized object on the stack detected.");
                 }
                 // Even harder, we're not initialized but are supposed to broaden
                 // the known object type
                 if (!stack.get(i).equals(s.stack.get(i)) && stack.get(i) instanceof UninitializedObjectType
                     && !(s.stack.get(i) instanceof UninitializedObjectType)) {
-                    throw new StructuralCodeConstraintException("Backwards branch with an uninitialized object on the stack detected.");
+                    throw new StructuralCodeConstraintException("Backward branch with an uninitialized object on the stack detected.");
                 }
                 // on the other hand...
                 if (stack.get(i) instanceof UninitializedObjectType && !(s.stack.get(i) instanceof UninitializedObjectType)) { // that has been initialized by
@@ -169,6 +185,8 @@ public class OperandStack implements Cloneable {
 
     /**
      * Returns the element on top of the stack. The element is not popped off the stack!
+     *
+     * @return The top element.
      */
     public Type peek() {
         return peek(0);
@@ -177,13 +195,18 @@ public class OperandStack implements Cloneable {
     /**
      * Returns the element that's i elements below the top element; that means, iff i==0 the top element is returned. The
      * element is not popped off the stack!
+     *
+     * @param depth The depth.
+     * @return The element at the specified depth.
      */
-    public Type peek(final int i) {
-        return stack.get(size() - i - 1);
+    public Type peek(final int depth) {
+        return stack.get(size() - depth - 1);
     }
 
     /**
      * Returns the element on top of the stack. The element is popped off the stack.
+     *
+     * @return The popped element.
      */
     public Type pop() {
         return stack.remove(size() - 1);
@@ -192,6 +215,7 @@ public class OperandStack implements Cloneable {
     /**
      * Pops i elements off the stack. Always returns null.
      *
+     * @param count The number of elements to pop.
      * @return Always returns null.
      */
     public Type pop(final int count) {
@@ -203,6 +227,8 @@ public class OperandStack implements Cloneable {
 
     /**
      * Pushes a Type object onto the stack.
+     *
+     * @param type The type to push.
      */
     public void push(final Type type) {
         if (type == null) {
@@ -219,6 +245,8 @@ public class OperandStack implements Cloneable {
 
     /**
      * Returns the size of this OperandStack; that means, how many Type objects there are.
+     *
+     * @return The stack size.
      */
     public int size() {
         return stack.size();
@@ -227,6 +255,7 @@ public class OperandStack implements Cloneable {
     /**
      * Returns the number of stack slots used.
      *
+     * @return The number of slots used.
      * @see #maxStack()
      */
     public int slotsUsed() {
@@ -243,6 +272,8 @@ public class OperandStack implements Cloneable {
 
     /**
      * Returns a String representation of this OperandStack instance.
+     *
+     * @return string representation.
      */
     @Override
     public String toString() {

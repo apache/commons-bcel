@@ -67,7 +67,7 @@ public class ASTInteger extends ASTExpr {
     /**
      * Second pass Overrides AstExpr.eval()
      *
-     * @return type of expression
+     * @return type of expression.
      */
     @Override
     public int eval(final int expected) {
@@ -85,7 +85,7 @@ public class ASTInteger extends ASTExpr {
     }
 
     /**
-     * @return identifier and line/column number of appearance
+     * @return identifier and line/column number of appearance.
      */
     @Override
     public String toString() {

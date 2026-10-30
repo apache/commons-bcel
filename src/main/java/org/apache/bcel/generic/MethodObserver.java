@@ -24,5 +24,10 @@ package org.apache.bcel.generic;
  */
 public interface MethodObserver {
 
+    /**
+     * Notifies this observer of a change to the method.
+     *
+     * @param method The method that changed.
+     */
     void notify(MethodGen method);
 }

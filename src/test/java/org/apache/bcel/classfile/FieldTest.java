@@ -27,10 +27,10 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link Field}.
  */
-public class FieldTest {
+class FieldTest {
 
     @Test
-    public void testBCELComparator() throws Exception {
+    void testBCELComparator() throws Exception {
         final Field obj = new Field(1, 1, 1, null, null);
         assertTrue(Field.getComparator().equals(null, null));
         assertTrue(Field.getComparator().equals(obj, obj));

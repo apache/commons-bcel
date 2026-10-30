@@ -897,11 +897,11 @@ public class MiniParser/* @bgen(jjtree) */ implements MiniParserTreeConstants, M
         return jj_scanpos.kind != kind;
     }
 
-    final static void jjtreeCloseNodeScope(final Node n) {
+    static final void jjtreeCloseNodeScope(final Node n) {
         ((SimpleNode) n).closeNode();
     }
 
-    final static void jjtreeOpenNodeScope(final Node n) {
+    static final void jjtreeOpenNodeScope(final Node n) {
     }
 
     static public void LetExpr() throws ParseException {

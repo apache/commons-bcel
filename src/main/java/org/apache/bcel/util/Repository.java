@@ -35,35 +35,48 @@ public interface Repository {
 
     /**
      * Finds the class with the name provided, if the class isn't there, return NULL.
+     *
+     * @param className The class name.
+     * @return The JavaClass instance, or null.
      */
     JavaClass findClass(String className);
 
     /**
-     * Gets the ClassPath associated with this Repository
+     * Gets the ClassPath associated with this Repository.
+     *
+     * @return The ClassPath.
      */
     ClassPath getClassPath();
 
     /**
      * Finds the JavaClass instance for the given run-time class object.
      *
-     * @throws ClassNotFoundException if the class can't be found.
+     * @param clazz The class.
+     * @return The JavaClass instance.
+     * @throws ClassNotFoundException Thrown if the class can't be found.
      */
     JavaClass loadClass(Class<?> clazz) throws ClassNotFoundException;
 
     /**
      * Finds the class with the name provided, if the class isn't there, make an attempt to load it.
      *
-     * @throws ClassNotFoundException if the class can't be found.
+     * @param className The class name.
+     * @return The JavaClass instance.
+     * @throws ClassNotFoundException Thrown if the class can't be found.
      */
     JavaClass loadClass(String className) throws ClassNotFoundException;
 
     /**
-     * Removes class from repository
+     * Removes class from repository.
+     *
+     * @param clazz The class to remove.
      */
     void removeClass(JavaClass clazz);
 
     /**
-     * Stores the provided class under "clazz.getClassName()"
+     * Stores the provided class under "clazz.getClassName()".
+     *
+     * @param clazz The class to store.
      */
     void storeClass(JavaClass clazz);
 }

@@ -25,10 +25,10 @@ import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
 
-public class ObjectTypeTest {
+class ObjectTypeTest {
 
     @Test
-    public void testGetClassName() {
+    void testGetClassName() {
         final String className = BigDecimal.class.getName();
         final ObjectType objectType = ObjectType.getInstance(className);
         assertEquals(className, objectType.getClassName());

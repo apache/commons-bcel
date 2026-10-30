@@ -19,7 +19,7 @@
 package org.apache.bcel.generic;
 
 /**
- * Denotes an instruction to perform an unconditional branch, i.e., GOTO, JSR.
+ * Denotes an instruction to perform an unconditional branch, that is, GOTO, JSR.
  *
  * @see GOTO
  * @see JSR

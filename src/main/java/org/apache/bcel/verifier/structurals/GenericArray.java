@@ -28,6 +28,12 @@ public class GenericArray implements Cloneable, Serializable {
 
     private static final long serialVersionUID = 1991183963515237894L;
 
+    /**
+     * Constructs a GenericArray.
+     */
+    public GenericArray() {
+    }
+
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();

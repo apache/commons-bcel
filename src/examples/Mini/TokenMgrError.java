@@ -32,7 +32,7 @@ public class TokenMgrError extends Error {
     static final int LEXICAL_ERROR = 0;
 
     /**
-     * An attempt wass made to create a second instance of a static token manager.
+     * An attempt was made to create a second instance of a static token manager.
      */
     static final int STATIC_LEXER_ERROR = 1;
 
@@ -47,7 +47,7 @@ public class TokenMgrError extends Error {
     static final int LOOP_DETECTED = 3;
 
     /**
-     * Replaces unprintable characters by their espaced (or unicode escaped) equivalents in the given string
+     * Replaces unprintable characters by their escaped (or unicode escaped) equivalents in the given string
      */
     protected static String addEscapes(final String str) {
         final StringBuilder retval = new StringBuilder();
@@ -130,8 +130,10 @@ public class TokenMgrError extends Error {
     }
 
     /**
+     * Gets the error message.
+     *
      * You can also modify the body of this method to customize your error messages. For example, cases like LOOP_DETECTED
-     * and INVALID_LEXICAL_STATE are not of end-users concern, so you can return something like :
+     * and INVALID_LEXICAL_STATE are not a concern for end users, so you can return something like :
      *
      * "Internal Error : Please file a bug report .... "
      *

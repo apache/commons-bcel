@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * DCONST - Push 0.0 or 1.0, other values cause an exception
  *
- * <PRE>
+ * <pre>
  * Stack: ... -&gt; ...,
- * </PRE>
+ * </pre>
  */
 public class DCONST extends Instruction implements ConstantPushInstruction {
 
@@ -36,6 +36,12 @@ public class DCONST extends Instruction implements ConstantPushInstruction {
         this(0);
     }
 
+    /**
+     * Constructs a DCONST instruction.
+     *
+     * @param f The constant value (must be 0.0 or 1.0).
+     * @throws ClassGenException Thrown if f is not 0.0 or 1.0.
+     */
     public DCONST(final double f) {
         super(org.apache.bcel.Const.DCONST_0, (short) 1);
         if (f == 0.0) {
@@ -50,9 +56,9 @@ public class DCONST extends Instruction implements ConstantPushInstruction {
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -64,7 +70,9 @@ public class DCONST extends Instruction implements ConstantPushInstruction {
     }
 
     /**
-     * @return Type.DOUBLE
+     * Gets {@code Type.DOUBLE}.
+     *
+     * @return Type.DOUBLE.
      */
     @Override
     public Type getType(final ConstantPoolGen cp) {

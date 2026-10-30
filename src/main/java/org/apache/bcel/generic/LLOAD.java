@@ -21,9 +21,9 @@ package org.apache.bcel.generic;
 /**
  * LLOAD - Load long from local variable
  *
- * <PRE>
+ * <pre>
  * Stack ... -&gt; ..., result.word1, result.word2
- * </PRE>
+ * </pre>
  */
 public class LLOAD extends LoadInstruction {
 
@@ -34,15 +34,20 @@ public class LLOAD extends LoadInstruction {
         super(org.apache.bcel.Const.LLOAD, org.apache.bcel.Const.LLOAD_0);
     }
 
+    /**
+     * Load long from local variable.
+     *
+     * @param n index of local variable.
+     */
     public LLOAD(final int n) {
         super(org.apache.bcel.Const.LLOAD, org.apache.bcel.Const.LLOAD_0, n);
     }
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {

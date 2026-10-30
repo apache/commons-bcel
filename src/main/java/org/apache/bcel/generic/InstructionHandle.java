@@ -30,7 +30,7 @@ import org.apache.bcel.classfile.Utility;
  * Instances of this class give users a handle to the instructions contained in an InstructionList. Instruction objects
  * may be used more than once within a list, this is useful because it saves memory and may be much faster.
  *
- * Within an InstructionList an InstructionHandle object is wrapped around all instructions, i.e., it implements a cell
+ * Within an InstructionList an InstructionHandle object is wrapped around all instructions, that is, it implements a cell
  * in a doubly-linked list. From the outside only the next and the previous instruction (handle) are accessible. One can
  * traverse the list via an Enumeration returned by InstructionList.elements().
  *
@@ -53,7 +53,7 @@ public class InstructionHandle {
     static final InstructionTargeter[] EMPTY_INSTRUCTION_TARGETER_ARRAY = {};
 
     /**
-     * Factory method.
+     * Gets a new instruction handle for the given instruction.
      */
     static InstructionHandle getInstructionHandle(final Instruction i) {
         return new InstructionHandle(i);
@@ -73,6 +73,11 @@ public class InstructionHandle {
 
     private Map<Object, Object> attributes;
 
+    /**
+     * Constructs an InstructionHandle.
+     *
+     * @param i The instruction.
+     */
     protected InstructionHandle(final Instruction i) {
         setInstruction(i);
     }
@@ -80,7 +85,7 @@ public class InstructionHandle {
     /**
      * Convenience method, simply calls accept() on the contained instruction.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     public void accept(final Visitor v) {
         instruction.accept(v);
@@ -89,8 +94,8 @@ public class InstructionHandle {
     /**
      * Add an attribute to an instruction handle.
      *
-     * @param key the key object to store/retrieve the attribute
-     * @param attr the attribute to associate with this handle
+     * @param key The key object to store/retrieve the attribute.
+     * @param attr The attribute to associate with this handle.
      */
     public void addAttribute(final Object key, final Object attr) {
         if (attributes == null) {
@@ -111,6 +116,8 @@ public class InstructionHandle {
 
     /**
      * Denote this handle is being referenced by t.
+     *
+     * @param t The instruction targeter.
      */
     public void addTargeter(final InstructionTargeter t) {
         if (targeters == null) {
@@ -121,7 +128,7 @@ public class InstructionHandle {
     }
 
     /**
-     * Delete contents, i.e., remove user access.
+     * Delete contents, removes user access.
      */
     void dispose() {
         next = prev = null;
@@ -133,16 +140,19 @@ public class InstructionHandle {
     }
 
     /**
-     * Gets attribute of an instruction handle.
+     * Gets an attribute of an instruction handle.
      *
-     * @param key the key object to store/retrieve the attribute
+     * @param key The key object to store/retrieve the attribute.
+     * @return The attribute value.
      */
     public Object getAttribute(final Object key) {
         return attributes != null ? attributes.get(key) : null;
     }
 
     /**
-     * @return all attributes associated with this handle
+     * Gets all attributes associated with this handle.
+     *
+     * @return all attributes associated with this handle.
      */
     public Collection<Object> getAttributes() {
         if (attributes == null) {
@@ -151,28 +161,47 @@ public class InstructionHandle {
         return attributes.values();
     }
 
+    /**
+     * Gets the instruction.
+     *
+     * @return The instruction.
+     */
     public final Instruction getInstruction() {
         return instruction;
     }
 
+    /**
+     * Gets the next instruction handle.
+     *
+     * @return The next instruction handle.
+     */
     public final InstructionHandle getNext() {
         return next;
     }
 
     /**
-     * @return the position, i.e., the byte code offset of the contained instruction. This is accurate only after
+     * Gets the position.
+     *
+     * @return The position, the byte code offset of the contained instruction. This is accurate only after
      *         InstructionList.setPositions() has been called.
      */
     public int getPosition() {
         return i_position;
     }
 
+    /**
+     * Gets the previous instruction handle.
+     *
+     * @return The previous instruction handle.
+     */
     public final InstructionHandle getPrev() {
         return prev;
     }
 
     /**
-     * @return null, if there are no targeters
+     * Gets the targeters.
+     *
+     * @return null, if there are no targeters.
      */
     public InstructionTargeter[] getTargeters() {
         if (!hasTargeters()) {
@@ -183,6 +212,11 @@ public class InstructionHandle {
         return t;
     }
 
+    /**
+     * Tests whether this handle has targeters.
+     *
+     * @return true if this handle has targeters, false otherwise.
+     */
     public boolean hasTargeters() {
         return targeters != null && !targeters.isEmpty();
     }
@@ -199,7 +233,7 @@ public class InstructionHandle {
     /**
      * Delete an attribute of an instruction handle.
      *
-     * @param key the key object to retrieve the attribute
+     * @param key The key object to retrieve the attribute.
      */
     public void removeAttribute(final Object key) {
         if (attributes != null) {
@@ -209,6 +243,8 @@ public class InstructionHandle {
 
     /**
      * Denote this handle isn't referenced anymore by t.
+     *
+     * @param t The instruction targeter.
      */
     public void removeTargeter(final InstructionTargeter t) {
         if (targeters != null) {
@@ -217,7 +253,9 @@ public class InstructionHandle {
     }
 
     /**
-     * Replace current instruction contained in this handle. Old instruction is disposed using Instruction.dispose().
+     * Sets the instruction contained in this handle. The old instruction is disposed of using Instruction.dispose().
+     *
+     * @param i The new instruction.
      */
     public void setInstruction(final Instruction i) { // Overridden in BranchHandle TODO could be package-protected?
         if (i == null) {
@@ -233,7 +271,10 @@ public class InstructionHandle {
     }
 
     /**
-     * @param next the next to set
+     * Sets the next instruction handle.
+     *
+     * @param next The next to set.
+     * @return The next instruction handle.
      * @since 6.0
      */
     final InstructionHandle setNext(final InstructionHandle next) {
@@ -242,14 +283,19 @@ public class InstructionHandle {
     }
 
     /**
-     * Sets the position, i.e., the byte code offset of the contained instruction.
+     * Sets the position, the byte code offset of the contained instruction.
+     *
+     * @param pos The position.
      */
     void setPosition(final int pos) {
         i_position = pos;
     }
 
     /**
-     * @param prev the prev to set
+     * Sets the previous instruction handle.
+     *
+     * @param prev The prev to set.
+     * @return The previous instruction handle.
      * @since 6.0
      */
     final InstructionHandle setPrev(final InstructionHandle prev) {
@@ -263,6 +309,9 @@ public class InstructionHandle {
      * <p>
      * Warning: if this is used on a BranchHandle then some methods such as getPosition() will still refer to the original
      * cached instruction, whereas other BH methods may affect the cache and the replacement instruction.
+     *
+     * @param i The replacement instruction.
+     * @return The old instruction.
      */
     // See BCEL-273
     // TODO remove this method in any redesign of BCEL
@@ -273,7 +322,9 @@ public class InstructionHandle {
     }
 
     /**
-     * @return a string representation of the contained instruction.
+     * Gets a string representation of the contained instruction.
+     *
+     * @return A string representation of the contained instruction.
      */
     @Override
     public String toString() {
@@ -281,7 +332,10 @@ public class InstructionHandle {
     }
 
     /**
-     * @return a (verbose) string representation of the contained instruction.
+     * Gets a verbose string representation of the contained instruction.
+     *
+     * @param verbose whether to be verbose.
+     * @return A (verbose) string representation of the contained instruction.
      */
     public String toString(final boolean verbose) {
         return Utility.format(i_position, 4, false, ' ') + ": " + instruction.toString(verbose);
@@ -292,9 +346,9 @@ public class InstructionHandle {
      * length instructions 'setPositions()' performs multiple passes over the instruction list to calculate the correct
      * (byte) positions and offsets by calling this function.
      *
-     * @param offset additional offset caused by preceding (variable length) instructions
-     * @param maxOffset the maximum offset that may be caused by these instructions
-     * @return additional offset caused by possible change of this instruction's length
+     * @param offset additional offset caused by preceding (variable length) instructions.
+     * @param maxOffset The maximum offset that may be caused by these instructions.
+     * @return additional offset caused by possible change of this instruction's length.
      */
     protected int updatePosition(final int offset, final int maxOffset) {
         i_position += offset;

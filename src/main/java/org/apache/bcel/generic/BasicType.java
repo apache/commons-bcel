@@ -25,6 +25,13 @@ import org.apache.bcel.Const;
  */
 public final class BasicType extends Type {
 
+    /**
+     * Gets the BasicType for the given type constant.
+     *
+     * @param type The type constant.
+     * @return The BasicType.
+     * @since 6.0
+     */
     // @since 6.0 no longer final
     public static BasicType getType(final byte type) {
         switch (type) {
@@ -54,7 +61,7 @@ public final class BasicType extends Type {
     /**
      * Constructor for basic types such as int, long, 'void'
      *
-     * @param type one of T_INT, T_BOOLEAN, ..., T_VOID
+     * @param type one of T_INT, T_BOOLEAN, ..., T_VOID.
      * @see Const
      */
     BasicType(final byte type) {
@@ -65,7 +72,7 @@ public final class BasicType extends Type {
     }
 
     /**
-     * @return true if both type objects refer to the same type
+     * @return true if both type objects refer to the same type.
      */
     @Override
     public boolean equals(final Object type) {
@@ -73,7 +80,7 @@ public final class BasicType extends Type {
     }
 
     /**
-     * @return a hash code value for the object.
+     * @return A hash code value for the object.
      */
     @Override
     public int hashCode() {

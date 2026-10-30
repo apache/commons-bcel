@@ -22,7 +22,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import org.apache.bcel.Const;
@@ -56,6 +55,7 @@ import org.apache.bcel.generic.RET;
 import org.apache.bcel.generic.ReturnInstruction;
 import org.apache.bcel.generic.Select;
 import org.apache.bcel.generic.Type;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Factory creates il.append() statements, and sets instruction targets. A helper class for BCELifier.
@@ -112,7 +112,7 @@ final class BCELFactory extends EmptyVisitor {
             embed += "L";
         } else if (value instanceof ObjectType) {
             final ObjectType ot = (ObjectType) value;
-            embed = "new ObjectType(\"" + ot.getClassName() + "\")";
+            embed = "new ObjectType(\"" + Utility.convertString(ot.getClassName()) + "\")";
         } else if (value instanceof ArrayType) {
             final ArrayType at = (ArrayType) value;
             embed = "new ArrayType(" + BCELifier.printType(at.getBasicType()) + ", " + at.getDimensions() + ")";
@@ -167,8 +167,8 @@ final class BCELFactory extends EmptyVisitor {
         final CodeExceptionGen[] handlers = methodGen.getExceptionHandlers();
         for (final CodeExceptionGen h : handlers) {
             final String type = h.getCatchType() == null ? "null" : BCELifier.printType(h.getCatchType());
-            printWriter.println("    method.addExceptionHandler(" + "ih_" + h.getStartPC().getPosition() + ", " + "ih_" + h.getEndPC().getPosition() + ", "
-                + "ih_" + h.getHandlerPC().getPosition() + ", " + type + ");");
+            printWriter.println("    method.addExceptionHandler(ih_" + h.getStartPC().getPosition() + ", ih_" + h.getEndPC().getPosition() + ", ih_"
+                    + h.getHandlerPC().getPosition() + ", " + type + ");");
         }
     }
 
@@ -184,7 +184,7 @@ final class BCELFactory extends EmptyVisitor {
         int dim = 1;
         switch (opcode) {
         case Const.NEW:
-            printWriter.println("il.append(_factory.createNew(\"" + ((ObjectType) type).getClassName() + "\"));");
+            printWriter.println("il.append(_factory.createNew(\"" + Utility.convertString(((ObjectType) type).getClassName()) + "\"));");
             break;
         case Const.MULTIANEWARRAY:
             dim = ((MULTIANEWARRAY) i).getDimensions();
@@ -227,7 +227,7 @@ final class BCELFactory extends EmptyVisitor {
                 }
             }
             args.append(" }");
-            printWriter.print("Select " + name + " = new " + bi.getName().toUpperCase(Locale.ROOT) + "(" + args + ", new InstructionHandle[] { ");
+            printWriter.print("Select " + name + " = new " + StringUtils.toRootUpperCase(bi.getName()) + "(" + args + ", new InstructionHandle[] { ");
             for (int i = 0; i < matchs.length; i++) {
                 printWriter.print("null");
                 if (i < matchs.length - 1) {
@@ -245,7 +245,7 @@ final class BCELFactory extends EmptyVisitor {
                 target = "null";
             }
             printWriter.println("    BranchInstruction " + name + " = _factory.createBranchInstruction(" + CONSTANT_PREFIX
-                + bi.getName().toUpperCase(Locale.ROOT) + ", " + target + ");");
+                    + StringUtils.toRootUpperCase(bi.getName()) + ", " + target + ");");
         }
         if (bh.hasTargeters()) {
             printWriter.println("    ih_" + pos + " = il.append(" + name + ");");
@@ -271,8 +271,9 @@ final class BCELFactory extends EmptyVisitor {
         final String className = i.getClassName(constantPoolGen);
         final String fieldName = i.getFieldName(constantPoolGen);
         final Type type = i.getFieldType(constantPoolGen);
-        printWriter.println("il.append(_factory.createFieldAccess(\"" + className + "\", \"" + fieldName + "\", " + BCELifier.printType(type) + ", "
-            + CONSTANT_PREFIX + Const.getOpcodeName(opcode).toUpperCase(Locale.ROOT) + "));");
+        printWriter.println("il.append(_factory.createFieldAccess(\"" + Utility.convertString(className) + "\", \"" + Utility.convertString(fieldName) + "\", "
+                + BCELifier.printType(type) + ", "
+                + CONSTANT_PREFIX + StringUtils.toRootUpperCase(Const.getOpcodeName(opcode)) + "));");
     }
 
     @Override
@@ -284,7 +285,7 @@ final class BCELFactory extends EmptyVisitor {
     private boolean visitInstruction(final Instruction i) {
         final short opcode = i.getOpcode();
         if (InstructionConst.getInstruction(opcode) != null && !(i instanceof ConstantPushInstruction) && !(i instanceof ReturnInstruction)) { // Handled below
-            printWriter.println("il.append(InstructionConst." + i.getName().toUpperCase(Locale.ROOT) + ");");
+            printWriter.println("il.append(InstructionConst." + StringUtils.toRootUpperCase(i.getName()) + ");");
             return true;
         }
         return false;
@@ -297,8 +298,9 @@ final class BCELFactory extends EmptyVisitor {
         final String methodName = i.getMethodName(constantPoolGen);
         final Type type = i.getReturnType(constantPoolGen);
         final Type[] argTypes = i.getArgumentTypes(constantPoolGen);
-        printWriter.println("il.append(_factory.createInvoke(\"" + className + "\", \"" + methodName + "\", " + BCELifier.printType(type) + ", "
-            + BCELifier.printArgumentTypes(argTypes) + ", " + CONSTANT_PREFIX + Const.getOpcodeName(opcode).toUpperCase(Locale.ROOT) + "));");
+        printWriter.println("il.append(_factory.createInvoke(\"" + Utility.convertString(className) + "\", \"" + Utility.convertString(methodName) + "\", "
+            + BCELifier.printType(type) + ", " + BCELifier.printArgumentTypes(argTypes) + ", " + CONSTANT_PREFIX
+            + StringUtils.toRootUpperCase(Const.getOpcodeName(opcode)) + "));");
     }
 
     @Override

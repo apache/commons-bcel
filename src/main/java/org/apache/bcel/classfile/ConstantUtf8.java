@@ -84,6 +84,7 @@ public final class ConstantUtf8 extends Constant {
 
     }
 
+    private static final Object LOCK = new Object();
     // TODO these should perhaps be AtomicInt?
     private static volatile int considered;
     private static volatile int created;
@@ -105,8 +106,10 @@ public final class ConstantUtf8 extends Constant {
      *
      * @since 6.4.0
      */
-    public static synchronized void clearCache() {
-        Cache.CACHE.clear();
+    public static void clearCache() {
+        synchronized (LOCK) {
+            Cache.CACHE.clear();
+        }
     }
 
     // for access by test code
@@ -115,7 +118,7 @@ public final class ConstantUtf8 extends Constant {
     }
 
     // Avoid Spotbugs complaint about Write to static field
-    private static void countCreated() {
+    private static synchronized void countCreated() {
         created++;
     }
 
@@ -125,25 +128,27 @@ public final class ConstantUtf8 extends Constant {
      * See {@link ConstantUtf8} class Javadoc for details.
      * </p>
      *
-     * @param value the value.
-     * @return a new or cached instance of the given value.
+     * @param value The value.
+     * @return A new or cached instance of the given value.
      * @since 6.0
      */
     public static ConstantUtf8 getCachedInstance(final String value) {
-        if (value.length() > Cache.MAX_ENTRY_SIZE) {
-            skipped++;
-            return new ConstantUtf8(value);
-        }
-        considered++;
-        synchronized (ConstantUtf8.class) { // might be better with a specific lock object
-            ConstantUtf8 result = Cache.CACHE.get(value);
-            if (result != null) {
-                hits++;
+        synchronized (LOCK) {
+            if (value.length() > Cache.MAX_ENTRY_SIZE) {
+                skipped++;
+                return new ConstantUtf8(value);
+            }
+            considered++;
+            synchronized (ConstantUtf8.class) { // might be better with a specific lock object
+                ConstantUtf8 result = Cache.CACHE.get(value);
+                if (result != null) {
+                    hits++;
+                    return result;
+                }
+                result = new ConstantUtf8(value);
+                Cache.CACHE.put(value, result);
                 return result;
             }
-            result = new ConstantUtf8(value);
-            Cache.CACHE.put(value, result);
-            return result;
         }
     }
 
@@ -153,9 +158,9 @@ public final class ConstantUtf8 extends Constant {
      * See {@link ConstantUtf8} class Javadoc for details.
      * </p>
      *
-     * @param dataInput the value.
-     * @return a new or cached instance of the given value.
-     * @throws IOException if an I/O error occurs.
+     * @param dataInput The value.
+     * @return A new or cached instance of the given value.
+     * @throws IOException Thrown if an I/O error occurs.
      * @since 6.0
      */
     public static ConstantUtf8 getInstance(final DataInput dataInput) throws IOException {
@@ -168,8 +173,8 @@ public final class ConstantUtf8 extends Constant {
      * See {@link ConstantUtf8} class Javadoc for details.
      * </p>
      *
-     * @param value the value.
-     * @return a new or cached instance of the given value.
+     * @param value The value.
+     * @return A new or cached instance of the given value.
      * @since 6.0
      */
     public static ConstantUtf8 getInstance(final String value) {
@@ -190,7 +195,7 @@ public final class ConstantUtf8 extends Constant {
     /**
      * Initializes from another object.
      *
-     * @param constantUtf8 the value.
+     * @param constantUtf8 The value.
      */
     public ConstantUtf8(final ConstantUtf8 constantUtf8) {
         this(constantUtf8.getBytes());
@@ -199,8 +204,8 @@ public final class ConstantUtf8 extends Constant {
     /**
      * Initializes instance from file data.
      *
-     * @param dataInput Input stream
-     * @throws IOException if an I/O error occurs.
+     * @param dataInput Input stream.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     ConstantUtf8(final DataInput dataInput) throws IOException {
         super(Const.CONSTANT_Utf8);
@@ -209,7 +214,9 @@ public final class ConstantUtf8 extends Constant {
     }
 
     /**
-     * @param value Data
+     * Constructs a ConstantUtf8.
+     *
+     * @param value Data.
      */
     public ConstantUtf8(final String value) {
         super(Const.CONSTANT_Utf8);
@@ -219,9 +226,9 @@ public final class ConstantUtf8 extends Constant {
 
     /**
      * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
-     * I.e., the hierarchy of methods, fields, attributes, etc. spawns a tree of objects.
+     * That is, the hierarchy of methods, fields, attributes, and other elements forms a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
@@ -231,8 +238,8 @@ public final class ConstantUtf8 extends Constant {
     /**
      * Dumps String in Utf8 format to file stream.
      *
-     * @param file Output file stream
-     * @throws IOException if an I/O error occurs.
+     * @param file Output file stream.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     @Override
     public void dump(final DataOutputStream file) throws IOException {
@@ -241,6 +248,8 @@ public final class ConstantUtf8 extends Constant {
     }
 
     /**
+     * Gets the data converted to string.
+     *
      * @return Data converted to string.
      */
     public String getBytes() {
@@ -248,7 +257,10 @@ public final class ConstantUtf8 extends Constant {
     }
 
     /**
-     * @param bytes the raw bytes of this UTF-8
+     * Always throws {@link UnsupportedOperationException} because this constant is immutable.
+     *
+     * @param bytes The raw bytes of this UTF-8.
+     * @throws UnsupportedOperationException Thrown unconditionally.
      * @deprecated (since 6.0)
      */
     @java.lang.Deprecated
@@ -257,7 +269,7 @@ public final class ConstantUtf8 extends Constant {
     }
 
     /**
-     * @return String representation
+     * @return String representation.
      */
     @Override
     public String toString() {

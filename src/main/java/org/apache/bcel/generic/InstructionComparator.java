@@ -19,10 +19,10 @@
 package org.apache.bcel.generic;
 
 /**
- * Equality of instructions isn't clearly to be defined. You might wish, for example, to compare whether instructions
- * have the same meaning. E.g., whether two INVOKEVIRTUALs describe the same call.
+ * Instruction equality can be defined in different ways. You might wish to compare whether instructions have the same meaning,
+ * for example, whether two INVOKEVIRTUALs describe the same call.
  * <p>
- * The DEFAULT comparator however, considers two instructions to be equal if they have same opcode and point to the same
+ * The DEFAULT comparator, however, considers two instructions to be equal if they have the same opcode and point to the same
  * indexes (if any) in the constant pool or the same local variable index. Branch instructions must have the same
  * target.
  * </p>
@@ -31,6 +31,9 @@ package org.apache.bcel.generic;
  */
 public interface InstructionComparator {
 
+    /**
+     * Default instruction comparator.
+     */
     InstructionComparator DEFAULT = (i1, i2) -> {
         if (i1.getOpcode() == i2.getOpcode()) {
             if (i1 instanceof BranchInstruction) {
@@ -53,5 +56,12 @@ public interface InstructionComparator {
         return false;
     };
 
+    /**
+     * Compares two instructions for equality.
+     *
+     * @param i1 The first instruction.
+     * @param i2 The second instruction.
+     * @return true if the instructions are equal, false otherwise.
+     */
     boolean equals(Instruction i1, Instruction i2);
 }

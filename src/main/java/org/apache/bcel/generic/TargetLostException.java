@@ -19,7 +19,7 @@
 package org.apache.bcel.generic;
 
 /**
- * Thrown by {@link InstructionList} when one or multiple disposed instructions are still being referenced by an {@link InstructionTargeter} object. I.e. the
+ * Thrown by {@link InstructionList} when one or multiple disposed instructions are still being referenced by an {@link InstructionTargeter} object. That is, the
  * {@link InstructionTargeter} has to be notified that (one of) the {@link InstructionHandle} it is referencing is being removed from the
  * {@link InstructionList} and thus not valid anymore.
  *
@@ -48,8 +48,16 @@ package org.apache.bcel.generic;
 public final class TargetLostException extends Exception {
 
     private static final long serialVersionUID = -6857272667645328384L;
+
+    /** The target instruction handles that were lost. */
     private final InstructionHandle[] targets;
 
+    /**
+     * Constructs a TargetLostException.
+     *
+     * @param targets The instruction handles.
+     * @param message The exception message.
+     */
     TargetLostException(final InstructionHandle[] targets, final String message) {
         super(message);
         this.targets = targets;

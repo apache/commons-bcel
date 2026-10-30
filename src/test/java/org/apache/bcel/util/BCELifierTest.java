@@ -1,0 +1,436 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.apache.bcel.util;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.bcel.AbstractTest;
+import org.apache.bcel.Const;
+import org.apache.bcel.HelloWorldCreator;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.ConstantValue;
+import org.apache.bcel.classfile.Field;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Utility;
+import org.apache.bcel.generic.BinaryOpCreator;
+import org.apache.bcel.generic.ClassGen;
+import org.apache.bcel.generic.ConstantPoolGen;
+import org.apache.bcel.generic.FieldGen;
+import org.apache.bcel.generic.InstructionConst;
+import org.apache.bcel.generic.InstructionFactory;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.MethodGen;
+import org.apache.bcel.generic.Type;
+import org.apache.commons.lang3.SystemProperties;
+import org.apache.commons.lang3.SystemUtils;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledForJreRange;
+import org.junit.jupiter.api.condition.JRE;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+class BCELifierTest extends AbstractTest {
+
+    private static Pattern CANON1 = Pattern.compile("#\\d+"); // numbers may vary in length
+    private static Pattern CANON2 = Pattern.compile(" +"); // collapse spaces
+    private static Pattern CANON3 = Pattern.compile("//.+");
+
+    private static final String EOL = System.lineSeparator();
+    public static final String CLASSPATH = "." + File.pathSeparator + SystemProperties.getJavaClassPath();
+
+    // Canonicalise the javap output so it compares better
+    private String canonHashRef(String input) {
+        input = CANON1.matcher(input).replaceAll("#n");
+        input = CANON2.matcher(input).replaceAll(" ");
+        return CANON3.matcher(input).replaceAll("");
+    }
+
+    private String exec(final File workDir, final String... args) throws Exception {
+        // System.out.print(workDir + ": ");
+        // Stream.of(args).forEach(e -> System.out.print(e + " "));
+        // System.out.println();
+        final ProcessBuilder pb = new ProcessBuilder(args);
+        pb.directory(workDir);
+        pb.redirectErrorStream(true);
+        final Process proc = pb.start();
+        try (BufferedInputStream is = new BufferedInputStream(proc.getInputStream())) {
+            final byte[] buff = new byte[2048];
+            int len;
+
+            final StringBuilder sb = new StringBuilder();
+            while ((len = is.read(buff)) != -1) {
+                sb.append(new String(buff, 0, len));
+            }
+            final String output = sb.toString();
+            assertEquals(0, proc.waitFor(), output);
+            return output;
+        }
+    }
+
+    private String getAppJava() {
+        return getJavaHomeApp("java");
+    }
+
+    private String getAppJavaC() {
+        return getJavaHomeApp("javac");
+    }
+
+    private String getAppJavaP() {
+        return getJavaHomeApp("javap");
+    }
+
+    private String getJavaHomeApp(final String app) {
+        final Path path = getJavaHomeBinPath().resolve(app);
+        if (Files.exists(path)) {
+            return path.toAbsolutePath().toString();
+        }
+        if (SystemUtils.IS_OS_WINDOWS && Files.exists(getJavaHomeBinPath().resolve(app + ".exe"))) {
+            return path.toAbsolutePath().toString();
+        }
+        return app;
+    }
+
+    private Path getJavaHomeBinPath() {
+        return SystemUtils.getJavaHomePath().resolve("bin");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+    // @formatter:off
+        "iadd 3 2 = 5",
+        "isub 3 2 = 1",
+        "imul 3 2 = 6",
+        "idiv 3 2 = 1",
+        "irem 3 2 = 1",
+        "iand 3 2 = 2",
+        "ior 3 2 = 3",
+        "ixor 3 2 = 1",
+        "ishl 4 1 = 8",
+        "ishr 4 1 = 2",
+        "iushr 4 1 = 2",
+        "ladd 3 2 = 5",
+        "lsub 3 2 = 1",
+        "lmul 3 2 = 6",
+        "ldiv 3 2 = 1",
+        "lrem 3 2 = 1",
+        "land 3 2 = 2",
+        "lor 3 2 = 3",
+        "lxor 3 2 = 1",
+        "lshl 4 1 = 8",
+        "lshr 4 1 = 2",
+        "lushr 4 1 = 2",
+        "fadd 3 2 = 5.0",
+        "fsub 3 2 = 1.0",
+        "fmul 3 2 = 6.0",
+        "fdiv 3 2 = 1.5",
+        "frem 3 2 = 1.0",
+        "dadd 3 2 = 5.0",
+        "dsub 3 2 = 1.0",
+        "dmul 3 2 = 6.0",
+        "ddiv 3 2 = 1.5",
+        "drem 3 2 = 1.0"
+    // @formatter:on
+    })
+    void testBinaryOp(final String exp) throws Exception {
+        BinaryOpCreator.main(new String[] {});
+        final File workDir = new File("target");
+        final Pattern pattern = Pattern.compile("([a-z]{3,5}) ([-+]?\\d*\\.?\\d+) ([-+]?\\d*\\.?\\d+) = ([-+]?\\d*\\.?\\d+)");
+        final Matcher matcher = pattern.matcher(exp);
+        assertTrue(matcher.matches());
+        final String op = matcher.group(1);
+        final String a = matcher.group(2);
+        final String b = matcher.group(3);
+        final String expected = matcher.group(4);
+        final String javaAgent = getJavaAgent();
+        if (javaAgent == null) {
+            assertEquals(expected + EOL, exec(workDir, getAppJava(), "-cp", CLASSPATH, "org.apache.bcel.generic.BinaryOp", op, a, b));
+        } else {
+            final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_org.apache.bcel.generic.BinaryOp.exec");
+            assertEquals(expected + EOL, exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.generic.BinaryOp", op, a, b));
+        }
+    }
+
+    @Test
+    void testBooleanConstantFieldInitValue() throws Exception {
+        // javac stores "static final boolean ON = true;" as a CONSTANT_Integer ConstantValue; the generated creator
+        // must call FieldGen.setInitValue(boolean), since setInitValue(int) throws for boolean fields.
+        final ClassGen cg = new ClassGen("Example", "java.lang.Object", "Example.java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
+        final ConstantPoolGen cp = cg.getConstantPool();
+        final FieldGen fg = new FieldGen(Const.ACC_PUBLIC | Const.ACC_STATIC | Const.ACC_FINAL, Type.BOOLEAN, "ON", cp);
+        fg.setInitValue(true);
+        cg.addField(fg.getField());
+
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        new BCELifier(cg.getJavaClass(), os).start();
+        final String source = new String(os.toByteArray(), StandardCharsets.UTF_8);
+
+        assertTrue(source.contains("field.setInitValue(true);"), source);
+        assertFalse(source.contains("field.setInitValue(1);"), source);
+
+        final ByteArrayOutputStream compiledClassOutput = new ByteArrayOutputStream();
+        new BCELifier(BCELifier.getJavaClass("BooleanConstants"), compiledClassOutput).start();
+        final String compiledClassSource = new String(compiledClassOutput.toByteArray(), StandardCharsets.UTF_8);
+        assertTrue(compiledClassSource.contains("field.setInitValue(true);"), compiledClassSource);
+        assertTrue(compiledClassSource.contains("field.setInitValue(false);"), compiledClassSource);
+        assertFalse(compiledClassSource.contains("field.setInitValue(0);"), compiledClassSource);
+    }
+
+    @ParameterizedTest
+    @CsvSource({ "0, false", "1, true", "2, false", "3, true", "-2, false", "-1, true" })
+    void testBooleanConstantFieldLowBit(final int value, final boolean expected) {
+        final ClassGen cg = new ClassGen("Example", "java.lang.Object", "Example.java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
+        final ConstantPoolGen cp = cg.getConstantPool();
+        final FieldGen fg = new FieldGen(Const.ACC_PUBLIC | Const.ACC_STATIC | Const.ACC_FINAL, Type.BOOLEAN, "VALUE", cp);
+        fg.addAttribute(new ConstantValue(cp.addUtf8("ConstantValue"), 2, cp.addInteger(value), cp.getConstantPool()));
+        cg.addField(fg.getField());
+
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        new BCELifier(cg.getJavaClass(), os).start();
+        final String source = new String(os.toByteArray(), StandardCharsets.UTF_8);
+        assertTrue(source.contains("field.setInitValue(" + expected + ");"), source);
+    }
+
+    @Test
+    void testClassNameRejectedWhenNotJavaIdentifier() {
+        // Class file names may contain characters the Java language forbids (JVMS 4.2.2 bans only . ; [ /).
+        // BCELifier must refuse to emit such a name in identifier position rather than let a crafted
+        // this_class inject statements into the generated source.
+        final ClassGen cg = new ClassGen("Evil {}\nclass Injected {}//", "java.lang.Object", "Evil.java", Const.ACC_PUBLIC | Const.ACC_SUPER,
+            new String[] {});
+        final BCELifier bcelifier = new BCELifier(cg.getJavaClass(), new ByteArrayOutputStream());
+        assertThrows(IllegalArgumentException.class, bcelifier::start);
+    }
+
+    @Test
+    void testClassNamesEscapedInOutput() throws Exception {
+        // Superclass and source file names are constant-pool derived and can hold any UTF-8.
+        final String toEscapeSuper = "java.lang.Object\"); System.exit(1); _cg = new ClassGen(\"x";
+        final String toEscapeSource = "Example.java\"); System.exit(2); String s = (\"";
+        final ClassGen cg = new ClassGen("Example", toEscapeSuper, toEscapeSource, Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
+
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        new BCELifier(cg.getJavaClass(), os).start();
+        final String source = new String(os.toByteArray(), StandardCharsets.UTF_8);
+
+        assertTrue(source.contains(Utility.convertString(toEscapeSuper)), source);
+        assertTrue(source.contains(Utility.convertString(toEscapeSource)), source);
+        assertFalse(source.contains('"' + toEscapeSuper + '"'), source);
+        assertFalse(source.contains('"' + toEscapeSource + '"'), source);
+    }
+
+    private void testClassOnPath(final String javaClassFileName) throws Exception {
+        final File workDir = new File("target", getClass().getSimpleName());
+        Files.createDirectories(workDir.getParentFile().toPath());
+        final File inFile = new File(javaClassFileName);
+        final JavaClass javaClass = BCELifier.getJavaClass(inFile.getName().replace(JavaClass.EXTENSION, ""));
+        assertNotNull(javaClass);
+        // Gets javap output of the input class
+        // System.out.println(exec(null, getJavaP(), "-version"));
+        final String javaClassName = javaClass.getClassName();
+        final String javapOutInital = exec(null, getAppJavaP(), "-cp", CLASSPATH, "-p", "-c", javaClassName);
+        final String outCreatorFileName = javaClass.getSourceFilePath().replace(".java", "Creator.java");
+        final File outCreatorFile = new File(workDir, outCreatorFileName);
+        Files.createDirectories(outCreatorFile.getParentFile().toPath());
+        final String javaAgent = getJavaAgent();
+        final String bcelifierClassName = BCELifier.class.getName();
+        final String creatorJavaSource;
+        // Creates the BCEL Java app source in creatorJavaSource
+        if (javaAgent == null) {
+            creatorJavaSource = exec(workDir, getAppJava(), "-cp", CLASSPATH, bcelifierClassName, javaClassName);
+        } else {
+            final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_" + inFile.getName() + ".exec");
+            creatorJavaSource = exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, bcelifierClassName, javaClassName);
+        }
+        // Write the BCEL Java app source to a file
+        Files.write(outCreatorFile.toPath(), creatorJavaSource.getBytes(StandardCharsets.UTF_8));
+        // Compiles the BCEL Java app
+        assertEquals("", exec(workDir, getAppJavaC(), "-cp", CLASSPATH, outCreatorFileName.toString()));
+        final String creatorClassName = javaClassName + "Creator";
+        // Runs the BCEL Java app to create a class file
+        if (javaAgent == null) {
+            assertEquals("", exec(workDir, getAppJava(), "-cp", CLASSPATH, creatorClassName));
+        } else {
+            final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_" + Utility.pathToPackage(outCreatorFileName) + ".exec");
+            assertEquals("", exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, creatorClassName));
+        }
+        // Runs javap on the BCEL generated class file
+        final String javapOutput = exec(workDir, getAppJavaP(), "-p", "-c", inFile.getName());
+        // Finally compares the output of the roundtrip
+        assertEquals(canonHashRef(javapOutInital), canonHashRef(javapOutput));
+        // javap -p -c does not show ConstantValue attributes. Check boolean constants explicitly.
+        final JavaClass regenerated = new ClassParser(new File(workDir, javaClassName + JavaClass.EXTENSION).getPath()).parse();
+        final Field[] originalFields = javaClass.getFields();
+        final Field[] regeneratedFields = regenerated.getFields();
+        assertEquals(originalFields.length, regeneratedFields.length);
+        for (int i = 0; i < originalFields.length; i++) {
+            final Field original = originalFields[i];
+            if (original.getType() == Type.BOOLEAN && original.getConstantValue() != null) {
+                final Field actual = regeneratedFields[i];
+                assertEquals(original.getName(), actual.getName());
+                assertEquals(original.getSignature(), actual.getSignature());
+                assertNotNull(actual.getConstantValue(), original.getName());
+                final int expectedValue = original.getConstantPool().getConstantInteger(original.getConstantValue().getConstantValueIndex()).getBytes() & 1;
+                assertEquals(expectedValue, actual.getConstantPool().getConstantInteger(actual.getConstantValue().getConstantValueIndex()).getBytes(),
+                    original.getName());
+            }
+        }
+    }
+
+    @Test
+    void testCreateInvokeEscapesConstantPoolName() throws Exception {
+        // A hostile constant pool can hold any UTF-8 as a referenced method name.
+        final String toEscapeName = "evil\"); System.exit(1); il.append(\"";
+        final ClassGen cg = new ClassGen("Example", "java.lang.Object", "Example.java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
+        final ConstantPoolGen cp = cg.getConstantPool();
+        final InstructionFactory factory = new InstructionFactory(cg, cp);
+        final InstructionList il = new InstructionList();
+        il.append(InstructionConst.ALOAD_0);
+        il.append(factory.createInvoke("java.lang.Object", toEscapeName, Type.VOID, Type.NO_ARGS, Const.INVOKEVIRTUAL));
+        il.append(InstructionConst.RETURN);
+        final MethodGen mg = new MethodGen(Const.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {}, "m", "Example", il, cp);
+        mg.setMaxStack();
+        mg.setMaxLocals();
+        cg.addMethod(mg.getMethod());
+
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        new BCELifier(cg.getJavaClass(), os).start();
+        final String source = new String(os.toByteArray(), StandardCharsets.UTF_8);
+
+        assertTrue(source.contains("_factory.createInvoke(\"java.lang.Object\", \"" + Utility.convertString(toEscapeName) + "\", "), source);
+        assertFalse(source.contains('"' + toEscapeName + '"'), source);
+    }
+
+    @Test
+    void testHelloWorld() throws Exception {
+        HelloWorldCreator.main(new String[] {});
+        final File workDir = new File("target");
+        final String javaAgent = getJavaAgent();
+        if (javaAgent == null) {
+            assertEquals("Hello World!" + EOL, exec(workDir, getAppJava(), "-cp", CLASSPATH, "org.apache.bcel.HelloWorld"));
+        } else {
+            final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_org.apache.bcel.HelloWorld.exec");
+            assertEquals("Hello World!" + EOL, exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, "org.apache.bcel.HelloWorld"));
+        }
+    }
+
+    /*
+     * Dumps a class using "javap" and compare with the same class recreated using BCELifier, "javac", "java" and dumped with "javap".
+     *
+     * TODO: detect if JDK present and skip test if not
+     */
+    @ParameterizedTest
+    @ValueSource(strings = {
+    // @formatter:off
+        "org.apache.commons.lang.math.Fraction.class",
+        "org.apache.commons.lang.exception.NestableDelegate.class",
+        "org.apache.commons.lang.builder.CompareToBuilder.class",
+        "org.apache.commons.lang.builder.ToStringBuilder.class",
+        "org.apache.commons.lang.SerializationUtils.class",
+        "org.apache.commons.lang.ArrayUtils.class",
+        "target/test-classes/Java4Example.class",
+        "target/test-classes/BooleanConstants.class"
+    // @formatter:on
+    })
+    void testJavapCompare(final String pathToClass) throws Exception {
+        testClassOnPath(pathToClass);
+    }
+
+    /*
+     * See https://issues.apache.org/jira/browse/BCEL-378
+     */
+    @ParameterizedTest
+    @ValueSource(strings = {
+    // @formatter:off
+        "target/test-classes/Java8Example.class",
+        "target/test-classes/Java8Example2.class",
+    // @formatter:on
+    })
+    @DisabledForJreRange(min = JRE.JAVA_25)
+    void testJavapCompareJava25KnownBroken(final String pathToClass) throws Exception {
+        testClassOnPath(pathToClass);
+    }
+
+    @Test
+    void testMainNoArg() throws Exception {
+        final PrintStream sysout = System.out;
+        try {
+            final ByteArrayOutputStream out = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(out));
+            BCELifier.main(new String[0]);
+            final String outputNoArgs = new String(out.toByteArray());
+            assertEquals("Usage: BCELifier className" + EOL + "\tThe class must exist on the classpath" + EOL, outputNoArgs);
+        } finally {
+            System.setOut(sysout);
+        }
+    }
+
+    @Test
+    void testMethodNameEscapedInOutput() throws Exception {
+        // A hostile constant pool can hold any UTF-8 as a method name.
+        final String evilName = "evil\"); System.exit(1); String x = (\"";
+        final ClassGen cg = new ClassGen("Example", "java.lang.Object", "Example.java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
+        final ConstantPoolGen cp = cg.getConstantPool();
+        final InstructionList il = new InstructionList();
+        il.append(InstructionConst.RETURN);
+        final MethodGen mg = new MethodGen(Const.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {}, evilName, "Example", il, cp);
+        mg.setMaxStack();
+        mg.setMaxLocals();
+        cg.addMethod(mg.getMethod());
+
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        new BCELifier(cg.getJavaClass(), os).start();
+        final String source = new String(os.toByteArray(), StandardCharsets.UTF_8);
+
+        assertTrue(source.contains("\"" + Utility.convertString(evilName) + "\", \"Example\", il, _cp);"), source);
+        assertFalse(source.contains('"' + evilName + '"'), source);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "StackMapExample", "StackMapExample2" })
+    void testStackMap(final String className) throws Exception {
+        testJavapCompare(className);
+        final File workDir = new File("target");
+        assertEquals("Hello World" + EOL, exec(workDir, getAppJava(), "-cp", CLASSPATH, className, "Hello"));
+    }
+
+    @Test
+    void testStart() throws Exception {
+        final OutputStream os = new ByteArrayOutputStream();
+        final JavaClass javaClass = BCELifier.getJavaClass("Java8Example");
+        assertNotNull(javaClass);
+        final BCELifier bcelifier = new BCELifier(javaClass, os);
+        bcelifier.start();
+    }
+}

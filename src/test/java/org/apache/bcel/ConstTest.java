@@ -26,29 +26,55 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link Const}.
  */
-public class ConstTest {
+class ConstTest {
 
     @Test
-    public void testJava22() throws Exception {
+    void testJava22() throws Exception {
         assertEquals(66, Const.MAJOR_22);
         assertEquals(0, Const.MINOR_22);
     }
 
     @Test
-    public void testJava23() throws Exception {
+    void testJava23() throws Exception {
         assertEquals(67, Const.MAJOR_23);
         assertEquals(0, Const.MINOR_23);
     }
 
     @Test
-    public void testJava24() throws Exception {
+    void testJava24() throws Exception {
         assertEquals(68, Const.MAJOR_24);
         assertEquals(0, Const.MINOR_24);
     }
 
     @Test
-    public void testJava25() throws Exception {
+    void testJava25() throws Exception {
         assertEquals(69, Const.MAJOR_25);
         assertEquals(0, Const.MINOR_25);
+    }
+
+    @Test
+    void testJava26() throws Exception {
+        assertEquals(70, Const.MAJOR_26);
+        assertEquals(0, Const.MINOR_26);
+    }
+
+    @Test
+    void testJava27() throws Exception {
+        assertEquals(71, Const.MAJOR_27);
+        assertEquals(0, Const.MINOR_27);
+    }
+
+    @Test
+    void testJava28() throws Exception {
+        assertEquals(72, Const.MAJOR_28);
+        assertEquals(0, Const.MINOR_28);
+    }
+
+    /**
+     * Tests that we do not break binary compatibility with BCEL-330.
+     */
+    @Test
+    void testReferenceToConstant() {
+        assertEquals(Const.AALOAD, Constants.AALOAD);
     }
 }

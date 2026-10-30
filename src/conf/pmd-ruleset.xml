@@ -58,7 +58,6 @@
   <rule ref="category/java/errorprone.xml/UnconditionalIfStatement"/>
   <rule ref="category/java/errorprone.xml/UnnecessaryConversionTemporary"/>
   <rule ref="category/java/errorprone.xml/UnusedNullCheckInEquals"/>
-  <rule ref="category/java/errorprone.xml/UselessOperationOnImmutable"/>
   <rule ref="category/java/multithreading.xml/AvoidThreadGroup"/>
   <rule ref="category/java/multithreading.xml/DontCallThreadRun"/>
   <rule ref="category/java/multithreading.xml/DoubleCheckedLocking"/>
@@ -67,7 +66,7 @@
   <rule ref="category/java/codestyle.xml/UnnecessaryFullyQualifiedName">
     <properties>
       <!-- java.lang annotations have the same name as BCEL classes so must be fully
-        qualified, e.g. java.lang.Deprecated -->
+        qualified, for example java.lang.Deprecated -->
       <property name="violationSuppressXPath"
         value="//ClassOrInterfaceDeclaration[@SimpleName='AccessFlags' or @SimpleName='Attribute'
           or @SimpleName='AttributeReader' or @SimpleName='Constant'

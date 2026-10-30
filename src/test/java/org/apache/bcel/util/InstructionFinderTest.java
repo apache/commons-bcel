@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Iterator;
 
-import org.apache.bcel.AbstractTestCase;
+import org.apache.bcel.AbstractTest;
 import org.apache.bcel.generic.IADD;
 import org.apache.bcel.generic.ILOAD;
 import org.apache.bcel.generic.ISTORE;
@@ -31,10 +31,10 @@ import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
 import org.junit.jupiter.api.Test;
 
-public class InstructionFinderTest extends AbstractTestCase {
+class InstructionFinderTest extends AbstractTest {
 
     @Test
-    public void testSearch() {
+    void testSearch() {
         final InstructionList il = new InstructionList();
         il.append(new ILOAD(1));
         il.append(new ILOAD(2));

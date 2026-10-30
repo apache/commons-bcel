@@ -21,21 +21,22 @@ package org.apache.bcel.generic;
 /**
  * DUP - Duplicate top operand stack word
  *
- * <PRE>
+ * <pre>
  * Stack: ..., word -&gt; ..., word, word
- * </PRE>
+ * </pre>
  */
 public class DUP extends StackInstruction implements PushInstruction {
 
+    /** Constructs a DUP instruction. */
     public DUP() {
         super(org.apache.bcel.Const.DUP);
     }
 
     /**
      * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
-     * methods according to the class hierarchy in descending order, i.e., the most specific visitXXX() call comes last.
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
     public void accept(final Visitor v) {
