@@ -215,7 +215,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                             if (vr != VerificationResult.VR_OK) {
                                 throw new ClassConstraintException("Code attribute '" + tostring(obj) + "' (method '" + m + "') has an exception_table entry '"
                                         + tostring(element) + "' that references '" + cname + "' as an Exception but '" + e.getSuperclassName()
-                                        + "' in the ancestor hierachy does not pass verification pass 1: " + vr);
+                                        + "' in the ancestor hierarchy does not pass verification pass 1: " + vr);
                             }
                             e = Repository.lookupClass(e.getSuperclassName());
                         }
@@ -548,7 +548,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                         vr = v.doPass1();
                         if (vr != VerificationResult.VR_OK) {
                             throw new ClassConstraintException("Exceptions attribute '" + tostring(obj) + "' references '" + cname + "' as an Exception but '"
-                                + e.getSuperclassName() + "' in the ancestor hierachy does not pass verification pass 1: " + vr);
+                                + e.getSuperclassName() + "' in the ancestor hierarchy does not pass verification pass 1: " + vr);
                         }
                         e = Repository.lookupClass(e.getSuperclassName());
                     }
@@ -583,12 +583,12 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 }
                 if (maxone > 1) {
                     throw new ClassConstraintException(
-                        "Field '" + tostring(obj) + "' must only have at most one of its ACC_PRIVATE, ACC_PROTECTED, ACC_PUBLIC modifiers set.");
+                        "Field '" + tostring(obj) + "' must have at most one of its ACC_PRIVATE, ACC_PROTECTED, ACC_PUBLIC modifiers set.");
                 }
 
                 if (obj.isFinal() && obj.isVolatile()) {
                     throw new ClassConstraintException(
-                        "Field '" + tostring(obj) + "' must only have at most one of its ACC_FINAL, ACC_VOLATILE modifiers set.");
+                        "Field '" + tostring(obj) + "' must have at most one of its ACC_FINAL, ACC_VOLATILE modifiers set.");
                 }
             } else { // isInterface!
                 if (!obj.isPublic()) {
@@ -612,7 +612,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             final String name = obj.getName();
             if (!validFieldName(name)) {
-                throw new ClassConstraintException("Field '" + tostring(obj) + "' has illegal name '" + obj.getName() + "'.");
+                throw new ClassConstraintException("Field '" + tostring(obj) + "' has an illegal name '" + obj.getName() + "'.");
             }
 
             // A descriptor is often named signature in BCEL
@@ -628,7 +628,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             final String nameanddesc = name + sig;
             if (fieldNamesAndDesc.contains(nameanddesc)) {
-                throw new ClassConstraintException("No two fields (like '" + tostring(obj) + "') are allowed have same names and descriptors.");
+                throw new ClassConstraintException("No two fields (like '" + tostring(obj) + "') are allowed to have the same name and descriptor.");
             }
             if (fieldNames.contains(name)) {
                 addMessage("More than one field of name '" + name + "' detected (but with different type descriptors). This is very unusual.");
@@ -798,7 +798,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             final String name = obj.getName();
             if (!validMethodName(name, true)) {
-                throw new ClassConstraintException("Method '" + tostring(obj) + "' has illegal name '" + name + "'.");
+                throw new ClassConstraintException("Method '" + tostring(obj) + "' has an illegal name '" + name + "'.");
             }
 
             // A descriptor is often named signature in BCEL
@@ -847,7 +847,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
             // Nearly forgot this! Funny return values are allowed, but a non-empty arguments list makes a different method out of
             // it!
             if (name.equals(Const.STATIC_INITIALIZER_NAME) && ts.length != 0) {
-                throw new ClassConstraintException("Method '" + tostring(obj) + "' has illegal name '" + name + "'."
+                throw new ClassConstraintException("Method '" + tostring(obj) + "' has an illegal name '" + name + "'."
                     + " Its name resembles the class or interface initialization method which it isn't because of its arguments (==descriptor).");
             }
 
@@ -864,7 +864,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                 }
                 if (maxone > 1) {
                     throw new ClassConstraintException(
-                        "Method '" + tostring(obj) + "' must only have at most one of its ACC_PRIVATE, ACC_PROTECTED, ACC_PUBLIC modifiers set.");
+                        "Method '" + tostring(obj) + "' must have at most one of its ACC_PRIVATE, ACC_PROTECTED, ACC_PUBLIC modifiers set.");
                 }
 
                 if (obj.isAbstract()) {
@@ -929,7 +929,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
 
             final String nameanddesc = name + sig;
             if (methodNamesAndDesc.contains(nameanddesc)) {
-                throw new ClassConstraintException("No two methods (like '" + tostring(obj) + "') are allowed have same names and desciptors.");
+                throw new ClassConstraintException("No two methods (like '" + tostring(obj) + "') are allowed to have the same name and descriptor.");
             }
             methodNamesAndDesc.add(nameanddesc);
 
@@ -1026,7 +1026,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         @Override
         public void visitConstantFieldref(final ConstantFieldref obj) {
             if (obj.getTag() != Const.CONSTANT_Fieldref) {
-                throw new ClassConstraintException("ConstantFieldref '" + tostring(obj) + "' has wrong tag.");
+                throw new ClassConstraintException("ConstantFieldref '" + tostring(obj) + "' has the wrong tag.");
             }
             final int nameAndTypeIndex = obj.getNameAndTypeIndex();
             final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(nameAndTypeIndex);
@@ -1054,7 +1054,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         @Override
         public void visitConstantInterfaceMethodref(final ConstantInterfaceMethodref obj) {
             if (obj.getTag() != Const.CONSTANT_InterfaceMethodref) {
-                throw new ClassConstraintException("ConstantInterfaceMethodref '" + tostring(obj) + "' has wrong tag.");
+                throw new ClassConstraintException("ConstantInterfaceMethodref '" + tostring(obj) + "' has the wrong tag.");
             }
             final int nameAndTypeIndex = obj.getNameAndTypeIndex();
             final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(nameAndTypeIndex);
@@ -1087,7 +1087,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
         @Override
         public void visitConstantMethodref(final ConstantMethodref obj) {
             if (obj.getTag() != Const.CONSTANT_Methodref) {
-                throw new ClassConstraintException("ConstantMethodref '" + tostring(obj) + "' has wrong tag.");
+                throw new ClassConstraintException("ConstantMethodref '" + tostring(obj) + "' has the wrong tag.");
             }
             final int nameAndTypeIndex = obj.getNameAndTypeIndex();
             final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(nameAndTypeIndex);
@@ -1432,11 +1432,11 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                     if (map.containsKey(nameAndSig) && method.isFinal()) {
                         if (!method.isPrivate()) {
                             throw new ClassConstraintException("Method '" + nameAndSig + "' in class '" + map.get(nameAndSig)
-                                + "' overrides the final (not-overridable) definition in class '" + jc.getClassName() + "'.");
+                                + "' overrides the final (non-overridable) definition in class '" + jc.getClassName() + "'.");
                         }
                         addMessage("Method '" + nameAndSig + "' in class '" + map.get(nameAndSig)
-                            + "' overrides the final (not-overridable) definition in class '" + jc.getClassName()
-                            + "'. This is okay, as the original definition was private; however this constraint leverage"
+                            + "' overrides the final (non-overridable) definition in class '" + jc.getClassName()
+                            + "'. This is okay, as the original definition was private; however, this relaxation of the constraint"
                             + " was introduced by JLS 8.4.6 (not vmspec2) and the behavior of the Sun verifiers.");
                     } else if (!method.isStatic()) { // static methods don't inherit
                         map.put(nameAndSig, jc.getClassName());

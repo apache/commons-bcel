@@ -272,7 +272,7 @@ public class Subroutines {
             for (final InstructionHandle actual : instructions) {
                 if (actual.getInstruction() instanceof RET) {
                     if (ret != null) {
-                        throw new StructuralCodeConstraintException("Subroutine with more then one RET detected: '" + ret + "' and '" + actual + "'.");
+                        throw new StructuralCodeConstraintException("Subroutine with more than one RET detected: '" + ret + "' and '" + actual + "'.");
                     }
                     ret = actual;
                 }

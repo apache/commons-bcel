@@ -324,7 +324,7 @@ public class ASTExpr extends SimpleNode implements MiniParserConstants, MiniPars
 
             if (t != childType) {
                 MiniC.addError(expr.getLine(), expr.getColumn(),
-                        "Expression has not expected type " + Const.getTypeName(childType) + " but " + Const.getTypeName(t) + ".");
+                        "Expression does not have the expected type " + Const.getTypeName(childType) + " but " + Const.getTypeName(t) + ".");
             }
 
             is_simple = is_simple && expr.isSimple();

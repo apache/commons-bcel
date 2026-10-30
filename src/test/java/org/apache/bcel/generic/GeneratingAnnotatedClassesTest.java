@@ -384,7 +384,7 @@ class GeneratingAnnotatedClassesTest extends AbstractTest {
         final JavaClass jc2 = getClassFrom("temp1", "HelloWorld");
         // Check annotation is OK
         i = jc2.getMethods()[0].getAnnotationEntries().length;
-        assertEquals(1, i, "Wrong number of annotation on JavaClass");
+        assertEquals(1, i, "Wrong number of annotations on JavaClass");
         final ClassGen cg2 = new ClassGen(jc2);
         // Check it now it is a ClassGen
         final Method[] m = cg2.getMethods();

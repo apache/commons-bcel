@@ -156,7 +156,7 @@ public abstract class BranchInstruction extends Instruction implements Instructi
      */
     protected int getTargetOffset(final InstructionHandle target) {
         if (target == null) {
-            throw new ClassGenException("Target of " + super.toString(true) + " is invalid null handle");
+            throw new ClassGenException("Target of " + super.toString(true) + " is an invalid null handle");
         }
         final int t = target.getPosition();
         if (t < 0) {

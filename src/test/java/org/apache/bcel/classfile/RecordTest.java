@@ -72,7 +72,7 @@ class RecordTest extends AbstractTest {
         final JavaClass clazzFromRepo = repos2.loadClass("SimpleRecord");
         assertNotNull(clazzFromRepo); // Use the variable to avoid a warning
         final Record recordAttributeFromRepo = (Record) findAttribute("Record", clazzFromRepo)[0];
-        assertEquals(recordAttribute.toString(), recordAttributeFromRepo.toString(), "Both attributes needs to be equal");
+        assertEquals(recordAttribute.toString(), recordAttributeFromRepo.toString(), "Both attributes need to be equal");
         tfile.deleteOnExit();
     }
 
@@ -87,9 +87,9 @@ class RecordTest extends AbstractTest {
     @Test
     void testRecordClassSaysItIs() throws ClassNotFoundException, ClassFormatException, IOException {
         final JavaClass clazz = new ClassParser("src/test/resources/record/SimpleRecord.class").parse();
-        assertTrue(clazz.isRecord(), "Expected SimpleRecord class to say it was a record - but it didn't !");
+        assertTrue(clazz.isRecord(), "Expected SimpleRecord class to say it was a record - but it didn't!");
         final JavaClass simpleClazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleClass");
-        assertFalse(simpleClazz.isRecord(), "Expected SimpleClass class to say it was not a record - but it didn't !");
+        assertFalse(simpleClazz.isRecord(), "Expected SimpleClass class to say it was not a record - but it didn't!");
     }
 
     @Test

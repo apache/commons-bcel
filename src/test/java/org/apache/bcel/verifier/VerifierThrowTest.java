@@ -28,6 +28,6 @@ class VerifierThrowTest extends AbstractVerifierTest {
     @Test
     void testThrowEmptyStack() throws IOException, ClassNotFoundException {
         new TestThrow01Creator().create();
-        assertVerifyRejected("TestThrow01", "Verification of a method with ATHROW instruction on an empty stack must fail.");
+        assertVerifyRejected("TestThrow01", "Verification of a method with an ATHROW instruction on an empty stack must fail.");
     }
 }

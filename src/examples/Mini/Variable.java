@@ -80,6 +80,6 @@ public class Variable implements EnvEntry {
         if (!reserved) {
             return var_name + " declared at line " + line + ", column " + column;
         }
-        return var_name + " <reserved key word>";
+        return var_name + " <reserved keyword>";
     }
 }

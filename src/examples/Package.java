@@ -259,17 +259,17 @@ public class Package {
     public void usage() {
         System.out.println(" This program packages classes and all their dependents");
         System.out.println(" into one jar. Give all starting classes (your main)");
-        System.out.println(" on the command line. Use / as separator, the .class is");
-        System.out.println(" optional. We use the environments CLASSPATH to resolve");
-        System.out.println(" classes. Anything but java.* packages are packaged.");
+        System.out.println(" on the command line. Use / as the separator; the .class extension is");
+        System.out.println(" optional. We use the CLASSPATH environment variable to resolve");
+        System.out.println(" classes. All classes except those in java.* packages are packaged.");
         System.out.println(" If you use Class.forName (or similar), be sure to");
         System.out.println(" include the classes that you load dynamically on the");
         System.out.println(" command line.\n");
         System.out.println(" These options are recognized:");
         System.out.println(" -e -error  Show errors, meaning classes that could not ");
-        System.out.println("   resolved + the classes that referenced them.");
+        System.out.println("   be resolved, plus the classes that referenced them.");
         System.out.println(" -l -log  Show classes as they are processed. This will");
-        System.out.println("   include doubles, java classes and is difficult to");
+        System.out.println("   include duplicates and Java classes and may be difficult to");
         System.out.println("   read. I use it as a sort of progress monitor");
         System.out.println(" -s -show  Prints all the classes that were packaged");
         System.out.println("   in alphabetical order, which is ordered by package");

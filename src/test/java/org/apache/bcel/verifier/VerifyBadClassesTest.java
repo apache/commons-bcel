@@ -195,7 +195,7 @@ class VerifyBadClassesTest {
         final File testFile = new File(testDir, className + JavaClass.EXTENSION);
 
         if (!origFile.renameTo(testFile)) {
-            fail("Failed to rename orig file");
+            fail("Failed to rename original file");
         }
 
         String result;

@@ -65,7 +65,7 @@ class ElementValueGenTest extends AbstractTest {
         // Creation of an element like that should leave a new entry in the
         // cpool
         final int idx = cp.lookupInteger(1); // 1 == true
-        assertEquals(idx, evg.getIndex(), "Should have the same index in the constantpool");
+        assertEquals(idx, evg.getIndex(), "Should have the same index in the constant pool");
         checkSerialize(evg, cp);
     }
 
@@ -77,7 +77,7 @@ class ElementValueGenTest extends AbstractTest {
         // Creation of an element like that should leave a new entry in the
         // cpool
         final int idx = cp.lookupInteger((byte) 'z');
-        assertEquals(idx, evg.getIndex(), "Should have the same index in the constantpool");
+        assertEquals(idx, evg.getIndex(), "Should have the same index in the constant pool");
         checkSerialize(evg, cp);
     }
 
@@ -89,7 +89,7 @@ class ElementValueGenTest extends AbstractTest {
         // Creation of an element like that should leave a new entry in the
         // cpool
         final int idx = cp.lookupInteger('t');
-        assertEquals(idx, evg.getIndex(), "Should have the same index in the constantpool");
+        assertEquals(idx, evg.getIndex(), "Should have the same index in the constant pool");
         checkSerialize(evg, cp);
     }
 
@@ -113,7 +113,7 @@ class ElementValueGenTest extends AbstractTest {
         // Creation of an element like that should leave a new entry in the
         // cpool
         final int idx = cp.lookupDouble(333.44);
-        assertEquals(idx, evg.getIndex(), "Should have the same index in the constantpool");
+        assertEquals(idx, evg.getIndex(), "Should have the same index in the constant pool");
         checkSerialize(evg, cp);
     }
 
@@ -128,7 +128,7 @@ class ElementValueGenTest extends AbstractTest {
         final EnumElementValueGen evg = new EnumElementValueGen(enumType, "Red", cp);
         // Creation of an element like that should leave a new entry in the
         // cpool
-        assertEquals(cp.lookupUtf8("Red"), evg.getValueIndex(), "The new ElementValue value index should match the contents of the constantpool");
+        assertEquals(cp.lookupUtf8("Red"), evg.getValueIndex(), "The new ElementValue value index should match the contents of the constant pool");
         // BCELBUG: Should the class signature or class name be in the constant
         // pool? (see note in ConstantPool)
         // assertTrue("The new ElementValue type index should match the contents
@@ -145,7 +145,7 @@ class ElementValueGenTest extends AbstractTest {
         final SimpleElementValueGen evg = new SimpleElementValueGen(ElementValueGen.PRIMITIVE_FLOAT, cp, 111.222f);
         // Creation of an element like that should leave a new entry in the
         // cpool
-        assertEquals(cp.lookupFloat(111.222f), evg.getIndex(), "Should have the same index in the constantpool");
+        assertEquals(cp.lookupFloat(111.222f), evg.getIndex(), "Should have the same index in the constant pool");
         checkSerialize(evg, cp);
     }
 
@@ -159,7 +159,7 @@ class ElementValueGenTest extends AbstractTest {
         final SimpleElementValueGen evg = new SimpleElementValueGen(ElementValueGen.PRIMITIVE_INT, cp, 555);
         // Creation of an element like that should leave a new entry in the
         // cpool
-        assertEquals(cp.lookupInteger(555), evg.getIndex(), "Should have the same index in the constantpool");
+        assertEquals(cp.lookupInteger(555), evg.getIndex(), "Should have the same index in the constant pool");
         checkSerialize(evg, cp);
     }
 
@@ -171,7 +171,7 @@ class ElementValueGenTest extends AbstractTest {
         // Creation of an element like that should leave a new entry in the
         // cpool
         final int idx = cp.lookupLong(3334455L);
-        assertEquals(idx, evg.getIndex(), "Should have the same index in the constantpool");
+        assertEquals(idx, evg.getIndex(), "Should have the same index in the constant pool");
         checkSerialize(evg, cp);
     }
 
@@ -183,7 +183,7 @@ class ElementValueGenTest extends AbstractTest {
         // Creation of an element like that should leave a new entry in the
         // cpool
         final int idx = cp.lookupInteger(42);
-        assertEquals(idx, evg.getIndex(), "Should have the same index in the constantpool");
+        assertEquals(idx, evg.getIndex(), "Should have the same index in the constant pool");
         checkSerialize(evg, cp);
     }
 
@@ -197,7 +197,7 @@ class ElementValueGenTest extends AbstractTest {
         final SimpleElementValueGen evg = new SimpleElementValueGen(ElementValueGen.STRING, cp, "hello");
         // Creation of an element like that should leave a new entry in the
         // cpool
-        assertEquals(cp.lookupUtf8("hello"), evg.getIndex(), "Should have the same index in the constantpool");
+        assertEquals(cp.lookupUtf8("hello"), evg.getIndex(), "Should have the same index in the constant pool");
         checkSerialize(evg, cp);
     }
 }

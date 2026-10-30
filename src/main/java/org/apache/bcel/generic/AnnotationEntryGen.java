@@ -115,7 +115,7 @@ public class AnnotationEntryGen {
 
             return newAttributes.toArray(Attribute.EMPTY_ARRAY);
         } catch (final IOException e) {
-            System.err.println("IOException whilst processing annotations");
+            System.err.println("IOException while processing annotations");
             e.printStackTrace();
         }
         return null;
@@ -195,7 +195,7 @@ public class AnnotationEntryGen {
             }
             return newAttributes.toArray(Attribute.EMPTY_ARRAY);
         } catch (final IOException e) {
-            System.err.println("IOException whilst processing parameter annotations");
+            System.err.println("IOException while processing parameter annotations");
             e.printStackTrace();
         }
         return null;

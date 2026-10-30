@@ -803,7 +803,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
      */
     public boolean implementationOf(final JavaClass inter) throws ClassNotFoundException {
         if (!inter.isInterface()) {
-            throw new IllegalArgumentException(inter.getClassName() + " is no interface");
+            throw new IllegalArgumentException(inter.getClassName() + " is not an interface");
         }
         if (equals(inter)) {
             return true;

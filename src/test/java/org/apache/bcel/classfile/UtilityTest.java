@@ -46,7 +46,7 @@ class UtilityTest {
         assertEquals(0, Utility.clearBit(0, 0));
         assertEquals(0, Utility.clearBit(1, 0), "1 bit 0 set to 0 -> 0");
         assertEquals(1, Utility.clearBit(1, 1), "1 bit 1 is 0 hence no change");
-        assertEquals(8, Utility.clearBit(8, 4), "1000 only has 4 bit hence no change");
+        assertEquals(8, Utility.clearBit(8, 4), "1000 only has 4 bits, hence no change");
         assertEquals(1, Utility.clearBit(9, 3), "1001 bit 3 set to 0 -> 0001");
         assertEquals(-2, Utility.clearBit(-1, 0), "111...11 set bit 0 to 0 -> 111..10");
         assertEquals(0, Utility.clearBit(Integer.MIN_VALUE, 31), "100...00 set bit 31 to 0 -> 000..00");

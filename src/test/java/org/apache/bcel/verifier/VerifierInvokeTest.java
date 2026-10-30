@@ -25,23 +25,23 @@ class VerifierInvokeTest extends AbstractVerifierTest {
 
     @Test
     void testLegalInvokeInterface() throws ClassNotFoundException {
-        assertVerifyOK("TestLegalInvokeInterface01", "Verification of invokeinterface on method defined in superinterface must pass.");
+        assertVerifyOK("TestLegalInvokeInterface01", "Verification of invokeinterface on a method defined in a superinterface must pass.");
     }
 
     @Test
     void testLegalInvokeSpecial() throws ClassNotFoundException {
-        assertVerifyOK("TestLegalInvokeSpecial01", "Verification of invokespecial on method defined in superclass must pass.");
-        assertVerifyOK("TestLegalInvokeSpecial02", "Verification of invokespecial on method defined in superclass must pass.");
+        assertVerifyOK("TestLegalInvokeSpecial01", "Verification of invokespecial on a method defined in a superclass must pass.");
+        assertVerifyOK("TestLegalInvokeSpecial02", "Verification of invokespecial on a method defined in a superclass must pass.");
     }
 
     @Test
     void testLegalInvokeStatic() throws ClassNotFoundException {
-        assertVerifyOK("TestLegalInvokeStatic01", "Verification of invokestatic on method defined in superclass must pass.");
+        assertVerifyOK("TestLegalInvokeStatic01", "Verification of invokestatic on a method defined in a superclass must pass.");
     }
 
     @Test
     void testLegalInvokeVirtual() throws ClassNotFoundException {
-        assertVerifyOK("TestLegalInvokeVirtual01", "Verification of invokevirtual on method defined in superclass must pass.");
-        assertVerifyOK("TestLegalInvokeVirtual02", "Verification of invokevirtual on method defined in superinterface must pass.");
+        assertVerifyOK("TestLegalInvokeVirtual01", "Verification of invokevirtual on a method defined in a superclass must pass.");
+        assertVerifyOK("TestLegalInvokeVirtual02", "Verification of invokevirtual on a method defined in a superinterface must pass.");
     }
 }

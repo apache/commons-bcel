@@ -293,7 +293,7 @@ public class MethodGen extends FieldGenOrMethodGen {
             }
             if (argNames != null) { // Names for variables provided?
                 if (size != argNames.length) {
-                    throw new ClassGenException("Mismatch in argument array lengths: " + size + " vs. " + argNames.length);
+                    throw new ClassGenException("Mismatch in argument array lengths: " + size + " versus " + argNames.length);
                 }
             } else { // Give them dummy names
                 argNames = new String[size];
@@ -422,7 +422,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     public CodeExceptionGen addExceptionHandler(final InstructionHandle startPc, final InstructionHandle endPc, final InstructionHandle handlerPc,
         final ObjectType catchType) {
         if (startPc == null || endPc == null || handlerPc == null) {
-            throw new ClassGenException("Exception handler target is null instruction");
+            throw new ClassGenException("Exception handler target is a null instruction");
         }
         final CodeExceptionGen c = new CodeExceptionGen(startPc, endPc, handlerPc, catchType);
         exceptionList.add(c);
@@ -501,7 +501,7 @@ public class MethodGen extends FieldGenOrMethodGen {
             }
             return l;
         }
-        throw new IllegalArgumentException("Can not use " + type + " as type for local variable");
+        throw new IllegalArgumentException("Cannot use " + type + " as the type of a local variable");
     }
 
     /**

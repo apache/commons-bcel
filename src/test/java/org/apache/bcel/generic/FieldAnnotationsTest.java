@@ -103,7 +103,7 @@ class FieldAnnotationsTest extends AbstractTest {
         }
         assertEquals("[@Lorg/apache/bcel/data/SimpleAnnotation;(id=1)]", dumpAnnotationEntries(f.getAnnotationEntries()));
         if (dbg) {
-            System.err.println("AnnotationEntrys on field are: " + dumpAnnotationEntries(f.getAnnotationEntries()));
+            System.err.println("AnnotationEntries on field are: " + dumpAnnotationEntries(f.getAnnotationEntries()));
         }
         final AnnotationEntryGen fruitBasedAnnotationEntry = createFruitAnnotationEntry(clg.getConstantPool(), "Tomato", false);
         final FieldGen fg = new FieldGen(f, clg.getConstantPool());
@@ -115,7 +115,7 @@ class FieldAnnotationsTest extends AbstractTest {
             System.err.println("FieldGen (mutable field) is " + fg);
         }
         if (dbg) {
-            System.err.println("with AnnotationEntrys: " + dumpAnnotationEntries(fg.getAnnotationEntries()));
+            System.err.println("with AnnotationEntries: " + dumpAnnotationEntries(fg.getAnnotationEntries()));
         }
         if (dbg) {
             System.err.println("Replacing original field with new field that has extra AnnotationEntry");
@@ -129,7 +129,7 @@ class FieldAnnotationsTest extends AbstractTest {
             System.err.println("Field now looks like this: " + f);
         }
         if (dbg) {
-            System.err.println("With AnnotationEntrys: " + dumpAnnotationEntries(f.getAnnotationEntries()));
+            System.err.println("With AnnotationEntries: " + dumpAnnotationEntries(f.getAnnotationEntries()));
         }
         assertEquals(2, f.getAnnotationEntries().length, "Wrong number of AnnotationEntries");
     }

@@ -294,7 +294,7 @@ public final class Pass3aVerifier extends PassVerifier {
             final int idx = o.getIndex();
             if (idx < 0) {
                 constraintViolated(o, "Index '" + idx + "' must be non-negative."
-                    + " [Constraint by JustIce as an analogon to the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
+                    + " [Constraint imposed by JustIce by analogy with the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
             } else {
                 final int maxminus2 = maxLocals() - 2;
                 if (idx > maxminus2) {
@@ -309,7 +309,7 @@ public final class Pass3aVerifier extends PassVerifier {
             final int idx = o.getIndex();
             if (idx < 0) {
                 constraintViolated(o, "Index '" + idx + "' must be non-negative."
-                    + " [Constraint by JustIce as an analogon to the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
+                    + " [Constraint imposed by JustIce by analogy with the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
             } else {
                 final int maxminus2 = maxLocals() - 2;
                 if (idx > maxminus2) {
@@ -639,7 +639,7 @@ public final class Pass3aVerifier extends PassVerifier {
             } catch (final ClassNotFoundException e) {
                 // FIXME: maybe not the best way to handle this
                 // throw new AssertionViolatedException("Missing class: " + e, e);
-                addMessage("Unable to verify INVOKEVITUAL as cannot load target class: " + e.getCause());
+                addMessage("Unable to verify INVOKEVIRTUAL because the target class cannot be loaded: " + e.getCause());
             }
         }
 
@@ -684,7 +684,7 @@ public final class Pass3aVerifier extends PassVerifier {
             try {
                 indexValid(o, o.getIndex() + 1);
             } catch (final StaticCodeInstructionOperandConstraintException e) {
-                throw new AssertionViolatedException("Does not BCEL handle that? LDC2_W operand has a problem.", e);
+                throw new AssertionViolatedException("Does BCEL not handle that? LDC2_W operand has a problem.", e);
             }
         }
 
@@ -694,7 +694,7 @@ public final class Pass3aVerifier extends PassVerifier {
             final int idx = o.getIndex();
             if (idx < 0) {
                 constraintViolated(o, "Index '" + idx + "' must be non-negative."
-                    + " [Constraint by JustIce as an analogon to the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
+                    + " [Constraint imposed by JustIce by analogy with the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
             } else {
                 final int maxminus2 = maxLocals() - 2;
                 if (idx > maxminus2) {
@@ -756,7 +756,7 @@ public final class Pass3aVerifier extends PassVerifier {
             final int idx = o.getIndex();
             if (idx < 0) {
                 constraintViolated(o, "Index '" + idx + "' must be non-negative."
-                    + " [Constraint by JustIce as an analogon to the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
+                    + " [Constraint imposed by JustIce by analogy with the single-slot xLOAD/xSTORE instructions; may not happen anyway.]");
             } else {
                 final int maxminus2 = maxLocals() - 2;
                 if (idx > maxminus2) {
@@ -781,7 +781,7 @@ public final class Pass3aVerifier extends PassVerifier {
             if (t instanceof ArrayType) {
                 final int dimensions = ((ArrayType) t).getDimensions();
                 if (dimensions < dimensions2create) {
-                    constraintViolated(o, "Not allowed to create array with more dimensions ('" + dimensions2create
+                    constraintViolated(o, "Not allowed to create an array with more dimensions ('" + dimensions2create
                         + "') than the one referenced by the CONSTANT_Class '" + t + "'.");
                 }
             } else {
@@ -940,7 +940,7 @@ public final class Pass3aVerifier extends PassVerifier {
                 }
                 if (offsets.contains(offset)) {
                     addMessage("LineNumberTable attribute '" + code.getLineNumberTable() + "' refers to the same code offset ('" + offset
-                        + "') more than once which is violating the semantics [but is sometimes produced by IBM's 'jikes' compiler].");
+                        + "') more than once, which violates the semantics [but is sometimes produced by IBM's 'jikes' compiler].");
                 } else {
                     offsets.add(offset);
                 }
@@ -990,16 +990,16 @@ public final class Pass3aVerifier extends PassVerifier {
             }
             if (!instructionPositionSet.contains(Integer.valueOf(startpc))) {
                 throw new ClassConstraintException("Code attribute '" + tostring(code) + "' has an exception_table entry '" + element
-                    + "' that has a non-existant bytecode offset as its start_pc ('" + startpc + "').");
+                    + "' that has a nonexistent bytecode offset as its start_pc ('" + startpc + "').");
             }
             if (!instructionPositionSet.contains(Integer.valueOf(endpc)) && endpc != codeLength) {
                 throw new ClassConstraintException("Code attribute '" + tostring(code) + "' has an exception_table entry '" + element
-                    + "' that has a non-existant bytecode offset as its end_pc ('" + startpc + "') [that is also not equal to code_length ('" + codeLength
+                    + "' that has a nonexistent bytecode offset as its end_pc ('" + startpc + "') [that is also not equal to code_length ('" + codeLength
                     + "')].");
             }
             if (!instructionPositionSet.contains(Integer.valueOf(handlerpc))) {
                 throw new ClassConstraintException("Code attribute '" + tostring(code) + "' has an exception_table entry '" + element
-                    + "' that has a non-existant bytecode offset as its handler_pc ('" + handlerpc + "').");
+                    + "' that has a nonexistent bytecode offset as its handler_pc ('" + handlerpc + "').");
             }
         }
     }
@@ -1122,13 +1122,13 @@ public final class Pass3aVerifier extends PassVerifier {
         while (ih != null) {
             final Instruction i = ih.getInstruction();
             if (i instanceof IMPDEP1) {
-                throw new StaticCodeInstructionConstraintException("IMPDEP1 must not be in the code, it is an illegal instruction for _internal_ JVM use.");
+                throw new StaticCodeInstructionConstraintException("IMPDEP1 must not be in the code; it is an illegal instruction for _internal_ JVM use.");
             }
             if (i instanceof IMPDEP2) {
-                throw new StaticCodeInstructionConstraintException("IMPDEP2 must not be in the code, it is an illegal instruction for _internal_ JVM use.");
+                throw new StaticCodeInstructionConstraintException("IMPDEP2 must not be in the code; it is an illegal instruction for _internal_ JVM use.");
             }
             if (i instanceof BREAKPOINT) {
-                throw new StaticCodeInstructionConstraintException("BREAKPOINT must not be in the code, it is an illegal instruction for _internal_ JVM use.");
+                throw new StaticCodeInstructionConstraintException("BREAKPOINT must not be in the code; it is an illegal instruction for _internal_ JVM use.");
             }
             ih = ih.getNext();
         }
@@ -1184,8 +1184,8 @@ public final class Pass3aVerifier extends PassVerifier {
                     }
                     if (!(target.getInstruction() instanceof ASTORE)) {
                         throw new StaticCodeInstructionOperandConstraintException(
-                            "Due to JustIce's clear definition of subroutines, no JSR or JSR_W may target anything else"
-                                + " than an ASTORE instruction. Instruction '" + tostring(ih) + "' targets '" + tostring(target) + "'.");
+                            "Due to JustIce's clear definition of subroutines, no JSR or JSR_W may target anything"
+                                + " other than an ASTORE instruction. Instruction '" + tostring(ih) + "' targets '" + tostring(target) + "'.");
                     }
                 }
 

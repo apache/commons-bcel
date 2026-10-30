@@ -43,17 +43,17 @@ class VerifierReturnTest extends AbstractVerifierTest {
         new TestReturn03IntCreator().create();
         assertVerifyRejected("TestReturn03Int", "Verification of an int method that returns null int must fail.");
         new TestReturn03FloatCreator().create();
-        assertVerifyRejected("TestReturn03Float", "Verification of a int method that returns null float must fail.");
+        assertVerifyRejected("TestReturn03Float", "Verification of an int method that returns null float must fail.");
         new TestReturn03DoubleCreator().create();
-        assertVerifyRejected("TestReturn03Double", "Verification of a int method that returns null double must fail.");
+        assertVerifyRejected("TestReturn03Double", "Verification of an int method that returns null double must fail.");
         new TestReturn03LongCreator().create();
-        assertVerifyRejected("TestReturn03Long", "Verification of a int method that returns null long must fail.");
+        assertVerifyRejected("TestReturn03Long", "Verification of an int method that returns null long must fail.");
         new TestReturn03ByteCreator().create();
-        assertVerifyRejected("TestReturn03Byte", "Verification of a int method that returns null byte must fail.");
+        assertVerifyRejected("TestReturn03Byte", "Verification of an int method that returns null byte must fail.");
         new TestReturn03BooleanCreator().create();
-        assertVerifyRejected("TestReturn03Boolean", "Verification of a int method that returns null boolean must fail.");
+        assertVerifyRejected("TestReturn03Boolean", "Verification of an int method that returns null boolean must fail.");
         new TestReturn03ObjectCreator().create();
-        assertVerifyRejected("TestReturn03Object", "Verification of a int method that returns null Object must fail.");
+        assertVerifyRejected("TestReturn03Object", "Verification of an int method that returns null Object must fail.");
         final TestReturn03UnknownCreator testReturn03UnknownCreator = new TestReturn03UnknownCreator();
         assertThrowsExactly(IllegalArgumentException.class, testReturn03UnknownCreator::create, "Invalid type <unknown object>");
     }

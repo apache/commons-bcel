@@ -368,7 +368,7 @@ public class ASTFunDecl extends SimpleNode implements MiniParserTreeConstants {
 
         if (expected != Const.T_UNKNOWN && type != expected) {
             MiniC.addError(line, column,
-                    "Function f ist not of type " + Const.getTypeName(expected) + " as previously assumed, but " + Const.getTypeName(type));
+                    "Function f is not of type " + Const.getTypeName(expected) + " as previously assumed, but " + Const.getTypeName(type));
         }
 
         name.setType(type);

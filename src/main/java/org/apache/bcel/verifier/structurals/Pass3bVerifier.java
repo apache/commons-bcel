@@ -218,7 +218,7 @@ public final class Pass3bVerifier extends PassVerifier {
                 int skipJsr = 0;
                 for (int ss = oldchain.size() - 1; ss >= 0; ss--) {
                     if (skipJsr < 0) {
-                        throw new AssertionViolatedException("More RET than JSR in execution chain?.");
+                        throw new AssertionViolatedException("More RET instructions than JSR instructions in the execution chain?");
                     }
 //System.err.println("+"+oldchain.get(ss));
                     if (oldchain.get(ss).getInstruction().getInstruction() instanceof JsrInstruction) {
@@ -427,7 +427,7 @@ public final class Pass3bVerifier extends PassVerifier {
             final PrintWriter pw = new PrintWriter(sw);
             re.printStackTrace(pw);
 
-            throw new AssertionViolatedException("Some RuntimeException occurred while verify()ing class '" + jc.getClassName() + "', method '"
+            throw new AssertionViolatedException("Some RuntimeException occurred while verifying class '" + jc.getClassName() + "', method '"
                 + methods[methodNo] + "'. Original RuntimeException's stack trace:\n---\n" + sw + "---\n", re);
         }
         return VerificationResult.VR_OK;

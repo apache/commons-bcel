@@ -132,7 +132,7 @@ public class LocalVariables implements Cloneable {
     public void merge(final LocalVariables localVariable) {
 
         if (this.locals.length != localVariable.locals.length) {
-            throw new AssertionViolatedException("Merging LocalVariables of different size?!? From different methods or what?!?");
+            throw new AssertionViolatedException("Merging LocalVariables of different sizes?!? From different methods or what?!?");
         }
 
         for (int i = 0; i < locals.length; i++) {
@@ -151,11 +151,11 @@ public class LocalVariables implements Cloneable {
             // We won't accept an uninitialized object if we know it was initialized;
             // compare vmspec2, 4.9.4, last paragraph.
             if (!(locals[i] instanceof UninitializedObjectType) && lv.locals[i] instanceof UninitializedObjectType) {
-                throw new StructuralCodeConstraintException("Backwards branch with an uninitialized object in the local variables detected.");
+                throw new StructuralCodeConstraintException("Backward branch with an uninitialized object in the local variables detected.");
             }
             // Even harder, what about _different_ uninitialized object types?!
             if (!locals[i].equals(lv.locals[i]) && locals[i] instanceof UninitializedObjectType && lv.locals[i] instanceof UninitializedObjectType) {
-                throw new StructuralCodeConstraintException("Backwards branch with an uninitialized object in the local variables detected.");
+                throw new StructuralCodeConstraintException("Backward branch with an uninitialized object in the local variables detected.");
             }
             // If we just didn't know that it was initialized, we have now learned.
             if (locals[i] instanceof UninitializedObjectType && !(lv.locals[i] instanceof UninitializedObjectType)) {
@@ -167,7 +167,7 @@ public class LocalVariables implements Cloneable {
 
                     if (sup == null) {
                         // We should have checked this in Pass2!
-                        throw new AssertionViolatedException("Could not load all the super classes of '" + locals[i] + "' and '" + lv.locals[i] + "'.");
+                        throw new AssertionViolatedException("Could not load all the superclasses of '" + locals[i] + "' and '" + lv.locals[i] + "'.");
                     }
                     locals[i] = sup;
                 }

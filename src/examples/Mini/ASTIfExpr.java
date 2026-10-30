@@ -133,7 +133,7 @@ public class ASTIfExpr extends ASTExpr {
 
         if (expected != Const.T_UNKNOWN && thenType != expected) {
             MiniC.addError(then_expr.getLine(), then_expr.getColumn(),
-                    "THEN expression is not of expected type " + Const.getTypeName(expected) + " but " + Const.getTypeName(thenType) + ".");
+                    "THEN expression is not of the expected type " + Const.getTypeName(expected) + " but " + Const.getTypeName(thenType) + ".");
         }
 
         if (else_expr != null) {
@@ -141,7 +141,7 @@ public class ASTIfExpr extends ASTExpr {
 
             if (expected != Const.T_UNKNOWN && elseType != expected) {
                 MiniC.addError(else_expr.getLine(), else_expr.getColumn(),
-                        "ELSE expression is not of expected type " + Const.getTypeName(expected) + " but " + Const.getTypeName(elseType) + ".");
+                        "ELSE expression is not of the expected type " + Const.getTypeName(expected) + " but " + Const.getTypeName(elseType) + ".");
             } else if (thenType == Const.T_UNKNOWN) {
                 thenType = elseType;
                 then_expr.setType(elseType);
@@ -152,7 +152,7 @@ public class ASTIfExpr extends ASTExpr {
         }
 
         if (thenType != elseType) {
-            MiniC.addError(line, column, "Type mismatch in THEN-ELSE: " + Const.getTypeName(thenType) + " vs. " + Const.getTypeName(elseType) + ".");
+            MiniC.addError(line, column, "Type mismatch in THEN-ELSE: " + Const.getTypeName(thenType) + " versus " + Const.getTypeName(elseType) + ".");
         }
 
         type = thenType;

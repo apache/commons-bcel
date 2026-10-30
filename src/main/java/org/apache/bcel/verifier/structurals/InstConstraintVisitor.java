@@ -600,7 +600,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitBREAKPOINT(final BREAKPOINT o) {
-        throw new AssertionViolatedException("In this JustIce verification pass there should not occur an illegal instruction such as BREAKPOINT.");
+        throw new AssertionViolatedException("This JustIce verification pass should not encounter an illegal instruction such as BREAKPOINT.");
     }
 
     /**
@@ -1498,7 +1498,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIMPDEP1(final IMPDEP1 o) {
-        throw new AssertionViolatedException("In this JustIce verification pass there should not occur an illegal instruction such as IMPDEP1.");
+        throw new AssertionViolatedException("This JustIce verification pass should not encounter an illegal instruction such as IMPDEP1.");
     }
 
     /**
@@ -1508,7 +1508,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
      */
     @Override
     public void visitIMPDEP2(final IMPDEP2 o) {
-        throw new AssertionViolatedException("In this JustIce verification pass there should not occur an illegal instruction such as IMPDEP2.");
+        throw new AssertionViolatedException("This JustIce verification pass should not encounter an illegal instruction such as IMPDEP2.");
     }
 
     /**
@@ -1697,9 +1697,9 @@ public class InstConstraintVisitor extends EmptyVisitor {
             // Don't init an object twice.
             if (o.getMethodName(cpg).equals(Const.CONSTRUCTOR_NAME) && !(stack().peek(o.getArgumentTypes(cpg).length) instanceof UninitializedObjectType)) {
                 constraintViolated(o,
-                    "Possibly initializing object twice."
+                    "Possibly initializing an object twice."
                         + " A valid instruction sequence must not have an uninitialized object on the operand stack or in a local variable"
-                        + " during a backwards branch, or in a local variable in code protected by an exception handler."
+                        + " during a backward branch, or in a local variable in code protected by an exception handler."
                         + " Please see The Java Virtual Machine Specification, Second Edition, 4.9.4 (pages 147 and 148) for details.");
             }
             // the o.getClassType(cpg) type has passed pass 2; see visitLoadClass(o).
@@ -2081,17 +2081,17 @@ public class InstConstraintVisitor extends EmptyVisitor {
         // [suppose some instruction put an int at N+1--- our double at N is defective]
         if (o.getType(cpg).getSize() == 2 && locals().get(o.getIndex() + 1) != Type.UNKNOWN) {
             constraintViolated(o,
-                "Reading a two-locals value from local variables " + o.getIndex() + " and " + (o.getIndex() + 1) + " where the latter one is destroyed.");
+                "Reading a two-slot value from local variables " + o.getIndex() + " and " + (o.getIndex() + 1) + " where the latter one is destroyed.");
         }
 
         // LOAD instructions must read the correct type.
         if (!(o instanceof ALOAD)) {
             if (locals().get(o.getIndex()) != o.getType(cpg)) {
-                constraintViolated(o, "Local Variable type and LOADing Instruction type mismatch: Local Variable: '" + locals().get(o.getIndex())
+                constraintViolated(o, "Local Variable type and load instruction type mismatch: Local Variable: '" + locals().get(o.getIndex())
                     + "'; Instruction type: '" + o.getType(cpg) + "'.");
             }
         } else if (!(locals().get(o.getIndex()) instanceof ReferenceType)) {
-            constraintViolated(o, "Local Variable type and LOADing Instruction type mismatch: Local Variable: '" + locals().get(o.getIndex())
+            constraintViolated(o, "Local Variable type and load instruction type mismatch: Local Variable: '" + locals().get(o.getIndex())
                 + "'; Instruction expects a ReferenceType.");
         }
         // ALOAD __IS ALLOWED__ to put uninitialized objects onto the stack!
@@ -2252,7 +2252,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
 
         final Type t = o.getType(cpg);
         if (!(t instanceof ReferenceType)) {
-            throw new AssertionViolatedException("NEW.getType() returning a non-reference type?.");
+            throw new AssertionViolatedException("NEW.getType() returning a non-reference type?");
         }
         if (!(t instanceof ObjectType)) {
             constraintViolated(o, "Expecting a class type (ObjectType) to work on. Found: '" + t + "'.");
@@ -2265,7 +2265,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
                 constraintViolated(o, "Expecting a class type (ObjectType) to work on. Found: '" + obj + "'.");
             }
         } catch (final ClassNotFoundException e) {
-            constraintViolated(o, "Expecting a class type (ObjectType) to work on. Found: '" + obj + "'. which threw " + e);
+            constraintViolated(o, "Expecting a class type (ObjectType) to work on. Found: '" + obj + "', which threw " + e);
         }
     }
 
@@ -2520,13 +2520,13 @@ public class InstConstraintVisitor extends EmptyVisitor {
         if (!(o instanceof ASTORE)) {
             if (!(stack().peek() == o.getType(cpg))) { // the other xSTORE types are singletons in BCEL.
                 constraintViolated(o,
-                    "Stack top type and STOREing Instruction type mismatch: Stack top: '" + stack().peek() + "'; Instruction type: '" + o.getType(cpg) + "'.");
+                    "Stack top type and store instruction type mismatch: Stack top: '" + stack().peek() + "'; Instruction type: '" + o.getType(cpg) + "'.");
             }
         } else { // we deal with ASTORE
             final Type stacktop = stack().peek();
             if (!(stacktop instanceof ReferenceType) && !(stacktop instanceof ReturnaddressType)) {
-                constraintViolated(o, "Stack top type and STOREing Instruction type mismatch: Stack top: '" + stack().peek()
-                    + "'; Instruction expects a ReferenceType or a ReturnadressType.");
+                constraintViolated(o, "Stack top type and store instruction type mismatch: Stack top: '" + stack().peek()
+                    + "'; Instruction expects a ReferenceType or a ReturnaddressType.");
             }
             // if (stacktop instanceof ReferenceType) {
             // referenceTypeIsInitialized(o, (ReferenceType) stacktop);

@@ -34,8 +34,8 @@ class AnnotationAccessFlagTest extends AbstractTest {
     @Test
     void testAnnotationClassSaysItIs() throws ClassNotFoundException {
         JavaClass clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleAnnotation");
-        assertTrue(clazz.isAnnotation(), "Expected SimpleAnnotation class to say it was an annotation - but it didn't !");
+        assertTrue(clazz.isAnnotation(), "Expected SimpleAnnotation class to say it was an annotation - but it didn't!");
         clazz = getTestJavaClass(PACKAGE_BASE_NAME + ".data.SimpleClass");
-        assertFalse(clazz.isAnnotation(), "Expected SimpleClass class to say it was not an annotation - but it didn't !");
+        assertFalse(clazz.isAnnotation(), "Expected SimpleClass class to say it was not an annotation - but it didn't!");
     }
 }
