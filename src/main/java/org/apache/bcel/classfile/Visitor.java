@@ -438,16 +438,6 @@ public interface Visitor {
     }
 
     /**
-     * Visits a RuntimeVisibleTypeAnnotations or RuntimeInvisibleTypeAnnotations attribute.
-     *
-     * @param obj The attribute.
-     * @since 6.14.0
-     */
-    default void visitTypeAnnotations(final TypeAnnotations obj) {
-        // empty
-    }
-
-    /**
      * Visits a {@link Record} object.
      *
      * @param obj Record to visit.
@@ -511,6 +501,16 @@ public interface Visitor {
      * @param obj The attribute.
      */
     void visitSynthetic(Synthetic obj);
+
+    /**
+     * Visits a RuntimeVisibleTypeAnnotations or RuntimeInvisibleTypeAnnotations attribute.
+     *
+     * @param obj The attribute.
+     * @since 6.14.0
+     */
+    default void visitTypeAnnotations(final TypeAnnotations obj) {
+        // empty
+    }
 
     /**
      * Visits an Unknown attribute.

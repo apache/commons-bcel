@@ -48,23 +48,6 @@ public abstract class TypeAnnotations extends Attribute implements Iterable<Type
      * @param annotationType The subclass type of the attribute.
      * @param nameIndex Index pointing to the name of the attribute.
      * @param length Content length in bytes.
-     * @param typeAnnotationTable The actual type annotations.
-     * @param constantPool Array of constants.
-     * @param isRuntimeVisible whether the annotations are visible at runtime.
-     */
-    public TypeAnnotations(final byte annotationType, final int nameIndex, final int length, final TypeAnnotationEntry[] typeAnnotationTable,
-            final ConstantPool constantPool, final boolean isRuntimeVisible) {
-        super(annotationType, nameIndex, length, constantPool);
-        setTypeAnnotationTable(typeAnnotationTable);
-        this.isRuntimeVisible = isRuntimeVisible;
-    }
-
-    /**
-     * Constructs an instance.
-     *
-     * @param annotationType The subclass type of the attribute.
-     * @param nameIndex Index pointing to the name of the attribute.
-     * @param length Content length in bytes.
      * @param input Input stream.
      * @param constantPool Array of constants.
      * @param isRuntimeVisible whether the annotations are visible at runtime.
@@ -78,6 +61,23 @@ public abstract class TypeAnnotations extends Attribute implements Iterable<Type
         for (int i = 0; i < tableLength; i++) {
             typeAnnotationTable[i] = TypeAnnotationEntry.read(input, constantPool, isRuntimeVisible);
         }
+    }
+
+    /**
+     * Constructs an instance.
+     *
+     * @param annotationType The subclass type of the attribute.
+     * @param nameIndex Index pointing to the name of the attribute.
+     * @param length Content length in bytes.
+     * @param typeAnnotationTable The actual type annotations.
+     * @param constantPool Array of constants.
+     * @param isRuntimeVisible whether the annotations are visible at runtime.
+     */
+    public TypeAnnotations(final byte annotationType, final int nameIndex, final int length, final TypeAnnotationEntry[] typeAnnotationTable,
+            final ConstantPool constantPool, final boolean isRuntimeVisible) {
+        super(annotationType, nameIndex, length, constantPool);
+        setTypeAnnotationTable(typeAnnotationTable);
+        this.isRuntimeVisible = isRuntimeVisible;
     }
 
     @Override

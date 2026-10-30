@@ -115,47 +115,6 @@ public class TypeAnnotationEntry {
     /** Number of bytes of a {@code localvar_target} entry: start_pc, length and index. */
     private static final int LOCAL_VARIABLE_RANGE_SIZE = 6;
 
-    /**
-     * Gets the number of bytes of the target info that follows a target type.
-     *
-     * @param targetType The target type.
-     * @return the size of the target info, or -1 if it depends on its content (the table of a {@code localvar_target}).
-     * @throws ClassFormatException Thrown if the target type is not defined.
-     */
-    private static int targetInfoSize(final int targetType) {
-        switch (targetType) {
-        case TARGET_CLASS_TYPE_PARAMETER:
-        case TARGET_METHOD_TYPE_PARAMETER:
-        case TARGET_METHOD_FORMAL_PARAMETER:
-            return 1;
-        case TARGET_CLASS_EXTENDS:
-        case TARGET_CLASS_TYPE_PARAMETER_BOUND:
-        case TARGET_METHOD_TYPE_PARAMETER_BOUND:
-        case TARGET_THROWS:
-        case TARGET_EXCEPTION_PARAMETER:
-        case TARGET_INSTANCEOF:
-        case TARGET_NEW:
-        case TARGET_CONSTRUCTOR_REFERENCE:
-        case TARGET_METHOD_REFERENCE:
-            return 2;
-        case TARGET_FIELD:
-        case TARGET_METHOD_RETURN:
-        case TARGET_METHOD_RECEIVER:
-            return 0;
-        case TARGET_LOCAL_VARIABLE:
-        case TARGET_RESOURCE_VARIABLE:
-            return -1;
-        case TARGET_CAST:
-        case TARGET_CONSTRUCTOR_INVOCATION_TYPE_ARGUMENT:
-        case TARGET_METHOD_INVOCATION_TYPE_ARGUMENT:
-        case TARGET_CONSTRUCTOR_REFERENCE_TYPE_ARGUMENT:
-        case TARGET_METHOD_REFERENCE_TYPE_ARGUMENT:
-            return 3;
-        default:
-            throw new ClassFormatException("Invalid type annotation target type: 0x" + Integer.toHexString(targetType));
-        }
-    }
-
     private static void checkTargetInfo(final int targetType, final byte[] targetInfo) {
         final int size = targetInfoSize(targetType);
         if (size >= 0) {
@@ -195,6 +154,47 @@ public class TypeAnnotationEntry {
         final byte[] typePath = new byte[input.readUnsignedByte() * 2];
         input.readFully(typePath);
         return new TypeAnnotationEntry(targetType, targetInfo, typePath, AnnotationEntry.read(input, constantPool, isRuntimeVisible));
+    }
+
+    /**
+     * Gets the number of bytes of the target info that follows a target type.
+     *
+     * @param targetType The target type.
+     * @return the size of the target info, or -1 if it depends on its content (the table of a {@code localvar_target}).
+     * @throws ClassFormatException Thrown if the target type is not defined.
+     */
+    private static int targetInfoSize(final int targetType) {
+        switch (targetType) {
+        case TARGET_CLASS_TYPE_PARAMETER:
+        case TARGET_METHOD_TYPE_PARAMETER:
+        case TARGET_METHOD_FORMAL_PARAMETER:
+            return 1;
+        case TARGET_CLASS_EXTENDS:
+        case TARGET_CLASS_TYPE_PARAMETER_BOUND:
+        case TARGET_METHOD_TYPE_PARAMETER_BOUND:
+        case TARGET_THROWS:
+        case TARGET_EXCEPTION_PARAMETER:
+        case TARGET_INSTANCEOF:
+        case TARGET_NEW:
+        case TARGET_CONSTRUCTOR_REFERENCE:
+        case TARGET_METHOD_REFERENCE:
+            return 2;
+        case TARGET_FIELD:
+        case TARGET_METHOD_RETURN:
+        case TARGET_METHOD_RECEIVER:
+            return 0;
+        case TARGET_LOCAL_VARIABLE:
+        case TARGET_RESOURCE_VARIABLE:
+            return -1;
+        case TARGET_CAST:
+        case TARGET_CONSTRUCTOR_INVOCATION_TYPE_ARGUMENT:
+        case TARGET_METHOD_INVOCATION_TYPE_ARGUMENT:
+        case TARGET_CONSTRUCTOR_REFERENCE_TYPE_ARGUMENT:
+        case TARGET_METHOD_REFERENCE_TYPE_ARGUMENT:
+            return 3;
+        default:
+            throw new ClassFormatException("Invalid type annotation target type: 0x" + Integer.toHexString(targetType));
+        }
     }
 
     private final int targetType;
@@ -291,18 +291,13 @@ public class TypeAnnotationEntry {
     }
 
     /**
-     * Gets the number of steps in the type path.
+     * Gets the index of the type argument for a step of the type path of kind 3, else 0.
      *
-     * <p>
-     * The path leads from the type of the target to the part of it that is annotated. An empty path identifies the outermost part of the type where an
-     * annotation is allowed. For a non-static inner class, {@code @A Outer.Inner} has an empty path, while {@code Outer.@A Inner} requires one step.
-     * For a static nested class, {@code Outer.@A Nested} has an empty path.
-     * </p>
-     *
-     * @return The number of steps of the type path.
+     * @param step Index of the step, from 0 to {@link #getTypePathLength()} excluded.
+     * @return The index of the type argument.
      */
-    public int getTypePathLength() {
-        return typePath.length / 2;
+    public int getTypePathArgumentIndex(final int step) {
+        return typePath[step * 2 + 1] & 0xFF;
     }
 
     /**
@@ -317,13 +312,18 @@ public class TypeAnnotationEntry {
     }
 
     /**
-     * Gets the index of the type argument for a step of the type path of kind 3, else 0.
+     * Gets the number of steps in the type path.
      *
-     * @param step Index of the step, from 0 to {@link #getTypePathLength()} excluded.
-     * @return The index of the type argument.
+     * <p>
+     * The path leads from the type of the target to the part of it that is annotated. An empty path identifies the outermost part of the type where an
+     * annotation is allowed. For a non-static inner class, {@code @A Outer.Inner} has an empty path, while {@code Outer.@A Inner} requires one step.
+     * For a static nested class, {@code Outer.@A Nested} has an empty path.
+     * </p>
+     *
+     * @return The number of steps of the type path.
      */
-    public int getTypePathArgumentIndex(final int step) {
-        return typePath[step * 2 + 1] & 0xFF;
+    public int getTypePathLength() {
+        return typePath.length / 2;
     }
 
     @Override

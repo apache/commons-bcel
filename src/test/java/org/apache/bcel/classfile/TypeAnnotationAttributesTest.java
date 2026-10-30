@@ -153,29 +153,6 @@ class TypeAnnotationAttributesTest {
 
     @ParameterizedTest
     @ValueSource(booleans = {false, true})
-    void readsEmptyAttributes(final boolean visible) throws IOException {
-        final Fixture fixture = new Fixture(visible);
-        final byte[] encoded = fixture.annotationAttribute(0x13, new byte[0], 0);
-        final TypeAnnotations annotations = (TypeAnnotations) parse(encoded, fixture.pool);
-        assertEquals(0, annotations.getNumTypeAnnotations());
-        assertFalse(annotations.iterator().hasNext());
-        assertArrayEquals(encoded, dump(annotations));
-        assertArrayEquals(encoded, dump(annotations.copy(fixture.pool.copy())));
-    }
-
-    @ParameterizedTest
-    @ValueSource(booleans = {false, true})
-    void rejectsTruncatedAttributes(final boolean visible) throws IOException {
-        final Fixture fixture = new Fixture(visible);
-        final byte[] encoded = fixture.annotationAttribute(0x13, new byte[0], 2);
-        for (int length = 0; length < encoded.length; length++) {
-            final byte[] truncated = Arrays.copyOf(encoded, length);
-            assertThrows(EOFException.class, () -> parse(truncated, fixture.pool), "length " + length);
-        }
-    }
-
-    @ParameterizedTest
-    @ValueSource(booleans = {false, true})
     void enforcesTheUnsignedAnnotationCount(final boolean visible) throws IOException {
         final Fixture fixture = new Fixture(visible);
         final TypeAnnotations annotations = fixture.annotations(0);
@@ -189,6 +166,18 @@ class TypeAnnotationAttributesTest {
         assertEquals(65535, ((TypeAnnotations) parse(encoded, fixture.pool)).getNumTypeAnnotations());
         annotations.setTypeAnnotationTable(new TypeAnnotationEntry[65536]);
         assertThrows(ClassFormatException.class, () -> dump(annotations));
+    }
+
+    @ParameterizedTest
+    @ValueSource(booleans = {false, true})
+    void readsEmptyAttributes(final boolean visible) throws IOException {
+        final Fixture fixture = new Fixture(visible);
+        final byte[] encoded = fixture.annotationAttribute(0x13, new byte[0], 0);
+        final TypeAnnotations annotations = (TypeAnnotations) parse(encoded, fixture.pool);
+        assertEquals(0, annotations.getNumTypeAnnotations());
+        assertFalse(annotations.iterator().hasNext());
+        assertArrayEquals(encoded, dump(annotations));
+        assertArrayEquals(encoded, dump(annotations.copy(fixture.pool.copy())));
     }
 
     @ParameterizedTest
@@ -241,5 +230,16 @@ class TypeAnnotationAttributesTest {
         assertTrue(annotations.iterator().hasNext());
         assertEquals(0x13, annotations.getTypeAnnotationEntries()[0].getTargetType());
         assertArrayEquals(encoded, dump(record));
+    }
+
+    @ParameterizedTest
+    @ValueSource(booleans = {false, true})
+    void rejectsTruncatedAttributes(final boolean visible) throws IOException {
+        final Fixture fixture = new Fixture(visible);
+        final byte[] encoded = fixture.annotationAttribute(0x13, new byte[0], 2);
+        for (int length = 0; length < encoded.length; length++) {
+            final byte[] truncated = Arrays.copyOf(encoded, length);
+            assertThrows(EOFException.class, () -> parse(truncated, fixture.pool), "length " + length);
+        }
     }
 }

@@ -55,19 +55,6 @@ import org.junit.jupiter.api.Test;
  */
 class TypeAnnotationsTest {
 
-    @Target(ElementType.TYPE_USE)
-    @Retention(RetentionPolicy.RUNTIME)
-    @interface TypeUse {
-    }
-
-    static class Outer {
-        class Inner {
-        }
-
-        static class Nested {
-        }
-    }
-
     static class AnnotatedTypes {
         @TypeUse Outer.Inner outer;
         Outer.@TypeUse Inner inner;
@@ -80,6 +67,19 @@ class TypeAnnotationsTest {
         }
     }
 
+    static class Outer {
+        class Inner {
+        }
+
+        static class Nested {
+        }
+    }
+
+    @Target(ElementType.TYPE_USE)
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface TypeUse {
+    }
+
     private static final String CLASS_FILE = "src/test/resources/typeannotations/TypeAnnotated.class";
 
     private static JavaClass annotatedTypes() throws IOException {
@@ -90,101 +90,20 @@ class TypeAnnotationsTest {
         }
     }
 
-    private static JavaClass parse() throws IOException {
-        return new ClassParser(CLASS_FILE).parse();
-    }
-
-    private static TypeAnnotations typeAnnotationsOf(final FieldOrMethod member, final byte tag) {
-        return (TypeAnnotations) Stream.of(member.getAttributes()).filter(a -> a.getTag() == tag).findFirst().orElse(null);
+    private static Field field(final JavaClass clazz, final String name) {
+        return Stream.of(clazz.getFields()).filter(f -> f.getName().equals(name)).findFirst().orElseThrow(AssertionError::new);
     }
 
     private static Method method(final JavaClass clazz, final String name) {
         return Stream.of(clazz.getMethods()).filter(m -> m.getName().equals(name)).findFirst().orElseThrow(AssertionError::new);
     }
 
-    private static Field field(final JavaClass clazz, final String name) {
-        return Stream.of(clazz.getFields()).filter(f -> f.getName().equals(name)).findFirst().orElseThrow(AssertionError::new);
+    private static JavaClass parse() throws IOException {
+        return new ClassParser(CLASS_FILE).parse();
     }
 
-    @Test
-    void readsTheTypeAnnotationOfAField() throws IOException {
-        final TypeAnnotations annotations = typeAnnotationsOf(field(parse(), "field"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS);
-        assertNotNull(annotations);
-        assertTrue(annotations instanceof RuntimeVisibleTypeAnnotations);
-        assertTrue(annotations.isRuntimeVisible());
-        assertEquals(1, annotations.getNumTypeAnnotations());
-        final TypeAnnotationEntry entry = annotations.getTypeAnnotationEntries()[0];
-        assertEquals(TypeAnnotationEntry.TARGET_FIELD, entry.getTargetType());
-        assertEquals(0, entry.getTargetInfo().length);
-        assertEquals(0, entry.getTypePathLength());
-        assertEquals("Ltypeannotations/Visible;", entry.getAnnotationEntry().getAnnotationType());
-    }
-
-    @Test
-    void readsTheTypePathOfATypeArgument() throws IOException {
-        final TypeAnnotations annotations = typeAnnotationsOf(field(parse(), "items"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS);
-        final TypeAnnotationEntry entry = annotations.getTypeAnnotationEntries()[0];
-        assertEquals(TypeAnnotationEntry.TARGET_FIELD, entry.getTargetType());
-        assertEquals(1, entry.getTypePathLength());
-        // a type argument of the parameterized type, the first one
-        assertEquals(3, entry.getTypePathKind(0));
-        assertEquals(0, entry.getTypePathArgumentIndex(0));
-    }
-
-    @Test
-    void readsTheInvisibleAttribute() throws IOException {
-        final Field hidden = field(parse(), "hidden");
-        assertNull(typeAnnotationsOf(hidden, Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS));
-        final TypeAnnotations annotations = typeAnnotationsOf(hidden, Const.ATTR_RUNTIME_INVISIBLE_TYPE_ANNOTATIONS);
-        assertTrue(annotations instanceof RuntimeInvisibleTypeAnnotations);
-        assertFalse(annotations.isRuntimeVisible());
-        assertEquals("Ltypeannotations/Invisible;", annotations.getTypeAnnotationEntries()[0].getAnnotationEntry().getAnnotationType());
-    }
-
-    @Test
-    void readsTheTargetsOfAMethod() throws IOException {
-        final TypeAnnotations annotations = typeAnnotationsOf(method(parse(), "find"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS);
-        final List<Integer> targets = new ArrayList<>();
-        for (final TypeAnnotationEntry entry : annotations) {
-            targets.add(entry.getTargetType());
-            if (entry.getTargetType() == TypeAnnotationEntry.TARGET_METHOD_FORMAL_PARAMETER) {
-                // the index of the parameter
-                assertArrayEquals(new byte[] {0}, entry.getTargetInfo());
-            }
-        }
-        assertTrue(targets.contains(TypeAnnotationEntry.TARGET_METHOD_RETURN));
-        assertTrue(targets.contains(TypeAnnotationEntry.TARGET_METHOD_FORMAL_PARAMETER));
-    }
-
-    @Test
-    void readsTheBoundOfATypeParameterOfTheClass() throws IOException {
-        final JavaClass clazz = parse();
-        final TypeAnnotations annotations = (TypeAnnotations) Stream.of(clazz.getAttributes())
-                .filter(a -> a.getTag() == Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS).findFirst().orElse(null);
-        assertNotNull(annotations);
-        final TypeAnnotationEntry entry = annotations.getTypeAnnotationEntries()[0];
-        assertEquals(TypeAnnotationEntry.TARGET_CLASS_TYPE_PARAMETER_BOUND, entry.getTargetType());
-        // the first type parameter, its first bound
-        assertArrayEquals(new byte[] {0, 0}, entry.getTargetInfo());
-    }
-
-    @Test
-    void dumpsWhatItReads() throws IOException {
-        final JavaClass clazz = parse();
-        final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        try (DataOutputStream dos = new DataOutputStream(out)) {
-            clazz.dump(dos);
-        }
-        assertArrayEquals(Files.readAllBytes(Paths.get(CLASS_FILE)), out.toByteArray());
-        final JavaClass reread = new ClassParser(new ByteArrayInputStream(out.toByteArray()), CLASS_FILE).parse();
-        for (final String name : new String[] {"field", "items", "hidden"}) {
-            final Field original = field(clazz, name);
-            final Field copy = field(reread, name);
-            assertEquals(original.getAttributes().length, copy.getAttributes().length);
-            for (int i = 0; i < original.getAttributes().length; i++) {
-                assertEquals(original.getAttributes()[i].toString(), copy.getAttributes()[i].toString());
-            }
-        }
+    private static TypeAnnotations typeAnnotationsOf(final FieldOrMethod member, final byte tag) {
+        return (TypeAnnotations) Stream.of(member.getAttributes()).filter(a -> a.getTag() == tag).findFirst().orElse(null);
     }
 
     @Test
@@ -224,6 +143,58 @@ class TypeAnnotationsTest {
     }
 
     @Test
+    void distinguishesInnerClassesFromStaticNestedClasses() throws IOException {
+        final JavaClass clazz = annotatedTypes();
+        final TypeAnnotationEntry outer = typeAnnotationsOf(field(clazz, "outer"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS).getTypeAnnotationEntries()[0];
+        final TypeAnnotationEntry inner = typeAnnotationsOf(field(clazz, "inner"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS).getTypeAnnotationEntries()[0];
+        final TypeAnnotationEntry nested = typeAnnotationsOf(field(clazz, "nested"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS).getTypeAnnotationEntries()[0];
+        assertEquals(0, outer.getTypePathLength());
+        assertEquals(1, inner.getTypePathLength());
+        assertEquals(1, inner.getTypePathKind(0));
+        assertEquals(0, inner.getTypePathArgumentIndex(0));
+        assertEquals(0, nested.getTypePathLength());
+    }
+
+    @Test
+    void dumpsWhatItReads() throws IOException {
+        final JavaClass clazz = parse();
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        try (DataOutputStream dos = new DataOutputStream(out)) {
+            clazz.dump(dos);
+        }
+        assertArrayEquals(Files.readAllBytes(Paths.get(CLASS_FILE)), out.toByteArray());
+        final JavaClass reread = new ClassParser(new ByteArrayInputStream(out.toByteArray()), CLASS_FILE).parse();
+        for (final String name : new String[] {"field", "items", "hidden"}) {
+            final Field original = field(clazz, name);
+            final Field copy = field(reread, name);
+            assertEquals(original.getAttributes().length, copy.getAttributes().length);
+            for (int i = 0; i < original.getAttributes().length; i++) {
+                assertEquals(original.getAttributes()[i].toString(), copy.getAttributes()[i].toString());
+            }
+        }
+    }
+
+    @Test
+    void followsTypeArgumentsWildcardBoundsAndArrayElements() throws IOException {
+        final TypeAnnotationEntry entry = typeAnnotationsOf(field(annotatedTypes(), "wildcard"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS)
+                .getTypeAnnotationEntries()[0];
+        assertEquals(3, entry.getTypePathLength());
+        assertEquals(3, entry.getTypePathKind(0));
+        assertEquals(2, entry.getTypePathKind(1));
+        assertEquals(0, entry.getTypePathKind(2));
+        for (int step = 0; step < 3; step++) {
+            assertEquals(0, entry.getTypePathArgumentIndex(step));
+        }
+    }
+
+    @Test
+    void isRepresented() throws IOException {
+        final JavaClass clazz = parse();
+        final StringRepresentation representation = new StringRepresentation(typeAnnotationsOf(field(clazz, "field"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS));
+        assertTrue(representation.toString().contains("RuntimeVisibleTypeAnnotations"), representation.toString());
+    }
+
+    @Test
     void isVisitedWithItsAnnotations() throws IOException {
         final JavaClass clazz = parse();
         final List<String> events = new ArrayList<>();
@@ -250,10 +221,25 @@ class TypeAnnotationsTest {
     }
 
     @Test
-    void isRepresented() throws IOException {
+    void readsTheBoundOfATypeParameterOfTheClass() throws IOException {
         final JavaClass clazz = parse();
-        final StringRepresentation representation = new StringRepresentation(typeAnnotationsOf(field(clazz, "field"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS));
-        assertTrue(representation.toString().contains("RuntimeVisibleTypeAnnotations"), representation.toString());
+        final TypeAnnotations annotations = (TypeAnnotations) Stream.of(clazz.getAttributes())
+                .filter(a -> a.getTag() == Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS).findFirst().orElse(null);
+        assertNotNull(annotations);
+        final TypeAnnotationEntry entry = annotations.getTypeAnnotationEntries()[0];
+        assertEquals(TypeAnnotationEntry.TARGET_CLASS_TYPE_PARAMETER_BOUND, entry.getTargetType());
+        // the first type parameter, its first bound
+        assertArrayEquals(new byte[] {0, 0}, entry.getTargetInfo());
+    }
+
+    @Test
+    void readsTheInvisibleAttribute() throws IOException {
+        final Field hidden = field(parse(), "hidden");
+        assertNull(typeAnnotationsOf(hidden, Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS));
+        final TypeAnnotations annotations = typeAnnotationsOf(hidden, Const.ATTR_RUNTIME_INVISIBLE_TYPE_ANNOTATIONS);
+        assertTrue(annotations instanceof RuntimeInvisibleTypeAnnotations);
+        assertFalse(annotations.isRuntimeVisible());
+        assertEquals("Ltypeannotations/Invisible;", annotations.getTypeAnnotationEntries()[0].getAnnotationEntry().getAnnotationType());
     }
 
     @Test
@@ -283,10 +269,43 @@ class TypeAnnotationsTest {
     }
 
     @Test
-    void rejectsAnUndefinedTargetType() throws IOException {
-        final ConstantPool constantPool = parse().getConstantPool();
-        final DataInputStream input = new DataInputStream(new ByteArrayInputStream(new byte[] {0x7F, 0, 0, 0}));
-        assertThrows(ClassFormatException.class, () -> TypeAnnotationEntry.read(input, constantPool, true));
+    void readsTheTargetsOfAMethod() throws IOException {
+        final TypeAnnotations annotations = typeAnnotationsOf(method(parse(), "find"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS);
+        final List<Integer> targets = new ArrayList<>();
+        for (final TypeAnnotationEntry entry : annotations) {
+            targets.add(entry.getTargetType());
+            if (entry.getTargetType() == TypeAnnotationEntry.TARGET_METHOD_FORMAL_PARAMETER) {
+                // the index of the parameter
+                assertArrayEquals(new byte[] {0}, entry.getTargetInfo());
+            }
+        }
+        assertTrue(targets.contains(TypeAnnotationEntry.TARGET_METHOD_RETURN));
+        assertTrue(targets.contains(TypeAnnotationEntry.TARGET_METHOD_FORMAL_PARAMETER));
+    }
+
+    @Test
+    void readsTheTypeAnnotationOfAField() throws IOException {
+        final TypeAnnotations annotations = typeAnnotationsOf(field(parse(), "field"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS);
+        assertNotNull(annotations);
+        assertTrue(annotations instanceof RuntimeVisibleTypeAnnotations);
+        assertTrue(annotations.isRuntimeVisible());
+        assertEquals(1, annotations.getNumTypeAnnotations());
+        final TypeAnnotationEntry entry = annotations.getTypeAnnotationEntries()[0];
+        assertEquals(TypeAnnotationEntry.TARGET_FIELD, entry.getTargetType());
+        assertEquals(0, entry.getTargetInfo().length);
+        assertEquals(0, entry.getTypePathLength());
+        assertEquals("Ltypeannotations/Visible;", entry.getAnnotationEntry().getAnnotationType());
+    }
+
+    @Test
+    void readsTheTypePathOfATypeArgument() throws IOException {
+        final TypeAnnotations annotations = typeAnnotationsOf(field(parse(), "items"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS);
+        final TypeAnnotationEntry entry = annotations.getTypeAnnotationEntries()[0];
+        assertEquals(TypeAnnotationEntry.TARGET_FIELD, entry.getTargetType());
+        assertEquals(1, entry.getTypePathLength());
+        // a type argument of the parameterized type, the first one
+        assertEquals(3, entry.getTypePathKind(0));
+        assertEquals(0, entry.getTypePathArgumentIndex(0));
     }
 
     @Test
@@ -299,6 +318,13 @@ class TypeAnnotationsTest {
         // and has at most 255 steps
         assertThrows(IllegalArgumentException.class, () -> new TypeAnnotationEntry(TypeAnnotationEntry.TARGET_FIELD, new byte[0], new byte[256 * 2], annotation));
         assertEquals(255, new TypeAnnotationEntry(TypeAnnotationEntry.TARGET_FIELD, new byte[0], new byte[255 * 2], annotation).getTypePathLength());
+    }
+
+    @Test
+    void rejectsAnUndefinedTargetType() throws IOException {
+        final ConstantPool constantPool = parse().getConstantPool();
+        final DataInputStream input = new DataInputStream(new ByteArrayInputStream(new byte[] {0x7F, 0, 0, 0}));
+        assertThrows(ClassFormatException.class, () -> TypeAnnotationEntry.read(input, constantPool, true));
     }
 
     @Test
@@ -316,32 +342,6 @@ class TypeAnnotationsTest {
         assertThrows(IllegalArgumentException.class,
                 () -> new TypeAnnotationEntry(TypeAnnotationEntry.TARGET_LOCAL_VARIABLE, twoRangesAnnouncedAsOne, new byte[0], annotation));
         assertEquals(2, new TypeAnnotationEntry(TypeAnnotationEntry.TARGET_LOCAL_VARIABLE, new byte[2], new byte[0], annotation).getTargetInfo().length);
-    }
-
-    @Test
-    void distinguishesInnerClassesFromStaticNestedClasses() throws IOException {
-        final JavaClass clazz = annotatedTypes();
-        final TypeAnnotationEntry outer = typeAnnotationsOf(field(clazz, "outer"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS).getTypeAnnotationEntries()[0];
-        final TypeAnnotationEntry inner = typeAnnotationsOf(field(clazz, "inner"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS).getTypeAnnotationEntries()[0];
-        final TypeAnnotationEntry nested = typeAnnotationsOf(field(clazz, "nested"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS).getTypeAnnotationEntries()[0];
-        assertEquals(0, outer.getTypePathLength());
-        assertEquals(1, inner.getTypePathLength());
-        assertEquals(1, inner.getTypePathKind(0));
-        assertEquals(0, inner.getTypePathArgumentIndex(0));
-        assertEquals(0, nested.getTypePathLength());
-    }
-
-    @Test
-    void followsTypeArgumentsWildcardBoundsAndArrayElements() throws IOException {
-        final TypeAnnotationEntry entry = typeAnnotationsOf(field(annotatedTypes(), "wildcard"), Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS)
-                .getTypeAnnotationEntries()[0];
-        assertEquals(3, entry.getTypePathLength());
-        assertEquals(3, entry.getTypePathKind(0));
-        assertEquals(2, entry.getTypePathKind(1));
-        assertEquals(0, entry.getTypePathKind(2));
-        for (int step = 0; step < 3; step++) {
-            assertEquals(0, entry.getTypePathArgumentIndex(step));
-        }
     }
 
     @Test

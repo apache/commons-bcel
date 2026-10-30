@@ -413,16 +413,6 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         tostring = toString(obj);
     }
 
-    /**
-     * Visits RuntimeVisibleTypeAnnotations and RuntimeInvisibleTypeAnnotations attributes.
-     *
-     * @since 6.14.0
-     */
-    @Override
-    public void visitTypeAnnotations(final TypeAnnotations obj) {
-        tostring = toString(obj);
-    }
-
     @Override
     public void visitRecord(final Record obj) {
         tostring = toString(obj);
@@ -458,6 +448,16 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
 
     @Override
     public void visitSynthetic(final Synthetic obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * Visits RuntimeVisibleTypeAnnotations and RuntimeInvisibleTypeAnnotations attributes.
+     *
+     * @since 6.14.0
+     */
+    @Override
+    public void visitTypeAnnotations(final TypeAnnotations obj) {
         tostring = toString(obj);
     }
 

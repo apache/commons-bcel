@@ -109,128 +109,6 @@ class TypeAnnotationEntryTest {
     }
 
     @ParameterizedTest
-    @MethodSource("targetLayouts")
-    void readsAndDumpsEveryTargetLayout(final int targetConstant, final int tag, final byte[] info) throws IOException {
-        assertEquals(tag, targetConstant, "The public constant must match the JVMS tag");
-        final byte[] expected = encodedEntry(tag, info, new byte[0]);
-        for (final boolean visible : new boolean[] {false, true}) {
-            final TypeAnnotationEntry entry = read(expected, visible);
-            assertEquals(tag, entry.getTargetType());
-            assertArrayEquals(info, entry.getTargetInfo());
-            assertEquals(0, entry.getTypePathLength());
-            assertEquals("Lexample/Annotation;", entry.getAnnotationEntry().getAnnotationType());
-            assertEquals(visible, entry.getAnnotationEntry().isRuntimeVisible());
-            assertArrayEquals(expected, dump(entry));
-            assertArrayEquals(expected, dump(new TypeAnnotationEntry(targetConstant, info, new byte[0], entry.getAnnotationEntry())));
-        }
-    }
-
-    @ParameterizedTest
-    @ValueSource(booleans = {false, true})
-    void readsEveryPathKindAndUnsignedArgumentIndex(final boolean visible) throws IOException {
-        final byte[] expected = encodedEntry(0x13, new byte[0], TYPE_PATH);
-        final TypeAnnotationEntry entry = read(expected, visible);
-        assertEquals(4, entry.getTypePathLength());
-        assertEquals(0, entry.getTypePathKind(0));
-        assertEquals(1, entry.getTypePathKind(1));
-        assertEquals(3, entry.getTypePathKind(2));
-        assertEquals(2, entry.getTypePathKind(3));
-        assertEquals(0, entry.getTypePathArgumentIndex(0));
-        assertEquals(0, entry.getTypePathArgumentIndex(1));
-        assertEquals(255, entry.getTypePathArgumentIndex(2));
-        assertEquals(0, entry.getTypePathArgumentIndex(3));
-        assertEquals(visible, entry.getAnnotationEntry().isRuntimeVisible());
-        assertArrayEquals(expected, dump(entry));
-    }
-
-    @ParameterizedTest
-    @MethodSource("targetLayouts")
-    void rejectsTruncatedEntries(final int targetConstant, final int tag, final byte[] info) throws IOException {
-        final byte[] bytes = encodedEntry(tag, info, TYPE_PATH);
-        for (int length = 0; length < bytes.length; length++) {
-            final byte[] truncated = Arrays.copyOf(bytes, length);
-            assertThrows(EOFException.class, () -> read(truncated, true), "target " + targetConstant + ", length " + length);
-        }
-    }
-
-    @ParameterizedTest
-    @MethodSource("targetLayouts")
-    void rejectsIncorrectTargetInfoLengths(final int targetConstant, final int tag, final byte[] info) {
-        final AnnotationEntry annotation = new AnnotationEntry(1, constantPool(), true);
-        assertEquals(tag, targetConstant);
-        assertThrows(IllegalArgumentException.class,
-                () -> new TypeAnnotationEntry(targetConstant, Arrays.copyOf(info, info.length + 1), new byte[0], annotation));
-        if (info.length > 0) {
-            assertThrows(IllegalArgumentException.class,
-                    () -> new TypeAnnotationEntry(targetConstant, Arrays.copyOf(info, info.length - 1), new byte[0], annotation));
-        }
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {0, 1, 255, 256, 65535})
-    void readsUnsignedLocalVariableTableLengths(final int ranges) throws IOException {
-        final byte[] info = new byte[2 + ranges * 6];
-        info[0] = (byte) (ranges >>> 8);
-        info[1] = (byte) ranges;
-        if (ranges > 0) {
-            info[info.length - 1] = (byte) 255;
-        }
-        for (final int target : new int[] {0x40, 0x41}) {
-            final byte[] bytes = encodedEntry(target, info, new byte[0]);
-            final TypeAnnotationEntry entry = read(bytes, true);
-            assertArrayEquals(info, entry.getTargetInfo());
-            assertArrayEquals(bytes, dump(entry));
-        }
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {0, 1, 127, 128, 255})
-    void readsUnsignedPathLengths(final int steps) throws IOException {
-        final byte[] bytes = encodedEntry(0x13, new byte[0], new byte[steps * 2]);
-        final TypeAnnotationEntry entry = read(bytes, true);
-        assertEquals(steps, entry.getTypePathLength());
-        assertArrayEquals(bytes, dump(entry));
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {-1, 2, 15, 24, 63, 76, 127, 255, 256})
-    void rejectsUndefinedConstructorTargets(final int target) {
-        assertThrows(ClassFormatException.class, () -> new TypeAnnotationEntry(target, new byte[0], new byte[0], null));
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {2, 15, 24, 63, 76, 127, 255})
-    void rejectsUndefinedEncodedTargets(final int target) throws IOException {
-        final byte[] bytes = encodedEntry(target, new byte[0], new byte[0]);
-        assertThrows(ClassFormatException.class, () -> read(bytes, true));
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {0, 1})
-    void rejectsLocalVariableTablesWithoutACompleteCount(final int length) {
-        for (final int target : new int[] {0x40, 0x41}) {
-            assertThrows(IllegalArgumentException.class,
-                    () -> new TypeAnnotationEntry(target, new byte[length], new byte[0], new AnnotationEntry(1, constantPool(), true)));
-        }
-    }
-
-    @Test
-    void protectsTargetInfoAndPathFromCallerMutation() throws IOException {
-        final byte[] info = {0, 2};
-        final byte[] path = {3, 1};
-        final TypeAnnotationEntry entry = new TypeAnnotationEntry(0x10, info, path, new AnnotationEntry(1, constantPool(), true));
-        info[0] = 99;
-        path[0] = 99;
-        path[1] = 99;
-        final byte[] returnedInfo = entry.getTargetInfo();
-        returnedInfo[0] = 88;
-        assertArrayEquals(new byte[] {0, 2}, entry.getTargetInfo());
-        assertEquals(3, entry.getTypePathKind(0));
-        assertEquals(1, entry.getTypePathArgumentIndex(0));
-        assertArrayEquals(encodedEntry(0x10, new byte[] {0, 2}, new byte[] {3, 1}), dump(entry));
-    }
-
-    @ParameterizedTest
     @ValueSource(booleans = {false, true})
     void deeplyCopiesNestedAnnotationValues(final boolean visible) throws IOException {
         final ConstantPoolGen gen = new ConstantPoolGen();
@@ -273,6 +151,128 @@ class TypeAnnotationEntryTest {
         assertEquals("second", array.getElementValuesArray()[0].stringifyValue());
         assertEquals("second", copiedNested.getElementValuePairs()[0].getValue().stringifyValue());
         assertArrayEquals(expected, dump(original), "Mutating nested copied values must not change the original");
+    }
+
+    @Test
+    void protectsTargetInfoAndPathFromCallerMutation() throws IOException {
+        final byte[] info = {0, 2};
+        final byte[] path = {3, 1};
+        final TypeAnnotationEntry entry = new TypeAnnotationEntry(0x10, info, path, new AnnotationEntry(1, constantPool(), true));
+        info[0] = 99;
+        path[0] = 99;
+        path[1] = 99;
+        final byte[] returnedInfo = entry.getTargetInfo();
+        returnedInfo[0] = 88;
+        assertArrayEquals(new byte[] {0, 2}, entry.getTargetInfo());
+        assertEquals(3, entry.getTypePathKind(0));
+        assertEquals(1, entry.getTypePathArgumentIndex(0));
+        assertArrayEquals(encodedEntry(0x10, new byte[] {0, 2}, new byte[] {3, 1}), dump(entry));
+    }
+
+    @ParameterizedTest
+    @MethodSource("targetLayouts")
+    void readsAndDumpsEveryTargetLayout(final int targetConstant, final int tag, final byte[] info) throws IOException {
+        assertEquals(tag, targetConstant, "The public constant must match the JVMS tag");
+        final byte[] expected = encodedEntry(tag, info, new byte[0]);
+        for (final boolean visible : new boolean[] {false, true}) {
+            final TypeAnnotationEntry entry = read(expected, visible);
+            assertEquals(tag, entry.getTargetType());
+            assertArrayEquals(info, entry.getTargetInfo());
+            assertEquals(0, entry.getTypePathLength());
+            assertEquals("Lexample/Annotation;", entry.getAnnotationEntry().getAnnotationType());
+            assertEquals(visible, entry.getAnnotationEntry().isRuntimeVisible());
+            assertArrayEquals(expected, dump(entry));
+            assertArrayEquals(expected, dump(new TypeAnnotationEntry(targetConstant, info, new byte[0], entry.getAnnotationEntry())));
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(booleans = {false, true})
+    void readsEveryPathKindAndUnsignedArgumentIndex(final boolean visible) throws IOException {
+        final byte[] expected = encodedEntry(0x13, new byte[0], TYPE_PATH);
+        final TypeAnnotationEntry entry = read(expected, visible);
+        assertEquals(4, entry.getTypePathLength());
+        assertEquals(0, entry.getTypePathKind(0));
+        assertEquals(1, entry.getTypePathKind(1));
+        assertEquals(3, entry.getTypePathKind(2));
+        assertEquals(2, entry.getTypePathKind(3));
+        assertEquals(0, entry.getTypePathArgumentIndex(0));
+        assertEquals(0, entry.getTypePathArgumentIndex(1));
+        assertEquals(255, entry.getTypePathArgumentIndex(2));
+        assertEquals(0, entry.getTypePathArgumentIndex(3));
+        assertEquals(visible, entry.getAnnotationEntry().isRuntimeVisible());
+        assertArrayEquals(expected, dump(entry));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 255, 256, 65535})
+    void readsUnsignedLocalVariableTableLengths(final int ranges) throws IOException {
+        final byte[] info = new byte[2 + ranges * 6];
+        info[0] = (byte) (ranges >>> 8);
+        info[1] = (byte) ranges;
+        if (ranges > 0) {
+            info[info.length - 1] = (byte) 255;
+        }
+        for (final int target : new int[] {0x40, 0x41}) {
+            final byte[] bytes = encodedEntry(target, info, new byte[0]);
+            final TypeAnnotationEntry entry = read(bytes, true);
+            assertArrayEquals(info, entry.getTargetInfo());
+            assertArrayEquals(bytes, dump(entry));
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 127, 128, 255})
+    void readsUnsignedPathLengths(final int steps) throws IOException {
+        final byte[] bytes = encodedEntry(0x13, new byte[0], new byte[steps * 2]);
+        final TypeAnnotationEntry entry = read(bytes, true);
+        assertEquals(steps, entry.getTypePathLength());
+        assertArrayEquals(bytes, dump(entry));
+    }
+
+    @ParameterizedTest
+    @MethodSource("targetLayouts")
+    void rejectsIncorrectTargetInfoLengths(final int targetConstant, final int tag, final byte[] info) {
+        final AnnotationEntry annotation = new AnnotationEntry(1, constantPool(), true);
+        assertEquals(tag, targetConstant);
+        assertThrows(IllegalArgumentException.class,
+                () -> new TypeAnnotationEntry(targetConstant, Arrays.copyOf(info, info.length + 1), new byte[0], annotation));
+        if (info.length > 0) {
+            assertThrows(IllegalArgumentException.class,
+                    () -> new TypeAnnotationEntry(targetConstant, Arrays.copyOf(info, info.length - 1), new byte[0], annotation));
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1})
+    void rejectsLocalVariableTablesWithoutACompleteCount(final int length) {
+        for (final int target : new int[] {0x40, 0x41}) {
+            assertThrows(IllegalArgumentException.class,
+                    () -> new TypeAnnotationEntry(target, new byte[length], new byte[0], new AnnotationEntry(1, constantPool(), true)));
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("targetLayouts")
+    void rejectsTruncatedEntries(final int targetConstant, final int tag, final byte[] info) throws IOException {
+        final byte[] bytes = encodedEntry(tag, info, TYPE_PATH);
+        for (int length = 0; length < bytes.length; length++) {
+            final byte[] truncated = Arrays.copyOf(bytes, length);
+            assertThrows(EOFException.class, () -> read(truncated, true), "target " + targetConstant + ", length " + length);
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 2, 15, 24, 63, 76, 127, 255, 256})
+    void rejectsUndefinedConstructorTargets(final int target) {
+        assertThrows(ClassFormatException.class, () -> new TypeAnnotationEntry(target, new byte[0], new byte[0], null));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {2, 15, 24, 63, 76, 127, 255})
+    void rejectsUndefinedEncodedTargets(final int target) throws IOException {
+        final byte[] bytes = encodedEntry(target, new byte[0], new byte[0]);
+        assertThrows(ClassFormatException.class, () -> read(bytes, true));
     }
 
     @Test

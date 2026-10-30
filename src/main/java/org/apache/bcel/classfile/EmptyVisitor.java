@@ -303,11 +303,6 @@ public class EmptyVisitor implements Visitor {
     public void visitPermittedSubclasses(final PermittedSubclasses obj) {
     }
 
-    /** @since 6.14.0 */
-    @Override
-    public void visitTypeAnnotations(final TypeAnnotations obj) {
-    }
-
     @Override
     public void visitSignature(final Signature obj) {
     }
@@ -336,6 +331,11 @@ public class EmptyVisitor implements Visitor {
 
     @Override
     public void visitSynthetic(final Synthetic obj) {
+    }
+
+    /** @since 6.14.0 */
+    @Override
+    public void visitTypeAnnotations(final TypeAnnotations obj) {
     }
 
     @Override
