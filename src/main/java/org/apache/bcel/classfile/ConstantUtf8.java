@@ -202,18 +202,6 @@ public final class ConstantUtf8 extends Constant {
     }
 
     /**
-     * Initializes instance from file data.
-     *
-     * @param dataInput Input stream.
-     * @throws IOException Thrown if an I/O error occurs.
-     */
-    ConstantUtf8(final DataInput dataInput) throws IOException {
-        super(Const.CONSTANT_Utf8);
-        value = dataInput.readUTF();
-        countCreated();
-    }
-
-    /**
      * Constructs a ConstantUtf8.
      *
      * @param value Data.
