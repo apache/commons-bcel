@@ -66,6 +66,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix constant pool module access test on Java 27 (#534).</action>
       <action issue="BCEL-379" type="fix" dev="ggregory" due-to="Gary Gregory, Aryan Ganjoo">BCELifier emits boolean literals for boolean ConstantValue fields so generated creator classes run. FieldGen preserves explicit false initial values (#536).</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Update ECJ versions and generate the SWAP fixture with BCEL (#537).</action>
+      <action                  type="fix" dev="ggregory" due-to="Mohd Irshad">Fix typo 'preceeding' in ConstantPool exception message (#541).</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add and use ClassFormatException.ClassFormatException(String, Object...).</action>
       <action                  type="add" dev="ggregory" due-to="Nicolas Baumann, Gary Gregory">Add support for the RuntimeVisibleTypeAnnotations and RuntimeInvisibleTypeAnnotations attributes.</action>
