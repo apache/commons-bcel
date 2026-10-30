@@ -331,7 +331,7 @@ public class ConstantPool implements Cloneable, Node, Iterable<Constant> {
         if (index > 1) {
             final Constant prev = constantPool[index - 1];
             if (prev != null && (prev.getTag() == Const.CONSTANT_Double || prev.getTag() == Const.CONSTANT_Long)) {
-                throw new ClassFormatException("Constant pool at index %,d is invalid. The index is unused due to the preceeding %s.", index,
+                throw new ClassFormatException("Constant pool at index %,d is invalid. The index is unused due to the preceding %s.", index,
                         Const.getConstantName(prev.getTag()));
             }
         }
