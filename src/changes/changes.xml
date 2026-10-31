@@ -73,7 +73,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="add" dev="ggregory" due-to="Nicolas Baumann, Gary Gregory">Add support for the RuntimeVisibleTypeAnnotations and RuntimeInvisibleTypeAnnotations attributes.</action>
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add ObjectType.toString().</action>
       <!-- UPDATE -->
-      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 104 to 106.</action>
+      <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 104 to 107.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-lang3 from 3.20.0 to 3.21.0 #531.</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump ecj.version from 3.26 to 3.46.100 on Java 17 and up (#537).</action>
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump ecj.version from 3.26 to 3.33 on Java 11 (#537).</action>
