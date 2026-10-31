@@ -34,4 +34,10 @@ class ObjectTypeTest {
         assertEquals(className, objectType.getClassName());
     }
 
+    @Test
+    void testToString() {
+        assertEquals("java.math.BigDecimal", ObjectType.getInstance("java.math.BigDecimal").toString());
+        assertEquals("java.math.BigDecimal", ObjectType.getInstance("java/math/BigDecimal").toString());
+    }
+
 }

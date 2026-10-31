@@ -164,4 +164,15 @@ public class ObjectType extends ReferenceType {
         }
         return Repository.instanceOf(this.className, superclass.className);
     }
+
+    /**
+     * Return the string representation of this type.
+     *
+     * @return the string representation of this type.
+     * @since 6.14.0
+     */
+    @Override
+    public String toString() {
+        return className;
+    }
 }
