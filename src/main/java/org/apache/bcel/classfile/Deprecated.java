@@ -1,145 +1,129 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
+
 package org.apache.bcel.classfile;
 
 import java.io.DataInput;
-import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
- * This class is derived from <em>Attribute</em> and denotes that this is a
- * deprecated method.
- * It is instantiated from the <em>Attribute.readAttribute()</em> method.
+ * This class is derived from <em>Attribute</em> and denotes that this is a deprecated method. It is instantiated from the <em>Attribute.readAttribute()</em>
+ * method.
  *
- * @see     Attribute
+ * <pre>
+ * Deprecated_attribute {
+ *     u2 attribute_name_index;
+ *     u4 attribute_length;
+ * }
+ * </pre>
+ *
+ * @see Attribute
+ * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.15">JVM Specification: The Deprecated Attribute</a>
  */
 public final class Deprecated extends Attribute {
 
-    private byte[] bytes;
-
-
     /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use clone() for a physical copy.
+     * Initialize from another object. Note that both objects use the same references (shallow copy). Use clone() for a physical copy.
+     *
+     * @param c Source to copy.
      */
     public Deprecated(final Deprecated c) {
         this(c.getNameIndex(), c.getLength(), c.getBytes(), c.getConstantPool());
     }
 
-
     /**
-     * @param name_index Index in constant pool to CONSTANT_Utf8
-     * @param length Content length in bytes
-     * @param bytes Attribute contents
-     * @param constant_pool Array of constants
+     * Constructs a Deprecated attribute.
+     *
+     * @param nameIndex    Index in constant pool to CONSTANT_Utf8.
+     * @param length       JVM Specification: "The value of the attribute_length item must be zero.".
+     * @param bytes        Attribute contents.
+     * @param constantPool Array of constants.
+     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.15">JVM Specification: The Deprecated Attribute</a>
      */
-    public Deprecated(final int name_index, final int length, final byte[] bytes, final ConstantPool constant_pool) {
-        super(Const.ATTR_DEPRECATED, name_index, length, constant_pool);
-        this.bytes = bytes;
+    public Deprecated(final int nameIndex, final int length, final byte[] bytes, final ConstantPool constantPool) {
+        super(Const.ATTR_DEPRECATED, nameIndex, Args.require0(length, "Deprecated attribute length"), constantPool);
     }
 
-
     /**
-     * Construct object from input stream.
+     * Constructs object from input stream.
      *
-     * @param name_index Index in constant pool to CONSTANT_Utf8
-     * @param length Content length in bytes
-     * @param input Input stream
-     * @param constant_pool Array of constants
-     * @throws IOException
+     * @param nameIndex    Index in constant pool to CONSTANT_Utf8.
+     * @param length       JVM Specification: "The value of the attribute_length item must be zero.".
+     * @param input        Input stream.
+     * @param constantPool Array of constants.
+     * @throws IOException Thrown if an I/O error occurs.
+     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.15">JVM Specification: The Deprecated Attribute</a>
      */
-    Deprecated(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
-            throws IOException {
-        this(name_index, length, (byte[]) null, constant_pool);
-        if (length > 0) {
-            bytes = new byte[length];
-            input.readFully(bytes);
-            println("Deprecated attribute with length > 0");
-        }
+    Deprecated(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+        this(nameIndex, length, (byte[]) null, constantPool);
     }
 
-
     /**
-     * Called by objects that are traversing the nodes of the tree implicitely
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
+     * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class. That is, the hierarchy of methods,
+     * fields, attributes, and other elements forms a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitDeprecated(this);
     }
 
-
     /**
-     * Dump source file attribute to file stream in binary format.
-     *
-     * @param file Output file stream
-     * @throws IOException
+     * @return deep copy of this attribute.
      */
     @Override
-    public void dump( final DataOutputStream file ) throws IOException {
-        super.dump(file);
-        if (super.getLength() > 0) {
-            file.write(bytes, 0, super.getLength());
-        }
+    public Attribute copy(final ConstantPool constantPool) {
+        final Deprecated c = (Deprecated) clone();
+        c.setConstantPool(constantPool);
+        return c;
     }
 
-
     /**
+     * Gets the data bytes.
+     *
      * @return data bytes.
      */
     public byte[] getBytes() {
-        return bytes;
+        return ArrayUtils.EMPTY_BYTE_ARRAY;
     }
 
-
     /**
-     * @param bytes the raw bytes that represents this byte array
+     * Sets the data bytes.
+     *
+     * @param bytes The raw bytes that represents this byte array.
      */
-    public void setBytes( final byte[] bytes ) {
-        this.bytes = bytes;
+    public void setBytes(final byte[] bytes) {
+        if (bytes != null) {
+            Args.require0(bytes.length, "Deprecated attribute length");
+        }
     }
 
-
     /**
-     * @return attribute name
+     * @return attribute name.
      */
     @Override
     public String toString() {
         return Const.getAttributeName(Const.ATTR_DEPRECATED) + ": true";
-    }
-
-
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        final Deprecated c = (Deprecated) clone();
-        if (bytes != null) {
-            c.bytes = new byte[bytes.length];
-            System.arraycopy(bytes, 0, c.bytes, 0, bytes.length);
-        }
-        c.setConstantPool(_constant_pool);
-        return c;
     }
 }

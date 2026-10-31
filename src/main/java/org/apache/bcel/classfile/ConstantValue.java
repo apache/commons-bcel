@@ -1,19 +1,20 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.apache.bcel.classfile;
 
@@ -22,96 +23,115 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
- * This class is derived from <em>Attribute</em> and represents a constant
- * value, i.e., a default value for initializing a class field.
- * This class is instantiated by the <em>Attribute.readAttribute()</em> method.
+ * This class is derived from <em>Attribute</em> and represents a constant value, that is, a default value for initializing
+ * a class field. This class is instantiated by the <em>Attribute.readAttribute()</em> method.
  *
- * @see     Attribute
+ * <pre>
+ * ConstantValue_attribute {
+ *   u2 attribute_name_index;
+ *   u4 attribute_length;
+ *   u2 constantvalue_index;
+ * }
+ * </pre>
+ *
+ * @see Attribute
  */
 public final class ConstantValue extends Attribute {
 
     private int constantValueIndex;
 
-
     /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use clone() for a physical copy.
+     * Initialize from another object. Note that both objects use the same references (shallow copy). Use clone() for a
+     * physical copy.
+     *
+     * @param c Source to copy.
      */
     public ConstantValue(final ConstantValue c) {
         this(c.getNameIndex(), c.getLength(), c.getConstantValueIndex(), c.getConstantPool());
     }
 
-
     /**
-     * Construct object from input stream.
-     * @param name_index Name index in constant pool
-     * @param length Content length in bytes
-     * @param input Input stream
-     * @param constant_pool Array of constants
-     * @throws IOException
+     * Constructs object from input stream.
+     *
+     * @param nameIndex Name index in constant pool.
+     * @param length Content length in bytes.
+     * @param input Input stream.
+     * @param constantPool Array of constants.
+     * @throws IOException Thrown if an I/O error occurs.
      */
-    ConstantValue(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
-            throws IOException {
-        this(name_index, length, input.readUnsignedShort(), constant_pool);
+    ConstantValue(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+        this(nameIndex, length, input.readUnsignedShort(), constantPool);
     }
 
-
     /**
-     * @param name_index Name index in constant pool
-     * @param length Content length in bytes
-     * @param constantValueIndex Index in constant pool
-     * @param constant_pool Array of constants
+     * Constructs a ConstantValue.
+     *
+     * @param nameIndex Name index in constant pool.
+     * @param length Content length in bytes.
+     * @param constantValueIndex Index in constant pool.
+     * @param constantPool Array of constants.
      */
-    public ConstantValue(final int name_index, final int length, final int constantValueIndex,
-            final ConstantPool constant_pool) {
-        super(Const.ATTR_CONSTANT_VALUE, name_index, length, constant_pool);
+    public ConstantValue(final int nameIndex, final int length, final int constantValueIndex, final ConstantPool constantPool) {
+        super(Const.ATTR_CONSTANT_VALUE, nameIndex, Args.require(length, 2, "ConstantValue attribute length"), constantPool);
         this.constantValueIndex = constantValueIndex;
     }
 
-
     /**
-     * Called by objects that are traversing the nodes of the tree implicitely
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
+     * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
+     * That is, the hierarchy of methods, fields, attributes, and other elements forms a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitConstantValue(this);
     }
 
-
     /**
-     * Dump constant value attribute to file stream on binary format.
+     * Creates a deep copy of this attribute.
      *
-     * @param file Output file stream
-     * @throws IOException
+     * @param constantPool The constant pool.
+     * @return deep copy of this attribute.
      */
     @Override
-    public void dump( final DataOutputStream file ) throws IOException {
+    public Attribute copy(final ConstantPool constantPool) {
+        final ConstantValue c = (ConstantValue) clone();
+        c.setConstantPool(constantPool);
+        return c;
+    }
+
+    /**
+     * Dumps constant value attribute to file stream on binary format.
+     *
+     * @param file Output file stream.
+     * @throws IOException Thrown if an I/O error occurs.
+     */
+    @Override
+    public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
         file.writeShort(constantValueIndex);
     }
 
-
     /**
+     * Gets the index in constant pool of constant value.
+     *
      * @return Index in constant pool of constant value.
      */
     public int getConstantValueIndex() {
         return constantValueIndex;
     }
 
-
     /**
-     * @param constantValueIndex the index info the constant pool of this constant value
+     * Sets the constant value index.
+     *
+     * @param constantValueIndex The index info the constant pool of this constant value.
      */
-    public void setConstantValueIndex( final int constantValueIndex ) {
+    public void setConstantValueIndex(final int constantValueIndex) {
         this.constantValueIndex = constantValueIndex;
     }
-
 
     /**
      * @return String representation of constant value.
@@ -119,41 +139,30 @@ public final class ConstantValue extends Attribute {
     @Override
     public String toString() {
         Constant c = super.getConstantPool().getConstant(constantValueIndex);
-        String buf;
-        int i;
+        final String buf;
+        final int i;
         // Print constant to string depending on its type
         switch (c.getTag()) {
-            case Const.CONSTANT_Long:
-                buf = String.valueOf(((ConstantLong) c).getBytes());
-                break;
-            case Const.CONSTANT_Float:
-                buf = String.valueOf(((ConstantFloat) c).getBytes());
-                break;
-            case Const.CONSTANT_Double:
-                buf = String.valueOf(((ConstantDouble) c).getBytes());
-                break;
-            case Const.CONSTANT_Integer:
-                buf = String.valueOf(((ConstantInteger) c).getBytes());
-                break;
-            case Const.CONSTANT_String:
-                i = ((ConstantString) c).getStringIndex();
-                c = super.getConstantPool().getConstant(i, Const.CONSTANT_Utf8);
-                buf = "\"" + Utility.convertString(((ConstantUtf8) c).getBytes()) + "\"";
-                break;
-            default:
-                throw new IllegalStateException("Type of ConstValue invalid: " + c);
+        case Const.CONSTANT_Long:
+            buf = String.valueOf(((ConstantLong) c).getBytes());
+            break;
+        case Const.CONSTANT_Float:
+            buf = String.valueOf(((ConstantFloat) c).getBytes());
+            break;
+        case Const.CONSTANT_Double:
+            buf = String.valueOf(((ConstantDouble) c).getBytes());
+            break;
+        case Const.CONSTANT_Integer:
+            buf = String.valueOf(((ConstantInteger) c).getBytes());
+            break;
+        case Const.CONSTANT_String:
+            i = ((ConstantString) c).getStringIndex();
+            c = super.getConstantPool().getConstantUtf8(i);
+            buf = "\"" + Utility.convertString(((ConstantUtf8) c).getBytes()) + "\"";
+            break;
+        default:
+            throw new IllegalStateException("Type of ConstValue invalid: " + c);
         }
         return buf;
-    }
-
-
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        final ConstantValue c = (ConstantValue) clone();
-        c.setConstantPool(_constant_pool);
-        return c;
     }
 }

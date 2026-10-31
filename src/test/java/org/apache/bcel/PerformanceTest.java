@@ -1,27 +1,31 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 
 package org.apache.bcel;
+
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -32,9 +36,8 @@ import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
+import org.apache.commons.lang3.SystemProperties;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.fail;
 
 public final class PerformanceTest {
 
@@ -50,9 +53,7 @@ public final class PerformanceTest {
             final int n = is.read(b, len, b.length - len);
             if (n == -1) {
                 if (len < b.length) {
-                    final byte[] c = new byte[len];
-                    System.arraycopy(b, 0, c, 0, len);
-                    b = c;
+                    b = Arrays.copyOf(b, len);
                 }
                 return b;
             }
@@ -73,7 +74,7 @@ public final class PerformanceTest {
         final NanoTimer mserTime = new NanoTimer();
         final NanoTimer serTime = new NanoTimer();
 
-        System.out.println("parsing " + lib);
+        System.out.println("Parsing " + lib);
 
         total.start();
         try (JarFile jar = new JarFile(lib)) {
@@ -81,8 +82,8 @@ public final class PerformanceTest {
 
             while (en.hasMoreElements()) {
                 final JarEntry e = (JarEntry) en.nextElement();
-                if (e.getName().endsWith(".class")) {
-                    byte[] bytes;
+                if (e.getName().endsWith(JavaClass.EXTENSION)) {
+                    final byte[] bytes;
                     try (InputStream in = jar.getInputStream(e)) {
                         bytes = read(in);
                     }
@@ -131,10 +132,10 @@ public final class PerformanceTest {
     }
 
     @Test
-    public void testPerformance() {
-        final File javaLib = new File(System.getProperty("java.home"), "lib");
+    void testPerformance() {
+        final File javaLib = new File(SystemProperties.getJavaHome(), "lib");
         javaLib.listFiles(file -> {
-            if(file.getName().endsWith(".jar")) {
+            if (file.getName().endsWith(".jar")) {
                 try {
                     test(file);
                 } catch (final IOException e) {

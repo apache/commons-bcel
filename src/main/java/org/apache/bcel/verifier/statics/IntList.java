@@ -1,50 +1,46 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.apache.bcel.verifier.statics;
 
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A small utility class representing a set of basic int values.
- *
  */
-public class IntList{
-    /** The int are stored as Integer objects here. */
-    private final List<Integer> theList;
+public class IntList {
+
+    /** The ints are stored as Integer objects in a hash set so that {@link #contains(int)} is O(1), not a linear scan. */
+    private final Set<Integer> set;
+
     /** This constructor creates an empty list. */
     IntList() {
-        theList = new ArrayList<>();
+        set = new HashSet<>();
     }
+
     /** Adds an element to the list. */
     void add(final int i) {
-        theList.add(Integer.valueOf(i));
+        set.add(Integer.valueOf(i));
     }
-    /** Checks if the specified int is already in the list. */
+
+    /** Tests if the specified int is already in the list. */
     boolean contains(final int i) {
-        final Integer[] ints = new Integer[theList.size()];
-        theList.toArray(ints);
-        for (final Integer k : ints) {
-            if (i == k.intValue()) {
-                return true;
-            }
-        }
-        return false;
+        return set.contains(Integer.valueOf(i));
     }
 }

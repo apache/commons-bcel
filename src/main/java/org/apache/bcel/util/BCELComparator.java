@@ -1,44 +1,45 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.apache.bcel.util;
 
 /**
- * Used for BCEL comparison strategy
+ * Used for BCEL comparison strategy.
  *
+ * @param <T> What type we are comparing.
  * @since 5.2
  */
-public interface BCELComparator {
+public interface BCELComparator<T> {
 
     /**
-     * Compare two objects and return what THIS.equals(THAT) should return
+     * Compares two objects and return what a.equals(b) should return.
      *
-     * @param THIS
-     * @param THAT
-     * @return true if and only if THIS equals THAT
+     * @param a An object.
+     * @param b An object to be compared with {@code a} for equality.
+     * @return {@code true} if the arguments are equal to each other and {@code false} otherwise.
      */
-    boolean equals( Object THIS, Object THAT );
-
+    boolean equals(T a, T b);
 
     /**
-     * Return hashcode for THIS.hashCode()
+     * Gets the hash code for o.hashCode().
      *
-     * @param THIS
-     * @return hashcode for THIS.hashCode()
+     * @param o The object.
+     * @return hash code for o.hashCode().
      */
-    int hashCode( Object THIS );
+    int hashCode(T o);
 }

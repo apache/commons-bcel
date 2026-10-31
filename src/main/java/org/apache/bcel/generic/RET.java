@@ -1,61 +1,77 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.apache.bcel.generic;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.apache.bcel.Const;
 import org.apache.bcel.util.ByteSequence;
 
 /**
  * RET - Return from subroutine
  *
- * <PRE>Stack: ... -&gt; ...</PRE>
- *
+ * <pre>
+ * Stack: ... -&gt; ...
+ * </pre>
  */
 public class RET extends Instruction implements IndexedInstruction, TypedInstruction {
 
     private boolean wide;
-    private int index; // index to local variable containg the return address
-
+    private int index; // index to local variable containing the return address
 
     /**
-     * Empty constructor needed for Instruction.readInstruction.
-     * Not to be used otherwise.
+     * Default constructor needed for Instruction.readInstruction. Not to be used otherwise.
      */
     RET() {
     }
 
-
+    /**
+     * Constructs a RET instruction.
+     *
+     * @param index index of local variable containing the return address.
+     */
     public RET(final int index) {
-        super(org.apache.bcel.Const.RET, (short) 2);
+        super(Const.RET, (short) 2);
         setIndex(index); // May set wide as side effect
     }
 
-
     /**
-     * Dump instruction as byte code to stream out.
-     * @param out Output stream
+     * Call corresponding visitor method(s). The order is: Call visitor methods of implemented interfaces first, then call
+     * methods according to the class hierarchy in descending order, that is, the most specific visitXXX() call comes last.
+     *
+     * @param v Visitor object.
      */
     @Override
-    public void dump( final DataOutputStream out ) throws IOException {
+    public void accept(final Visitor v) {
+        v.visitRET(this);
+    }
+
+    /**
+     * Dumps instruction as byte code to stream out.
+     *
+     * @param out Output stream.
+     */
+    @Override
+    public void dump(final DataOutputStream out) throws IOException {
         if (wide) {
-            out.writeByte(org.apache.bcel.Const.WIDE);
+            out.writeByte(Const.WIDE);
         }
         out.writeByte(super.getOpcode());
         if (wide) {
@@ -65,22 +81,31 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
         }
     }
 
-
-    private void setWide() {
-        wide = index > org.apache.bcel.Const.MAX_BYTE;
-        if (wide) {
-            super.setLength(4); // Including the wide byte
-        } else {
-            super.setLength(2);
-        }
-    }
-
-
     /**
-     * Read needed data (e.g. index) from file.
+     * Gets the index of the local variable containing the return address.
+     *
+     * @return index of local variable containing the return address.
      */
     @Override
-    protected void initFromFile( final ByteSequence bytes, final boolean wide ) throws IOException {
+    public final int getIndex() {
+        return index;
+    }
+
+    /**
+     * Gets the return address type.
+     *
+     * @return return address type.
+     */
+    @Override
+    public Type getType(final ConstantPoolGen cp) {
+        return ReturnaddressType.NO_TARGET;
+    }
+
+    /**
+     * Reads needed data (for example index) from file.
+     */
+    @Override
+    protected void initFromFile(final ByteSequence bytes, final boolean wide) throws IOException {
         this.wide = wide;
         if (wide) {
             index = bytes.readUnsignedShort();
@@ -91,56 +116,35 @@ public class RET extends Instruction implements IndexedInstruction, TypedInstruc
         }
     }
 
-
     /**
-     * @return index of local variable containg the return address
+     * Sets the index of the local variable containing the return address.
+     *
+     * @param index index of local variable containing the return address.
+     * @throws ClassGenException Thrown if index is out of bounds.
      */
     @Override
-    public final int getIndex() {
-        return index;
-    }
-
-
-    /**
-     * Set index of local variable containg the return address
-     */
-    @Override
-    public final void setIndex( final int n ) {
-        if (n < 0) {
-            throw new ClassGenException("Negative index value: " + n);
+    public final void setIndex(final int index) {
+        if (!isNonNegativeUShort(index)) {
+            throw new ClassGenException("Illegal value: " + index);
         }
-        index = n;
+        this.index = index;
         setWide();
     }
 
+    private void setWide() {
+        wide = index > Const.MAX_BYTE;
+        if (wide) {
+            super.setLength(4); // Including the wide byte
+        } else {
+            super.setLength(2);
+        }
+    }
 
     /**
-     * @return mnemonic for instruction
+     * @return mnemonic for instruction.
      */
     @Override
-    public String toString( final boolean verbose ) {
+    public String toString(final boolean verbose) {
         return super.toString(verbose) + " " + index;
-    }
-
-
-    /** @return return address type
-     */
-    @Override
-    public Type getType( final ConstantPoolGen cp ) {
-        return ReturnaddressType.NO_TARGET;
-    }
-
-
-    /**
-     * Call corresponding visitor method(s). The order is:
-     * Call visitor methods of implemented interfaces first, then
-     * call methods according to the class hierarchy in descending order,
-     * i.e., the most specific visitXXX() call comes last.
-     *
-     * @param v Visitor object
-     */
-    @Override
-    public void accept( final Visitor v ) {
-        v.visitRET(this);
     }
 }

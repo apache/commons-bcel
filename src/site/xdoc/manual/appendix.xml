@@ -1,25 +1,28 @@
 <?xml version="1.0"?>
 <!--
-    * Licensed to the Apache Software Foundation (ASF) under one
-    * or more contributor license agreements.  See the NOTICE file
-    * distributed with this work for additional information
-    * regarding copyright ownership.  The ASF licenses this file
-    * to you under the Apache License, Version 2.0 (the
-    * "License"); you may not use this file except in compliance
-    * with the License.  You may obtain a copy of the License at
-    * 
-    *   http://www.apache.org/licenses/LICENSE-2.0
-    * 
-    * Unless required by applicable law or agreed to in writing,
-    * software distributed under the License is distributed on an
-    * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-    * KIND, either express or implied.  See the License for the
-    * specific language governing permissions and limitations
-    * under the License.    
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   https://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
 -->
-<document>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
   <properties>
     <title>Appendix</title>
+    <author email="dev@commons.apache.org">Apache Commons Team</author>
   </properties>
 
   <body>
@@ -55,7 +58,7 @@ public class HelloWorld {
 
       <p>
         We will sketch here how the above Java class can be created from the
-        scratch using the <font face="helvetica,arial">BCEL</font> API. For
+        scratch using the BCEL API. For
         ease of reading we will use textual signatures and not create them
         dynamically. For example, the signature
       </p>
@@ -68,7 +71,8 @@ public class HelloWorld {
 
       <source>Type.getMethodSignature(Type.STRINGBUFFER, new Type[] { Type.STRING });</source>
 
-      <p><b>Initialization:</b>
+      <p>
+        <b>Initialization:</b>
         First we create an empty class and an instruction list:
       </p>
 
@@ -104,8 +108,9 @@ ObjectType i_stream = new ObjectType("java.io.InputStream");
 ObjectType p_stream = new ObjectType("java.io.PrintStream");
       </source>
 
-      <p><b>Create variables <tt>in</tt> and <tt>name</tt>:</b> We call
-        the constructors, i.e., execute
+      <p>
+        <b>Create variables <tt>in</tt> and <tt>name</tt>:</b> We call
+        the constructors, that is, execute
         <tt>BufferedReader(InputStreamReader(System.in))</tt>. The reference
         to the <tt>BufferedReader</tt> object stays on top of the stack and
         is stored in the newly allocated <tt>in</tt> variable.
@@ -141,7 +146,8 @@ il.append(InstructionConstants.ACONST_NULL);
 lg.setStart(il.append(new ASTORE(name))); // "name" valid from here
       </source>
 
-      <p><b>Create try-catch block:</b> We remember the start of the
+      <p>
+        <b>Create try-catch block:</b> We remember the start of the
         block, read a line from the standard input and store it into the
         variable <tt>name</tt>.
       </p>
@@ -190,8 +196,9 @@ InstructionHandle ih =
 g.setTarget(ih);
       </source>
 
-      <p><b>Printing "Hello":</b>
-String concatenation compiles to <tt>StringBuffer</tt> operations.
+      <p>
+        <b>Printing "Hello":</b>
+        String concatenation compiles to <tt>StringBuffer</tt> operations.
       </p>
 
       <source>
@@ -216,7 +223,8 @@ il.append(InstructionConstants.RETURN);
       </source>
 
 
-      <p><b>Finalization:</b> Finally, we have to set the stack size,
+      <p>
+        <b>Finalization:</b> Finally, we have to set the stack size,
         which normally would have to be computed on the fly and add a
         default constructor method to the class, which is empty in this
         case.
@@ -266,17 +274,17 @@ public class Peephole {
             JavaClass clazz  = Repository.lookupClass(argv[0]);
             Method[] methods = clazz.getMethods();
             ConstantPoolGen cp = new ConstantPoolGen(clazz.getConstantPool());
-    
+
             for (int i = 0; i &lt; methods.length; i++) {
                 if (!(methods[i].isAbstract() || methods[i].isNative())) {
                     MethodGen mg = new MethodGen(methods[i], clazz.getClassName(), cp);
                     Method stripped = removeNOPs(mg);
-        
+
                     if (stripped != null)      // Any NOPs stripped?
                         methods[i] = stripped; // Overwrite with stripped method
                   }
             }
-    
+
             // Dump the class to "class name"_.class
             clazz.setConstantPool(cp.getFinalConstantPool());
             clazz.dump(clazz.getClassName() + "_.class");
@@ -291,19 +299,19 @@ public class Peephole {
         String pat = "NOP+"; // Find at least one NOP
         InstructionHandle next = null;
         int count = 0;
-        
+
         for (Iterator iter = f.search(pat); iter.hasNext();) {
             InstructionHandle[] match = (InstructionHandle[]) iter.next();
             InstructionHandle first = match[0];
             InstructionHandle last  = match[match.length - 1];
-            
+
             // Some nasty Java compilers may add NOP at end of method.
             if ((next = last.getNext()) == null) {
                 break;
             }
-            
+
             count += match.length;
-            
+
             /**
              * Delete NOPs and redirect any references to them to the following (non-nop) instruction.
              */
@@ -345,44 +353,45 @@ public class Peephole {
     <subsection name="Constant pool UML diagram">
 
       <p align="center">
-        <a name="Figure 8">
-          <img src="../images/constantpool.gif"/>
+        <a id="Figure-8">
+          <img src="../images/constantpool.gif" alt="Figure 8"/>
           <br/>
           Figure 8: UML diagram for constant pool classes
         </a>
       </p>
     </subsection>
-      
+
     <subsection name="Verifier">
-      
+
       <h4>Running a console based verifier</h4>
 
       <source>
-java org.apache.bcel.verifier.Verifier fully.qualified.class.Name          
+java org.apache.bcel.verifier.Verifier fully.qualified.class.Name
       </source>
-
-      lets JustIce work standalone.
-      If you get a "java.lang.OutOfMemoryError", you should increase the
-      maximum Java heap space. A command like
-
+      <p>
+        lets JustIce work standalone.
+        If you get a "java.lang.OutOfMemoryError", you should increase the
+        maximum Java heap space. A command like
+      </p>
       <source>
 java -Xmx1887436800 org.apache.bcel.verifier.Verifier f.q.c.Name
       </source>
-
-      will usually resolve the problem. The value above is suitable for
-      big server machines; if your machine starts swapping to disk, try
-      to lower the value.
-
+      <p>
+        will usually resolve the problem. The value above is suitable for
+        big server machines; if your machine starts swapping to disk, try
+        to lower the value.
+      </p>
       <h4>Running a graphics based verifier</h4>
-
-      If you prefer a graphical application, you should use a command like
-
+      <p>
+        If you prefer a graphical application, you should use a command like
+      </p>
       <source>
 java org.apache.bcel.verifier.GraphicalVerifier
       </source>
-
-      to launch one. Again, you may have to resolve a memory issue depending
-      on the classes to verify.
+      <p>
+        to launch one. Again, you may have to resolve a memory issue depending
+        on the classes to verify.
+      </p>
     </subsection>
   </section>
   </body>

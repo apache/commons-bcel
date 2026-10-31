@@ -1,20 +1,21 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
-
 package org.apache.bcel;
 
 import java.io.ByteArrayInputStream;
@@ -52,64 +53,29 @@ import org.openjdk.jmh.infra.Blackhole;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class BCELBenchmark {
 
-    private JarFile getJarFile() throws IOException {
-        String javaHome = System.getProperty("java.home");
-        return new JarFile(javaHome + "/lib/rt.jar");
-    }
-
-    private Iterable<JarEntry> getClasses(JarFile jar) {
-        return new IteratorIterable<>(new FilterIterator<>(new EnumerationIterator<>(jar.entries()), new Predicate<JarEntry>() {
-            @Override
-            public boolean evaluate(JarEntry entry) {
-                return entry.getName().endsWith(".class");
-            }
-        }));
-    }
-
     /**
      * Baseline benchmark. Read the classes but don't parse them.
      */
     @Benchmark
     public void baseline(Blackhole bh) throws IOException {
-        JarFile jar = getJarFile();
-
+        final JarFile jar = getJarFile();
         for (JarEntry entry : getClasses(jar)) {
-            byte[] bytes = IOUtils.toByteArray(jar.getInputStream(entry));
+            final byte[] bytes = IOUtils.toByteArray(jar.getInputStream(entry));
             bh.consume(bytes);
         }
-
-        jar.close();
-    }
-
-    @Benchmark
-    public void parser(Blackhole bh) throws IOException {
-        JarFile jar = getJarFile();
-
-        for (JarEntry entry : getClasses(jar)) {
-            byte[] bytes = IOUtils.toByteArray(jar.getInputStream(entry));
-
-            JavaClass clazz = new ClassParser(new ByteArrayInputStream(bytes), entry.getName()).parse();
-            bh.consume(clazz);
-        }
-
         jar.close();
     }
 
     @Benchmark
     public void generator(Blackhole bh) throws IOException {
-        JarFile jar = getJarFile();
-
+        final JarFile jar = getJarFile();
         for (JarEntry entry : getClasses(jar)) {
-            byte[] bytes = IOUtils.toByteArray(jar.getInputStream(entry));
-
-            JavaClass clazz = new ClassParser(new ByteArrayInputStream(bytes), entry.getName()).parse();
-
-            ClassGen cg = new ClassGen(clazz);
-
+            final byte[] bytes = IOUtils.toByteArray(jar.getInputStream(entry));
+            final JavaClass clazz = new ClassParser(new ByteArrayInputStream(bytes), entry.getName()).parse();
+            final ClassGen cg = new ClassGen(clazz);
             for (Method m : cg.getMethods()) {
-                MethodGen mg = new MethodGen(m, cg.getClassName(), cg.getConstantPool());
-                InstructionList il = mg.getInstructionList();
-
+                final MethodGen mg = new MethodGen(m, cg.getClassName(), cg.getConstantPool());
+                final InstructionList il = mg.getInstructionList();
                 if (il != null) {
                     mg.getInstructionList().setPositions();
                     mg.setMaxLocals();
@@ -117,10 +83,33 @@ public class BCELBenchmark {
                 }
                 cg.replaceMethod(m, mg.getMethod());
             }
-
             bh.consume(cg.getJavaClass().getBytes());
         }
+        jar.close();
+    }
 
+    private Iterable<JarEntry> getClasses(JarFile jar) {
+        return new IteratorIterable<>(new FilterIterator<>(new EnumerationIterator<>(jar.entries()), new Predicate<JarEntry>() {
+            @Override
+            public boolean evaluate(JarEntry entry) {
+                return entry.getName().endsWith(JavaClass.EXTENSION);
+            }
+        }));
+    }
+
+    private JarFile getJarFile() throws IOException {
+        final String javaHome = System.getProperty("java.home");
+        return new JarFile(javaHome + "/lib/rt.jar");
+    }
+
+    @Benchmark
+    public void parser(final Blackhole bh) throws IOException {
+        final JarFile jar = getJarFile();
+        for (JarEntry entry : getClasses(jar)) {
+            final byte[] bytes = IOUtils.toByteArray(jar.getInputStream(entry));
+            final JavaClass clazz = new ClassParser(new ByteArrayInputStream(bytes), entry.getName()).parse();
+            bh.consume(clazz);
+        }
         jar.close();
     }
 }

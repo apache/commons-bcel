@@ -1,18 +1,20 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 
 package org.apache.bcel.classfile;
@@ -24,24 +26,23 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * This class represents an entry in the requires table of the Module attribute.
- * Each entry describes a module on which the parent module depends.
+ * This class represents an entry in the requires table of the Module attribute. Each entry describes a module on which
+ * the parent module depends.
  *
- * @see   Module
+ * @see Module
  * @since 6.4.0
  */
 public final class ModuleRequires implements Cloneable, Node {
 
-    private final int requiresIndex;  // points to CONSTANT_Module_info
+    private final int requiresIndex; // points to CONSTANT_Module_info
     private final int requiresFlags;
-    private final int requiresVersionIndex;  // either 0 or points to CONSTANT_Utf8_info
-
+    private final int requiresVersionIndex; // either 0 or points to CONSTANT_Utf8_info
 
     /**
-     * Construct object from file stream.
+     * Constructs object from file stream.
      *
-     * @param file Input stream
-     * @throws IOException if an I/O Exception occurs in readUnsignedShort
+     * @param file Input stream.
+     * @throws IOException Thrown if an I/O Exception occurs in readUnsignedShort.
      */
     ModuleRequires(final DataInput file) throws IOException {
         requiresIndex = file.readUnsignedShort();
@@ -49,59 +50,21 @@ public final class ModuleRequires implements Cloneable, Node {
         requiresVersionIndex = file.readUnsignedShort();
     }
 
-
     /**
-     * Called by objects that are traversing the nodes of the tree implicitely
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
+     * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
+     * That is, the hierarchy of methods, fields, attributes, and other elements forms a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitModuleRequires(this);
     }
 
-    // TODO add more getters and setters?
-
     /**
-     * Dump table entry to file stream in binary format.
+     * Creates a deep copy of this object.
      *
-     * @param file Output file stream
-     * @throws IOException if an I/O Exception occurs in writeShort
-     */
-    public void dump( final DataOutputStream file ) throws IOException {
-        file.writeShort(requiresIndex);
-        file.writeShort(requiresFlags);
-        file.writeShort(requiresVersionIndex);
-    }
-
-
-    /**
-     * @return String representation
-     */
-    @Override
-    public String toString() {
-        return "requires(" + requiresIndex + ", " + String.format("%04x", requiresFlags) + ", " + requiresVersionIndex + ")";
-    }
-
-
-    /**
-     * @return Resolved string representation
-     */
-    public String toString( final ConstantPool constant_pool ) {
-        final StringBuilder buf = new StringBuilder();
-        final String module_name = constant_pool.constantToString(requiresIndex, Const.CONSTANT_Module);
-        buf.append(Utility.compactClassName(module_name, false));
-        buf.append(", ").append(String.format("%04x", requiresFlags));
-        final String version = requiresVersionIndex == 0 ? "0" : constant_pool.getConstantString(requiresVersionIndex, Const.CONSTANT_Utf8);
-        buf.append(", ").append(version);
-        return buf.toString();
-    }
-
-
-    /**
-     * @return deep copy of this object
+     * @return deep copy of this object.
      */
     public ModuleRequires copy() {
         try {
@@ -110,5 +73,73 @@ public final class ModuleRequires implements Cloneable, Node {
             // TODO should this throw?
         }
         return null;
+    }
+
+    /**
+     * Dumps table entry to file stream in binary format.
+     *
+     * @param file Output file stream.
+     * @throws IOException Thrown if an I/O Exception occurs in writeShort.
+     */
+    public void dump(final DataOutputStream file) throws IOException {
+        file.writeShort(requiresIndex);
+        file.writeShort(requiresFlags);
+        file.writeShort(requiresVersionIndex);
+    }
+
+    /**
+     * Gets the module name from the constant pool.
+     *
+     * @param constantPool Array of constants usually obtained from the ClassFile object.
+     * @return module name.
+     * @since 6.10.0
+     */
+    public String getModuleName(final ConstantPool constantPool) {
+        return constantPool.constantToString(requiresIndex, Const.CONSTANT_Module);
+    }
+
+    /**
+     * Gets the flags for this ModuleRequires.
+     *
+     * @return The requiresFlags.
+     * @since 6.10.0
+     */
+    public int getRequiresFlags() {
+        return requiresFlags;
+    }
+
+    /**
+     * Gets the required version from the constant pool.
+     *
+     * @param constantPool Array of constants usually obtained from the ClassFile object.
+     * @return required version, "0" if version index is 0.
+     * @since 6.10.0
+     */
+    public String getVersion(final ConstantPool constantPool) {
+        return requiresVersionIndex == 0 ? "0" : constantPool.getConstantString(requiresVersionIndex, Const.CONSTANT_Utf8);
+    }
+
+    /**
+     * @return String representation.
+     */
+    @Override
+    public String toString() {
+        return "requires(" + requiresIndex + ", " + String.format("%04x", requiresFlags) + ", " + requiresVersionIndex + ")";
+    }
+
+    /**
+     * Gets the resolved string representation.
+     *
+     * @param constantPool The constant pool.
+     * @return Resolved string representation.
+     */
+    public String toString(final ConstantPool constantPool) {
+        final StringBuilder buf = new StringBuilder();
+        final String moduleName = getModuleName(constantPool);
+        buf.append(moduleName);
+        buf.append(", ").append(String.format("%04x", requiresFlags));
+        final String version = getVersion(constantPool);
+        buf.append(", ").append(version);
+        return buf.toString();
     }
 }

@@ -1,19 +1,20 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.apache.bcel.verifier.structurals;
 
@@ -34,7 +35,7 @@ public class ExceptionHandlers {
     /**
      * Empty array.
      */
-    private static final ExceptionHandler[] EMPTY_EXCEPTION_HANDLER_ARRAY = new ExceptionHandler[0];
+    private static final ExceptionHandler[] EMPTY_ARRAY = {};
 
     /**
      * The ExceptionHandler instances. Key: InstructionHandle objects, Values: HashSet<ExceptionHandler> instances.
@@ -42,7 +43,9 @@ public class ExceptionHandlers {
     private final Map<InstructionHandle, Set<ExceptionHandler>> exceptionHandlers;
 
     /**
-     * Constructor. Creates a new ExceptionHandlers instance.
+     * Constructs a new ExceptionHandlers instance.
+     *
+     * @param mg The method generator.
      */
     public ExceptionHandlers(final MethodGen mg) {
         exceptionHandlers = new HashMap<>();
@@ -50,26 +53,23 @@ public class ExceptionHandlers {
         for (final CodeExceptionGen ceg : cegs) {
             final ExceptionHandler eh = new ExceptionHandler(ceg.getCatchType(), ceg.getHandlerPC());
             for (InstructionHandle ih = ceg.getStartPC(); ih != ceg.getEndPC().getNext(); ih = ih.getNext()) {
-                Set<ExceptionHandler> hs;
-                hs = exceptionHandlers.get(ih);
-                if (hs == null) {
-                    hs = new HashSet<>();
-                    exceptionHandlers.put(ih, hs);
-                }
-                hs.add(eh);
+                exceptionHandlers.computeIfAbsent(ih, k -> new HashSet<>()).add(eh);
             }
         }
     }
 
     /**
-     * Returns all the ExceptionHandler instances representing exception handlers that protect the instruction ih.
+     * Gets all the ExceptionHandler instances representing exception handlers that protect the instruction ih.
+     *
+     * @param ih The instruction handle.
+     * @return array of exception handlers.
      */
     public ExceptionHandler[] getExceptionHandlers(final InstructionHandle ih) {
         final Set<ExceptionHandler> hsSet = exceptionHandlers.get(ih);
         if (hsSet == null) {
-            return EMPTY_EXCEPTION_HANDLER_ARRAY;
+            return EMPTY_ARRAY;
         }
-        return hsSet.toArray(new ExceptionHandler[hsSet.size()]);
+        return hsSet.toArray(ExceptionHandler.EMPTY_ARRAY);
     }
 
 }

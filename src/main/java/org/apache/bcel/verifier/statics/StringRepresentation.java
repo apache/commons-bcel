@@ -1,22 +1,22 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.apache.bcel.verifier.statics;
-
 
 import org.apache.bcel.classfile.AnnotationDefault;
 import org.apache.bcel.classfile.AnnotationEntry;
@@ -26,6 +26,7 @@ import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.CodeException;
 import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantDouble;
+import org.apache.bcel.classfile.ConstantDynamic;
 import org.apache.bcel.classfile.ConstantFieldref;
 import org.apache.bcel.classfile.ConstantFloat;
 import org.apache.bcel.classfile.ConstantInteger;
@@ -35,7 +36,9 @@ import org.apache.bcel.classfile.ConstantLong;
 import org.apache.bcel.classfile.ConstantMethodHandle;
 import org.apache.bcel.classfile.ConstantMethodType;
 import org.apache.bcel.classfile.ConstantMethodref;
+import org.apache.bcel.classfile.ConstantModule;
 import org.apache.bcel.classfile.ConstantNameAndType;
+import org.apache.bcel.classfile.ConstantPackage;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.ConstantString;
 import org.apache.bcel.classfile.ConstantUtf8;
@@ -58,30 +61,31 @@ import org.apache.bcel.classfile.NestMembers;
 import org.apache.bcel.classfile.Node;
 import org.apache.bcel.classfile.ParameterAnnotationEntry;
 import org.apache.bcel.classfile.ParameterAnnotations;
+import org.apache.bcel.classfile.PermittedSubclasses;
+import org.apache.bcel.classfile.Record;
+import org.apache.bcel.classfile.RecordComponentInfo;
 import org.apache.bcel.classfile.Signature;
 import org.apache.bcel.classfile.SourceFile;
 import org.apache.bcel.classfile.StackMap;
 import org.apache.bcel.classfile.StackMapEntry;
 import org.apache.bcel.classfile.Synthetic;
+import org.apache.bcel.classfile.TypeAnnotations;
 import org.apache.bcel.classfile.Unknown;
 import org.apache.bcel.verifier.exc.AssertionViolatedException;
 
 /**
- * BCEL's Node classes (those from the classfile API that <B>accept()</B> Visitor
- * instances) have <B>toString()</B> methods that were not designed to be robust,
- * this gap is closed by this class.
- * When performing class file verification, it may be useful to output which
- * entity (e.g. a <B>Code</B> instance) is not satisfying the verifier's
- * constraints, but in this case it could be possible for the <B>toString()</B>
- * method to throw a RuntimeException.
- * A (new StringRepresentation(Node n)).toString() never throws any exception.
- * Note that this class also serves as a placeholder for more sophisticated message
- * handling in future versions of JustIce.
- *
+ * BCEL's Node classes (those from the classfile API that {@code accept()} Visitor instances) have {@code toString()}
+ * methods that were not designed to be robust, this gap is closed by this class. When performing class file
+ * verification, it may be useful to output which entity (for example a {@code Code} instance) is not satisfying the verifier's
+ * constraints, but in this case it could be possible for the {@code toString()} method to throw a RuntimeException. A
+ * (new StringRepresentation(Node n)).toString() never throws any exception. Note that this class also serves as a
+ * placeholder for more sophisticated message handling in future versions of JustIce.
  */
 public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor {
+
     /** The string representation, created by a visitXXX() method, output by toString(). */
     private String tostring;
+
     /** The node we ask for its string representation. Not really needed; only for debug output. */
     private final Node n;
 
@@ -107,24 +111,20 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
 // If some new "Node" is defined in BCEL (such as some concrete "Attribute"), we
 // want to know that this class has also to be adapted.
         if (tostring == null) {
-            throw new AssertionViolatedException(
-                "Please adapt '" + getClass() + "' to deal with objects of class '" + n.getClass() + "'.");
+            throw new AssertionViolatedException("Please adapt '" + getClass() + "' to deal with objects of class '" + n.getClass() + "'.");
         }
         return tostring;
     }
 
     /**
-     * Returns the String representation of the Node object obj;
-     * this is obj.toString() if it does not throw any RuntimeException,
-     * or else it is a string derived only from obj's class name.
+     * Returns the String representation of the Node object obj; this is obj.toString() if it does not throw any
+     * RuntimeException, or else it is a string derived only from obj's class name.
      */
     private String toString(final Node obj) {
         String ret;
         try {
             ret = obj.toString();
-        }
-
-        catch (final RuntimeException e) {
+        } catch (final RuntimeException e) {
             // including ClassFormatException, trying to convert the "signature" of a ReturnaddressType LocalVariable
             // (shouldn't occur, but people do crazy things)
             String s = obj.getClass().getName();
@@ -134,38 +134,50 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         return ret;
     }
 
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitAnnotation(final Annotations obj) {
+        // this is invoked whenever an annotation is found
+        // when verifier is passed over a class
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitAnnotationDefault(final AnnotationDefault obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitAnnotationEntry(final AnnotationEntry obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitBootstrapMethods(final BootstrapMethods obj) {
+        tostring = toString(obj);
+    }
+
     ////////////////////////////////
     // Visitor methods start here //
     ////////////////////////////////
     // We don't of course need to call some default implementation:
-    // e.g. we could also simply output "Code" instead of a possibly
+    // for example we could also simply output "Code" instead of a possibly
     // lengthy Code attribute's toString().
     @Override
     public void visitCode(final Code obj) {
-        //tostring = toString(obj);
+        // tostring = toString(obj);
         tostring = "<CODE>"; // We don't need real code outputs.
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitAnnotation(final Annotations obj)
-    {
-        //this is invoked whenever an annotation is found
-        //when verifier is passed over a class
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitLocalVariableTypeTable(final LocalVariableTypeTable obj)
-    {
-        //this is invoked whenever a local variable type is found
-        //when verifier is passed over a class
-        tostring = toString(obj);
     }
 
     @Override
@@ -180,6 +192,14 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
 
     @Override
     public void visitConstantDouble(final ConstantDouble obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.6.0
+     */
+    @Override
+    public void visitConstantDynamic(final ConstantDynamic obj) {
         tostring = toString(obj);
     }
 
@@ -203,8 +223,24 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         tostring = toString(obj);
     }
 
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitConstantInvokeDynamic(final ConstantInvokeDynamic obj) {
+        tostring = toString(obj);
+    }
+
     @Override
     public void visitConstantLong(final ConstantLong obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitConstantMethodHandle(final ConstantMethodHandle obj) {
         tostring = toString(obj);
     }
 
@@ -213,8 +249,32 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         tostring = toString(obj);
     }
 
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitConstantMethodType(final ConstantMethodType obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.6.0
+     */
+    @Override
+    public void visitConstantModule(final ConstantModule obj) {
+        tostring = toString(obj);
+    }
+
     @Override
     public void visitConstantNameAndType(final ConstantNameAndType obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.6.0
+     */
+    @Override
+    public void visitConstantPackage(final ConstantPackage obj) {
         tostring = toString(obj);
     }
 
@@ -240,6 +300,14 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
 
     @Override
     public void visitDeprecated(final Deprecated obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitEnclosingMethod(final EnclosingMethod obj) {
         tostring = toString(obj);
     }
 
@@ -288,8 +356,70 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         tostring = "<LocalVariableTable: " + toString(obj) + ">";
     }
 
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitLocalVariableTypeTable(final LocalVariableTypeTable obj) {
+        // this is invoked whenever a local variable type is found
+        // when verifier is passed over a class
+        tostring = toString(obj);
+    }
+
     @Override
     public void visitMethod(final Method obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitMethodParameters(final MethodParameters obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.4.0
+     */
+    @Override
+    public void visitNestMembers(final NestMembers obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitParameterAnnotation(final ParameterAnnotations obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitParameterAnnotationEntry(final ParameterAnnotationEntry obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * Visits PermittedSubclasses attribute.
+     *
+     * @since 6.13.0
+     */
+    @Override
+    public void visitPermittedSubclasses(final PermittedSubclasses obj) {
+        tostring = toString(obj);
+    }
+
+    @Override
+    public void visitRecord(final Record obj) {
+        tostring = toString(obj);
+    }
+
+    @Override
+    public void visitRecordComponent(final RecordComponentInfo obj) {
         tostring = toString(obj);
     }
 
@@ -308,8 +438,26 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         tostring = toString(obj);
     }
 
+    /**
+     * @since 6.0
+     */
+    @Override
+    public void visitStackMapEntry(final StackMapEntry obj) {
+        tostring = toString(obj);
+    }
+
     @Override
     public void visitSynthetic(final Synthetic obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * Visits RuntimeVisibleTypeAnnotations and RuntimeInvisibleTypeAnnotations attributes.
+     *
+     * @since 6.14.0
+     */
+    @Override
+    public void visitTypeAnnotations(final TypeAnnotations obj) {
         tostring = toString(obj);
     }
 
@@ -318,99 +466,4 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
         tostring = toString(obj);
     }
 
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitEnclosingMethod(final EnclosingMethod obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitBootstrapMethods(final BootstrapMethods obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitMethodParameters(final MethodParameters obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitConstantInvokeDynamic(final ConstantInvokeDynamic obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitStackMapEntry(final StackMapEntry obj) {
-        tostring = toString(obj);
-    }
-    /**
-     * @since 6.0
-     */
-
-    @Override
-    public void visitParameterAnnotation(final ParameterAnnotations obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitAnnotationEntry(final AnnotationEntry obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitAnnotationDefault(final AnnotationDefault obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitConstantMethodType(final ConstantMethodType obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitConstantMethodHandle(final ConstantMethodHandle obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.0
-     */
-    @Override
-    public void visitParameterAnnotationEntry(final ParameterAnnotationEntry obj) {
-        tostring = toString(obj);
-    }
-
-    /**
-     * @since 6.4.0
-     */
-    @Override
-    public void visitNestMembers(final NestMembers obj) {
-        tostring = toString(obj);
-    }
 }

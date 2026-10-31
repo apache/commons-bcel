@@ -1,32 +1,34 @@
 <?xml version="1.0"?>
 <!--
-    * Licensed to the Apache Software Foundation (ASF) under one
-    * or more contributor license agreements.  See the NOTICE file
-    * distributed with this work for additional information
-    * regarding copyright ownership.  The ASF licenses this file
-    * to you under the Apache License, Version 2.0 (the
-    * "License"); you may not use this file except in compliance
-    * with the License.  You may obtain a copy of the License at
-    * 
-    *   http://www.apache.org/licenses/LICENSE-2.0
-    * 
-    * Unless required by applicable law or agreed to in writing,
-    * software distributed under the License is distributed on an
-    * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-    * KIND, either express or implied.  See the License for the
-    * specific language governing permissions and limitations
-    * under the License.    
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   https://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
 -->
-<document>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
   <properties>
     <title>Application areas</title>
+    <author email="dev@commons.apache.org">Apache Commons Team</author>
   </properties>
 
   <body>
     <section name="Application areas">
       <p>
-        There are many possible application areas for <font
-              face="helvetica,arial">BCEL</font> ranging from class
+        There are many possible application areas for BCEL ranging from class
         browsers, profilers, byte code optimizers, and compilers to
         sophisticated run-time analysis tools and extensions to the Java
         language.
@@ -34,15 +36,14 @@
 
       <p>
         Compilers like the <a
-              href="http://barat.sourceforge.net">Barat</a> compiler use <font
-              face="helvetica,arial">BCEL</font> to implement a byte code
+              href="https://barat.sourceforge.net">Barat</a> compiler use BCEL to implement a byte code
         generating back end. Other possible application areas are the
         static analysis of byte code or examining the run-time behavior of
         classes by inserting calls to profiling methods into the
         code. Further examples are extending Java with Eiffel-like
         assertions, automated delegation, or with the concepts of <a
-              href="http://www.eclipse.org/aspectj/">Aspect-Oriented Programming</a>.<br/> A
-        list of projects using <font face="helvetica,arial">BCEL</font> can
+              href="https://www.eclipse.org/aspectj/">Aspect-Oriented Programming</a>.<br/> A
+        list of projects using BCEL can
         be found <a href="../projects.html">here</a>.
       </p>
 
@@ -51,13 +52,12 @@
         Class loaders are responsible for loading class files from the
         file system or other resources and passing the byte code to the
         Virtual Machine. A custom <tt>ClassLoader</tt> object may be used
-        to intercept the standard procedure of loading a class, i.e.m  the
-        system class loader, and perform some transformations before
-        actually passing the byte code to the JVM.
+        to intercept the standard class-loading procedure and transform
+        the byte code before passing it to the JVM.
       </p>
 
       <p>
-        A  possible  scenario is  described  in <a href="#Figure 7">figure
+        A  possible  scenario is  described  in <a href="#Figure-7">figure
         7</a>:
         During run-time the Virtual Machine requests a custom class loader
         to load a given class. But before the JVM actually sees the byte
@@ -68,8 +68,8 @@
       </p>
 
       <p align="center">
-        <a name="Figure 7">
-          <img src="../images/classloader.gif"/>
+        <a id="Figure-7">
+          <img src="../images/classloader.gif" alt="Figure 7"/>
           <br/>
           Figure 7: Class loaders
         </a>
@@ -81,16 +81,15 @@
         This concept enables developers to use <em>load-time
         reflection</em> to implement their ideas as opposed to the static
         reflection supported by the <a
-              href="http://java.sun.com/j2se/1.3/docs/guide/reflection/index.html">Java
+              href="https://docs.oracle.com/javase/8/docs/technotes/guides/reflection/index.html">Java
         Reflection API</a>. Load-time transformations supply the user with
-        a new level of abstraction. He is not strictly tied to the static
+        a new level of abstraction. They are not strictly tied to the static
         constraints of the original authors of the classes but may
         customize the applications with third-party code in order to
         benefit from new features. Such transformations may be executed on
         demand and neither interfere with other users, nor alter the
         original byte code. In fact, class loaders may even create classes
-        <em>ad hoc</em> without loading a file at all.<br/> <font
-              face="helvetica,arial">BCEL</font> has already builtin support for
+        <em>ad hoc</em> without loading a file at all.<br/> BCEL has already builtin support for
         dynamically creating classes, an example is the ProxyCreator class.
       </p>
 
@@ -99,8 +98,7 @@
     <subsection name="Example: Poor Man's Genericity">
       <p>
         The former "Poor Man's Genericity" project that extended Java with
-        parameterized classes, for example, used <font
-              face="helvetica,arial">BCEL</font> in two places to generate
+        parameterized classes, for example, used BCEL in two places to generate
         instances of parameterized classes: During compile-time (with the
         standard <tt>javac</tt> with some slightly changed classes) and at
         run-time using a custom class loader. The compiler puts some
@@ -109,20 +107,18 @@
         performs some transformations on the loaded class and passes them
         to the VM. The following algorithm illustrates how the load method
         of the class loader fulfills the request for a parameterized
-        class, e.g., <tt>Stack&lt;String&gt;</tt>
+        class, for example, <tt>Stack&lt;String&gt;</tt>.
       </p>
 
-      <p>
         <ol type="1">
           <li> Search for class <tt>Stack</tt>, load it, and check for a
             certain class attribute containing additional type
-            information. I.e.  the attribute defines the "real" name of the
-            class, i.e., <tt>Stack&lt;A&gt;</tt>.</li>
+            information. That is, the attribute defines the "real" name of the
+            class, that is, <tt>Stack&lt;A&gt;</tt>.</li>
 
           <li>Replace all occurrences and references to the formal type
             <tt>A</tt> with references to the actual type <tt>String</tt>. For
             example the method
-          </li>
 
           <source>
             void push(A obj) { ... }
@@ -135,10 +131,10 @@
           <source>
             void push(String obj) { ... }
           </source>
+          </li>
 
           <li> Return the resulting class to the Virtual Machine.</li>
         </ol>
-      </p>
 
     </subsection>
     </section>

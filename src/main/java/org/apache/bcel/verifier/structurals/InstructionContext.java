@@ -1,106 +1,111 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.apache.bcel.verifier.structurals;
-
 
 import java.util.ArrayList;
 
 import org.apache.bcel.generic.InstructionHandle;
 
 /**
- * An InstructionContext offers convenient access
- * to information like control flow successors and
- * such.
- *
+ * An InstructionContext offers convenient access to information like control flow successors and such.
  */
-public interface InstructionContext{
+public interface InstructionContext {
 
     /**
-     * The getTag and setTag methods may be used for
-     * temporary flagging, such as graph colouring.
-     * Nothing in the InstructionContext object depends
-     * on the value of the tag. JustIce does not use it.
+     * This method symbolically executes the Instruction held in the InstructionContext. It "merges in" the incoming
+     * execution frame situation (see The Java Virtual Machine Specification, 2nd edition, page 146). By so doing, the
+     * outgoing execution frame situation is calculated.
      *
-     * @see #setTag(int tag)
-     */
-    int getTag();
-
-    /**
-     * The getTag and setTag methods may be used for
-     * temporary flagging, such as graph colouring.
-     * Nothing in the InstructionContext object depends
-     * on the value of the tag. JustIce does not use it.
+     * This method is JustIce-specific and is usually of no sense for users of the ControlFlowGraph class. They should use
+     * getInstruction().accept(Visitor), possibly in conjunction with the ExecutionVisitor.
      *
-     * @see #getTag()
-     */
-    void setTag(int tag);
-
-    /**
-     * This method symbolically executes the Instruction
-     * held in the InstructionContext.
-     * It "merges in" the incoming execution frame situation
-     * (see The Java Virtual Machine Specification, 2nd
-     * edition, page 146).
-     * By so doing, the outgoing execution frame situation
-     * is calculated.
-     *
-     * This method is JustIce-specific and is usually of
-     * no sense for users of the ControlFlowGraph class.
-     * They should use getInstruction().accept(Visitor),
-     * possibly in conjunction with the ExecutionVisitor.
-     *
-     *
+     * @param inFrame The incoming frame.
+     * @param executionPredecessors The execution predecessors.
+     * @param icv The instruction constraint visitor.
+     * @param ev The execution visitor.
      * @see ControlFlowGraph
      * @see ExecutionVisitor
      * @see #getOutFrame(ArrayList)
-     * @return true -  if and only if the "outgoing" frame situation
-     * changed from the one before execute()ing.
+     * @return true - if and only if the "outgoing" frame situation changed from the one before execute()ing.
      */
-    boolean execute(Frame inFrame, ArrayList<InstructionContext> executionPredecessors,
-            InstConstraintVisitor icv, ExecutionVisitor ev);
+    boolean execute(Frame inFrame, ArrayList<InstructionContext> executionPredecessors, InstConstraintVisitor icv, ExecutionVisitor ev);
 
+    /**
+     * Gets the exception handlers that protect this instruction. They are special control flow successors.
+     *
+     * @return The exception handlers.
+     */
+    ExceptionHandler[] getExceptionHandlers();
+
+    /**
+     * Gets the incoming frame.
+     *
+     * @return The incoming frame.
+     */
     Frame getInFrame();
 
     /**
-     * This method returns the outgoing execution frame situation;
-     * therefore <B>it has to be calculated by execute(Frame, ArrayList)
-     * first.</B>
-     *
-     * @see #execute(Frame, ArrayList, InstConstraintVisitor, ExecutionVisitor)
-     */
-    Frame getOutFrame(ArrayList<InstructionContext> executionPredecessors);
-
-    /**
-     * Returns the InstructionHandle this InstructionContext is wrapped around.
+     * Gets the InstructionHandle this InstructionContext is wrapped around.
      *
      * @return The InstructionHandle this InstructionContext is wrapped around.
      */
     InstructionHandle getInstruction();
 
     /**
-     * Returns the usual control flow successors.
+     * Gets the outgoing execution frame situation; therefore <B>it has to be calculated by execute(Frame,
+     * ArrayList) first.</B>
+     *
+     * @param executionPredecessors The execution predecessors.
+     * @return The outgoing frame.
+     * @see #execute(Frame, ArrayList, InstConstraintVisitor, ExecutionVisitor)
+     */
+    Frame getOutFrame(ArrayList<InstructionContext> executionPredecessors);
+
+    /**
+     * Gets the usual control flow successors.
+     *
+     * @return The successors.
      * @see #getExceptionHandlers()
      */
     InstructionContext[] getSuccessors();
 
     /**
-     * Returns the exception handlers that protect this instruction.
-     * They are special control flow successors.
+     * Gets the tag value used for temporary flagging.
+     * <p>
+     * The getTag and setTag methods may be used for temporary flagging, such as graph coloring. Nothing in the
+     * InstructionContext object depends on the value of the tag. JustIce does not use it.
+     * </p>
+     *
+     * @return The tag value.
+     * @see #setTag(int tag)
      */
-    ExceptionHandler[] getExceptionHandlers();
+    int getTag();
+
+    /**
+     * Sets the tag value used for temporary flagging.
+     * <p>
+     * The getTag and setTag methods may be used for temporary flagging, such as graph coloring. Nothing in the
+     * InstructionContext object depends on the value of the tag. JustIce does not use it.
+     * </p>
+     *
+     * @param tag The tag value.
+     * @see #getTag()
+     */
+    void setTag(int tag);
 }

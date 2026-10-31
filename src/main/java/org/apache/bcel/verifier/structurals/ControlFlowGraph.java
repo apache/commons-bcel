@@ -1,24 +1,25 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.apache.bcel.verifier.structurals;
 
-
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,19 +39,16 @@ import org.apache.bcel.verifier.exc.StructuralCodeConstraintException;
 
 /**
  * This class represents a control flow graph of a method.
- *
  */
-public class ControlFlowGraph{
+public class ControlFlowGraph {
 
     /**
-     * Objects of this class represent a node in a ControlFlowGraph.
-     * These nodes are instructions, not basic blocks.
+     * Objects of this class represent a node in a ControlFlowGraph. These nodes are instructions, not basic blocks.
      */
-    private class InstructionContextImpl implements InstructionContext{
+    private final class InstructionContextImpl implements InstructionContext {
 
         /**
-         * The TAG field is here for external temporary flagging, such
-         * as graph colouring.
+         * The TAG field is here for external temporary flagging, such as graph coloring.
          *
          * @see #getTag()
          * @see #setTag(int)
@@ -65,7 +63,7 @@ public class ControlFlowGraph{
         /**
          * The 'incoming' execution Frames.
          */
-        private final Map<InstructionContext, Frame> inFrames;    // key: the last-executed JSR
+        private final Map<InstructionContext, Frame> inFrames; // key: the last-executed JSR
 
         /**
          * The 'outgoing' execution Frames.
@@ -73,256 +71,28 @@ public class ControlFlowGraph{
         private final Map<InstructionContext, Frame> outFrames; // key: the last-executed JSR
 
         /**
-         * The 'execution predecessors' - a list of type InstructionContext
-         * of those instances that have been execute()d before in that order.
+         * The 'execution predecessors' - a list of type InstructionContext of those instances that have been execute()d before
+         * in that order.
          */
-        private List<InstructionContext> executionPredecessors = null; // Type: InstructionContext
+        private List<InstructionContext> executionPredecessors; // Type: InstructionContext
 
         /**
-         * Creates an InstructionHandleImpl object from an InstructionHandle.
-         * Creation of one per InstructionHandle suffices. Don't create more.
+         * Creates an InstructionHandleImpl object from an InstructionHandle. Creation of one per InstructionHandle suffices.
+         * Don't create more.
          */
-        public InstructionContextImpl(final InstructionHandle inst) {
+        InstructionContextImpl(final InstructionHandle inst) {
             if (inst == null) {
                 throw new AssertionViolatedException("Cannot instantiate InstructionContextImpl from NULL.");
             }
-
             instruction = inst;
             inFrames = new HashMap<>();
             outFrames = new HashMap<>();
         }
 
-        /* Satisfies InstructionContext.getTag(). */
-        @Override
-        public int getTag() {
-            return TAG;
-        }
-
-        /* Satisfies InstructionContext.setTag(int). */
-        @Override
-        public void setTag(final int tag) { // part of InstructionContext interface
-            TAG = tag;
-        }
-
         /**
-         * Returns the exception handlers of this instruction.
-         */
-        @Override
-        public ExceptionHandler[] getExceptionHandlers() {
-            return exceptionhandlers.getExceptionHandlers(getInstruction());
-        }
-
-        /**
-         * Returns a clone of the "outgoing" frame situation with respect to the given ExecutionChain.
-         */
-        @Override
-        public Frame getOutFrame(final ArrayList<InstructionContext> execChain) {
-            executionPredecessors = execChain;
-
-            Frame org;
-
-            final InstructionContext jsr = lastExecutionJSR();
-
-            org = outFrames.get(jsr);
-
-            if (org == null) {
-                throw new AssertionViolatedException(
-                    "outFrame not set! This:\n"+this+"\nExecutionChain: "+getExecutionChain()+"\nOutFrames: '"+outFrames+"'.");
-            }
-            return org.getClone();
-        }
-
-    @Override
-    public Frame getInFrame() {
-          Frame org;
-
-            final InstructionContext jsr = lastExecutionJSR();
-
-            org = inFrames.get(jsr);
-
-            if (org == null) {
-                throw new AssertionViolatedException("inFrame not set! This:\n"+this+"\nInFrames: '"+inFrames+"'.");
-      }
-      return org.getClone();
-    }
-
-        /**
-         * "Merges in" (vmspec2, page 146) the "incoming" frame situation;
-         * executes the instructions symbolically
-         * and therefore calculates the "outgoing" frame situation.
-         * Returns: True iff the "incoming" frame situation changed after
-         * merging with "inFrame".
-         * The execPreds ArrayList must contain the InstructionContext
-         * objects executed so far in the correct order. This is just
-         * one execution path [out of many]. This is needed to correctly
-         * "merge" in the special case of a RET's successor.
-         * <B>The InstConstraintVisitor and ExecutionVisitor instances
-         * must be set up correctly.</B>
-         * @return true - if and only if the "outgoing" frame situation
-         * changed from the one before execute()ing.
-         */
-        @Override
-        public boolean execute(final Frame inFrame, final ArrayList<InstructionContext> execPreds, final InstConstraintVisitor icv, final ExecutionVisitor ev) {
-
-            @SuppressWarnings("unchecked") // OK because execPreds is compatible type
-            final List<InstructionContext> clone = (List<InstructionContext>) execPreds.clone();
-            executionPredecessors = clone;
-
-            //sanity check
-            if ( (lastExecutionJSR() == null) && (subroutines.subroutineOf(getInstruction()) != subroutines.getTopLevel() ) ) {
-                throw new AssertionViolatedException("Huh?! Am I '"+this+"' part of a subroutine or not?");
-            }
-            if ( (lastExecutionJSR() != null) && (subroutines.subroutineOf(getInstruction()) == subroutines.getTopLevel() ) ) {
-                throw new AssertionViolatedException("Huh?! Am I '"+this+"' part of a subroutine or not?");
-            }
-
-            Frame inF = inFrames.get(lastExecutionJSR());
-            if (inF == null) {// no incoming frame was set, so set it.
-                inFrames.put(lastExecutionJSR(), inFrame);
-                inF = inFrame;
-            }
-            else{// if there was an "old" inFrame
-                if (inF.equals(inFrame)) { //shortcut: no need to merge equal frames.
-                    return false;
-                }
-                if (! mergeInFrames(inFrame)) {
-                    return false;
-                }
-            }
-
-            // Now we're sure the inFrame has changed!
-
-            // new inFrame is already merged in, see above.
-            final Frame workingFrame = inF.getClone();
-
-            try{
-                // This verifies the InstructionConstraint for the current
-                // instruction, but does not modify the workingFrame object.
-//InstConstraintVisitor icv = InstConstraintVisitor.getInstance(VerifierFactory.getVerifier(method_gen.getClassName()));
-                icv.setFrame(workingFrame);
-                getInstruction().accept(icv);
-            }
-            catch(final StructuralCodeConstraintException ce) {
-                ce.extendMessage("","\nInstructionHandle: "+getInstruction()+"\n");
-                ce.extendMessage("","\nExecution Frame:\n"+workingFrame);
-                extendMessageWithFlow(ce);
-                throw ce;
-            }
-
-            // This executes the Instruction.
-            // Therefore the workingFrame object is modified.
-//ExecutionVisitor ev = ExecutionVisitor.getInstance(VerifierFactory.getVerifier(method_gen.getClassName()));
-            ev.setFrame(workingFrame);
-            getInstruction().accept(ev);
-            //getInstruction().accept(ExecutionVisitor.withFrame(workingFrame));
-            outFrames.put(lastExecutionJSR(), workingFrame);
-
-            return true;    // new inFrame was different from old inFrame so merging them
-                                        // yielded a different this.inFrame.
-        }
-
-        /**
-         * Returns a simple String representation of this InstructionContext.
-         */
-        @Override
-        public String toString() {
-        //TODO: Put information in the brackets, e.g.
-        //      Is this an ExceptionHandler? Is this a RET? Is this the start of
-        //      a subroutine?
-            final String ret = getInstruction().toString(false)+"\t[InstructionContext]";
-            return ret;
-        }
-
-        /**
-         * Does the actual merging (vmspec2, page 146).
-         * Returns true IFF this.inFrame was changed in course of merging with inFrame.
-         */
-        private boolean mergeInFrames(final Frame inFrame) {
-            // TODO: Can be performance-improved.
-            final Frame inF = inFrames.get(lastExecutionJSR());
-            final OperandStack oldstack = inF.getStack().getClone();
-            final LocalVariables oldlocals = inF.getLocals().getClone();
-            try {
-                inF.getStack().merge(inFrame.getStack());
-                inF.getLocals().merge(inFrame.getLocals());
-            } catch (final StructuralCodeConstraintException sce) {
-                extendMessageWithFlow(sce);
-                throw sce;
-            }
-            return !(oldstack.equals(inF.getStack()) && oldlocals.equals(inF.getLocals()));
-        }
-
-        /**
-         * Returns the control flow execution chain. This is built
-         * while execute(Frame, ArrayList)-ing the code represented
-         * by the surrounding ControlFlowGraph.
-         */
-        private String getExecutionChain() {
-            String s = this.toString();
-            for (int i=executionPredecessors.size()-1; i>=0; i--) {
-                s = executionPredecessors.get(i)+"\n" + s;
-            }
-            return s;
-        }
-
-
-        /**
-         * Extends the StructuralCodeConstraintException ("e") object with an at-the-end-extended message.
-         * This extended message will then reflect the execution flow needed to get to the constraint
-         * violation that triggered the throwing of the "e" object.
-         */
-        private void extendMessageWithFlow(final StructuralCodeConstraintException e) {
-            final String s = "Execution flow:\n";
-            e.extendMessage("", s+getExecutionChain());
-        }
-
-        /*
-         * Fulfils the contract of InstructionContext.getInstruction().
-         */
-        @Override
-        public InstructionHandle getInstruction() {
-            return instruction;
-        }
-
-        /**
-         * Returns the InstructionContextImpl with an JSR/JSR_W
-         * that was last in the ExecutionChain, without
-         * a corresponding RET, i.e.
-         * we were called by this one.
-         * Returns null if we were called from the top level.
-         */
-        private InstructionContextImpl lastExecutionJSR() {
-
-            final int size = executionPredecessors.size();
-            int retcount = 0;
-
-            for (int i=size-1; i>=0; i--) {
-                final InstructionContextImpl current = (InstructionContextImpl) (executionPredecessors.get(i));
-                final Instruction currentlast = current.getInstruction().getInstruction();
-                if (currentlast instanceof RET) {
-                    retcount++;
-                }
-                if (currentlast instanceof JsrInstruction) {
-                    retcount--;
-                    if (retcount == -1) {
-                        return current;
-                    }
-                }
-            }
-            return null;
-        }
-
-        /* Satisfies InstructionContext.getSuccessors(). */
-        @Override
-        public InstructionContext[] getSuccessors() {
-            return contextsOf(_getSuccessors());
-        }
-
-        /**
-         * A utility method that calculates the successors of a given InstructionHandle
-         * That means, a RET does have successors as defined here.
-         * A JsrInstruction has its target as its successor
-         * (opposed to its physical successor) as defined here.
+         * A utility method that calculates the successors of a given InstructionHandle That means, a RET does have successors
+         * as defined here. A JsrInstruction has its target as its successor (opposed to its physical successor) as defined
+         * here.
          */
 // TODO: implement caching!
         private InstructionHandle[] _getSuccessors() {
@@ -332,9 +102,9 @@ public class ControlFlowGraph{
 
             if (inst instanceof RET) {
                 final Subroutine s = subroutines.subroutineOf(getInstruction());
-                if (s==null) { //return empty;
+                if (s == null) { // return empty;
                     // RET in dead code. "empty" would be the correct answer, but we know something about the surrounding project...
-                    throw new AssertionViolatedException("Asking for successors of a RET in dead code?!");
+                    throw new AssertionViolatedException("Asking for successors of a RET in dead code?");
                 }
 
 //TODO: remove. Only JustIce must not use it, but foreign users of the ControlFlowGraph
@@ -343,21 +113,15 @@ public class ControlFlowGraph{
 
                 final InstructionHandle[] jsrs = s.getEnteringJsrInstructions();
                 final InstructionHandle[] ret = new InstructionHandle[jsrs.length];
-                for (int i=0; i<jsrs.length; i++) {
-                    ret[i] = jsrs[i].getNext();
-                }
+                Arrays.setAll(ret, i -> jsrs[i].getNext());
                 return ret;
             }
 
             // Terminates method normally.
-            if (inst instanceof ReturnInstruction) {
-                return InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY;
-            }
-
             // Terminates method abnormally, because JustIce mandates
             // subroutines not to be protected by exception handlers.
-            if (inst instanceof ATHROW) {
-                return InstructionHandle.EMPTY_INSTRUCTION_HANDLE_ARRAY;
+            if (inst instanceof ReturnInstruction || inst instanceof ATHROW) {
+                return InstructionHandle.EMPTY_ARRAY;
             }
 
             // See method comment.
@@ -376,7 +140,7 @@ public class ControlFlowGraph{
                     // BCEL's getTargets() returns only the non-default targets,
                     // thanks to Eli Tilevich for reporting.
                     final InstructionHandle[] matchTargets = ((Select) inst).getTargets();
-                    final InstructionHandle[] ret = new InstructionHandle[matchTargets.length+1];
+                    final InstructionHandle[] ret = new InstructionHandle[matchTargets.length + 1];
                     ret[0] = ((Select) inst).getTarget();
                     System.arraycopy(matchTargets, 0, ret, 1, matchTargets.length);
                     return ret;
@@ -392,10 +156,201 @@ public class ControlFlowGraph{
             return single;
         }
 
+        /**
+         * "Merges in" (vmspec2, page 146) the "incoming" frame situation; executes the instructions symbolically and therefore
+         * calculates the "outgoing" frame situation. Returns: True iff the "incoming" frame situation changed after merging
+         * with "inFrame". The execPreds ArrayList must contain the InstructionContext objects executed so far in the correct
+         * order. This is just one execution path [out of many]. This is needed to correctly "merge" in the special case of a
+         * RET's successor. <strong>The InstConstraintVisitor and ExecutionVisitor instances must be set up correctly.</strong>
+         *
+         * @return true - if and only if the "outgoing" frame situation changed from the one before execute()ing.
+         */
+        @Override
+        public boolean execute(final Frame inFrame, final ArrayList<InstructionContext> execPreds, final InstConstraintVisitor icv, final ExecutionVisitor ev) {
+
+            @SuppressWarnings("unchecked") // OK because execPreds is compatible type
+            final List<InstructionContext> clone = (List<InstructionContext>) execPreds.clone();
+            executionPredecessors = clone;
+
+            // sanity check
+            if (lastExecutionJSR() == null && subroutines.subroutineOf(getInstruction()) != subroutines.getTopLevel()
+                || lastExecutionJSR() != null && subroutines.subroutineOf(getInstruction()) == subroutines.getTopLevel()) {
+                throw new AssertionViolatedException("Huh?! Am I '" + this + "' part of a subroutine or not?");
+            }
+
+            Frame inF = inFrames.get(lastExecutionJSR());
+            if (inF == null) { // no incoming frame was set, so set it.
+                inFrames.put(lastExecutionJSR(), inFrame);
+                inF = inFrame;
+            } else if (inF.equals(inFrame) || !mergeInFrames(inFrame)) { // if there was an "old" inFrame
+                return false;
+            }
+
+            // Now we're sure the inFrame has changed!
+
+            // new inFrame is already merged in, see above.
+            final Frame workingFrame = inF.getClone();
+
+            try {
+                // This verifies the InstructionConstraint for the current
+                // instruction, but does not modify the workingFrame object.
+//InstConstraintVisitor icv = InstConstraintVisitor.getInstance(VerifierFactory.getVerifier(method_gen.getClassName()));
+                icv.setFrame(workingFrame);
+                getInstruction().accept(icv);
+            } catch (final StructuralCodeConstraintException ce) {
+                ce.extendMessage("", "\nInstructionHandle: " + getInstruction() + "\n");
+                ce.extendMessage("", "\nExecution Frame:\n" + workingFrame);
+                extendMessageWithFlow(ce);
+                throw ce;
+            }
+
+            // This executes the Instruction.
+            // Therefore the workingFrame object is modified.
+//ExecutionVisitor ev = ExecutionVisitor.getInstance(VerifierFactory.getVerifier(method_gen.getClassName()));
+            ev.setFrame(workingFrame);
+            getInstruction().accept(ev);
+            // getInstruction().accept(ExecutionVisitor.withFrame(workingFrame));
+            outFrames.put(lastExecutionJSR(), workingFrame);
+
+            return true; // new inFrame was different from old inFrame so merging them
+                         // yielded a different this.inFrame.
+        }
+
+        /**
+         * Extends the StructuralCodeConstraintException ("e") object with an at-the-end-extended message. This extended message
+         * will then reflect the execution flow needed to get to the constraint violation that triggered the throwing of the "e"
+         * object.
+         */
+        private void extendMessageWithFlow(final StructuralCodeConstraintException e) {
+            final String s = "Execution flow:\n";
+            e.extendMessage("", s + getExecutionChain());
+        }
+
+        /**
+         * Gets the exception handlers of this instruction.
+         */
+        @Override
+        public ExceptionHandler[] getExceptionHandlers() {
+            return exceptionhandlers.getExceptionHandlers(getInstruction());
+        }
+
+        /**
+         * Gets the control flow execution chain. This is built while execute(Frame, ArrayList)-ing the code represented by
+         * the surrounding ControlFlowGraph.
+         */
+        private String getExecutionChain() {
+            final StringBuilder s = new StringBuilder(toString());
+            for (int i = executionPredecessors.size() - 1; i >= 0; i--) {
+                s.insert(0, executionPredecessors.get(i) + "\n");
+            }
+            return s.toString();
+        }
+
+        @Override
+        public Frame getInFrame() {
+            final InstructionContext jsr = lastExecutionJSR();
+            final Frame org = inFrames.get(jsr);
+            if (org == null) {
+                throw new AssertionViolatedException("inFrame not set! This:\n" + this + "\nInFrames: '" + inFrames + "'.");
+            }
+            return org.getClone();
+        }
+
+        @Override
+        public InstructionHandle getInstruction() {
+            return instruction;
+        }
+
+        /**
+         * Gets a clone of the "outgoing" frame situation with respect to the given ExecutionChain.
+         */
+        @Override
+        public Frame getOutFrame(final ArrayList<InstructionContext> execChain) {
+            executionPredecessors = execChain;
+            final InstructionContext jsr = lastExecutionJSR();
+            final Frame org = outFrames.get(jsr);
+            if (org == null) {
+                throw new AssertionViolatedException(
+                        "outFrame not set! This:\n" + this + "\nExecutionChain: " + getExecutionChain() + "\nOutFrames: '" + outFrames + "'.");
+            }
+            return org.getClone();
+        }
+
+        @Override
+        public InstructionContext[] getSuccessors() {
+            return contextsOf(_getSuccessors());
+        }
+
+        @Override
+        public int getTag() {
+            return TAG;
+        }
+
+        /**
+         * Returns the InstructionContextImpl with an JSR/JSR_W that was last in the ExecutionChain, without a corresponding
+         * RET, for example we were called by this one. Returns null if we were called from the top level.
+         */
+        private InstructionContextImpl lastExecutionJSR() {
+
+            final int size = executionPredecessors.size();
+            int retcount = 0;
+
+            for (int i = size - 1; i >= 0; i--) {
+                final InstructionContextImpl current = (InstructionContextImpl) executionPredecessors.get(i);
+                final Instruction currentlast = current.getInstruction().getInstruction();
+                if (currentlast instanceof RET) {
+                    retcount++;
+                }
+                if (currentlast instanceof JsrInstruction) {
+                    retcount--;
+                    if (retcount == -1) {
+                        return current;
+                    }
+                }
+            }
+            return null;
+        }
+
+        /**
+         * Does the actual merging (vmspec2, page 146). Returns true IFF this.inFrame was changed in course of merging with
+         * inFrame.
+         */
+        private boolean mergeInFrames(final Frame inFrame) {
+            // TODO: Can be performance-improved.
+            final Frame inF = inFrames.get(lastExecutionJSR());
+            final OperandStack oldstack = inF.getStack().getClone();
+            final LocalVariables oldlocals = inF.getLocals().getClone();
+            try {
+                inF.getStack().merge(inFrame.getStack());
+                inF.getLocals().merge(inFrame.getLocals());
+            } catch (final StructuralCodeConstraintException sce) {
+                extendMessageWithFlow(sce);
+                throw sce;
+            }
+            return !(oldstack.equals(inF.getStack()) && oldlocals.equals(inF.getLocals()));
+        }
+
+        /* Satisfies InstructionContext.setTag(int). */
+        @Override
+        public void setTag(final int tag) { // part of InstructionContext interface
+            TAG = tag;
+        }
+
+        /**
+         * Returns a simple String representation of this InstructionContext.
+         */
+        @Override
+        public String toString() {
+            // TODO: Put information in the brackets, for example
+            // Is this an ExceptionHandler? Is this a RET? Is this the start of
+            // a subroutine?
+            return getInstruction().toString(false) + "\t[InstructionContext]";
+        }
+
     } // End Inner InstructionContextImpl Class.
 
-    ///** The MethodGen object we're working on. */
-    //private final MethodGen method_gen;
+    /// ** The MethodGen object we're working on. */
+    // private final MethodGen method_gen;
 
     /** The Subroutines object for the method whose control flow is represented by this ControlFlowGraph. */
     private final Subroutines subroutines;
@@ -408,57 +363,63 @@ public class ControlFlowGraph{
 
     /**
      * A Control Flow Graph; with additional JustIce checks
-     * @param  method_gen the method generator instance
+     *
+     * @param methodGen The method generator instance.
      */
-    public ControlFlowGraph(final MethodGen method_gen) {
-        this(method_gen, true);
+    public ControlFlowGraph(final MethodGen methodGen) {
+        this(methodGen, true);
     }
 
     /**
      * A Control Flow Graph.
-     * @param  method_gen the method generator instance
-     * @param enableJustIceCheck if true, additional JustIce checks are performed
+     *
+     * @param methodGen The method generator instance.
+     * @param enableJustIceCheck if true, additional JustIce checks are performed.
      * @since 6.0
      */
-    public ControlFlowGraph(final MethodGen method_gen, final boolean enableJustIceCheck) {
-        subroutines = new Subroutines(method_gen, enableJustIceCheck);
-        exceptionhandlers = new ExceptionHandlers(method_gen);
+    public ControlFlowGraph(final MethodGen methodGen, final boolean enableJustIceCheck) {
+        subroutines = new Subroutines(methodGen, enableJustIceCheck);
+        exceptionhandlers = new ExceptionHandlers(methodGen);
 
-        final InstructionHandle[] instructionhandles = method_gen.getInstructionList().getInstructionHandles();
+        final InstructionHandle[] instructionhandles = methodGen.getInstructionList().getInstructionHandles();
         for (final InstructionHandle instructionhandle : instructionhandles) {
             instructionContexts.put(instructionhandle, new InstructionContextImpl(instructionhandle));
         }
 
-        //this.method_gen = method_gen;
+        // this.method_gen = method_gen;
     }
 
     /**
      * Returns the InstructionContext of a given instruction.
+     *
+     * @param inst The instruction handle.
+     * @return The InstructionContext of the given instruction.
      */
     public InstructionContext contextOf(final InstructionHandle inst) {
         final InstructionContext ic = instructionContexts.get(inst);
         if (ic == null) {
-            throw new AssertionViolatedException("InstructionContext requested for an InstructionHandle that's not known!");
+            throw new AssertionViolatedException("InstructionContext requested for an InstructionHandle that's not known.");
         }
         return ic;
     }
 
     /**
-     * Returns the InstructionContext[] of a given InstructionHandle[],
-     * in a naturally ordered manner.
+     * Returns the InstructionContext[] of a given InstructionHandle[], in a naturally ordered manner.
+     *
+     * @param insts The instruction handles.
+     * @return The InstructionContext array of the given instruction handles.
      */
     public InstructionContext[] contextsOf(final InstructionHandle[] insts) {
         final InstructionContext[] ret = new InstructionContext[insts.length];
-        for (int i=0; i<insts.length; i++) {
-            ret[i] = contextOf(insts[i]);
-        }
+        Arrays.setAll(ret, i -> contextOf(insts[i]));
         return ret;
     }
 
     /**
-     * Returns an InstructionContext[] with all the InstructionContext instances
-     * for the method whose control flow is represented by this ControlFlowGraph
-     * <B>(NOT ORDERED!)</B>.
+     * Gets an InstructionContext[] with all the InstructionContext instances for the method whose control flow is
+     * represented by this ControlFlowGraph <strong>(NOT ORDERED!)</strong>.
+     *
+     * @return array of InstructionContext instances.
      */
     public InstructionContext[] getInstructionContexts() {
         final InstructionContext[] ret = new InstructionContext[instructionContexts.size()];
@@ -466,8 +427,10 @@ public class ControlFlowGraph{
     }
 
     /**
-     * Returns true, if and only if the said instruction is not reachable; that means,
-     * if it is not part of this ControlFlowGraph.
+     * Tests whether the instruction is unreachable, that is, whether it is absent from this ControlFlowGraph.
+     *
+     * @param i The instruction handle.
+     * @return true if the instruction is not reachable, false otherwise.
      */
     public boolean isDead(final InstructionHandle i) {
         return subroutines.subroutineOf(i) == null;

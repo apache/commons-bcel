@@ -1,19 +1,20 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.apache.bcel.classfile;
 
@@ -24,85 +25,94 @@ import java.io.IOException;
 import org.apache.bcel.Const;
 
 /**
- * This class is derived from the abstract {@link Constant}
- * and represents a reference to an int object.
+ * This class is derived from the abstract {@link Constant} and represents a reference to an int object.
  *
- * @see     Constant
+ * @see Constant
  */
 public final class ConstantInteger extends Constant implements ConstantObject {
 
     private int bytes;
 
+    /**
+     * Initialize from another object.
+     *
+     * @param c Source to copy.
+     */
+    public ConstantInteger(final ConstantInteger c) {
+        this(c.getBytes());
+    }
 
     /**
-     * @param bytes Data
+     * Initialize instance from file data.
+     *
+     * @param file Input stream.
+     * @throws IOException Thrown if an I/O error occurs.
+     */
+    ConstantInteger(final DataInput file) throws IOException {
+        this(file.readInt());
+    }
+
+    /**
+     * Constructs a ConstantInteger.
+     *
+     * @param bytes Data.
      */
     public ConstantInteger(final int bytes) {
         super(Const.CONSTANT_Integer);
         this.bytes = bytes;
     }
 
-
     /**
-     * Initialize from another object.
-     */
-    public ConstantInteger(final ConstantInteger c) {
-        this(c.getBytes());
-    }
-
-
-    /**
-     * Initialize instance from file data.
+     * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
+     * That is, the hierarchy of methods, fields, attributes, and other elements forms a tree of objects.
      *
-     * @param file Input stream
-     * @throws IOException
-     */
-    ConstantInteger(final DataInput file) throws IOException {
-        this(file.readInt());
-    }
-
-
-    /**
-     * Called by objects that are traversing the nodes of the tree implicitely
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
-     *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitConstantInteger(this);
     }
 
-
     /**
-     * Dump constant integer to file stream in binary format.
+     * Dumps constant integer to file stream in binary format.
      *
-     * @param file Output file stream
-     * @throws IOException
+     * @param file Output file stream.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     @Override
-    public void dump( final DataOutputStream file ) throws IOException {
+    public void dump(final DataOutputStream file) throws IOException {
         file.writeByte(super.getTag());
         file.writeInt(bytes);
     }
 
-
     /**
-     * @return data, i.e., 4 bytes.
+     * Gets the data.
+     *
+     * @return data, that is, 4 bytes.
      */
     public int getBytes() {
         return bytes;
     }
 
-
     /**
-     * @param bytes the raw bytes that represent this integer
+     * Gets the Integer object.
+     *
+     * @param cp The constant pool (not used).
+     * @return Integer object.
      */
-    public void setBytes( final int bytes ) {
-        this.bytes = bytes;
+    @Override
+    public Object getConstantValue(final ConstantPool cp) {
+        return Integer.valueOf(bytes);
     }
 
+    /**
+     * Sets the raw bytes that represent the integer value.
+     *
+     * @param bytes The raw bytes that represent the integer value.
+     */
+    public void setBytes(final int bytes) {
+        this.bytes = bytes;
+    }
 
     /**
      * @return String representation.
@@ -110,13 +120,5 @@ public final class ConstantInteger extends Constant implements ConstantObject {
     @Override
     public String toString() {
         return super.toString() + "(bytes = " + bytes + ")";
-    }
-
-
-    /** @return Integer object
-     */
-    @Override
-    public Object getConstantValue( final ConstantPool cp ) {
-        return Integer.valueOf(bytes);
     }
 }

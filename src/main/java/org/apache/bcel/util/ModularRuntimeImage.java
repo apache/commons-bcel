@@ -1,19 +1,20 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.apache.bcel.util;
 
@@ -31,9 +32,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.io.IOUtils;
 
 /**
  * Wraps a Java 9 JEP 220 modular runtime image. Requires the JRT NIO file system.
@@ -50,28 +52,23 @@ public class ModularRuntimeImage implements Closeable {
 
     /**
      * Constructs a default instance.
-     *
-     * @throws IOException
-     *             an I/O error occurs accessing the file system
      */
-    public ModularRuntimeImage() throws IOException {
+    @SuppressWarnings("resource") // See #close()
+    public ModularRuntimeImage() {
         this(null, FileSystems.getFileSystem(URI.create("jrt:/")));
     }
 
     /**
      * Constructs an instance using the JRT file system implementation from a specific Java Home.
      *
-     * @param javaHome
-     *            Path to a Java 9 or greater home.
-     *
-     * @throws IOException
-     *             an I/O error occurs accessing the file system
+     * @param javaHome Path to a Java 9 or greater home.
+     * @throws IOException Thrown if an I/O error occurs while accessing the file system.
      */
     public ModularRuntimeImage(final String javaHome) throws IOException {
         final Map<String, ?> emptyMap = Collections.emptyMap();
         final Path jrePath = Paths.get(javaHome);
         final Path jrtFsPath = jrePath.resolve("lib").resolve("jrt-fs.jar");
-        this.classLoader = new URLClassLoader(new URL[] {jrtFsPath.toUri().toURL() });
+        this.classLoader = URLClassLoader.newInstance(new URL[] {jrtFsPath.toUri().toURL()});
         this.fileSystem = FileSystems.newFileSystem(URI.create("jrt:/"), emptyMap, classLoader);
     }
 
@@ -82,30 +79,36 @@ public class ModularRuntimeImage implements Closeable {
 
     @Override
     public void close() throws IOException {
-        if (classLoader != null) {
-            classLoader.close();
-        }
+        IOUtils.close(classLoader);
         if (fileSystem != null) {
-            fileSystem.close();
+            try {
+                fileSystem.close();
+            } catch (final UnsupportedOperationException e) {
+                // do nothing
+            }
         }
+    }
+
+    /**
+     * Gets the file system.
+     *
+     * @return The file system.
+     */
+    public FileSystem getFileSystem() {
+        return fileSystem;
     }
 
     /**
      * Lists all entries in the given directory.
      *
-     * @param dirPath
-     *            directory path.
-     * @return a list of dir entries if an I/O error occurs
-     * @throws IOException
-     *             an I/O error occurs accessing the file system
+     * @param dirPath directory path.
+     * @return A list of dir entries if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs while accessing the file system.
      */
     public List<Path> list(final Path dirPath) throws IOException {
         final List<Path> list = new ArrayList<>();
         try (DirectoryStream<Path> ds = Files.newDirectoryStream(dirPath)) {
-            final Iterator<Path> iterator = ds.iterator();
-            while (iterator.hasNext()) {
-                list.add(iterator.next());
-            }
+            ds.forEach(list::add);
         }
         return list;
     }
@@ -113,11 +116,9 @@ public class ModularRuntimeImage implements Closeable {
     /**
      * Lists all entries in the given directory.
      *
-     * @param dirName
-     *            directory path.
-     * @return a list of dir entries if an I/O error occurs
-     * @throws IOException
-     *             an I/O error occurs accessing the file system
+     * @param dirName directory path.
+     * @return A list of dir entries if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs while accessing the file system.
      */
     public List<Path> list(final String dirName) throws IOException {
         return list(fileSystem.getPath(dirName));
@@ -126,9 +127,8 @@ public class ModularRuntimeImage implements Closeable {
     /**
      * Lists all modules.
      *
-     * @return a list of modules
-     * @throws IOException
-     *             an I/O error occurs accessing the file system
+     * @return A list of modules.
+     * @throws IOException Thrown if an I/O error occurs while accessing the file system.
      */
     public List<Path> modules() throws IOException {
         return list(MODULES_PATH);
@@ -137,16 +137,11 @@ public class ModularRuntimeImage implements Closeable {
     /**
      * Lists all packages.
      *
-     * @return a list of modules
-     * @throws IOException
-     *             an I/O error occurs accessing the file system
+     * @return A list of modules.
+     * @throws IOException Thrown if an I/O error occurs while accessing the file system.
      */
     public List<Path> packages() throws IOException {
         return list(PACKAGES_PATH);
-    }
-
-    public FileSystem getFileSystem() {
-        return fileSystem;
     }
 
 }

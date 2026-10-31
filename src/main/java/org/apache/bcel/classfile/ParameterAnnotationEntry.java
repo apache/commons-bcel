@@ -1,19 +1,20 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.apache.bcel.classfile;
 
@@ -24,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.bcel.util.Args;
+
 /**
  * represents one parameter annotation in the parameter annotation table
  *
@@ -31,61 +34,80 @@ import java.util.List;
  */
 public class ParameterAnnotationEntry implements Node {
 
-    private final AnnotationEntry[] annotationTable;
-
+    static final ParameterAnnotationEntry[] EMPTY_ARRAY = {};
 
     /**
-     * Construct object from input stream.
+     * Creates parameter annotation entries from attributes.
      *
-     * @param input Input stream
-     * @throws IOException
+     * @param attributes The attributes.
+     * @return The parameter annotation entries.
      */
-    ParameterAnnotationEntry(final DataInput input, final ConstantPool constant_pool) throws IOException {
-        final int annotation_table_length = input.readUnsignedShort();
-        annotationTable = new AnnotationEntry[annotation_table_length];
-        for (int i = 0; i < annotation_table_length; i++) {
-            // TODO isRuntimeVisible
-            annotationTable[i] = AnnotationEntry.read(input, constant_pool, false);
+    public static ParameterAnnotationEntry[] createParameterAnnotationEntries(final Attribute[] attributes) {
+        if (attributes == null) {
+            return EMPTY_ARRAY;
+        }
+        // Find attributes that contain parameter annotation data
+        final List<ParameterAnnotationEntry> accumulatedAnnotations = new ArrayList<>(attributes.length);
+        for (final Attribute attribute : attributes) {
+            if (attribute instanceof ParameterAnnotations) {
+                final ParameterAnnotations runtimeAnnotations = (ParameterAnnotations) attribute;
+                final ParameterAnnotationEntry[] parameterAnnotationEntries = runtimeAnnotations.getParameterAnnotationEntries();
+                if (parameterAnnotationEntries != null) {
+                    Collections.addAll(accumulatedAnnotations, parameterAnnotationEntries);
+                }
+            }
+        }
+        return accumulatedAnnotations.toArray(EMPTY_ARRAY);
+    }
+
+    private final AnnotationEntry[] annotationTable;
+
+    /**
+     * Constructs object from input stream.
+     *
+     * @param input Input stream.
+     * @param constantPool The constant pool.
+     * @param isRuntimeVisible whether the contained annotations are runtime visible.
+     * @throws IOException Thrown if an I/O error occurs.
+     */
+    ParameterAnnotationEntry(final DataInput input, final ConstantPool constantPool, final boolean isRuntimeVisible) throws IOException {
+        final int annotationTableLength = input.readUnsignedShort();
+        annotationTable = new AnnotationEntry[annotationTableLength];
+        for (int i = 0; i < annotationTableLength; i++) {
+            annotationTable[i] = AnnotationEntry.read(input, constantPool, isRuntimeVisible);
         }
     }
 
-
     /**
-     * Called by objects that are traversing the nodes of the tree implicitely
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
+     * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
+     * That is, the hierarchy of methods, fields, attributes, and other elements forms a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitParameterAnnotationEntry(this);
     }
 
     /**
-     * returns the array of annotation entries in this annotation
+     * Dumps parameter annotation entry to file stream.
+     *
+     * @param dos Output file stream.
+     * @throws IOException Thrown if an I/O error occurs.
      */
-    public AnnotationEntry[] getAnnotationEntries() {
-        return annotationTable;
-    }
-
     public void dump(final DataOutputStream dos) throws IOException {
-        dos.writeShort(annotationTable.length);
+        dos.writeShort(Args.requireU2(annotationTable.length, "annotationTable.length"));
         for (final AnnotationEntry entry : annotationTable) {
             entry.dump(dos);
         }
     }
 
-  public static ParameterAnnotationEntry[] createParameterAnnotationEntries(final Attribute[] attrs) {
-      // Find attributes that contain parameter annotation data
-      final List<ParameterAnnotationEntry> accumulatedAnnotations = new ArrayList<>(attrs.length);
-      for (final Attribute attribute : attrs) {
-          if (attribute instanceof ParameterAnnotations) {
-              final ParameterAnnotations runtimeAnnotations = (ParameterAnnotations)attribute;
-              Collections.addAll(accumulatedAnnotations, runtimeAnnotations.getParameterAnnotationEntries());
-          }
-      }
-      return accumulatedAnnotations.toArray(new ParameterAnnotationEntry[accumulatedAnnotations.size()]);
-  }
+    /**
+     * Gets the annotation entries.
+     *
+     * @return The array of annotation entries in this annotation.
+     */
+    public AnnotationEntry[] getAnnotationEntries() {
+        return annotationTable;
+    }
 }
-

@@ -1,19 +1,20 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.apache.bcel.util;
 
@@ -24,72 +25,80 @@ import java.util.Map;
 
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Utility;
 
 /**
- * The repository maintains information about which classes have
- * been loaded.
+ * The repository maintains information about which classes have been loaded.
  *
- * It loads its data from the ClassLoader implementation
- * passed into its constructor.
+ * It loads its data from the ClassLoader implementation passed into its constructor.
  *
  * @see org.apache.bcel.Repository
- *
  */
 public class ClassLoaderRepository implements Repository {
 
     private final java.lang.ClassLoader loader;
     private final Map<String, JavaClass> loadedClasses = new HashMap<>(); // CLASSNAME X JAVACLASS
 
-
+    /**
+     * Constructs a ClassLoaderRepository.
+     *
+     * @param loader The class loader.
+     */
     public ClassLoaderRepository(final java.lang.ClassLoader loader) {
         this.loader = loader;
     }
 
-
     /**
-     * Store a new JavaClass into this Repository.
+     * Clear all entries from cache.
      */
     @Override
-    public void storeClass( final JavaClass clazz ) {
-        loadedClasses.put(clazz.getClassName(), clazz);
-        clazz.setRepository(this);
+    public void clear() {
+        loadedClasses.clear();
     }
-
-
-    /**
-     * Remove class from repository
-     */
-    @Override
-    public void removeClass( final JavaClass clazz ) {
-        loadedClasses.remove(clazz.getClassName());
-    }
-
 
     /**
      * Find an already defined JavaClass.
      */
     @Override
-    public JavaClass findClass( final String className ) {
-        return loadedClasses.containsKey(className) ? loadedClasses.get(className) : null;
+    public JavaClass findClass(final String className) {
+        return loadedClasses.get(className);
     }
 
+    /*
+     * @return null.
+     */
+    @Override
+    public ClassPath getClassPath() {
+        return null;
+    }
+
+    @Override
+    public JavaClass loadClass(final Class<?> clazz) throws ClassNotFoundException {
+        return loadClass(clazz.getName());
+    }
 
     /**
      * Lookup a JavaClass object from the Class Name provided.
      */
     @Override
     public JavaClass loadClass(final String className) throws ClassNotFoundException {
-        final String classFile = className.replace('.', '/');
+        final String classFile = Utility.packageToPath(className);
         JavaClass RC = findClass(className);
         if (RC != null) {
             return RC;
         }
-        try (InputStream is = loader.getResourceAsStream(classFile + ".class")) {
+        try (InputStream is = loader.getResourceAsStream(classFile + JavaClass.EXTENSION)) {
             if (is == null) {
                 throw new ClassNotFoundException(className + " not found.");
             }
             final ClassParser parser = new ClassParser(is, className);
             RC = parser.parse();
+            // The this_class name inside the parsed bytes is attacker-controlled: caching it under its own name
+            // would let a class file found under one name poison the repository entry for another (the JDK's
+            // defineClass() rejects the same mismatch). Refuse to cache or return it.
+            if (!RC.getClassName().equals(className)) {
+                throw new ClassNotFoundException("Class name mismatch: requested " + className + " but the class file declares " + RC.getClassName());
+            }
             storeClass(RC);
             return RC;
         } catch (final IOException e) {
@@ -97,26 +106,20 @@ public class ClassLoaderRepository implements Repository {
         }
     }
 
-
-    @Override
-    public JavaClass loadClass( final Class<?> clazz ) throws ClassNotFoundException {
-        return loadClass(clazz.getName());
-    }
-
-
-    /** Clear all entries from cache.
+    /**
+     * Remove class from repository
      */
     @Override
-    public void clear() {
-        loadedClasses.clear();
+    public void removeClass(final JavaClass clazz) {
+        loadedClasses.remove(clazz.getClassName());
     }
 
-
-    /*
-     * @return null
+    /**
+     * Store a new JavaClass into this Repository.
      */
     @Override
-    public ClassPath getClassPath() {
-        return null;
+    public void storeClass(final JavaClass clazz) {
+        loadedClasses.put(clazz.getClassName(), clazz);
+        clazz.setRepository(this);
     }
 }

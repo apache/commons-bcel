@@ -1,291 +1,1029 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
+
 package org.apache.bcel.generic;
 
-import org.apache.bcel.Const;
-
 /**
- * This interface contains shareable instruction objects.
+ * Contains shareable instruction objects.
+ * <p>
+ * Reusing predefined instruction objects can save time and memory, especially for frequently used instructions such as ICONST_0.
+ * These objects are shared and should not be modified. This approach adapts the Flyweight design pattern by using an array instead of a factory.
+ * </p>
+ * <p>
+ * The instruction objects can also be accessed directly by name, for example, {@code il.append(InstructionConst.ICONST_0)}.
+ * </p>
  *
- * In order to save memory you can use some instructions multiply,
- * since they have an immutable state and are directly derived from
- * Instruction.  I.e. they have no instance fields that could be
- * changed. Since some of these instructions like ICONST_0 occur
- * very frequently this can save a lot of time and space. This
- * feature is an adaptation of the FlyWeight design pattern, we
- * just use an array instead of a factory.
- *
- * The Instructions can also accessed directly under their names, so
- * it's possible to write il.append(Instruction.ICONST_0);
- *
- * @deprecated (since 6.0) Do not use. Use InstructionConst instead.
+ * @deprecated (since 6.0) Do not use. Use {@link InstructionConst} instead.
  */
 @Deprecated
 public interface InstructionConstants {
 
-    /** Predefined instruction objects
+    /**
+     * Deprecated, consider private and ignore.
+     *
+     * @deprecated Consider private.
      */
-    /*
-     * NOTE these are not currently immutable, because Instruction
-     * has mutable protected fields opcode and length.
-     */
-    Instruction NOP = new NOP();
-    Instruction ACONST_NULL = new ACONST_NULL();
-    Instruction ICONST_M1 = new ICONST(-1);
-    Instruction ICONST_0 = new ICONST(0);
-    Instruction ICONST_1 = new ICONST(1);
-    Instruction ICONST_2 = new ICONST(2);
-    Instruction ICONST_3 = new ICONST(3);
-    Instruction ICONST_4 = new ICONST(4);
-    Instruction ICONST_5 = new ICONST(5);
-    Instruction LCONST_0 = new LCONST(0);
-    Instruction LCONST_1 = new LCONST(1);
-    Instruction FCONST_0 = new FCONST(0);
-    Instruction FCONST_1 = new FCONST(1);
-    Instruction FCONST_2 = new FCONST(2);
-    Instruction DCONST_0 = new DCONST(0);
-    Instruction DCONST_1 = new DCONST(1);
-    ArrayInstruction IALOAD = new IALOAD();
-    ArrayInstruction LALOAD = new LALOAD();
-    ArrayInstruction FALOAD = new FALOAD();
-    ArrayInstruction DALOAD = new DALOAD();
-    ArrayInstruction AALOAD = new AALOAD();
-    ArrayInstruction BALOAD = new BALOAD();
-    ArrayInstruction CALOAD = new CALOAD();
-    ArrayInstruction SALOAD = new SALOAD();
-    ArrayInstruction IASTORE = new IASTORE();
-    ArrayInstruction LASTORE = new LASTORE();
-    ArrayInstruction FASTORE = new FASTORE();
-    ArrayInstruction DASTORE = new DASTORE();
-    ArrayInstruction AASTORE = new AASTORE();
-    ArrayInstruction BASTORE = new BASTORE();
-    ArrayInstruction CASTORE = new CASTORE();
-    ArrayInstruction SASTORE = new SASTORE();
-    StackInstruction POP = new POP();
-    StackInstruction POP2 = new POP2();
-    StackInstruction DUP = new DUP();
-    StackInstruction DUP_X1 = new DUP_X1();
-    StackInstruction DUP_X2 = new DUP_X2();
-    StackInstruction DUP2 = new DUP2();
-    StackInstruction DUP2_X1 = new DUP2_X1();
-    StackInstruction DUP2_X2 = new DUP2_X2();
-    StackInstruction SWAP = new SWAP();
-    ArithmeticInstruction IADD = new IADD();
-    ArithmeticInstruction LADD = new LADD();
-    ArithmeticInstruction FADD = new FADD();
-    ArithmeticInstruction DADD = new DADD();
-    ArithmeticInstruction ISUB = new ISUB();
-    ArithmeticInstruction LSUB = new LSUB();
-    ArithmeticInstruction FSUB = new FSUB();
-    ArithmeticInstruction DSUB = new DSUB();
-    ArithmeticInstruction IMUL = new IMUL();
-    ArithmeticInstruction LMUL = new LMUL();
-    ArithmeticInstruction FMUL = new FMUL();
-    ArithmeticInstruction DMUL = new DMUL();
-    ArithmeticInstruction IDIV = new IDIV();
-    ArithmeticInstruction LDIV = new LDIV();
-    ArithmeticInstruction FDIV = new FDIV();
-    ArithmeticInstruction DDIV = new DDIV();
-    ArithmeticInstruction IREM = new IREM();
-    ArithmeticInstruction LREM = new LREM();
-    ArithmeticInstruction FREM = new FREM();
-    ArithmeticInstruction DREM = new DREM();
-    ArithmeticInstruction INEG = new INEG();
-    ArithmeticInstruction LNEG = new LNEG();
-    ArithmeticInstruction FNEG = new FNEG();
-    ArithmeticInstruction DNEG = new DNEG();
-    ArithmeticInstruction ISHL = new ISHL();
-    ArithmeticInstruction LSHL = new LSHL();
-    ArithmeticInstruction ISHR = new ISHR();
-    ArithmeticInstruction LSHR = new LSHR();
-    ArithmeticInstruction IUSHR = new IUSHR();
-    ArithmeticInstruction LUSHR = new LUSHR();
-    ArithmeticInstruction IAND = new IAND();
-    ArithmeticInstruction LAND = new LAND();
-    ArithmeticInstruction IOR = new IOR();
-    ArithmeticInstruction LOR = new LOR();
-    ArithmeticInstruction IXOR = new IXOR();
-    ArithmeticInstruction LXOR = new LXOR();
-    ConversionInstruction I2L = new I2L();
-    ConversionInstruction I2F = new I2F();
-    ConversionInstruction I2D = new I2D();
-    ConversionInstruction L2I = new L2I();
-    ConversionInstruction L2F = new L2F();
-    ConversionInstruction L2D = new L2D();
-    ConversionInstruction F2I = new F2I();
-    ConversionInstruction F2L = new F2L();
-    ConversionInstruction F2D = new F2D();
-    ConversionInstruction D2I = new D2I();
-    ConversionInstruction D2L = new D2L();
-    ConversionInstruction D2F = new D2F();
-    ConversionInstruction I2B = new I2B();
-    ConversionInstruction I2C = new I2C();
-    ConversionInstruction I2S = new I2S();
-    Instruction LCMP = new LCMP();
-    Instruction FCMPL = new FCMPL();
-    Instruction FCMPG = new FCMPG();
-    Instruction DCMPL = new DCMPL();
-    Instruction DCMPG = new DCMPG();
-    ReturnInstruction IRETURN = new IRETURN();
-    ReturnInstruction LRETURN = new LRETURN();
-    ReturnInstruction FRETURN = new FRETURN();
-    ReturnInstruction DRETURN = new DRETURN();
-    ReturnInstruction ARETURN = new ARETURN();
-    ReturnInstruction RETURN = new RETURN();
-    Instruction ARRAYLENGTH = new ARRAYLENGTH();
-    Instruction ATHROW = new ATHROW();
-    Instruction MONITORENTER = new MONITORENTER();
-    Instruction MONITOREXIT = new MONITOREXIT();
-    /** You can use these constants in multiple places safely, if you can guarantee
-     * that you will never alter their internal values, e.g. call setIndex().
-     */
-    LocalVariableInstruction THIS = new ALOAD(0);
-    LocalVariableInstruction ALOAD_0 = THIS;
-    LocalVariableInstruction ALOAD_1 = new ALOAD(1);
-    LocalVariableInstruction ALOAD_2 = new ALOAD(2);
-    LocalVariableInstruction ILOAD_0 = new ILOAD(0);
-    LocalVariableInstruction ILOAD_1 = new ILOAD(1);
-    LocalVariableInstruction ILOAD_2 = new ILOAD(2);
-    LocalVariableInstruction ASTORE_0 = new ASTORE(0);
-    LocalVariableInstruction ASTORE_1 = new ASTORE(1);
-    LocalVariableInstruction ASTORE_2 = new ASTORE(2);
-    LocalVariableInstruction ISTORE_0 = new ISTORE(0);
-    LocalVariableInstruction ISTORE_1 = new ISTORE(1);
-    LocalVariableInstruction ISTORE_2 = new ISTORE(2);
-    /** Get object via its opcode, for immutable instructions like
-     * branch instructions entries are set to null.
-     */
-    Instruction[] INSTRUCTIONS = new Instruction[256];
-    /** Interfaces may have no static initializers, so we simulate this
-     * with an inner class.
-     */
-    Clinit bla = new Clinit();
-
+    @Deprecated
     class Clinit {
 
-        Clinit() {
-            INSTRUCTIONS[Const.NOP] = NOP;
-            INSTRUCTIONS[Const.ACONST_NULL] = ACONST_NULL;
-            INSTRUCTIONS[Const.ICONST_M1] = ICONST_M1;
-            INSTRUCTIONS[Const.ICONST_0] = ICONST_0;
-            INSTRUCTIONS[Const.ICONST_1] = ICONST_1;
-            INSTRUCTIONS[Const.ICONST_2] = ICONST_2;
-            INSTRUCTIONS[Const.ICONST_3] = ICONST_3;
-            INSTRUCTIONS[Const.ICONST_4] = ICONST_4;
-            INSTRUCTIONS[Const.ICONST_5] = ICONST_5;
-            INSTRUCTIONS[Const.LCONST_0] = LCONST_0;
-            INSTRUCTIONS[Const.LCONST_1] = LCONST_1;
-            INSTRUCTIONS[Const.FCONST_0] = FCONST_0;
-            INSTRUCTIONS[Const.FCONST_1] = FCONST_1;
-            INSTRUCTIONS[Const.FCONST_2] = FCONST_2;
-            INSTRUCTIONS[Const.DCONST_0] = DCONST_0;
-            INSTRUCTIONS[Const.DCONST_1] = DCONST_1;
-            INSTRUCTIONS[Const.IALOAD] = IALOAD;
-            INSTRUCTIONS[Const.LALOAD] = LALOAD;
-            INSTRUCTIONS[Const.FALOAD] = FALOAD;
-            INSTRUCTIONS[Const.DALOAD] = DALOAD;
-            INSTRUCTIONS[Const.AALOAD] = AALOAD;
-            INSTRUCTIONS[Const.BALOAD] = BALOAD;
-            INSTRUCTIONS[Const.CALOAD] = CALOAD;
-            INSTRUCTIONS[Const.SALOAD] = SALOAD;
-            INSTRUCTIONS[Const.IASTORE] = IASTORE;
-            INSTRUCTIONS[Const.LASTORE] = LASTORE;
-            INSTRUCTIONS[Const.FASTORE] = FASTORE;
-            INSTRUCTIONS[Const.DASTORE] = DASTORE;
-            INSTRUCTIONS[Const.AASTORE] = AASTORE;
-            INSTRUCTIONS[Const.BASTORE] = BASTORE;
-            INSTRUCTIONS[Const.CASTORE] = CASTORE;
-            INSTRUCTIONS[Const.SASTORE] = SASTORE;
-            INSTRUCTIONS[Const.POP] = POP;
-            INSTRUCTIONS[Const.POP2] = POP2;
-            INSTRUCTIONS[Const.DUP] = DUP;
-            INSTRUCTIONS[Const.DUP_X1] = DUP_X1;
-            INSTRUCTIONS[Const.DUP_X2] = DUP_X2;
-            INSTRUCTIONS[Const.DUP2] = DUP2;
-            INSTRUCTIONS[Const.DUP2_X1] = DUP2_X1;
-            INSTRUCTIONS[Const.DUP2_X2] = DUP2_X2;
-            INSTRUCTIONS[Const.SWAP] = SWAP;
-            INSTRUCTIONS[Const.IADD] = IADD;
-            INSTRUCTIONS[Const.LADD] = LADD;
-            INSTRUCTIONS[Const.FADD] = FADD;
-            INSTRUCTIONS[Const.DADD] = DADD;
-            INSTRUCTIONS[Const.ISUB] = ISUB;
-            INSTRUCTIONS[Const.LSUB] = LSUB;
-            INSTRUCTIONS[Const.FSUB] = FSUB;
-            INSTRUCTIONS[Const.DSUB] = DSUB;
-            INSTRUCTIONS[Const.IMUL] = IMUL;
-            INSTRUCTIONS[Const.LMUL] = LMUL;
-            INSTRUCTIONS[Const.FMUL] = FMUL;
-            INSTRUCTIONS[Const.DMUL] = DMUL;
-            INSTRUCTIONS[Const.IDIV] = IDIV;
-            INSTRUCTIONS[Const.LDIV] = LDIV;
-            INSTRUCTIONS[Const.FDIV] = FDIV;
-            INSTRUCTIONS[Const.DDIV] = DDIV;
-            INSTRUCTIONS[Const.IREM] = IREM;
-            INSTRUCTIONS[Const.LREM] = LREM;
-            INSTRUCTIONS[Const.FREM] = FREM;
-            INSTRUCTIONS[Const.DREM] = DREM;
-            INSTRUCTIONS[Const.INEG] = INEG;
-            INSTRUCTIONS[Const.LNEG] = LNEG;
-            INSTRUCTIONS[Const.FNEG] = FNEG;
-            INSTRUCTIONS[Const.DNEG] = DNEG;
-            INSTRUCTIONS[Const.ISHL] = ISHL;
-            INSTRUCTIONS[Const.LSHL] = LSHL;
-            INSTRUCTIONS[Const.ISHR] = ISHR;
-            INSTRUCTIONS[Const.LSHR] = LSHR;
-            INSTRUCTIONS[Const.IUSHR] = IUSHR;
-            INSTRUCTIONS[Const.LUSHR] = LUSHR;
-            INSTRUCTIONS[Const.IAND] = IAND;
-            INSTRUCTIONS[Const.LAND] = LAND;
-            INSTRUCTIONS[Const.IOR] = IOR;
-            INSTRUCTIONS[Const.LOR] = LOR;
-            INSTRUCTIONS[Const.IXOR] = IXOR;
-            INSTRUCTIONS[Const.LXOR] = LXOR;
-            INSTRUCTIONS[Const.I2L] = I2L;
-            INSTRUCTIONS[Const.I2F] = I2F;
-            INSTRUCTIONS[Const.I2D] = I2D;
-            INSTRUCTIONS[Const.L2I] = L2I;
-            INSTRUCTIONS[Const.L2F] = L2F;
-            INSTRUCTIONS[Const.L2D] = L2D;
-            INSTRUCTIONS[Const.F2I] = F2I;
-            INSTRUCTIONS[Const.F2L] = F2L;
-            INSTRUCTIONS[Const.F2D] = F2D;
-            INSTRUCTIONS[Const.D2I] = D2I;
-            INSTRUCTIONS[Const.D2L] = D2L;
-            INSTRUCTIONS[Const.D2F] = D2F;
-            INSTRUCTIONS[Const.I2B] = I2B;
-            INSTRUCTIONS[Const.I2C] = I2C;
-            INSTRUCTIONS[Const.I2S] = I2S;
-            INSTRUCTIONS[Const.LCMP] = LCMP;
-            INSTRUCTIONS[Const.FCMPL] = FCMPL;
-            INSTRUCTIONS[Const.FCMPG] = FCMPG;
-            INSTRUCTIONS[Const.DCMPL] = DCMPL;
-            INSTRUCTIONS[Const.DCMPG] = DCMPG;
-            INSTRUCTIONS[Const.IRETURN] = IRETURN;
-            INSTRUCTIONS[Const.LRETURN] = LRETURN;
-            INSTRUCTIONS[Const.FRETURN] = FRETURN;
-            INSTRUCTIONS[Const.DRETURN] = DRETURN;
-            INSTRUCTIONS[Const.ARETURN] = ARETURN;
-            INSTRUCTIONS[Const.RETURN] = RETURN;
-            INSTRUCTIONS[Const.ARRAYLENGTH] = ARRAYLENGTH;
-            INSTRUCTIONS[Const.ATHROW] = ATHROW;
-            INSTRUCTIONS[Const.MONITORENTER] = MONITORENTER;
-            INSTRUCTIONS[Const.MONITOREXIT] = MONITOREXIT;
+        /**
+         * Constructs a Clinit.
+         */
+        public Clinit() {
+            // empty
         }
     }
+
+    /*
+     * NOTE these are not currently immutable, because Instruction has mutable protected fields opcode and length.
+     */
+
+    /**
+     * NOP instruction.
+     *
+     * @deprecated Use {@link InstructionConst#NOP}.
+     */
+    @Deprecated
+    Instruction NOP = InstructionConst.NOP;
+
+    /**
+     * ACONST_NULL instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ACONST_NULL}.
+     */
+    @Deprecated
+    Instruction ACONST_NULL = InstructionConst.ACONST_NULL;
+
+    /**
+     * ICONST_M1 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ICONST_M1}.
+     */
+    @Deprecated
+    Instruction ICONST_M1 = InstructionConst.ICONST_M1;
+
+    /**
+     * ICONST_0 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ICONST_0}.
+     */
+    @Deprecated
+    Instruction ICONST_0 = InstructionConst.ICONST_0;
+
+    /**
+     * ICONST_1 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ICONST_1}.
+     */
+    @Deprecated
+    Instruction ICONST_1 = InstructionConst.ICONST_1;
+
+    /**
+     * ICONST_2 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ICONST_2}.
+     */
+    @Deprecated
+    Instruction ICONST_2 = InstructionConst.ICONST_2;
+
+    /**
+     * ICONST_3 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ICONST_3}.
+     */
+    @Deprecated
+    Instruction ICONST_3 = InstructionConst.ICONST_3;
+
+    /**
+     * ICONST_4 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ICONST_4}.
+     */
+    @Deprecated
+    Instruction ICONST_4 = InstructionConst.ICONST_4;
+
+    /**
+     * ICONST_5 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ICONST_5}.
+     */
+    @Deprecated
+    Instruction ICONST_5 = InstructionConst.ICONST_5;
+
+    /**
+     * LCONST_0 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#LCONST_0}.
+     */
+    @Deprecated
+    Instruction LCONST_0 = InstructionConst.LCONST_0;
+
+    /**
+     * LCONST_1 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#LCONST_1}.
+     */
+    @Deprecated
+    Instruction LCONST_1 = InstructionConst.LCONST_1;
+
+    /**
+     * FCONST_0 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#FCONST_0}.
+     */
+    @Deprecated
+    Instruction FCONST_0 = InstructionConst.FCONST_0;
+
+    /**
+     * FCONST_1 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#FCONST_1}.
+     */
+    @Deprecated
+    Instruction FCONST_1 = InstructionConst.FCONST_1;
+
+    /**
+     * FCONST_2 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#FCONST_2}.
+     */
+    @Deprecated
+    Instruction FCONST_2 = InstructionConst.FCONST_2;
+
+    /**
+     * DCONST_0 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DCONST_0}.
+     */
+    @Deprecated
+    Instruction DCONST_0 = InstructionConst.DCONST_0;
+
+    /**
+     * DCONST_1 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DCONST_1}.
+     */
+    @Deprecated
+    Instruction DCONST_1 = InstructionConst.DCONST_1;
+
+    /**
+     * IALOAD instruction.
+     *
+     * @deprecated Use {@link InstructionConst#IALOAD}.
+     */
+    @Deprecated
+    ArrayInstruction IALOAD = InstructionConst.IALOAD;
+
+    /**
+     * LALOAD instruction.
+     *
+     * @deprecated Use {@link InstructionConst#LALOAD}.
+     */
+    @Deprecated
+    ArrayInstruction LALOAD = InstructionConst.LALOAD;
+
+    /**
+     * FALOAD instruction.
+     *
+     * @deprecated Use {@link InstructionConst#FALOAD}.
+     */
+    @Deprecated
+    ArrayInstruction FALOAD = InstructionConst.FALOAD;
+
+    /**
+     * DALOAD instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DALOAD}.
+     */
+    @Deprecated
+    ArrayInstruction DALOAD = InstructionConst.DALOAD;
+
+    /**
+     * AALOAD instruction.
+     *
+     * @deprecated Use {@link InstructionConst#AALOAD}.
+     */
+    @Deprecated
+    ArrayInstruction AALOAD = InstructionConst.AALOAD;
+
+    /**
+     * BALOAD instruction.
+     *
+     * @deprecated Use {@link InstructionConst#BALOAD}.
+     */
+    @Deprecated
+    ArrayInstruction BALOAD = InstructionConst.BALOAD;
+
+    /**
+     * CALOAD instruction.
+     *
+     * @deprecated Use {@link InstructionConst#CALOAD}.
+     */
+    @Deprecated
+    ArrayInstruction CALOAD = InstructionConst.CALOAD;
+
+    /**
+     * SALOAD instruction.
+     *
+     * @deprecated Use {@link InstructionConst#SALOAD}.
+     */
+    @Deprecated
+    ArrayInstruction SALOAD = InstructionConst.SALOAD;
+
+    /**
+     * IASTORE instruction.
+     *
+     * @deprecated Use {@link InstructionConst#IASTORE}.
+     */
+    @Deprecated
+    ArrayInstruction IASTORE = InstructionConst.IASTORE;
+
+    /**
+     * LASTORE instruction.
+     *
+     * @deprecated Use {@link InstructionConst#LASTORE}.
+     */
+    @Deprecated
+    ArrayInstruction LASTORE = InstructionConst.LASTORE;
+
+    /**
+     * FASTORE instruction.
+     *
+     * @deprecated Use {@link InstructionConst#FASTORE}.
+     */
+    @Deprecated
+    ArrayInstruction FASTORE = InstructionConst.FASTORE;
+
+    /**
+     * DASTORE instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DASTORE}.
+     */
+    @Deprecated
+    ArrayInstruction DASTORE = InstructionConst.DASTORE;
+
+    /**
+     * AASTORE instruction.
+     *
+     * @deprecated Use {@link InstructionConst#AASTORE}.
+     */
+    @Deprecated
+    ArrayInstruction AASTORE = InstructionConst.AASTORE;
+
+    /**
+     * BASTORE instruction.
+     *
+     * @deprecated Use {@link InstructionConst#BASTORE}.
+     */
+    @Deprecated
+    ArrayInstruction BASTORE = InstructionConst.BASTORE;
+
+    /**
+     * CASTORE instruction.
+     *
+     * @deprecated Use {@link InstructionConst#CASTORE}.
+     */
+    @Deprecated
+    ArrayInstruction CASTORE = InstructionConst.CASTORE;
+
+    /**
+     * SASTORE instruction.
+     *
+     * @deprecated Use {@link InstructionConst#SASTORE}.
+     */
+    @Deprecated
+    ArrayInstruction SASTORE = InstructionConst.SASTORE;
+
+    /**
+     * POP instruction.
+     *
+     * @deprecated Use {@link InstructionConst#POP}.
+     */
+    @Deprecated
+    StackInstruction POP = InstructionConst.POP;
+
+    /**
+     * POP2 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#POP2}.
+     */
+    @Deprecated
+    StackInstruction POP2 = InstructionConst.POP2;
+
+    /**
+     * DUP instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DUP}.
+     */
+    @Deprecated
+    StackInstruction DUP = InstructionConst.DUP;
+
+    /**
+     * DUP_X1 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DUP_X1}.
+     */
+    @Deprecated
+    StackInstruction DUP_X1 = InstructionConst.DUP_X1;
+
+    /**
+     * DUP_X2 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DUP_X2}.
+     */
+    @Deprecated
+    StackInstruction DUP_X2 = InstructionConst.DUP_X2;
+
+    /**
+     * DUP2 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DUP2}.
+     */
+    @Deprecated
+    StackInstruction DUP2 = InstructionConst.DUP2;
+
+    /**
+     * DUP2_X1 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DUP2_X1}.
+     */
+    @Deprecated
+    StackInstruction DUP2_X1 = InstructionConst.DUP2_X1;
+
+    /**
+     * DUP2_X2 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DUP2_X2}.
+     */
+    @Deprecated
+    StackInstruction DUP2_X2 = InstructionConst.DUP2_X2;
+
+    /**
+     * SWAP instruction.
+     *
+     * @deprecated Use {@link InstructionConst#SWAP}.
+     */
+    @Deprecated
+    StackInstruction SWAP = InstructionConst.SWAP;
+
+    /**
+     * IADD instruction.
+     *
+     * @deprecated Use {@link InstructionConst#IADD}.
+     */
+    @Deprecated
+    ArithmeticInstruction IADD = InstructionConst.IADD;
+
+    /**
+     * LADD instruction.
+     *
+     * @deprecated Use {@link InstructionConst#LADD}.
+     */
+    @Deprecated
+    ArithmeticInstruction LADD = InstructionConst.LADD;
+
+    /**
+     * FADD instruction.
+     *
+     * @deprecated Use {@link InstructionConst#FADD}.
+     */
+    @Deprecated
+    ArithmeticInstruction FADD = InstructionConst.FADD;
+
+    /**
+     * DADD instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DADD}.
+     */
+    @Deprecated
+    ArithmeticInstruction DADD = InstructionConst.DADD;
+
+    /**
+     * ISUB instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ISUB}.
+     */
+    @Deprecated
+    ArithmeticInstruction ISUB = InstructionConst.ISUB;
+
+    /**
+     * LSUB instruction.
+     *
+     * @deprecated Use {@link InstructionConst#LSUB}.
+     */
+    @Deprecated
+    ArithmeticInstruction LSUB = InstructionConst.LSUB;
+
+    /**
+     * FSUB instruction.
+     *
+     * @deprecated Use {@link InstructionConst#FSUB}.
+     */
+    @Deprecated
+    ArithmeticInstruction FSUB = InstructionConst.FSUB;
+
+    /**
+     * DSUB instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DSUB}.
+     */
+    @Deprecated
+    ArithmeticInstruction DSUB = InstructionConst.DSUB;
+
+    /**
+     * IMUL instruction.
+     *
+     * @deprecated Use {@link InstructionConst#IMUL}.
+     */
+    @Deprecated
+    ArithmeticInstruction IMUL = InstructionConst.IMUL;
+
+    /**
+     * LMUL instruction.
+     *
+     * @deprecated Use {@link InstructionConst#LMUL}.
+     */
+    @Deprecated
+    ArithmeticInstruction LMUL = InstructionConst.LMUL;
+
+    /**
+     * FMUL instruction.
+     *
+     * @deprecated Use {@link InstructionConst#FMUL}.
+     */
+    @Deprecated
+    ArithmeticInstruction FMUL = InstructionConst.FMUL;
+
+    /**
+     * DMUL instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DMUL}.
+     */
+    @Deprecated
+    ArithmeticInstruction DMUL = InstructionConst.DMUL;
+
+    /**
+     * IDIV instruction.
+     *
+     * @deprecated Use {@link InstructionConst#IDIV}.
+     */
+    @Deprecated
+    ArithmeticInstruction IDIV = InstructionConst.IDIV;
+
+    /**
+     * LDIV instruction.
+     *
+     * @deprecated Use {@link InstructionConst#LDIV}.
+     */
+    @Deprecated
+    ArithmeticInstruction LDIV = InstructionConst.LDIV;
+
+    /**
+     * FDIV instruction.
+     *
+     * @deprecated Use {@link InstructionConst#FDIV}.
+     */
+    @Deprecated
+    ArithmeticInstruction FDIV = InstructionConst.FDIV;
+
+    /**
+     * DDIV instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DDIV}.
+     */
+    @Deprecated
+    ArithmeticInstruction DDIV = InstructionConst.DDIV;
+
+    /**
+     * IREM instruction.
+     *
+     * @deprecated Use {@link InstructionConst#IREM}.
+     */
+    @Deprecated
+    ArithmeticInstruction IREM = InstructionConst.IREM;
+
+    /**
+     * LREM instruction.
+     *
+     * @deprecated Use {@link InstructionConst#LREM}.
+     */
+    @Deprecated
+    ArithmeticInstruction LREM = InstructionConst.LREM;
+
+    /**
+     * FREM instruction.
+     *
+     * @deprecated Use {@link InstructionConst#FREM}.
+     */
+    @Deprecated
+    ArithmeticInstruction FREM = InstructionConst.FREM;
+
+    /**
+     * DREM instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DREM}.
+     */
+    @Deprecated
+    ArithmeticInstruction DREM = InstructionConst.DREM;
+
+    /**
+     * INEG instruction.
+     *
+     * @deprecated Use {@link InstructionConst#INEG}.
+     */
+    @Deprecated
+    ArithmeticInstruction INEG = InstructionConst.INEG;
+
+    /**
+     * LNEG instruction.
+     *
+     * @deprecated Use {@link InstructionConst#LNEG}.
+     */
+    @Deprecated
+    ArithmeticInstruction LNEG = InstructionConst.LNEG;
+
+    /**
+     * FNEG instruction.
+     *
+     * @deprecated Use {@link InstructionConst#FNEG}.
+     */
+    @Deprecated
+    ArithmeticInstruction FNEG = InstructionConst.FNEG;
+
+    /**
+     * DNEG instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DNEG}.
+     */
+    @Deprecated
+    ArithmeticInstruction DNEG = InstructionConst.DNEG;
+
+    /**
+     * ISHL instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ISHL}.
+     */
+    @Deprecated
+    ArithmeticInstruction ISHL = InstructionConst.ISHL;
+
+    /**
+     * LSHL instruction.
+     *
+     * @deprecated Use {@link InstructionConst#LSHL}.
+     */
+    @Deprecated
+    ArithmeticInstruction LSHL = InstructionConst.LSHL;
+
+    /**
+     * ISHR instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ISHR}.
+     */
+    @Deprecated
+    ArithmeticInstruction ISHR = InstructionConst.ISHR;
+
+    /**
+     * LSHR instruction.
+     *
+     * @deprecated Use {@link InstructionConst#LSHR}.
+     */
+    @Deprecated
+    ArithmeticInstruction LSHR = InstructionConst.LSHR;
+
+    /**
+     * IUSHR instruction.
+     *
+     * @deprecated Use {@link InstructionConst#IUSHR}.
+     */
+    @Deprecated
+    ArithmeticInstruction IUSHR = InstructionConst.IUSHR;
+
+    /**
+     * LUSHR instruction.
+     *
+     * @deprecated Use {@link InstructionConst#LUSHR}.
+     */
+    @Deprecated
+    ArithmeticInstruction LUSHR = InstructionConst.LUSHR;
+
+    /**
+     * IAND instruction.
+     *
+     * @deprecated Use {@link InstructionConst#IAND}.
+     */
+    @Deprecated
+    ArithmeticInstruction IAND = InstructionConst.IAND;
+
+    /**
+     * LAND instruction.
+     *
+     * @deprecated Use {@link InstructionConst#LAND}.
+     */
+    @Deprecated
+    ArithmeticInstruction LAND = InstructionConst.LAND;
+
+    /**
+     * IOR instruction.
+     *
+     * @deprecated Use {@link InstructionConst#IOR}.
+     */
+    @Deprecated
+    ArithmeticInstruction IOR = InstructionConst.IOR;
+
+    /**
+     * LOR instruction.
+     *
+     * @deprecated Use {@link InstructionConst#LOR}.
+     */
+    @Deprecated
+    ArithmeticInstruction LOR = InstructionConst.LOR;
+
+    /**
+     * IXOR instruction.
+     *
+     * @deprecated Use {@link InstructionConst#IXOR}.
+     */
+    @Deprecated
+    ArithmeticInstruction IXOR = InstructionConst.IXOR;
+
+    /**
+     * LXOR instruction.
+     *
+     * @deprecated Use {@link InstructionConst#LXOR}.
+     */
+    @Deprecated
+    ArithmeticInstruction LXOR = InstructionConst.LXOR;
+
+    /**
+     * I2L instruction.
+     *
+     * @deprecated Use {@link InstructionConst#I2L}.
+     */
+    @Deprecated
+    ConversionInstruction I2L = InstructionConst.I2L;
+
+    /**
+     * I2F instruction.
+     *
+     * @deprecated Use {@link InstructionConst#I2F}.
+     */
+    @Deprecated
+    ConversionInstruction I2F = InstructionConst.I2F;
+
+    /**
+     * I2D instruction.
+     *
+     * @deprecated Use {@link InstructionConst#I2D}.
+     */
+    @Deprecated
+    ConversionInstruction I2D = InstructionConst.I2D;
+
+    /**
+     * L2I instruction.
+     *
+     * @deprecated Use {@link InstructionConst#L2I}.
+     */
+    @Deprecated
+    ConversionInstruction L2I = InstructionConst.L2I;
+
+    /**
+     * L2F instruction.
+     *
+     * @deprecated Use {@link InstructionConst#L2F}.
+     */
+    @Deprecated
+    ConversionInstruction L2F = InstructionConst.L2F;
+
+    /**
+     * L2D instruction.
+     *
+     * @deprecated Use {@link InstructionConst#L2D}.
+     */
+    @Deprecated
+    ConversionInstruction L2D = InstructionConst.L2D;
+
+    /**
+     * F2I instruction.
+     *
+     * @deprecated Use {@link InstructionConst#F2I}.
+     */
+    @Deprecated
+    ConversionInstruction F2I = InstructionConst.F2I;
+
+    /**
+     * F2L instruction.
+     *
+     * @deprecated Use {@link InstructionConst#F2L}.
+     */
+    @Deprecated
+    ConversionInstruction F2L = InstructionConst.F2L;
+
+    /**
+     * F2D instruction.
+     *
+     * @deprecated Use {@link InstructionConst#F2D}.
+     */
+    @Deprecated
+    ConversionInstruction F2D = InstructionConst.F2D;
+
+    /**
+     * D2I instruction.
+     *
+     * @deprecated Use {@link InstructionConst#D2I}.
+     */
+    @Deprecated
+    ConversionInstruction D2I = InstructionConst.D2I;
+
+    /**
+     * D2L instruction.
+     *
+     * @deprecated Use {@link InstructionConst#D2L}.
+     */
+    @Deprecated
+    ConversionInstruction D2L = InstructionConst.D2L;
+
+    /**
+     * D2F instruction.
+     *
+     * @deprecated Use {@link InstructionConst#D2F}.
+     */
+    @Deprecated
+    ConversionInstruction D2F = InstructionConst.D2F;
+
+    /**
+     * I2B instruction.
+     *
+     * @deprecated Use {@link InstructionConst#I2B}.
+     */
+    @Deprecated
+    ConversionInstruction I2B = InstructionConst.I2B;
+
+    /**
+     * I2C instruction.
+     *
+     * @deprecated Use {@link InstructionConst#I2C}.
+     */
+    @Deprecated
+    ConversionInstruction I2C = InstructionConst.I2C;
+
+    /**
+     * I2S instruction.
+     *
+     * @deprecated Use {@link InstructionConst#I2S}.
+     */
+    @Deprecated
+    ConversionInstruction I2S = InstructionConst.I2S;
+
+    /**
+     * LCMP instruction.
+     *
+     * @deprecated Use {@link InstructionConst#LCMP}.
+     */
+    @Deprecated
+    Instruction LCMP = InstructionConst.LCMP;
+
+    /**
+     * FCMPL instruction.
+     *
+     * @deprecated Use {@link InstructionConst#FCMPL}.
+     */
+    @Deprecated
+    Instruction FCMPL = InstructionConst.FCMPL;
+
+    /**
+     * FCMPG instruction.
+     *
+     * @deprecated Use {@link InstructionConst#FCMPG}.
+     */
+    @Deprecated
+    Instruction FCMPG = InstructionConst.FCMPG;
+
+    /**
+     * DCMPL instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DCMPL}.
+     */
+    @Deprecated
+    Instruction DCMPL = InstructionConst.DCMPL;
+
+    /**
+     * DCMPG instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DCMPG}.
+     */
+    @Deprecated
+    Instruction DCMPG = InstructionConst.DCMPG;
+
+    /**
+     * IRETURN instruction.
+     *
+     * @deprecated Use {@link InstructionConst#IRETURN}.
+     */
+    @Deprecated
+    ReturnInstruction IRETURN = InstructionConst.IRETURN;
+
+    /**
+     * LRETURN instruction.
+     *
+     * @deprecated Use {@link InstructionConst#LRETURN}.
+     */
+    @Deprecated
+    ReturnInstruction LRETURN = InstructionConst.LRETURN;
+
+    /**
+     * FRETURN instruction.
+     *
+     * @deprecated Use {@link InstructionConst#FRETURN}.
+     */
+    @Deprecated
+    ReturnInstruction FRETURN = InstructionConst.FRETURN;
+
+    /**
+     * DRETURN instruction.
+     *
+     * @deprecated Use {@link InstructionConst#DRETURN}.
+     */
+    @Deprecated
+    ReturnInstruction DRETURN = InstructionConst.DRETURN;
+
+    /**
+     * ARETURN instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ARETURN}.
+     */
+    @Deprecated
+    ReturnInstruction ARETURN = InstructionConst.ARETURN;
+
+    /**
+     * RETURN instruction.
+     *
+     * @deprecated Use {@link InstructionConst#RETURN}.
+     */
+    @Deprecated
+    ReturnInstruction RETURN = InstructionConst.RETURN;
+
+    /**
+     * ARRAYLENGTH instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ARRAYLENGTH}.
+     */
+    @Deprecated
+    Instruction ARRAYLENGTH = InstructionConst.ARRAYLENGTH;
+
+    /**
+     * ATHROW instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ATHROW}.
+     */
+    @Deprecated
+    Instruction ATHROW = InstructionConst.ATHROW;
+
+    /**
+     * MONITORENTER instruction.
+     *
+     * @deprecated Use {@link InstructionConst#MONITORENTER}.
+     */
+    @Deprecated
+    Instruction MONITORENTER = InstructionConst.MONITORENTER;
+
+    /**
+     * MONITOREXIT instruction.
+     *
+     * @deprecated Use {@link InstructionConst#MONITOREXIT}.
+     */
+    @Deprecated
+    Instruction MONITOREXIT = InstructionConst.MONITOREXIT;
+
+    /**
+     * You can use these constants in multiple places safely, if you can guarantee that you will never alter their internal values, for example call setIndex().
+     *
+     * @deprecated Use {@link InstructionConst#THIS}.
+     */
+    @Deprecated
+    LocalVariableInstruction THIS = InstructionConst.THIS;
+
+    /**
+     * ALOAD_0 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ALOAD_0}.
+     */
+    @Deprecated
+    LocalVariableInstruction ALOAD_0 = InstructionConst.ALOAD_0;
+
+    /**
+     * ALOAD_1 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ALOAD_1}.
+     */
+    @Deprecated
+    LocalVariableInstruction ALOAD_1 = InstructionConst.ALOAD_1;
+
+    /**
+     * ALOAD_2 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ALOAD_2}.
+     */
+    @Deprecated
+    LocalVariableInstruction ALOAD_2 = InstructionConst.ALOAD_2;
+
+    /**
+     * ILOAD_0 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ILOAD_0}.
+     */
+    @Deprecated
+    LocalVariableInstruction ILOAD_0 = InstructionConst.ILOAD_0;
+
+    /**
+     * ILOAD_1 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ILOAD_1}.
+     */
+    @Deprecated
+    LocalVariableInstruction ILOAD_1 = InstructionConst.ILOAD_1;
+
+    /**
+     * ILOAD_2 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ILOAD_2}.
+     */
+    @Deprecated
+    LocalVariableInstruction ILOAD_2 = InstructionConst.ILOAD_2;
+
+    /**
+     * ASTORE_0 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ASTORE_0}.
+     */
+    @Deprecated
+    LocalVariableInstruction ASTORE_0 = InstructionConst.ASTORE_0;
+
+    /**
+     * ASTORE_1 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ASTORE_1}.
+     */
+    @Deprecated
+    LocalVariableInstruction ASTORE_1 = InstructionConst.ASTORE_1;
+
+    /**
+     * ASTORE_2 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ASTORE_2}.
+     */
+    @Deprecated
+    LocalVariableInstruction ASTORE_2 = InstructionConst.ASTORE_2;
+
+    /**
+     * ISTORE_0 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ISTORE_0}.
+     */
+    @Deprecated
+    LocalVariableInstruction ISTORE_0 = InstructionConst.ISTORE_0;
+
+    /**
+     * ISTORE_1 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ISTORE_1}.
+     */
+    @Deprecated
+    LocalVariableInstruction ISTORE_1 = InstructionConst.ISTORE_1;
+
+    /**
+     * ISTORE_2 instruction.
+     *
+     * @deprecated Use {@link InstructionConst#ISTORE_2}.
+     */
+    @Deprecated
+    LocalVariableInstruction ISTORE_2 = InstructionConst.ISTORE_2;
+
+    /**
+     * Instruction objects indexed by opcode. Entries for instructions without a predefined instance, such as branch instructions, are null.
+     *
+     * @deprecated Use {@link InstructionConst#INSTRUCTIONS}.
+     */
+    @Deprecated
+    Instruction[] INSTRUCTIONS = InstructionConst.INSTRUCTIONS;
+
+    /**
+     * Interfaces may have no static initializers, so we simulate this with an inner class.
+     */
+    Clinit bla = new Clinit();
 }

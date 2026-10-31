@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       https://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!--
+  This file contains some false positive bugs detected by findbugs. Their
+  false positive nature has been analyzed individually and they have been
+  put here to instruct findbugs it must ignore them.
+-->
+<FindBugsFilter
+    xmlns="https://github.com/spotbugs/filter/3.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://github.com/spotbugs/filter/3.0.0 https://raw.githubusercontent.com/spotbugs/spotbugs/3.1.0/spotbugs/etc/findbugsfilter.xsd">
+  <!-- Using wild-card class names so exclusions work regardless of the top-level package -->
+  <!-- https://github.com/spotbugs/spotbugs/issues/2710 -->
+  <Match>
+    <Class name="~.*" />
+    <Bug pattern="CT_CONSTRUCTOR_THROW" />
+  </Match>
+  <!-- Waiting on BCEL-252 -->
+  <Match>
+    <Class name="~.*\.util\.Class2HTML" />
+    <Bug pattern="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD" />
+  </Match>
+  <!-- Class is not supposed to be an Exception itself -->
+  <Match>
+    <Class name="~.*\.classfile\.CodeException" />
+    <Bug pattern="NM_CLASS_NOT_EXCEPTION" />
+  </Match>
+  <!-- Ignore GC here -->
+  <Match>
+    <Class name="~.*\.verifier\.TransitiveHull" />
+    <Bug pattern="DM_GC" />
+  </Match>
+  <!-- clone() creates a new instance so does not need to call super.clone() -->
+  <Match>
+    <Bug pattern="CN_IDIOM_NO_SUPER_CALL"/>
+    <Method name="clone"/>
+    <Or>
+      <Class name="~.*\.verifier\.structurals\.LocalVariables"/>
+      <Class name="~.*\.verifier\.structurals\.OperandStack"/>
+    </Or>
+  </Match>
+  <!-- Binary compatibility -->
+  <Match>
+    <Class name="org.apache.bcel.Repository"/>
+    <Method name="setRepository"/>
+    <Bug pattern="EI_EXPOSE_STATIC_REP2"/>
+  </Match>  
+  <!-- Binary compatibility -->
+  <Match>
+    <Class name="org.apache.bcel.Repository"/>
+    <Method name="getRepository"/>
+    <Bug pattern="MS_EXPOSE_REP"/>
+  </Match>
+  <!-- Binary compatibility -->
+  <Match>
+    <Class name="TransitiveHull"/>
+    <Field name="IGNORED"/>
+    <Bug pattern="MS_PKGPROTECT"/>
+  </Match>
+  <!--
+    TODO: this should probably be sinplified
+     Medium: Complicated, subtle or wrong increment in for-loop
+      org.apache.bcel.util.BCELifier.printFlags(int, BCELifier$FLAGS)
+      [org.apache.bcel.util.BCELifier] At BCELifier.java:[line 118]
+      QF_QUESTIONABLE_FOR_LOOP
+   -->
+  <Match>
+    <Class name="org.apache.bcel.util.BCELifier"/>
+    <Method name="printFlags" params="int, org.apache.bcel.util.BCELifier$FLAGS" returns="java.lang.String"/>
+    <Bug pattern="QF_QUESTIONABLE_FOR_LOOP"/>
+  </Match>
+  <!-- Reason: TODO, perhaps? -->
+  <Match>
+    <Class name="~.*" />
+    <Or>
+      <Bug pattern="EI_EXPOSE_REP" />
+      <Bug pattern="EI_EXPOSE_REP2" />
+    </Or>
+  </Match>
+  <!-- TODO - enable later -->
+  <Match>
+    <Class name="~.*" />
+    <Bug pattern="MS_MUTABLE_ARRAY" />
+  </Match>
+  <!-- Test data classes -->
+  <Match>
+    <Or>
+      <Class name="~.*\.data\..*" />
+      <Class name="~.*\.tests\.Test.*" />
+    </Or>
+  </Match>
+  <!--
+    This is intentional
+    Error:  Switch statement found in org.apache.bcel.util.BCELFactory.visitAllocationInstruction(AllocationInstruction)
+     where one case falls through to the next case
+     [org.apache.bcel.util.BCELFactory, org.apache.bcel.util.BCELFactory]
+     At BCELFactory.java:[lines 188-191]
+     Another occurrence at BCELFactory.java:[lines 192-196] SF_SWITCH_FALLTHROUGH
+  -->
+  <Match>
+    <Class name="org.apache.bcel.util.BCELFactory"/>
+    <Method name="visitAllocationInstruction"/>
+    <Bug pattern="SF_SWITCH_FALLTHROUGH"/>
+  </Match>
+  <!--
+    Class is deprecated
+    Error:  The class name org.apache.bcel.util.ClassLoader
+      shadows the simple name of the superclass java.lang.ClassLoader
+      [org.apache.bcel.util.ClassLoader] At ClassLoader.java:[lines 59-178]
+      NM_SAME_SIMPLE_NAME_AS_SUPERCLASS
+    Error:  org.apache.bcel.util.ClassLoader.DEFAULT_IGNORED_PACKAGES should be package protected
+    [org.apache.bcel.util.ClassLoader] At ClassLoader.java:[line 59]
+    MS_PKGPROTECT
+  -->
+  <Match>
+    <Class name="org.apache.bcel.util.ClassLoader"/>
+    <Or>
+      <Bug pattern="NM_SAME_SIMPLE_NAME_AS_SUPERCLASS"/>
+      <Bug pattern="MS_PKGPROTECT"/>
+    </Or>
+  </Match>
+  <!--
+    TODO: field is deprecated in preparation for making it private later
+    Error:  org.apache.bcel.verifier.structurals.Frame._this should be package protected
+    [org.apache.bcel.verifier.structurals.Frame] In Frame.java
+      MS_PKGPROTECT
+  -->
+  <Match>
+    <Class name="org.apache.bcel.verifier.structurals.Frame"/>
+    <Field name="_this"/>
+    <Bug pattern="MS_PKGPROTECT"/>
+  </Match>
+  <!-- TODO Is this really identity equality and not object equality? -->
+  <Match>
+    <Class name="Mini.ASTFunDecl"/>
+    <Method name="optimizeIFs"/>
+    <Bug pattern="EC_UNRELATED_TYPES_USING_POINTER_EQUALITY"/>
+  </Match>
+  <!-- TODO Needs a redo, looks like very old code. -->
+  <Match>
+    <Class name="Mini.Environment"/>
+    <Bug pattern="CN_IDIOM_NO_SUPER_CALL"/>
+  </Match>
+  <!-- Skip JavaCC generated code. -->
+  <Match>
+    <Class name="Mini.MiniParser"/>
+  </Match>
+  <!-- Skip JavaCC generated code. -->
+  <Match>
+    <Class name="Mini.ASCII_CharStream"/>
+  </Match>
+  <!-- Skip JavaCC generated code. -->
+  <Match>
+    <Class name="Mini.MiniParserTokenManager"/>
+  </Match>
+  <!-- Skip JavaCC generated code. -->
+  <Match>
+    <Class name="Mini.MiniParserConstants"/>
+  </Match>
+  <!-- Skip JavaCC generated code. -->
+  <Match>
+    <Class name="Mini.SimpleNode"/>
+  </Match>
+  <!-- Skip JavaCC generated code. -->
+  <Match>
+    <Class name="Mini.Token"/>
+  </Match>
+  <!-- Skip JavaCC generated code. -->
+  <Match>
+    <Class name="Mini.ASTIfExpr"/>
+  </Match>
+  <!-- Skip JavaCC generated code. -->
+  <Match>
+    <Class name="Mini.MiniParserTreeConstants"/>
+  </Match>
+  <!-- FALSE POSITIVE. -->
+  <Match>
+    <Class name="Mini.MiniC"/>
+    <Field name="errors"/>
+    <Field name="file"/>
+    <Field name="warnings"/>
+    <Bug pattern="UWF_UNWRITTEN_FIELD"/>
+  </Match>
+</FindBugsFilter>

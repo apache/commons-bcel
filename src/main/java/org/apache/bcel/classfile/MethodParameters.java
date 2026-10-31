@@ -1,18 +1,20 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 
 package org.apache.bcel.classfile;
@@ -20,41 +22,36 @@ package org.apache.bcel.classfile;
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.stream.Stream;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
  * This class represents a MethodParameters attribute.
  *
- * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.24">
- * The class File Format : The MethodParameters Attribute</a>
+ * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.24"> The class File Format :
+ *      The MethodParameters Attribute</a>
  * @since 6.0
  */
-public class MethodParameters extends Attribute {
+public class MethodParameters extends Attribute implements Iterable<MethodParameter> {
 
     /**
      * Empty array.
      */
-    private static final MethodParameter[] EMPTY_METHOD_PARAMETER_ARRAY = new MethodParameter[0];
+    private static final MethodParameter[] EMPTY_ARRAY = {};
 
-    private MethodParameter[] parameters = EMPTY_METHOD_PARAMETER_ARRAY;
+    private MethodParameter[] parameters = EMPTY_ARRAY;
 
-    MethodParameters(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool) throws IOException {
-        super(Const.ATTR_METHOD_PARAMETERS, name_index, length, constant_pool);
-
-        final int parameters_count = input.readUnsignedByte();
-        parameters = new MethodParameter[parameters_count];
-        for (int i = 0; i < parameters_count; i++) {
+    MethodParameters(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+        super(Const.ATTR_METHOD_PARAMETERS, nameIndex, length, constantPool);
+        final int parameterCount = input.readUnsignedByte();
+        parameters = new MethodParameter[parameterCount];
+        for (int i = 0; i < parameterCount; i++) {
             parameters[i] = new MethodParameter(input);
         }
-    }
-
-    public MethodParameter[] getParameters() {
-        return parameters;
-    }
-
-    public void setParameters(final MethodParameter[] parameters) {
-        this.parameters = parameters;
     }
 
     @Override
@@ -63,29 +60,49 @@ public class MethodParameters extends Attribute {
     }
 
     @Override
-    public Attribute copy(final ConstantPool _constant_pool) {
+    public Attribute copy(final ConstantPool constantPool) {
         final MethodParameters c = (MethodParameters) clone();
         c.parameters = new MethodParameter[parameters.length];
-
-        for (int i = 0; i < parameters.length; i++) {
-            c.parameters[i] = parameters[i].copy();
-        }
-        c.setConstantPool(_constant_pool);
+        Arrays.setAll(c.parameters, i -> parameters[i].copy());
+        c.setConstantPool(constantPool);
         return c;
     }
 
     /**
-     * Dump method parameters attribute to file stream in binary format.
+     * Dumps method parameters attribute to file stream in binary format.
      *
-     * @param file Output file stream
-     * @throws IOException
+     * @param file Output file stream.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     @Override
-       public void dump(final DataOutputStream file) throws IOException {
-           super.dump(file);
-           file.writeByte(parameters.length);
+    public void dump(final DataOutputStream file) throws IOException {
+        super.dump(file);
+        file.writeByte(Args.requireU1(parameters.length, "parameters.length"));
         for (final MethodParameter parameter : parameters) {
             parameter.dump(file);
         }
+    }
+
+    /**
+     * Gets the method parameters.
+     *
+     * @return The method parameters.
+     */
+    public MethodParameter[] getParameters() {
+        return parameters;
+    }
+
+    @Override
+    public Iterator<MethodParameter> iterator() {
+        return Stream.of(parameters).iterator();
+    }
+
+    /**
+     * Sets the method parameters.
+     *
+     * @param parameters The method parameters to set.
+     */
+    public void setParameters(final MethodParameter[] parameters) {
+        this.parameters = parameters != null ? parameters : EMPTY_ARRAY;
     }
 }

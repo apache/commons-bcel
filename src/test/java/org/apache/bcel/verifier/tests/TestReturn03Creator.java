@@ -1,21 +1,24 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.apache.bcel.verifier.tests;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -30,55 +33,57 @@ import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.Type;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+public abstract class TestReturn03Creator extends TestCreator {
+    private final InstructionFactory instructionFactory;
+    private final ConstantPoolGen constantPoolGen;
+    private final ClassGen classGen;
+    private final Type returnType;
+    private final String genClassSuffix;
 
-public class TestReturn03Creator extends TestCreator {
-  private final InstructionFactory _factory;
-  private final ConstantPoolGen    _cp;
-  private final ClassGen           _cg;
+    protected TestReturn03Creator(final Type returnType, final String genClassSuffix) {
+        classGen = new ClassGen(TEST_PACKAGE + ".TestReturn03" + genClassSuffix, "java.lang.Object", "TestReturn03.java", Const.ACC_PUBLIC | Const.ACC_SUPER,
+                new String[] {});
 
-  public TestReturn03Creator() {
-    _cg = new ClassGen(TEST_PACKAGE+".TestReturn03", "java.lang.Object", "TestReturn03.java",
-            Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {  });
+        constantPoolGen = classGen.getConstantPool();
+        instructionFactory = new InstructionFactory(classGen, constantPoolGen);
+        this.returnType = returnType;
+        this.genClassSuffix = genClassSuffix;
+    }
 
-    _cp = _cg.getConstantPool();
-    _factory = new InstructionFactory(_cg, _cp);
-  }
+    @Override
+    public void create(final OutputStream out) throws IOException {
+        createMethod_0();
+        createMethod_1();
+        classGen.getJavaClass().dump(out);
+    }
 
-  @Override
-public void create(final OutputStream out) throws IOException {
-    createMethod_0();
-    createMethod_1();
-    _cg.getJavaClass().dump(out);
-  }
+    private void createMethod_0() {
+        final InstructionList il = new InstructionList();
+        final MethodGen method = new MethodGen(Const.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {}, "<init>", TEST_PACKAGE + ".TestReturn03", il,
+                constantPoolGen);
 
-  private void createMethod_0() {
-    final InstructionList il = new InstructionList();
-    final MethodGen method = new MethodGen(Const.ACC_PUBLIC, Type.VOID, Type.NO_ARGS, new String[] {  },
-            "<init>", TEST_PACKAGE+".TestReturn03", il, _cp);
+        final InstructionHandle ih_0 = il.append(InstructionFactory.createLoad(Type.OBJECT, 0));
+        assertNotNull(ih_0); // TODO why is this not used
+        il.append(instructionFactory.createInvoke("java.lang.Object", "<init>", Type.VOID, Type.NO_ARGS, Const.INVOKESPECIAL));
+        final InstructionHandle ih_4 = il.append(InstructionFactory.createReturn(Type.VOID));
+        assertNotNull(ih_4); // TODO why is this not used
+        method.setMaxStack();
+        method.setMaxLocals();
+        classGen.addMethod(method.getMethod());
+        il.dispose();
+    }
 
-    final InstructionHandle ih_0 = il.append(InstructionFactory.createLoad(Type.OBJECT, 0));
-    assertNotNull(ih_0); // TODO why is this not used
-    il.append(_factory.createInvoke("java.lang.Object", "<init>", Type.VOID, Type.NO_ARGS, Const.INVOKESPECIAL));
-    final InstructionHandle ih_4 = il.append(InstructionFactory.createReturn(Type.VOID));
-    assertNotNull(ih_4); // TODO why is this not used
-    method.setMaxStack();
-    method.setMaxLocals();
-    _cg.addMethod(method.getMethod());
-    il.dispose();
-  }
+    private void createMethod_1() {
+        final InstructionList il = new InstructionList();
+        final MethodGen method = new MethodGen(Const.ACC_PUBLIC | Const.ACC_STATIC, Type.INT, Type.NO_ARGS, new String[] {}, "test3",
+                TEST_PACKAGE + ".TestReturn03" + genClassSuffix, il, constantPoolGen);
 
-  private void createMethod_1() {
-    final InstructionList il = new InstructionList();
-    final MethodGen method = new MethodGen(Const.ACC_PUBLIC | Const.ACC_STATIC, Type.INT, Type.NO_ARGS,
-            new String[] {  }, "test3", TEST_PACKAGE+".TestReturn03", il, _cp);
-
-    final InstructionHandle ih_0 = il.append(InstructionConst.ACONST_NULL);
-    assertNotNull(ih_0); // TODO why is this not used
-    il.append(InstructionFactory.createReturn(Type.OBJECT));
-    method.setMaxStack();
-    method.setMaxLocals();
-    _cg.addMethod(method.getMethod());
-    il.dispose();
-  }
+        final InstructionHandle ih_0 = il.append(InstructionConst.ACONST_NULL);
+        assertNotNull(ih_0); // TODO why is this not used
+        il.append(InstructionFactory.createReturn(returnType));
+        method.setMaxStack();
+        method.setMaxLocals();
+        classGen.addMethod(method.getMethod());
+        il.dispose();
+    }
 }

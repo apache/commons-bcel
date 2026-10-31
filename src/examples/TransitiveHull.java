@@ -1,25 +1,26 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-import org.apache.bcel.Constants;
+import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.ConstantCP;
@@ -30,38 +31,66 @@ import org.apache.bcel.classfile.ConstantMethodref;
 import org.apache.bcel.classfile.ConstantNameAndType;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.generic.ArrayType;
 import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.Type;
 import org.apache.bcel.util.ClassQueue;
 import org.apache.bcel.util.ClassSet;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
- * Find all classes referenced by given start class and all classes referenced
- * by those and so on. In other words: Compute the transitive hull of classes
- * used by a given class. This is done by checking all ConstantClass entries and
+ * Find all classes referenced by given start class and all classes referenced by those and so on. In other words:
+ * Compute the transitive hull of classes used by a given class. This is done by checking all ConstantClass entries and
  * all method and field signatures.
  * <p>
- * This may be useful in order to put all class files of an application into a
- * single JAR file, e.g..
+ * This may be useful in order to put all class files of an application into a single JAR file.
  * </p>
  * <p>
  * It fails however in the presence of reflexive code aka introspection.
  * </p>
  * <p>
- * You'll need Apache's regular expression library supplied together with BCEL
- * to use this class.
+ * You'll need Apache's regular expression library supplied together with BCEL to use this class.
  * </p>
  */
 public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
 
+    /**
+     * Should be private.
+     *
+     * @deprecated Use {@link #getIgnored()}.
+     */
+    @Deprecated
+    public static final String[] IGNORED = {"java[.].*", "javax[.].*", "sun[.].*", "sunw[.].*", "com[.]sun[.].*", "org[.]omg[.].*", "org[.]w3c[.].*",
+        "org[.]xml[.].*", "net[.]jini[.].*"};
+
+    public static void main(final String[] argv) {
+        JavaClass javaClass;
+
+        try {
+            if (argv.length == 0) {
+                System.err.println("transitive: No input files specified");
+            } else {
+                if ((javaClass = Repository.lookupClass(argv[0])) == null) {
+                    javaClass = new ClassParser(argv[0]).parse();
+                }
+
+                final TransitiveHull hull = new TransitiveHull(javaClass);
+
+                hull.start();
+                System.out.println(Arrays.asList(hull.getClassNames()));
+            }
+        } catch (final Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private final ClassQueue queue;
     private final ClassSet set;
-    private ConstantPool cp;
-    private String[] ignored = IGNORED;
 
-    public static final String[] IGNORED = {"java[.].*", "javax[.].*", "sun[.].*", "sunw[.].*",
-            "com[.]sun[.].*", "org[.]omg[.].*", "org[.]w3c[.].*", "org[.]xml[.].*", "net[.]jini[.].*"};
+    private ConstantPool cp;
+
+    private String[] ignored = IGNORED;
 
     public TransitiveHull(final JavaClass clazz) {
         queue = new ClassQueue();
@@ -70,12 +99,61 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
         set.add(clazz);
     }
 
+    private void add(String className) {
+        className = Utility.pathToPackage(className);
+
+        for (final String alreadyContained : set.getClassNames()) {
+            if (alreadyContained.equals(className)) {
+                return;
+            }
+        }
+
+        for (final String anIgnored : ignored) {
+            if (Pattern.matches(anIgnored, className)) {
+                return;
+            }
+        }
+
+        try {
+            final JavaClass clazz = Repository.lookupClass(className);
+
+            if (set.add(clazz)) {
+                queue.enqueue(clazz);
+            }
+        } catch (final ClassNotFoundException e) {
+            throw new IllegalStateException("Missing class: " + e.toString());
+        }
+    }
+
+    private void checkType(Type type) {
+        if (type instanceof ArrayType) {
+            type = ((ArrayType) type).getBasicType();
+        }
+
+        if (type instanceof ObjectType) {
+            add(((ObjectType) type).getClassName());
+        }
+    }
+
     public JavaClass[] getClasses() {
         return set.toArray();
     }
 
     public String[] getClassNames() {
         return set.getClassNames();
+    }
+
+    public String[] getIgnored() {
+        return ignored != null ? ignored.clone() : null;
+    }
+
+    /**
+     * Sets the value of ignored.
+     *
+     * @param v Value to assign to ignored.
+     */
+    public void setIgnored(final String[] v) {
+        ignored = ArrayUtils.clone(v);
     }
 
     /**
@@ -90,48 +168,32 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
         }
     }
 
-    private void add(String class_name) {
-        class_name = class_name.replace('/', '.');
-
-        for (final String anIgnored : ignored) {
-            if (Pattern.matches(anIgnored, class_name)) {
-                return;
-            }
-        }
-
-        try {
-            final JavaClass clazz = Repository.lookupClass(class_name);
-
-            if (set.add(clazz)) {
-                queue.enqueue(clazz);
-            }
-        } catch (final ClassNotFoundException e) {
-            throw new IllegalStateException("Missing class: " + e.toString());
-        }
+    @Override
+    public void visitConstantClass(final ConstantClass cc) {
+        final String className = (String) cc.getConstantValue(cp);
+        add(className);
     }
 
     @Override
-    public void visitConstantClass(final ConstantClass cc) {
-        final String class_name = (String) cc.getConstantValue(cp);
-        add(class_name);
+    public void visitConstantFieldref(final ConstantFieldref cfr) {
+        visitRef(cfr, false);
     }
 
-    private void checkType(Type type) {
-        if (type instanceof ArrayType) {
-            type = ((ArrayType) type).getBasicType();
-        }
+    @Override
+    public void visitConstantInterfaceMethodref(final ConstantInterfaceMethodref cimr) {
+        visitRef(cimr, true);
+    }
 
-        if (type instanceof ObjectType) {
-            add(((ObjectType) type).getClassName());
-        }
+    @Override
+    public void visitConstantMethodref(final ConstantMethodref cmr) {
+        visitRef(cmr, true);
     }
 
     private void visitRef(final ConstantCP ccp, final boolean method) {
-        final String class_name = ccp.getClass(cp);
-        add(class_name);
+        final String className = ccp.getClass(cp);
+        add(className);
 
-        final ConstantNameAndType cnat = (ConstantNameAndType) cp.getConstant(ccp.getNameAndTypeIndex(),
-                Constants.CONSTANT_NameAndType);
+        final ConstantNameAndType cnat = cp.getConstant(ccp.getNameAndTypeIndex(), Const.CONSTANT_NameAndType, ConstantNameAndType.class);
 
         final String signature = cnat.getSignature(cp);
 
@@ -145,55 +207,6 @@ public class TransitiveHull extends org.apache.bcel.classfile.EmptyVisitor {
             }
         } else {
             checkType(Type.getType(signature));
-        }
-    }
-
-    @Override
-    public void visitConstantMethodref(final ConstantMethodref cmr) {
-        visitRef(cmr, true);
-    }
-
-    @Override
-    public void visitConstantInterfaceMethodref(final ConstantInterfaceMethodref cimr) {
-        visitRef(cimr, true);
-    }
-
-    @Override
-    public void visitConstantFieldref(final ConstantFieldref cfr) {
-        visitRef(cfr, false);
-    }
-
-    public String[] getIgnored() {
-        return ignored;
-    }
-
-    /**
-     * Set the value of ignored.
-     *
-     * @param v Value to assign to ignored.
-     */
-    public void setIgnored(final String[] v) {
-        ignored = v;
-    }
-
-    public static void main(final String[] argv) {
-        JavaClass java_class;
-
-        try {
-            if (argv.length == 0) {
-                System.err.println("transitive: No input files specified");
-            } else {
-                if ((java_class = Repository.lookupClass(argv[0])) == null) {
-                    java_class = new ClassParser(argv[0]).parse();
-                }
-
-                final TransitiveHull hull = new TransitiveHull(java_class);
-
-                hull.start();
-                System.out.println(Arrays.asList(hull.getClassNames()));
-            }
-        } catch (final Exception e) {
-            e.printStackTrace();
         }
     }
 }

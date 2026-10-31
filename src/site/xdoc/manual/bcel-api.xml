@@ -1,46 +1,47 @@
 <?xml version="1.0"?>
 <!--
-    * Licensed to the Apache Software Foundation (ASF) under one
-    * or more contributor license agreements.  See the NOTICE file
-    * distributed with this work for additional information
-    * regarding copyright ownership.  The ASF licenses this file
-    * to you under the Apache License, Version 2.0 (the
-    * "License"); you may not use this file except in compliance
-    * with the License.  You may obtain a copy of the License at
-    * 
-    *   http://www.apache.org/licenses/LICENSE-2.0
-    * 
-    * Unless required by applicable law or agreed to in writing,
-    * software distributed under the License is distributed on an
-    * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-    * KIND, either express or implied.  See the License for the
-    * specific language governing permissions and limitations
-    * under the License.    
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   https://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
 -->
-<document>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
   <properties>
     <title>The BCEL API</title>
+    <author email="dev@commons.apache.org">Apache Commons Team</author>
   </properties>
 
   <body>
     <section name="The BCEL API">
       <p>
-        The <font face="helvetica,arial">BCEL</font> API abstracts from
+        The BCEL API abstracts from
         the concrete circumstances of the Java Virtual Machine and how to
         read and write binary Java class files. The API mainly consists
         of three parts:
       </p>
 
-      <p>
-
         <ol type="1">
           <li> A package that contains classes that describe "static"
-            constraints of class files, i.e., reflects the class file format and
+            constraints of class files, that is, a package that reflects the class file format and
             is not intended for byte code modifications. The classes may be
             used to read and write class files from or to a file.  This is
             useful especially for analyzing Java classes without having the
             source files at hand.  The main data structure is called
-            <tt>JavaClass</tt> which contains methods, fields, etc..</li>
+            <tt>JavaClass</tt> which contains methods, fields, and so on.</li>
 
           <li> A package to dynamically generate or modify
             <tt>JavaClass</tt> or <tt>Method</tt> objects.  It may be used to
@@ -51,31 +52,29 @@
           <li> Various code examples and utilities like a class file viewer,
             a tool to convert class files into HTML, and a converter from
             class files to the <a
-                    href="http://jasmin.sourceforge.net">Jasmin</a> assembly
+                    href="https://jasmin.sourceforge.net">Jasmin</a> assembly
             language.</li>
         </ol>
-      </p>
 
     <subsection name="JavaClass">
       <p>
-        The "static" component of the <font
-              face="helvetica,arial">BCEL</font> API resides in the package
+        The "static" component of the BCEL API resides in the package
         <tt>org.apache.bcel.classfile</tt> and closely represents class
         files. All of the binary components and data structures declared
         in the <a
-              href="http://docs.oracle.com/javase/specs/">JVM
+              href="https://docs.oracle.com/javase/specs/">JVM
         specification</a> and described in section <a
               href="#2 The Java Virtual Machine">2</a> are mapped to classes.
 
         <a href="#Figure 3">Figure 3</a> shows an UML diagram of the
-        hierarchy of classes of the <font face="helvetica,arial">BCEL
-      </font>API. <a href="#Figure 8">Figure 8</a> in the appendix also
+        hierarchy of classes of the BCEL
+        API. <a href="#Figure-8">Figure 8</a> in the appendix also
         shows a detailed diagram of the <tt>ConstantPool</tt> components.
       </p>
 
       <p align="center">
-        <a name="Figure 3">
-          <img src="../images/javaclass.gif"/> <br/>
+        <a id="Figure-3">
+          <img src="../images/javaclass.gif" alt=""/> <br/>
           Figure 3: UML diagram for the JavaClass API</a>
       </p>
 
@@ -101,8 +100,8 @@
       <p>
         Methods and fields contain a signature, symbolically defining
         their types.  Access flags like <tt>public static final</tt> occur
-        in several places and are encoded by an integer bit mask, e.g.,
-        <tt>public static final</tt> matches to the Java expression
+        in several places and are encoded by an integer bit mask. For example,
+        <tt>public static final</tt> corresponds to the Java expression
       </p>
 
 
@@ -118,7 +117,7 @@
         table of handled exceptions, and some optional debugging
         information coded as <tt>LineNumberTable</tt> and
         <tt>LocalVariableTable</tt> attributes. Attributes are in general
-        specific to some data structure, i.e., no two components share the
+        specific to some data structure, that is, no two components share the
         same kind of attribute, though this is not explicitly
         forbidden. In the figure the <tt>Attribute</tt> classes are stereotyped
         with the component they belong to.
@@ -164,7 +163,7 @@ printCode(clazz.getMethods());
 public static void printCode(Method[] methods) {
     for (int i = 0; i &lt; methods.length; i++) {
         System.out.println(methods[i]);
-        
+
         Code code = methods[i].getCode();
         if (code != null) // Non-abstract method
         System.out.println(code);
@@ -174,12 +173,12 @@ public static void printCode(Method[] methods) {
 
     <h4>Analyzing class data</h4>
       <p>
-        Last but not least, <font face="helvetica,arial">BCEL</font>
+        Last but not least, BCEL
         supports the <em>Visitor</em> design pattern, so one can write
         visitor objects to traverse and analyze the contents of a class
         file. Included in the distribution is a class
         <tt>JasminVisitor</tt> that converts class files into the <a
-              href="http://jasmin.sourceforge.net">Jasmin</a>
+              href="https://jasmin.sourceforge.net">Jasmin</a>
         assembler language.
       </p>
 
@@ -197,8 +196,8 @@ public static void printCode(Method[] methods) {
       </p>
 
       <p align="center">
-        <a name="Figure 4">
-          <img src="../images/classgen.gif"/>
+        <a id="Figure-4">
+          <img src="../images/classgen.gif" alt="Figure 3"/>
           <br/>
           Figure 4: UML diagram of the ClassGen API</a>
       </p>
@@ -233,7 +232,7 @@ Type[] arg_types = new Type[] { new ArrayType(Type.STRING, 1) };
       <p>
         Fields are represented by <tt>FieldGen</tt> objects, which may be
         freely modified by the user. If they have the access rights
-        <tt>static final</tt>, i.e., are constants and of basic type, they
+        <tt>static final</tt>, that is, are constants and of basic type, they
         may optionally have an initializing value.
       </p>
 
@@ -268,7 +267,7 @@ Type[] arg_types = new Type[] { new ArrayType(Type.STRING, 1) };
         offsets.  Instructions consist of an opcode (sometimes called
         tag), their length in bytes and an offset (or index) within the
         byte code. Since many instructions are immutable (stack operators,
-        e.g.), the <tt>InstructionConstants</tt> interface offers
+        for example), the <tt>InstructionConstants</tt> interface offers
         shareable predefined "fly-weight" constants to use.
       </p>
 
@@ -276,24 +275,23 @@ Type[] arg_types = new Type[] { new ArrayType(Type.STRING, 1) };
         Instructions are grouped via sub-classing, the type hierarchy of
         instruction classes is illustrated by (incomplete) figure in the
         appendix. The most important family of instructions are the
-        <em>branch instructions</em>, e.g., <tt>goto</tt>, that branch to
+        <em>branch instructions</em>, for example, <tt>goto</tt>, that branch to
         targets somewhere within the byte code. Obviously, this makes them
         candidates for playing an <tt>InstructionTargeter</tt> role,
         too. Instructions are further grouped by the interfaces they
-        implement, there are, e.g., <tt>TypedInstruction</tt>s that are
+        implement. There are, for example, <tt>TypedInstruction</tt>s that are
         associated with a specific type like <tt>ldc</tt>, or
         <tt>ExceptionThrower</tt> instructions that may raise exceptions
         when executed.
       </p>
 
       <p>
-        All instructions can be traversed via <tt>accept(Visitor v)</tt>
-        methods, i.e., the Visitor design pattern. There is however some
-        special trick in these methods that allows to merge the handling
-        of certain instruction groups. The <tt>accept()</tt> do not only
-        call the corresponding <tt>visit()</tt> method, but call
-        <tt>visit()</tt> methods of their respective super classes and
-        implemented interfaces first, i.e., the most specific
+        All instructions can be traversed using <tt>accept(Visitor v)</tt>
+        methods, which implement the Visitor design pattern. These methods
+        allow the handling of certain instruction groups to be combined.
+        Before calling the corresponding <tt>visit()</tt> method, each
+        <tt>accept()</tt> method calls the <tt>visit()</tt> methods for the
+        respective superclasses and implemented interfaces. The most specific
         <tt>visit()</tt> call is last. Thus one can group the handling of,
         say, all <tt>BranchInstruction</tt>s into one single method.
       </p>
@@ -301,7 +299,7 @@ Type[] arg_types = new Type[] { new ArrayType(Type.STRING, 1) };
       <p>
         For debugging purposes it may even make sense to "invent" your own
         instructions. In a sophisticated code generator like the one used
-        as a backend of the <a href="http://barat.sourceforge.net">Barat
+        as a backend of the <a href="https://barat.sourceforge.net">Barat
         framework</a> for static analysis one often has to insert
         temporary <tt>nop</tt> (No operation) instructions. When examining
         the produced code it may be very difficult to track back where the
@@ -327,7 +325,7 @@ Type[] arg_types = new Type[] { new ArrayType(Type.STRING, 1) };
         areas of code very simple and also allows us to reuse immutable
         instruction objects (fly-weight objects). Since we use symbolic
         references, computation of concrete byte code offsets does not
-        need to occur until finalization, i.e., until the user has
+        need to occur until finalization, that is, until the user has
         finished the process of generating or transforming code. We will
         use the term instruction handle and instruction synonymously
         throughout the rest of the paper. Instruction handles may contain
@@ -340,7 +338,7 @@ Type[] arg_types = new Type[] { new ArrayType(Type.STRING, 1) };
         lists anywhere to an existing list. The instructions are appended
         after the given instruction handle. All append methods return a
         new instruction handle which may then be used as the target of a
-        branch instruction, e.g.:
+        branch instruction, for example:
       </p>
 
       <source>
@@ -409,7 +407,7 @@ InstructionList il = new InstructionList();
 ClassGen  cg = new ClassGen("HelloWorld", "java.lang.Object",
         "&lt;generated&#62;", ACC_PUBLIC | ACC_SUPER, null);
 MethodGen mg = new MethodGen(ACC_STATIC | ACC_PUBLIC,
-        Type.VOID, new Type[] { new ArrayType(Type.STRING, 1) }, 
+        Type.VOID, new Type[] { new ArrayType(Type.STRING, 1) },
         new String[] { "argv" }, "main", "HelloWorld", il, cp);
 ...
 cg.addMethod(mg.getMethod());
@@ -431,8 +429,8 @@ il.dispose(); // Reuse instruction handles of list
       </p>
 
       <p align="center">
-        <a name="Figure 5">
-          <img src="../images/il.gif"/>
+        <a id="Figure-5">
+          <img src="../images/il.gif" alt="Figure 5"/>
           <br/>
           Figure 5: Instruction list for <tt>readInt()</tt> method</a>
       </p>
@@ -442,13 +440,13 @@ il.dispose(); // Reuse instruction handles of list
         To simplify the creation of certain instructions the user can use
         the supplied <tt>InstructionFactory</tt> class which offers a lot
         of useful methods to create instructions from
-        scratch. Alternatively, he can also use <em>compound
+        scratch. Alternatively, they can also use <em>compound
         instructions</em>: When producing byte code, some patterns
         typically occur very frequently, for instance the compilation of
         arithmetic or comparison expressions. You certainly do not want
         to rewrite the code that translates such expressions into byte
         code in every place they may appear. In order to support this, the
-        <font face="helvetica,arial">BCEL</font> API includes a <em>compound
+        BCEL API includes a <em>compound
         instruction</em> (an interface with a single
         <tt>getInstructionList()</tt> method). Instances of this class
         may be used in any place where normal instructions would occur,
@@ -492,12 +490,11 @@ il.append(f.createReturn(type));
         When transforming code, for instance during optimization or when
         inserting analysis method calls, one typically searches for
         certain patterns of code to perform the transformation at. To
-        simplify handling such situations <font
-              face="helvetica,arial">BCEL </font>introduces a special feature:
+        simplify handling such situations BCEL introduces a special feature:
         One can search for given code patterns within an instruction list
         using <em>regular expressions</em>. In such expressions,
-        instructions are represented by their opcode names, e.g.,
-        <tt>LDC</tt>, one may also use their respective super classes, e.g.,
+        instructions are represented by their opcode names, for example,
+        <tt>LDC</tt>. One may also use their respective super classes, for example,
         "<tt>IfInstruction</tt>". Meta characters like <tt>+</tt>,
         <tt>*</tt>, and <tt>(..|..)</tt> have their usual meanings. Thus,
         the expression
@@ -535,7 +532,7 @@ il.append(f.createReturn(type));
       <p>
         When the code has been finalized these chunks can be optimized
         with a <em>peep hole</em> algorithm: An <tt>IfInstruction</tt>
-        (e.g.  the comparison of two integers: <tt>if_icmpeq</tt>) that
+        (for example, the comparison of two integers: <tt>if_icmpeq</tt>) that
         either produces a 1 or a 0 on the stack and is followed by an
         <tt>ifne</tt> instruction (branch if stack value 0) may be
         replaced by the <tt>IfInstruction</tt> with its branch target
@@ -590,13 +587,12 @@ for (Iterator e = f.search(pat, constraint); e.hasNext(); ) {
 
       <p>
         can be mapped to both of the chunks of byte code shown in <a
-              href="#Figure 6">figure 6</a>. The left column represents the
+              href="#Figure-6">figure 6</a>. The left column represents the
         unoptimized code while the right column displays the same code
         after the peep hole algorithm has been applied:
       </p>
 
-      <p align="center"><a name="Figure 6">
-        <table>
+        <table align="center" id="Figure-6">
           <tr>
             <td valign="top"><pre>
               5:  aload_0
@@ -637,8 +633,6 @@ for (Iterator e = f.search(pat, constraint); e.hasNext(); ) {
             </pre></td>
           </tr>
         </table>
-      </a>
-      </p>
     </subsection>
     </section>
   </body>

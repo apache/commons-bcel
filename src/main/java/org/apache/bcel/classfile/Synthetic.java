@@ -1,155 +1,131 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
+
 package org.apache.bcel.classfile;
 
 import java.io.DataInput;
-import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
- * This class is derived from <em>Attribute</em> and declares this class as
- * `synthetic', i.e., it needs special handling.  The JVM specification
- * states "A class member that does not appear in the source code must be
- * marked using a Synthetic attribute."  It may appear in the ClassFile
- * attribute table, a field_info table or a method_info table.  This class
- * is intended to be instantiated from the
- * <em>Attribute.readAttribute()</em> method.
+ * This class is derived from <em>Attribute</em> and declares this class as 'synthetic', that is, it needs special handling. The JVM specification states "A
+ * class member that does not appear in the source code must be marked using a Synthetic attribute." It may appear in the ClassFile attribute table, a
+ * field_info table or a method_info table. This class is intended to be instantiated from the <em>Attribute.readAttribute()</em> method.
  *
- * @see     Attribute
+ * <pre>
+ *
+ * Synthetic_attribute {
+ *     u2 attribute_name_index;
+ *     u4 attribute_length;
+ * }
+ * </pre>
+ *
+ * @see Attribute
+ * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.8">JVM Specification: The Synthetic Attribute</a>
  */
 public final class Synthetic extends Attribute {
 
-    private byte[] bytes;
-
+    /**
+     * Constructs a Synthetic attribute.
+     *
+     * @param nameIndex    Index in constant pool to CONSTANT_Utf8, which should represent the string "Synthetic".
+     * @param length       JVM Specification: "The value of the attribute_length item must be zero.".
+     * @param bytes        Attribute contents.
+     * @param constantPool The constant pool this attribute is associated with.
+     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.8">JVM Specification: The Synthetic Attribute</a>
+     */
+    public Synthetic(final int nameIndex, final int length, final byte[] bytes, final ConstantPool constantPool) {
+        super(Const.ATTR_SYNTHETIC, nameIndex, Args.require0(length, "Synthetic attribute length"), constantPool);
+    }
 
     /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use copy() for a physical copy.
+     * Constructs object from input stream.
+     *
+     * @param nameIndex    Index in constant pool to CONSTANT_Utf8.
+     * @param length       JVM Specification: "The value of the attribute_length item must be zero.".
+     * @param input        Input stream.
+     * @param constantPool Array of constants.
+     * @throws IOException Thrown if an I/O error occurs.
+     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.8">JVM Specification: The Synthetic Attribute</a>
+     */
+    Synthetic(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+        this(nameIndex, length, (byte[]) null, constantPool);
+    }
+
+    /**
+     * Initialize from another object. Note that both objects use the same references (shallow copy). Use copy() for a physical copy.
+     *
+     * @param c Source to copy.
      */
     public Synthetic(final Synthetic c) {
         this(c.getNameIndex(), c.getLength(), c.getBytes(), c.getConstantPool());
     }
 
-
     /**
-     * @param name_index Index in constant pool to CONSTANT_Utf8, which
-     * should represent the string "Synthetic".
-     * @param length Content length in bytes - should be zero.
-     * @param bytes Attribute contents
-     * @param constant_pool The constant pool this attribute is associated
-     * with.
-     */
-    public Synthetic(final int name_index, final int length, final byte[] bytes, final ConstantPool constant_pool) {
-        super(Const.ATTR_SYNTHETIC, name_index, length, constant_pool);
-        this.bytes = bytes;
-    }
-
-
-    /**
-     * Construct object from input stream.
+     * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class. That is, the hierarchy of methods, fields,
+     * attributes, and other elements forms a tree of objects.
      *
-     * @param name_index Index in constant pool to CONSTANT_Utf8
-     * @param length Content length in bytes
-     * @param input Input stream
-     * @param constant_pool Array of constants
-     * @throws IOException
-     */
-    Synthetic(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
-            throws IOException {
-        this(name_index, length, (byte[]) null, constant_pool);
-        if (length > 0) {
-            bytes = new byte[length];
-            input.readFully(bytes);
-            println("Synthetic attribute with length > 0");
-        }
-    }
-
-
-    /**
-     * Called by objects that are traversing the nodes of the tree implicitely
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
-     *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitSynthetic(this);
     }
 
-
     /**
-     * Dump source file attribute to file stream in binary format.
-     *
-     * @param file Output file stream
-     * @throws IOException
+     * @return deep copy of this attribute.
      */
     @Override
-    public void dump( final DataOutputStream file ) throws IOException {
-        super.dump(file);
-        if (super.getLength() > 0) {
-            file.write(bytes, 0, super.getLength());
-        }
+    public Attribute copy(final ConstantPool constantPool) {
+        final Synthetic c = (Synthetic) clone();
+        c.setConstantPool(constantPool);
+        return c;
     }
 
-
     /**
+     * Gets data bytes.
+     *
      * @return data bytes.
      */
     public byte[] getBytes() {
-        return bytes;
+        return ArrayUtils.EMPTY_BYTE_ARRAY;
     }
-
 
     /**
-     * @param bytes
+     * Sets data bytes.
+     *
+     * @param bytes data bytes.
      */
-    public void setBytes( final byte[] bytes ) {
-        this.bytes = bytes;
+    public void setBytes(final byte[] bytes) {
+        if (bytes != null) {
+            Args.require0(bytes.length, "Deprecated attribute length");
+        }
     }
-
 
     /**
      * @return String representation.
      */
     @Override
     public String toString() {
-        final StringBuilder buf = new StringBuilder("Synthetic");
-        if (super.getLength() > 0) {
-            buf.append(" ").append(Utility.toHexString(bytes));
-        }
-        return buf.toString();
-    }
-
-
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        final Synthetic c = (Synthetic) clone();
-        if (bytes != null) {
-            c.bytes = new byte[bytes.length];
-            System.arraycopy(bytes, 0, c.bytes, 0, bytes.length);
-        }
-        c.setConstantPool(_constant_pool);
-        return c;
+        return "Synthetic";
     }
 }

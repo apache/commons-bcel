@@ -1,19 +1,20 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.apache.bcel.generic;
 
@@ -25,118 +26,135 @@ import org.apache.bcel.classfile.ElementValue;
 import org.apache.bcel.classfile.EnumElementValue;
 
 /**
+ * Generates enum element values in annotations.
+ *
  * @since 6.0
  */
-public class EnumElementValueGen extends ElementValueGen
-{
+public class EnumElementValueGen extends ElementValueGen {
     // For enum types, these two indices point to the type and value
     private final int typeIdx;
 
     private final int valueIdx;
 
     /**
-     * This ctor assumes the constant pool already contains the right type and
-     * value - as indicated by typeIdx and valueIdx. This ctor is used for
-     * deserialization
+     * Constructs an EnumElementValueGen from an EnumElementValue.
+     *
+     * @param value The enum element value.
+     * @param cpool The constant pool.
+     * @param copyPoolEntries whether to copy pool entries.
      */
-    protected EnumElementValueGen(final int typeIdx, final int valueIdx,
-            final ConstantPoolGen cpool)
-    {
-        super(ElementValueGen.ENUM_CONSTANT, cpool);
+    public EnumElementValueGen(final EnumElementValue value, final ConstantPoolGen cpool, final boolean copyPoolEntries) {
+        super(ENUM_CONSTANT, cpool);
+        if (copyPoolEntries) {
+            typeIdx = cpool.addUtf8(value.getEnumTypeString()); // was addClass(value.getEnumTypeString());
+            valueIdx = cpool.addUtf8(value.getEnumValueString()); // was addString(value.getEnumValueString());
+        } else {
+            typeIdx = value.getTypeIndex();
+            valueIdx = value.getValueIndex();
+        }
+    }
+
+    /**
+     * This constructor assumes the constant pool already contains the right type and value - as indicated by typeIdx and valueIdx.
+     * This constructor is used for deserialization.
+     *
+     * @param typeIdx The type index.
+     * @param valueIdx The value index.
+     * @param cpool The constant pool.
+     */
+    protected EnumElementValueGen(final int typeIdx, final int valueIdx, final ConstantPoolGen cpool) {
+        super(ENUM_CONSTANT, cpool);
         if (super.getElementValueType() != ENUM_CONSTANT) {
-            throw new IllegalArgumentException(
-                    "Only element values of type enum can be built with this ctor - type specified: " + super.getElementValueType());
+            throw new IllegalArgumentException("Only element values of type enum can be built with this ctor - type specified: " + super.getElementValueType());
         }
         this.typeIdx = typeIdx;
         this.valueIdx = valueIdx;
     }
 
     /**
-     * Return immutable variant of this EnumElementValue
+     * Constructs an EnumElementValueGen.
+     *
+     * @param t The object type.
+     * @param value The value.
+     * @param cpool The constant pool.
      */
-    @Override
-    public ElementValue getElementValue()
-    {
-        System.err.println("Duplicating value: " + getEnumTypeString() + ":"
-                + getEnumValueString());
-        return new EnumElementValue(super.getElementValueType(), typeIdx, valueIdx,
-                getConstantPool().getConstantPool());
-    }
-
-    public EnumElementValueGen(final ObjectType t, final String value, final ConstantPoolGen cpool)
-    {
-        super(ElementValueGen.ENUM_CONSTANT, cpool);
-        typeIdx = cpool.addUtf8(t.getSignature());// was addClass(t);
-        valueIdx = cpool.addUtf8(value);// was addString(value);
-    }
-
-    public EnumElementValueGen(final EnumElementValue value, final ConstantPoolGen cpool,
-            final boolean copyPoolEntries)
-    {
+    public EnumElementValueGen(final ObjectType t, final String value, final ConstantPoolGen cpool) {
         super(ENUM_CONSTANT, cpool);
-        if (copyPoolEntries)
-        {
-            typeIdx = cpool.addUtf8(value.getEnumTypeString());// was
-                                                                // addClass(value.getEnumTypeString());
-            valueIdx = cpool.addUtf8(value.getEnumValueString()); // was
-                                                                    // addString(value.getEnumValueString());
-        }
-        else
-        {
-            typeIdx = value.getTypeIndex();
-            valueIdx = value.getValueIndex();
-        }
+        typeIdx = cpool.addUtf8(t.getSignature()); // was addClass(t);
+        valueIdx = cpool.addUtf8(value); // was addString(value);
     }
 
     @Override
-    public void dump(final DataOutputStream dos) throws IOException
-    {
+    public void dump(final DataOutputStream dos) throws IOException {
         dos.writeByte(super.getElementValueType()); // u1 type of value (ENUM_CONSTANT == 'e')
         dos.writeShort(typeIdx); // u2
         dos.writeShort(valueIdx); // u2
     }
 
+    /**
+     * Gets an immutable variant of this EnumElementValueGen.
+     *
+     * @return immutable variant.
+     */
     @Override
-    public String stringifyValue()
-    {
-        final ConstantUtf8 cu8 = (ConstantUtf8) getConstantPool().getConstant(valueIdx);
-        return cu8.getBytes();
-        // ConstantString cu8 =
-        // (ConstantString)getConstantPool().getConstant(valueIdx);
-        // return
-        // ((ConstantUtf8)getConstantPool().getConstant(cu8.getStringIndex())).getBytes();
+    public ElementValue getElementValue() {
+        System.err.println("Duplicating value: " + getEnumTypeString() + ":" + getEnumValueString());
+        return new EnumElementValue(super.getElementValueType(), typeIdx, valueIdx, getConstantPool().getConstantPool());
     }
 
-    // BCELBUG: Should we need to call utility.signatureToString() on the output
-    // here?
-    public String getEnumTypeString()
-    {
+    /**
+     * Gets the enum type string.
+     *
+     * @return The enum type string.
+     */
+    public String getEnumTypeString() {
         // Constant cc = getConstantPool().getConstant(typeIdx);
         // ConstantClass cu8 =
-        // (ConstantClass)getConstantPool().getConstant(typeIdx);
+        // (ConstantClass) getConstantPool().getConstant(typeIdx);
         // return
-        // ((ConstantUtf8)getConstantPool().getConstant(cu8.getNameIndex())).getBytes();
-        return ((ConstantUtf8) getConstantPool().getConstant(typeIdx))
-                .getBytes();
+        // ((ConstantUtf8) getConstantPool().getConstant(cu8.getNameIndex())).getBytes();
+        return ((ConstantUtf8) getConstantPool().getConstant(typeIdx)).getBytes();
         // return Utility.signatureToString(cu8.getBytes());
     }
 
-    public String getEnumValueString()
-    {
+    /**
+     * Gets the enum value string.
+     *
+     * @return The enum value string.
+     */
+    public String getEnumValueString() {
         return ((ConstantUtf8) getConstantPool().getConstant(valueIdx)).getBytes();
         // ConstantString cu8 =
-        // (ConstantString)getConstantPool().getConstant(valueIdx);
+        // (ConstantString) getConstantPool().getConstant(valueIdx);
         // return
-        // ((ConstantUtf8)getConstantPool().getConstant(cu8.getStringIndex())).getBytes();
+        // ((ConstantUtf8) getConstantPool().getConstant(cu8.getStringIndex())).getBytes();
     }
 
-    public int getValueIndex()
-    {
+    /**
+     * Gets the type index.
+     *
+     * @return The type index.
+     */
+    public int getTypeIndex() {
+        return typeIdx;
+    }
+
+    /**
+     * Gets the value index.
+     *
+     * @return The value index.
+     */
+    public int getValueIndex() {
         return valueIdx;
     }
 
-    public int getTypeIndex()
-    {
-        return typeIdx;
+    @Override
+    public String stringifyValue() {
+        final ConstantUtf8 cu8 = (ConstantUtf8) getConstantPool().getConstant(valueIdx);
+        return cu8.getBytes();
+        // ConstantString cu8 =
+        // (ConstantString) getConstantPool().getConstant(valueIdx);
+        // return
+        // ((ConstantUtf8) getConstantPool().getConstant(cu8.getStringIndex())).getBytes();
     }
 }

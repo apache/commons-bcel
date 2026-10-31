@@ -1,18 +1,20 @@
-/**
- *  Licensed to the Apache Software Foundation (ASF) under one or more
- *  contributor license agreements.  See the NOTICE file distributed with
- *  this work for additional information regarding copyright ownership.
- *  The ASF licenses this file to You under the Apache License, Version 2.0
- *  (the "License"); you may not use this file except in compliance with
- *  the License.  You may obtain a copy of the License at
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.apache.bcel.classfile;
 
@@ -21,10 +23,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.util.Args;
 
 /**
- * This attribute exists for local or
- * anonymous classes and ... there can be only one.
+ * This attribute exists for local or anonymous classes and ... there can be only one.
  *
  * @since 6.0
  */
@@ -36,10 +38,10 @@ public class EnclosingMethod extends Attribute {
 
     // If the current class is not immediately enclosed by a method or
     // constructor, then the value of the method_index item must be zero.
-    // Otherwise, the value of the  method_index item must point to a
+    // Otherwise, the value of the method_index item must point to a
     // CONSTANT_NameAndType_info structure representing the name and the
     // type of a method in the class referenced by the class we point
-    // to in the class_index.  *It is the compiler responsibility* to
+    // to in the class_index. *It is the compiler responsibility* to
     // ensure that the method identified by this index is the closest
     // lexically enclosing method that includes the local/anonymous class.
     private int methodIndex;
@@ -49,52 +51,20 @@ public class EnclosingMethod extends Attribute {
         this(nameIndex, len, input.readUnsignedShort(), input.readUnsignedShort(), cpool);
     }
 
-    private EnclosingMethod(final int nameIndex, final int len, final int classIdx,final int methodIdx, final ConstantPool cpool) {
-        super(Const.ATTR_ENCLOSING_METHOD, nameIndex, len, cpool);
-        classIndex  = classIdx;
-        methodIndex = methodIdx;
+    private EnclosingMethod(final int nameIndex, final int len, final int classIndex, final int methodIndex, final ConstantPool cpool) {
+        super(Const.ATTR_ENCLOSING_METHOD, nameIndex, Args.require(len, 4, "EnclosingMethod attribute length"), cpool);
+        this.classIndex = Args.requireU2(classIndex, 0, cpool.getLength(), "EnclosingMethod class index");
+        this.methodIndex = Args.requireU2(methodIndex, "EnclosingMethod method index");
     }
 
     @Override
     public void accept(final Visitor v) {
-      v.visitEnclosingMethod(this);
+        v.visitEnclosingMethod(this);
     }
 
     @Override
-    public Attribute copy(final ConstantPool constant_pool) {
+    public Attribute copy(final ConstantPool constantPool) {
         return (Attribute) clone();
-    }
-
-    // Accessors
-    public final int getEnclosingClassIndex() {
-        return classIndex;
-    }
-
-    public final int getEnclosingMethodIndex() {
-        return methodIndex;
-    }
-
-    public final void setEnclosingClassIndex(final int idx) {
-        classIndex = idx;
-    }
-
-    public final void setEnclosingMethodIndex(final int idx) {
-        methodIndex = idx;
-    }
-
-    public final ConstantClass getEnclosingClass() {
-        final ConstantClass c =
-            (ConstantClass)super.getConstantPool().getConstant(classIndex,Const.CONSTANT_Class);
-        return c;
-    }
-
-    public final ConstantNameAndType getEnclosingMethod() {
-        if (methodIndex == 0) {
-            return null;
-        }
-        final ConstantNameAndType nat =
-            (ConstantNameAndType)super.getConstantPool().getConstant(methodIndex,Const.CONSTANT_NameAndType);
-        return nat;
     }
 
     @Override
@@ -102,5 +72,62 @@ public class EnclosingMethod extends Attribute {
         super.dump(file);
         file.writeShort(classIndex);
         file.writeShort(methodIndex);
+    }
+
+    /**
+     * Gets the enclosing class.
+     *
+     * @return The enclosing class.
+     */
+    public final ConstantClass getEnclosingClass() {
+        return super.getConstantPool().getConstant(classIndex, Const.CONSTANT_Class, ConstantClass.class);
+    }
+
+    /**
+     * Gets the enclosing class index.
+     *
+     * @return The enclosing class index.
+     */
+    public final int getEnclosingClassIndex() {
+        return classIndex;
+    }
+
+    /**
+     * Gets the enclosing method.
+     *
+     * @return The enclosing method.
+     */
+    public final ConstantNameAndType getEnclosingMethod() {
+        if (methodIndex == 0) {
+            return null;
+        }
+        return super.getConstantPool().getConstant(methodIndex, Const.CONSTANT_NameAndType, ConstantNameAndType.class);
+    }
+
+    /**
+     * Gets the enclosing method index.
+     *
+     * @return The enclosing method index.
+     */
+    public final int getEnclosingMethodIndex() {
+        return methodIndex;
+    }
+
+    /**
+     * Sets the enclosing class index.
+     *
+     * @param idx The index.
+     */
+    public final void setEnclosingClassIndex(final int idx) {
+        classIndex = idx;
+    }
+
+    /**
+     * Sets the enclosing method index.
+     *
+     * @param idx The index.
+     */
+    public final void setEnclosingMethodIndex(final int idx) {
+        methodIndex = idx;
     }
 }

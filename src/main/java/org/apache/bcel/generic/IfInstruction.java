@@ -1,47 +1,48 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.apache.bcel.generic;
 
 /**
- * Super class for the IFxxx family of instructions.
- *
+ * Superclass for the IFxxx family of instructions.
  */
 public abstract class IfInstruction extends BranchInstruction implements StackConsumer {
 
     /**
-     * Empty constructor needed for Instruction.readInstruction.
-     * Not to be used otherwise.
+     * Empty constructor needed for Instruction.readInstruction. Not to be used otherwise.
      */
     IfInstruction() {
     }
 
-
     /**
-     * @param opcode opcode of instruction
-     * @param target Target instruction to branch to
+     * Constructs an IfInstruction.
+     *
+     * @param opcode opcode of instruction.
+     * @param target Target instruction to branch to.
      */
     protected IfInstruction(final short opcode, final InstructionHandle target) {
         super(opcode, target);
     }
 
-
     /**
-     * @return negation of instruction, e.g. IFEQ.negate() == IFNE
+     * Gets the negation of this instruction.
+     *
+     * @return negation of instruction, for example IFEQ.negate() == IFNE.
      */
     public abstract IfInstruction negate();
 }

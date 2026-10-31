@@ -1,28 +1,29 @@
 <?xml version="1.0"?>
 <!--
-    * Licensed to the Apache Software Foundation (ASF) under one
-    * or more contributor license agreements.  See the NOTICE file
-    * distributed with this work for additional information
-    * regarding copyright ownership.  The ASF licenses this file
-    * to you under the Apache License, Version 2.0 (the
-    * "License"); you may not use this file except in compliance
-    * with the License.  You may obtain a copy of the License at
-    * 
-    *   http://www.apache.org/licenses/LICENSE-2.0
-    * 
-    * Unless required by applicable law or agreed to in writing,
-    * software distributed under the License is distributed on an
-    * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-    * KIND, either express or implied.  See the License for the
-    * specific language governing permissions and limitations
-    * under the License.    
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   https://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
 -->
-
-<document>
-
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
   <properties>
-    <title>BCEL FAQ</title>
-  </properties> 
+    <title>Commons BCEL FAQ</title>
+    <author email="dev@commons.apache.org">Apache Commons Team</author>
+  </properties>
 
   <body>
 
@@ -40,32 +41,33 @@
       <b>Q: </b> Is the BCEL thread-safe?
       <br/>
       <b>A: </b>BCEL was (deliberately) not designed for thread
-      safety. See <a href="https://java.sun.com/docs/books/cp/">
-      "Concurrent Programming in Java"</a>, by Doug Lea,
-      for an excellent reference on how to build thread-safe wrappers.
+      safety. See "Concurrent Programming in Java", by Doug Lea,
+      for an excellent reference on how to build thread-safe wrappers and
+      <a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/further.html">more</a>.
     </p>
 
     <p>
       <b>Q: </b> Can I use BCEL in a commercial product?
       <br/>
       <b>A: </b> Yes, this is covered by the <a
-      href="http://www.apache.org/licenses/">Apache License</a>, if you add a note about the original
-      author and where to find the sources, i.e., 
+      href="https://www.apache.org/licenses/">Apache License</a>, if you add a note about the original
+      author and where to find the sources, that is,
       <a href="https://commons.apache.org/bcel/">https://commons.apache.org/bcel/</a>
     </p>
 
     <p>
       <b>Q: </b> (Typically for users of Xalan (XSLTC)) I'm getting
-      <pre>
-      ClassGenException: Branch target offset too large for short</pre>
+    </p>
+    <source>ClassGenException: Branch target offset too large for short</source>
+    <p>
       when compiling large files.
-      <br/>
-
+    </p>
+    <p>
       <b>A: </b> The answer lies in internal limitations of the JVM,
-      branch instruction like goto can not address offsets larger than
-      a short integer, i.e. offsets >= 32767.<br/>
-      The solution is to split the branch into in intermediate hops,
-      which the XSLTC obviously doesn't take care off.
+      branch instructions like goto cannot address offsets larger than
+      a short integer, that is, offsets >= 32767.<br/>
+      The solution is to split the branch into intermediate hops,
+      which XSLTC does not handle.
       (In fact you could replace gotos with the goto_w instruction,
       but this wouldn't help in the other cases).
     </p>
@@ -83,10 +85,9 @@
       <br/>
       <b>A:</b> Use the JustIce verifier that comes together with BCEL
       to get more detailed information:
-       <pre>
-       java org.apache.bcel.verifier.Verifier &lt;your class&gt;</pre>
     </p>
-    
+    <source>java org.apache.bcel.verifier.Verifier &lt;your class&gt;</source>
+
     </section>
 <!--
     <p>

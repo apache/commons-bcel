@@ -6,7 +6,7 @@
  (the "License"); you may not use this file except in compliance with
  the License.  You may obtain a copy of the License at
 
-      http://www.apache.org/licenses/LICENSE-2.0
+      https://www.apache.org/licenses/LICENSE-2.0
 
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
@@ -43,64 +43,77 @@
 Apache Commons BCEL
 ===================
 
-[![Travis-CI Status](https://travis-ci.org/apache/commons-bcel.svg)](https://travis-ci.org/apache/commons-bcel)
-[![GitHub Actions Status](https://github.com/apache/commons-bcel/workflows/Java%20CI/badge.svg)](https://github.com/apache/commons-bcel/actions)
-[![Coverage Status](https://coveralls.io/repos/apache/commons-bcel/badge.svg)](https://coveralls.io/r/apache/commons-bcel)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.apache.bcel/bcel/)
-[![Javadocs](https://javadoc.io/badge/org.apache.bcel/bcel/6.5.0.svg)](https://javadoc.io/doc/org.apache.bcel/bcel/6.5.0)
+[![Java CI](https://github.com/apache/commons-bcel/actions/workflows/maven.yml/badge.svg)](https://github.com/apache/commons-bcel/actions/workflows/maven.yml)
+[![Maven Central](https://img.shields.io/maven-central/v/org.apache.bcel/bcel?label=Maven%20Central)](https://search.maven.org/artifact/org.apache.bcel/bcel)
+[![Javadocs](https://javadoc.io/badge/org.apache.bcel/bcel/6.13.0.svg)](https://javadoc.io/doc/org.apache.bcel/bcel/6.13.0)
+[![CodeQL](https://github.com/apache/commons-bcel/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/apache/commons-bcel/actions/workflows/codeql-analysis.yml)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/apache/commons-bcel/badge)](https://api.securityscorecards.dev/projects/github.com/apache/commons-bcel)
 
-Apache Commons Bytecode Engineering Library
+The Commons Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files.
 
 Documentation
 -------------
 
 More information can be found on the [Apache Commons BCEL homepage](https://commons.apache.org/proper/commons-bcel).
 The [Javadoc](https://commons.apache.org/proper/commons-bcel/apidocs) can be browsed.
-Questions related to the usage of Apache Commons BCEL should be posted to the [user mailing list][ml].
+Questions related to the usage of Apache Commons BCEL should be posted to the [user mailing list](https://commons.apache.org/mail-lists.html).
 
-Where can I get the latest release?
------------------------------------
+Getting the latest release
+--------------------------
 You can download source and binaries from our [download page](https://commons.apache.org/proper/commons-bcel/download_bcel.cgi).
 
-Alternatively you can pull it from the central Maven repositories:
+Alternatively, you can pull it from the central Maven repositories:
 
 ```xml
 <dependency>
   <groupId>org.apache.bcel</groupId>
   <artifactId>bcel</artifactId>
-  <version>6.5.0</version>
+  <version>6.13.0</version>
 </dependency>
 ```
+
+Building
+--------
+
+Building requires a Java JDK and [Apache Maven](https://maven.apache.org/).
+The required Java version is found in the `pom.xml` as the `maven.compiler.source` property.
+
+From a command shell, run `mvn` without arguments to invoke the default Maven goal to run all tests and checks.
 
 Contributing
 ------------
 
-We accept Pull Requests via GitHub. The [developer mailing list][ml] is the main channel of communication for contributors.
+We accept Pull Requests via GitHub. The [developer mailing list](https://commons.apache.org/mail-lists.html) is the main channel of communication for contributors.
 There are some guidelines which will make applying PRs easier for us:
 + No tabs! Please use spaces for indentation.
-+ Respect the code style.
++ Respect the existing code style for each file.
 + Create minimal diffs - disable on save actions like reformat source code or organize imports. If you feel the source code should be reformatted create a separate PR for this change.
-+ Provide JUnit tests for your changes and make sure your changes don't break any existing tests by running ```mvn clean test```.
++ Provide JUnit tests for your changes and make sure your changes don't break any existing tests by running `mvn`.
++ Before you push a PR, run `mvn` (without arguments). This runs the default goal which contains all build checks.
++ To see the code coverage report, regardless of coverage failures, run `mvn clean site -Dcommons.jacoco.haltOnFailure=false -Pjacoco`
 
 If you plan to contribute on a regular basis, please consider filing a [contributor license agreement](https://www.apache.org/licenses/#clas).
 You can learn more about contributing via GitHub in our [contribution guidelines](CONTRIBUTING.md).
 
 License
 -------
-This code is under the [Apache Licence v2](https://www.apache.org/licenses/LICENSE-2.0).
+This code is licensed under the [Apache License v2](https://www.apache.org/licenses/LICENSE-2.0).
 
 See the `NOTICE.txt` file for required notices and attributions.
 
-Donations
----------
-You like Apache Commons BCEL? Then [donate back to the ASF](https://www.apache.org/foundation/contributing.html) to support the development.
+Donating
+--------
+You like Apache Commons BCEL? Then [donate back to the ASF](https://www.apache.org/foundation/contributing.html) to support development.
 
 Additional Resources
 --------------------
 
 + [Apache Commons Homepage](https://commons.apache.org/)
 + [Apache Issue Tracker (JIRA)](https://issues.apache.org/jira/browse/BCEL)
-+ [Apache Commons Twitter Account](https://twitter.com/ApacheCommons)
-+ `#apache-commons` IRC channel on `irc.freenode.org`
++ [Apache Commons Slack Channel](https://the-asf.slack.com/archives/C60NVB8AD)
 
-[ml]:https://commons.apache.org/mail-lists.html
+Apache Commons Components
+-------------------------
+
++ [List of Apache Commons components](https://commons.apache.org/components.html): homepages and documentation for all components.
++ [`REPOSITORIES.md`](https://github.com/apache/commons-parent/blob/master/REPOSITORIES.md): overview of the code repositories and their build status.

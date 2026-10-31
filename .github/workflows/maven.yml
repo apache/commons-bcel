@@ -5,7 +5,7 @@
 # (the "License"); you may not use this file except in compliance with
 # the License.  You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+#      https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,34 +15,47 @@
 
 name: Java CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - 'master'
+  pull_request: {}
+
+permissions:
+  contents: read
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental }}
     strategy:
+      max-parallel: 20
       matrix:
-        java: [ 8, 11, 15 ]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        java: [ 8, 11, 17, 21, 25, 27 ]
         experimental: [false]
         include:
-          - java: 16-ea
+          - java: 28-ea
+            os: ubuntu-latest
             experimental: true
-          - java: 17-ea
-            experimental: true
-        
+
     steps:
-    - uses: actions/checkout@v2.3.4
-    - uses: actions/cache@v2
+    - name: Prepare git
+      run: git config --global core.autocrlf false
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+    - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 #v6.1.0
       with:
         path: ~/.m2/repository
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
     - name: Set up JDK ${{ matrix.java }}
-      uses: actions/setup-java@v1.4.3
+      uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
       with:
+        distribution: ${{ runner.os == 'macOS' && matrix.java == '8' && 'zulu' || 'temurin' }}
         java-version: ${{ matrix.java }}
     - name: Build with Maven
-      run: mvn -V --file pom.xml --no-transfer-progress
+      run: mvn --errors --show-version --batch-mode --no-transfer-progress -DtrimStackTrace=false

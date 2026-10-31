@@ -1,141 +1,153 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
+
 package org.apache.bcel.classfile;
 
 import java.io.DataInput;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 import org.apache.bcel.Const;
+import org.apache.commons.lang3.SystemProperties;
 
 /**
- * This class represents a reference to an unknown (i.e.,
- * application-specific) attribute of a class.  It is instantiated from the
- * {@link Attribute#readAttribute(java.io.DataInput, ConstantPool)} method.
- * Applications that need to read in application-specific attributes should create an
- * {@link UnknownAttributeReader} implementation and attach it via
+ * This class represents a reference to an unknown (that is, application-specific) attribute of a class. It is instantiated
+ * from the {@link Attribute#readAttribute(java.io.DataInput, ConstantPool)} method. Applications that need to read in
+ * application-specific attributes should create an {@link UnknownAttributeReader} implementation and attach it via
  * {@link Attribute#addAttributeReader(String, UnknownAttributeReader)}.
-
  *
  * @see Attribute
  * @see UnknownAttributeReader
  */
 public final class Unknown extends Attribute {
 
+    /**
+     * Arbitrary to limit the maximum length of unknown attributes to avoid OOM errors.
+     */
+    static final int MAX_LEN = 1_000_000;
+
+    private static final String MAX_LEN_PROP = "BCEL.Attribute.Unknown.max_attribute_length";
+
     private byte[] bytes;
+
     private final String name;
-    private static final Map<String, Unknown> unknownAttributes = new HashMap<>();
-
-
-    /** @return array of unknown attributes, but just one for each kind.
-     */
-    static Unknown[] getUnknownAttributes() {
-        final Unknown[] unknowns = new Unknown[unknownAttributes.size()];
-        unknownAttributes.values().toArray(unknowns);
-        unknownAttributes.clear();
-        return unknowns;
-    }
-
 
     /**
-     * Initialize from another object. Note that both objects use the same
-     * references (shallow copy). Use clone() for a physical copy.
-     */
-    public Unknown(final Unknown c) {
-        this(c.getNameIndex(), c.getLength(), c.getBytes(), c.getConstantPool());
-    }
-
-
-    /**
-     * Create a non-standard attribute.
+     * Constructs a new instance for a non-standard attribute.
      *
-     * @param name_index Index in constant pool
-     * @param length Content length in bytes
-     * @param bytes Attribute contents
-     * @param constant_pool Array of constants
+     * @param nameIndex Index in constant pool.
+     * @param length Content length in bytes.
+     * @param bytes Attribute contents.
+     * @param constantPool Array of constants.
      */
-    public Unknown(final int name_index, final int length, final byte[] bytes, final ConstantPool constant_pool) {
-        super(Const.ATTR_UNKNOWN, name_index, length, constant_pool);
+    public Unknown(final int nameIndex, final int length, final byte[] bytes, final ConstantPool constantPool) {
+        super(Const.ATTR_UNKNOWN, nameIndex, length, constantPool);
         this.bytes = bytes;
-        name = ((ConstantUtf8) constant_pool.getConstant(name_index, Const.CONSTANT_Utf8))
-                .getBytes();
-        unknownAttributes.put(name, this);
+        this.name = constantPool.getConstantUtf8(nameIndex).getBytes();
     }
 
-
     /**
-     * Construct object from input stream.
+     * Constructs a new instance from a DataInput.
+     * <p>
+     * The size of an <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7">Attribute</a> unknown to the JVM specification is
+     * limited to 1 MB and is overridden with the system property {@code BCEL.Attribute.Unknown.max_attribute_length}.
+     * </p>
      *
-     * @param name_index Index in constant pool
-     * @param length Content length in bytes
-     * @param input Input stream
-     * @param constant_pool Array of constants
-     * @throws IOException
+     * @param nameIndex    Index in constant pool.
+     * @param length       Content length in bytes.
+     * @param input        Input stream.
+     * @param constantPool Array of constants.
+     * @throws IOException Thrown if an I/O error occurs.
+     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7">Attribute</a>
      */
-    Unknown(final int name_index, final int length, final DataInput input, final ConstantPool constant_pool)
-            throws IOException {
-        this(name_index, length, (byte[]) null, constant_pool);
+    Unknown(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool) throws IOException {
+        this(nameIndex, length, (byte[]) null, constantPool);
         if (length > 0) {
+            if (length > SystemProperties.getInt(MAX_LEN_PROP, () -> MAX_LEN)) {
+                throw new IOException(
+                        String.format("Unknown attribute length %,d > %,d; use the %s system property to increase the limit.", length, MAX_LEN, MAX_LEN_PROP));
+            }
             bytes = new byte[length];
             input.readFully(bytes);
         }
     }
 
+    /**
+     * Constructs a new instance from another instance. Note that both objects use the same references (shallow copy). Use clone() for a physical copy.
+     *
+     * @param unknown Source.
+     */
+    public Unknown(final Unknown unknown) {
+        this(unknown.getNameIndex(), unknown.getLength(), unknown.getBytes(), unknown.getConstantPool());
+    }
 
     /**
-     * Called by objects that are traversing the nodes of the tree implicitely
-     * defined by the contents of a Java class. I.e., the hierarchy of methods,
-     * fields, attributes, etc. spawns a tree of objects.
+     * Called by objects that are traversing the nodes of the tree implicitly defined by the contents of a Java class.
+     * That is, the hierarchy of methods, fields, attributes, and other elements forms a tree of objects.
      *
-     * @param v Visitor object
+     * @param v Visitor object.
      */
     @Override
-    public void accept( final Visitor v ) {
+    public void accept(final Visitor v) {
         v.visitUnknown(this);
     }
 
-
     /**
-     * Dump unknown bytes to file stream.
-     *
-     * @param file Output file stream
-     * @throws IOException
+     * @return deep copy of this attribute.
      */
     @Override
-    public void dump( final DataOutputStream file ) throws IOException {
+    public Attribute copy(final ConstantPool constantPool) {
+        final Unknown c = (Unknown) clone();
+        if (bytes != null) {
+            c.bytes = bytes.clone();
+        }
+        c.setConstantPool(constantPool);
+        return c;
+    }
+
+    /**
+     * Dumps unknown bytes to file stream.
+     *
+     * @param file Output file stream.
+     * @throws IOException Thrown if an I/O error occurs.
+     */
+    @Override
+    public void dump(final DataOutputStream file) throws IOException {
         super.dump(file);
         if (super.getLength() > 0) {
             file.write(bytes, 0, super.getLength());
         }
     }
 
-
     /**
+     * Gets the data bytes.
+     *
      * @return data bytes.
      */
     public byte[] getBytes() {
         return bytes;
     }
 
-
     /**
+     * Gets the name of the attribute.
+     *
      * @return name of attribute.
      */
     @Override
@@ -143,14 +155,14 @@ public final class Unknown extends Attribute {
         return name;
     }
 
-
     /**
-     * @param bytes the bytes to set
+     * Sets the data bytes.
+     *
+     * @param bytes The bytes to set.
      */
-    public void setBytes( final byte[] bytes ) {
+    public void setBytes(final byte[] bytes) {
         this.bytes = bytes;
     }
-
 
     /**
      * @return String representation.
@@ -160,29 +172,14 @@ public final class Unknown extends Attribute {
         if (super.getLength() == 0 || bytes == null) {
             return "(Unknown attribute " + name + ")";
         }
-        String hex;
-        if (super.getLength() > 10) {
-            final byte[] tmp = new byte[10];
-            System.arraycopy(bytes, 0, tmp, 0, 10);
+        final String hex;
+        final int limit = 10;
+        if (super.getLength() > limit) {
+            final byte[] tmp = Arrays.copyOf(bytes, limit);
             hex = Utility.toHexString(tmp) + "... (truncated)";
         } else {
             hex = Utility.toHexString(bytes);
         }
         return "(Unknown attribute " + name + ": " + hex + ")";
-    }
-
-
-    /**
-     * @return deep copy of this attribute
-     */
-    @Override
-    public Attribute copy( final ConstantPool _constant_pool ) {
-        final Unknown c = (Unknown) clone();
-        if (bytes != null) {
-            c.bytes = new byte[bytes.length];
-            System.arraycopy(bytes, 0, c.bytes, 0, bytes.length);
-        }
-        c.setConstantPool(_constant_pool);
-        return c;
     }
 }

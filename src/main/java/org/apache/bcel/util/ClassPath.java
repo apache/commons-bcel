@@ -1,24 +1,24 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.apache.bcel.util;
 
 import java.io.Closeable;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FilenameFilter;
@@ -31,18 +31,23 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.StringTokenizer;
-import java.util.Vector;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Utility;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemProperties;
+
 /**
- * Responsible for loading (class) files from the CLASSPATH. Inspired by sun.tools.ClassPath.
- *
+ * Loads class files from the CLASSPATH. Inspired by sun.tools.ClassPath.
  */
 public class ClassPath implements Closeable {
 
@@ -65,10 +70,7 @@ public class ClassPath implements Closeable {
 
         @Override
         public void close() throws IOException {
-            if (zipFile != null) {
-                zipFile.close();
-            }
-
+            IOUtils.close(zipFile);
         }
 
         @Override
@@ -128,7 +130,7 @@ public class ClassPath implements Closeable {
             }
         }
 
-        protected abstract String toEntryName(final String name, final String suffix);
+        protected abstract String toEntryName(String name, String suffix);
 
         @Override
         public String toString() {
@@ -143,33 +145,44 @@ public class ClassPath implements Closeable {
     public interface ClassFile {
 
         /**
-         * @return base path of found class, i.e. class is contained relative to that path, which may either denote a
-         *         directory, or zip file
+         * Gets the base path of found class.
+         *
+         * @return base path of found class, for example class is contained relative to that path, which may either denote a directory,
+         *         or ZIP file.
          */
         String getBase();
 
         /**
+         * Gets the input stream for class file.
+         *
          * @return input stream for class file.
+         * @throws IOException Thrown if an I/O error occurs.
          */
         InputStream getInputStream() throws IOException;
 
         /**
+         * Gets the canonical path to class file.
+         *
          * @return canonical path to class file.
          */
         String getPath();
 
         /**
+         * Gets the size of class file.
+         *
          * @return size of class file.
          */
         long getSize();
 
         /**
+         * Gets the modification time of class file.
+         *
          * @return modification time of class file.
          */
         long getTime();
     }
 
-    private static class Dir extends AbstractPathEntry {
+    private static final class Dir extends AbstractPathEntry {
 
         private final String dir;
 
@@ -251,7 +264,7 @@ public class ClassPath implements Closeable {
         }
     }
 
-    private static class Jar extends AbstractZip {
+    private static final class Jar extends AbstractZip {
 
         Jar(final ZipFile zip) {
             super(zip);
@@ -259,16 +272,16 @@ public class ClassPath implements Closeable {
 
         @Override
         protected String toEntryName(final String name, final String suffix) {
-            return packageToFolder(name) + suffix;
+            return Utility.packageToPath(name) + suffix;
         }
 
     }
 
-    private static class JrtModule extends AbstractPathEntry {
+    private static final class JrtModule extends AbstractPathEntry {
 
         private final Path modulePath;
 
-        public JrtModule(final Path modulePath) {
+        JrtModule(final Path modulePath) {
             this.modulePath = Objects.requireNonNull(modulePath, "modulePath");
         }
 
@@ -280,7 +293,7 @@ public class ClassPath implements Closeable {
 
         @Override
         ClassFile getClassFile(final String name, final String suffix) {
-            final Path resolved = modulePath.resolve(packageToFolder(name) + suffix);
+            final Path resolved = modulePath.resolve(Utility.packageToPath(name) + suffix);
             if (Files.exists(resolved)) {
                 return new ClassFile() {
 
@@ -347,18 +360,14 @@ public class ClassPath implements Closeable {
 
     }
 
-    private static class JrtModules extends AbstractPathEntry {
+    private static final class JrtModules extends AbstractPathEntry {
 
         private final ModularRuntimeImage modularRuntimeImage;
         private final JrtModule[] modules;
 
-        public JrtModules(final String path) throws IOException {
+        JrtModules(final String path) throws IOException {
             this.modularRuntimeImage = new ModularRuntimeImage();
-            final List<Path> list = modularRuntimeImage.list(path);
-            this.modules = new JrtModule[list.size()];
-            for (int i = 0; i < modules.length; i++) {
-                modules[i] = new JrtModule(list.get(i));
-            }
+            this.modules = modularRuntimeImage.list(path).stream().map(JrtModule::new).toArray(JrtModule[]::new);
         }
 
         @Override
@@ -417,7 +426,7 @@ public class ClassPath implements Closeable {
 
     }
 
-    private static class Module extends AbstractZip {
+    private static final class Module extends AbstractZip {
 
         Module(final ZipFile zip) {
             super(zip);
@@ -425,25 +434,28 @@ public class ClassPath implements Closeable {
 
         @Override
         protected String toEntryName(final String name, final String suffix) {
-            return "classes/" + packageToFolder(name) + suffix;
+            return "classes/" + Utility.packageToPath(name) + suffix;
         }
 
     }
 
+    /** Filter for archive files (.zip and .jar). */
     private static final FilenameFilter ARCHIVE_FILTER = (dir, name) -> {
-        name = name.toLowerCase(Locale.ENGLISH);
+        name = StringUtils.toRootLowerCase(name);
         return name.endsWith(".zip") || name.endsWith(".jar");
     };
 
+    /** Filter for module files. */
     private static final FilenameFilter MODULES_FILTER = (dir, name) -> {
-        name = name.toLowerCase(Locale.ENGLISH);
-        return name.endsWith(".jmod");
+        name = StringUtils.toRootLowerCase(name);
+        return name.endsWith(org.apache.bcel.classfile.Module.EXTENSION);
     };
 
+    /** The system class path. */
     public static final ClassPath SYSTEM_CLASS_PATH = new ClassPath(getClassPath());
 
     private static void addJdkModules(final String javaHome, final List<String> list) {
-        String modulesPath = System.getProperty("java.modules.path");
+        String modulesPath = SystemProperties.getJdkModulePath();
         if (modulesPath == null || modulesPath.trim().isEmpty()) {
             // Default to looking in JAVA_HOME/jmods
             modulesPath = javaHome + File.separator + "jmods";
@@ -460,21 +472,24 @@ public class ClassPath implements Closeable {
     }
 
     /**
-     * Checks for class path components in the following properties: "java.class.path", "sun.boot.class.path",
-     * "java.ext.dirs"
+     * Gets the default class path used by BCEL.
      *
-     * @return class path as used by default by BCEL
+     * <p>
+     * Collects class path components from "java.class.path", "sun.boot.class.path", and "java.ext.dirs", along with runtime modules under "java.home".
+     * </p>
+     *
+     * @return class path as used by default by BCEL.
      */
     // @since 6.0 no longer final
     public static String getClassPath() {
-        final String classPathProp = System.getProperty("java.class.path");
+        final String classPathProp = SystemProperties.getJavaClassPath();
         final String bootClassPathProp = System.getProperty("sun.boot.class.path");
-        final String extDirs = System.getProperty("java.ext.dirs");
+        final String extDirs = SystemProperties.getJavaExtDirs();
         // System.out.println("java.version = " + System.getProperty("java.version"));
         // System.out.println("java.class.path = " + classPathProp);
         // System.out.println("sun.boot.class.path=" + bootClassPathProp);
         // System.out.println("java.ext.dirs=" + extDirs);
-        final String javaHome = System.getProperty("java.home");
+        final String javaHome = SystemProperties.getJavaHome();
         final List<String> list = new ArrayList<>();
 
         // Starting in JRE 9, .class files are in the modules directory. Add them to the path.
@@ -490,23 +505,16 @@ public class ClassPath implements Closeable {
         final List<String> dirs = new ArrayList<>();
         getPathComponents(extDirs, dirs);
         for (final String d : dirs) {
-            final File ext_dir = new File(d);
-            final String[] extensions = ext_dir.list(ARCHIVE_FILTER);
+            final File extDir = new File(d);
+            final String[] extensions = extDir.list(ARCHIVE_FILTER);
             if (extensions != null) {
                 for (final String extension : extensions) {
-                    list.add(ext_dir.getPath() + File.separatorChar + extension);
+                    list.add(extDir.getPath() + File.separatorChar + extension);
                 }
             }
         }
 
-        final StringBuilder buf = new StringBuilder();
-        String separator = "";
-        for (final String path : list) {
-            buf.append(separator);
-            separator = File.pathSeparator;
-            buf.append(path);
-        }
-        return buf.toString().intern();
+        return list.stream().collect(Collectors.joining(File.pathSeparator));
     }
 
     private static void getPathComponents(final String path, final List<String> list) {
@@ -522,15 +530,11 @@ public class ClassPath implements Closeable {
         }
     }
 
-    static String packageToFolder(final String name) {
-        return name.replace('.', '/');
-    }
+    private final String classPathString;
 
-    private final String classPath;
+    private final ClassPath parent;
 
-    private ClassPath parent;
-
-    private final AbstractPathEntry[] paths;
+    private final List<AbstractPathEntry> paths;
 
     /**
      * Search for classes in CLASSPATH.
@@ -542,35 +546,31 @@ public class ClassPath implements Closeable {
         this(getClassPath());
     }
 
-    public ClassPath(final ClassPath parent, final String classPath) {
-        this(classPath);
-        this.parent = parent;
-    }
-
     /**
-     * Search for classes in given path.
+     * Constructs a ClassPath with a parent and class path string.
      *
-     * @param classPath
+     * @param parent The parent ClassPath.
+     * @param classPathString The class path string.
      */
     @SuppressWarnings("resource")
-    public ClassPath(final String classPath) {
-        this.classPath = classPath;
-        final List<AbstractPathEntry> list = new ArrayList<>();
-        for (final StringTokenizer tokenizer = new StringTokenizer(classPath, File.pathSeparator); tokenizer
-                .hasMoreTokens();) {
+    public ClassPath(final ClassPath parent, final String classPathString) {
+        this.parent = parent;
+        this.classPathString = Objects.requireNonNull(classPathString, "classPathString");
+        this.paths = new ArrayList<>();
+        for (final StringTokenizer tokenizer = new StringTokenizer(classPathString, File.pathSeparator); tokenizer.hasMoreTokens();) {
             final String path = tokenizer.nextToken();
             if (!path.isEmpty()) {
                 final File file = new File(path);
                 try {
                     if (file.exists()) {
                         if (file.isDirectory()) {
-                            list.add(new Dir(path));
-                        } else if (path.endsWith(".jmod")) {
-                            list.add(new Module(new ZipFile(file)));
+                            paths.add(new Dir(path));
+                        } else if (path.endsWith(org.apache.bcel.classfile.Module.EXTENSION)) {
+                            paths.add(new Module(new ZipFile(file)));
                         } else if (path.endsWith(ModularRuntimeImage.MODULES_PATH)) {
-                            list.add(new JrtModules(ModularRuntimeImage.MODULES_PATH));
+                            paths.add(new JrtModules(ModularRuntimeImage.MODULES_PATH));
                         } else {
-                            list.add(new Jar(new ZipFile(file)));
+                            paths.add(new Jar(new ZipFile(file)));
                         }
                     }
                 } catch (final IOException e) {
@@ -580,75 +580,88 @@ public class ClassPath implements Closeable {
                 }
             }
         }
-        paths = new AbstractPathEntry[list.size()];
-        list.toArray(paths);
+    }
+
+    /**
+     * Search for classes in given path.
+     *
+     * @param classPath The class path string.
+     */
+    public ClassPath(final String classPath) {
+        this(null, classPath);
     }
 
     @Override
     public void close() throws IOException {
-        if (paths != null) {
-            for (final AbstractPathEntry path : paths) {
-                path.close();
-            }
+        for (final AbstractPathEntry path : paths) {
+            path.close();
         }
-
     }
 
     @Override
-    public boolean equals(final Object o) {
-        if (o instanceof ClassPath) {
-            final ClassPath cp = (ClassPath) o;
-            return classPath.equals(cp.toString());
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
         }
-        return false;
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ClassPath other = (ClassPath) obj;
+        return Objects.equals(classPathString, other.classPathString);
     }
 
     /**
-     * @return byte array for class
+     * Gets byte array for the given class.
+     *
+     * @param name fully qualified file name, for example java/lang/String.
+     * @return byte array for class.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public byte[] getBytes(final String name) throws IOException {
-        return getBytes(name, ".class");
+        return getBytes(name, JavaClass.EXTENSION);
     }
 
     /**
-     * @param name
-     *            fully qualified file name, e.g. java/lang/String
-     * @param suffix
-     *            file name ends with suffix, e.g. .java
-     * @return byte array for file on class path
+     * Gets byte array for the given file.
+     *
+     * @param name fully qualified file name, for example java/lang/String.
+     * @param suffix file name ends with suffix, for example .java.
+     * @return byte array for file on class path.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public byte[] getBytes(final String name, final String suffix) throws IOException {
-        DataInputStream dis = null;
         try (InputStream inputStream = getInputStream(name, suffix)) {
             if (inputStream == null) {
                 throw new IOException("Couldn't find: " + name + suffix);
             }
-            dis = new DataInputStream(inputStream);
-            final byte[] bytes = new byte[inputStream.available()];
-            dis.readFully(bytes);
-            return bytes;
-        } finally {
-            if (dis != null) {
-                dis.close();
-            }
+            // Read until EOF instead of sizing the buffer from InputStream.available(): for ZIP/JAR entries, available()
+            // reflects the archive's declared uncompressed-size field, which is untrusted metadata. Trusting it lets a
+            // tiny archive force a forged multi-gigabyte allocation, or silently truncate the returned bytes.
+            return IOUtils.toByteArray(inputStream);
         }
     }
 
     /**
-     * @param name
-     *            fully qualified class name, e.g. java.lang.String
-     * @return input stream for class
+     * Gets the input stream for the given class.
+     *
+     * @param name fully qualified class name, for example {@link String}.
+     * @return input stream for class.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public ClassFile getClassFile(final String name) throws IOException {
-        return getClassFile(name, ".class");
+        return getClassFile(name, JavaClass.EXTENSION);
     }
 
     /**
-     * @param name
-     *            fully qualified file name, e.g. java/lang/String
-     * @param suffix
-     *            file name ends with suff, e.g. .java
-     * @return class file for the java class
+     * Gets the class file for the given Java class.
+     *
+     * @param name fully qualified file name, for example java/lang/String.
+     * @param suffix file name ends with suffix, for example .java.
+     * @return class file for the Java class.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public ClassFile getClassFile(final String name, final String suffix) throws IOException {
         ClassFile cf = null;
@@ -669,54 +682,61 @@ public class ClassPath implements Closeable {
     }
 
     private ClassFile getClassFileInternal(final String name, final String suffix) {
-
         for (final AbstractPathEntry path : paths) {
             final ClassFile cf = path.getClassFile(name, suffix);
-
             if (cf != null) {
                 return cf;
             }
         }
-
         return null;
     }
 
     /**
-     * @param name
-     *            fully qualified class name, e.g. java.lang.String
-     * @return input stream for class
+     * Gets an InputStream.
+     * <p>
+     * The caller is responsible for closing the InputStream.
+     * </p>
+     *
+     * @param name fully qualified class name, for example {@link String}.
+     * @return input stream for class.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public InputStream getInputStream(final String name) throws IOException {
-        return getInputStream(packageToFolder(name), ".class");
+        return getInputStream(Utility.packageToPath(name), JavaClass.EXTENSION);
     }
 
     /**
-     * Return stream for class or resource on CLASSPATH.
+     * Gets an InputStream for a class or resource on the classpath.
+     * <p>
+     * The caller is responsible for closing the InputStream.
+     * </p>
      *
-     * @param name
-     *            fully qualified file name, e.g. java/lang/String
-     * @param suffix
-     *            file name ends with suff, e.g. .java
-     * @return input stream for file on class path
-     * @throws IOException
+     * @param name   fully qualified file name, for example java/lang/String.
+     * @param suffix file name ends with suff, for example .java.
+     * @return input stream for file on class path.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public InputStream getInputStream(final String name, final String suffix) throws IOException {
-        InputStream inputStream = null;
         try {
-            inputStream = getClass().getClassLoader().getResourceAsStream(name + suffix); // may return null
-        } catch (final Exception e) {
+            final java.lang.ClassLoader classLoader = getClass().getClassLoader();
+            @SuppressWarnings("resource") // closed by caller
+            final
+            InputStream inputStream = classLoader == null ? null : classLoader.getResourceAsStream(name + suffix);
+            if (inputStream != null) {
+                return inputStream;
+            }
+        } catch (final Exception ignored) {
             // ignored
-        }
-        if (inputStream != null) {
-            return inputStream;
         }
         return getClassFile(name, suffix).getInputStream();
     }
 
     /**
-     * @param name
-     *            name of file to search for, e.g. java/lang/String.java
-     * @return full (canonical) path for file
+     * Gets the full canonical path for the given file.
+     *
+     * @param name name of file to search for, for example java/lang/String.java.
+     * @return full (canonical) path for file.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public String getPath(String name) throws IOException {
         final int index = name.lastIndexOf('.');
@@ -729,25 +749,27 @@ public class ClassPath implements Closeable {
     }
 
     /**
-     * @param name
-     *            name of file to search for, e.g. java/lang/String
-     * @param suffix
-     *            file name suffix, e.g. .java
-     * @return full (canonical) path for file, if it exists
+     * Gets the full canonical path for the given file.
+     *
+     * @param name name of file to search for, for example java/lang/String.
+     * @param suffix file name suffix, for example .java.
+     * @return full (canonical) path for file, if it exists.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public String getPath(final String name, final String suffix) throws IOException {
         return getClassFile(name, suffix).getPath();
     }
 
     /**
-     * @param name
-     *            fully qualified resource name, e.g. java/lang/String.class
+     * Gets the URL for the given resource.
+     *
+     * @param name fully qualified resource name, for example java/lang/String.class.
      * @return URL supplying the resource, or null if no resource with that name.
      * @since 6.0
      */
     public URL getResource(final String name) {
         for (final AbstractPathEntry path : paths) {
-            URL url;
+            final URL url;
             if ((url = path.getResource(name)) != null) {
                 return url;
             }
@@ -756,14 +778,15 @@ public class ClassPath implements Closeable {
     }
 
     /**
-     * @param name
-     *            fully qualified resource name, e.g. java/lang/String.class
+     * Gets the InputStream for the given resource.
+     *
+     * @param name fully qualified resource name, for example java/lang/String.class.
      * @return InputStream supplying the resource, or null if no resource with that name.
      * @since 6.0
      */
     public InputStream getResourceAsStream(final String name) {
         for (final AbstractPathEntry path : paths) {
-            InputStream is;
+            final InputStream is;
             if ((is = path.getResourceAsStream(name)) != null) {
                 return is;
             }
@@ -772,38 +795,36 @@ public class ClassPath implements Closeable {
     }
 
     /**
-     * @param name
-     *            fully qualified resource name, e.g. java/lang/String.class
+     * Gets an Enumeration of URLs for the given resource.
+     *
+     * @param name fully qualified resource name, for example java/lang/String.class.
      * @return An Enumeration of URLs supplying the resource, or an empty Enumeration if no resource with that name.
      * @since 6.0
      */
     public Enumeration<URL> getResources(final String name) {
-        final Vector<URL> results = new Vector<>();
+        final List<URL> list = new ArrayList<>();
         for (final AbstractPathEntry path : paths) {
-            URL url;
+            final URL url;
             if ((url = path.getResource(name)) != null) {
-                results.add(url);
+                list.add(url);
             }
         }
-        return results.elements();
+        return Collections.enumeration(list);
     }
 
     @Override
     public int hashCode() {
-        if (parent != null) {
-            return classPath.hashCode() + parent.hashCode();
-        }
-        return classPath.hashCode();
+        return classPathString.hashCode();
     }
 
     /**
-     * @return used class path string
+     * @return used class path string.
      */
     @Override
     public String toString() {
         if (parent != null) {
-            return parent + File.pathSeparator + classPath;
+            return parent + File.pathSeparator + classPathString;
         }
-        return classPath;
+        return classPathString;
     }
 }
