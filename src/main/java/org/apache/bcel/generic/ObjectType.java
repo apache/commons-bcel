@@ -105,8 +105,7 @@ public class ObjectType extends ReferenceType {
     @Deprecated
     public boolean referencesClass() {
         try {
-            final JavaClass jc = Repository.lookupClass(className);
-            return jc.isClass();
+            return Repository.lookupClass(className).isClass();
         } catch (final ClassNotFoundException e) {
             return false;
         }
@@ -119,8 +118,7 @@ public class ObjectType extends ReferenceType {
      * @throws ClassNotFoundException Thrown if the class or interface referenced by this type can't be found
      */
     public boolean referencesClassExact() throws ClassNotFoundException {
-        final JavaClass jc = Repository.lookupClass(className);
-        return jc.isClass();
+        return Repository.lookupClass(className).isClass();
     }
 
     /**
@@ -133,8 +131,7 @@ public class ObjectType extends ReferenceType {
     @Deprecated
     public boolean referencesInterface() {
         try {
-            final JavaClass jc = Repository.lookupClass(className);
-            return !jc.isClass();
+            return !Repository.lookupClass(className).isClass();
         } catch (final ClassNotFoundException e) {
             return false;
         }
@@ -147,8 +144,7 @@ public class ObjectType extends ReferenceType {
      * @throws ClassNotFoundException Thrown if the class or interface referenced by this type can't be found
      */
     public boolean referencesInterfaceExact() throws ClassNotFoundException {
-        final JavaClass jc = Repository.lookupClass(className);
-        return !jc.isClass();
+        return !Repository.lookupClass(className).isClass();
     }
 
     /**
