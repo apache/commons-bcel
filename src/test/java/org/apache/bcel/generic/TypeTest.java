@@ -18,19 +18,30 @@
  */
 package org.apache.bcel.generic;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class TypeTest {
+
+    // Java declaration: <T> List<T> filter(List<T> input, Predicate<T> p).
+    private static final String FILTER_DESCRIPTOR = "(Ljava/util/List;Ljava/util/function/Predicate;)Ljava/util/List;";
+    private static final String FILTER_SIGNATURE =
+            "<T:Ljava/lang/Object;>(Ljava/util/List<TT;>;Ljava/util/function/Predicate<TT;>;)Ljava/util/List<TT;>;";
+
     @Test
     void testBCEL243() {
         // expectedValue = "Ljava/util/Map<TX;Ljava/util/List<TY;>;>;";
@@ -40,6 +51,53 @@ class TypeTest {
         final String expectedValue = "Ljava/util/Map<X, java/util/List<Y>>;";
         final String actualValue = Type.getType("Ljava/util/Map<TX;Ljava/util/List<TY;>;>;").getSignature();
         assertEquals(expectedValue, actualValue, "Type.getType");
+    }
+
+    @Test
+    void testGetArgumentTypesMethodDescriptor() {
+        assertArrayEquals(new Type[] { ObjectType.getInstance("java.util.List"), ObjectType.getInstance("java.util.function.Predicate") },
+                Type.getArgumentTypes(FILTER_DESCRIPTOR));
+    }
+
+    @Test
+    void testGetReturnTypeMethodDescriptor() {
+        assertEquals(ObjectType.getInstance("java.util.List"), Type.getReturnType(FILTER_DESCRIPTOR));
+    }
+
+    @Test
+    void testGetReturnTypeMethodSignature() {
+        // Extracts the return type after the formal type parameters and method arguments, retaining the current BCEL-243 representation.
+        final Type type = Type.getReturnType(FILTER_SIGNATURE);
+        assertEquals("java.util.List<T>", type.getClassName());
+        assertEquals("Ljava/util/List<T>;", type.getSignature());
+    }
+
+    @ParameterizedTest
+    @CsvSource(delimiter = '|', value = {
+        "Ljava/util/List<Ljava/lang/String;>; | java.util.List<java.lang.String> | Ljava/util/List<java/lang/String>;",
+        "Ljava/util/List<TT;>; | java.util.List<T> | Ljava/util/List<T>;",
+        "Ljava/util/Map<TX;Ljava/util/List<TY;>;>; | java.util.Map<X, java.util.List<Y>> | Ljava/util/Map<X, java/util/List<Y>>;",
+        "Ljava/util/List<*>; | java.util.List<?> | Ljava/util/List<?>;",
+        "Ljava/util/List<+Ljava/lang/Number;>; | java.util.List<? extends java.lang.Number> | Ljava/util/List<? extends java/lang/Number>;",
+        "Ljava/util/List<-Ljava/lang/Integer;>; | java.util.List<? super java.lang.Integer> | Ljava/util/List<? super java/lang/Integer>;"
+    })
+    void testGetTypeGenerics(final String signature, final String expectedClassName, final String expectedSignature) {
+        // BCEL-243 compatibility: ObjectType currently embeds generic display text in its class name and reconstructed signature.
+        // These expectations describe existing behavior, not type erasure or lossless preservation of the encoded generic signature.
+        final Type type = Type.getType(signature);
+        assertEquals(ObjectType.class, type.getClass());
+        assertEquals(expectedClassName, type.toString());
+        assertEquals(expectedClassName, type.getClassName());
+        assertEquals(expectedSignature, type.getSignature());
+        assertEquals(1, type.getSize());
+        assertEquals(Const.T_REFERENCE, type.getType());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { FILTER_DESCRIPTOR, FILTER_SIGNATURE })
+    void testGetTypeRejectsMethodSignatures(final String signature) {
+        // A complete method descriptor or generic method signature does not describe a single type.
+        assertThrows(ClassFormatException.class, () -> Type.getType(signature));
     }
 
     @Test
