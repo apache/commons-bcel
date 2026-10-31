@@ -1342,7 +1342,7 @@ public abstract class Utility {
     }
 
     /**
-     * Return type of method signature as a byte value as defined in <em>Constants</em>
+     * Return type of method signature as a byte value as defined in {@link Const}.
      *
      * @param signature in format described above.
      * @return type of method signature.
