@@ -78,6 +78,9 @@ import org.junit.jupiter.params.provider.MethodSource;
  */
 class JdkGenericDumpTest {
 
+    private static final boolean PRINT_CLASS_NAME = Boolean.getBoolean("bcel.print.ClassNames");
+    private static final boolean PRINT_JAR_NAME = Boolean.getBoolean("bcel.print.JarNames");
+
     private static class ClassParserFilesVisitor extends SimpleFileVisitor<Path> {
 
         private final PathMatcher matcher;
@@ -159,14 +162,18 @@ class JdkGenericDumpTest {
     }
 
     private void testJar(final Path file) throws Exception {
-        System.out.println(file);
+        if (PRINT_JAR_NAME) {
+            System.out.println(" - " + file);
+        }
         try (JarFile jar = new JarFile(file.toFile())) {
             final Enumeration<JarEntry> en = jar.entries();
             while (en.hasMoreElements()) {
                 final JarEntry jarEntry = en.nextElement();
                 final String name = jarEntry.getName();
                 if (name.endsWith(JavaClass.EXTENSION)) {
-                    // System.out.println("- " + name);
+                    if (PRINT_CLASS_NAME) {
+                        System.out.println("  - " + name);
+                    }
                     try (InputStream inputStream = jar.getInputStream(jarEntry)) {
                         final ClassParser classParser = new ClassParser(inputStream, name);
                         final JavaClass javaClass = classParser.parse();
