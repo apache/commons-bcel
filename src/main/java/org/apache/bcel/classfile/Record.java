@@ -39,12 +39,12 @@ public final class Record extends Attribute {
 
     private static final RecordComponentInfo[] EMPTY_RCI_ARRAY = {};
 
-    private static RecordComponentInfo[] readComponents(final DataInput input, final ConstantPool constantPool)
+    private static RecordComponentInfo[] readComponents(final DataInput input, final ConstantPool constantPool, final boolean legacyCodeFormat)
             throws IOException {
         final int classCount = input.readUnsignedShort();
         final RecordComponentInfo[] components = new RecordComponentInfo[classCount];
         for (int i = 0; i < classCount; i++) {
-            components[i] = new RecordComponentInfo(input, constantPool);
+            components[i] = new RecordComponentInfo(input, constantPool, legacyCodeFormat);
         }
         return components;
     }
@@ -62,7 +62,12 @@ public final class Record extends Attribute {
      */
     Record(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool)
             throws IOException {
-        this(nameIndex, length, readComponents(input, constantPool), constantPool);
+        this(nameIndex, length, input, constantPool, false);
+    }
+
+    Record(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool, final boolean legacyCodeFormat)
+            throws IOException {
+        this(nameIndex, length, readComponents(input, constantPool, legacyCodeFormat), constantPool);
     }
 
     /**

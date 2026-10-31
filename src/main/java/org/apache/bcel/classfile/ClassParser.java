@@ -60,6 +60,7 @@ public final class ClassParser {
     private int superclassNameIndex;
     private int major; // Compiler version
     private int minor; // Compiler version
+    private boolean legacyCodeFormat; // True if class file version is <=45.2
     private int accessFlags; // Access rights of parsed class
     private int[] interfaces; // Names of implemented interfaces
     private ConstantPool constantPool; // collection of constants
@@ -192,7 +193,7 @@ public final class ClassParser {
         final int attributesCount = dataInputStream.readUnsignedShort();
         attributes = new Attribute[attributesCount];
         for (int i = 0; i < attributesCount; i++) {
-            attributes[i] = Attribute.readAttribute(dataInputStream, constantPool);
+            attributes[i] = Attribute.readAttribute(dataInputStream, constantPool, legacyCodeFormat);
         }
     }
 
@@ -237,7 +238,7 @@ public final class ClassParser {
         final int fieldsCount = dataInputStream.readUnsignedShort();
         fields = new Field[fieldsCount];
         for (int i = 0; i < fieldsCount; i++) {
-            fields[i] = new Field(dataInputStream, constantPool);
+            fields[i] = new Field(dataInputStream, constantPool, legacyCodeFormat);
         }
     }
 
@@ -273,7 +274,7 @@ public final class ClassParser {
         final int methodsCount = dataInputStream.readUnsignedShort();
         methods = new Method[methodsCount];
         for (int i = 0; i < methodsCount; i++) {
-            methods[i] = new Method(dataInputStream, constantPool);
+            methods[i] = new Method(dataInputStream, constantPool, legacyCodeFormat);
         }
     }
 
@@ -286,5 +287,6 @@ public final class ClassParser {
     private void readVersion() throws IOException, ClassFormatException {
         minor = dataInputStream.readUnsignedShort();
         major = dataInputStream.readUnsignedShort();
+        legacyCodeFormat = major < Const.MAJOR_1_1 || (major == Const.MAJOR_1_1 && minor < Const.MINOR_1_1);
     }
 }

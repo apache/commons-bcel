@@ -86,7 +86,11 @@ public final class Method extends FieldOrMethod {
      * @throws ClassFormatException Thrown if a class is malformed or cannot be interpreted as a class file.
      */
     Method(final DataInput file, final ConstantPool constantPool) throws IOException, ClassFormatException {
-        super(file, constantPool);
+        this(file, constantPool, false);
+    }
+
+    Method(final DataInput file, final ConstantPool constantPool, final boolean legacyCodeFormat) throws IOException {
+        super(file, constantPool, legacyCodeFormat);
     }
 
     /**

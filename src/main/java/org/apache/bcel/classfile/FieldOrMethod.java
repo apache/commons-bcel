@@ -78,11 +78,15 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @throws IOException Thrown if an I/O error occurs.
      */
     protected FieldOrMethod(final DataInput file, final ConstantPool constantPool) throws IOException {
+        this(file, constantPool, false);
+    }
+
+    FieldOrMethod(final DataInput file, final ConstantPool constantPool, final boolean legacyCodeFormat) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), null, constantPool);
         final int attributesCount = file.readUnsignedShort();
         attributes = new Attribute[attributesCount];
         for (int i = 0; i < attributesCount; i++) {
-            attributes[i] = Attribute.readAttribute(file, constantPool);
+            attributes[i] = Attribute.readAttribute(file, constantPool, legacyCodeFormat);
         }
         this.attributes_count = attributesCount; // init deprecated field
     }

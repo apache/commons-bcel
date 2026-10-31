@@ -19,12 +19,12 @@
 
 package org.apache.bcel.classfile;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link ClassParser}.

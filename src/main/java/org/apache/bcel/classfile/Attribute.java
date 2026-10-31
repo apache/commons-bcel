@@ -133,6 +133,13 @@ public abstract class Attribute implements Cloneable, Node {
      * @since 6.0
      */
     public static Attribute readAttribute(final DataInput dataInput, final ConstantPool constantPool) throws IOException {
+        return readAttribute(dataInput, constantPool, false);
+    }
+
+    /**
+     * Reads an attribute using the Code encoding selected by the enclosing class file's version.
+     */
+    static Attribute readAttribute(final DataInput dataInput, final ConstantPool constantPool, final boolean legacyCodeFormat) throws IOException {
         // Track the nesting depth to guard against malicious class files that nest attributes (for example, a Code attribute inside a Code attribute, or
         // mutually recursive Record component attributes) deeply enough to overflow the parser's stack (CWE-674).
         final int depth = NESTING_DEPTH.get().intValue() + 1;
@@ -143,7 +150,7 @@ public abstract class Attribute implements Cloneable, Node {
         }
         NESTING_DEPTH.set(Integer.valueOf(depth));
         try {
-            return readAttribute0(dataInput, constantPool);
+            return readAttribute0(dataInput, constantPool, legacyCodeFormat);
         } finally {
             if (depth == 1) {
                 NESTING_DEPTH.remove();
@@ -169,9 +176,9 @@ public abstract class Attribute implements Cloneable, Node {
     }
 
     /**
-     * Reads one attribute without tracking the nesting depth; only to be called by {@link #readAttribute(DataInput, ConstantPool)}.
+     * Reads one attribute without tracking the nesting depth; only to be called by {@link #readAttribute(DataInput, ConstantPool, boolean)}.
      */
-    private static Attribute readAttribute0(final DataInput dataInput, final ConstantPool constantPool) throws IOException {
+    private static Attribute readAttribute0(final DataInput dataInput, final ConstantPool constantPool, final boolean legacyCodeFormat) throws IOException {
         byte tag = Const.ATTR_UNKNOWN; // Unknown attribute
         // Get class name from constant pool via 'name_index' indirection
         final int nameIndex = dataInput.readUnsignedShort();
@@ -201,7 +208,7 @@ public abstract class Attribute implements Cloneable, Node {
         case Const.ATTR_SOURCE_FILE:
             return new SourceFile(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_CODE:
-            return new Code(nameIndex, length, dataInput, constantPool);
+            return new Code(nameIndex, length, dataInput, constantPool, legacyCodeFormat);
         case Const.ATTR_EXCEPTIONS:
             return new ExceptionTable(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_LINE_NUMBER_TABLE:
@@ -256,7 +263,7 @@ public abstract class Attribute implements Cloneable, Node {
         case Const.ATTR_NEST_MEMBERS:
             return new NestMembers(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_RECORD:
-            return new Record(nameIndex, length, dataInput, constantPool);
+            return new Record(nameIndex, length, dataInput, constantPool, legacyCodeFormat);
         case Const.ATTR_PERMITTED_SUBCLASSES:
             return new PermittedSubclasses(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS:

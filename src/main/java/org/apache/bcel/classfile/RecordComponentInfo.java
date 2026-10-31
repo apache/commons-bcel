@@ -48,12 +48,16 @@ public class RecordComponentInfo implements Node {
      * @throws IOException Thrown if an I/O error occurs.
      */
     public RecordComponentInfo(final DataInput input, final ConstantPool constantPool) throws IOException {
+        this(input, constantPool, false);
+    }
+
+    RecordComponentInfo(final DataInput input, final ConstantPool constantPool, final boolean legacyCodeFormat) throws IOException {
         this.index = input.readUnsignedShort();
         this.descriptorIndex = input.readUnsignedShort();
         final int attributesCount = input.readUnsignedShort();
         this.attributes = new Attribute[attributesCount];
         for (int j = 0; j < attributesCount; j++) {
-            attributes[j] = Attribute.readAttribute(input, constantPool);
+            attributes[j] = Attribute.readAttribute(input, constantPool, legacyCodeFormat);
         }
         this.constantPool = constantPool;
     }

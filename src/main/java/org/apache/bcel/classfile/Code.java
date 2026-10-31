@@ -63,6 +63,10 @@ import org.apache.commons.lang3.ArrayUtils;
  */
 public final class Code extends Attribute {
 
+    /**
+     * Whether the Code header uses the smaller fields of class file versions up to 45.2.
+     */
+    private final boolean legacyCodeFormat;
     private int maxStack; // Maximum size of stack used by this method // TODO this could be made final (setter is not used)
     private int maxLocals; // Number of local variables // TODO this could be made final (setter is not used)
     private byte[] code; // Actual byte code
@@ -77,7 +81,7 @@ public final class Code extends Attribute {
      */
     public Code(final Code code) {
         this(code.getNameIndex(), code.getLength(), code.getMaxStack(), code.getMaxLocals(), code.getCode(), code.getExceptionTable(), code.getAttributes(),
-                code.getConstantPool());
+                code.getConstantPool(), code.legacyCodeFormat);
     }
 
     /**
@@ -90,10 +94,18 @@ public final class Code extends Attribute {
      * @throws ClassFormatException Thrown if the code array read from {@code file} is greater than {@link Const#MAX_CODE_SIZE}.
      */
     Code(final int nameIndex, final int length, final DataInput dataInput, final ConstantPool constantPool) throws IOException {
+        this(nameIndex, length, dataInput, constantPool, false);
+    }
+
+    /**
+     * Reads a Code attribute using the header widths selected by the enclosing class file's version.
+     */
+    Code(final int nameIndex, final int length, final DataInput dataInput, final ConstantPool constantPool, final boolean legacyCodeFormat) throws IOException {
         // Initialize with some default values which will be overwritten later
-        this(nameIndex, length, dataInput.readUnsignedShort(), dataInput.readUnsignedShort(), (byte[]) null, (CodeException[]) null, (Attribute[]) null,
-                constantPool);
-        final int codeLength = Args.requireU4(dataInput.readInt(), 0, Const.MAX_CODE_SIZE, "Code length attribute");
+        this(nameIndex, length, legacyCodeFormat ? dataInput.readUnsignedByte() : dataInput.readUnsignedShort(),
+                legacyCodeFormat ? dataInput.readUnsignedByte() : dataInput.readUnsignedShort(), null, null, null, constantPool, legacyCodeFormat);
+        final int codeLength = Args.requireU4(legacyCodeFormat ? dataInput.readUnsignedShort() : dataInput.readInt(), 0, Const.MAX_CODE_SIZE,
+                "Code length attribute");
         code = new byte[codeLength]; // Read byte code
         dataInput.readFully(code);
         /*
@@ -110,7 +122,7 @@ public final class Code extends Attribute {
         final int attributesCount = dataInput.readUnsignedShort();
         attributes = new Attribute[attributesCount];
         for (int i = 0; i < attributesCount; i++) {
-            attributes[i] = readAttribute(dataInput, constantPool);
+            attributes[i] = readAttribute(dataInput, constantPool, legacyCodeFormat);
         }
         /*
          * Adjust length, because of setAttributes in this(), s.b. length is incorrect, because it didn't take the internal attributes into account yet! Very
@@ -134,7 +146,13 @@ public final class Code extends Attribute {
      */
     public Code(final int nameIndex, final int length, final int maxStack, final int maxLocals, final byte[] code, final CodeException[] exceptionTable,
         final Attribute[] attributes, final ConstantPool constantPool) {
+        this(nameIndex, length, maxStack, maxLocals, code, exceptionTable, attributes, constantPool, false);
+    }
+
+    private Code(final int nameIndex, final int length, final int maxStack, final int maxLocals, final byte[] code, final CodeException[] exceptionTable,
+        final Attribute[] attributes, final ConstantPool constantPool, final boolean legacyCodeFormat) {
         super(Const.ATTR_CODE, nameIndex, length, constantPool);
+        this.legacyCodeFormat = legacyCodeFormat;
         this.maxStack = Args.requireU2(maxStack, "maxStack");
         this.maxLocals = Args.requireU2(maxLocals, "maxLocals");
         this.code = ArrayUtils.nullToEmpty(code);
@@ -197,10 +215,21 @@ public final class Code extends Attribute {
      */
     @Override
     public void dump(final DataOutputStream file) throws IOException {
+        if (legacyCodeFormat) {
+            Args.requireU1(maxStack, "maxStack");
+            Args.requireU1(maxLocals, "maxLocals");
+            Args.requireU2(code.length, "Code length attribute");
+        }
         super.dump(file);
-        file.writeShort(maxStack);
-        file.writeShort(maxLocals);
-        file.writeInt(code.length);
+        if (legacyCodeFormat) {
+            file.writeByte(maxStack);
+            file.writeByte(maxLocals);
+            file.writeShort(code.length);
+        } else {
+            file.writeShort(maxStack);
+            file.writeShort(maxLocals);
+            file.writeInt(code.length);
+        }
         file.write(code, 0, code.length);
         file.writeShort(Args.requireU2(exceptionTable.length, "exceptionTable.length"));
         for (final CodeException exception : exceptionTable) {
@@ -247,7 +276,7 @@ public final class Code extends Attribute {
      * @return The internal length of this code attribute (minus the first 6 bytes) and excluding all its attributes.
      */
     private int getInternalLength() {
-        return 2 /* maxStack */ + 2 /* maxLocals */ + 4 /* code length */
+        return (legacyCodeFormat ? 4 : 8) /* maxStack, maxLocals, code length */
             + code.length /* byte-code */
             + 2 /* exception-table length */
             + 8 * (exceptionTable == null ? 0 : exceptionTable.length) /* exception table */

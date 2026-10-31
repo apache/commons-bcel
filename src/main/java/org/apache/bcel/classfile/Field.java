@@ -77,7 +77,11 @@ public final class Field extends FieldOrMethod {
      * @param constantPool The constant pool.
      */
     Field(final DataInput file, final ConstantPool constantPool) throws IOException, ClassFormatException {
-        super(file, constantPool);
+        this(file, constantPool, false);
+    }
+
+    Field(final DataInput file, final ConstantPool constantPool, final boolean legacyCodeFormat) throws IOException {
+        super(file, constantPool, legacyCodeFormat);
     }
 
     /**
