@@ -56,6 +56,21 @@ import org.apache.commons.lang3.ArrayUtils;
  * }
  * </pre>
  *
+ * <p>
+ * The layout above uses the standard Code header. This class also supports compact Code headers found in historical class file versions 45.0 through 45.2.
+ * Here, "compact" describes the narrower encoding of three fields: {@code max_stack} and {@code max_locals} each use {@code u1}, and {@code code_length}
+ * uses {@code u2}, instead of {@code u2}, {@code u2}, and {@code u4}, respectively. The notation {@code u1}, {@code u2}, and {@code u4} denotes unsigned
+ * one-, two-, and four-byte values. These three fields therefore occupy 4 bytes instead of 8, excluding the common six-byte attribute prefix.
+ * The layout of that prefix and the remaining Code fields is unchanged; the bytecode itself is not compressed.
+ * {@link #isCompactCodeHeader()} identifies this narrower layout.
+ * </p>
+ *
+ * <p>
+ * Class file versions 45.0 through 45.2 also occur with standard Code headers accepted by modern JVMs, so the version alone does not identify the layout.
+ * {@link ClassParser} uses standard headers by default; {@link ClassParser#setCompactCodeHeaderEnabled(boolean)} explicitly selects compact headers
+ * for those versions.
+ * </p>
+ *
  * @see Attribute
  * @see CodeException
  * @see LineNumberTable
@@ -63,6 +78,11 @@ import org.apache.commons.lang3.ArrayUtils;
  */
 public final class Code extends Attribute {
 
+    /**
+     * Whether {@code max_stack}, {@code max_locals}, and {@code code_length} use {@code u1/u1/u2} (4 bytes) instead of {@code u2/u2/u4} (8 bytes).
+     * Compact describes these field widths, not compression of the bytecode or the rest of the attribute.
+     */
+    private boolean compactCodeHeader;
     private int maxStack; // Maximum size of stack used by this method // TODO this could be made final (setter is not used)
     private int maxLocals; // Number of local variables // TODO this could be made final (setter is not used)
     private byte[] code; // Actual byte code
@@ -77,7 +97,7 @@ public final class Code extends Attribute {
      */
     public Code(final Code code) {
         this(code.getNameIndex(), code.getLength(), code.getMaxStack(), code.getMaxLocals(), code.getCode(), code.getExceptionTable(), code.getAttributes(),
-                code.getConstantPool());
+                code.getConstantPool(), code.compactCodeHeader);
     }
 
     /**
@@ -90,10 +110,19 @@ public final class Code extends Attribute {
      * @throws ClassFormatException Thrown if the code array read from {@code file} is greater than {@link Const#MAX_CODE_SIZE}.
      */
     Code(final int nameIndex, final int length, final DataInput dataInput, final ConstantPool constantPool) throws IOException {
-        // Initialize with some default values which will be overwritten later
-        this(nameIndex, length, dataInput.readUnsignedShort(), dataInput.readUnsignedShort(), (byte[]) null, (CodeException[]) null, (Attribute[]) null,
-                constantPool);
-        final int codeLength = Args.requireU4(dataInput.readInt(), 0, Const.MAX_CODE_SIZE, "Code length attribute");
+        this(nameIndex, length, dataInput, constantPool, false);
+    }
+
+    /**
+     * Reads a Code attribute using the selected header layout.
+     */
+    Code(final int nameIndex, final int length, final DataInput dataInput, final ConstantPool constantPool, final boolean compactCodeHeader) throws IOException {
+        // Compact headers encode max_stack/max_locals/code_length as u1/u1/u2; standard headers use u2/u2/u4.
+        // Initialize the remaining fields with default values, then read them below.
+        this(nameIndex, length, compactCodeHeader ? dataInput.readUnsignedByte() : dataInput.readUnsignedShort(),
+                compactCodeHeader ? dataInput.readUnsignedByte() : dataInput.readUnsignedShort(), null, null, null, constantPool, compactCodeHeader);
+        final int codeLength = Args.requireU4(compactCodeHeader ? dataInput.readUnsignedShort() : dataInput.readInt(), 0, Const.MAX_CODE_SIZE,
+                "Code length attribute");
         code = new byte[codeLength]; // Read byte code
         dataInput.readFully(code);
         /*
@@ -110,7 +139,7 @@ public final class Code extends Attribute {
         final int attributesCount = dataInput.readUnsignedShort();
         attributes = new Attribute[attributesCount];
         for (int i = 0; i < attributesCount; i++) {
-            attributes[i] = readAttribute(dataInput, constantPool);
+            attributes[i] = readAttribute(dataInput, constantPool, compactCodeHeader);
         }
         /*
          * Adjust length, because of setAttributes in this(), s.b. length is incorrect, because it didn't take the internal attributes into account yet! Very
@@ -120,7 +149,11 @@ public final class Code extends Attribute {
     }
 
     /**
-     * Constructs a Code attribute.
+     * Constructs a Code attribute using a standard eight-byte header.
+     *
+     * <p>
+     * Use {@link #setCompactCodeHeader(boolean)} to select the compact four-byte header after construction.
+     * </p>
      *
      * @param nameIndex Index pointing to the name <em>Code</em>.
      * @param length Content length in bytes.
@@ -134,7 +167,13 @@ public final class Code extends Attribute {
      */
     public Code(final int nameIndex, final int length, final int maxStack, final int maxLocals, final byte[] code, final CodeException[] exceptionTable,
         final Attribute[] attributes, final ConstantPool constantPool) {
+        this(nameIndex, length, maxStack, maxLocals, code, exceptionTable, attributes, constantPool, false);
+    }
+
+    private Code(final int nameIndex, final int length, final int maxStack, final int maxLocals, final byte[] code, final CodeException[] exceptionTable,
+        final Attribute[] attributes, final ConstantPool constantPool, final boolean compactCodeHeader) {
         super(Const.ATTR_CODE, nameIndex, length, constantPool);
+        this.compactCodeHeader = compactCodeHeader;
         this.maxStack = Args.requireU2(maxStack, "maxStack");
         this.maxLocals = Args.requireU2(maxLocals, "maxLocals");
         this.code = ArrayUtils.nullToEmpty(code);
@@ -194,13 +233,26 @@ public final class Code extends Attribute {
      *
      * @param file Output file stream.
      * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if a compact header's {@code max_stack} or {@code max_locals} is outside 0 through 255,
+     *         or its code length exceeds 65535 bytes.
      */
     @Override
     public void dump(final DataOutputStream file) throws IOException {
+        if (compactCodeHeader) {
+            Args.requireU1(maxStack, "maxStack");
+            Args.requireU1(maxLocals, "maxLocals");
+            Args.requireU2(code.length, "Code length attribute");
+        }
         super.dump(file);
-        file.writeShort(maxStack);
-        file.writeShort(maxLocals);
-        file.writeInt(code.length);
+        if (compactCodeHeader) {
+            file.writeByte(maxStack);
+            file.writeByte(maxLocals);
+            file.writeShort(code.length);
+        } else {
+            file.writeShort(maxStack);
+            file.writeShort(maxLocals);
+            file.writeInt(code.length);
+        }
         file.write(code, 0, code.length);
         file.writeShort(Args.requireU2(exceptionTable.length, "exceptionTable.length"));
         for (final CodeException exception : exceptionTable) {
@@ -247,7 +299,8 @@ public final class Code extends Attribute {
      * @return The internal length of this code attribute (minus the first 6 bytes) and excluding all its attributes.
      */
     private int getInternalLength() {
-        return 2 /* maxStack */ + 2 /* maxLocals */ + 4 /* code length */
+        // Only max_stack, max_locals, and code_length differ: 1 + 1 + 2 compact bytes versus 2 + 2 + 4 standard bytes.
+        return (compactCodeHeader ? 4 : 8)
             + code.length /* byte-code */
             + 2 /* exception-table length */
             + 8 * (exceptionTable == null ? 0 : exceptionTable.length) /* exception table */
@@ -331,6 +384,18 @@ public final class Code extends Attribute {
     }
 
     /**
+     * Gets whether this attribute uses the compact four-byte Code header.
+     *
+     * @return Whether {@code max_stack}, {@code max_locals}, and {@code code_length} use {@code u1}, {@code u1}, and {@code u2}, respectively,
+     *         instead of the standard {@code u2}, {@code u2}, and {@code u4}.
+     * @since 6.14.0
+     * @see #setCompactCodeHeader(boolean)
+     */
+    public boolean isCompactCodeHeader() {
+        return compactCodeHeader;
+    }
+
+    /**
      * Sets the attributes for this Code.
      *
      * @param attributes The attributes to set for this Code.
@@ -350,6 +415,35 @@ public final class Code extends Attribute {
         this.code = ArrayUtils.nullToEmpty(code);
         Args.requireU4(this.code.length, 0, Const.MAX_CODE_SIZE, "Code length attribute");
         super.setLength(calculateLength()); // Adjust length
+    }
+
+    /**
+     * Sets the Code header layout and recalculates the attribute length.
+     *
+     * <p>
+     * Compact headers encode {@code max_stack}, {@code max_locals}, and {@code code_length} as {@code u1}, {@code u1}, and {@code u2}, respectively,
+     * totaling 4 bytes instead of the standard 8. This limits {@code max_stack} and {@code max_locals} to 0 through 255 and the code length to 65535 bytes.
+     * The remaining attribute layout is unchanged. Compact headers are intended for historical class file versions 45.0 through 45.2.
+     * Enabling compact headers validates these values before changing the layout. Subsequent changes to them are checked by {@link #dump(DataOutputStream)}.
+     * </p>
+     *
+     * <p>
+     * This setting controls this attribute's own dump. When dumping an entire class, {@link JavaClass#dump(DataOutputStream)} selects one layout for
+     * all method Code attributes based on the class version and the methods' header settings, without changing this attribute's setting.
+     * </p>
+     *
+     * @param compactCodeHeader Whether to use a compact four-byte header ({@code true}) or a standard eight-byte header ({@code false}).
+     * @throws ClassFormatException Thrown if {@code compactCodeHeader} is {@code true} and the current values do not fit in a compact header.
+     * @since 6.14.0
+     */
+    public void setCompactCodeHeader(final boolean compactCodeHeader) {
+        if (compactCodeHeader) {
+            Args.requireU1(maxStack, "maxStack");
+            Args.requireU1(maxLocals, "maxLocals");
+            Args.requireU2(code.length, "Code length attribute");
+        }
+        this.compactCodeHeader = compactCodeHeader;
+        super.setLength(calculateLength());
     }
 
     /**

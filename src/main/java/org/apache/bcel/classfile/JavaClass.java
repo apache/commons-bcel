@@ -338,10 +338,21 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
     /**
      * Dumps Java class to output stream in binary format.
      *
+     * <p>
+     * For versions 45.0 through 45.2, all method Code attributes use compact four-byte headers if any method's Code attribute returns {@code true} from
+     * {@link Code#isCompactCodeHeader()}. Otherwise, all method Code attributes use standard eight-byte headers. Versions 45.3 and later always use standard
+     * headers, including after a version change. The header size refers only to {@code max_stack}, {@code max_locals}, and {@code code_length}.
+     * These encoding adjustments do not modify the methods or their attributes.
+     * </p>
+     *
      * @param file Output stream.
      * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if a method's values do not fit the selected Code header layout.
      */
     public void dump(final DataOutputStream file) throws IOException {
+        // Use one layout for all method Code headers. A version change can require widening headers without modifying shared attributes.
+        final boolean compactCodeHeader = major == Const.MAJOR_1_1 && minor < Const.MINOR_1_1 && Arrays.stream(methods)
+            .map(Method::getCode).filter(Objects::nonNull).anyMatch(Code::isCompactCodeHeader);
         file.writeInt(Const.JVM_CLASSFILE_MAGIC);
         file.writeShort(minor);
         file.writeShort(major);
@@ -359,7 +370,7 @@ public class JavaClass extends AccessFlags implements Cloneable, Node, Comparabl
         }
         file.writeShort(Args.requireU2(methods.length, "methods.length"));
         for (final Method method : methods) {
-            method.dump(file);
+            method.dump(file, compactCodeHeader);
         }
         if (attributes != null) {
             file.writeShort(Args.requireU2(attributes.length, "attributes.length"));

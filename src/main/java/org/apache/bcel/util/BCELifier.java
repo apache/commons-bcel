@@ -374,6 +374,10 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         }
         final Code code = method.getCode();
         if (code != null) {
+            // Preserve this method's compact header setting only for versions that support it; JavaClass.dump selects the class-wide layout.
+            if (code.isCompactCodeHeader() && clazz.getMajor() == Const.MAJOR_1_1 && clazz.getMinor() < Const.MINOR_1_1) {
+                printWriter.println("    method.setCompactCodeHeader(true);");
+            }
             final StackMap stackMap = code.getStackMap();
             if (stackMap != null) {
                 stackMap.accept(this);
