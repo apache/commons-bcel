@@ -287,6 +287,6 @@ public final class ClassParser {
     private void readVersion() throws IOException, ClassFormatException {
         minor = dataInputStream.readUnsignedShort();
         major = dataInputStream.readUnsignedShort();
-        legacyCodeFormat = major < Const.MAJOR_1_1 || (major == Const.MAJOR_1_1 && minor < Const.MINOR_1_1);
+        legacyCodeFormat = major < Const.MAJOR_1_1 || major == Const.MAJOR_1_1 && minor < Const.MINOR_1_1;
     }
 }
