@@ -60,6 +60,10 @@ public final class ClassParser {
     private int superclassNameIndex;
     private int major; // Compiler version
     private int minor; // Compiler version
+    // Actual Code layout selected after checking both the explicit option and the class file version.
+    private boolean compactCodeHeader;
+    // Versions 45.0 through 45.2 can also use standard Code headers, so the narrower layout requires an explicit option.
+    private boolean compactCodeHeaderEnabled;
     private int accessFlags; // Access rights of parsed class
     private int[] interfaces; // Names of implemented interfaces
     private ConstantPool constantPool; // collection of constants
@@ -112,9 +116,25 @@ public final class ClassParser {
     }
 
     /**
+     * Gets whether compact Code header parsing is enabled for class file versions 45.0 through 45.2.
+     *
+     * @return Whether compact Code header parsing is enabled.
+     * @since 6.14.0
+     * @see #setCompactCodeHeaderEnabled(boolean)
+     */
+    public boolean isCompactCodeHeaderEnabled() {
+        return compactCodeHeaderEnabled;
+    }
+
+    /**
      * Parses the given Java class file and return an object that represents the contained data, that is, constants, methods,
      * fields and commands. A <em>ClassFormatException</em> is raised, if the file is not a valid .class file. (This does
      * not include verification of the byte code as it is performed by the Java interpreter).
+     *
+     * <p>
+     * Code attributes use the standard eight-byte header by default, including in class files with version 45.0 through 45.2.
+     * Use {@link #setCompactCodeHeaderEnabled(boolean)} to read the compact four-byte header used by historical files with those versions.
+     * </p>
      *
      * @return Class object representing the parsed class file.
      * @throws IOException Thrown if an I/O error occurs.
@@ -192,7 +212,7 @@ public final class ClassParser {
         final int attributesCount = dataInputStream.readUnsignedShort();
         attributes = new Attribute[attributesCount];
         for (int i = 0; i < attributesCount; i++) {
-            attributes[i] = Attribute.readAttribute(dataInputStream, constantPool);
+            attributes[i] = Attribute.readAttribute(dataInputStream, constantPool, compactCodeHeader);
         }
     }
 
@@ -237,7 +257,7 @@ public final class ClassParser {
         final int fieldsCount = dataInputStream.readUnsignedShort();
         fields = new Field[fieldsCount];
         for (int i = 0; i < fieldsCount; i++) {
-            fields[i] = new Field(dataInputStream, constantPool);
+            fields[i] = new Field(dataInputStream, constantPool, compactCodeHeader);
         }
     }
 
@@ -273,7 +293,7 @@ public final class ClassParser {
         final int methodsCount = dataInputStream.readUnsignedShort();
         methods = new Method[methodsCount];
         for (int i = 0; i < methodsCount; i++) {
-            methods[i] = new Method(dataInputStream, constantPool);
+            methods[i] = new Method(dataInputStream, constantPool, compactCodeHeader);
         }
     }
 
@@ -286,5 +306,30 @@ public final class ClassParser {
     private void readVersion() throws IOException, ClassFormatException {
         minor = dataInputStream.readUnsignedShort();
         major = dataInputStream.readUnsignedShort();
+        // The option resolves the ambiguous layout for 45.0 through 45.2; versions 45.3 and later always use standard headers.
+        compactCodeHeader = compactCodeHeaderEnabled && major == Const.MAJOR_1_1 && minor < Const.MINOR_1_1;
+    }
+
+    /**
+     * Sets whether to read compact Code headers in class file versions 45.0 through 45.2.
+     *
+     * <p>
+     * "Compact" refers to the widths of {@code max_stack}, {@code max_locals}, and {@code code_length}: unsigned one-, one-, and two-byte fields,
+     * respectively, totaling 4 bytes. Standard headers use unsigned two-, two-, and four-byte fields, totaling 8 bytes. These sizes exclude the common
+     * six-byte attribute prefix. The layout of that prefix and the remaining Code fields is unchanged.
+     * </p>
+     *
+     * <p>
+     * This option is disabled by default because modern JVMs also accept versions 45.0 through 45.2 with standard headers. The version therefore
+     * cannot determine the layout by itself; enabling this option selects the historical compact layout. Other class file versions always use standard
+     * headers, regardless of this option. Set this option before calling {@link #parse()}.
+     * </p>
+     *
+     * @param enabled Whether to enable compact Code header parsing.
+     * @since 6.14.0
+     * @see Code#isCompactCodeHeader()
+     */
+    public void setCompactCodeHeaderEnabled(final boolean enabled) {
+        compactCodeHeaderEnabled = enabled;
     }
 }

@@ -42,6 +42,7 @@ import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.ConstantValue;
 import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.generic.BinaryOpCreator;
 import org.apache.bcel.generic.ClassGen;
@@ -57,6 +58,7 @@ import org.apache.commons.lang3.SystemUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledForJreRange;
 import org.junit.jupiter.api.condition.JRE;
+import org.junit.jupiter.api.io.TempDir;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -305,6 +307,36 @@ class BCELifierTest extends AbstractTest {
                 assertEquals(expectedValue, actual.getConstantPool().getConstantInteger(actual.getConstantValue().getConstantValueIndex()).getBytes(),
                     original.getName());
             }
+        }
+    }
+
+    @ParameterizedTest
+    @CsvSource({"true, 45, 2", "false, 45, 2", "true, 45, 3", "true, 46, 0"})
+    void testCompactCodeHeaderRoundTrip(final boolean compactCodeHeader, final int major, final int minor, @TempDir final Path directory) throws Exception {
+        final ClassParser parser = new ClassParser("src/test/resources/Java1OakExample.class");
+        parser.setCompactCodeHeaderEnabled(true);
+        final JavaClass original = parser.parse();
+        original.setMajor(major);
+        original.setMinor(minor);
+        for (final Method method : original.getMethods()) {
+            method.getCode().setCompactCodeHeader(compactCodeHeader);
+        }
+        final ByteArrayOutputStream source = new ByteArrayOutputStream();
+        new BCELifier(original, source).start();
+        Files.write(directory.resolve("Java1OakExampleCreator.java"), source.toByteArray());
+        final File workDir = directory.toFile();
+        exec(workDir, getAppJavaC(), "-source", "8", "-target", "8", "-cp", CLASSPATH, "Java1OakExampleCreator.java");
+        exec(workDir, getAppJava(), "-cp", CLASSPATH, "Java1OakExampleCreator");
+        final boolean expectedCompactCodeHeader = compactCodeHeader && major == 45 && minor < 3;
+        final ClassParser generatedParser = new ClassParser(directory.resolve("Java1OakExample.class").toString());
+        generatedParser.setCompactCodeHeaderEnabled(expectedCompactCodeHeader);
+        final JavaClass generated = generatedParser.parse();
+        assertEquals(major, generated.getMajor());
+        assertEquals(minor, generated.getMinor());
+        assertEquals(original.getMethods().length, generated.getMethods().length);
+        for (final Method method : generated.getMethods()) {
+            assertEquals(expectedCompactCodeHeader, method.getCode().isCompactCodeHeader());
+            assertEquals(1, method.getCode().getMaxLocals());
         }
     }
 

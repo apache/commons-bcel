@@ -41,19 +41,39 @@ public class RecordComponentInfo implements Node {
     private final ConstantPool constantPool;
 
     /**
-     * Constructs a new instance from an input stream.
+     * Constructs record component information from a data input using standard Code headers for nested attributes.
      *
      * @param input        Input stream.
-     * @param constantPool Array of constants.
+     * @param constantPool The constant pool.
      * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if a component attribute is malformed.
      */
     public RecordComponentInfo(final DataInput input, final ConstantPool constantPool) throws IOException {
+        this(input, constantPool, false);
+    }
+
+    /**
+     * Constructs record component information from a data input using the selected Code header layout for nested attributes.
+     *
+     * <p>
+     * The header selection is forwarded when reading component attributes; it does not change the record component layout.
+     * </p>
+     *
+     * @param input Input stream.
+     * @param constantPool The constant pool.
+     * @param compactCodeHeader Whether to read any Code attributes encountered with compact four-byte headers ({@code true})
+     *        or standard eight-byte headers ({@code false}).
+     * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if a component attribute is malformed.
+     * @see Attribute#readAttribute(DataInput, ConstantPool, boolean)
+     */
+    RecordComponentInfo(final DataInput input, final ConstantPool constantPool, final boolean compactCodeHeader) throws IOException {
         this.index = input.readUnsignedShort();
         this.descriptorIndex = input.readUnsignedShort();
         final int attributesCount = input.readUnsignedShort();
         this.attributes = new Attribute[attributesCount];
         for (int j = 0; j < attributesCount; j++) {
-            attributes[j] = Attribute.readAttribute(input, constantPool);
+            attributes[j] = Attribute.readAttribute(input, constantPool, compactCodeHeader);
         }
         this.constantPool = constantPool;
     }

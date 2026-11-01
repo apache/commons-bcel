@@ -79,21 +79,37 @@ public final class Method extends FieldOrMethod {
     }
 
     /**
-     * Constructs object from file stream.
+     * Constructs a Method from a data input using standard Code headers.
      *
      * @param file Input stream.
+     * @param constantPool The constant pool.
      * @throws IOException Thrown if an I/O error occurs.
-     * @throws ClassFormatException Thrown if a class is malformed or cannot be interpreted as a class file.
+     * @throws ClassFormatException Thrown if the method or one of its attributes is malformed.
      */
     Method(final DataInput file, final ConstantPool constantPool) throws IOException, ClassFormatException {
-        super(file, constantPool);
+        this(file, constantPool, false);
+    }
+
+    /**
+     * Constructs a Method from a data input using the selected Code header layout.
+     *
+     * @param file Input stream.
+     * @param constantPool The constant pool.
+     * @param compactCodeHeader Whether to read any Code attributes encountered with compact four-byte headers ({@code true})
+     *        or standard eight-byte headers ({@code false}).
+     * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the method or one of its attributes is malformed.
+     * @see Attribute#readAttribute(DataInput, ConstantPool, boolean)
+     */
+    Method(final DataInput file, final ConstantPool constantPool, final boolean compactCodeHeader) throws IOException {
+        super(file, constantPool, compactCodeHeader);
     }
 
     /**
      * Constructs a Method.
      *
      * @param accessFlags Access rights of method.
-     * @param nameIndex Points to field name in constant pool.
+     * @param nameIndex Points to method name in constant pool.
      * @param signatureIndex Points to encoded signature.
      * @param attributes Collection of attributes.
      * @param constantPool Array of constants.

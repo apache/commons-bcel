@@ -39,12 +39,12 @@ public final class Record extends Attribute {
 
     private static final RecordComponentInfo[] EMPTY_RCI_ARRAY = {};
 
-    private static RecordComponentInfo[] readComponents(final DataInput input, final ConstantPool constantPool)
+    private static RecordComponentInfo[] readComponents(final DataInput input, final ConstantPool constantPool, final boolean compactCodeHeader)
             throws IOException {
         final int classCount = input.readUnsignedShort();
         final RecordComponentInfo[] components = new RecordComponentInfo[classCount];
         for (int i = 0; i < classCount; i++) {
-            components[i] = new RecordComponentInfo(input, constantPool);
+            components[i] = new RecordComponentInfo(input, constantPool, compactCodeHeader);
         }
         return components;
     }
@@ -52,17 +52,40 @@ public final class Record extends Attribute {
     private RecordComponentInfo[] components;
 
     /**
-     * Constructs object from input stream.
+     * Constructs a Record attribute from a data input using standard Code headers for nested attributes.
      *
-     * @param nameIndex    Index in constant pool.
+     * @param nameIndex    Constant pool index of the attribute name.
      * @param length       Content length in bytes.
      * @param input        Input stream.
-     * @param constantPool Array of constants.
+     * @param constantPool The constant pool.
      * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the attribute or one of its components is malformed.
      */
     Record(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool)
             throws IOException {
-        this(nameIndex, length, readComponents(input, constantPool), constantPool);
+        this(nameIndex, length, input, constantPool, false);
+    }
+
+    /**
+     * Constructs a Record attribute from a data input using the selected Code header layout for nested attributes.
+     *
+     * <p>
+     * The header selection is forwarded when reading component attributes; it does not change the Record attribute or record component layout.
+     * </p>
+     *
+     * @param nameIndex Constant pool index of the attribute name.
+     * @param length Content length in bytes.
+     * @param input Input stream.
+     * @param constantPool The constant pool.
+     * @param compactCodeHeader Whether to read any Code attributes encountered with compact four-byte headers ({@code true})
+     *        or standard eight-byte headers ({@code false}).
+     * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the attribute or one of its components is malformed.
+     * @see Attribute#readAttribute(DataInput, ConstantPool, boolean)
+     */
+    Record(final int nameIndex, final int length, final DataInput input, final ConstantPool constantPool, final boolean compactCodeHeader)
+            throws IOException {
+        this(nameIndex, length, readComponents(input, constantPool, compactCodeHeader), constantPool);
     }
 
     /**

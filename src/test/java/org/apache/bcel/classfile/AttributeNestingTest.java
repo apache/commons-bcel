@@ -29,7 +29,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * Tests that {@link Attribute#readAttribute(DataInput, ConstantPool)} bounds the attribute nesting depth instead of recursing until a
@@ -40,17 +41,23 @@ class AttributeNestingTest {
     /**
      * Builds a Code attribute nested {@code depth} times inside itself: each level declares one sub-attribute, which is again a Code attribute.
      */
-    private static byte[] nestedCodeAttribute(final int depth) throws IOException {
+    private static byte[] nestedCodeAttribute(final int depth, final boolean compactCodeHeader) throws IOException {
         byte[] inner = {};
         int attributeCount = 0;
         for (int i = 0; i < depth; i++) {
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
             try (DataOutputStream dos = new DataOutputStream(baos)) {
                 dos.writeShort(1); // attribute_name_index -> "Code"
-                dos.writeInt(12 + inner.length); // attribute_length
-                dos.writeShort(0); // max_stack
-                dos.writeShort(0); // max_locals
-                dos.writeInt(0); // code_length
+                dos.writeInt((compactCodeHeader ? 8 : 12) + inner.length); // attribute_length
+                if (compactCodeHeader) {
+                    dos.writeByte(0); // max_stack
+                    dos.writeByte(0); // max_locals
+                    dos.writeShort(0); // code_length
+                } else {
+                    dos.writeShort(0); // max_stack
+                    dos.writeShort(0); // max_locals
+                    dos.writeInt(0); // code_length
+                }
                 dos.writeShort(0); // exception_table_length
                 dos.writeShort(attributeCount); // attributes_count
                 dos.write(inner);
@@ -61,21 +68,23 @@ class AttributeNestingTest {
         return inner;
     }
 
-    @Test
-    void testDeeplyNestedCodeAttributeRejected() throws IOException {
+    @ParameterizedTest
+    @ValueSource(booleans = {false, true})
+    void testDeeplyNestedCodeAttributeRejected(final boolean compactCodeHeader) throws IOException {
         final ConstantPool cp = new ConstantPool(new ConstantUtf8("unused index 0"), new ConstantUtf8("Code"));
-        final byte[] bytes = nestedCodeAttribute(1_000);
+        final byte[] bytes = nestedCodeAttribute(1_000, compactCodeHeader);
         try (DataInputStream in = new DataInputStream(new ByteArrayInputStream(bytes))) {
-            assertThrows(ClassFormatException.class, () -> Attribute.readAttribute((DataInput) in, cp));
+            assertThrows(ClassFormatException.class, () -> Attribute.readAttribute(in, cp, compactCodeHeader));
         }
     }
 
-    @Test
-    void testModeratelyNestedCodeAttributeAccepted() throws IOException {
+    @ParameterizedTest
+    @ValueSource(booleans = {false, true})
+    void testModeratelyNestedCodeAttributeAccepted(final boolean compactCodeHeader) throws IOException {
         final ConstantPool cp = new ConstantPool(new ConstantUtf8("unused index 0"), new ConstantUtf8("Code"));
-        final byte[] bytes = nestedCodeAttribute(3);
+        final byte[] bytes = nestedCodeAttribute(3, compactCodeHeader);
         try (DataInputStream in = new DataInputStream(new ByteArrayInputStream(bytes))) {
-            assertTrue(Attribute.readAttribute((DataInput) in, cp) instanceof Code);
+            assertTrue(Attribute.readAttribute(in, cp, compactCodeHeader) instanceof Code);
         }
     }
 }

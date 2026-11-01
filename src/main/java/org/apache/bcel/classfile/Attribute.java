@@ -121,18 +121,39 @@ public abstract class Attribute implements Cloneable, Node {
     }
 
     /**
-     * Class method reads one attribute from the input data stream. This method must not be accessible from the outside. It
-     * is called by the Field and Method constructor methods.
+     * Reads one attribute using standard eight-byte Code headers.
      *
-     * @see Field
-     * @see Method
      * @param dataInput Input stream.
      * @param constantPool Array of constants.
      * @return Attribute.
      * @throws IOException Thrown if an I/O error occurs.
      * @since 6.0
+     * @see #readAttribute(DataInput, ConstantPool, boolean)
      */
     public static Attribute readAttribute(final DataInput dataInput, final ConstantPool constantPool) throws IOException {
+        return readAttribute(dataInput, constantPool, false);
+    }
+
+    /**
+     * Reads one attribute using the selected Code header layout.
+     *
+     * <p>
+     * The compact layout uses {@code u1}, {@code u1}, and {@code u2} for {@code max_stack}, {@code max_locals}, and {@code code_length}, respectively. These
+     * fields occupy 4 bytes instead of the standard 8 bytes; the rest of the Code attribute layout is unchanged. This layout is intended for historical class
+     * files with version 45.0 through 45.2. This method has no enclosing class version to check, so the caller must select the layout. The selection also
+     * applies to Code attributes encountered while reading nested attributes.
+     * </p>
+     *
+     * @param dataInput         Input stream.
+     * @param constantPool      Constant pool.
+     * @param compactCodeHeader Whether to read compact four-byte Code headers ({@code true}) or standard eight-byte headers ({@code false}).
+     * @return The attribute.
+     * @throws IOException          Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the attribute is malformed or exceeds the nesting limit.
+     * @since 6.14.0
+     * @see Code#isCompactCodeHeader()
+     */
+    public static Attribute readAttribute(final DataInput dataInput, final ConstantPool constantPool, final boolean compactCodeHeader) throws IOException {
         // Track the nesting depth to guard against malicious class files that nest attributes (for example, a Code attribute inside a Code attribute, or
         // mutually recursive Record component attributes) deeply enough to overflow the parser's stack (CWE-674).
         final int depth = NESTING_DEPTH.get().intValue() + 1;
@@ -143,7 +164,7 @@ public abstract class Attribute implements Cloneable, Node {
         }
         NESTING_DEPTH.set(Integer.valueOf(depth));
         try {
-            return readAttribute0(dataInput, constantPool);
+            return readAttribute0(dataInput, constantPool, compactCodeHeader);
         } finally {
             if (depth == 1) {
                 NESTING_DEPTH.remove();
@@ -154,24 +175,22 @@ public abstract class Attribute implements Cloneable, Node {
     }
 
     /**
-     * Class method reads one attribute from the input data stream. This method must not be accessible from the outside. It
-     * is called by the Field and Method constructor methods.
+     * Reads one attribute using standard eight-byte Code headers.
      *
-     * @see Field
-     * @see Method
      * @param dataInputStream Input stream.
      * @param constantPool Array of constants.
      * @return Attribute.
      * @throws IOException Thrown if an I/O error occurs.
+     * @see #readAttribute(DataInput, ConstantPool, boolean)
      */
     public static Attribute readAttribute(final DataInputStream dataInputStream, final ConstantPool constantPool) throws IOException {
         return readAttribute((DataInput) dataInputStream, constantPool);
     }
 
     /**
-     * Reads one attribute without tracking the nesting depth; only to be called by {@link #readAttribute(DataInput, ConstantPool)}.
+     * Reads one attribute without tracking the nesting depth; only to be called by {@link #readAttribute(DataInput, ConstantPool, boolean)}.
      */
-    private static Attribute readAttribute0(final DataInput dataInput, final ConstantPool constantPool) throws IOException {
+    private static Attribute readAttribute0(final DataInput dataInput, final ConstantPool constantPool, final boolean compactCodeHeader) throws IOException {
         byte tag = Const.ATTR_UNKNOWN; // Unknown attribute
         // Get class name from constant pool via 'name_index' indirection
         final int nameIndex = dataInput.readUnsignedShort();
@@ -201,7 +220,7 @@ public abstract class Attribute implements Cloneable, Node {
         case Const.ATTR_SOURCE_FILE:
             return new SourceFile(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_CODE:
-            return new Code(nameIndex, length, dataInput, constantPool);
+            return new Code(nameIndex, length, dataInput, constantPool, compactCodeHeader);
         case Const.ATTR_EXCEPTIONS:
             return new ExceptionTable(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_LINE_NUMBER_TABLE:
@@ -256,7 +275,7 @@ public abstract class Attribute implements Cloneable, Node {
         case Const.ATTR_NEST_MEMBERS:
             return new NestMembers(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_RECORD:
-            return new Record(nameIndex, length, dataInput, constantPool);
+            return new Record(nameIndex, length, dataInput, constantPool, compactCodeHeader);
         case Const.ATTR_PERMITTED_SUBCLASSES:
             return new PermittedSubclasses(nameIndex, length, dataInput, constantPool);
         case Const.ATTR_RUNTIME_VISIBLE_TYPE_ANNOTATIONS:

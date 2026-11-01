@@ -19,7 +19,10 @@
 
 package org.apache.bcel.classfile;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,5 +34,12 @@ class ClassParserTest {
     @Test
     void testParseInvalidClass() {
         assertThrows(ClassFormatException.class, () -> new ClassParser("src/test/resources/org/apache/commons/bcel/classfile/CodeCtor.class").parse());
+    }
+
+    @Test
+    void testParseOakClassFile() throws IOException {
+        final ClassParser parser = new ClassParser("src/test/resources/Java1OakExample.class");
+        parser.setCompactCodeHeaderEnabled(true);
+        assertNotNull(parser.parse());
     }
 }

@@ -67,32 +67,52 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     private String signatureAttributeString;
     private boolean searchedForSignatureAttribute;
 
+    /**
+     * Constructs an empty field or method whose properties must be set before use.
+     */
     FieldOrMethod() {
     }
 
     /**
-     * Constructs object from file stream.
+     * Constructs a field or method from a data input using standard Code headers.
      *
      * @param file Input stream.
      * @param constantPool The constant pool.
      * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the field or method, or one of its attributes, is malformed.
      */
     protected FieldOrMethod(final DataInput file, final ConstantPool constantPool) throws IOException {
+        this(file, constantPool, false);
+    }
+
+    /**
+     * Constructs a field or method from a data input using the selected Code header layout.
+     *
+     * @param file Input stream.
+     * @param constantPool The constant pool.
+     * @param compactCodeHeader Whether to read any Code attributes encountered with compact four-byte headers ({@code true})
+     *        or standard eight-byte headers ({@code false}).
+     * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the field or method, or one of its attributes, is malformed.
+     * @see Attribute#readAttribute(DataInput, ConstantPool, boolean)
+     */
+    FieldOrMethod(final DataInput file, final ConstantPool constantPool, final boolean compactCodeHeader) throws IOException {
         this(file.readUnsignedShort(), file.readUnsignedShort(), file.readUnsignedShort(), null, constantPool);
         final int attributesCount = file.readUnsignedShort();
         attributes = new Attribute[attributesCount];
         for (int i = 0; i < attributesCount; i++) {
-            attributes[i] = Attribute.readAttribute(file, constantPool);
+            attributes[i] = Attribute.readAttribute(file, constantPool, compactCodeHeader);
         }
         this.attributes_count = attributesCount; // init deprecated field
     }
 
     /**
-     * Constructs object from file stream.
+     * Constructs a field or method from a data input stream using standard Code headers.
      *
      * @param file Input stream.
      * @param constantPool The constant pool.
      * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the field or method, or one of its attributes, is malformed.
      * @deprecated (6.0) Use {@link #FieldOrMethod(java.io.DataInput, ConstantPool)} instead.
      */
     @java.lang.Deprecated
@@ -113,8 +133,8 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
     /**
      * Constructs a FieldOrMethod.
      *
-     * @param accessFlags Access rights of method.
-     * @param nameIndex Points to field name in constant pool.
+     * @param accessFlags Access rights of the field or method.
+     * @param nameIndex Points to the field or method name in the constant pool.
      * @param signatureIndex Points to encoded signature.
      * @param attributes Collection of attributes.
      * @param constantPool Array of constants.
@@ -154,13 +174,42 @@ public abstract class FieldOrMethod extends AccessFlags implements Cloneable, No
      * @throws IOException Thrown if an I/O error occurs.
      */
     public final void dump(final DataOutputStream file) throws IOException {
+        dump(file, attributes);
+    }
+
+    private void dump(final DataOutputStream file, final Attribute[] outputAttributes) throws IOException {
         file.writeShort(super.getAccessFlags());
         file.writeShort(name_index);
         file.writeShort(signature_index);
         file.writeShort(Args.requireU2(attributes_count, "attributes_count"));
-        for (final Attribute attribute : attributes) {
+        for (final Attribute attribute : outputAttributes) {
             attribute.dump(file);
         }
+    }
+
+    /**
+     * Dumps a member with the Code encoding selected by its enclosing class, without modifying its attributes.
+     *
+     * @param file Output stream.
+     * @param compactCodeHeader Whether to write Code attributes with compact four-byte headers ({@code true})
+     *        or standard eight-byte headers ({@code false}).
+     * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if an attribute fails validation.
+     */
+    final void dump(final DataOutputStream file, final boolean compactCodeHeader) throws IOException {
+        final Attribute[] sourceAttributes = getAttributes();
+        Attribute[] outputAttributes = sourceAttributes;
+        for (int i = 0; i < sourceAttributes.length; i++) {
+            if (sourceAttributes[i] instanceof Code && ((Code) sourceAttributes[i]).isCompactCodeHeader() != compactCodeHeader) {
+                if (outputAttributes == sourceAttributes) {
+                    outputAttributes = sourceAttributes.clone();
+                }
+                final Code code = new Code((Code) sourceAttributes[i]);
+                code.setCompactCodeHeader(compactCodeHeader);
+                outputAttributes[i] = code;
+            }
+        }
+        dump(file, outputAttributes);
     }
 
     /**

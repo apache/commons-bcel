@@ -71,13 +71,30 @@ public final class Field extends FieldOrMethod {
     }
 
     /**
-     * Constructs object from file stream.
+     * Constructs a Field from a data input using standard Code headers.
      *
      * @param file Input stream.
      * @param constantPool The constant pool.
+     * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the field or one of its attributes is malformed.
      */
     Field(final DataInput file, final ConstantPool constantPool) throws IOException, ClassFormatException {
-        super(file, constantPool);
+        this(file, constantPool, false);
+    }
+
+    /**
+     * Constructs a Field from a data input using the selected Code header layout.
+     *
+     * @param file Input stream.
+     * @param constantPool The constant pool.
+     * @param compactCodeHeader Whether to read any Code attributes encountered with compact four-byte headers ({@code true})
+     *        or standard eight-byte headers ({@code false}).
+     * @throws IOException Thrown if an I/O error occurs.
+     * @throws ClassFormatException Thrown if the field or one of its attributes is malformed.
+     * @see Attribute#readAttribute(DataInput, ConstantPool, boolean)
+     */
+    Field(final DataInput file, final ConstantPool constantPool, final boolean compactCodeHeader) throws IOException {
+        super(file, constantPool, compactCodeHeader);
     }
 
     /**

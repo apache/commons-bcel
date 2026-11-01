@@ -45,6 +45,7 @@ import org.apache.bcel.classfile.ParameterAnnotationEntry;
 import org.apache.bcel.classfile.ParameterAnnotations;
 import org.apache.bcel.classfile.RuntimeVisibleParameterAnnotations;
 import org.apache.bcel.classfile.Utility;
+import org.apache.bcel.util.Args;
 import org.apache.bcel.util.BCELComparator;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.stream.Streams;
@@ -225,6 +226,7 @@ public class MethodGen extends FieldGenOrMethodGen {
     private InstructionList il;
 
     private boolean stripAttributes;
+    private boolean compactCodeHeader;
     private LocalVariableTypeTable localVariableTypeTable;
     private final List<LocalVariableGen> variableList = new ArrayList<>();
 
@@ -327,6 +329,7 @@ public class MethodGen extends FieldGenOrMethodGen {
             Attribute a = attribute;
             if (a instanceof Code) {
                 final Code c = (Code) a;
+                compactCodeHeader = c.isCompactCodeHeader();
                 setMaxStack(c.getMaxStack());
                 setMaxLocals(c.getMaxLocals());
                 final CodeException[] ces = c.getExceptionTable();
@@ -881,7 +884,12 @@ public class MethodGen extends FieldGenOrMethodGen {
      * Gets method object. Never forget to call setMaxStack() or setMaxStack(max), respectively, before calling this method
      * (the same applies for max locals).
      *
+     * <p>
+     * When initialized from an existing method, the Code header layout is preserved. Use {@link #setCompactCodeHeader(boolean)} to change it.
+     * </p>
+     *
      * @return method object.
+     * @throws org.apache.bcel.classfile.ClassFormatException Thrown if Code values do not fit the selected header layout.
      */
     public Method getMethod() {
         final String signature = getSignature();
@@ -899,7 +907,16 @@ public class MethodGen extends FieldGenOrMethodGen {
          */
         if (!variableList.isEmpty() && !stripAttributes) {
             updateLocalVariableTable(getLocalVariableTable(cp));
-            addCodeAttribute(lvt = getLocalVariableTable(cp));
+            lvt = getLocalVariableTable(cp);
+        }
+        // Updating the local variable table can increase maxLocals. Validate before adding temporary attributes.
+        if (compactCodeHeader && byteCode != null && !isAbstract() && !isNative()) {
+            Args.requireU1(maxStack, "maxStack");
+            Args.requireU1(maxLocals, "maxLocals");
+            Args.requireU2(byteCode.length, "Code length attribute");
+        }
+        if (lvt != null) {
+            addCodeAttribute(lvt);
         }
         if (localVariableTypeTable != null) {
             // LocalVariable length in LocalVariableTypeTable is not updated automatically. It's a difference with
@@ -935,6 +952,7 @@ public class MethodGen extends FieldGenOrMethodGen {
                 2 + excLen + // exceptions
                 2 + attrsLen, // attributes
                 maxStack, maxLocals, byteCode, cExc, codeAttrs, cp.getConstantPool());
+            code.setCompactCodeHeader(compactCodeHeader);
             addAttribute(code);
         }
         final Attribute[] annotations = addRuntimeAnnotationsAsAttribute(cp);
@@ -989,6 +1007,17 @@ public class MethodGen extends FieldGenOrMethodGen {
     @Override
     public int hashCode() {
         return bcelComparator.hashCode(this);
+    }
+
+    /**
+     * Gets whether generated Code attributes use compact four-byte headers.
+     *
+     * @return Whether generated Code attributes use compact headers.
+     * @since 6.14.0
+     * @see Code#isCompactCodeHeader()
+     */
+    public boolean isCompactCodeHeader() {
+        return compactCodeHeader;
     }
 
     private List<AnnotationEntryGen> makeMutableVersion(final AnnotationEntry[] mutableArray) {
@@ -1180,6 +1209,34 @@ public class MethodGen extends FieldGenOrMethodGen {
      */
     public void setClassName(final String className) { // TODO could be package-protected?
         this.className = className;
+    }
+
+    /**
+     * Sets the header layout of generated Code attributes.
+     *
+     * <p>
+     * Compact headers encode {@code max_stack}, {@code max_locals}, and {@code code_length} as unsigned one-, one-, and two-byte fields, respectively,
+     * totaling 4 bytes instead of the standard 8. This changes only these field widths, not the bytecode or the remaining attribute layout.
+     * Compact headers are intended for historical class file versions 45.0 through 45.2.
+     * </p>
+     *
+     * <p>
+     * Newly created methods use standard headers by default. Methods initialized from an existing method preserve its header layout.
+     * {@link #getMethod()} checks that compact headers have {@code max_stack} and {@code max_locals} from 0 through 255 and a code length
+     * of at most 65535 bytes.
+     * </p>
+     *
+     * <p>
+     * When dumping the enclosing class, {@link org.apache.bcel.classfile.JavaClass#dump(java.io.DataOutputStream)} may select a different layout
+     * for consistency with the class version and its other methods. This does not change the generated Code attribute's header setting.
+     * </p>
+     *
+     * @param compactCodeHeader Whether to generate compact four-byte Code headers ({@code true}) or standard eight-byte headers ({@code false}).
+     * @since 6.14.0
+     * @see Code#setCompactCodeHeader(boolean)
+     */
+    public void setCompactCodeHeader(final boolean compactCodeHeader) {
+        this.compactCodeHeader = compactCodeHeader;
     }
 
     /**
