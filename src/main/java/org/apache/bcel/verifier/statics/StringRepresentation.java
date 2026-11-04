@@ -57,6 +57,13 @@ import org.apache.bcel.classfile.LocalVariableTable;
 import org.apache.bcel.classfile.LocalVariableTypeTable;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.classfile.MethodParameters;
+import org.apache.bcel.classfile.Module;
+import org.apache.bcel.classfile.ModuleExports;
+import org.apache.bcel.classfile.ModuleMainClass;
+import org.apache.bcel.classfile.ModuleOpens;
+import org.apache.bcel.classfile.ModulePackages;
+import org.apache.bcel.classfile.ModuleProvides;
+import org.apache.bcel.classfile.ModuleRequires;
 import org.apache.bcel.classfile.NestMembers;
 import org.apache.bcel.classfile.Node;
 import org.apache.bcel.classfile.ParameterAnnotationEntry;
@@ -376,6 +383,76 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
      */
     @Override
     public void visitMethodParameters(final MethodParameters obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * Visits the Module attribute of a module descriptor.
+     *
+     * @since 6.14.0
+     */
+    @Override
+    public void visitModule(final Module obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * Visits a ModuleExports entry of the Module attribute.
+     *
+     * @since 6.14.0
+     */
+    @Override
+    public void visitModuleExports(final ModuleExports obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * Visits the ModuleMainClass attribute of a module descriptor.
+     *
+     * @since 6.14.0
+     */
+    @Override
+    public void visitModuleMainClass(final ModuleMainClass obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * Visits a ModuleOpens entry of the Module attribute.
+     *
+     * @since 6.14.0
+     */
+    @Override
+    public void visitModuleOpens(final ModuleOpens obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * Visits the ModulePackages attribute of a module descriptor.
+     *
+     * @since 6.14.0
+     */
+    @Override
+    public void visitModulePackages(final ModulePackages obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * Visits a ModuleProvides entry of the Module attribute.
+     *
+     * @since 6.14.0
+     */
+    @Override
+    public void visitModuleProvides(final ModuleProvides obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * Visits a ModuleRequires entry of the Module attribute.
+     *
+     * @since 6.14.0
+     */
+    @Override
+    public void visitModuleRequires(final ModuleRequires obj) {
         tostring = toString(obj);
     }
 
