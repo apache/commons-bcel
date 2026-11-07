@@ -148,6 +148,22 @@ public final class Pass3aVerifier extends PassVerifier {
          */
         private Method getMethod(final JavaClass jc, final InvokeInstruction invoke) {
             final Method[] ms = jc.getMethods();
+            // JVMS 5.4.3.3: signature polymorphic methods resolve using the call site's descriptor.
+            if (invoke instanceof INVOKEVIRTUAL
+                && ("java.lang.invoke.MethodHandle".equals(jc.getClassName()) || "java.lang.invoke.VarHandle".equals(jc.getClassName()))) {
+                Method candidate = null;
+                int matches = 0;
+                for (final Method method : ms) {
+                    if (method.getName().equals(invoke.getMethodName(constantPoolGen))) {
+                        candidate = method;
+                        matches++;
+                    }
+                }
+                if (matches == 1 && candidate.isNative() && candidate.isVarArgs()
+                    && Arrays.equals(candidate.getArgumentTypes(), new Type[] { new ArrayType(Type.OBJECT, 1) })) {
+                    return candidate;
+                }
+            }
             for (final Method element : ms) {
                 if (element.getName().equals(invoke.getMethodName(constantPoolGen))
                     && Type.getReturnType(element.getSignature()).equals(invoke.getReturnType(constantPoolGen))

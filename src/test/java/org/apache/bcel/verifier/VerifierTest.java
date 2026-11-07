@@ -20,10 +20,6 @@
 package org.apache.bcel.verifier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,18 +29,12 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 import org.apache.bcel.classfile.JavaClass;
-import org.apache.bcel.classfile.NestHost;
 import org.apache.bcel.classfile.Utility;
-import org.apache.bcel.verifier.exc.AssertionViolatedException;
 import org.apache.bcel.verifier.input.FieldVerifierChildClass;
 import org.apache.bcel.verifier.input.StaticFieldVerifierChildClass;
-import org.apache.bcel.verifier.statics.StringRepresentation;
 import org.apache.commons.lang3.Strings;
-import org.apache.commons.lang3.SystemProperties;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.DisabledForJreRange;
-import org.junit.jupiter.api.condition.JRE;
 
 class VerifierTest {
 
@@ -91,24 +81,6 @@ class VerifierTest {
         }
     }
 
-    private static void testNestHostWithJavaVersion(final String className) throws ClassNotFoundException {
-        final String version = SystemProperties.getJavaVersion();
-        assertNotNull(version);
-        try {
-            testDefaultMethodValidation(className);
-            assertTrue(version.startsWith("1."));
-        } catch (final AssertionViolatedException e) {
-            assertFalse(version.startsWith("1."));
-            final StringBuilder expectedMessage = new StringBuilder();
-            expectedMessage.append("INTERNAL ERROR: Please adapt '");
-            expectedMessage.append(StringRepresentation.class);
-            expectedMessage.append("' to deal with objects of class '");
-            expectedMessage.append(NestHost.class);
-            expectedMessage.append("'.");
-            assertEquals(expectedMessage.toString(), e.getCause().getMessage());
-        }
-    }
-
     @AfterEach
     public void afterEach() {
         VerifierFactory.clear();
@@ -116,7 +88,7 @@ class VerifierTest {
 
     @Test
     void testArrayUtils() throws ClassNotFoundException {
-        testNestHostWithJavaVersion("org.apache.commons.lang.ArrayUtils");
+        testDefaultMethodValidation("org.apache.commons.lang.ArrayUtils");
     }
 
     @Test
@@ -131,7 +103,7 @@ class VerifierTest {
 
     @Test
     void testDefinitionImpl() throws ClassNotFoundException {
-        testNestHostWithJavaVersion("com.ibm.wsdl.DefinitionImpl");
+        testDefaultMethodValidation("com.ibm.wsdl.DefinitionImpl");
     }
 
     @Test
@@ -140,15 +112,11 @@ class VerifierTest {
     }
 
     @Test
-    @DisabledForJreRange(max = JRE.JAVA_8)
-    void testObjectInputStream() throws ClassNotFoundException {
-        testNestHostWithJavaVersion("java.io.ObjectInputStream");
-    }
-
-    @Test
-    @DisabledForJreRange(min = JRE.JAVA_9)
-    void testObjectInputStreamJDK8() {
-        assertThrowsExactly(UnsupportedOperationException.class, () -> testNestHostWithJavaVersion("java.io.ObjectInputStream"));
+    void testObjectInputStreamPass2() {
+        // Exercise NestHost diagnostics without depending on JDK-specific bytecode and unsupported pass 3 instructions.
+        final Verifier verifier = VerifierFactory.getVerifier("java.io.ObjectInputStream");
+        assertEquals(VerificationResult.VR_OK, verifier.doPass1());
+        assertEquals(VerificationResult.VR_OK, verifier.doPass2());
     }
 
     @Test

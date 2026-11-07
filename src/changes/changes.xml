@@ -73,6 +73,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix NestHost rendering in StringRepresentation to prevent internal errors when verifying nest members.</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix MethodParameter rendering in StringRepresentation.</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix StackMapType rendering in StringRepresentation.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix verification of signature polymorphic MethodHandle and VarHandle calls.</action>
       <!-- ADD -->
       <action                  type="add" dev="ggregory" due-to="Gary Gregory">Add and use ClassFormatException.ClassFormatException(String, Object...).</action>
       <action                  type="add" dev="ggregory" due-to="Nicolas Baumann, Gary Gregory">Add support for the RuntimeVisibleTypeAnnotations and RuntimeInvisibleTypeAnnotations attributes.</action>
