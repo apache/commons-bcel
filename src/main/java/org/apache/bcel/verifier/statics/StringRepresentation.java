@@ -56,6 +56,7 @@ import org.apache.bcel.classfile.LocalVariable;
 import org.apache.bcel.classfile.LocalVariableTable;
 import org.apache.bcel.classfile.LocalVariableTypeTable;
 import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.MethodParameter;
 import org.apache.bcel.classfile.MethodParameters;
 import org.apache.bcel.classfile.Module;
 import org.apache.bcel.classfile.ModuleExports;
@@ -64,6 +65,7 @@ import org.apache.bcel.classfile.ModuleOpens;
 import org.apache.bcel.classfile.ModulePackages;
 import org.apache.bcel.classfile.ModuleProvides;
 import org.apache.bcel.classfile.ModuleRequires;
+import org.apache.bcel.classfile.NestHost;
 import org.apache.bcel.classfile.NestMembers;
 import org.apache.bcel.classfile.Node;
 import org.apache.bcel.classfile.ParameterAnnotationEntry;
@@ -75,6 +77,7 @@ import org.apache.bcel.classfile.Signature;
 import org.apache.bcel.classfile.SourceFile;
 import org.apache.bcel.classfile.StackMap;
 import org.apache.bcel.classfile.StackMapEntry;
+import org.apache.bcel.classfile.StackMapType;
 import org.apache.bcel.classfile.Synthetic;
 import org.apache.bcel.classfile.TypeAnnotations;
 import org.apache.bcel.classfile.Unknown;
@@ -379,6 +382,17 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     }
 
     /**
+     * Visits a method parameter.
+     *
+     * @param obj The node to represent.
+     * @since 6.14.0
+     */
+    @Override
+    public void visitMethodParameter(final MethodParameter obj) {
+        tostring = toString(obj);
+    }
+
+    /**
      * @since 6.0
      */
     @Override
@@ -457,6 +471,17 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
     }
 
     /**
+     * Visits the NestHost attribute.
+     *
+     * @param obj The node to represent.
+     * @since 6.14.0
+     */
+    @Override
+    public void visitNestHost(final NestHost obj) {
+        tostring = toString(obj);
+    }
+
+    /**
      * @since 6.4.0
      */
     @Override
@@ -520,6 +545,17 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
      */
     @Override
     public void visitStackMapEntry(final StackMapEntry obj) {
+        tostring = toString(obj);
+    }
+
+    /**
+     * Visits a stack map verification type.
+     *
+     * @param obj The node to represent.
+     * @since 6.14.0
+     */
+    @Override
+    public void visitStackMapType(final StackMapType obj) {
         tostring = toString(obj);
     }
 

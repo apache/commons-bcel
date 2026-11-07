@@ -47,10 +47,14 @@ import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.MethodParameter;
 import org.apache.bcel.classfile.Module;
 import org.apache.bcel.classfile.ModuleMainClass;
 import org.apache.bcel.classfile.ModulePackages;
+import org.apache.bcel.classfile.NestHost;
 import org.apache.bcel.classfile.Node;
+import org.apache.bcel.classfile.StackMapType;
+import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.verifier.VerificationResult;
 import org.apache.bcel.verifier.Verifier;
@@ -59,7 +63,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests {@link StringRepresentation} with the attributes of a module descriptor.
+ * Tests {@link StringRepresentation} with class file attributes and their entries.
  * <p>
  * A module descriptor contains attributes and entries that a class file verifier reports when it finds something it does not know, so
  * {@link StringRepresentation} must be able to represent them instead of failing with an internal error.
@@ -109,6 +113,30 @@ class StringRepresentationTest {
         final ModulePackages modulePackages = new ModulePackages(nameIndex, 4, new int[] { moduleInfo.getClassNameIndex() }, pool.getConstantPool());
         assertThrows(ClassFormatException.class, modulePackages::toString);
         assertEquals("<<ModulePackages>>", new StringRepresentation(modulePackages).toString());
+    }
+
+    @Test
+    void testMalformedNestHost() {
+        final ConstantPoolGen pool = new ConstantPoolGen();
+        final int nameIndex = pool.addUtf8("NestHost");
+        final NestHost nestHost = new NestHost(nameIndex, 2, nameIndex, pool.getConstantPool());
+        assertThrows(ClassFormatException.class, nestHost::toString);
+        assertEquals("<<NestHost>>", new StringRepresentation(nestHost).toString());
+    }
+
+    @Test
+    void testMalformedStackMapType() {
+        final ConstantPoolGen pool = new ConstantPoolGen();
+        final int utf8Index = pool.addUtf8("NotAClassConstant");
+        final StackMapType type = new StackMapType(Const.ITEM_Object, utf8Index, pool.getConstantPool());
+        assertThrows(ClassFormatException.class, type::toString);
+        assertEquals("<<StackMapType>>", new StringRepresentation(type).toString());
+    }
+
+    @Test
+    void testMethodParameter() {
+        final MethodParameter parameter = new MethodParameter();
+        assertEquals(parameter.toString(), new StringRepresentation(parameter).toString());
     }
 
     @Test
@@ -170,6 +198,16 @@ class StringRepresentationTest {
     }
 
     @Test
+    void testNestHost() {
+        final ConstantPoolGen pool = new ConstantPoolGen();
+        final int nameIndex = pool.addUtf8("NestHost");
+        final int hostIndex = pool.addClass("example.Host");
+        final NestHost nestHost = new NestHost(nameIndex, 2, hostIndex, pool.getConstantPool());
+        assertEquals("NestHost: example.Host", new StringRepresentation(nestHost).toString());
+        assertEquals(nestHost.toString(), new StringRepresentation(nestHost).toString());
+    }
+
+    @Test
     void testOtherModuleDescriptorAttributes() throws IOException {
         final JavaClass moduleInfo = parseModuleInfo();
         final ConstantPoolGen pool = new ConstantPoolGen(moduleInfo.getConstantPool());
@@ -182,6 +220,16 @@ class StringRepresentationTest {
         final ModuleMainClass moduleMainClass = new ModuleMainClass(mainClassNameIndex, 2, mainClassIndex, constantPool);
         for (final Node node : Arrays.asList(modulePackages, moduleMainClass)) {
             assertEquals(node.toString(), new StringRepresentation(node).toString());
+        }
+    }
+
+    @Test
+    void testStackMapTypes() {
+        final ConstantPoolGen pool = new ConstantPoolGen();
+        final int classIndex = pool.addClass("example.Value");
+        for (byte tag = Const.ITEM_Bogus; tag <= Const.ITEM_NewObject; tag++) {
+            final StackMapType type = new StackMapType(tag, tag == Const.ITEM_Object ? classIndex : 0, pool.getConstantPool());
+            assertEquals(type.toString(), new StringRepresentation(type).toString(), "Verification type tag " + tag);
         }
     }
 
@@ -200,6 +248,35 @@ class StringRepresentationTest {
                     .anyMatch(message -> message.contains("Module:") && message.contains("is unknown and will therefore be ignored")));
         } finally {
             Repository.removeClass(moduleInfo);
+            if (previous != null) {
+                Repository.addClass(previous);
+            }
+        }
+    }
+
+    @Test
+    void testVerifierOnNestMember() throws IOException, ClassNotFoundException {
+        final ClassGen generator = new ClassGen("example.Host$Member", "java.lang.Object", "Host.java",
+                Const.ACC_PUBLIC | Const.ACC_SUPER, new String[0]);
+        generator.setMajor(Const.MAJOR_11);
+        final ConstantPoolGen pool = generator.getConstantPool();
+        final int nameIndex = pool.addUtf8("NestHost");
+        final int hostIndex = pool.addClass("example.Host");
+        generator.addAttribute(new NestHost(nameIndex, 2, hostIndex, pool.getConstantPool()));
+        // BCEL parses the generated Java 11 class; the JVM never loads it, including on Java 8.
+        final JavaClass member;
+        try (InputStream input = new ByteArrayInputStream(generator.getJavaClass().getBytes())) {
+            member = new ClassParser(input, "Host$Member.class").parse();
+        }
+        final JavaClass previous = Repository.addClass(member);
+        try {
+            final Verifier verifier = VerifierFactory.getVerifier(member.getClassName());
+            verifier.flush();
+            assertEquals(VerificationResult.VR_OK, assertDoesNotThrow(verifier::doPass2));
+            assertTrue(Arrays.stream(verifier.getMessages()).anyMatch(message -> message.contains("NestHost: example.Host")
+                    && message.contains("is unknown and will therefore be ignored")));
+        } finally {
+            Repository.removeClass(member);
             if (previous != null) {
                 Repository.addClass(previous);
             }
