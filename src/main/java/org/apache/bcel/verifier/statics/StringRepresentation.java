@@ -112,11 +112,11 @@ public class StringRepresentation extends org.apache.bcel.classfile.EmptyVisitor
      */
     @Override
     public String toString() {
-// The run-time check below is needed because we don't want to omit inheritance
-// of "EmptyVisitor" and provide a thousand empty methods.
-// However, in terms of performance this would be a better idea.
-// If some new "Node" is defined in BCEL (such as some concrete "Attribute"), we
-// want to know that this class has also to be adapted.
+        // The run-time check below is needed because we don't want to omit inheritance
+        // of "EmptyVisitor" and provide a thousand empty methods.
+        // However, in terms of performance this would be a better idea.
+        // If some new "Node" is defined in BCEL (such as some concrete "Attribute"), we
+        // want to know that this class has also to be adapted.
         if (tostring == null) {
             throw new AssertionViolatedException("Please adapt '" + getClass() + "' to deal with objects of class '" + n.getClass() + "'.");
         }
