@@ -1,3 +1,78 @@
+Apache Commons BCEL Version 6.14.0
+RELEASE NOTES
+
+
+Introduction
+------------
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.14.0.
+
+The Commons Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files.
+
+This is a feature and maintenance release. Java 8 or later is required.
+
+New Features
+------------
+*           Add and use ClassFormatException.ClassFormatException(String, Object...). Thanks to Gary Gregory.
+*           Add support for the RuntimeVisibleTypeAnnotations and RuntimeInvisibleTypeAnnotations attributes. Thanks to Nicolas Baumann, Gary Gregory.
+*           Add ObjectType.toString(). Thanks to Gary Gregory.
+
+Fixed Bugs
+----------
+*           Use modern Mockito on Java 11+ (#528). Thanks to Gary Gregory.
+* BCEL-280: MethodGen.setMaxLocals() should account for LocalVariableTable entries (#529). Thanks to Max Kammerer, akashchamp, Gary Gregory.
+*           Fix constant pool module access test on Java 27 (#534). Thanks to Gary Gregory.
+* BCEL-379: BCELifier emits boolean literals for boolean ConstantValue fields so generated creator classes run. FieldGen preserves explicit false initial values (#536). Thanks to Gary Gregory, Aryan Ganjoo.
+*           Update ECJ versions and generate the SWAP fixture with BCEL (#537). Thanks to Gary Gregory.
+*           Fix typo 'preceeding' in ConstantPool exception message (#541). Thanks to Mohd Irshad.
+*           Clean up comments for spelling, grammar, and readability. Thanks to Gary Gregory.
+* BCEL-341: Support explicit parsing and generation of compact Code headers in class file versions 45.0 through 45.2 (#58). Thanks to Gary Gregory, Hippo.
+*           Fix module descriptor rendering in StringRepresentation (#543). Thanks to Gary Gregory, simpleqt.
+*           Fix NestHost rendering in StringRepresentation to prevent internal errors when verifying nest members. Thanks to Gary Gregory.
+*           Fix MethodParameter rendering in StringRepresentation. Thanks to Gary Gregory.
+*           Fix StackMapType rendering in StringRepresentation. Thanks to Gary Gregory.
+*           Fix verification of signature polymorphic MethodHandle and VarHandle calls. Thanks to Gary Gregory.
+
+Changes
+-------
+*           Bump org.apache.commons:commons-parent from 104 to 107. Thanks to Gary Gregory.
+*           Bump org.apache.commons:commons-lang3 from 3.20.0 to 3.21.0 #531. Thanks to Gary Gregory.
+*           Bump ecj.version from 3.26 to 3.46.100 on Java 17 and up (#537). Thanks to Gary Gregory.
+*           Bump ecj.version from 3.26 to 3.33 on Java 11 (#537). Thanks to Gary Gregory.
+*           Bump org.jetbrains.kotlin:kotlin-stdlib from 2.4.0 to 2.4.21 (#532). Thanks to Gary Gregory, Dependabot.
+
+Removed
+-------
+* BCEL-280: Remove obsolete class file src/examples/Mini/MiniParser$JJCalls. Thanks to Gary Gregory.
+
+Historical list of changes: https://commons.apache.org/proper/commons-bcel/changes.html
+
+For complete information on Apache Commons BCEL, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons BCEL website:
+
+https://commons.apache.org/proper/commons-bcel
+
+Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+Open source works best when you give feedback:
+
+    https://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
 Apache Commons BCEL Version 6.13.0
 RELEASE NOTES
 
