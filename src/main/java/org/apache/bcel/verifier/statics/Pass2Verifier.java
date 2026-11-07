@@ -215,7 +215,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants {
                             if (vr != VerificationResult.VR_OK) {
                                 throw new ClassConstraintException("Code attribute '" + tostring(obj) + "' (method '" + m + "') has an exception_table entry '"
                                         + tostring(element) + "' that references '" + cname + "' as an Exception but '" + e.getSuperclassName()
-                                        + "' in the ancestor hierachy does not pass verification pass 1: " + vr);
+                                        + "' in the ancestor hierarchy does not pass verification pass 1: " + vr);
                             }
                             e = Repository.lookupClass(e.getSuperclassName());
                         }
