@@ -1108,7 +1108,7 @@ public abstract class Utility {
      * @since 6.7.0
      */
     public static String packageToPath(final String name) {
-        return name.replace('.', '/');
+        return name == null ? null : name.replace('.', '/');
     }
 
     /**
@@ -1119,7 +1119,7 @@ public abstract class Utility {
      * @since 6.6.0
      */
     public static String pathToPackage(final String str) {
-        return str.replace('/', '.');
+        return str == null ? null : str.replace('/', '.');
     }
 
     private static int pow2(final int n) {
@@ -1326,6 +1326,9 @@ public abstract class Utility {
      * @return bytes as hexadecimal string, for example 00 fa 12 ...
      */
     public static String toHexString(final byte[] bytes) {
+        if (bytes == null) {
+            return null;
+        }
         final StringBuilder buf = new StringBuilder();
         for (int i = 0; i < bytes.length; i++) {
             final short b = byteToShort(bytes[i]);

@@ -42,6 +42,21 @@ class UtilityTest {
 
 
     @Test
+    void testPackageToPathAndPathToPackage() {
+        assertNull(Utility.packageToPath(null));
+        assertNull(Utility.pathToPackage(null));
+        assertEquals("org/apache/bcel", Utility.packageToPath("org.apache.bcel"));
+        assertEquals("org.apache.bcel", Utility.pathToPackage("org/apache/bcel"));
+    }
+
+    @Test
+    void testToHexString() {
+        assertNull(Utility.toHexString(null));
+        assertEquals("", Utility.toHexString(new byte[0]));
+        assertEquals("00 0f 10 ff", Utility.toHexString(new byte[] { 0, 15, 16, (byte) 255 }));
+    }
+
+    @Test
     void testClearBit() {
         assertEquals(0, Utility.clearBit(0, 0));
         assertEquals(0, Utility.clearBit(1, 0), "1 bit 0 set to 0 -> 0");
