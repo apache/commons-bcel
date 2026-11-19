@@ -27,9 +27,15 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.classfile.Unknown;
 import org.apache.bcel.generic.ClassGen;
+import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.FieldGen;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.Type;
 import org.junit.jupiter.api.Test;
 
@@ -76,5 +82,34 @@ class Class2HTMLXSSTest {
         final String methods = new String(Files.readAllBytes(new File(outputDir, "Evil2_methods.html").toPath()), StandardCharsets.UTF_8);
         assertFalse(methods.contains("x\" onmouseover"), "field name broke out of the attribute context");
         assertTrue(methods.contains("x&quot; onmouseover"), "expected quotes in the field name to be escaped");
+    }
+
+    /**
+     * An unknown method attribute's name is any CONSTANT_Utf8 value, hence attacker controlled and may contain HTML
+     * metacharacters; the code report must escape it in text context rather than emit a live element (incomplete fix
+     * for CVE-2026-105111).
+     */
+    @Test
+    void testUnknownMethodAttributeNameIsEscaped() throws Exception {
+        final ClassGen cg = new ClassGen("EvilUnknownAttr", "java.lang.Object", "EvilUnknownAttr.java", Const.ACC_PUBLIC, null);
+        final ConstantPoolGen cpg = cg.getConstantPool();
+        final String marker = "x<svg onload=\"alert(1)\">&'\"y";
+        final int nameIndex = cpg.addUtf8(marker);
+        final MethodGen mg = new MethodGen(Const.ACC_PUBLIC, Type.INT, new Type[] {}, new String[] {}, "value", "EvilUnknownAttr", new InstructionList(), cpg);
+        final Method method = mg.getMethod();
+        method.setAttributes(new Attribute[] { new Unknown(nameIndex, 0, new byte[0], cpg.getFinalConstantPool()) });
+        cg.addMethod(method);
+        final JavaClass jc = cg.getJavaClass();
+
+        final File outputDir = new File("target/test-output/html-xss");
+        if (!outputDir.mkdirs()) {
+            assertTrue(outputDir.isDirectory());
+        }
+        new Class2HTML(jc, outputDir.getAbsolutePath() + File.separator);
+
+        final String code = new String(Files.readAllBytes(new File(outputDir, "EvilUnknownAttr_code.html").toPath()), StandardCharsets.UTF_8);
+        assertFalse(code.contains(marker), "unknown attribute name was emitted unescaped in text context");
+        assertTrue(code.contains("(Unknown attribute x&lt;svg onload=&quot;alert(1)&quot;&gt;&amp;&#39;&quot;y)"),
+            "expected the unknown attribute name to be HTML-escaped");
     }
 }

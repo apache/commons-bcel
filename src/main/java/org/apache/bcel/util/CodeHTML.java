@@ -521,7 +521,7 @@ final class CodeHTML {
                     printWriter.print("<LI><A HREF=\"" + className + "_attributes.html#method" + methodNumber + "@" + i + "\" TARGET=Attributes>"
                         + Const.getAttributeName(tag) + "</A></LI>\n");
                 } else {
-                    printWriter.print("<LI>" + attributes[i] + "</LI>");
+                    printWriter.print("<LI>" + Class2HTML.toHTML(String.valueOf(attributes[i])) + "</LI>");
                 }
                 if (tag == Const.ATTR_CODE) {
                     c = (Code) attributes[i];
