@@ -20,24 +20,30 @@
 package org.apache.bcel.util;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 
 import org.apache.bcel.Const;
-import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
-import org.apache.bcel.classfile.Method;
 import org.apache.bcel.classfile.Unknown;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.ConstantPoolGen;
 import org.apache.bcel.generic.FieldGen;
+import org.apache.bcel.generic.InstructionConst;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
 import org.apache.bcel.generic.Type;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class Class2HTMLXSSTest {
 
@@ -85,31 +91,42 @@ class Class2HTMLXSSTest {
     }
 
     /**
-     * An unknown method attribute's name is any CONSTANT_Utf8 value, hence attacker controlled and may contain HTML
-     * metacharacters; the code report must escape it in text context rather than emit a live element (incomplete fix
-     * for CVE-2026-105111).
+     * Tests that unknown method attribute descriptions are HTML-escaped.
+     *
+     * <p>
+     * Attribute names come from attacker-controlled {@code CONSTANT_Utf8} entries and may contain HTML metacharacters. This is a regression for an
+     * escaping omission in the earlier fix for CVE-2026-105111.
+     * </p>
      */
-    @Test
-    void testUnknownMethodAttributeNameIsEscaped() throws Exception {
+    @ParameterizedTest
+    @CsvSource({
+        "0, ''",
+        "1, ': 00'",
+        "10, ': 00 00 00 00 00 00 00 00 00 00'",
+        "11, ': 00 00 00 00 00 00 00 00 00 00... (truncated)'"
+    })
+    void testUnknownMethodAttributeNameIsEscaped(final int length, final String expectedPayload, @TempDir final Path outputDir) throws Exception {
         final ClassGen cg = new ClassGen("EvilUnknownAttr", "java.lang.Object", "EvilUnknownAttr.java", Const.ACC_PUBLIC, null);
         final ConstantPoolGen cpg = cg.getConstantPool();
         final String marker = "x<svg onload=\"alert(1)\">&'\"y";
         final int nameIndex = cpg.addUtf8(marker);
-        final MethodGen mg = new MethodGen(Const.ACC_PUBLIC, Type.INT, new Type[] {}, new String[] {}, "value", "EvilUnknownAttr", new InstructionList(), cpg);
-        final Method method = mg.getMethod();
-        method.setAttributes(new Attribute[] { new Unknown(nameIndex, 0, new byte[0], cpg.getFinalConstantPool()) });
-        cg.addMethod(method);
-        final JavaClass jc = cg.getJavaClass();
+        final InstructionList instructions = new InstructionList();
+        instructions.append(InstructionConst.ICONST_0);
+        instructions.append(InstructionConst.IRETURN);
+        final MethodGen mg = new MethodGen(Const.ACC_PUBLIC | Const.ACC_STATIC, Type.INT, Type.NO_ARGS, null, "value", "EvilUnknownAttr", instructions, cpg);
+        mg.addAttribute(new Unknown(nameIndex, length, new byte[length], cpg.getConstantPool()));
+        mg.setMaxStack();
+        mg.setMaxLocals();
+        cg.addMethod(mg.getMethod());
+        instructions.dispose();
 
-        final File outputDir = new File("target/test-output/html-xss");
-        if (!outputDir.mkdirs()) {
-            assertTrue(outputDir.isDirectory());
-        }
-        new Class2HTML(jc, outputDir.getAbsolutePath() + File.separator);
+        final JavaClass jc = new ClassParser(new ByteArrayInputStream(cg.getJavaClass().getBytes()), "EvilUnknownAttr.class").parse();
+        assertNotNull(jc.getMethods()[0].getCode(), "expected the parsed method to retain its Code attribute");
+        new Class2HTML(jc, outputDir.toAbsolutePath() + File.separator);
 
-        final String code = new String(Files.readAllBytes(new File(outputDir, "EvilUnknownAttr_code.html").toPath()), StandardCharsets.UTF_8);
-        assertFalse(code.contains(marker), "unknown attribute name was emitted unescaped in text context");
-        assertTrue(code.contains("(Unknown attribute x&lt;svg onload=&quot;alert(1)&quot;&gt;&amp;&#39;&quot;y)"),
-            "expected the unknown attribute name to be HTML-escaped");
+        final String code = new String(Files.readAllBytes(outputDir.resolve("EvilUnknownAttr_code.html")), StandardCharsets.UTF_8);
+        assertFalse(code.contains("<svg"), "unknown attribute name was emitted as a live HTML element");
+        assertTrue(code.contains("<LI>(Unknown attribute x&lt;svg onload=&quot;alert(1)&quot;&gt;&amp;&#39;&quot;y" + expectedPayload + ")</LI>"),
+            "expected the complete unknown attribute description to be HTML-escaped");
     }
 }
