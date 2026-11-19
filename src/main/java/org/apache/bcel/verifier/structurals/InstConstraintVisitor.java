@@ -1047,7 +1047,11 @@ public class InstConstraintVisitor extends EmptyVisitor {
     }
 
     /**
-     * Assures the 'objectref' of a GETFIELD or PUTFIELD is an instance of the class named by the field reference.
+     * Ensures an initialized object reference is assignment compatible with the class named by a GETFIELD or PUTFIELD field reference.
+     *
+     * <p>
+     * The null type is permitted because dereferencing null fails at execution time, not during verification. The caller checks for disallowed reference types.
+     * </p>
      */
     private void objectrefIsInstanceOfFieldClass(final FieldInstruction o, final Type objectref) throws ClassNotFoundException {
         if (objectref instanceof ObjectType) {

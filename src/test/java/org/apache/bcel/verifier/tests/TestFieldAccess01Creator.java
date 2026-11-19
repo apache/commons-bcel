@@ -26,33 +26,46 @@ import org.apache.bcel.Const;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.ConstantPoolGen;
-import org.apache.bcel.generic.FieldGen;
 import org.apache.bcel.generic.InstructionConst;
 import org.apache.bcel.generic.InstructionFactory;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.MethodGen;
-import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.Type;
 
 /**
- * Emits a class with an instance field {@code int x} and a static method {@code test} that applies {@code getfield} or
- * {@code putfield} for that field to its single parameter. When the parameter type is not the class declaring the field,
- * for example {@code java.lang.String}, the access is illegal and structural verification must reject it.
+ * Emits a class with a static method {@code test} that applies {@code getfield} or {@code putfield} to an instance field named {@code x}.
+ *
+ * <p>
+ * The receiver is either the method's single parameter or a null constant. A parameter type that is not assignment compatible with the class named by the field
+ * reference must be rejected during structural verification. Subclass receivers and the null type are permitted.
+ * </p>
  */
 public class TestFieldAccess01Creator extends TestCreator {
     private final InstructionFactory factory;
     private final ConstantPoolGen cp;
     private final ClassGen cg;
     private final short opcode;
-    private final ObjectType objectrefType;
+    private final Type objectrefType;
+    private final Type fieldType;
+    private final String fieldClassName;
     private final String className;
     private final String simpleClassName;
 
-    public TestFieldAccess01Creator(final short opcode, final boolean validObjectref) {
+    /**
+     * Constructs a field access fixture.
+     *
+     * @param opcode {@link Const#GETFIELD} or {@link Const#PUTFIELD}.
+     * @param fieldType the type of field {@code x}.
+     * @param fieldClassName the class named by the field reference, which may inherit {@code x}.
+     * @param objectrefType the receiver parameter type, or {@link Type#NULL} to emit a null constant without a parameter.
+     */
+    public TestFieldAccess01Creator(final short opcode, final Type fieldType, final String fieldClassName, final Type objectrefType) {
         this.opcode = opcode;
-        simpleClassName = "TestFieldAccess01" + (opcode == Const.GETFIELD ? "Get" : "Put") + (validObjectref ? "Valid" : "Invalid");
+        this.fieldType = fieldType;
+        this.fieldClassName = fieldClassName;
+        this.objectrefType = objectrefType;
+        simpleClassName = "TestFieldAccess01" + (opcode == Const.GETFIELD ? "Get" : "Put") + fieldType.getSignature();
         className = TEST_PACKAGE + "." + simpleClassName;
-        objectrefType = validObjectref ? ObjectType.getInstance(className) : Type.STRING;
         cg = new ClassGen(className, "java.lang.Object", simpleClassName + ".java", Const.ACC_PUBLIC | Const.ACC_SUPER, new String[] {});
         cp = cg.getConstantPool();
         factory = new InstructionFactory(cg, cp);
@@ -60,7 +73,6 @@ public class TestFieldAccess01Creator extends TestCreator {
 
     @Override
     public void create(final OutputStream out) throws IOException {
-        cg.addField(new FieldGen(Const.ACC_PUBLIC, Type.INT, "x", cp).getField());
         createMethod_0();
         createMethod_1();
         cg.getJavaClass().dump(out);
@@ -80,15 +92,17 @@ public class TestFieldAccess01Creator extends TestCreator {
 
     private void createMethod_1() {
         final InstructionList il = new InstructionList();
-        final MethodGen method = new MethodGen(Const.ACC_PUBLIC | Const.ACC_STATIC, Type.VOID, new Type[] { objectrefType }, new String[] { "o" }, "test",
-            className, il, cp);
-        il.append(InstructionFactory.createLoad(objectrefType, 0));
+        final boolean nullReceiver = objectrefType == Type.NULL;
+        final Type[] parameterTypes = nullReceiver ? Type.NO_ARGS : new Type[] { objectrefType };
+        final String[] parameterNames = nullReceiver ? new String[] {} : new String[] { "o" };
+        final MethodGen method = new MethodGen(Const.ACC_PUBLIC | Const.ACC_STATIC, Type.VOID, parameterTypes, parameterNames, "test", className, il, cp);
+        il.append(nullReceiver ? InstructionConst.ACONST_NULL : InstructionFactory.createLoad(objectrefType, 0));
         if (opcode == Const.GETFIELD) {
-            il.append(factory.createFieldAccess(className, "x", Type.INT, Const.GETFIELD));
-            il.append(InstructionConst.POP);
+            il.append(factory.createFieldAccess(fieldClassName, "x", fieldType, Const.GETFIELD));
+            il.append(InstructionFactory.createPop(fieldType.getSize()));
         } else {
-            il.append(InstructionConst.ICONST_1);
-            il.append(factory.createFieldAccess(className, "x", Type.INT, Const.PUTFIELD));
+            il.append(InstructionFactory.createNull(fieldType));
+            il.append(factory.createFieldAccess(fieldClassName, "x", fieldType, Const.PUTFIELD));
         }
         il.append(InstructionFactory.createReturn(Type.VOID));
         method.setMaxStack();
@@ -102,6 +116,11 @@ public class TestFieldAccess01Creator extends TestCreator {
         return simpleClassName + JavaClass.EXTENSION;
     }
 
+    /**
+     * Gets the simple name of the generated class.
+     *
+     * @return the simple class name.
+     */
     public String getSimpleClassName() {
         return simpleClassName;
     }
