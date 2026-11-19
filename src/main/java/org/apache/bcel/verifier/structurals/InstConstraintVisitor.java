@@ -345,6 +345,22 @@ public class InstConstraintVisitor extends EmptyVisitor {
     }
 
     /**
+     * Ensures an initialized object reference is assignment compatible with the class named by a GETFIELD or PUTFIELD field reference.
+     *
+     * <p>
+     * The null type is permitted because dereferencing null fails at execution time, not during verification. The caller checks for disallowed reference types.
+     * </p>
+     */
+    private void objectrefIsInstanceOfFieldClass(final FieldInstruction o, final Type objectref) throws ClassNotFoundException {
+        if (objectref instanceof ObjectType) {
+            final String theClass = getObjectType(o).getClassName();
+            if (!Repository.instanceOf(((ObjectType) objectref).getClassName(), theClass)) {
+                constraintViolated(o, "The 'objectref' item '" + objectref + "' is not an instance of '" + theClass + "' as expected.");
+            }
+        }
+    }
+
+    /**
      * Assures the ReferenceType r is initialized (or Type.NULL). Formally, this means (!(r instanceof
      * UninitializedObjectType)), because there are no uninitialized array types.
      *
@@ -378,6 +394,11 @@ public class InstConstraintVisitor extends EmptyVisitor {
         // throw new AssertionViolatedException("Forgot to set important values first.");
     }
 
+    /*
+     * "generic"visitXXXX methods where XXXX is an interface therefore, we don't know the order of visiting; but we know these methods are called before the
+     * visitYYYY methods below
+     */
+
     /**
      * Sets the MethodGen instance needed for constraint checking prior to execution.
      *
@@ -386,11 +407,6 @@ public class InstConstraintVisitor extends EmptyVisitor {
     public void setMethodGen(final MethodGen mg) {
         this.mg = mg;
     }
-
-    /*
-     * "generic"visitXXXX methods where XXXX is an interface therefore, we don't know the order of visiting; but we know these methods are called before the
-     * visitYYYY methods below
-     */
 
     /**
      * The OperandStack we're working on.
@@ -522,6 +538,10 @@ public class InstConstraintVisitor extends EmptyVisitor {
         // }
     }
 
+    /*
+    /* "special"visitXXXX methods for one type of instruction each.
+     */
+
     /**
      * Ensures the specific preconditions of the said instruction.
      */
@@ -548,10 +568,6 @@ public class InstConstraintVisitor extends EmptyVisitor {
             throw new AssertionViolatedException("Missing class: " + e, e);
         }
     }
-
-    /*
-    /* "special"visitXXXX methods for one type of instruction each.
-     */
 
     /**
      * Ensures the specific preconditions of the said instruction.
@@ -603,6 +619,12 @@ public class InstConstraintVisitor extends EmptyVisitor {
         throw new AssertionViolatedException("This JustIce verification pass should not encounter an illegal instruction such as BREAKPOINT.");
     }
 
+    /*
+     * "generic" visitYYYY methods where YYYY is a superclass.
+     * therefore, we know the order of visiting; we know
+     * these methods are called after the visitXXXX methods above.
+     */
+
     /**
      * Ensures the specific preconditions of the said instruction.
      */
@@ -616,12 +638,6 @@ public class InstConstraintVisitor extends EmptyVisitor {
                 + ((ArrayType) arrayref).getElementType() + ".");
         }
     }
-
-    /*
-     * "generic" visitYYYY methods where YYYY is a superclass.
-     * therefore, we know the order of visiting; we know
-     * these methods are called after the visitXXXX methods above.
-     */
 
     /**
      * Ensures the specific preconditions of the said instruction.
@@ -1042,22 +1058,6 @@ public class InstConstraintVisitor extends EmptyVisitor {
             final VerificationResult vr = v.doPass2();
             if (vr.getStatus() != VerificationResult.VERIFIED_OK) {
                 constraintViolated(o, "Class '" + name + "' is referenced, but cannot be loaded and resolved: '" + vr + "'.");
-            }
-        }
-    }
-
-    /**
-     * Ensures an initialized object reference is assignment compatible with the class named by a GETFIELD or PUTFIELD field reference.
-     *
-     * <p>
-     * The null type is permitted because dereferencing null fails at execution time, not during verification. The caller checks for disallowed reference types.
-     * </p>
-     */
-    private void objectrefIsInstanceOfFieldClass(final FieldInstruction o, final Type objectref) throws ClassNotFoundException {
-        if (objectref instanceof ObjectType) {
-            final String theClass = getObjectType(o).getClassName();
-            if (!Repository.instanceOf(((ObjectType) objectref).getClassName(), theClass)) {
-                constraintViolated(o, "The 'objectref' item '" + objectref + "' is not an instance of '" + theClass + "' as expected.");
             }
         }
     }

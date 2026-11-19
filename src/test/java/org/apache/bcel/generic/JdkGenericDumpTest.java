@@ -78,9 +78,6 @@ import org.junit.jupiter.params.provider.MethodSource;
  */
 class JdkGenericDumpTest {
 
-    private static final boolean PRINT_CLASS_NAME = Boolean.getBoolean("bcel.print.ClassNames");
-    private static final boolean PRINT_JAR_NAME = Boolean.getBoolean("bcel.print.JarNames");
-
     private static class ClassParserFilesVisitor extends SimpleFileVisitor<Path> {
 
         private final PathMatcher matcher;
@@ -118,6 +115,9 @@ class JdkGenericDumpTest {
             return FileVisitResult.CONTINUE;
         }
     }
+    private static final boolean PRINT_CLASS_NAME = Boolean.getBoolean("bcel.print.ClassNames");
+
+    private static final boolean PRINT_JAR_NAME = Boolean.getBoolean("bcel.print.JarNames");
 
     private static final char[] hexArray = "0123456789ABCDEF".toCharArray();
 

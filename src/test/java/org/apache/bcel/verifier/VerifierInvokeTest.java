@@ -78,6 +78,28 @@ class VerifierInvokeTest extends AbstractVerifierTest {
     }
 
     @Test
+    void testLegalInvokeInterface() throws ClassNotFoundException {
+        assertVerifyOK("TestLegalInvokeInterface01", "Verification of invokeinterface on a method defined in a superinterface must pass.");
+    }
+
+    @Test
+    void testLegalInvokeSpecial() throws ClassNotFoundException {
+        assertVerifyOK("TestLegalInvokeSpecial01", "Verification of invokespecial on a method defined in a superclass must pass.");
+        assertVerifyOK("TestLegalInvokeSpecial02", "Verification of invokespecial on a method defined in a superclass must pass.");
+    }
+
+    @Test
+    void testLegalInvokeStatic() throws ClassNotFoundException {
+        assertVerifyOK("TestLegalInvokeStatic01", "Verification of invokestatic on a method defined in a superclass must pass.");
+    }
+
+    @Test
+    void testLegalInvokeVirtual() throws ClassNotFoundException {
+        assertVerifyOK("TestLegalInvokeVirtual01", "Verification of invokevirtual on a method defined in a superclass must pass.");
+        assertVerifyOK("TestLegalInvokeVirtual02", "Verification of invokevirtual on a method defined in a superinterface must pass.");
+    }
+
+    @Test
     void testMethodHandleSignatures() throws ClassNotFoundException {
         for (final String name : new String[] { "invoke", "invokeExact" }) {
             assertInvokeVirtual("java.lang.invoke.MethodHandle", name, Type.OBJECT,
@@ -101,27 +123,5 @@ class VerifierInvokeTest extends AbstractVerifierTest {
         assertInvokeVirtual("java.lang.invoke.VarHandle", "set", Type.VOID, new Type[] { Type.OBJECT, Type.INT }, true);
         assertInvokeVirtual("java.lang.invoke.VarHandle", "compareAndSet", Type.BOOLEAN, new Type[] { Type.OBJECT, Type.INT, Type.INT }, true);
         assertInvokeVirtual("java.lang.invoke.VarHandle", "toString", Type.INT, Type.NO_ARGS, false);
-    }
-
-    @Test
-    void testLegalInvokeInterface() throws ClassNotFoundException {
-        assertVerifyOK("TestLegalInvokeInterface01", "Verification of invokeinterface on a method defined in a superinterface must pass.");
-    }
-
-    @Test
-    void testLegalInvokeSpecial() throws ClassNotFoundException {
-        assertVerifyOK("TestLegalInvokeSpecial01", "Verification of invokespecial on a method defined in a superclass must pass.");
-        assertVerifyOK("TestLegalInvokeSpecial02", "Verification of invokespecial on a method defined in a superclass must pass.");
-    }
-
-    @Test
-    void testLegalInvokeStatic() throws ClassNotFoundException {
-        assertVerifyOK("TestLegalInvokeStatic01", "Verification of invokestatic on a method defined in a superclass must pass.");
-    }
-
-    @Test
-    void testLegalInvokeVirtual() throws ClassNotFoundException {
-        assertVerifyOK("TestLegalInvokeVirtual01", "Verification of invokevirtual on a method defined in a superclass must pass.");
-        assertVerifyOK("TestLegalInvokeVirtual02", "Verification of invokevirtual on a method defined in a superinterface must pass.");
     }
 }
