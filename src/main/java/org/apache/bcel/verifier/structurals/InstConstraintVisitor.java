@@ -1046,6 +1046,18 @@ public class InstConstraintVisitor extends EmptyVisitor {
         }
     }
 
+    /**
+     * Assures the 'objectref' of a GETFIELD or PUTFIELD is an instance of the class named by the field reference.
+     */
+    private void objectrefIsInstanceOfFieldClass(final FieldInstruction o, final Type objectref) throws ClassNotFoundException {
+        if (objectref instanceof ObjectType) {
+            final String theClass = getObjectType(o).getClassName();
+            if (!Repository.instanceOf(((ObjectType) objectref).getClassName(), theClass)) {
+                constraintViolated(o, "The 'objectref' item '" + objectref + "' is not an instance of '" + theClass + "' as expected.");
+            }
+        }
+    }
+
     private Field visitFieldInstructionInternals(final FieldInstruction o) throws ClassNotFoundException {
         final String fieldName = o.getFieldName(cpg);
         final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
@@ -1151,6 +1163,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
             if (!(objectref instanceof ObjectType || objectref == Type.NULL)) {
                 constraintViolated(o, "Stack top should be an object reference that's not an array reference, but is '" + objectref + "'.");
             }
+            objectrefIsInstanceOfFieldClass(o, objectref);
             final String fieldName = o.getFieldName(cpg);
 
             final JavaClass jc = Repository.lookupClass(getObjectType(o).getClassName());
@@ -2316,6 +2329,7 @@ public class InstConstraintVisitor extends EmptyVisitor {
             if (!(objectref instanceof ObjectType || objectref == Type.NULL)) {
                 constraintViolated(o, "Stack next-to-top should be an object reference that's not an array reference, but is '" + objectref + "'.");
             }
+            objectrefIsInstanceOfFieldClass(o, objectref);
 
             final Field f = visitFieldInstructionInternals(o);
 
