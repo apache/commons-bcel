@@ -180,6 +180,19 @@ public class Class2HTML implements Constants {
         return "<A HREF=\"" + toHTMLRef(baseType) + ".html\" TARGET=_top>" + toHTML(shortType) + "</A>";
     }
 
+    /**
+     * Escapes text for inclusion in an HTML report.
+     *
+     * <p>
+     * Replaces ampersands, angle brackets, double quotes, and single quotes with HTML entities. Line feed and carriage return characters become the literal
+     * sequences {@code \n} and {@code \r}, respectively. All other characters are copied unchanged.
+     * </p>
+     *
+     * @param str the non-null text to escape.
+     * @return the HTML-escaped text.
+     * @throws NullPointerException if {@code str} is null.
+     * @see #toHTMLRef(String)
+     */
     static String toHTML(final String str) {
         final StringBuilder buf = new StringBuilder();
         for (int i = 0; i < str.length(); i++) {
@@ -214,8 +227,17 @@ public class Class2HTML implements Constants {
     }
 
     /**
-     * Encodes a class or type name as a UTF-8 file name in an HTML link. Spaces use percent escapes rather than the form encoding's plus signs, and HTML
-     * metacharacters are percent-encoded as well. Any ':' is replaced so a name cannot introduce a URL scheme such as "javascript:".
+     * Encodes a class or type name as a file-name component in an HTML report link.
+     *
+     * <p>
+     * Replaces colons with underscores, then percent-encodes the name using UTF-8. Spaces become {@code %20}, and HTML metacharacters are percent-encoded.
+     * The caller appends report suffixes and URL fragments to the encoded name.
+     * </p>
+     *
+     * @param str the non-null class or type name to encode.
+     * @return the encoded file-name component.
+     * @throws NullPointerException if {@code str} is null.
+     * @see #toHTML(String)
      */
     static String toHTMLRef(final String str) {
         try {
