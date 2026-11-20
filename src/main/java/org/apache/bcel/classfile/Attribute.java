@@ -464,10 +464,15 @@ public abstract class Attribute implements Cloneable, Node {
     }
 
     /**
+     * Returns the standard name for a known attribute tag, or the declared name for an unrecognized tag.
+     * <p>
+     * Custom attributes can use {@link Const#ATTR_UNKNOWN} and inherit this implementation. Their names are obtained from {@link #getName()}.
+     * </p>
+     *
      * @return attribute name.
      */
     @Override
     public String toString() {
-        return Const.getAttributeName(tag);
+        return tag >= 0 && tag < Const.KNOWN_ATTRIBUTES ? Const.getAttributeName(tag) : getName();
     }
 }
