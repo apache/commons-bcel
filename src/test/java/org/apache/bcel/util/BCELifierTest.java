@@ -27,6 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
@@ -252,16 +253,20 @@ class BCELifierTest extends AbstractTest {
         assertFalse(source.contains('"' + toEscapeSource + '"'), source);
     }
 
-    private void testClassOnPath(final String javaClassFileName) throws Exception {
-        final File workDir = new File("target", getClass().getSimpleName());
-        Files.createDirectories(workDir.getParentFile().toPath());
-        final File inFile = new File(javaClassFileName);
-        final JavaClass javaClass = BCELifier.getJavaClass(inFile.getName().replace(JavaClass.EXTENSION, ""));
-        assertNotNull(javaClass);
-        // Gets javap output of the input class
-        // System.out.println(exec(null, getJavaP(), "-version"));
-        final String javaClassName = javaClass.getClassName();
-        final String javapOutInital = exec(null, getAppJavaP(), "-cp", CLASSPATH, "-p", "-c", javaClassName);
+    private File testClassOnPath(final String javaClassName, final Path directory) throws Exception {
+        final Path inputDirectory = Files.createDirectory(directory.resolve("input"));
+        final String resourceName = Utility.packageToPath(javaClassName) + JavaClass.EXTENSION;
+        final Path inputFile = inputDirectory.resolve(resourceName);
+        Files.createDirectories(inputFile.getParent());
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream(resourceName)) {
+            assertNotNull(input, resourceName);
+            Files.copy(input, inputFile);
+        }
+        final JavaClass javaClass = new ClassParser(inputFile.toString()).parse();
+        final File workDir = Files.createDirectory(directory.resolve("output")).toFile();
+        // Both subprocesses must read the same fixture, never a class left by a previous round trip.
+        final String inputClassPath = inputDirectory + File.pathSeparator + SystemProperties.getJavaClassPath();
+        final String javapOutInitial = exec(workDir, getAppJavaP(), "-p", "-c", inputFile.toString());
         final String outCreatorFileName = javaClass.getSourceFilePath().replace(".java", "Creator.java");
         final File outCreatorFile = new File(workDir, outCreatorFileName);
         Files.createDirectories(outCreatorFile.getParentFile().toPath());
@@ -270,10 +275,10 @@ class BCELifierTest extends AbstractTest {
         final String creatorJavaSource;
         // Creates the BCEL Java app source in creatorJavaSource
         if (javaAgent == null) {
-            creatorJavaSource = exec(workDir, getAppJava(), "-cp", CLASSPATH, bcelifierClassName, javaClassName);
+            creatorJavaSource = exec(workDir, getAppJava(), "-cp", inputClassPath, bcelifierClassName, javaClassName);
         } else {
-            final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_" + inFile.getName() + ".exec");
-            creatorJavaSource = exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, bcelifierClassName, javaClassName);
+            final String runtimeExecJavaAgent = javaAgent.replace("jacoco.exec", "jacoco_" + javaClassName + ".exec");
+            creatorJavaSource = exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", inputClassPath, bcelifierClassName, javaClassName);
         }
         // Write the BCEL Java app source to a file
         Files.write(outCreatorFile.toPath(), creatorJavaSource.getBytes(StandardCharsets.UTF_8));
@@ -288,11 +293,12 @@ class BCELifierTest extends AbstractTest {
             assertEquals("", exec(workDir, getAppJava(), runtimeExecJavaAgent, "-cp", CLASSPATH, creatorClassName));
         }
         // Runs javap on the BCEL generated class file
-        final String javapOutput = exec(workDir, getAppJavaP(), "-p", "-c", inFile.getName());
+        final File regeneratedFile = new File(workDir, javaClassName + JavaClass.EXTENSION);
+        final String javapOutput = exec(workDir, getAppJavaP(), "-p", "-c", regeneratedFile.getAbsolutePath());
         // Finally compares the output of the roundtrip
-        assertEquals(canonHashRef(javapOutInital), canonHashRef(javapOutput));
+        assertEquals(canonHashRef(javapOutInitial), canonHashRef(javapOutput));
         // javap -p -c does not show ConstantValue attributes. Check boolean constants explicitly.
-        final JavaClass regenerated = new ClassParser(new File(workDir, javaClassName + JavaClass.EXTENSION).getPath()).parse();
+        final JavaClass regenerated = new ClassParser(regeneratedFile.getPath()).parse();
         final Field[] originalFields = javaClass.getFields();
         final Field[] regeneratedFields = regenerated.getFields();
         assertEquals(originalFields.length, regeneratedFields.length);
@@ -308,6 +314,7 @@ class BCELifierTest extends AbstractTest {
                     original.getName());
             }
         }
+        return workDir;
     }
 
     @ParameterizedTest
@@ -385,18 +392,18 @@ class BCELifierTest extends AbstractTest {
     @ParameterizedTest
     @ValueSource(strings = {
     // @formatter:off
-        "org.apache.commons.lang.math.Fraction.class",
-        "org.apache.commons.lang.exception.NestableDelegate.class",
-        "org.apache.commons.lang.builder.CompareToBuilder.class",
-        "org.apache.commons.lang.builder.ToStringBuilder.class",
-        "org.apache.commons.lang.SerializationUtils.class",
-        "org.apache.commons.lang.ArrayUtils.class",
-        "target/test-classes/Java4Example.class",
-        "target/test-classes/BooleanConstants.class"
+        "org.apache.commons.lang.math.Fraction",
+        "org.apache.commons.lang.exception.NestableDelegate",
+        "org.apache.commons.lang.builder.CompareToBuilder",
+        "org.apache.commons.lang.builder.ToStringBuilder",
+        "org.apache.commons.lang.SerializationUtils",
+        "org.apache.commons.lang.ArrayUtils",
+        "Java4Example",
+        "BooleanConstants"
     // @formatter:on
     })
-    void testJavapCompare(final String pathToClass) throws Exception {
-        testClassOnPath(pathToClass);
+    void testJavapCompare(final String className, @TempDir final Path directory) throws Exception {
+        testClassOnPath(className, directory);
     }
 
     /*
@@ -405,13 +412,13 @@ class BCELifierTest extends AbstractTest {
     @ParameterizedTest
     @ValueSource(strings = {
     // @formatter:off
-        "target/test-classes/Java8Example.class",
-        "target/test-classes/Java8Example2.class",
+        "Java8Example",
+        "Java8Example2",
     // @formatter:on
     })
     @DisabledForJreRange(min = JRE.JAVA_25)
-    void testJavapCompareJava25KnownBroken(final String pathToClass) throws Exception {
-        testClassOnPath(pathToClass);
+    void testJavapCompareJava25KnownBroken(final String className, @TempDir final Path directory) throws Exception {
+        testClassOnPath(className, directory);
     }
 
     @Test
@@ -451,9 +458,8 @@ class BCELifierTest extends AbstractTest {
 
     @ParameterizedTest
     @ValueSource(strings = { "StackMapExample", "StackMapExample2" })
-    void testStackMap(final String className) throws Exception {
-        testJavapCompare(className);
-        final File workDir = new File("target");
+    void testStackMap(final String className, @TempDir final Path directory) throws Exception {
+        final File workDir = testClassOnPath(className, directory);
         assertEquals("Hello World" + EOL, exec(workDir, getAppJava(), "-cp", CLASSPATH, className, "Hello"));
     }
 
