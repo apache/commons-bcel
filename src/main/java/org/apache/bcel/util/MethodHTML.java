@@ -36,14 +36,14 @@ import org.apache.bcel.classfile.Utility;
  */
 final class MethodHTML {
 
-    private final String className; // name of current class
+    private final String classNameRef; // encoded name for links to the current class
     private final PrintWriter printWriter; // file to write to
     private final ConstantHTML constantHtml;
     private final AttributeHTML attributeHtml;
 
     MethodHTML(final String dir, final String className, final Method[] methods, final Field[] fields, final ConstantHTML constantHtml,
         final AttributeHTML attributeHtml, final Charset charset) throws FileNotFoundException, UnsupportedEncodingException {
-        this.className = className;
+        this.classNameRef = Class2HTML.toHTMLRef(className);
         this.attributeHtml = attributeHtml;
         this.constantHtml = constantHtml;
         try (PrintWriter newPrintWriter = new PrintWriter(dir + className + "_methods.html", charset.name())) {
@@ -88,7 +88,7 @@ final class MethodHTML {
             if (attributes[i].getTag() == Const.ATTR_CONSTANT_VALUE) { // Default value
                 final String str = attributes[i].toString();
                 // Reference attribute in _attributes.html
-                printWriter.print("<TD>= <A HREF=\"" + className + "_attributes.html#" + Class2HTML.toHTML(name) + "@" + i + "\" TARGET=\"Attributes\">"
+                printWriter.print("<TD>= <A HREF=\"" + classNameRef + "_attributes.html#" + Class2HTML.toHTML(name) + "@" + i + "\" TARGET=\"Attributes\">"
                     + Class2HTML.toHTML(str) + "</TD>\n");
                 break;
             }
@@ -115,7 +115,7 @@ final class MethodHTML {
         access = Utility.replace(access, " ", "&nbsp;");
         final String htmlName = Class2HTML.toHTML(name);
         printWriter.print("<TR VALIGN=TOP><TD><FONT COLOR=\"#FF0000\"><A NAME=method" + methodNumber + ">" + access + "</A></FONT></TD>");
-        printWriter.print("<TD>" + Class2HTML.referenceType(type) + "</TD><TD><A HREF=\"" + className + "_code.html#method" + methodNumber + "\" TARGET=Code>"
+        printWriter.print("<TD>" + Class2HTML.referenceType(type) + "</TD><TD><A HREF=\"" + classNameRef + "_code.html#method" + methodNumber + "\" TARGET=Code>"
             + htmlName + "</A></TD>\n<TD>(");
         for (int i = 0; i < args.length; i++) {
             printWriter.print(Class2HTML.referenceType(args[i]));

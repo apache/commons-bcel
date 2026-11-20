@@ -45,6 +45,7 @@ final class CodeHTML {
 
     private static boolean wide;
     private final String className; // name of current class
+    private final String classNameRef; // encoded name for links to the current class
     // private Method[] methods; // Methods to print
     private final PrintWriter printWriter; // file to write to
     private BitSet gotoSet;
@@ -54,6 +55,7 @@ final class CodeHTML {
     CodeHTML(final String dir, final String className, final Method[] methods, final ConstantPool constantPool, final ConstantHTML constantHtml,
         final Charset charset) throws IOException {
         this.className = className;
+        this.classNameRef = Class2HTML.toHTMLRef(className);
 //        this.methods = methods;
         this.constantPool = constantPool;
         this.constantHtml = constantHtml;
@@ -243,7 +245,7 @@ final class CodeHTML {
             index = c1.getNameAndTypeIndex();
             final String fieldName = constantPool.constantToString(index, Const.CONSTANT_NameAndType);
             if (name.equals(className)) { // Local field
-                buf.append("<A HREF=\"").append(className).append("_methods.html#field").append(Class2HTML.toHTML(fieldName)).append("\" TARGET=Methods>")
+                buf.append("<A HREF=\"").append(classNameRef).append("_methods.html#field").append(Class2HTML.toHTML(fieldName)).append("\" TARGET=Methods>")
                     .append(Class2HTML.toHTML(fieldName)).append("</A>\n");
             } else {
                 buf.append(constantHtml.referenceConstant(classIndex)).append(".").append(Class2HTML.toHTML(fieldName));
@@ -298,7 +300,7 @@ final class CodeHTML {
             signature = constantPool.constantToString(c2.getSignatureIndex(), Const.CONSTANT_Utf8);
             final String[] args = Utility.methodSignatureArgumentTypes(signature, false);
             final String type = Utility.methodSignatureReturnType(signature, false);
-            buf.append(name).append(".<A HREF=\"").append(className).append("_cp.html#cp").append(mIndex).append("\" TARGET=ConstantPool>").append(str)
+            buf.append(name).append(".<A HREF=\"").append(classNameRef).append("_cp.html#cp").append(mIndex).append("\" TARGET=ConstantPool>").append(str)
                 .append("</A>").append("(");
             // List arguments
             for (int i = 0; i < args.length; i++) {
@@ -316,12 +318,12 @@ final class CodeHTML {
         case Const.LDC_W:
         case Const.LDC2_W:
             index = bytes.readUnsignedShort();
-            buf.append("<A HREF=\"").append(className).append("_cp.html#cp").append(index).append("\" TARGET=\"ConstantPool\">")
+            buf.append("<A HREF=\"").append(classNameRef).append("_cp.html#cp").append(index).append("\" TARGET=\"ConstantPool\">")
                 .append(Class2HTML.toHTML(constantPool.constantToString(index, constantPool.getConstant(index).getTag()))).append("</a>");
             break;
         case Const.LDC:
             index = bytes.readUnsignedByte();
-            buf.append("<A HREF=\"").append(className).append("_cp.html#cp").append(index).append("\" TARGET=\"ConstantPool\">")
+            buf.append("<A HREF=\"").append(classNameRef).append("_cp.html#cp").append(index).append("\" TARGET=\"ConstantPool\">")
                 .append(Class2HTML.toHTML(constantPool.constantToString(index, constantPool.getConstant(index).getTag()))).append("</a>");
             break;
         /*
@@ -503,7 +505,7 @@ final class CodeHTML {
         // Get the method's attributes, the Code Attribute in particular
         final Attribute[] attributes = method.getAttributes();
         printWriter.print("<P><B><FONT COLOR=\"#FF0000\">" + access + "</FONT>&nbsp;<A NAME=method" + methodNumber + ">" + Class2HTML.referenceType(type)
-            + "</A>&nbsp<A HREF=\"" + className + "_methods.html#method" + methodNumber + "\" TARGET=Methods>" + htmlName + "</A>(");
+            + "</A>&nbsp<A HREF=\"" + classNameRef + "_methods.html#method" + methodNumber + "\" TARGET=Methods>" + htmlName + "</A>(");
         for (int i = 0; i < args.length; i++) {
             printWriter.print(Class2HTML.referenceType(args[i]));
             if (i < args.length - 1) {
@@ -518,7 +520,7 @@ final class CodeHTML {
             for (int i = 0; i < attributes.length; i++) {
                 byte tag = attributes[i].getTag();
                 if (tag != Const.ATTR_UNKNOWN) {
-                    printWriter.print("<LI><A HREF=\"" + className + "_attributes.html#method" + methodNumber + "@" + i + "\" TARGET=Attributes>"
+                    printWriter.print("<LI><A HREF=\"" + classNameRef + "_attributes.html#method" + methodNumber + "@" + i + "\" TARGET=Attributes>"
                         + Const.getAttributeName(tag) + "</A></LI>\n");
                 } else {
                     printWriter.print("<LI>" + Class2HTML.toHTML(String.valueOf(attributes[i])) + "</LI>");
@@ -531,7 +533,7 @@ final class CodeHTML {
                     for (int j = 0; j < attributes2.length; j++) {
                         tag = attributes2[j].getTag();
                         if (tag != Const.ATTR_UNKNOWN) {
-                            printWriter.print("<LI><A HREF=\"" + className + "_attributes.html#method" + methodNumber + "@" + i + "@" + j
+                            printWriter.print("<LI><A HREF=\"" + classNameRef + "_attributes.html#method" + methodNumber + "@" + i + "@" + j
                                 + "\" TARGET=Attributes>" + Const.getAttributeName(tag) + "</A></LI>\n");
                         } else {
                             printWriter.print("<LI>" + Class2HTML.toHTML(String.valueOf(attributes2[j])) + "</LI>\n");

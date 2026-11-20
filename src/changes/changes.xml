@@ -64,6 +64,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action                  type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">InstConstraintVisitor check objectref class in getfield and putfield verification (#547).</action>
       <action                  type="fix" dev="ggregory" due-to="hataehoon, Gary Gregory">Escape unknown method attribute names in Class2HTML code reports.</action>
       <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Fix Class2HTML ArrayIndexOutOfBoundsException for unknown Code sub-attributes and render their descriptions with HTML escaping.</action>
+      <action                  type="fix" dev="ggregory" due-to="Gary Gregory">Reject class names containing '#' or '%' before generating Class2HTML reports, and encode report links for accepted names containing spaces, ampersands, and other special characters.</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action                  type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-lang3 from 3.21.0 to 3.22.0.</action>

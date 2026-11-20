@@ -23,6 +23,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
@@ -57,6 +58,7 @@ public class Class2HTML implements Constants {
 
     private static String classPackage; // name of package, unclean to make it static, but ...
     private static String className; // name of current class, ditto
+    private static String classNameRef; // encoded name for links to the current class
     private static ConstantPool constantPool;
     private static final Set<String> basicTypes = new HashSet<>();
     static {
@@ -73,18 +75,20 @@ public class Class2HTML implements Constants {
 
     /**
      * The class name comes from the attacker-controlled this_class constant of the parsed class file and is
-     * concatenated into the five output file paths ("dir + className + suffix"). Class file parsing only folds
-     * '/' into '.', so Windows separators ('\\'), drive designators (':') and ".." segments survive and would
-     * let a crafted class file write its HTML output outside the target directory (CWE-22).
+     * concatenated into the five output file paths ("dir + className + suffix") and into the report's own
+     * self-referential links (HREF/SRC values). Class file parsing only folds '/' into '.', so Windows separators
+     * ('\\'), drive designators (':') and ".." segments survive and would let a crafted class file write its HTML
+     * output outside the target directory (CWE-22). The '#' and '%' characters are also rejected in output file names.
+     * Accepted names are encoded separately for use in the report's links.
      *
-     * @param name the class name about to be used as part of a file name.
+     * @param name the class name about to be used as part of a file name and of the report's own links.
      * @throws IOException Thrown if the name contains a path separator, a Windows-reserved file name character, a
-     *         control character, or a ".." sequence.
+     *         control character, a '#' or '%', or a ".." sequence.
      */
     private static void checkFileNameSafe(final String name) throws IOException {
         for (int i = 0; i < name.length(); i++) {
             final char c = name.charAt(i);
-            if (c < ' ' || "\\/:*?\"<>|".indexOf(c) >= 0) {
+            if (c < ' ' || "\\/:*?\"<>|#%".indexOf(c) >= 0) {
                 throw new IOException("Refusing to write HTML for a class whose name contains the unsafe character (0x"
                     + Integer.toHexString(c) + "): " + name);
             }
@@ -158,7 +162,7 @@ public class Class2HTML implements Constants {
         String str = constantPool.getConstantString(index, Const.CONSTANT_Class);
         str = Utility.compactClassName(str);
         str = Utility.compactClassName(str, classPackage + ".", true);
-        return "<A HREF=\"" + className + "_cp.html#cp" + index + "\" TARGET=ConstantPool>" + toHTML(str) + "</A>";
+        return "<A HREF=\"" + classNameRef + "_cp.html#cp" + index + "\" TARGET=ConstantPool>" + toHTML(str) + "</A>";
     }
 
     static String referenceType(final String type) {
@@ -210,12 +214,15 @@ public class Class2HTML implements Constants {
     }
 
     /**
-     * Escapes a class or type name taken from the constant pool for use as a relative link target inside an HREF
-     * attribute value. On top of the text escaping done by {@code toHTML(String)}, any ':' is replaced so an
-     * attacker-chosen name cannot smuggle a URL scheme such as "javascript:" into the generated link.
+     * Encodes a class or type name as a UTF-8 file name in an HTML link. Spaces use percent escapes rather than the form encoding's plus signs, and HTML
+     * metacharacters are percent-encoded as well. Any ':' is replaced so a name cannot introduce a URL scheme such as "javascript:".
      */
     static String toHTMLRef(final String str) {
-        return toHTML(str.replace(':', '_'));
+        try {
+            return URLEncoder.encode(str.replace(':', '_'), StandardCharsets.UTF_8.name()).replace("+", "%20");
+        } catch (final UnsupportedEncodingException ex) {
+            throw new IllegalStateException(ex);
+        }
     }
 
     private final JavaClass javaClass; // current class object
@@ -239,6 +246,7 @@ public class Class2HTML implements Constants {
         this.dir = dir;
         className = javaClass.getClassName(); // Remember full name
         checkFileNameSafe(className);
+        classNameRef = toHTMLRef(className);
         constantPool = javaClass.getConstantPool();
         // Get package name by tacking off everything after the last '.'
         final int index = className.lastIndexOf('.');
@@ -266,17 +274,17 @@ public class Class2HTML implements Constants {
                 + "<HEAD><TITLE>Documentation for " + toHTML(className) + "</TITLE></HEAD>\n"
                 + "<FRAMESET BORDER=1 cols=\"30%,*\">\n"
                 + "<FRAMESET BORDER=1 rows=\"80%,*\">\n"
-                + "<FRAME NAME=\"ConstantPool\" SRC=\"" + className + "_cp.html" + "\"\n"
+                + "<FRAME NAME=\"ConstantPool\" SRC=\"" + classNameRef + "_cp.html" + "\"\n"
                 + "MARGINWIDTH=\"0\" "
                 + "MARGINHEIGHT=\"0\" FRAMEBORDER=\"1\" SCROLLING=\"AUTO\">\n"
-                + "<FRAME NAME=\"Attributes\" SRC=\"" + className + "_attributes.html\"\n"
+                + "<FRAME NAME=\"Attributes\" SRC=\"" + classNameRef + "_attributes.html\"\n"
                 + " MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" FRAMEBORDER=\"1\" SCROLLING=\"AUTO\">\n"
                 + "</FRAMESET>\n"
                 + "<FRAMESET BORDER=1 rows=\"80%,*\">\n"
-                + "<FRAME NAME=\"Code\" SRC=\"" + className + "_code.html\"\n"
+                + "<FRAME NAME=\"Code\" SRC=\"" + classNameRef + "_code.html\"\n"
                 + " MARGINWIDTH=0 "
                 + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n"
-                + "<FRAME NAME=\"Methods\" SRC=\"" + className + "_methods.html\"\n"
+                + "<FRAME NAME=\"Methods\" SRC=\"" + classNameRef + "_methods.html\"\n"
                 + " MARGINWIDTH=0 "
                 + "MARGINHEIGHT=0 FRAMEBORDER=1 SCROLLING=\"AUTO\">\n"
                 + "</FRAMESET></FRAMESET></HTML>");
