@@ -95,46 +95,6 @@ class Class2HTMLXSSTest {
     }
 
     /**
-     * Tests that unknown method attribute descriptions are HTML-escaped.
-     *
-     * <p>
-     * Attribute names come from attacker-controlled {@code CONSTANT_Utf8} entries and may contain HTML metacharacters. This is a regression for an
-     * escaping omission in the earlier fix for CVE-2026-105111.
-     * </p>
-     */
-    @ParameterizedTest
-    @CsvSource({
-        "0, ''",
-        "1, ': 00'",
-        "10, ': 00 00 00 00 00 00 00 00 00 00'",
-        "11, ': 00 00 00 00 00 00 00 00 00 00... (truncated)'"
-    })
-    void testUnknownMethodAttributeNameIsEscaped(final int length, final String expectedPayload, @TempDir final Path outputDir) throws Exception {
-        final ClassGen cg = new ClassGen("EvilUnknownAttr", "java.lang.Object", "EvilUnknownAttr.java", Const.ACC_PUBLIC, null);
-        final ConstantPoolGen cpg = cg.getConstantPool();
-        final String marker = "x<svg onload=\"alert(1)\">&'\"y";
-        final int nameIndex = cpg.addUtf8(marker);
-        final InstructionList instructions = new InstructionList();
-        instructions.append(InstructionConst.ICONST_0);
-        instructions.append(InstructionConst.IRETURN);
-        final MethodGen mg = new MethodGen(Const.ACC_PUBLIC | Const.ACC_STATIC, Type.INT, Type.NO_ARGS, null, "value", "EvilUnknownAttr", instructions, cpg);
-        mg.addAttribute(new Unknown(nameIndex, length, new byte[length], cpg.getConstantPool()));
-        mg.setMaxStack();
-        mg.setMaxLocals();
-        cg.addMethod(mg.getMethod());
-        instructions.dispose();
-
-        final JavaClass jc = new ClassParser(new ByteArrayInputStream(cg.getJavaClass().getBytes()), "EvilUnknownAttr.class").parse();
-        assertNotNull(jc.getMethods()[0].getCode(), "expected the parsed method to retain its Code attribute");
-        new Class2HTML(jc, outputDir.toAbsolutePath() + File.separator);
-
-        final String code = new String(Files.readAllBytes(outputDir.resolve("EvilUnknownAttr_code.html")), StandardCharsets.UTF_8);
-        assertFalse(code.contains("<svg"), "unknown attribute name was emitted as a live HTML element");
-        assertTrue(code.contains("<LI>(Unknown attribute x&lt;svg onload=&quot;alert(1)&quot;&gt;&amp;&#39;&quot;y" + expectedPayload + ")</LI>"),
-            "expected the complete unknown attribute description to be HTML-escaped");
-    }
-
-    /**
      * Tests that an unknown code-level attribute description is shown with its actual (escaped) name.
      *
      * <p>
@@ -176,5 +136,45 @@ class Class2HTMLXSSTest {
         assertFalse(codeHtml.contains(">SourceFile</A>"), "unknown code attribute was mislabeled as SourceFile");
         assertTrue(codeHtml.contains("<LI>(Unknown attribute x&lt;script&gt;alert(1)&lt;/script&gt;)</LI>"),
             "expected the unknown code attribute description to be HTML-escaped");
+    }
+
+    /**
+     * Tests that unknown method attribute descriptions are HTML-escaped.
+     *
+     * <p>
+     * Attribute names come from attacker-controlled {@code CONSTANT_Utf8} entries and may contain HTML metacharacters. This is a regression for an
+     * escaping omission in the earlier fix for CVE-2026-105111.
+     * </p>
+     */
+    @ParameterizedTest
+    @CsvSource({
+        "0, ''",
+        "1, ': 00'",
+        "10, ': 00 00 00 00 00 00 00 00 00 00'",
+        "11, ': 00 00 00 00 00 00 00 00 00 00... (truncated)'"
+    })
+    void testUnknownMethodAttributeNameIsEscaped(final int length, final String expectedPayload, @TempDir final Path outputDir) throws Exception {
+        final ClassGen cg = new ClassGen("EvilUnknownAttr", "java.lang.Object", "EvilUnknownAttr.java", Const.ACC_PUBLIC, null);
+        final ConstantPoolGen cpg = cg.getConstantPool();
+        final String marker = "x<svg onload=\"alert(1)\">&'\"y";
+        final int nameIndex = cpg.addUtf8(marker);
+        final InstructionList instructions = new InstructionList();
+        instructions.append(InstructionConst.ICONST_0);
+        instructions.append(InstructionConst.IRETURN);
+        final MethodGen mg = new MethodGen(Const.ACC_PUBLIC | Const.ACC_STATIC, Type.INT, Type.NO_ARGS, null, "value", "EvilUnknownAttr", instructions, cpg);
+        mg.addAttribute(new Unknown(nameIndex, length, new byte[length], cpg.getConstantPool()));
+        mg.setMaxStack();
+        mg.setMaxLocals();
+        cg.addMethod(mg.getMethod());
+        instructions.dispose();
+
+        final JavaClass jc = new ClassParser(new ByteArrayInputStream(cg.getJavaClass().getBytes()), "EvilUnknownAttr.class").parse();
+        assertNotNull(jc.getMethods()[0].getCode(), "expected the parsed method to retain its Code attribute");
+        new Class2HTML(jc, outputDir.toAbsolutePath() + File.separator);
+
+        final String code = new String(Files.readAllBytes(outputDir.resolve("EvilUnknownAttr_code.html")), StandardCharsets.UTF_8);
+        assertFalse(code.contains("<svg"), "unknown attribute name was emitted as a live HTML element");
+        assertTrue(code.contains("<LI>(Unknown attribute x&lt;svg onload=&quot;alert(1)&quot;&gt;&amp;&#39;&quot;y" + expectedPayload + ")</LI>"),
+            "expected the complete unknown attribute description to be HTML-escaped");
     }
 }

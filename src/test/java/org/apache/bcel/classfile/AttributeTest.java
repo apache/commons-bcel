@@ -74,6 +74,16 @@ public class AttributeTest {
     }
 
     /**
+     * Preserves the standard names at both ends of the known-tag range even when the constant-pool name differs.
+     */
+    @Test
+    public void testToStringForKnownTags() {
+        final ConstantPool constantPool = new ConstantPool(new Constant[] { null, new ConstantUtf8("DifferentName") });
+        assertEquals("SourceFile", new TestAttribute(Const.ATTR_SOURCE_FILE, 1, 0, constantPool).toString());
+        assertEquals("RuntimeInvisibleTypeAnnotations", new TestAttribute(Const.ATTR_RUNTIME_INVISIBLE_TYPE_ANNOTATIONS, 1, 0, constantPool).toString());
+    }
+
+    /**
      * Formats a custom attribute parsed through a registered reader without requiring a subclass {@code toString()} override.
      * <p>
      * The serialized attribute has a custom name and an empty payload. Its reader returns an attribute with {@link Const#ATTR_UNKNOWN}, which used
@@ -101,16 +111,6 @@ public class AttributeTest {
             final Unknown attribute = assertInstanceOf(Unknown.class, Attribute.readAttribute(input, constantPool));
             assertEquals("(Unknown attribute " + name + ")", attribute.toString());
         }
-    }
-
-    /**
-     * Preserves the standard names at both ends of the known-tag range even when the constant-pool name differs.
-     */
-    @Test
-    public void testToStringForKnownTags() {
-        final ConstantPool constantPool = new ConstantPool(new Constant[] { null, new ConstantUtf8("DifferentName") });
-        assertEquals("SourceFile", new TestAttribute(Const.ATTR_SOURCE_FILE, 1, 0, constantPool).toString());
-        assertEquals("RuntimeInvisibleTypeAnnotations", new TestAttribute(Const.ATTR_RUNTIME_INVISIBLE_TYPE_ANNOTATIONS, 1, 0, constantPool).toString());
     }
 
     /**
