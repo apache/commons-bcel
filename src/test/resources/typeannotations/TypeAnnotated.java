@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.List;
 
-// Compiled with: javac --release 8 -d . TypeAnnotated.java (only TypeAnnotated.class is used by the tests)
+// See src/test/README.md for the compiler and command used to reproduce TypeAnnotated.class.
 @Target(ElementType.TYPE_USE)
 @Retention(RetentionPolicy.RUNTIME)
 @interface Visible {

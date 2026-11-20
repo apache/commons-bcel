@@ -51,12 +51,19 @@ import org.apache.bcel.verifier.statics.StringRepresentation;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests the type annotation attributes, read from {@code TypeAnnotated.class} (see {@code TypeAnnotated.java}).
+ * Tests type annotation attributes from the checked-in {@code TypeAnnotated.class} fixture and the source fixture {@link AnnotatedTypes}.
  */
 class TypeAnnotationsTest {
 
+    /**
+     * Supplies type-use annotations on enclosing, inner, and static nested types, wildcard bounds, array elements, casts, and local variables.
+     * <p>
+     * The explicit {@code TypeAnnotationsTest.} qualifier lets both javac and ECJ compile the annotation on {@code Outer}. It preserves the intended
+     * distinction between annotating the enclosing instance type and annotating {@code Inner} itself.
+     * </p>
+     */
     static class AnnotatedTypes {
-        @TypeUse Outer.Inner outer;
+        TypeAnnotationsTest.@TypeUse Outer.Inner outer;
         Outer.@TypeUse Inner inner;
         Outer.@TypeUse Nested nested;
         List<? extends @TypeUse Number[]> wildcard;
@@ -142,6 +149,23 @@ class TypeAnnotationsTest {
         assertEquals(original.toString(), copy.toString());
     }
 
+    /**
+     * Distinguishes annotations on an enclosing type, its inner class, and its static nested class.
+     * <p>
+     * Parses the compiler-generated class for these declarations:
+     * </p>
+     * <pre>{@code
+     * TypeAnnotationsTest.@TypeUse Outer.Inner outer;
+     * Outer.@TypeUse Inner inner;
+     * Outer.@TypeUse Nested nested;
+     * }</pre>
+     * <p>
+     * An annotation on {@code Outer} has an empty type path, an annotation on {@code Inner} has one INNER_TYPE step, and an annotation on the static
+     * {@code Nested} type has an empty path. The explicit qualifier changes neither those paths nor the assertions and works with javac and ECJ.
+     * </p>
+     *
+     * @throws IOException if the compiled fixture cannot be parsed.
+     */
     @Test
     void distinguishesInnerClassesFromStaticNestedClasses() throws IOException {
         final JavaClass clazz = annotatedTypes();
