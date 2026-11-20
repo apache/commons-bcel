@@ -15,3 +15,6 @@
  limitations under the License.
 -->
 The Apache Commons security page is [https://commons.apache.org/security.html](https://commons.apache.org/security.html).
+
+For BCEL's security model and the classification of attribute-rendering exceptions, see the
+[component security documentation](src/site/markdown/security.md#security-model).

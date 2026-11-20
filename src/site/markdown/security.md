@@ -35,6 +35,23 @@ If you have encountered an unlisted security vulnerability or other unexpected b
 
 The [Apache Commons security model](https://commons.apache.org/security.html#Security_Model) specifies that it is unsafe to pass possibly malicious input to Commons libraries unless otherwise specified. For Commons BCEL, processing untrusted class data is supported to the extent that this should never allow the supplier of the data to trigger arbitrary code execution, filesystem or network access. It may still trigger other crashes, such as `StackOverflowError` or `OutOfMemoryError`: if your code uses BCEL to process untrusted input then it is up to you to compensate for that as necessary. Loading or executing the generated classes is unsafe and may cause unexpected behavior, including arbitrary code execution.
 
+### Attribute-rendering exceptions
+
+The [changes for 6.14.1](changes.html#a6.14.1) address two attribute-rendering failures:
+
+- `Class2HTML` could throw `ArrayIndexOutOfBoundsException` when rendering an unknown attribute nested in a method's `Code` attribute.
+- `Attribute.toString()` could throw the same exception when a custom attribute subclass inherited that method with an unrecognized attribute tag.
+
+Unknown attributes can be valid class-file extensions, as described in the
+[Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.7.1).
+Their presence alone does not make a class file malformed.
+
+Under the BCEL security model above, these exceptions are non-security robustness bugs. The fixes for the exceptions in 6.14.1 do not warrant a separate CVE.
+Applications processing untrusted class data remain responsible for handling processing failures.
+
+This classification applies to the exceptions themselves. HTML injection in generated reports and unintended code execution, filesystem access, or network access
+must be assessed separately under the security model and reported privately through the [Apache Commons security process](https://commons.apache.org/security.html).
+
 ## Security Vulnerabilities Fixed in 6.13.0
 
 ### CVE-2026-105111
