@@ -28,10 +28,14 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.Code;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
 import org.apache.bcel.classfile.Unknown;
 import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.ConstantPoolGen;
@@ -128,5 +132,49 @@ class Class2HTMLXSSTest {
         assertFalse(code.contains("<svg"), "unknown attribute name was emitted as a live HTML element");
         assertTrue(code.contains("<LI>(Unknown attribute x&lt;svg onload=&quot;alert(1)&quot;&gt;&amp;&#39;&quot;y" + expectedPayload + ")</LI>"),
             "expected the complete unknown attribute description to be HTML-escaped");
+    }
+
+    /**
+     * Tests that an unknown code-level attribute description is shown with its actual (escaped) name.
+     *
+     * <p>
+     * Prior to the fix, the attribute tag was passed to {@code Const.getAttributeName()} unconditionally, which threw
+     * {@code ArrayIndexOutOfBoundsException} for {@code Const.ATTR_UNKNOWN} (-1), so Class2HTML crashed on any method whose Code attribute
+     * has an unknown sub-attribute.
+     * </p>
+     */
+    @Test
+    void testUnknownCodeAttributeNameIsShown(@TempDir final Path outputDir) throws Exception {
+        final ClassGen cg = new ClassGen("EvilUnknownCodeAttr", "java.lang.Object", "EvilUnknownCodeAttr.java", Const.ACC_PUBLIC, null);
+        final ConstantPoolGen cpg = cg.getConstantPool();
+        final String marker = "x<script>alert(1)</script>";
+        final int nameIndex = cpg.addUtf8(marker);
+        final InstructionList instructions = new InstructionList();
+        instructions.append(InstructionConst.ICONST_0);
+        instructions.append(InstructionConst.IRETURN);
+        final MethodGen mg = new MethodGen(Const.ACC_PUBLIC | Const.ACC_STATIC, Type.INT, Type.NO_ARGS, null, "value", "EvilUnknownCodeAttr", instructions, cpg);
+        mg.setMaxStack();
+        mg.setMaxLocals();
+        final Method method = mg.getMethod();
+        for (final Attribute attribute : method.getAttributes()) {
+            if (attribute instanceof Code) {
+                final Code code = (Code) attribute;
+                final Attribute[] subAttributes = code.getAttributes();
+                final Attribute[] extended = Arrays.copyOf(subAttributes, subAttributes.length + 1);
+                extended[subAttributes.length] = new Unknown(nameIndex, 0, new byte[0], cpg.getConstantPool());
+                code.setAttributes(extended);
+            }
+        }
+        cg.addMethod(method);
+        instructions.dispose();
+
+        final JavaClass jc = new ClassParser(new ByteArrayInputStream(cg.getJavaClass().getBytes()), "EvilUnknownCodeAttr.class").parse();
+        assertNotNull(jc.getMethods()[0].getCode(), "expected the parsed method to retain its Code attribute");
+        new Class2HTML(jc, outputDir.toAbsolutePath() + File.separator);
+
+        final String codeHtml = new String(Files.readAllBytes(outputDir.resolve("EvilUnknownCodeAttr_code.html")), StandardCharsets.UTF_8);
+        assertFalse(codeHtml.contains(">SourceFile</A>"), "unknown code attribute was mislabeled as SourceFile");
+        assertTrue(codeHtml.contains("<LI>(Unknown attribute x&lt;script&gt;alert(1)&lt;/script&gt;)</LI>"),
+            "expected the unknown code attribute description to be HTML-escaped");
     }
 }

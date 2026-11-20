@@ -530,8 +530,12 @@ final class CodeHTML {
                     printWriter.print("<UL>");
                     for (int j = 0; j < attributes2.length; j++) {
                         tag = attributes2[j].getTag();
-                        printWriter.print("<LI><A HREF=\"" + className + "_attributes.html#method" + methodNumber + "@" + i + "@" + j
-                            + "\" TARGET=Attributes>" + Const.getAttributeName(tag) + "</A></LI>\n");
+                        if (tag != Const.ATTR_UNKNOWN) {
+                            printWriter.print("<LI><A HREF=\"" + className + "_attributes.html#method" + methodNumber + "@" + i + "@" + j
+                                + "\" TARGET=Attributes>" + Const.getAttributeName(tag) + "</A></LI>\n");
+                        } else {
+                            printWriter.print("<LI>" + Class2HTML.toHTML(String.valueOf(attributes2[j])) + "</LI>\n");
+                        }
                     }
                     printWriter.print("</UL>");
                 }
