@@ -18,6 +18,7 @@
  */
 package org.apache.bcel.util;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -26,6 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -33,13 +35,18 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.bcel.AbstractTest;
 import org.apache.bcel.Const;
 import org.apache.bcel.HelloWorldCreator;
+import org.apache.bcel.classfile.BootstrapMethod;
+import org.apache.bcel.classfile.BootstrapMethods;
 import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantValue;
 import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.JavaClass;
@@ -57,7 +64,7 @@ import org.apache.bcel.generic.Type;
 import org.apache.commons.lang3.SystemProperties;
 import org.apache.commons.lang3.SystemUtils;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.DisabledForJreRange;
+import org.junit.jupiter.api.condition.EnabledForJreRange;
 import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.api.io.TempDir;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -72,6 +79,96 @@ class BCELifierTest extends AbstractTest {
 
     private static final String EOL = System.lineSeparator();
     public static final String CLASSPATH = "." + File.pathSeparator + SystemProperties.getJavaClassPath();
+
+    /**
+     * Checks two executable round trips without changing the fixture's bootstrap table.
+     *
+     * @param mainBody the Java statements to compile in {@code main}.
+     * @param java8 whether to target Java 8 bytecode.
+     * @param padding the number of additional UTF-8 constants.
+     * @param directory the temporary work directory.
+     * @throws Exception if compilation, generation, or execution fails.
+     */
+    private void assertInvokeDynamicRoundTrip(final String mainBody, final boolean java8, final int padding, final Path directory) throws Exception {
+        assertInvokeDynamicRoundTrip(mainBody, java8, padding, directory, bootstrapMethods -> {
+            // Keep the compiler's bootstrap table unchanged.
+        });
+    }
+
+    /**
+     * Compiles a fixture in an isolated directory, then regenerates and executes it twice with only the regenerated class on the runtime classpath.
+     *
+     * <p>
+     * Both generations must preserve the bootstrap table and every original constant at its original index. The optional padding exercises constant-pool
+     * initialization large enough to exceed a single generated method's code-size limit. Special floating-point values and two-slot constants check that
+     * seeding the pool preserves their values and indices as well.
+     * </p>
+     *
+     * @param mainBody the Java statements to compile in {@code main}.
+     * @param java8 whether to target Java 8 bytecode.
+     * @param padding the number of additional UTF-8 constants.
+     * @param directory the temporary work directory.
+     * @param bootstrapModifier the bootstrap-table customization to apply before verification and generation.
+     * @throws Exception if compilation, generation, or execution fails.
+     */
+    private void assertInvokeDynamicRoundTrip(final String mainBody, final boolean java8, final int padding, final Path directory,
+        final Consumer<BootstrapMethods> bootstrapModifier) throws Exception {
+        final String className = "InvokeDynamicExample";
+        final Path inputDirectory = Files.createDirectory(directory.resolve("input"));
+        final Path source = inputDirectory.resolve(className + ".java");
+        Files.write(source, ("public class " + className + " { public static void main(String[] args) { " + mainBody + " } }")
+            .getBytes(StandardCharsets.UTF_8));
+        if (java8) {
+            exec(inputDirectory.toFile(), getAppJavaC(), "-g", "-source", "8", "-target", "8", source.toString());
+        } else {
+            exec(inputDirectory.toFile(), getAppJavaC(), "-g", source.toString());
+        }
+        final Path inputFile = inputDirectory.resolve(className + JavaClass.EXTENSION);
+        JavaClass original = new ClassParser(inputFile.toString()).parse();
+        final ConstantPoolGen pool = new ConstantPoolGen(original.getConstantPool());
+        pool.addInteger(Integer.MIN_VALUE);
+        pool.addLong(Long.MIN_VALUE);
+        pool.addDouble(Double.NaN);
+        pool.addDouble(Double.NEGATIVE_INFINITY);
+        pool.addDouble(-0.0);
+        pool.addFloat(Float.NaN);
+        pool.addFloat(Float.POSITIVE_INFINITY);
+        pool.addFloat(-0.0f);
+        pool.addString("quote\" slash\\ newline\n");
+        for (int i = 0; i < padding; i++) {
+            pool.addUtf8("padding" + i);
+        }
+        original.setConstantPool(pool.getFinalConstantPool());
+        bootstrapModifier.accept(Arrays.stream(original.getAttributes()).filter(BootstrapMethods.class::isInstance)
+            .map(BootstrapMethods.class::cast).findFirst().get());
+        original.dump(inputFile.toString());
+        assertEquals("lambda works" + EOL, exec(inputDirectory.toFile(), getAppJava(), "-cp", ".", className, "lambda"));
+        for (int pass = 1; pass <= 2; pass++) {
+            final Path outputDirectory = Files.createDirectory(directory.resolve("pass" + pass));
+            final ByteArrayOutputStream creator = new ByteArrayOutputStream();
+            new BCELifier(original, creator).start();
+            Files.write(outputDirectory.resolve(className + "Creator.java"), creator.toByteArray());
+            final File workDir = outputDirectory.toFile();
+            assertEquals("", exec(workDir, getAppJavaC(), "-Xlint:deprecation", "-cp", CLASSPATH, className + "Creator.java"));
+            assertEquals("", exec(workDir, getAppJava(), "-cp", CLASSPATH, className + "Creator"));
+            assertEquals("lambda works" + EOL, exec(workDir, getAppJava(), "-Xverify:all", "-cp", ".", className, "lambda"));
+            final JavaClass regenerated = new ClassParser(outputDirectory.resolve(className + JavaClass.EXTENSION).toString()).parse();
+            final Constant[] constants = original.getConstantPool().getConstantPool();
+            for (int i = 1; i < constants.length; i++) {
+                assertEquals(String.valueOf(constants[i]), String.valueOf(regenerated.getConstantPool().getConstantPool()[i]), "Constant " + i);
+            }
+            final BootstrapMethods bootstrapMethods = Arrays.stream(original.getAttributes()).filter(BootstrapMethods.class::isInstance)
+                .map(BootstrapMethods.class::cast).findFirst().get();
+            final BootstrapMethods regeneratedBootstrapMethods = Arrays.stream(regenerated.getAttributes())
+                .filter(BootstrapMethods.class::isInstance).map(BootstrapMethods.class::cast).findFirst().get();
+            final ByteArrayOutputStream expectedBootstrap = new ByteArrayOutputStream();
+            bootstrapMethods.dump(new DataOutputStream(expectedBootstrap));
+            final ByteArrayOutputStream actualBootstrap = new ByteArrayOutputStream();
+            regeneratedBootstrapMethods.dump(new DataOutputStream(actualBootstrap));
+            assertArrayEquals(expectedBootstrap.toByteArray(), actualBootstrap.toByteArray());
+            original = regenerated;
+        }
+    }
 
     // Canonicalise the javap output so it compares better
     private String canonHashRef(String input) {
@@ -384,6 +481,85 @@ class BCELifierTest extends AbstractTest {
         }
     }
 
+    /**
+     * Verifies that large bootstrap tables and argument lists compile and survive two executable round trips.
+     *
+     * <p>
+     * The active lambda keeps its original bootstrap entry. Additional unused entries and arguments contain valid constant-pool references and exercise
+     * initialization beyond the JVM's per-method code-size limit. The original class is executed before regeneration to check that the expanded table is valid.
+     * </p>
+     *
+     * @param methodCount the number of bootstrap entries.
+     * @param argumentCount the number of arguments in the final, unused entry.
+     * @param directory the temporary work directory.
+     * @throws Exception if compilation, generation, or execution fails.
+     */
+    @ParameterizedTest
+    @CsvSource({"4000, 3", "2, 12000"})
+    void testInvokeDynamicLargeBootstrapMethods(final int methodCount, final int argumentCount, @TempDir final Path directory) throws Exception {
+        assertInvokeDynamicRoundTrip("Runnable task = () -> System.out.println(\"lambda works\"); task.run();", true, 0, directory, bootstrapMethods -> {
+            final BootstrapMethod template = bootstrapMethods.getBootstrapMethods()[0];
+            final BootstrapMethod[] methods = new BootstrapMethod[methodCount];
+            for (int i = 0; i < methods.length; i++) {
+                methods[i] = template.copy();
+            }
+            final int[] arguments = new int[argumentCount];
+            Arrays.fill(arguments, template.getBootstrapArguments()[0]);
+            methods[methods.length - 1].setBootstrapArguments(arguments);
+            bootstrapMethods.setBootstrapMethods(methods);
+            bootstrapMethods.setLength(2 + Arrays.stream(methods).mapToInt(method -> 4 + 2 * method.getNumBootstrapArguments()).sum());
+        });
+    }
+
+    /**
+     * Verifies that preserving a large constant pool splits generated initialization into methods that javac can compile.
+     *
+     * @param directory the temporary work directory.
+     * @throws Exception if compilation, generation, or execution fails.
+     */
+    @Test
+    void testInvokeDynamicLargeConstantPool(@TempDir final Path directory) throws Exception {
+        assertInvokeDynamicRoundTrip("Runnable task = () -> System.out.println(\"lambda works\"); task.run();", true, 6000, directory);
+    }
+
+    /**
+     * Verifies BCEL-378 with ordinary and captured lambdas, a method reference, a serializable lambda, and a static interface method call.
+     *
+     * <p>
+     * The smallest case is {@code Runnable task = () -> System.out.println("lambda works"); task.run();}. Captured values require a nonempty invokedynamic
+     * descriptor; method references require preserving their target handle; serializable lambdas use {@code altMetafactory} with integer bootstrap arguments
+     * and generate branching deserialization code with stack maps. Each fixture is compiled for Java 8, regenerated twice, and executed after each pass.
+     * </p>
+     *
+     * @param mainBody the Java statements to compile in {@code main}.
+     * @param directory the temporary work directory.
+     * @throws Exception if compilation, generation, or execution fails.
+     */
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "Runnable task = () -> System.out.println(\"lambda works\"); task.run();",
+        "String prefix = args[0]; java.util.function.Supplier<String> task = () -> prefix + \" works\"; System.out.println(task.get());",
+        "java.util.function.Function<String, String> task = String::trim; System.out.println(task.apply(\" lambda works \"));",
+        "Runnable task = (Runnable & java.io.Serializable) () -> System.out.println(\"lambda works\"); task.run();",
+        "java.util.function.Function<String, String> task = java.util.function.Function.<String>identity().andThen(value -> value + \" works\"); "
+            + "System.out.println(task.apply(args[0]));"
+    })
+    void testInvokeDynamicRoundTrip(final String mainBody, @TempDir final Path directory) throws Exception {
+        assertInvokeDynamicRoundTrip(mainBody, true, 0, directory);
+    }
+
+    /**
+     * Verifies the StringConcatFactory bootstrap emitted by javac on Java 9 and later, including its string bootstrap argument.
+     *
+     * @param directory the temporary work directory.
+     * @throws Exception if compilation, generation, or execution fails.
+     */
+    @Test
+    @EnabledForJreRange(min = JRE.JAVA_9)
+    void testInvokeDynamicStringConcatenation(@TempDir final Path directory) throws Exception {
+        assertInvokeDynamicRoundTrip("System.out.println(args[0] + \" works\");", false, 0, directory);
+    }
+
     /*
      * Dumps a class using "javap" and compare with the same class recreated using BCELifier, "javac", "java" and dumped with "javap".
      *
@@ -406,8 +582,12 @@ class BCELifierTest extends AbstractTest {
         testClassOnPath(className, directory);
     }
 
-    /*
-     * See https://issues.apache.org/jira/browse/BCEL-378
+    /**
+     * Round-trips the existing Java 8 fixtures, including their invokedynamic instructions, on all supported JDKs.
+     *
+     * @param className the fixture class name.
+     * @param directory the temporary work directory.
+     * @throws Exception if generation, compilation, or bytecode comparison fails.
      */
     @ParameterizedTest
     @ValueSource(strings = {
@@ -416,8 +596,7 @@ class BCELifierTest extends AbstractTest {
         "Java8Example2",
     // @formatter:on
     })
-    @DisabledForJreRange(min = JRE.JAVA_25)
-    void testJavapCompareJava25KnownBroken(final String className, @TempDir final Path directory) throws Exception {
+    void testJavapCompareJava8(final String className, @TempDir final Path directory) throws Exception {
         testClassOnPath(className, directory);
     }
 

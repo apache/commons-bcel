@@ -23,11 +23,30 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.function.IntFunction;
 
 import org.apache.bcel.Const;
 import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.BootstrapMethod;
+import org.apache.bcel.classfile.BootstrapMethods;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.Code;
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantCP;
+import org.apache.bcel.classfile.ConstantClass;
+import org.apache.bcel.classfile.ConstantDouble;
+import org.apache.bcel.classfile.ConstantFloat;
+import org.apache.bcel.classfile.ConstantInteger;
+import org.apache.bcel.classfile.ConstantLong;
+import org.apache.bcel.classfile.ConstantMethodHandle;
+import org.apache.bcel.classfile.ConstantMethodType;
+import org.apache.bcel.classfile.ConstantModule;
+import org.apache.bcel.classfile.ConstantNameAndType;
+import org.apache.bcel.classfile.ConstantPackage;
+import org.apache.bcel.classfile.ConstantString;
+import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.ConstantValue;
 import org.apache.bcel.classfile.ExceptionTable;
 import org.apache.bcel.classfile.Field;
@@ -70,6 +89,9 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     // N.B we use the class so renames will be detected by the compiler/IDE
     private static final String BASE_PACKAGE = Const.class.getPackage().getName();
     private static final String CONSTANT_PREFIX = Const.class.getSimpleName() + ".";
+
+    // Bound each bootstrap expression so a batch of array assignments stays below the JVM's method-size limit.
+    private static final int MAX_INLINE_BOOTSTRAP_ARGUMENTS = 32;
 
     /**
      * Checks that a name from the parsed class file is a dotted sequence of valid Java identifiers before it is
@@ -221,6 +243,8 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
 
     private final ConstantPoolGen constantPoolGen;
 
+    private final boolean preserveConstantPool;
+
     /**
      * Constructs a new instance.
      *
@@ -231,6 +255,131 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         this.clazz = clazz;
         this.printWriter = new PrintWriter(new OutputStreamWriter(out, StandardCharsets.UTF_8), false);
         this.constantPoolGen = new ConstantPoolGen(this.clazz.getConstantPool());
+        this.preserveConstantPool = Arrays.stream(clazz.getAttributes()).anyMatch(BootstrapMethods.class::isInstance);
+    }
+
+    /**
+     * Prints an array factory with initialization split across bounded methods.
+     *
+     * @param name the generated factory method name.
+     * @param type the Java array element type.
+     * @param length the array length.
+     * @param initializer the expression for an element, or null to leave it uninitialized.
+     */
+    private void printArray(final String name, final String type, final int length, final IntFunction<String> initializer) {
+        final int batchSize = 100;
+        printWriter.println("  private static " + type + "[] " + name + "() {");
+        printWriter.println("    " + type + "[] values = new " + type + "[" + length + "];");
+        for (int start = 0; start < length; start += batchSize) {
+            printWriter.println("    " + name + "_" + start + "(values);");
+        }
+        printWriter.println("    return values;");
+        printWriter.println("  }");
+        printWriter.println();
+        for (int start = 0; start < length; start += batchSize) {
+            printWriter.println("  private static void " + name + "_" + start + "(" + type + "[] values) {");
+            for (int i = start; i < Math.min(start + batchSize, length); i++) {
+                final String expression = initializer.apply(i);
+                if (expression != null) {
+                    printWriter.println("    values[" + i + "] = " + expression + ";");
+                }
+            }
+            printWriter.println("  }");
+            printWriter.println();
+        }
+    }
+
+    /**
+     * Prints bootstrap-table initialization, splitting large tables and argument lists into bounded methods.
+     *
+     * @param attribute the bootstrap-methods attribute to recreate.
+     */
+    private void printBootstrapMethods(final BootstrapMethods attribute) {
+        final BootstrapMethod[] methods = attribute.getBootstrapMethods();
+        printArray("createBootstrapMethods", "BootstrapMethod", methods.length, index -> {
+            final BootstrapMethod method = methods[index];
+            final int[] arguments = method.getBootstrapArguments();
+            final StringBuilder expression = new StringBuilder("new BootstrapMethod(").append(method.getBootstrapMethodRef()).append(", ");
+            if (arguments.length > MAX_INLINE_BOOTSTRAP_ARGUMENTS) {
+                expression.append("createBootstrapArguments_").append(index).append("()");
+            } else {
+                expression.append("new int[] {");
+                for (int i = 0; i < arguments.length; i++) {
+                    if (i > 0) {
+                        expression.append(", ");
+                    }
+                    expression.append(arguments[i]);
+                }
+                expression.append('}');
+            }
+            return expression.append(')').toString();
+        });
+        for (int i = 0; i < methods.length; i++) {
+            final int[] arguments = methods[i].getBootstrapArguments();
+            if (arguments.length > MAX_INLINE_BOOTSTRAP_ARGUMENTS) {
+                printArray("createBootstrapArguments_" + i, "int", arguments.length, index -> Integer.toString(arguments[index]));
+            }
+        }
+    }
+
+    /**
+     * Prints a constant constructor using the original indices.
+     *
+     * <p>
+     * Bootstrap arguments can refer to any loadable constant, including another dynamic constant.
+     * </p>
+     *
+     * @param constant the constant to recreate.
+     * @return the Java constructor expression.
+     */
+    private String printConstant(final Constant constant) {
+        final String arguments;
+        if (constant instanceof ConstantCP) {
+            final ConstantCP reference = (ConstantCP) constant;
+            // For dynamic constants, classIndex holds the bootstrap-method index.
+            arguments = reference.getClassIndex() + ", " + reference.getNameAndTypeIndex();
+        } else if (constant instanceof ConstantClass) {
+            arguments = Integer.toString(((ConstantClass) constant).getNameIndex());
+        } else if (constant instanceof ConstantDouble) {
+            arguments = "Double.longBitsToDouble(" + Double.doubleToLongBits(((ConstantDouble) constant).getBytes()) + "L)";
+        } else if (constant instanceof ConstantFloat) {
+            arguments = "Float.intBitsToFloat(" + Float.floatToIntBits(((ConstantFloat) constant).getBytes()) + ")";
+        } else if (constant instanceof ConstantInteger) {
+            arguments = Integer.toString(((ConstantInteger) constant).getBytes());
+        } else if (constant instanceof ConstantLong) {
+            arguments = ((ConstantLong) constant).getBytes() + "L";
+        } else if (constant instanceof ConstantMethodHandle) {
+            final ConstantMethodHandle handle = (ConstantMethodHandle) constant;
+            arguments = handle.getReferenceKind() + ", " + handle.getReferenceIndex();
+        } else if (constant instanceof ConstantMethodType) {
+            arguments = Integer.toString(((ConstantMethodType) constant).getDescriptorIndex());
+        } else if (constant instanceof ConstantModule) {
+            arguments = Integer.toString(((ConstantModule) constant).getNameIndex());
+        } else if (constant instanceof ConstantNameAndType) {
+            final ConstantNameAndType nameAndType = (ConstantNameAndType) constant;
+            arguments = nameAndType.getNameIndex() + ", " + nameAndType.getSignatureIndex();
+        } else if (constant instanceof ConstantPackage) {
+            arguments = Integer.toString(((ConstantPackage) constant).getNameIndex());
+        } else if (constant instanceof ConstantString) {
+            arguments = Integer.toString(((ConstantString) constant).getStringIndex());
+        } else if (constant instanceof ConstantUtf8) {
+            arguments = "\"" + Utility.convertString(((ConstantUtf8) constant).getBytes()) + "\"";
+        } else {
+            throw new IllegalArgumentException("Unsupported constant: " + constant);
+        }
+        return "new " + constant.getClass().getSimpleName() + "(" + arguments + ")";
+    }
+
+    /**
+     * Preserves the constant pool for bootstrap methods so all instruction, method-handle, and bootstrap-argument indices remain valid.
+     */
+    private void printConstantPool() {
+        final Constant[] constants = clazz.getConstantPool().getConstantPool();
+        printWriter.println("  private static ConstantPoolGen createConstantPool() {");
+        printWriter.println("    return new ConstantPoolGen(createConstants());");
+        printWriter.println("  }");
+        printWriter.println();
+        printArray("createConstants", "Constant", constants.length, index -> constants[index] == null ? null : printConstant(constants[index]));
     }
 
     private void printCreate() {
@@ -262,6 +411,12 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
     public void start() {
         visitJavaClass(clazz);
         printWriter.flush();
+    }
+
+    @Override
+    public void visitBootstrapMethods(final BootstrapMethods bootstrapMethods) {
+        printWriter.println("    _cg.addAttribute(new BootstrapMethods(" + bootstrapMethods.getNameIndex() + ", " + bootstrapMethods.getLength()
+            + ", createBootstrapMethods(), _cp.getConstantPool()));");
     }
 
     @Override
@@ -326,14 +481,28 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
         printWriter.println("  public " + className + "Creator() {");
         printWriter.println("    _cg = new ClassGen(\"" + Utility.convertString(packageName.isEmpty() ? className : packageName + "." + className) + "\", \""
             + Utility.convertString(superName) + "\", \"" + Utility.convertString(clazz.getSourceFileName()) + "\", "
-            + printFlags(clazz.getAccessFlags(), FLAGS.CLASS) + ", " + "new String[] { " + inter + " });");
+            + printFlags(clazz.getAccessFlags(), FLAGS.CLASS) + ", " + "new String[] { " + inter + " }"
+            + (preserveConstantPool ? ", createConstantPool()" : "") + ");");
         printWriter.println("    _cg.setMajor(" + clazz.getMajor() + ");");
         printWriter.println("    _cg.setMinor(" + clazz.getMinor() + ");");
         printWriter.println();
         printWriter.println("    _cp = _cg.getConstantPool();");
         printWriter.println("    _factory = new InstructionFactory(_cg, _cp);");
+        for (final Attribute attribute : clazz.getAttributes()) {
+            if (attribute instanceof BootstrapMethods) {
+                attribute.accept(this);
+            }
+        }
         printWriter.println("  }");
         printWriter.println();
+        if (preserveConstantPool) {
+            printConstantPool();
+            for (final Attribute attribute : clazz.getAttributes()) {
+                if (attribute instanceof BootstrapMethods) {
+                    printBootstrapMethods((BootstrapMethods) attribute);
+                }
+            }
+        }
         printCreate();
         final Field[] fields = clazz.getFields();
         if (fields.length > 0) {
@@ -384,7 +553,7 @@ public class BCELifier extends org.apache.bcel.classfile.EmptyVisitor {
             }
         }
         printWriter.println();
-        final BCELFactory factory = new BCELFactory(mg, printWriter);
+        final BCELFactory factory = new BCELFactory(mg, printWriter, preserveConstantPool);
         factory.start();
         printWriter.println("    method.setMaxStack();");
         printWriter.println("    method.setMaxLocals();");

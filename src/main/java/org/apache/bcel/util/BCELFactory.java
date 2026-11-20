@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.classfile.ConstantInterfaceMethodref;
 import org.apache.bcel.classfile.Utility;
 import org.apache.bcel.generic.AllocationInstruction;
 import org.apache.bcel.generic.ArrayInstruction;
@@ -68,16 +69,18 @@ final class BCELFactory extends EmptyVisitor {
     private final MethodGen methodGen;
     private final PrintWriter printWriter;
     private final ConstantPoolGen constantPoolGen;
+    private final boolean preserveConstantPool;
 
     private final Map<Instruction, InstructionHandle> branchMap = new HashMap<>();
 
     // Memorize BranchInstructions that need an update
     private final List<BranchInstruction> branches = new ArrayList<>();
 
-    BCELFactory(final MethodGen mg, final PrintWriter out) {
-        methodGen = mg;
-        constantPoolGen = mg.getConstantPool();
-        printWriter = out;
+    BCELFactory(final MethodGen methodGen, final PrintWriter printWriter, final boolean preserveConstantPool) {
+        this.methodGen = methodGen;
+        this.constantPoolGen = methodGen.getConstantPool();
+        this.printWriter = printWriter;
+        this.preserveConstantPool = preserveConstantPool;
     }
 
     private void createConstant(final Object value) {
@@ -294,23 +297,36 @@ final class BCELFactory extends EmptyVisitor {
     @Override
     public void visitInvokeInstruction(final InvokeInstruction i) {
         final short opcode = i.getOpcode();
+        if (opcode == Const.INVOKEDYNAMIC) {
+            printWriter.println("il.append(new INVOKEDYNAMIC(" + i.getIndex() + "));");
+            return;
+        }
         final String className = i.getClassName(constantPoolGen);
         final String methodName = i.getMethodName(constantPoolGen);
         final Type type = i.getReturnType(constantPoolGen);
         final Type[] argTypes = i.getArgumentTypes(constantPoolGen);
         printWriter.println("il.append(_factory.createInvoke(\"" + Utility.convertString(className) + "\", \"" + Utility.convertString(methodName) + "\", "
             + BCELifier.printType(type) + ", " + BCELifier.printArgumentTypes(argTypes) + ", " + CONSTANT_PREFIX
-            + StringUtils.toRootUpperCase(Const.getOpcodeName(opcode)) + "));");
+            + StringUtils.toRootUpperCase(Const.getOpcodeName(opcode))
+            + (opcode != Const.INVOKEINTERFACE && constantPoolGen.getConstant(i.getIndex()) instanceof ConstantInterfaceMethodref ? ", true" : "") + "));");
     }
 
     @Override
     public void visitLDC(final LDC i) {
-        createConstant(i.getValue(constantPoolGen));
+        if (preserveConstantPool) {
+            printWriter.println("il.append(new " + StringUtils.toRootUpperCase(i.getName()) + "(" + i.getIndex() + "));");
+        } else {
+            createConstant(i.getValue(constantPoolGen));
+        }
     }
 
     @Override
     public void visitLDC2_W(final LDC2_W i) {
-        createConstant(i.getValue(constantPoolGen));
+        if (preserveConstantPool) {
+            printWriter.println("il.append(new " + StringUtils.toRootUpperCase(i.getName()) + "(" + i.getIndex() + "));");
+        } else {
+            createConstant(i.getValue(constantPoolGen));
+        }
     }
 
     @Override
