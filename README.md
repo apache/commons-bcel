@@ -25,10 +25,10 @@
  | commons-build-plugin/trunk/src/main/resources/commons-xdoc-templates |
  +======================================================================+
  |                                                                      |
- | 1) Re-generate using: mvn commons-build:readme-md                    |
+ | 1) Regenerate using: mvn commons-build:readme-md                     |
  |                                                                      |
- | 2) Set the following properties in the component's pom:              |
- |    - commons.componentid (required, alphabetic, lower case)          |
+ | 2) Set the following properties in the component's POM:              |
+ |    - commons.componentid (required, alphabetic, lowercase)           |
  |    - commons.release.version (required)                              |
  |                                                                      |
  | 3) Example Properties                                                |
@@ -45,7 +45,7 @@ Apache Commons BCEL
 
 [![Java CI](https://github.com/apache/commons-bcel/actions/workflows/maven.yml/badge.svg)](https://github.com/apache/commons-bcel/actions/workflows/maven.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/org.apache.bcel/bcel?label=Maven%20Central)](https://search.maven.org/artifact/org.apache.bcel/bcel)
-[![Javadocs](https://javadoc.io/badge/org.apache.bcel/bcel/6.14.0.svg)](https://javadoc.io/doc/org.apache.bcel/bcel/6.14.0)
+[![Javadocs](https://javadoc.io/badge/org.apache.bcel/bcel/6.14.1.svg)](https://javadoc.io/doc/org.apache.bcel/bcel/6.14.1)
 [![CodeQL](https://github.com/apache/commons-bcel/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/apache/commons-bcel/actions/workflows/codeql-analysis.yml)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/apache/commons-bcel/badge)](https://scorecard.dev/viewer/?uri=github.com/apache/commons-bcel)
 
@@ -60,15 +60,15 @@ Questions related to the usage of Apache Commons BCEL should be posted to the [u
 
 Getting the latest release
 --------------------------
-You can download source and binaries from our [download page](https://commons.apache.org/proper/commons-bcel/download_bcel.cgi).
+You can download the source and binaries from our [download page](https://commons.apache.org/proper/commons-bcel/download_bcel.cgi).
 
-Alternatively, you can pull it from the central Maven repositories:
+Alternatively, you can get the latest release from Maven Central:
 
 ```xml
 <dependency>
   <groupId>org.apache.bcel</groupId>
   <artifactId>bcel</artifactId>
-  <version>6.14.0</version>
+  <version>6.14.1</version>
 </dependency>
 ```
 
@@ -84,13 +84,13 @@ Contributing
 ------------
 
 We accept pull requests via GitHub. The [developer mailing list](https://commons.apache.org/mail-lists.html) is the main channel of communication for contributors.
-There are some guidelines which will make applying PRs easier for us:
+These guidelines will make applying PRs easier for us:
 + No tabs! Please use spaces for indentation.
 + Respect the existing code style for each file.
 + Create minimal diffs: disable on-save actions like reformatting source code or organizing imports. If you feel the source code should be reformatted, create a separate PR for this change.
 + Provide JUnit tests for your changes and make sure your changes don't break any existing tests by running `mvn`.
-+ Before you push a PR, run `mvn` (without arguments). This runs the default goal which contains all build checks.
-+ To see the code coverage report, regardless of coverage failures, run `mvn clean site -Dcommons.jacoco.haltOnFailure=false -Pjacoco`
++ Before you push a PR, run `mvn` (without arguments). This runs the default goal, which includes all build checks.
++ To see the code coverage report, regardless of coverage failures, run `mvn clean site -Dcommons.jacoco.haltOnFailure=false -Pjacoco`.
 
 If you plan to contribute on a regular basis, please consider filing a [contributor license agreement](https://www.apache.org/licenses/#clas).
 You can learn more about contributing via GitHub in our [contribution guidelines](CONTRIBUTING.md).
@@ -103,7 +103,7 @@ See the `NOTICE.txt` file for required notices and attributions.
 
 Donating
 --------
-You like Apache Commons BCEL? Then [donate back to the ASF](https://www.apache.org/foundation/contributing.html) to support development.
+Do you like Apache Commons BCEL? Then [donate back to the ASF](https://www.apache.org/foundation/contributing.html) to support development.
 
 Additional Resources
 --------------------

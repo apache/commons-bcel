@@ -1,3 +1,59 @@
+Apache Commons BCEL Version 6.14.1
+RELEASE NOTES
+
+
+Introduction
+------------
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.14.1.
+
+The Commons Byte Code Engineering Library (BCEL) is designed to provide users with a convenient way to analyze, create, and manipulate compiled .class files.
+
+This is a feature and maintenance release. Java 8 or later is required.
+
+Fixed Bugs
+----------
+*           InstConstraintVisitor check objectref class in getfield and putfield verification (#547). Thanks to Naveed Khan, Gary Gregory.
+*           Escape unknown method attribute names in Class2HTML code reports. Thanks to hataehoon, Gary Gregory.
+*           Fix Class2HTML ArrayIndexOutOfBoundsException for unknown Code sub-attributes and render their descriptions with HTML escaping. Thanks to Gary Gregory.
+*           Reject class names containing '#' or '%' before generating Class2HTML reports, and encode report links for accepted names containing spaces, ampersands, and other special characters. Thanks to Gary Gregory.
+*           Avoid ArrayIndexOutOfBoundsException in Attribute.toString() for custom attributes with unrecognized tags. Thanks to Gary Gregory.
+* BCEL-378: Fix BCELifier invokedynamic round trips by preserving the constant pool and bootstrap methods. Thanks to Gary Gregory.
+
+Changes
+-------
+*           Bump org.apache.commons:commons-lang3 from 3.21.0 to 3.22.0. Thanks to Gary Gregory.
+*           Document Class2HTML and Attribute.toString() attribute-rendering exceptions as non-security robustness bugs. Thanks to Gary Gregory.
+
+
+Historical list of changes: https://commons.apache.org/proper/commons-bcel/changes.html
+
+For complete information on Apache Commons BCEL, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons BCEL website:
+
+https://commons.apache.org/proper/commons-bcel
+
+Download it from https://commons.apache.org/proper/commons-bcel/download_bcel.cgi
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+Open source works best when you give feedback:
+
+    https://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
 Apache Commons BCEL Version 6.14.0
 RELEASE NOTES
 

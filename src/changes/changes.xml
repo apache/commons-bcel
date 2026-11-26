@@ -59,7 +59,7 @@ The <action> type attribute can be add,update,fix,remove.
   Defining changes.version allows one to create the RN without first removing the SNAPSHOT suffix.
    -->
   <body>
-    <release version="6.14.1" date="YYYY-MM-DD" description="This is a feature and maintenance release. Java 8 or later is required.">
+    <release version="6.14.1" date="2026-11-26" description="This is a feature and maintenance release. Java 8 or later is required.">
       <!-- FIX -->
       <action                  type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">InstConstraintVisitor check objectref class in getfield and putfield verification (#547).</action>
       <action                  type="fix" dev="ggregory" due-to="hataehoon, Gary Gregory">Escape unknown method attribute names in Class2HTML code reports.</action>

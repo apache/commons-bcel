@@ -26,14 +26,14 @@ limitations under the License.
  | commons-build-plugin/trunk/src/main/resources/commons-xdoc-templates |
  +======================================================================+
  |                                                                      |
- | 1) Re-generate using: mvn commons-build:download-page                |
+ | 1) Regenerate using: mvn commons-build:download-page                 |
  |                                                                      |
- | 2) Set the following properties in the component's pom:              |
- |    - commons.componentid     (required, alphabetic, lower case)      |
+ | 2) Set the following properties in the component's POM:              |
+ |    - commons.componentid     (required, alphabetic, lowercase)       |
  |    - commons.release.version (required)                              |
  |    - commons.release.name    (required)                              |
  |    - commons.binary.suffix   (optional)                              |
- |      (defaults to "-bin", set to "" for pre-maven2 releases)         |
+ |      (defaults to "-bin", set to "" for releases before Maven 2)     |
  |    - commons.release.desc    (optional)                              |
  |    - commons.release.subdir  (optional)                              |
  |    - commons.release.hash    (optional, lowercase, default sha512)   |
@@ -46,7 +46,7 @@ limitations under the License.
  |    - commons.release.[234].hash       (optional, lowercase, [sha512])|
  |                                                                      |
  | 3) Example Properties                                                |
- |    (commons.release.name inherited by parent:                        |
+ |    commons.release.name inherited from the parent:                   |
  |     ${project.artifactId}-${commons.release.version}                 |
  |                                                                      |
  |  <properties>                                                        |
@@ -70,15 +70,15 @@ limitations under the License.
         We recommend you use a mirror to download our release
         builds, but you <strong>must</strong> <a href="https://www.apache.org/info/verification.html">verify the integrity</a> of
         the downloaded files using signatures downloaded from our main
-        distribution directories. Recent releases (48 hours) may not yet
-        be available from all the mirrors.
+        distribution directories. Releases from the last 48 hours may not yet
+        be available from all mirrors.
       </p>
 
       <p>
         You are currently using <b>[preferred]</b>.  If you
         encounter a problem with this mirror, please select another
         mirror.  If all mirrors are failing, there are <i>backup</i>
-        mirrors (at the end of the mirrors list) that should be
+        mirrors (at the end of the list of mirrors) that should be
         available.
         <br></br>
         [if-any logo]<a href="[link]"><img align="right" src="[logo]" border="0" alt="Logo"></img></a>[end]
@@ -105,8 +105,8 @@ limitations under the License.
       <p>
         It is essential that you
         <a href="https://www.apache.org/info/verification.html">verify the integrity</a>
-        of downloaded files, preferably using the <code>PGP</code> signature (<code>*.asc</code> files);
-        failing that, using the <code>SHA512</code> hash (<code>*.sha512</code> checksum files).
+        of downloaded files. Use the <code>PGP</code> signature (<code>*.asc</code> files) if possible;
+        otherwise, use the <code>SHA512</code> hash (<code>*.sha512</code> checksum files).
       </p>
       <p>
         The <a href="https://downloads.apache.org/commons/KEYS">KEYS</a>
@@ -115,32 +115,32 @@ limitations under the License.
       </p>
     </subsection>
     </section>
-    <section name="Apache Commons BCEL 6.14.0 (Java 8 or above)">
+    <section name="Apache Commons BCEL 6.14.1 (Java 8 or above)">
       <subsection name="Binaries">
         <table>
           <tr>
-              <td><a href="[preferred]/commons/bcel/binaries/bcel-6.14.0-bin.tar.gz">bcel-6.14.0-bin.tar.gz</a></td>
-              <td><a href="https://downloads.apache.org/commons/bcel/binaries/bcel-6.14.0-bin.tar.gz.sha512">sha512</a></td>
-              <td><a href="https://downloads.apache.org/commons/bcel/binaries/bcel-6.14.0-bin.tar.gz.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/bcel/binaries/bcel-6.14.1-bin.tar.gz">bcel-6.14.1-bin.tar.gz</a></td>
+              <td><a href="https://downloads.apache.org/commons/bcel/binaries/bcel-6.14.1-bin.tar.gz.sha512">sha512</a></td>
+              <td><a href="https://downloads.apache.org/commons/bcel/binaries/bcel-6.14.1-bin.tar.gz.asc">pgp</a></td>
           </tr>
           <tr>
-              <td><a href="[preferred]/commons/bcel/binaries/bcel-6.14.0-bin.zip">bcel-6.14.0-bin.zip</a></td>
-              <td><a href="https://downloads.apache.org/commons/bcel/binaries/bcel-6.14.0-bin.zip.sha512">sha512</a></td>
-              <td><a href="https://downloads.apache.org/commons/bcel/binaries/bcel-6.14.0-bin.zip.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/bcel/binaries/bcel-6.14.1-bin.zip">bcel-6.14.1-bin.zip</a></td>
+              <td><a href="https://downloads.apache.org/commons/bcel/binaries/bcel-6.14.1-bin.zip.sha512">sha512</a></td>
+              <td><a href="https://downloads.apache.org/commons/bcel/binaries/bcel-6.14.1-bin.zip.asc">pgp</a></td>
           </tr>
         </table>
       </subsection>
       <subsection name="Source">
         <table>
           <tr>
-              <td><a href="[preferred]/commons/bcel/source/bcel-6.14.0-src.tar.gz">bcel-6.14.0-src.tar.gz</a></td>
-              <td><a href="https://downloads.apache.org/commons/bcel/source/bcel-6.14.0-src.tar.gz.sha512">sha512</a></td>
-              <td><a href="https://downloads.apache.org/commons/bcel/source/bcel-6.14.0-src.tar.gz.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/bcel/source/bcel-6.14.1-src.tar.gz">bcel-6.14.1-src.tar.gz</a></td>
+              <td><a href="https://downloads.apache.org/commons/bcel/source/bcel-6.14.1-src.tar.gz.sha512">sha512</a></td>
+              <td><a href="https://downloads.apache.org/commons/bcel/source/bcel-6.14.1-src.tar.gz.asc">pgp</a></td>
           </tr>
           <tr>
-              <td><a href="[preferred]/commons/bcel/source/bcel-6.14.0-src.zip">bcel-6.14.0-src.zip</a></td>
-              <td><a href="https://downloads.apache.org/commons/bcel/source/bcel-6.14.0-src.zip.sha512">sha512</a></td>
-              <td><a href="https://downloads.apache.org/commons/bcel/source/bcel-6.14.0-src.zip.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/bcel/source/bcel-6.14.1-src.zip">bcel-6.14.1-src.zip</a></td>
+              <td><a href="https://downloads.apache.org/commons/bcel/source/bcel-6.14.1-src.zip.sha512">sha512</a></td>
+              <td><a href="https://downloads.apache.org/commons/bcel/source/bcel-6.14.1-src.zip.asc">pgp</a></td>
           </tr>
         </table>
       </subsection>
